@@ -1,0 +1,11 @@
+PROJECT_NAME           = "IFJ-Projekt-2026"
+INPUT                  = include/
+RECURSIVE              = YES
+
+# Disable default Doxygen HTML output
+GENERATE_HTML          = NO
+GENERATE_LATEX         = NO
+
+# Enable XML output for m.css to consume
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
