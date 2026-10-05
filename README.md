@@ -16,9 +16,12 @@
 ## Překlad a testování
 
 - kompilace do `build/` – `make build`
+- spouštění `build/main` - `make run`
 - testování – `make test`
 - formátování všech souborů v `src/` – `make format`
 - výsledné zabalení do `output/` – `make package`
+- přikaz `make` - `build-test`
+- čištění složek `build/` a `output/` - `make clean`
 
 - další příkazy `make`:
     - `clean-build`

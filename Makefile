@@ -11,44 +11,47 @@ TARGET := $(BUILD_DIR)/main
 SRCS := $(wildcard $(SRC_DIR)/*.c)
 OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
-.PHONY: all build package clean test clean-build-test clean-build build-test format
+.PHONY: all build package clean test clean-build-test clean-build build-test format build-run run
 
 all: build-test
+
+run: build
+	@./$(TARGET)
 
 build: $(TARGET)
 
 $(TARGET): $(OBJS)
-	mkdir -p $(@D)
-	$(CC) $(OBJS) $(LDFLAGS) -o $@ || { \
-		echo "ERROR: Build failed."; \
-		exit 1; \
+	@mkdir -p $(@D)
+	@$(CC) $(OBJS) $(LDFLAGS) -o $@ || { \
+		@echo "ERROR: Build failed."; \
+		@exit 1; \
 	}
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@ || { \
-		echo "ERROR: Build failed while compiling $<."; \
-		exit 1; \
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@ || { \
+		@echo "ERROR: Build failed while compiling $<."; \
+		@exit 1; \
 	}
 
 package:
-	mkdir -p $(OUTPUT_DIR)
-	cp -r $(SRC_DIR)/* $(OUTPUT_DIR)/
+	@mkdir -p $(OUTPUT_DIR)
+	@zip -r $(OUTPUT_DIR)/archive.zip $(SRC_DIR)/*
 
 clean:
 	rm -rf $(BUILD_DIR) $(OUTPUT_DIR)
 
 test:
 	@if ! command -v valgrind >/dev/null 2>&1; then \
-		echo "ERROR: Valgrind is not installed."; \
-		exit 1; \
+		@echo "ERROR: Valgrind is not installed."; \
+		@exit 1; \
 	fi
 	valgrind --leak-check=yes $(TARGET)
 
 format:
 	@if ! command -v clang-format >/dev/null 2>&1; then \
-		echo "ERROR: clang-format is not installed."; \
-		exit 1; \
+		@echo "ERROR: clang-format is not installed."; \
+		@exit 1; \
 	fi
 	clang-format -i $(SRCS)
 
