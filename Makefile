@@ -19,11 +19,17 @@ build: $(TARGET)
 
 $(TARGET): $(OBJS)
 	mkdir -p $(@D)
-	$(CC) $(OBJS) $(LDFLAGS) -o $@
+	$(CC) $(OBJS) $(LDFLAGS) -o $@ || { \
+		echo "ERROR: Build failed."; \
+		exit 1; \
+	}
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ || { \
+		echo "ERROR: Build failed while compiling $<."; \
+		exit 1; \
+	}
 
 package:
 	mkdir -p $(OUTPUT_DIR)
@@ -33,9 +39,17 @@ clean:
 	rm -rf $(BUILD_DIR) $(OUTPUT_DIR)
 
 test:
+	@if ! command -v valgrind >/dev/null 2>&1; then \
+		echo "ERROR: Valgrind is not installed."; \
+		exit 1; \
+	fi
 	valgrind --leak-check=yes $(TARGET)
 
 format:
+	@if ! command -v clang-format >/dev/null 2>&1; then \
+		echo "ERROR: clang-format is not installed."; \
+		exit 1; \
+	fi
 	clang-format -i $(SRCS)
 
 clean-build-test: clean build test
