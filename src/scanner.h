@@ -14,7 +14,8 @@ typedef enum {
     TOKEN_INT_LITERAL,      // Celočíselný literál (např. 42, 1_000)
     TOKEN_DOUBLE_LITERAL,   // Desetinný literál (např. 3.14, 1e-10)
     TOKEN_STRING_LITERAL,   // Řetězec ("...")
-    TOKEN_MULTILINE_STRING, // Víceřádkový řetězec ("""...""")
+    TOKEN_TRUE_LITERAL, // true
+    TOKEN_FALSE_LITERAL, // false
 
     // Klíčová slova základního zadání
     TOKEN_DEF,           // def
@@ -27,13 +28,15 @@ typedef enum {
     TOKEN_VAL,           // val
     TOKEN_VAR,           // var
     TOKEN_WHILE,         // while
+    
+    // Typy
     TOKEN_INT,           // Int
     TOKEN_DOUBLE,        // Double
     TOKEN_STRING,        // String
     TOKEN_UNIT,          // Unit
+    TOKEN_BOOLEAN,       // Boolean
 
     // Klíčová slova rozšíření
-    // TOKEN_BOOLEAN,       // Boolean
     // TOKEN_CASE,          // case
     // TOKEN_CLASS,         // class
     // TOKEN_EXTENSION,     // extension
@@ -41,6 +44,9 @@ typedef enum {
     // TOKEN_LIST,          // List
     // TOKEN_MATCH,         // match
     // TOKEN_TYPE,          // type
+
+    
+
 
     // Operátory
     TOKEN_PLUS,             // +
