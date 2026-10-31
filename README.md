@@ -11,7 +11,13 @@
 ## Formát
 
 - Clang-format – LLVM
-- Deklarace – snakeCase
+
+- Proměnné a funkce - snake_case
+- Konstanty a položky enum - SCREAMING_SNAKE_CASE
+- Datové typy - PascalCase
+
+- Komentáře česky
+- Kód, git messages anglicky
 
 ## Překlad a testování
 
