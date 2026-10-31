@@ -6,8 +6,6 @@ SRC_DIR    := src
 BUILD_DIR  := build
 OUTPUT_DIR := output
 
-PACKAGE_FILES := Makefile rozsireni
-
 TARGET := $(BUILD_DIR)/main
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
@@ -38,8 +36,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 package:
 	@mkdir -p $(OUTPUT_DIR)
-	@rm -f $(OUTPUT_DIR)/archive.zip
-	@zip -r $(OUTPUT_DIR)/archive.zip $(SRC_DIR)/* $(PACKAGE_FILES)
+	@zip -r $(OUTPUT_DIR)/archive.zip $(SRC_DIR)/*
 
 clean:
 	rm -rf $(BUILD_DIR) $(OUTPUT_DIR)
