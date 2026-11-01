@@ -18,8 +18,20 @@ static int pushback_count = 0;
 
 // Cislo aktualniho radku vstupu
 static int line = 1;
+
 // Byl na aktualnim logickem radku uz nejaky token?
 static bool line_has_token = false;
+
+// Hloubka zavorek: uvnitr zavorek konec radku neni EOL
+static int paren_depth = 0;
+
+// Byl pred dalsim tokenem uvnitr zavorek konec radku?
+static bool pending_nl = false;
+
+// Skoncil blokovy komentar s koncem radku? Pak uz na radku nesmi byt token
+static bool after_newline_comment = false;
+
+
 
 // Stavy konecneho automatu
 typedef enum {
@@ -178,6 +190,7 @@ static void read_token(Token *token) {
     int comment_depth = 0; // Hloubka vnoreni blokoveho komentare
     DString buffer; // Inicializuje se az pri vstupu do stavu ID
     int quote_count = 0; // Pocet uvozovek za sebou ve viceradkovem retezci
+    bool comment_has_newline = false; // Obsahuje blokovy komentar konec radku?
     
 
     for (;;) {
@@ -186,8 +199,17 @@ static void read_token(Token *token) {
         switch (state) {
         case STATE_START:
 
-            // Konec radku: EOL, ale jen pokud na radku byl nejaky token
+            // Konec radku
             if (character == '\n') {
+                after_newline_comment = false;
+
+                // Uvnitr zavorek je to jen bily znak, ale zapamatujeme si ho
+                if (paren_depth > 0) {
+                    pending_nl = true;
+                    continue;
+                }
+
+                // Mimo zavorky: EOL, ale jen pokud na radku byl nejaky token
                 if (line_has_token) {
                     line_has_token = false;
                     token->type = TOKEN_EOL;
@@ -205,6 +227,8 @@ static void read_token(Token *token) {
 
             // Konec vstupu: pokud radek mel token, nejdriv EOL
             if (character == EOF) {
+                after_newline_comment = false;
+
                 if (line_has_token) {
                     line_has_token = false;
                     put_back(EOF);
@@ -214,6 +238,10 @@ static void read_token(Token *token) {
                 token->type = TOKEN_EOF;
                 return;
             }
+
+            // Za blokovym komentarem s koncem radku uz nesmi byt token
+            if (after_newline_comment)
+                error_exit(ERR_LEXICAL, token->line, "Za blokovym komentarem s koncem radku nesmi nasledovat token");
             
             // Token z jednoho znaku
             TokenType type;
@@ -397,6 +425,7 @@ static void read_token(Token *token) {
 
             if (character == '*') {
                 comment_depth = 1;
+                comment_has_newline = false;
                 state = STATE_BLOCK_COMMENT;
                 break;
             }
@@ -419,6 +448,9 @@ static void read_token(Token *token) {
             if (character == EOF)
                 error_exit(ERR_LEXICAL, token->line, "Neukonceny blokovy komentar");
 
+            if (character == '\n')
+                comment_has_newline = true;
+
             if (character == '/')
                 state = STATE_BLOCK_SLASH;
             else if (character == '*')
@@ -436,7 +468,25 @@ static void read_token(Token *token) {
         case STATE_BLOCK_STAR:
             if (character == '/') {
                 comment_depth--;
-                state = (comment_depth == 0) ? STATE_START : STATE_BLOCK_COMMENT;
+                if (comment_depth > 0) {
+                    state = STATE_BLOCK_COMMENT;
+                    break;
+                }
+
+                // Komentar skoncil, pokud obsahoval konec radku, chova se jako konec radku
+                if (comment_has_newline) {
+                    if (paren_depth > 0) {
+                        pending_nl = true;
+                    } else {
+                        after_newline_comment = true;
+                        if (line_has_token) {
+                            line_has_token = false;
+                            token->type = TOKEN_EOL;
+                            return;
+                        }
+                    }
+                }
+                state = STATE_START;
             } else {
                 put_back(character);
                 state = STATE_BLOCK_COMMENT;
@@ -735,14 +785,22 @@ static void read_token(Token *token) {
 
 }
 
-// Precte dalsi token a pamatuje si, jestli na radku uz nejaky byl
+// Precte dalsi token a udrzuje stav scanneru mezi tokeny
 void get_token(Token *token)
 {
     read_token(token);
+
+    // Token si nese informaci o konci radku uvnitr zavorek pred nim
+    token->nl_before = pending_nl;
+    pending_nl = false;
+
+    // Hloubka zavorek
+    if (token->type == TOKEN_LPAREN || token->type == TOKEN_LBRACKET)
+        paren_depth++;
+    else if ((token->type == TOKEN_RPAREN || token->type == TOKEN_RBRACKET) && paren_depth > 0)
+        paren_depth--;
+
+    // Radek ma aspon jeden token
     if (token->type != TOKEN_EOL && token->type != TOKEN_EOF)
         line_has_token = true;
 }
-
-// TODO: pokud blokovy komentar obsahoval '\n', ma se chovat jako konec radku
-// (vratit TOKEN_EOL, pak zkontrolovat, ze do konce radku nejsou
-// dalsi tokeny). Dodelat spolu s EOL a odsazenim.

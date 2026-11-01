@@ -23,11 +23,8 @@ int main(void)
     do {
         get_token(&t);
         printf("%d  %s", t.line, token_type_name(t.type));
-        if (t.type == TOKEN_STRING_LIT) {
-            printf("(\"");
-            print_escaped(t.value.text);
-            printf("\")");
-        }
+        if (t.nl_before)
+            printf("  [nl_before]");
         printf("\n");
         token_free(&t);
     } while (t.type != TOKEN_EOF);
