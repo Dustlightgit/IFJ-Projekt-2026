@@ -50,6 +50,49 @@ static int pending_dedents = 0;
 static int logical_indent = 0;      // Odsazeni zacatku aktualniho logickeho radku
 static bool pending_check = false;  // Dalsi token je prvni na novem fyzickem radku v zavorkach
 
+// Pracovni buffer je globalni, aby ho slo uvolnit i pri chybe
+static DString buffer;
+static bool buffer_active = false;
+
+static void buf_start(void)
+{
+    dstr_init(&buffer);
+    buffer_active = true;
+}
+
+static void buf_release(void)
+{
+    if (buffer_active) {
+        dstr_free(&buffer);
+        buffer_active = false;
+    }
+}
+
+// Uvolni text tokenu (jen u typu, ktere ho vlastni)
+static void free_token_text(Token *token)
+{
+    if ((token->type == TOKEN_ID || token->type == TOKEN_STRING_LIT)
+        && token->value.text != NULL) {
+        free(token->value.text);
+        token->value.text = NULL;
+    }
+}
+
+// Uvolni vse, co scanner drzi
+void scanner_cleanup(void)
+{
+    buf_release();
+
+    if (has_held) {
+        free_token_text(&held_token);
+        has_held = false;
+    }
+
+    if (indent_ready) {
+        stack_free(&indent_stack);
+        indent_ready = false;
+    }
+}
 
 
 // Stavy konecneho automatu
@@ -190,7 +233,7 @@ static void finish_int(Token *token, DString *buffer)
 
     token->type = TOKEN_INT_LIT;
     token->value.int_val = strtoll(buffer->data, NULL, 10);
-    dstr_free(buffer);
+    buf_release();
 }
 
 // Dokonci desetinny literal: prevede text na cislo
@@ -198,7 +241,7 @@ static void finish_double(Token *token, DString *buffer)
 {
     token->type = TOKEN_DOUBLE_LIT;
     token->value.double_val = strtod(buffer->data, NULL);
-    dstr_free(buffer);
+    buf_release();
 }
 
 
@@ -207,7 +250,6 @@ static void read_token(Token *token) {
     memset(token, 0, sizeof(*token));
     State state = STATE_START;
     int comment_depth = 0; // Hloubka vnoreni blokoveho komentare
-    DString buffer; // Inicializuje se az pri vstupu do stavu ID
     int quote_count = 0; // Pocet uvozovek za sebou ve viceradkovem retezci
     bool comment_has_newline = false; // Obsahuje blokovy komentar konec radku?
     
@@ -335,7 +377,7 @@ static void read_token(Token *token) {
             
             // Zacatek identifikatoru
             if (is_alpha(character) || character == '_') {
-                dstr_init(&buffer);
+                buf_start();
                 dstr_append_char(&buffer, (char)character);
                 state = STATE_ID;
                 break;
@@ -343,7 +385,7 @@ static void read_token(Token *token) {
 
             // Zacatek cisla
             if (is_digit(character)) {
-                dstr_init(&buffer);
+                buf_start();
                 dstr_append_char(&buffer, (char)character);
                 state = STATE_INT;
                 break;
@@ -363,7 +405,7 @@ static void read_token(Token *token) {
 
             // Zacatek anotace
             if (character == '@') {
-                dstr_init(&buffer);
+                buf_start();
                 state = STATE_AT;
                 break;
             }
@@ -545,7 +587,7 @@ static void read_token(Token *token) {
             token->type = lookup_keyword(buffer.data);
             if (token->type == TOKEN_ID)
                 token->value.text = dstr_copy(&buffer);
-            dstr_free(&buffer);
+            buf_release();
             return;
 
         case STATE_INT:
@@ -587,7 +629,7 @@ static void read_token(Token *token) {
         
         case STATE_DOT:
             if (is_digit(character)) {
-                dstr_init(&buffer);
+                buf_start();
                 dstr_append_char(&buffer, '.');
                 dstr_append_char(&buffer, (char)character);
                 state = STATE_FRAC;
@@ -714,7 +756,7 @@ static void read_token(Token *token) {
             if (character == '"') {
                 token->type = TOKEN_STRING_LIT;
                 token->value.text = dstr_copy(&buffer);
-                dstr_free(&buffer);
+                buf_release();
                 return;
             }
 
@@ -752,23 +794,23 @@ static void read_token(Token *token) {
 
             // Obycejny retezec, znak patri k jeho obsahu
             put_back(character);
-            dstr_init(&buffer);
+            buf_start();
             state = STATE_STRING;
             break;
 
         case STATE_QUOTE2:
             if (character == '"') {
-                dstr_init(&buffer);
+                buf_start();
                 state = STATE_MULTI;
                 break;
             }
 
             // Prazdny retezec ""
             put_back(character);
-            dstr_init(&buffer);
+            buf_start();
             token->type = TOKEN_STRING_LIT;
             token->value.text = dstr_copy(&buffer);
-            dstr_free(&buffer);
+            buf_release();
             return;
 
         case STATE_MULTI:
@@ -784,7 +826,7 @@ static void read_token(Token *token) {
                 put_back(character);
                 token->type = TOKEN_STRING_LIT;
                 token->value.text = dstr_copy(&buffer);
-                dstr_free(&buffer);
+                buf_release();
                 return;
             }
 
@@ -813,7 +855,7 @@ static void read_token(Token *token) {
                 error_exit(ERR_LEXICAL, token->line, "Neznama anotace, ocekava se @main");
 
             token->type = TOKEN_ANNOT_MAIN;
-            dstr_free(&buffer);
+            buf_release();
             return;    
         }
     }
@@ -835,8 +877,10 @@ static void make_token(Token *token, TokenType type, int token_line)
 static void apply_indent(Token *token)
 {   
     // Odsazeni obsahuje tabulator, nesmi
-    if (indent_has_tab)
+    if (indent_has_tab) {
+        free_token_text(token);
         error_exit(ERR_LEXICAL, token->line, "Odsazeni nesmi obsahovat tabulator");
+    }
 
     // Predchozi odsazeni
     int top = *(int *)stack_top(&indent_stack); 
@@ -864,8 +908,10 @@ static void apply_indent(Token *token)
         }
 
         // Kontrola, zda nove odsazeni presne odpovida nejake predchozi urovni
-        if (indent_count != top)
+        if (indent_count != top) {
+            free_token_text(token);
             error_exit(ERR_LEXICAL, token->line, "Nesedici odsazeni");
+        }
 
         // Ulozeni puvodniho tokenu pro pozdejsi vraceni
         held_token = *token;
@@ -918,6 +964,7 @@ void get_token(Token *token)
         
         // Sledovani odsazeni je pripraveno
         indent_ready = true;
+        atexit(scanner_cleanup);
     }
 
     // Nejdriv cekajici DEDENTy, potom podrzeny token
@@ -948,11 +995,15 @@ void get_token(Token *token)
     if (check_continuation && paren_depth > 0
         && token->type != TOKEN_EOL && token->type != TOKEN_EOF) {
         // Zkontroluje zda, odsazeni neobsahuje tabulator    
-        if (indent_has_tab)
+        if (indent_has_tab) {
+            free_token_text(token);
             error_exit(ERR_LEXICAL, token->line, "Odsazeni nesmi obsahovat tabulator");
+        }
         // Zkontroluje zda odsazeni je vetsi nez u zacatku logickeho radku
-        if (indent_count <= logical_indent)
+        if (indent_count <= logical_indent) {
+            free_token_text(token);
             error_exit(ERR_LEXICAL, token->line, "Pokracovaci radek v zavorkach musi byt odsazen vic");
+        }
     }
 
     if (first_on_line)
