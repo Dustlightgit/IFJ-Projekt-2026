@@ -18,6 +18,8 @@ static int pushback_count = 0;
 
 // Cislo aktualniho radku vstupu
 static int line = 1;
+// Byl na aktualnim logickem radku uz nejaky token?
+static bool line_has_token = false;
 
 // Stavy konecneho automatu
 typedef enum {
@@ -170,7 +172,7 @@ static void finish_double(Token *token, DString *buffer)
 
 
 // Precte dalsi token
-void get_token(Token *token) {
+static void read_token(Token *token) {
     memset(token, 0, sizeof(*token));
     State state = STATE_START;
     int comment_depth = 0; // Hloubka vnoreni blokoveho komentare
@@ -184,14 +186,31 @@ void get_token(Token *token) {
         switch (state) {
         case STATE_START:
 
-            // Bile znaky preskakujeme, zustavame ve stavu START
-            if (character == ' ' || character == '\t' || character == '\r' || character == '\n')
+            // Konec radku: EOL, ale jen pokud na radku byl nejaky token
+            if (character == '\n') {
+                if (line_has_token) {
+                    line_has_token = false;
+                    token->type = TOKEN_EOL;
+                    token->line = line - 1; // Konec radku uz zvysil citac radku
+                    return;
+                }
+                continue;
+            }
+
+            // Ostatni bile znaky preskakujeme, zustavame ve stavu START
+            if (character == ' ' || character == '\t' || character == '\r')
                 continue;
 
             token->line = line;
 
-            // Konec vstupu
+            // Konec vstupu: pokud radek mel token, nejdriv EOL
             if (character == EOF) {
+                if (line_has_token) {
+                    line_has_token = false;
+                    put_back(EOF);
+                    token->type = TOKEN_EOL;
+                    return;
+                }
                 token->type = TOKEN_EOF;
                 return;
             }
@@ -714,6 +733,14 @@ void get_token(Token *token) {
         }
     }
 
+}
+
+// Precte dalsi token a pamatuje si, jestli na radku uz nejaky byl
+void get_token(Token *token)
+{
+    read_token(token);
+    if (token->type != TOKEN_EOL && token->type != TOKEN_EOF)
+        line_has_token = true;
 }
 
 // TODO: pokud blokovy komentar obsahoval '\n', ma se chovat jako konec radku
