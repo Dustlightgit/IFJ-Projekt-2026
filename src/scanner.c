@@ -3,6 +3,7 @@
 
 
 #include "scanner.h"
+#include "stack.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -30,6 +31,21 @@ static bool pending_nl = false;
 
 // Skoncil blokovy komentar s koncem radku? Pak uz na radku nesmi byt token
 static bool after_newline_comment = false;
+
+// Pocitani odsazeni na zacatku radku
+static bool at_line_start = true;   // Jsme jeste v uvodnich bilych znacich radku?
+static int indent_count = 0;        // Pocet uvodnich mezer aktualniho radku
+static bool indent_has_tab = false; // Byl v uvodnich bilych znacich tabulator?
+
+// Zasobnik urovni odsazeni
+static Stack indent_stack;
+static bool indent_ready = false;
+
+// Podrzeny token (INDENT a DEDENT se vraci pred nim) a pocet cekajicich DEDENTu
+static Token held_token;
+static bool has_held = false;
+static int pending_dedents = 0;
+
 
 
 
@@ -202,6 +218,9 @@ static void read_token(Token *token) {
             // Konec radku
             if (character == '\n') {
                 after_newline_comment = false;
+                at_line_start = true;
+                indent_count = 0;
+                indent_has_tab = false;
 
                 // Uvnitr zavorek je to jen bily znak, ale zapamatujeme si ho
                 if (paren_depth > 0) {
@@ -219,9 +238,21 @@ static void read_token(Token *token) {
                 continue;
             }
 
-            // Ostatni bile znaky preskakujeme, zustavame ve stavu START
-            if (character == ' ' || character == '\t' || character == '\r')
+            // Bile znaky preskakujeme, na zacatku radku je pocitame jako odsazeni
+            if (character == ' ') {
+                if (at_line_start)
+                    indent_count++;
                 continue;
+            }
+            if (character == '\t') {
+                if (at_line_start)
+                    indent_has_tab = true;
+                continue;
+            }
+            if (character == '\r')
+                continue;
+
+            at_line_start = false;
 
             token->line = line;
 
@@ -785,14 +816,127 @@ static void read_token(Token *token) {
 
 }
 
+// Vytvori token INDENT nebo DEDENT
+static void make_token(Token *token, TokenType type, int token_line)
+{
+    memset(token, 0, sizeof(*token));
+    token->type = type;
+    token->line = token_line;
+    token->nl_before = true;
+}
+
+
+// Prvni token logickeho radku: porovna odsazeni se zasobnikem
+// Podrzi token a misto nej vrati INDENT nebo DEDENT
+static void apply_indent(Token *token)
+{   
+    // Odsazeni obsahuje tabulator, nesmi
+    if (indent_has_tab)
+        error_exit(ERR_LEXICAL, token->line, "Odsazeni nesmi obsahovat tabulator");
+
+    // Predchozi odsazeni
+    int top = *(int *)stack_top(&indent_stack); 
+
+    // Aktualni odsazeni vetsi nez predchozi odsazeni
+    if (indent_count > top) {
+        stack_push(&indent_stack, &indent_count); // Ulozi nove odsazeni na stack
+        held_token = *token; // Puvodni token si schovam, nejdriv vratim INDENT
+        has_held = true;
+
+        // Prepisu aktualni token na INDENT token
+        //(skutecny si drzim v held_token)
+        make_token(token, TOKEN_INDENT, held_token.line);
+    
+    // Aktualni mensi odsazeni nez predtim, to je konec bloku kodu
+    } else if (indent_count < top) {
+        int count = 0;
+
+        // Odebiram ze zasobniku tak dlouho dokud se nedostanu na uroven aktualniho odsazeni
+        // a pocita se kolik bloku se uzavrelo (count)
+        while (indent_count < top) {
+            stack_pop(&indent_stack, NULL);
+            count++;
+            top = *(int *)stack_top(&indent_stack);
+        }
+
+        // Kontrola, zda nove odsazeni presne odpovida nejake predchozi urovni
+        if (indent_count != top)
+            error_exit(ERR_LEXICAL, token->line, "Nesedici odsazeni");
+
+        // Ulozeni puvodniho tokenu pro pozdejsi vraceni
+        held_token = *token;
+        has_held = true;
+
+        // Pocet skoncenych bloku = 2, count-1=1
+        // Do pending_dedents si ulozim ze dluzim jeste jeden TOKEN_DEDENT navic
+        // Protoze ted hned muzu vratit jeden DEDENT
+        pending_dedents = count - 1;
+        make_token(token, TOKEN_DEDENT, held_token.line);
+    }
+}
+
+// Konec souboru: uzavre vsechny zbyvajici urovne odsazeni
+static void flush_indent(Token *token)
+{
+    // Spocitani poctu otevrenych bloku (odecteni zakladni urovne na dne zasobniku)
+    int count = (int)stack_size(&indent_stack) - 1;
+
+    // Pokud neni otevreny zadny blok, neni co zavirat a funkce skonci
+    if (count <= 0)
+        return;
+
+    // Smeteni vsech dodatecnych urovni odsazeni ze zasobniku (zbyde jen zakladni dno)
+    while (stack_size(&indent_stack) > 1)
+        stack_pop(&indent_stack, NULL);
+
+    held_token = *token;
+    has_held = true;
+
+    // Nastaveni poctu zbyvajicich dedentu pro dalsi volani lexeru
+    pending_dedents = count - 1;
+
+    // Vraceni prvniho tokenu DEDENT misto konce souboru
+    make_token(token, TOKEN_DEDENT, held_token.line);
+}
+
+
+
+
 // Precte dalsi token a udrzuje stav scanneru mezi tokeny
 void get_token(Token *token)
 {
+    if (!indent_ready) {
+        int zero = 0;
+        stack_init(&indent_stack, sizeof(int));
+
+        // Vlozeni vychozi nulove urovne na dno zasobniku
+        stack_push(&indent_stack, &zero);
+        
+        // Sledovani odsazeni je pripraveno
+        indent_ready = true;
+    }
+
+    // Nejdriv cekajici DEDENTy, potom podrzeny token
+    if (pending_dedents > 0) {
+        pending_dedents--;
+        make_token(token, TOKEN_DEDENT, held_token.line);
+        return;
+    }
+    if (has_held) {
+        *token = held_token;
+        has_held = false;
+        return;
+    }
+
     read_token(token);
 
-    // Token si nese informaci o konci radku uvnitr zavorek pred nim
+    // Preneseni informace o konci radku predchazejiciho tokenu a vymazani priznaku
     token->nl_before = pending_nl;
     pending_nl = false;
+
+    // Prvni token neprazdneho logickeho radku mimo zavorky rozhoduje o odsazeni
+    bool first_on_line = !line_has_token && paren_depth == 0
+        && token->type != TOKEN_EOL && token->type != TOKEN_EOF;
 
     // Hloubka zavorek
     if (token->type == TOKEN_LPAREN || token->type == TOKEN_LBRACKET)
@@ -803,4 +947,11 @@ void get_token(Token *token)
     // Radek ma aspon jeden token
     if (token->type != TOKEN_EOL && token->type != TOKEN_EOF)
         line_has_token = true;
+
+    // Pokud je to prvni token na radku, aplikuje se logika odsazeni
+    if (first_on_line)
+        apply_indent(token);
+    // Pokud se jedna o konec souboru, uzavrou se vsechny zbyvajici bloky    
+    else if (token->type == TOKEN_EOF)
+        flush_indent(token);
 }
