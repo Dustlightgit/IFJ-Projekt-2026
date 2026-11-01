@@ -46,6 +46,9 @@ static Token held_token;
 static bool has_held = false;
 static int pending_dedents = 0;
 
+// Kontrola odsazeni pokracovacich radku uvnitr zavorek
+static int logical_indent = 0;      // Odsazeni zacatku aktualniho logickeho radku
+static bool pending_check = false;  // Dalsi token je prvni na novem fyzickem radku v zavorkach
 
 
 
@@ -225,6 +228,7 @@ static void read_token(Token *token) {
                 // Uvnitr zavorek je to jen bily znak, ale zapamatujeme si ho
                 if (paren_depth > 0) {
                     pending_nl = true;
+                    pending_check = true;
                     continue;
                 }
 
@@ -933,10 +937,26 @@ void get_token(Token *token)
     // Preneseni informace o konci radku predchazejiciho tokenu a vymazani priznaku
     token->nl_before = pending_nl;
     pending_nl = false;
+    bool check_continuation = pending_check;
+    pending_check = false;
 
     // Prvni token neprazdneho logickeho radku mimo zavorky rozhoduje o odsazeni
     bool first_on_line = !line_has_token && paren_depth == 0
         && token->type != TOKEN_EOL && token->type != TOKEN_EOF;
+
+    // Pokracovaci radek uvnitr zavorek musi byt odsazen vic nez zacatek logickeho radku
+    if (check_continuation && paren_depth > 0
+        && token->type != TOKEN_EOL && token->type != TOKEN_EOF) {
+        // Zkontroluje zda, odsazeni neobsahuje tabulator    
+        if (indent_has_tab)
+            error_exit(ERR_LEXICAL, token->line, "Odsazeni nesmi obsahovat tabulator");
+        // Zkontroluje zda odsazeni je vetsi nez u zacatku logickeho radku
+        if (indent_count <= logical_indent)
+            error_exit(ERR_LEXICAL, token->line, "Pokracovaci radek v zavorkach musi byt odsazen vic");
+    }
+
+    if (first_on_line)
+        logical_indent = indent_count;
 
     // Hloubka zavorek
     if (token->type == TOKEN_LPAREN || token->type == TOKEN_LBRACKET)
