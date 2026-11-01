@@ -3,3 +3,5 @@ build
 output
 .vscode
 .vscode/settings.json
+.metals
+.scala-build
