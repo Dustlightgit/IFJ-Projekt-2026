@@ -5,3 +5,5 @@ output
 .vscode/settings.json
 .metals
 .scala-build
+IFJ26_examples
+jednoduchy_interpret_ukazka
