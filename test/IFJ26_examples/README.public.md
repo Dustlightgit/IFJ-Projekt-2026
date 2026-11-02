@@ -26,13 +26,18 @@ algoritmus v IFJcode26.
 | [paramlists.scala](extensions/paramlists.scala) | – | PARAMLISTS | Funkce bez parametrů, více seznamů parametrů a prázdný seznam parametrů. |
 
 ## Spuštění
-
+<!-- Poupravil jsem prikazy pro nase prostredi. Spusteni normalne z rootu projektu -->
 ```sh
-# Spuštění programu IFJ26 ve Scale
-scala run ifj26.scala basic/factorial.scala <basic/factorial.in
+# Spuštění programu IFJ26 ve Scale # edit: me osobne nefunguje
+cd test/IFJ26_examples
+scala ifj26.scala basic/factorial.scala <basic/factorial.in
+# nebo
+scala-cli run ifj26.scala basic/factorial.scala <basic/factorial.in
 
-# Spuštění programu IFJcode26 v námi dodaném interpretu (viz e-learning)
-./ic26int-linux-x86_64 basic/factorial.ifjcode <basic/factorial.in
+
+# Spuštění programu IFJcode26 v námi dodaném interpretu (viz e-learning) # edit: tohle normalne funguje
+cd test
+./interpret/ic26int-linux-x86_64 IFJ26_examples/basic/factorial.ifjcode <IFJ26_examples/basic/factorial.in
 
 # Příklad spuštění s využitím vašeho překladače
 ./vas-prekladac <basic/factorial.scala >/tmp/factorial.ifjcode
