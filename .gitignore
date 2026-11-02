@@ -3,3 +3,5 @@ build
 output
 .vscode
 .vscode/settings.json
+test/IFJ26_examples/.bsp
+test/IFJ26_examples/.scala-build

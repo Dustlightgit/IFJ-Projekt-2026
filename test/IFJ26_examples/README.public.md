@@ -25,18 +25,34 @@ algoritmus v IFJcode26.
 | [extkw.scala](extensions/extkw.scala) | –| EXTKW | Rozšiřující metoda bez parametrů, metoda s prázdným seznamem parametrů a metoda s argumentem. |
 | [paramlists.scala](extensions/paramlists.scala) | – | PARAMLISTS | Funkce bez parametrů, více seznamů parametrů a prázdný seznam parametrů. |
 
+<!-- Zacatek editu: Poupravil jsem prikazy pro nase prostredi. Spusteni se dela normalne z rootu projektu -->
+
+## Příprava lokalního prostředí
+1. Instalace Java a Scala
+
+Nainstalujte Java Development Kit a příkazový řádek pro Scalu (na merlinu nemusíš):
+
+```sh
+sudo apt update
+sudo apt install default-jdk
+curl -sSLf https://virtuslab.github.io/scala-cli-packages/scala-setup.sh | sh
+```
+2. Nastavení proměnné prostředí
+
+Před první interakcí s CLI nástrojem scala si nastavte proměnnou prostředí, tato úprava platí jen po dobu života vašeho sezení v otevřeném shellu – po ukončení, bude nutné příkaz provést znovu.
+
+```sh
+export JAVA_TOOL_OPTIONS="-Xmx1G"
+```
+
 ## Spuštění
-<!-- Poupravil jsem prikazy pro nase prostredi. Spusteni normalne z rootu projektu -->
 ```sh
 # Spuštění programu IFJ26 ve Scale # edit: me osobne nefunguje
-cd test/IFJ26_examples
-scala ifj26.scala basic/factorial.scala <basic/factorial.in
-# nebo
-scala-cli run ifj26.scala basic/factorial.scala <basic/factorial.in
-
+cd test/IFJ26_examples      # navigace do slozky se scala soubory
+scala run --server=false ifj26.scala basic/factorial.scala <basic/factorial.in
 
 # Spuštění programu IFJcode26 v námi dodaném interpretu (viz e-learning) # edit: tohle normalne funguje
-cd test
+cd test     # navigace do testove slozky
 ./interpret/ic26int-linux-x86_64 IFJ26_examples/basic/factorial.ifjcode <IFJ26_examples/basic/factorial.in
 
 # Příklad spuštění s využitím vašeho překladače
