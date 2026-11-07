@@ -47,6 +47,7 @@ test:
 		@exit 1; \
 	fi
 	valgrind --leak-check=yes $(TARGET)
+	$(MAKE) -C test
 
 format:
 	@if ! command -v clang-format >/dev/null 2>&1; then \

@@ -17,7 +17,8 @@
 
 - kompilace do `build/` – `make build`
 - spouštění `build/main` - `make run`
-- testování – `make test`
+- testování – `make test` - spusti vsechny unit testy ve slozce `/test/scripts` jednotlivych casti prekladace a zatoven otestuje prekladac pomoci _valgrind_
+    - vic info o testovani v `/test/tests.md`
 - formátování všech souborů v `src/` – `make format`
 - výsledné zabalení do `output/` – `make package`
 - přikaz `make` - `build-test`
