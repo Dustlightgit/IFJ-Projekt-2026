@@ -1,0 +1,1 @@
+SOURCES := scanner.c token.c dstring.c error.c stack.c

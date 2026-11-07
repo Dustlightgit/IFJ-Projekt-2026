@@ -1,3 +1,13 @@
+<!--
+    IFJ projekt 2026
+
+    Původní autor: xsantar00
+    Seznam změn:
+        - doplneni informaci a novych automatickych unit testech : xsantar00
+
+    Poskytuje informace o projektu a jeho implementaci
+
+-->
 # Implementace překladače imperativního jazyka IFJ26
 
 - Termín odevzdávání: 27. 11. v 11:59:59
@@ -11,13 +21,20 @@
 ## Formát
 
 - Clang-format – LLVM
-- Deklarace – snakeCase
+
+- Proměnné a funkce - snake_case
+- Konstanty a položky enum - SCREAMING_SNAKE_CASE
+- Datové typy - PascalCase
+
+- Komentáře česky
+- Kód, git messages anglicky
 
 ## Překlad a testování
 
 - kompilace do `build/` – `make build`
 - spouštění `build/main` - `make run`
-- testování – `make test`
+- testování – `make test` - spusti vsechny unit testy ve slozce `/test/scripts` jednotlivych casti prekladace a zatoven otestuje prekladac pomoci _valgrind_
+    - vic info o testovani v `/test/tests.md`
 - formátování všech souborů v `src/` – `make format`
 - výsledné zabalení do `output/` – `make package`
 - přikaz `make` - `build-test`
