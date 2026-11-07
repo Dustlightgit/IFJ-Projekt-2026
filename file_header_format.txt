@@ -1,0 +1,12 @@
+/* 
+    IFJ projekt 2026
+
+    Původní autor: xlogin00
+    Seznam změn:
+        - popis úpravy : xlogin00
+        - popis úpravy 2 : xlogin00 za asistence [chatbot jméno]
+        - ...
+
+    Popis funckionality souboru, co se v něm nachází, atd.
+
+*/

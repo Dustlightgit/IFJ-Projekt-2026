@@ -3,5 +3,9 @@ build
 output
 .vscode
 .vscode/settings.json
+.metals
+.scala-build
+IFJ26_examples
+jednoduchy_interpret_ukazka
 test/IFJ26_examples/.bsp
 test/IFJ26_examples/.scala-build
