@@ -1,0 +1,186 @@
+
+import sys
+import subprocess
+from pathlib import Path
+
+
+def run_tests():
+    scripts_dir = Path(__file__).parent.resolve()
+
+    selected_component = None
+    selected_test = None
+
+    # Argumenty: python3 test.py [COMPONENT] [TEST]
+    if len(sys.argv) > 1:
+        selected_component = sys.argv[1]
+
+    if len(sys.argv) > 2:
+        selected_test = sys.argv[2]
+
+    # Vyhledani komponent
+    if selected_component:
+        component_dirs = [scripts_dir / selected_component]
+
+        if not component_dirs[0].is_dir():
+            print(
+                f"ERROR: Komponenta '{selected_component}' neexistuje.",
+                file=sys.stderr
+            )
+            sys.exit(1)
+    else:
+        component_dirs = sorted(
+            d for d in scripts_dir.iterdir()
+            if d.is_dir() and (d / "build" / "runner").exists()
+        )
+
+    if not component_dirs:
+        print("ERROR: Nebyly nalezeny zadne komponenty.")
+        sys.exit(1)
+
+    total_passed = 0
+    total_failed = 0
+
+    for component_dir in component_dirs:
+        component_name = component_dir.name
+        runner_bin = component_dir / "build" / "runner"
+        unit_tests_dir = component_dir / "unit_tests"
+
+        if not runner_bin.exists():
+            print(
+                f"[SKIP] {component_name}: runner neexistuje."
+            )
+            continue
+
+        if not unit_tests_dir.is_dir():
+            print(
+                f"[SKIP] {component_name}: unit_tests neexistuje."
+            )
+            continue
+
+        test_dirs = sorted(
+            d for d in unit_tests_dir.iterdir()
+            if d.is_dir() and (
+                selected_test is None or d.name == selected_test
+            )
+        )
+
+        if selected_test and not test_dirs:
+            print(
+                f"[ERROR] Test '{selected_test}' "
+                f"nebyl nalezen v komponente '{component_name}'."
+            )
+            total_failed += 1
+            continue
+
+        print(f"\n========== {component_name} ==========")
+
+        for test_dir in test_dirs:
+            input_file = test_dir / "input.txt"
+            expected_file = test_dir / "expected.txt"
+            output_file = test_dir / "output.txt"
+
+            if not input_file.exists() or not expected_file.exists():
+                print(
+                    f"[SKIP] {test_dir.name}: "
+                    "chybi input.txt nebo expected.txt"
+                )
+                continue
+
+            try:
+                with open(input_file, "r", encoding="utf-8") as infile:
+                    result = subprocess.run(
+                        [str(runner_bin)],
+                        stdin=infile,
+                        capture_output=True,
+                        text=True,
+                        check=False
+                    )
+
+                output_file.write_text(
+                    result.stdout,
+                    encoding="utf-8"
+                )
+
+                if result.returncode != 0:
+                    print(f"[FAIL] {test_dir.name}")
+                    print(
+                        f"  - Runner skoncil s kodem "
+                        f"{result.returncode}"
+                    )
+
+                    if result.stderr:
+                        print(f"  - {result.stderr.strip()}")
+
+                    total_failed += 1
+                    continue
+
+            except OSError as error:
+                print(f"[FAIL] {test_dir.name}")
+                print(f"  - Chyba: {error}")
+                total_failed += 1
+                continue
+
+            expected_lines = [
+                line.strip()
+                for line in expected_file.read_text(
+                    encoding="utf-8"
+                ).splitlines()
+                if line.strip()
+            ]
+
+            actual_lines = [
+                line.strip()
+                for line in result.stdout.splitlines()
+                if line.strip()
+            ]
+
+            if actual_lines == expected_lines:
+                print(f"[OK]   {test_dir.name}")
+                total_passed += 1
+            else:
+                print(f"[FAIL] {test_dir.name}")
+                total_failed += 1
+
+                max_lines = max(
+                    len(actual_lines),
+                    len(expected_lines)
+                )
+
+                for i in range(max_lines):
+                    expected = (
+                        expected_lines[i]
+                        if i < len(expected_lines)
+                        else "<konec souboru>"
+                    )
+
+                    actual = (
+                        actual_lines[i]
+                        if i < len(actual_lines)
+                        else "<konec souboru>"
+                    )
+
+                    if expected != actual:
+                        print(
+                            f"  - Radek {i + 1}: "
+                            f"Ocekavano '{expected}', "
+                            f"Ziskano '{actual}'"
+                        )
+
+                print(
+                    f"  - Pocet radku: "
+                    f"Ocekavano {len(expected_lines)}, "
+                    f"Ziskano {len(actual_lines)}"
+                )
+
+    print(
+        f"\nCelkovy vysledek: "
+        f"{total_passed} uspesnych, "
+        f"{total_failed} selhalo."
+    )
+
+    if total_failed > 0:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    run_tests()

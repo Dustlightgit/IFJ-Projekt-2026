@@ -1,3 +1,13 @@
+# ====================================================================
+#   IFJ projekt 2026
+#
+#   Původní autor: xsantar00
+#   Seznam změn:
+#		- uprava testovani: xsantar00
+#
+#   makefile se stara a kompilaci specifickych zdrojovych kodu pro jejich nasledne otestovani v izolovanem prostredi
+# ====================================================================
+
 CC        := gcc
 CFLAGS    := -Wall -Wextra
 LDFLAGS   :=
@@ -50,6 +60,7 @@ test:
 		@exit 1; \
 	fi
 	valgrind --leak-check=yes $(TARGET)
+	$(MAKE) -C test
 
 format:
 	@if ! command -v clang-format >/dev/null 2>&1; then \
