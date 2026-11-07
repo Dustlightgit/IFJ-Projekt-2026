@@ -1,3 +1,11 @@
+# ====================================================================
+#    IFJ projekt 2026
+#
+#    Původní autor: xsantar00
+#    Seznam změn:
+#
+#    makefile se stara a kompilaci specifickych zdrojovych kodu pro jejich nasledne otestovani v izolovanem prostredi
+# ====================================================================
 
 .DEFAULT_GOAL := test
 

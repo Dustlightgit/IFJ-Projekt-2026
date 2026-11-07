@@ -1,4 +1,11 @@
+/* 
+    IFJ projekt 2026
 
+    Původní autor: xsantar00
+
+    Most mezi python testovacem a kompilovanym kodem
+
+*/
 #include <stdio.h>
 
 #include "scanner.h"

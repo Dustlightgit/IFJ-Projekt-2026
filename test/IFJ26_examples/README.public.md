@@ -1,3 +1,14 @@
+<!--
+    IFJ projekt 2026
+
+    Původní autor: ...
+    Seznam změn:
+        - doplneni informaci o priprave prostredi pro scala: xsantar00
+
+    Poskytuje informace o prekladu pomoci scala a o IFJ26_examples 
+
+-->
+
 # Ukázkové programy IFJ26
 
 V tomto archivu najdete několik ukázkových programů v jazyce IFJ26. V adresáři `basic/` jsou ukázky

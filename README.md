@@ -1,3 +1,13 @@
+<!--
+    IFJ projekt 2026
+
+    Původní autor: xsantar00
+    Seznam změn:
+        - doplneni informaci a novych automatickych unit testech : xsantar00
+
+    Poskytuje informace o projektu a jeho implementaci
+
+-->
 # Implementace překladače imperativního jazyka IFJ26
 
 - Termín odevzdávání: 27. 11. v 11:59:59

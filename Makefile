@@ -1,3 +1,13 @@
+# ====================================================================
+#   IFJ projekt 2026
+#
+#   Původní autor: xsantar00
+#   Seznam změn:
+#		- uprava testovani: xsantar00
+#
+#   makefile se stara a kompilaci specifickych zdrojovych kodu pro jejich nasledne otestovani v izolovanem prostredi
+# ====================================================================
+
 CC        := gcc
 CFLAGS    := -Wall -Wextra
 LDFLAGS   :=
