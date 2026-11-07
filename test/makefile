@@ -18,7 +18,7 @@ SCRIPTS_DIR := scripts
 
 COMPONENTS := $(patsubst $(SCRIPTS_DIR)/%/,%,$(wildcard $(SCRIPTS_DIR)/*/))
 
-.PHONY: all test component-test clean
+.PHONY: all test component-test component-build clean
 
 all: test
 
@@ -43,6 +43,9 @@ ifeq ($(strip $(COMPONENT)),)
 
 # Run all components
 test:
+	@for comp in $(COMPONENTS); do \
+		$(MAKE) COMPONENT=$$comp component-build || exit 1; \
+	done
 	@python3 $(TEST_SCRIPT)
 
 else
@@ -60,6 +63,10 @@ endif
 include $(COMPONENT_DIR)/sources.mk
 
 SOURCE_OBJS := $(addprefix $(BUILD_DIR)/,$(addsuffix .o,$(basename $(notdir $(SOURCES)))))
+
+.PHONY: component-build
+
+component-build: $(RUNNER_BIN)
 
 test: component-test
 
