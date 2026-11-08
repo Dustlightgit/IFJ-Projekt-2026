@@ -64,6 +64,9 @@ typedef struct SymTable SymTable;
 // Vytvori tabulku s jednim (globalnim) rozsahem
 SymTable *symtable_new(void);
 
+// Uvolni tabulku a vsechny symboly, ktere obsahuje
+void symtable_free(SymTable *table);
+
 
 // Rozsahy platnosti
  
