@@ -186,3 +186,319 @@ static AvlNode *avl_find(AvlNode *root, const char *name, int scope) {
     return NULL;
 }
 
+
+//--------------------------------------------------------------------------------//
+// Uvolnovani symbolu a stromu
+//--------------------------------------------------------------------------------//
+
+
+
+// Uvolni symbol a vsechno, co vlastni (jmeno, typy)
+// Definice funkce v AST (def) je nevlastni, ta se neuvolnuje
+static void free_symbol(Symbol *symbol) {
+    if (symbol == NULL) {
+        return;
+    }
+ 
+    free(symbol->name);
+ 
+    if (symbol->kind == SYM_VAR) {
+        type_free(symbol->as.var.type);
+    } else {
+        // param_types[index] muze byt NULL (parametr typu Any), type_free to snese
+        for (int index = 0; index < symbol->as.func.param_count; index++) {
+            type_free(symbol->as.func.param_types[index]);
+        }
+        free(symbol->as.func.param_types);
+        type_free(symbol->as.func.return_type);
+    }
+ 
+    free(symbol);
+}
+
+
+// Uvolni cely podstrom vcetne symbolu v uzlech (postorder: nejdriv potomci, pak uzel)
+static void avl_free(AvlNode *node) {
+    if (node == NULL) {
+        return;
+    }
+ 
+    avl_free(node->left);
+    avl_free(node->right);
+    free_symbol(node->symbol);
+    free(node);
+}
+
+
+//--------------------------------------------------------------------------------//
+// Tabulka symbolu
+//--------------------------------------------------------------------------------//
+
+
+#define INITIAL_SCOPE_CAPACITY 8
+ 
+struct SymTable {
+    AvlNode *root;       // Koren jedineho stromu, ve kterem jsou symboly vsech rozsahu
+    int *scope_stack;    // Zasobnik cisel prave otevrenych rozsahu, [0] je globalni
+    int scope_depth;     // Kolik rozsahu je na zasobniku otevrenych
+    int scope_capacity;  // Kolik rozsahu se vejde do alokovaneho zasobniku
+    int next_scope_id;   // Cislo, ktere dostane pristi otevreny rozsah (nikdy se nevraci)
+    int next_var_id;     // Posledni prideleny unique_id promenne
+};
+
+
+// Vytvori novou tabulku symbolu a inicializuje zasobnik rozsahu pro globalni kontext
+SymTable *symtable_new(void) {
+    SymTable *table = xcalloc(1, sizeof *table);
+ 
+    table->scope_capacity = INITIAL_SCOPE_CAPACITY;
+    table->scope_stack = xmalloc((size_t)table->scope_capacity * sizeof *table->scope_stack);
+ 
+    // Na zacatku jsme v globalnim rozsahu
+    table->scope_stack[0] = GLOBAL_SCOPE;
+    table->scope_depth = 1;
+    table->next_scope_id = GLOBAL_SCOPE + 1;
+    table->next_var_id = 0;
+ 
+    return table;
+}
+
+
+// Uvolni tabulku symbolu z pameti vcetne stromu a zasobniku rozsahu
+void symtable_free(SymTable *table) {
+    if (table == NULL) {
+        return;
+    }
+ 
+    avl_free(table->root);
+    free(table->scope_stack);
+    free(table);
+}
+
+// Vstoupi do noveho rozsahu, v pripade potreby zvetsi kapacitu zasobniku a priradi nove ID
+void symtable_enter_scope(SymTable *table) {
+    // Kdyz je zasobnik plny, zvetsi se na dvojnasobek
+    if (table->scope_depth == table->scope_capacity) {
+        table->scope_capacity *= 2;
+        table->scope_stack = xrealloc(table->scope_stack,
+                                      (size_t)table->scope_capacity * sizeof *table->scope_stack);
+    }
+ 
+    // Novy rozsah dostane vzdy nove cislo, aby se nepletl s drivejsimi sourozeneckymi bloky
+    table->scope_stack[table->scope_depth] = table->next_scope_id;
+    table->scope_depth++;
+    table->next_scope_id++;
+}
+
+
+// Opusti aktualni rozsah snizenim hloubky zasobniku, globalni rozsah nezavira
+void symtable_exit_scope(SymTable *table) {
+    // Globalni rozsah se nikdy nezavira
+    if (table->scope_depth > 1) {
+        table->scope_depth--;
+    }
+    // Strom se nemeni, symboly zustavaji az do symtable_free
+}
+
+
+//--------------------------------------------------------------------------------//
+// Vyhledavani
+//--------------------------------------------------------------------------------//
+ 
+
+// Hleda symbol v aktualnim rozsahu na vrcholu zasobniku
+Symbol *symtable_lookup_in_current_scope(const SymTable *table, const char *name) {
+    int current_scope = table->scope_stack[table->scope_depth - 1];
+ 
+    AvlNode *node = avl_find(table->root, name, current_scope);
+    return node != NULL ? node->symbol : NULL;
+}
+
+
+// Hleda symbol od nejvnitrnejsiho rozsahu smerem ven vcetne podpory zastineni
+Symbol *symtable_lookup(const SymTable *table, const char *name) {
+    // Od nejvnitrnejsiho rozsahu smerem ven, prvni nalez vyhrava (tim funguje zastineni)
+    for (int depth = table->scope_depth - 1; depth >= 0; depth--) {
+        AvlNode *node = avl_find(table->root, name, table->scope_stack[depth]);
+        if (node != NULL) {
+            return node->symbol;
+        }
+    }
+ 
+    return NULL;
+}
+
+
+//--------------------------------------------------------------------------------//
+// Definice symbolu
+//--------------------------------------------------------------------------------//
+ 
+
+// Zabali symbol do uzlu a vlozi ho do stromu pod klicem (jmeno symbolu, scope)
+// Tabulka tim symbol prebira do vlastnictvi, vrati ho zpet pro pohodli volajiciho
+static Symbol *insert_symbol(SymTable *table, Symbol *symbol, int scope) {
+    AvlNode *node = xmalloc(sizeof *node);
+    node->symbol = symbol;
+    node->scope_id = scope;
+    node->left = NULL;
+    node->right = NULL;
+    node->height = 1;
+ 
+    table->root = avl_insert(table->root, node);
+    return symbol;
+}
+
+
+// Definuje novou promennou v aktualnim rozsahu, overi existenci a priradi jedinecne ID
+Symbol *symtable_define_var(SymTable *table, const char *name, const Type *type, bool is_mutable) {
+    int current_scope = table->scope_stack[table->scope_depth - 1];
+ 
+    // Jmeno uz v aktualnim rozsahu existuje -> redefinice (chyba 4 se hlasi u volajiciho)
+    if (avl_find(table->root, name, current_scope) != NULL) {
+        return NULL;
+    }
+ 
+    Symbol *symbol = xcalloc(1, sizeof *symbol);
+    symbol->kind = SYM_VAR;
+    symbol->name = xstrdup(name);
+    symbol->as.var.type = (type != NULL) ? type_clone(type) : NULL;
+    symbol->as.var.is_mutable = is_mutable;
+ 
+    table->next_var_id++;
+    symbol->as.var.unique_id = table->next_var_id;
+ 
+    return insert_symbol(table, symbol, current_scope);
+}
+
+
+// Definuje novou funkci v globalnim rozsahu, overi existenci a zkopiruje typy
+Symbol *symtable_define_func(SymTable *table, const char *name, FuncDef *def) {
+    // Funkce jsou vzdy v globalnim rozsahu, bez ohledu na to, kde prave jsme
+    // nelze definovat vnorenou funkci uvnitr jine funkce
+    if (avl_find(table->root, name, GLOBAL_SCOPE) != NULL) {
+        return NULL;
+    }
+ 
+    Symbol *symbol = xcalloc(1, sizeof *symbol);
+    symbol->kind = SYM_FUNC;
+    symbol->name = xstrdup(name);
+ 
+    symbol->as.func.def = def;  // Nevlastni, patri AST
+    symbol->as.func.param_count = def->param_count;
+    symbol->as.func.is_builtin = false; // Jde o uzivatelskou funkci, proto false
+    symbol->as.func.being_inferred = false;
+ 
+    // Typy parametru se opisou z definice (kazdy symbol ma svoje vlastni kopie)
+    if (def->param_count > 0) {
+        symbol->as.func.param_types = xmalloc((size_t)def->param_count * sizeof *symbol->as.func.param_types);
+        for (int index = 0; index < def->param_count; index++) {
+            symbol->as.func.param_types[index] = type_clone(def->params[index].type);
+        }
+    } else {
+        symbol->as.func.param_types = NULL;
+    }
+ 
+    // Navratovy typ muze chybet (NULL = zatim neznamy, odvodi se az pozdeji)
+    symbol->as.func.return_type = (def->return_type != NULL) ? type_clone(def->return_type) : NULL;
+ 
+    return insert_symbol(table, symbol, GLOBAL_SCOPE);
+}
+
+// Definuje vestavenou funkci v globalnim rozsahu, overi existenci a zkopiruje typy
+Symbol *symtable_define_builtin(SymTable *table, const char *name, int param_count, const Type *const *param_types, const Type *return_type) {
+    // Vestavene funkce jsou take globalni
+    if (avl_find(table->root, name, GLOBAL_SCOPE) != NULL) {
+        return NULL;
+    }
+ 
+    Symbol *symbol = xcalloc(1, sizeof *symbol);
+    symbol->kind = SYM_FUNC;
+    symbol->name = xstrdup(name);
+ 
+    symbol->as.func.def = NULL;  // Vestavena funkce nema definici v AST
+    symbol->as.func.param_count = param_count;
+    symbol->as.func.is_builtin = true;
+    symbol->as.func.being_inferred = false;
+ 
+    // NULL prvek v param_types znamena parametr typu Any, ten zustane NULL
+    if (param_count > 0) {
+        symbol->as.func.param_types = xmalloc((size_t)param_count * sizeof *symbol->as.func.param_types);
+        for (int index = 0; index < param_count; index++) {
+            symbol->as.func.param_types[index] = (param_types[index] != NULL) ? type_clone(param_types[index]) : NULL;
+        }
+    } else {
+        symbol->as.func.param_types = NULL;
+    }
+ 
+    symbol->as.func.return_type = (return_type != NULL) ? type_clone(return_type) : NULL;
+ 
+    return insert_symbol(table, symbol, GLOBAL_SCOPE);
+}
+
+
+//--------------------------------------------------------------------------------//
+// Uprava symbolu
+//--------------------------------------------------------------------------------//
+
+// Nastavi nebo zmeni navratovy typ funkce
+void symbol_set_return_type(Symbol *symbol, const Type *type) {
+    if (symbol->kind != SYM_FUNC) {
+        return;
+    }
+ 
+    // Nejdriv vytvorit novou kopii a az pak uvolnit stary typ
+    Type *new_type = (type != NULL) ? type_clone(type) : NULL;
+    type_free(symbol->as.func.return_type);
+    symbol->as.func.return_type = new_type;
+}
+
+
+//--------------------------------------------------------------------------------//
+// Vestavene funkce
+//--------------------------------------------------------------------------------//
+ 
+void symtable_register_builtins(SymTable *table) {
+    // Typy pouzite v signaturach
+    // symtable_define_builtin si typy zkopiruje, proto staci obycejne lokalni promenne
+    const Type type_int = { .kind = TYPE_INT, .element = NULL };
+    const Type type_double = { .kind = TYPE_DOUBLE, .element = NULL };
+    const Type type_string = { .kind = TYPE_STRING, .element = NULL };
+    const Type type_unit = { .kind = TYPE_UNIT, .element = NULL };
+    const Type type_boolean = { .kind = TYPE_BOOLEAN, .element = NULL };
+ 
+    // Pole typu parametru, NULL prvek znamena Any
+    const Type *const params_any[] = { NULL };
+    const Type *const params_double[] = { &type_double };
+    const Type *const params_string[] = { &type_string };
+    const Type *const params_string_int[] = { &type_string, &type_int };
+    const Type *const params_string_int_int[] = { &type_string, &type_int, &type_int };
+    const Type *const params_int[] = { &type_int };
+ 
+    // print(value: Any): Unit
+    symtable_define_builtin(table, "print", 1, params_any, &type_unit);
+ 
+    // Funkce pro cteni ze vstupu, bez parametru
+    symtable_define_builtin(table, "readLine", 0, NULL, &type_string);
+    symtable_define_builtin(table, "readInt", 0, NULL, &type_int);
+    symtable_define_builtin(table, "readDouble", 0, NULL, &type_double);
+    symtable_define_builtin(table, "readBoolean", 0, NULL, &type_boolean);  // rozsireni BOOLTHEN
+ 
+    // toStr(value: Any): String
+    symtable_define_builtin(table, "toStr", 1, params_any, &type_string);
+ 
+    // toInt(value: Double): Int
+    symtable_define_builtin(table, "toInt", 1, params_double, &type_int);
+ 
+    // strLength(value: String): Int
+    symtable_define_builtin(table, "strLength", 1, params_string, &type_int);
+ 
+    // subStr(value: String, start: Int, end: Int): String
+    symtable_define_builtin(table, "subStr", 3, params_string_int_int, &type_string);
+ 
+    // ord(value: String, index: Int): Int
+    symtable_define_builtin(table, "ord", 2, params_string_int, &type_int);
+ 
+    // chr(code: Int): String
+    symtable_define_builtin(table, "chr", 1, params_int, &type_string);
+}
+
