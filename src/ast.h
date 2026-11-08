@@ -1,5 +1,5 @@
 // xnovacm00
-// ast.h
+// ast.h - hlavickovy soubor pro abstraktni syntakticky strom
 
 #ifndef AST_H
 #define AST_H
@@ -252,7 +252,10 @@ typedef struct {
 
 //--------------------------------------------------------------------------------//
 
-// Vygenerovano AI
+
+
+//--------------------------------------------------------------------------------//
+// Vygenerovano AI (zacatek)
 // prompt: "Udelej konstruktory a uvolnovaci funkce k ast.h"
 
 
@@ -367,5 +370,8 @@ void program_add_func(Program *program, FuncDef *func);
  
 // Uvolni program a vsechny jeho funkce
 void program_free(Program *program);
+
+// Vygenerovano AI (konec)
+//--------------------------------------------------------------------------------//
 
 #endif
