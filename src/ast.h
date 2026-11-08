@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------//
 
 
-// Block ukazuje na Stmt
+// Predbezne deklarace
 typedef struct Stmt Stmt;
 typedef struct Block Block;
 
@@ -43,7 +43,7 @@ typedef struct {
 
 // Druh typu
 typedef enum {
-    TYPE_NONE,    // Typ neni zadany nebo zatim neni znamy
+    //TYPE_NONE,    // Typ neni zadany nebo zatim neni znamy
     TYPE_INT,     // Int
     TYPE_DOUBLE,  // Double
     TYPE_STRING,  // String
@@ -248,6 +248,124 @@ typedef struct {
 
 //--------------------------------------------------------------------------------//
 
+// Funkce pro vytvareni a uvolnovani uzlu
 
+//--------------------------------------------------------------------------------//
+
+// Vygenerovano AI
+// prompt: "Udelej konstruktory a uvolnovaci funkce k ast.h"
+
+
+// Pravidlo 1: Rodicovsky uzel vlastni sve potomky, uvolneni korene uvolni cely strom.
+// Pravidlo 2: Konstruktory prebiraji vlastnictvi ukazatelu na uzly, bloky a typy.
+// Pravidlo 3: Predany ukazatel uz volajici nesmi uvolnit ani pouzit na jinem miste.
+// Pravidlo 4: Retezce (jmena, literaly) se kopiruji, svuj puvodni retezec uvolnuje volajici.
+// Pravidlo 5: Pri nedostatku pameti program konci s navratovym kodem 99.
+// Pravidlo 6: Vsechny funkce *_free akceptuji NULL, parser jimi muze pri chybe uvolnit rozpracovane uzly.
+
+
+// Typy
+ 
+// Vytvori typ daneho druhu (pro TYPE_LIST pouzij type_new_list)
+Type *type_new(TypeKind kind);
+ 
+// Vytvori typ List[element], prebere vlastnictvi elementu
+Type *type_new_list(Type *element);
+ 
+// Vytvori hlubokou kopii typu (pro semantiku, aby kazdy vyraz mel vlastni typ)
+// Resi problem s dvojitym uvolnenim
+// (kazdy vyraz uvolnuje svuj typ)
+// napr Expr "a" => TYPE_INT (1)
+//      Expr "a + b" => TYPE_INT (2)
+// neukazuji na stejny TYPE_INT ale kazdy ma svuj
+Type *type_clone(const Type *type);
+ 
+// Uvolni typ vcetne typu prvku
+void type_free(Type *type);
+
+
+// Vyrazy
+ 
+Expr *expr_new_int(int value, int line);
+Expr *expr_new_double(double value, int line);
+Expr *expr_new_string(const char *value, int line);
+Expr *expr_new_unit(int line);
+Expr *expr_new_bool(bool value, int line);
+Expr *expr_new_variable(const char *name, int line);
+Expr *expr_new_unary(UnaryOp op, Expr *operand, int line);
+Expr *expr_new_binary(BinaryOp op, Expr *left, Expr *right, int line);
+
+// Vytvori volani funkce bez argumentu, argumenty se pridavaji funkci expr_call_add_arg
+Expr *expr_new_call(const char *name, int line);
+void expr_call_add_arg(Expr *call, Expr *arg);
+
+
+Expr *expr_new_if(Expr *cond, Block *then_block, Block *else_block, int line);
+Expr *expr_new_range(Expr *from, Expr *to, bool is_inclusive, Expr *step, int line);
+
+
+// Vytvori clen hodnoty bez argumentu, argumenty se pridavaji funkci expr_member_add_arg
+Expr *expr_new_member(Expr *object, const char *name, int line);
+void expr_member_add_arg(Expr *member, Expr *arg);
+
+
+// Vytvori prazdny seznam, prvky se pridavaji funkci expr_list_add_item
+Expr *expr_new_list_literal(int line);
+void expr_list_add_item(Expr *list, Expr *item);
+ 
+Expr *expr_new_list_range(Expr *start, Expr *end, Expr *step, int line);
+Expr *expr_new_index(Expr *list, Expr *index, int line);
+
+
+
+// Uvolni vyraz a cely jeho podstrom
+void expr_free(Expr *expr);
+
+
+
+// Bloky a prikazy
+ 
+Block *block_new(void);
+ 
+// Prida prikaz na konec bloku, prebere vlastnictvi prikazu
+void block_add(Block *block, Stmt *stmt);
+
+// Uvolni blok a vsechny jeho prikazy
+void block_free(Block *block);
+
+
+Stmt *stmt_new_vardef(bool is_mutable, const char *name, Type *declared_type, Expr *init, int line);
+Stmt *stmt_new_assign(const char *name, Expr *value, int line);
+Stmt *stmt_new_return(Expr *value, int line);
+Stmt *stmt_new_expr(Expr *expr, int line);
+Stmt *stmt_new_while(Expr *cond, Block *body, int line);
+
+
+// Vytvori cyklus for bez strazi a bez tela, doplni se funkcemi nize
+Stmt *stmt_new_for(const char *var_name, Expr *source, int line);
+void stmt_for_add_guard(Stmt *for_stmt, Expr *guard);
+void stmt_for_set_body(Stmt *for_stmt, Block *body);
+
+
+// Uvolni prikaz a cely jeho podstrom
+void stmt_free(Stmt *stmt);
+
+
+// Funkce a program
+ 
+// Vytvori funkci bez parametru, bez navratoveho typu a bez tela
+FuncDef *funcdef_new(const char *name, bool is_main, int line);
+void funcdef_add_param(FuncDef *func, const char *name, Type *type);
+void funcdef_set_return_type(FuncDef *func, Type *return_type);
+void funcdef_set_body(FuncDef *func, Block *body);
+void funcdef_free(FuncDef *func);
+
+
+
+Program *program_new(void);
+void program_add_func(Program *program, FuncDef *func);
+ 
+// Uvolni program a vsechny jeho funkce
+void program_free(Program *program);
 
 #endif
