@@ -51,7 +51,7 @@
    doxygen dokumentace.
 
         Inspirativní úryvek ze scanneru:
-        <zde jsem přepokíroval náhodný úsek z kódu scanner.c>
+        <zde jsem prekopiroval nahodny usek z kodu scanner.c>
 
 */
 

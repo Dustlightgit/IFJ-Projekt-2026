@@ -113,8 +113,9 @@ const char *token_type_name(TokenType type) {
     return ";";
   case TOKEN_DOT:
     return ".";
+  default:
+    return "?";
   }
-  return "?";
 }
 
 // Uvolni text vlastneny tokenem (jen u ID a retezcu) a token zneplatni
