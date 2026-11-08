@@ -237,14 +237,14 @@ void expr_member_add_arg(Expr *member, Expr *arg)
 }
 
 
-// Vytvori prazdny vyraz pro list literal (seznam hodnot zapsany v kodu) => []
+// Vytvori prazdny vyraz pro list literal (seznam hodnot zapsany v kodu) => List()
 Expr *expr_new_list_literal(int line)
 {
     return expr_alloc(EXPR_LIST_LITERAL, line);
 }
 
-// Prida polozku do list literalu a prebere jej vlastnictvi => [..., item]
-// Prida polozku do list literalu a prebere jej vlastnictvi => [42, "hello"]
+
+// Prida polozku do list literalu a prebere jej vlastnictvi => List(1, 2, 3)
 void expr_list_add_item(Expr *list, Expr *item)
 {
     list->as.list_literal.items = grow_array(list->as.list_literal.items, list->as.list_literal.count, sizeof(Expr *));
@@ -252,7 +252,7 @@ void expr_list_add_item(Expr *list, Expr *item)
     list->as.list_literal.count++;
 }
 
-// Vytvori vyraz pro rozsah seznamu a prebere vlastnictvi vyrazu start, end a step => [1 .. 10 by 2]
+// Vytvori vyraz pro rozsah seznamu a prebere vlastnictvi vyrazu start, end a step => List.range(1, 10, 2)
 Expr *expr_new_list_range(Expr *start, Expr *end, Expr *step, int line)
 {
     Expr *expr = expr_alloc(EXPR_LIST_RANGE, line);
@@ -262,7 +262,7 @@ Expr *expr_new_list_range(Expr *start, Expr *end, Expr *step, int line)
     return expr;
 }
 
-// Vytvori vyraz pro indexovani nebo pristup k prvku podle indexu a prebere vlastnictvi list a index => my_list[0]
+// Vytvori vyraz pro indexovani nebo pristup k prvku podle indexu a prebere vlastnictvi list a index => lst(0)
 Expr *expr_new_index(Expr *list, Expr *index, int line)
 {
     Expr *expr = expr_alloc(EXPR_INDEX, line);
@@ -276,7 +276,7 @@ Expr *expr_new_index(Expr *list, Expr *index, int line)
 // Bloky a prikazy
 //--------------------------------------------------------------------------------//
 
-// Vytvori novy prazdny blok a alokuje pro jej pamet => { }
+// Vytvori novy prazdny blok a alokuje pro jej pamet
 Block *block_new(void)
 {
     Block *block = xmalloc(sizeof *block);
@@ -285,7 +285,7 @@ Block *block_new(void)
     return block;
 }
 
-// Prida prikaz do bloku a prebere jeho vlastnictvi => { print(42); }
+// Prida prikaz do bloku a prebere jeho vlastnictvi
 void block_add(Block *block, Stmt *stmt)
 {
     block->items = grow_array(block->items, block->count, sizeof(Stmt *));
@@ -390,6 +390,7 @@ FuncDef *funcdef_new(const char *name, bool is_main, int line)
     func->body = NULL;
     func->is_main = is_main;
     func->line = line;
+    func->symbol = NULL;
     return func;
 }
 
@@ -399,6 +400,7 @@ void funcdef_add_param(FuncDef *func, const char *name, Type *type)
     func->params = grow_array(func->params, func->param_count, sizeof(Param));
     func->params[func->param_count].name = xstrdup(name);
     func->params[func->param_count].type = type;
+    func->params[func->param_count].symbol = NULL;
     func->param_count++;
 }
 

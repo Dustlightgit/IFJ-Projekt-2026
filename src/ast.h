@@ -112,7 +112,10 @@ typedef struct Expr {
     Type *type;    // Typ vyrazu, vyplni semanticka analyza (parser nastavi NULL)
     union {
         Literal literal;                 // Pro EXPR_LITERAL
-        struct { char *name; } variable; // Pro EXPR_VARIABLE, vlastni kopie jmena
+        struct {
+            char *name;            // Jmeno promenne, vlastni kopie
+            struct Symbol *symbol; // Symbol z tabulky symbolu, vyplni semanticka analyza
+        } variable; // Pro EXPR_VARIABLE, vlastni kopie jmena
         struct {
             UnaryOp op;           // Ktery operator
             struct Expr *operand; // Vyraz, na ktery se operator pouzije
@@ -126,6 +129,7 @@ typedef struct Expr {
             char *name;          // Jmeno volane funkce, vlastni kopie
             struct Expr **args;  // Pole ukazatelu na argumenty
             int arg_count;       // Pocet argumentu
+            struct Symbol *symbol; // Symbol z tabulky symbolu (nevlastni), vyplni semantika
         } call;                  // Pro EXPR_CALL
         struct {
             struct Expr *cond;     // Podminka
@@ -192,10 +196,12 @@ struct Stmt {
             char *name;          // Jmeno promenne, vlastni kopie
             Type *declared_type; // Typ napsany programatorem, NULL kdyz chybi
             Expr *init;          // Pocatecni hodnota
+            struct Symbol *symbol; // Symbol z tabulky symbolu (nevlastni), vyplni semantika
         } vardef;                // Pro STMT_VARDEF
         struct {
             char *name;          // Jmeno promenne, vlastni kopie
             Expr *value;         // Nova hodnota
+            struct Symbol *symbol; // Symbol z tabulky symbolu (nevlastni), vyplni semantika
         } assign;                // Pro STMT_ASSIGN
         struct {
             Expr *value;         // Vracena hodnota, NULL pro prazdny return
@@ -213,6 +219,7 @@ struct Stmt {
             Expr **guards;       // Pole strazi (vyrazy typu Boolean)
             int guard_count;     // Pocet strazi, muze byt 0
             Block *body;         // Telo cyklu
+            struct Symbol *symbol; // Symbol z tabulky symbolu (nevlastni), vyplni semantika
         } for_loop;              // Pro STMT_FOR
     } as;
 };
@@ -225,6 +232,7 @@ struct Stmt {
 typedef struct {
     char *name;  // Jmeno parametru, vlastni kopie
     Type *type;  // Typ parametru, vzdy zadany
+    struct Symbol *symbol; // Symbol z tabulky symbolu (nevlastni), vyplni semantika
 } Param;
 
 // Definice funkce
@@ -236,6 +244,7 @@ typedef struct {
     Block *body;        // Telo funkce
     bool is_main;       // True pro funkci s anotaci @main
     int line;           // Radek ve zdrojovem kodu pro chybova hlaseni
+    struct Symbol *symbol; // Symbol z tabulky symbolu (nevlastni), vyplni semantika
 } FuncDef;
 
 
@@ -265,6 +274,7 @@ typedef struct {
 // Pravidlo 4: Retezce (jmena, literaly) se kopiruji, svuj puvodni retezec uvolnuje volajici.
 // Pravidlo 5: Pri nedostatku pameti program konci s navratovym kodem 99.
 // Pravidlo 6: Vsechny funkce *_free akceptuji NULL, parser jimi muze pri chybe uvolnit rozpracovane uzly.
+// Pravidlo 7: Ukazatele na Symbol AST nevlastni a funkce *_free je neuvolnuji.
 
 
 // Typy
