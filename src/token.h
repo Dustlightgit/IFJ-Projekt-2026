@@ -5,14 +5,16 @@
 
     Puvodni autor: xsantar00 - prvni verze vyctoveho typu enumu
     Seznam zmen:
-        - xnovacm00 za asistence xyz - finalizace vyctoveho typu enum, struktura token a funkce pro praci s nimi.
-        - xbalala00 - zmeneno poradi takenu tak, aby tokeny relevantni pro LL parser byly na zacatku kvuli indexaci LL tabulky.
-                    - pridani TOKEN_LL_TERM_COUNT pro zjisteni poctu terminalu kvuli LL tabulce.
+        - xnovacm00 za asistence xyz - finalizace vyctoveho typu enum, struktura
+   token a funkce pro praci s nimi.
+        - xbalala00 - zmeneno poradi takenu tak, aby tokeny relevantni pro LL
+   parser byly na zacatku kvuli indexaci LL tabulky.
+                    - pridani TOKEN_LL_TERM_COUNT pro zjisteni poctu terminalu
+   kvuli LL tabulce.
 
     Definice typu tokenu, struktury tokenu a prototypu funkci pro lexer.
 
 */
-
 
 #ifndef TOKEN_H
 #define TOKEN_H
@@ -37,7 +39,7 @@ typedef enum {
   TOKEN_KW_VAL,
   TOKEN_KW_VAR,
   TOKEN_KW_WHILE,
-  TOKEN_KW_FOR,   // CONTROL
+  TOKEN_KW_FOR, // CONTROL
 
   // Nazvy typu (jsou to klicova slova)
   TOKEN_KW_INT,
@@ -59,36 +61,36 @@ typedef enum {
 
   // Identifikator a prirazeni
   TOKEN_ID,
-  TOKEN_ASSIGN,   // =
-  
+  TOKEN_ASSIGN, // =
+
   // Import a main anotace
-  TOKEN_ANNOT_MAIN,   // Cele "@main"
-  TOKEN_STAR,         // * (v "import ifj26.*", take je operator)
-  TOKEN_DOT,          // . (VALMEM, LISTS, import)
+  TOKEN_ANNOT_MAIN, // Cele "@main"
+  TOKEN_STAR,       // * (v "import ifj26.*", take je operator)
+  TOKEN_DOT,        // . (VALMEM, LISTS, import)
 
   // Zde konci terminaly LL gramatiky.
 
   // Pocet terminalu LL gramatiky.
-  TOKEN_LL_TERM_COUNT,    // Neni skutecny token
+  TOKEN_LL_TERM_COUNT, // Neni skutecny token
 
   // Literaly (nesou hodnotu)
   TOKEN_INT_LIT,
   TOKEN_DOUBLE_LIT,
   TOKEN_STRING_LIT, // Jednoradkovy i viceradkovy """..."""
-  
+
   // Pravdivostni hodnoty
   TOKEN_KW_TRUE,  // BOOLTHEN, jsou klicova slova i literaly naraz...
   TOKEN_KW_FALSE, // BOOLTHEN
 
   // Unarni operatory
-  TOKEN_PLUS,     // +
-  TOKEN_MINUS,    // -
-  TOKEN_NOT,      // ! (BOOLTHEN)
+  TOKEN_PLUS,  // +
+  TOKEN_MINUS, // -
+  TOKEN_NOT,   // ! (BOOLTHEN)
 
   // Od tohoho bodu dal jsou terminaly, ktere nejsou soucasti LL tabulky
   // a kterymi nesmi zacinat vyraz - lze je rovnou detekovat jako chybu,
   // pokud by se preslo do vyrazoveho parseru na zaklade pristiho tokenu.
-  
+
   // Vyraz nesmi zacinat terminalem s hodnotou vetsi nez tento oddelovac
   TOKEN_EXPRESSION_BEGINNING_DELIMITER,
 
@@ -103,14 +105,14 @@ typedef enum {
   TOKEN_NE,       // !=
   TOKEN_AND,      // && (BOOLTHEN)
   TOKEN_OR,       // || (BOOLTHEN)
-  
+
 } TokenType;
 
 typedef union {
-    long long int_val; // TOKEN_INT_LIT
-    double double_val; // TOKEN_DOUBLE_LIT
-    char *text;        // TOKEN_ID, TOKEN_STRING_LIT
-  } TokenAttribute; 
+  long long int_val; // TOKEN_INT_LIT
+  double double_val; // TOKEN_DOUBLE_LIT
+  char *text;        // TOKEN_ID, TOKEN_STRING_LIT
+} TokenAttribute;
 
 typedef struct {
   TokenType type;
