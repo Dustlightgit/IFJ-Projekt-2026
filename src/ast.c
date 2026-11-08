@@ -235,3 +235,367 @@ void expr_member_add_arg(Expr *member, Expr *arg)
     member->as.member.args[member->as.member.arg_count] = arg;
     member->as.member.arg_count++;
 }
+
+
+// Vytvori prazdny vyraz pro list literal (seznam hodnot zapsany v kodu) => []
+Expr *expr_new_list_literal(int line)
+{
+    return expr_alloc(EXPR_LIST_LITERAL, line);
+}
+
+// Prida polozku do list literalu a prebere jej vlastnictvi => [..., item]
+// Prida polozku do list literalu a prebere jej vlastnictvi => [42, "hello"]
+void expr_list_add_item(Expr *list, Expr *item)
+{
+    list->as.list_literal.items = grow_array(list->as.list_literal.items, list->as.list_literal.count, sizeof(Expr *));
+    list->as.list_literal.items[list->as.list_literal.count] = item;
+    list->as.list_literal.count++;
+}
+
+// Vytvori vyraz pro rozsah seznamu a prebere vlastnictvi vyrazu start, end a step => [1 .. 10 by 2]
+Expr *expr_new_list_range(Expr *start, Expr *end, Expr *step, int line)
+{
+    Expr *expr = expr_alloc(EXPR_LIST_RANGE, line);
+    expr->as.list_range.start = start;
+    expr->as.list_range.end = end;
+    expr->as.list_range.step = step;
+    return expr;
+}
+
+// Vytvori vyraz pro indexovani nebo pristup k prvku podle indexu a prebere vlastnictvi list a index => my_list[0]
+Expr *expr_new_index(Expr *list, Expr *index, int line)
+{
+    Expr *expr = expr_alloc(EXPR_INDEX, line);
+    expr->as.index.list = list;
+    expr->as.index.index = index;
+    return expr;
+}
+
+
+//--------------------------------------------------------------------------------//
+// Bloky a prikazy
+//--------------------------------------------------------------------------------//
+
+// Vytvori novy prazdny blok a alokuje pro jej pamet => { }
+Block *block_new(void)
+{
+    Block *block = xmalloc(sizeof *block);
+    block->items = NULL;
+    block->count = 0;
+    return block;
+}
+
+// Prida prikaz do bloku a prebere jeho vlastnictvi => { print(42); }
+void block_add(Block *block, Stmt *stmt)
+{
+    block->items = grow_array(block->items, block->count, sizeof(Stmt *));
+    block->items[block->count] = stmt;
+    block->count++;
+}
+
+// Vytvori prazdny prikaz daneho druhu, vsechna ostatni pole jsou vynulovana
+static Stmt *stmt_alloc(StmtKind kind, int line)
+{
+    Stmt *stmt = xmalloc(sizeof *stmt);
+    memset(stmt, 0, sizeof *stmt);
+    stmt->kind = kind;
+    stmt->line = line;
+    return stmt;
+}
+
+// Vytvori prikaz pro definici promenne, naklonuje jmeno a prebere vlastnictvi datoveho typu
+// a inicializacniho vyrazu => val x: Int = 42
+Stmt *stmt_new_vardef(bool is_mutable, const char *name, Type *declared_type, Expr *init, int line)
+{
+    Stmt *stmt = stmt_alloc(STMT_VARDEF, line);
+    stmt->as.vardef.is_mutable = is_mutable;
+    stmt->as.vardef.name = xstrdup(name);
+    stmt->as.vardef.declared_type = declared_type;
+    stmt->as.vardef.init = init;
+    return stmt;
+}
+
+// Vytvori prikaz pro prirazeni hodnoty do promenne, naklonuje jmeno a prebere vlastnictvi vyrazu => x = 42
+Stmt *stmt_new_assign(const char *name, Expr *value, int line)
+{
+    Stmt *stmt = stmt_alloc(STMT_ASSIGN, line);
+    stmt->as.assign.name = xstrdup(name);
+    stmt->as.assign.value = value;
+    return stmt;
+}
+
+// Vytvori prikaz pro navrat z funkce a prebere vlastnictvi navratoveho vyrazu => return 42
+Stmt *stmt_new_return(Expr *value, int line)
+{
+    Stmt *stmt = stmt_alloc(STMT_RETURN, line);
+    stmt->as.ret.value = value;
+    return stmt;
+}
+
+// Vytvori prikaz pro samostatne vyhodnoceni vyrazu a prebere vlastnictvi vyrazu => print(42)
+Stmt *stmt_new_expr(Expr *expr, int line)
+{
+    Stmt *stmt = stmt_alloc(STMT_EXPR, line);
+    stmt->as.expr_stmt.expr = expr;
+    return stmt;
+}
+
+// Vytvori prikaz pro cyklus while a prebere vlastnictvi podminky a tela => while i > 0 do print(i)
+Stmt *stmt_new_while(Expr *cond, Block *body, int line)
+{
+    Stmt *stmt = stmt_alloc(STMT_WHILE, line);
+    stmt->as.while_loop.cond = cond;
+    stmt->as.while_loop.body = body;
+    return stmt;
+}
+
+// Vytvori prikaz pro cyklus for, naklonuje jmeno promenne a prebere vlastnictvi zdroje => for i <- 1 to 10 by 2 do
+Stmt *stmt_new_for(const char *var_name, Expr *source, int line)
+{
+    Stmt *stmt = stmt_alloc(STMT_FOR, line);
+    stmt->as.for_loop.var_name = xstrdup(var_name);
+    stmt->as.for_loop.source = source;
+    return stmt;
+}
+
+// Prida straz do cyklu for a prebere vlastnictvi vyrazu straze => if i != 3
+void stmt_for_add_guard(Stmt *for_stmt, Expr *guard)
+{
+    for_stmt->as.for_loop.guards = grow_array(for_stmt->as.for_loop.guards,
+                                              for_stmt->as.for_loop.guard_count, sizeof(Expr *));
+    for_stmt->as.for_loop.guards[for_stmt->as.for_loop.guard_count] = guard;
+    for_stmt->as.for_loop.guard_count++;
+}
+
+// Priradi telo k cyklu for a prebere vlastnictvi bloku => do print(i)
+void stmt_for_set_body(Stmt *for_stmt, Block *body)
+{
+    for_stmt->as.for_loop.body = body;
+}
+
+
+//--------------------------------------------------------------------------------//
+// Funkce a program
+//--------------------------------------------------------------------------------//
+
+
+// Vytvori definici funkce, naklonuje jmeno a nastavi priznak vstupni funkce => @main def runFoo(): Unit =
+FuncDef *funcdef_new(const char *name, bool is_main, int line)
+{
+    FuncDef *func = xmalloc(sizeof *func);
+    func->name = xstrdup(name);
+    func->params = NULL;
+    func->param_count = 0;
+    func->return_type = NULL;
+    func->body = NULL;
+    func->is_main = is_main;
+    func->line = line;
+    return func;
+}
+
+// Prida formalni parametr do definice funkce, naklonuje jmeno a prebere vlastnictvi datoveho typu => n: Int
+void funcdef_add_param(FuncDef *func, const char *name, Type *type)
+{
+    func->params = grow_array(func->params, func->param_count, sizeof(Param));
+    func->params[func->param_count].name = xstrdup(name);
+    func->params[func->param_count].type = type;
+    func->param_count++;
+}
+
+// Nastavi navratovy typ funkce a prebere vlastnictvi datoveho typu => : Int
+void funcdef_set_return_type(FuncDef *func, Type *return_type)
+{
+    func->return_type = return_type;
+}
+
+// Nastavi telo funkce a prebere vlastnictvi bloku prikazu => = val x = 42; return x
+void funcdef_set_body(FuncDef *func, Block *body)
+{
+    func->body = body;
+}
+
+// Vytvori koren abstraktniho syntaktickeho stromu pro cely program (prazdny seznam funkci) => @main def run(): Unit = print(42)
+Program *program_new(void)
+{
+    Program *program = xmalloc(sizeof *program);
+    program->funcs = NULL;
+    program->func_count = 0;
+    return program;
+}
+
+// Prida definici funkce do programu a prebere vlastnictvi jeji struktury => def myFunc(): Unit = print(1)
+void program_add_func(Program *program, FuncDef *func)
+{
+    program->funcs = grow_array(program->funcs, program->func_count, sizeof(FuncDef *));
+    program->funcs[program->func_count] = func;
+    program->func_count++;
+}
+
+
+//--------------------------------------------------------------------------------//
+// Uvolnovani pameti
+//--------------------------------------------------------------------------------//
+
+
+//--------------------------------------------------------------------------------//
+// Vygenerovano AI (zacatek)
+// prompt: "Napis pametove destruktory a uvolnovaci funkce pro AST (expressions, statements, blocks, functions, program)."
+
+
+// Uvolni pole ukazatelu na vyrazy i se vsemi vyrazy v nem (napr. pole strazi u cyklu for)
+static void free_expr_array(Expr **items, int count)
+{
+    for (int i = 0; i < count; i++) {
+        expr_free(items[i]);
+    }
+    free(items);
+}
+
+
+// Rekurzivne uvolni uzel vyrazu z pameti podle jeho typu
+// (literaly, promenne, unarni/binarni operace, volani, ridici konstrukce)
+void expr_free(Expr *expr)
+{
+    if (expr == NULL) {
+        return;
+    }
+
+    switch (expr->kind) {
+    case EXPR_LITERAL:
+        if (expr->as.literal.kind == LIT_STRING) {
+            free(expr->as.literal.value.string_value);
+        }
+        break;
+    case EXPR_VARIABLE:
+        free(expr->as.variable.name);
+        break;
+    case EXPR_UNARY:
+        expr_free(expr->as.unary.operand);
+        break;
+    case EXPR_BINARY:
+        expr_free(expr->as.binary.left);
+        expr_free(expr->as.binary.right);
+        break;
+    case EXPR_CALL:
+        free(expr->as.call.name);
+        free_expr_array(expr->as.call.args, expr->as.call.arg_count);
+        break;
+    case EXPR_IF:
+        expr_free(expr->as.if_expr.cond);
+        block_free(expr->as.if_expr.then_block);
+        block_free(expr->as.if_expr.else_block);
+        break;
+    case EXPR_RANGE:
+        expr_free(expr->as.range.from);
+        expr_free(expr->as.range.to);
+        expr_free(expr->as.range.step);
+        break;
+    case EXPR_MEMBER:
+        expr_free(expr->as.member.object);
+        free(expr->as.member.name);
+        free_expr_array(expr->as.member.args, expr->as.member.arg_count);
+        break;
+    case EXPR_LIST_LITERAL:
+        free_expr_array(expr->as.list_literal.items, expr->as.list_literal.count);
+        break;
+    case EXPR_LIST_RANGE:
+        expr_free(expr->as.list_range.start);
+        expr_free(expr->as.list_range.end);
+        expr_free(expr->as.list_range.step);
+        break;
+    case EXPR_INDEX:
+        expr_free(expr->as.index.list);
+        expr_free(expr->as.index.index);
+        break;
+    }
+
+    type_free(expr->type);
+    free(expr);
+}
+
+// Rekurzivne uvolni blok prikazu z pameti, vcetne vsech vnitrnich prikazu a dynamicky alokovaneho pole
+void block_free(Block *block)
+{
+    if (block == NULL) {
+        return;
+    }
+    for (int i = 0; i < block->count; i++) {
+        stmt_free(block->items[i]);
+    }
+    free(block->items);
+    free(block);
+}
+
+// Rekurzivne uvolni uzel prikazu (Stmt) z pameti podle jeho druhu
+// (definice, prirazeni, navrat, vyraz, while, for) vcetne vsech vnorenych struktur, poli strazi a bloku
+void stmt_free(Stmt *stmt)
+{
+    if (stmt == NULL) {
+        return;
+    }
+    switch (stmt->kind) {
+    case STMT_VARDEF:
+        free(stmt->as.vardef.name);
+        type_free(stmt->as.vardef.declared_type);
+        expr_free(stmt->as.vardef.init);
+        break;
+    case STMT_ASSIGN:
+        free(stmt->as.assign.name);
+        expr_free(stmt->as.assign.value);
+        break;
+    case STMT_RETURN:
+        expr_free(stmt->as.ret.value);
+        break;
+    case STMT_EXPR:
+        expr_free(stmt->as.expr_stmt.expr);
+        break;
+    case STMT_WHILE:
+        expr_free(stmt->as.while_loop.cond);
+        block_free(stmt->as.while_loop.body);
+        break;
+    case STMT_FOR:
+        free(stmt->as.for_loop.var_name);
+        expr_free(stmt->as.for_loop.source);
+        free_expr_array(stmt->as.for_loop.guards, stmt->as.for_loop.guard_count);
+        block_free(stmt->as.for_loop.body);
+        break;
+    }
+    free(stmt);
+}
+
+
+// Rekurzivne uvolni definici funkce ze zive pameti, vcetne jejiho jmena,
+// parametru, datovych typu, navratoveho typu a tela funkce
+void funcdef_free(FuncDef *func)
+{
+    if (func == NULL) {
+        return;
+    }
+    free(func->name);
+    for (int i = 0; i < func->param_count; i++) {
+        free(func->params[i].name);
+        type_free(func->params[i].type);
+    }
+    free(func->params);
+    type_free(func->return_type);
+    block_free(func->body);
+    free(func);
+}
+
+
+// Rekurzivne uvolni cely program (koren AST) z pameti,
+// vcetne pole vsech definic funkci a jejich vnitrnich struktur => @main def run(): Unit = ...
+void program_free(Program *program)
+{
+    if (program == NULL) {
+        return;
+    }
+    for (int i = 0; i < program->func_count; i++) {
+        funcdef_free(program->funcs[i]);
+    }
+    free(program->funcs);
+    free(program);
+}
+
+// Vygenerovano AI (konec)
+//--------------------------------------------------------------------------------//
