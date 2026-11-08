@@ -86,3 +86,103 @@ static int balance_factor(const AvlNode *node) {
 //--------------------------------------------------------------------------------//
 // Rotace
 //--------------------------------------------------------------------------------//
+
+
+// Prava rotace kolem uzlu root, jeho levy potomek se stane novym korenem podstromu
+// Vrati novy koren podstromu
+static AvlNode *rotate_right(AvlNode *root) {
+    AvlNode *new_root = root->left;
+ 
+    root->left = new_root->right;  // pravy podstrom noveho korene se presune pod puvodni koren
+    new_root->right = root;        // puvodni koren se stane pravym potomkem
+ 
+    // Poradi je dulezite: nejdriv nizsi uzel (root), pak vyssi (new_root)
+    update_height(root);
+    update_height(new_root);
+ 
+    return new_root;
+}
+
+
+// Leva rotace kolem uzlu root, jeho pravy potomek se stane novym korenem podstromu
+// Vrati novy koren podstromu
+static AvlNode *rotate_left(AvlNode *root) {
+    AvlNode *new_root = root->right;
+ 
+    root->right = new_root->left;  // levy podstrom noveho korene se presune pod puvodni koren
+    new_root->left = root;         // puvodni koren se stane levym potomkem
+ 
+    update_height(root);
+    update_height(new_root);
+ 
+    return new_root;
+}
+
+
+// Prepocita vysku uzlu a pripadne strom vyvazi rotacemi
+// Vrati novy koren podstromu (stejny uzel, nebo ten, ktery se po rotaci dostal nahoru)
+static AvlNode *rebalance(AvlNode *node) {
+    update_height(node);
+    int balance = balance_factor(node);
+ 
+    // Levy podstrom je prilis vysoky
+    if (balance > 1) {
+        // Pripad LR: levy potomek je nakloneny doprava, nejdriv ho otocime doleva
+        if (balance_factor(node->left) < 0) {
+            node->left = rotate_left(node->left);
+        }
+        // Pak jeste jednou otocime
+        return rotate_right(node);
+    }
+ 
+    // Pravy podstrom je prilis vysoky
+    if (balance < -1) {
+        // Pripad RL: pravy potomek je nakloneny doleva, nejdriv ho otocime doprava
+        if (balance_factor(node->right) > 0) {
+            node->right = rotate_right(node->right);
+        }
+        // Pak jeste jednou otocime
+        return rotate_left(node);
+    }
+ 
+    // Uzel je vyvazeny, neni co delat
+    return node;
+}
+
+
+// Vlozi hotovy uzel new_node do podstromu s korenem root
+// Vrati novy koren podstromu, volajici ho musi ulozit zpet
+// Volajici zarucuje, ze stejny klic (jmeno, rozsah) uz ve strome neni
+static AvlNode *avl_insert(AvlNode *root, AvlNode *new_node) {
+    // Prazdne misto, tady novy uzel zapadne
+    if (root == NULL) {
+        return new_node;
+    }
+ 
+    int cmp = key_cmp(new_node->symbol->name, new_node->scope_id, root);
+    if (cmp < 0) {
+        root->left = avl_insert(root->left, new_node);
+    } else {
+        root->right = avl_insert(root->right, new_node);
+    }
+ 
+    // Cestou zpet nahoru se na kazdem uzlu opravi vyska a pripadne vyvazeni
+    return rebalance(root);
+}
+
+
+// Najde uzel s klicem (name, scope), NULL kdyz ve strome neni
+static AvlNode *avl_find(AvlNode *root, const char *name, int scope) {
+    AvlNode *current = root;
+ 
+    while (current != NULL) {
+        int cmp = key_cmp(name, scope, current);
+        if (cmp == 0) {
+            return current;
+        }
+        current = (cmp < 0) ? current->left : current->right;
+    }
+ 
+    return NULL;
+}
+
