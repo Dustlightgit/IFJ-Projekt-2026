@@ -5,11 +5,11 @@
 
     Puvodni autor: xsantar00 - prvni verze vyctoveho typu enumu
     Seznam zmen:
-        - xnovacm00 za asistence xyz - finalizace vyctoveho typu enum, struktura
+      - xnovacm00 - finalizace vyctoveho typu enum, struktura
    token a funkce pro praci s nimi.
-        - xbalala00 - zmeneno poradi takenu tak, aby tokeny relevantni pro LL
+      - xbalala00 - zmeneno poradi takenu tak, aby tokeny relevantni pro LL
    parser byly na zacatku kvuli indexaci LL tabulky.
-                    - pridani TOKEN_LL_TERM_COUNT pro zjisteni poctu terminalu
+                  - pridani TOKEN_LL_TERM_COUNT pro zjisteni poctu terminalu
    kvuli LL tabulce.
 
     Definice typu tokenu, struktury tokenu a prototypu funkci pro lexer.

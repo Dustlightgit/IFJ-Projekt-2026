@@ -5,14 +5,14 @@
 
     Puvodni autor: xbakaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        -
+        - xbakaka00 - include semantic_actions.h nahrazen semantic_types.h.
 
     Tento soubor obsahuje deklarace pro LL tabulku, kterou bude vyuzivat
    prediktivni parser.
 */
 
 /*
-    Prompt pro vychozi kostru souboru se SemanticContext a SemanticCallback
+    Prompt pro vychozi kostru souboru s LL tabulkou.
 
     Prompt pro Claude:
         Tento soubor ll_table.h bude obshaovat deklarace pro samotnou LL
@@ -39,12 +39,17 @@
         extern const LLTableEntry LL_table[NONTERM_COUNT][TOKEN_LL_TERM_COUNT];
 */
 
+/*
+    Zmena includu (semantic_actions.h nahrazen semantic_types.h) byla
+    zpusobena prompty, jejichz zneni je v souboru semantic_types.h.
+*/
+
 #ifndef LL_TABLE_H
 #define LL_TABLE_H
 
 #include "nonterminal.h"
 #include "production.h"
-#include "semantic_actions.h"
+#include "semantic_types.h"
 #include "token.h"
 
 /**

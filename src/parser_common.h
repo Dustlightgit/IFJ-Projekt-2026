@@ -5,24 +5,25 @@
 
     Puvodni autor: xbakaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        -
+        - xbakaka00 - IDContextType (vcetne prejmenovani hodnot na ID_CONTEXT_*)
+          presunut do semantic_types.h.
 
-    Tento soubor obsahuje spolecne deklarace, ktere budou pouzivat oba parsery,
-   napriklad struktura prvku zasobniku a spolecny kontext.
 
+    Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
+    na zasobniku parseru a kontext sdileny mezi parsery.
 */
 
 /*
-    Prompt pro vychozi kostru souboru s IDContextType, ParserStackEntry a
-   ParserContext
+    Prompt pro vychozi kostru souboru.
 
     Prompt pro Claude:
         Tento soubor parser_common.h definuje věci společné pro oba parsery.
-   Prozatím vím, že to bude záznam ukládaný ve stacku, a nějaký společný kontext
-   (zatím si nejsem jistý, co bude uvnitř). Záznam stacku bude obsahovat
-   pointer, který do něj vloží obvykle sémantická akce k neterminálu. Bude to
-   většinou ukazatel na uzel, ke kteremu se má připojit další díl stromu v LL
-   parseru nebo výrazový podstrom ve výrazovém parseru.
+        Prozatím vím, že to bude záznam ukládaný ve stacku, a nějaký společný
+        kontext (zatím si nejsem jistý, co bude uvnitř). Záznam stacku bude
+        obsahovat pointer, který do něj vloží obvykle sémantická akce k
+        neterminálu. Bude to většinou ukazatel na uzel, ke kteremu se má
+        připojit další díl stromu v LL parseru nebo výrazový podstrom ve
+        výrazovém parseru.
 
         #include "stack.h"
 
@@ -45,24 +46,27 @@
    obsahovat } ParserContext;
 */
 
+/*
+    Prompt pro prejmenovani hodnot IDContextType.
+
+    Prompt pro Claude:
+        To s LL_ je pravda, můžeš to přejmenovat. Přesnou podobu toho structu
+        nejspíše budu ještě měnit, ale pravděpodobně bude ID zpracováváno
+        nějakým speciálním callbackem, který bude potřebovat znát, v jakém
+        kontextu se toto ID vyskytlo ve stromu. Tento callback však navrhnu
+        asi až později.
+*/
+
+/*
+    Presun IDContextType do semantic_types.h byl zpusoben dalsim promptem,
+    jehoz zneni je v souboru semantic_types.h.
+*/
+
 #ifndef PARSER_COMMON_H
 #define PARSER_COMMON_H
 
 #include "production.h"
-
-/**
- * @brief Kontext, ve kterem se token ID vyskytl ve strome.
- *
- * Podle nej se ID zpracuje specialnim callbackem. Bude doplnen,
- * prozatim nemusi byt uplny.
- */
-typedef enum {
-  ID_CONTEXT_NONE,                      ///< Symbol neni identifikator
-  ID_CONTEXT_FUNCTION_DECLARATION_NAME, ///< Jmeno deklarovane funkce
-  ID_CONTEXT_DECLARATION_NAME,          ///< Jmeno deklarovane promenne
-  ID_CONTEXT_ASSIGNMENT_TARGET,         ///< Cil prirazeni
-  ID_CONTEXT_EXPRESSION_REFERENCE, ///< Reference na identifikator ve vyrazu
-} IDContextType;
+#include "semantic_types.h"
 
 /**
  * @brief Zaznam ulozeny na zasobniku parseru.
