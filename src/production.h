@@ -5,7 +5,7 @@
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        -
+        - xbalaka00 - pridana makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL.
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
     prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
@@ -89,6 +89,29 @@ typedef struct {
     NonterminalType nonterminal; ///< Platne, pokud je is_terminal false
   };
 } GrammarSymbol;
+
+/*
+    Prompt pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL je v souboru
+    LL_table.c.
+*/
+
+/**
+ * @brief Inicializator GrammarSymbol pro terminal.
+ *
+ * Pouziva se pri inicializaci promenne nebo pole, napr.
+ * GrammarSymbol symbol = GRAMMAR_TERMINAL(TOKEN_ID);
+ */
+#define GRAMMAR_TERMINAL(t)                                                    \
+  { .is_terminal = true, .terminal = (t) }
+
+/**
+ * @brief Inicializator GrammarSymbol pro neterminal.
+ *
+ * Pouziva se pri inicializaci promenne nebo pole, napr.
+ * GrammarSymbol symbol = GRAMMAR_NONTERMINAL(NONTERM_TYPE);
+ */
+#define GRAMMAR_NONTERMINAL(n)                                                 \
+  { .is_terminal = false, .nonterminal = (n) }
 
 /**
  * @brief Staticka produkce, prava strana pravidla ulozena primo ve strukture.
