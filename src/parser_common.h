@@ -96,6 +96,9 @@ typedef struct {
   Token current_token;           ///< Aktualni token na vstupu programu
   bool has_current_token;        ///< Priznak validity vstupniho tokenu
   bool previous_token_was_comma; ///< Priznak pro kontrolu koncove carky
+  SemanticContext
+      semantic_context; ///< Struktura s daty pro interni potrebu semantickych akci
+  // Pokud nebude vyuzita, bude odstranena.
 } ParserContext;
 
 /**
