@@ -9,6 +9,8 @@
           ID_CONTEXT_*) presunut do semantic_types.h.
         - xbalaka00 - pridani funkci parser_stack_init, parser_stack_push,
           parser_stack_pop a parser_stack_top.
+        - xbalaka00 - pridani funkce parser_context_init za asistence Claude,
+          prompt je v predictive_parser.c.
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery a funkce pro praci
@@ -164,5 +166,19 @@ bool parser_stack_pop(Stack *stack, ParserStackEntry *out);
  * @return Ukazatel na zaznam na vrcholu, nebo NULL, je-li zasobnik prazdny.
  */
 ParserStackEntry *parser_stack_top(const Stack *stack);
+
+/*
+    Prompt pro nasledujici deklaraci funkce je v souboru predictive_parser.c.
+*/
+
+/**
+ * @brief Inicializuje kontext parseru a nacte prvni token ze vstupu.
+ *
+ * Vsechny hodnoty nastavi na nulove, potom zavola parser_advance, ktery
+ * ziska prvni vstupni token. Scanner musi byt pripraveny pred volanim.
+ *
+ * @param ctx Kontext parseru k inicializaci.
+ */
+void parser_context_init(ParserContext *ctx);
 
 #endif // PARSER_COMMON_H

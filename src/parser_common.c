@@ -5,7 +5,8 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - pridani funkce parser_context_init za asistence Claude,
+          prompt je v predictive_parser.c.
 
     Tento soubor obsahuje funkce pro praci se zasobnikem parseru.
 
@@ -113,4 +114,17 @@ bool parser_stack_pop(Stack *stack, ParserStackEntry *out) {
 
 ParserStackEntry *parser_stack_top(const Stack *stack) {
   return stack_top(stack);
+}
+
+/*
+    Prompt pro funkci parser_context_init je v souboru predictive_parser.c.
+*/
+
+void parser_context_init(ParserContext *ctx) {
+  // Vynulovani vsech hodnot, has_current_token je false, takze parser_advance
+  // zadny stary token neuvolnuje
+  *ctx = (ParserContext){0};
+
+  // Ziskani prvniho vstupniho tokenu
+  parser_advance(ctx);
 }
