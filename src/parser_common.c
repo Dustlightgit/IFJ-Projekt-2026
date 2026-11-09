@@ -13,6 +13,38 @@
 
 #include "parser_common.h"
 
+#include "error.h"
+#include "scanner.h"
+
+bool parser_check_token(const ParserContext *ctx, TokenType expected) {
+  return ctx->has_current_token && ctx->current_token.type == expected;
+}
+
+void parser_advance(ParserContext *ctx) {
+
+  // Uvolneni stareho tokenu pokud nejaky je
+  if (ctx->has_current_token)
+    token_free(&(ctx->current_token));
+
+  // Nacteni noveho tokenu
+  get_token(&(ctx->current_token));
+  ctx->has_current_token = true;
+
+  // Kontrola koncove carky
+  if (ctx->current_token.type == TOKEN_COMMA) {
+    ctx->previous_token_was_comma = true;
+  } else if (ctx->current_token.type == TOKEN_RPAREN) {
+    // Pokud je aktualni token ), předesly token byla carka a pred ) nebyl \n, pak nastala chyba
+    if (ctx->previous_token_was_comma && !(ctx->current_token.nl_before))
+      error_exit(ERR_SYNTAX, ctx->current_token.line,
+                 "Nepovolena koncova carka");
+
+    ctx->previous_token_was_comma = false;
+  } else {
+    ctx->previous_token_was_comma = false;
+  }
+}
+
 /*
     Prompt pro funkce parser_stack_init, parser_stack_push, parser_stack_pop
     a parser_stack_top. Stejny prompt zpusobil take pridani deklaraci do

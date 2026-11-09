@@ -21,6 +21,7 @@
 #include "production.h"
 #include "semantic_types.h"
 #include "stack.h"
+#include "token.h"
 
 /*
     Prompt pro vychozi kostru souboru (IDContextType byl pozdeji presunut do
@@ -74,26 +75,48 @@
  * @brief Zaznam ulozeny na zasobniku parseru.
  */
 typedef struct {
-    GrammarSymbol symbol; ///< Symbol na zasobniku
+  GrammarSymbol symbol; ///< Symbol na zasobniku
 
-    /**
+  /**
      * Ukazatel pro stavbu stromu, obvykle ho vklada semanticka akce
      * neterminalu. V LL parseru ukazuje na uzel, ke kteremu se pripoji
      * dalsi cast stromu, ve vyrazovem parseru na vyrazovy podstrom.
      */
-    void *semantic_pointer;
+  void *semantic_pointer;
 
-    IDContextType id_type; ///< Kontext vyskytu tokenu ID ve strome
+  IDContextType id_type; ///< Kontext vyskytu tokenu ID ve strome
 } ParserStackEntry;
 
 /**
  * @brief Kontext sdileny mezi vsemi parsery.
  *
- * Bude obsahovat napriklad aktualni terminal ze vstupu.
+ * Obsahuje aktualni terminal ze vstupu.
  */
 typedef struct {
-    int idk; ///< Prozatim bez vyznamu
+  Token current_token;           ///< Aktualni token na vstupu programu
+  bool has_current_token;        ///< Priznak validity vstupniho tokenu
+  bool previous_token_was_comma; ///< Priznak pro kontrolu koncove carky
 } ParserContext;
+
+/**
+ * @brief Umoznuje zjistit, zda je na vstupu konkretni token.
+ * 
+ * Funkce je ciste zjistovaci, nemeni stav kontextu parseru.
+ *
+ * @param ctx Spolecny context parseru.
+ * @param expected Porovnavany typ token.
+ */
+bool parser_check_token(const ParserContext *ctx, TokenType expected);
+
+/**
+ * @brief Posun ve vstupnim proudu dale. Kontroluje take koncovou carku.
+ * 
+ * Uvolni soucasny token a a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
+ * tedy musi probehnout jeste pred zavolanim teto funkce.
+ *
+ * @param ctx Spolecny context parseru.
+ */
+void parser_advance(ParserContext *ctx);
 
 /*
     Prompt pro nasledujici deklarace funkci je v souboru parser_common.c.
