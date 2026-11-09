@@ -1,6 +1,18 @@
-// xnovacm00
-// token.c - implementace funkci pro pro spravu a reprezentaci tokenu
-// lexikalniho analyzatoru
+/*
+    IFJ projekt 2026
+
+    token.c
+
+    Puvodni autor: xnovacm00
+    Seznam zmen:
+        - xbalaka00 - pridana explicitni vetev default ve funkci
+          token_type_name kvuli novym tokenum TOKEN_LL_TERM_COUNT
+          a TOKEN_EXPRESSION_BEGINNING_DELIMITER.
+
+    Implementace funkci pro spravu a reprezentaci tokenu lexikalniho
+    analyzatoru.
+
+*/
 
 #include "token.h"
 

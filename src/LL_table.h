@@ -3,24 +3,37 @@
 
     LL_table.h
 
-    Puvodni autor: xbakaka00 za asistence Claude a konzultace s ChatGPT
+    Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        - xbakaka00 - include semantic_actions.h nahrazen semantic_types.h.
+        - xbalaka00 - include semantic_actions.h nahrazen semantic_types.h.
 
     Tento soubor obsahuje deklarace pro LL tabulku, kterou bude vyuzivat
-   prediktivni parser.
+    prediktivni parser.
 */
+
+#ifndef LL_TABLE_H
+#define LL_TABLE_H
+
+/*
+    Zmena includu (semantic_actions.h nahrazen semantic_types.h) byla
+    zpusobena prompty, jejichz zneni je v souboru semantic_types.h.
+*/
+
+#include "nonterminal.h"
+#include "production.h"
+#include "semantic_types.h"
+#include "token.h"
 
 /*
     Prompt pro vychozi kostru souboru s LL tabulkou.
 
     Prompt pro Claude:
         Tento soubor ll_table.h bude obshaovat deklarace pro samotnou LL
-   tabulku. V .c tohoto souboru bude tato tabulka deklarovaná a zaplněná jako
-   globální proměnná. Tabulka bude vždy míť pravidlo buď v statické, nebo
-   callbackové verzi. Statickou produkci parser nahází na stack sám, u callbacku
-   to bude dělat callback, aby mohl rovnou připojit i své atributy dle své
-   potřeby.
+        tabulku. V .c tohoto souboru bude tato tabulka deklarovaná a zaplněná
+        jako globální proměnná. Tabulka bude vždy míť pravidlo buď v statické,
+        nebo callbackové verzi. Statickou produkci parser nahází na stack sám, u
+        callbacku to bude dělat callback, aby mohl rovnou připojit i své
+        atributy dle své potřeby.
 
         typedef enum {
             LL_RULE_ERROR = 0,
@@ -38,19 +51,6 @@
 
         extern const LLTableEntry LL_table[NONTERM_COUNT][TOKEN_LL_TERM_COUNT];
 */
-
-/*
-    Zmena includu (semantic_actions.h nahrazen semantic_types.h) byla
-    zpusobena prompty, jejichz zneni je v souboru semantic_types.h.
-*/
-
-#ifndef LL_TABLE_H
-#define LL_TABLE_H
-
-#include "nonterminal.h"
-#include "production.h"
-#include "semantic_types.h"
-#include "token.h"
 
 /**
  * @brief Typ polozky LL tabulky.

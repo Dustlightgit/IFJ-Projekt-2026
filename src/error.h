@@ -1,3 +1,17 @@
+/*
+    IFJ projekt 2026
+
+    error.h
+
+    Puvodni autor: xnovacm00
+    Seznam zmen:
+        -
+
+    Chybove navratove kody podle specifikace a funkce pro ukonceni programu
+    s chybou.
+
+*/
+
 #ifndef ERROR_H
 #define ERROR_H
 
@@ -16,4 +30,4 @@
 // Radek <= 0 znamena, ze radek neni znam
 void error_exit(int code, int line, const char *message);
 
-#endif
+#endif // ERROR_H

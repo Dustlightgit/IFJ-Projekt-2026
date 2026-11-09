@@ -3,7 +3,7 @@
 
     semantic_types.h
 
-    Puvodni autor: xbakaka00 za asistence Claude a konzultace s ChatGPT
+    Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
         -
 
@@ -13,25 +13,15 @@
     cyklickych zavislosti, proto nezahrnuje nic krome stack.h.
 */
 
-/*
-    Puvodni prompty k obsahu tohoto souboru jsou v jinych souborech:
-        - IDContextType: parser_common.h
-        - SemanticContext a SemanticCallback: semantic_actions.h
-*/
+#ifndef SEMANTIC_TYPES_H
+#define SEMANTIC_TYPES_H
+
+#include "stack.h"
 
 /*
-    Prompt pro upravu SemanticCallback (parser context se callbacku nepredava).
-
-    Prompt pro Claude:
-        Myslím, že nakonec parser context nakonec nebude potřeba předávat
-        callbacku. Bude existovat, ale budou v něm jen data společná pro
-        všechny instance parseru.
-*/
-
-/*
-    Prompt pro presun IDContextType, SemanticContext a SemanticCallback do
-    tohoto souboru. Stejny prompt zpusobil zmeny take v parser_common.h,
-    semantic_actions.h a LL_table.h, jejich zneni je pouze zde.
+    Prompty pro vytvoreni tohoto souboru a presun typu do nej. Stejne prompty
+    zpusobily zmeny take v parser_common.h, semantic_actions.h a LL_table.h,
+    jejich zneni je pouze zde.
 
     Prompt pro Claude:
         Kdybych IDContextType přesunul do sémantiky, byly by nějaké problémy?
@@ -44,11 +34,6 @@
         parser_common, které nejspíš bude potřebovat, protože callbacky mimo
         jiné budou samy dávat na stack produkci tohoto pravidla s
         příslušnými atributy/pointery.
-*/
-
-/*
-    Prompt pro vytvoreni tohoto souboru a podobu hlavicky souboru. Stejne
-    jako predchozi prompt zasahl i do ostatnich souboru.
 
     Prompt pro Claude:
         Myslím, že callback pro ID nejspíše bude mít vlastní typ. Na rozdíl
@@ -74,10 +59,10 @@
         Přikládám současnou verzi LL_table.h pro představu.
 */
 
-#ifndef SEMANTIC_TYPES_H
-#define SEMANTIC_TYPES_H
-
-#include "stack.h"
+/*
+    Prompty pro IDContextType jsou v parser_common.h, odkud byl tento typ
+    presunut.
+*/
 
 /**
  * @brief Kontext, ve kterem se token ID vyskytl ve strome.
@@ -90,8 +75,67 @@ typedef enum {
   ID_CONTEXT_FUNCTION_DECLARATION_NAME, ///< Jmeno deklarovane funkce
   ID_CONTEXT_DECLARATION_NAME,          ///< Jmeno deklarovane promenne
   ID_CONTEXT_ASSIGNMENT_TARGET,         ///< Cil prirazeni
-  ID_CONTEXT_EXPRESSION_REFERENCE, ///< Reference na identifikator ve vyrazu
+  ID_CONTEXT_EXPRESSION_REFERENCE,      ///< Reference na ID ve vyrazu
 } IDContextType;
+
+/*
+    Prompt pro vychozi kostru SemanticContext a SemanticCallback (puvodne
+    v semantic_actions.h).
+
+    Prompt pro Claude:
+        Nevím jestli jsem to již nezmínil, ale budou dva parsery - prediktivní
+        parser řízený LL tabulkou a potom výrazový parser. Sémantické akce
+        (možná by lepší název byl parser akce?) budou stavět AST; sémantické
+        kontroly pro kompatibility typů apod.  proběhnou až nad kompletním
+        AST.
+
+        Zde je hrubá verze deklarací, které budou v souboru
+        semantic_actions.h. Zde budou deklarovány všechny sémantické akce u
+        pravidel, které sémantickou akci mají. Možná se rozhraní ještě upraví,
+        ale prozatím může zůstat takto jako první verze. Sémantický kontext
+        bude obsahovat informace, které je potřeba, aby sémantické akce
+        sdílely (pokud tedy budou vůbec nějaké potřeba, případně se to později
+        odstraní).
+
+        Sémantická akce tedy obdrží sémantický kontext. Dále obdrží ukazatel,
+        který je uložen na stacku u neterminálu, který je tímto pravidlem
+        rozváděn; může se jednat třeba o dokončený podstrom výrazu v případě
+        výrazového parseru, nebo o ukazatel na místo AST, kam má být vložen
+        další kus stromu nebo zjištěná informace (nebo na node, ke kterému se
+        má napojit...). Výrazový parser potom bude pravděpodobně mít odlišnou
+        hlavičku svých callbacků, protože ten bude nejspíše používat celý
+        handle.
+        Stack pak bude dostávat proto, aby callback mohl na stack přidat
+        produkci a k ní rovnou přidávat atributy (pointery dle své potřeby,
+        případně jiné atributy např. pro kontext ID).
+
+        #include "stack.h"
+
+        typedef struct {
+            int temp;    // Prozatim nevim, co bude obsahovat. Bude se jednat o
+                    veskere informace, ktere si jednotlive semanticke akce budou
+                    potrebovat udrzovat mezi sebou, budou-li nejake.
+        } SemanticContext;
+
+        typedef void (*SemanticCallback)(SemanticContext*ctx, void
+                *semantic_pointer, Stack *stack);
+
+            ast_pointer bude vyznamny predevsim pro neterminaly a ma nasledujici
+                    vyznam:
+                - v LL parseru to bude ukazatel na misto, kam ma byt vlozen uzel
+                        ast, pripadne na atribut, jez ma byt zmenen,
+                pricemz toto provede semanticka funkce nahrazujici dany
+                        neterminal.
+                - ve vyrazovem parseru to bude obvykle ukazatel na prislusny
+                        dokonceny vyrazovy podstrom.
+
+    Prompt pro upravu SemanticCallback (parser context se callbacku nepredava).
+
+    Prompt pro Claude:
+        Myslím, že nakonec parser context nakonec nebude potřeba předávat
+        callbacku. Bude existovat, ale budou v něm jen data společná pro
+        všechny instance parseru.
+*/
 
 /**
  * @brief Semanticky kontext sdileny mezi semantickymi akcemi.

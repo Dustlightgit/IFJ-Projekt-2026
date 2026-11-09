@@ -3,7 +3,7 @@
 
     nonterminal.c
 
-    Puvodni autor: xbakaka00 za asistence Claude
+    Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
         -
 
@@ -16,10 +16,11 @@
 /*
     Prompt pro Claude:
         Teď prosím po vzoru následujícího úryvku k tokenům vygeneruj funkci,
-   která každému neterminálu přidá lidsky čitelný název. U tokenů byl využit
-   jejich zápis, jak by jej scanner přijmul; zde neterminál nemá podobný čitelný
-   protějšek, proto jim přiřaď spíše lidsky čitelný název v češtině (aby byly
-   chybové výstupy konzistentní se scannerem). Hlavičku k ní jsem už napsal:
+        která každému neterminálu přidá lidsky čitelný název. U tokenů byl
+        využit jejich zápis, jak by jej scanner přijmul; zde neterminál nemá
+        podobný čitelný protějšek, proto jim přiřaď spíše lidsky čitelný název v
+        češtině (aby byly chybové výstupy konzistentní se scannerem). Hlavičku k
+        ní jsem už napsal:
         const char *nonterm_type_name(NonterminalType type);
         ale můžeš vygenerovat doxygen komentář k ní.
 

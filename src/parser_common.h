@@ -3,18 +3,24 @@
 
     parser_common.h
 
-    Puvodni autor: xbakaka00 za asistence Claude a konzultace s ChatGPT
+    Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        - xbakaka00 - IDContextType (vcetne prejmenovani hodnot na ID_CONTEXT_*)
-          presunut do semantic_types.h.
-
+        - xbalaka00 - IDContextType (vcetne prejmenovani hodnot na
+          ID_CONTEXT_*) presunut do semantic_types.h.
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru a kontext sdileny mezi parsery.
 */
 
+#ifndef PARSER_COMMON_H
+#define PARSER_COMMON_H
+
+#include "production.h"
+#include "semantic_types.h"
+
 /*
-    Prompt pro vychozi kostru souboru.
+    Prompt pro vychozi kostru souboru (IDContextType byl pozdeji presunut do
+    semantic_types.h, kde je i prompt, ktery presun zpusobil).
 
     Prompt pro Claude:
         Tento soubor parser_common.h definuje věci společné pro oba parsery.
@@ -34,19 +40,22 @@
             LL_ID_ASSIGNMENT_TARGET,
             LL_ID_EXPRESSION_REFERENCE,
         } IDContextType;       // Bude pozdeji obsahovat kontext, podle ktereho
-   ma pozdeji tento token ID byt zpracovan, prozatim nevim, jestli je uplny
+                ma pozdeji tento token ID byt zpracovan, prozatim nevim, jestli
+                je uplny
 
         typedef struct {
             GrammarSymbol symbol;       // Symbol na zasobniku
             void *semantic_pointer;     // Ukazatel pro stavbu stromu a
-   semantiku. IDContextType id_type; } ParserStackEntry;
+                    semantiku.
+            IDContextType id_type;
+        } ParserStackEntry;
 
         // Kontext sdileny mezi vsemi parsery, napriklad s aktualnim terminalem
-   ze vstupu atp. typedef struct { int idk;   // Prozatim nevim, co bude
-   obsahovat } ParserContext;
-*/
+                ze vstupu atp.
+        typedef struct {
+            int idk;   // Prozatim nevim, co bude obsahovat
+        } ParserContext;
 
-/*
     Prompt pro prejmenovani hodnot IDContextType.
 
     Prompt pro Claude:
@@ -57,17 +66,6 @@
         asi až později.
 */
 
-/*
-    Presun IDContextType do semantic_types.h byl zpusoben dalsim promptem,
-    jehoz zneni je v souboru semantic_types.h.
-*/
-
-#ifndef PARSER_COMMON_H
-#define PARSER_COMMON_H
-
-#include "production.h"
-#include "semantic_types.h"
-
 /**
  * @brief Zaznam ulozeny na zasobniku parseru.
  */
@@ -75,10 +73,10 @@ typedef struct {
   GrammarSymbol symbol; ///< Symbol na zasobniku
 
   /**
-   * Ukazatel pro stavbu stromu, obvykle ho vklada semanticka akce
-   * neterminalu. V LL parseru ukazuje na uzel, ke kteremu se pripoji
-   * dalsi cast stromu, ve vyrazovem parseru na vyrazovy podstrom.
-   */
+     * Ukazatel pro stavbu stromu, obvykle ho vklada semanticka akce
+     * neterminalu. V LL parseru ukazuje na uzel, ke kteremu se pripoji
+     * dalsi cast stromu, ve vyrazovem parseru na vyrazovy podstrom.
+     */
   void *semantic_pointer;
 
   IDContextType id_type; ///< Kontext vyskytu tokenu ID ve strome
