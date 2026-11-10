@@ -5,7 +5,7 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - pridan nazev pro NONTERM_ELSE_TERNARY_IF.
 
     Tento soubor obsahuje pomocne funkce pro praci s neterminaly.
 
@@ -97,6 +97,8 @@ const char *nonterm_type_name(NonterminalType type) {
     return "ternarni if";
   case NONTERM_EXPR_OR_INDENT_EXPR:
     return "vyraz nebo odsazeny vyraz";
+  case NONTERM_ELSE_TERNARY_IF:
+    return "else vetev ternarniho ifu";
 
   // Pseudoneterminaly
   case NONTERM_EXPR:

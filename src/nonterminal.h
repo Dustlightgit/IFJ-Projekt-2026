@@ -6,6 +6,7 @@
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
         - Pridana hlavicka pro funkci nonterm_type_name
+        - xbalaka00 - pridan NONTERM_ELSE_TERNARY_IF.
 
     Tento soubor obsahuje vyctovy typ pro neterminaly a deklarace funkci pro
     praci s nimi.
@@ -59,6 +60,11 @@
 
 */
 
+/*
+    Prompt pro pridani NONTERM_ELSE_TERNARY_IF je v souboru
+    semantic_actions.c.
+*/
+
 /**
  * @brief Neterminaly LL gramatiky.
  *
@@ -98,6 +104,7 @@ typedef enum {
   NONTERM_OPTIONAL_ELSE,       ///< Nepovinna vetev else
   NONTERM_TERNARY_IF,          ///< Ternarni if
   NONTERM_EXPR_OR_INDENT_EXPR, ///< Vyraz, pripadne odsazeny
+  NONTERM_ELSE_TERNARY_IF,     ///< Else vetev ternarniho ifu, pripadne odsazena
 
   // Pseudoneterminaly, predani do vyrazove analyzy
   NONTERM_EXPR,       ///< Vyraz
