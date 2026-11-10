@@ -115,6 +115,8 @@ typedef struct {
 
 /**
  * @brief Staticka produkce, prava strana pravidla ulozena primo ve strukture.
+ * 
+ * Staticke produkce predavaji semanticky pointer z neterminalu na leve strane pravidla do vsech symbolu produkce.
  */
 typedef struct {
   size_t length; ///< Pocet symbolu

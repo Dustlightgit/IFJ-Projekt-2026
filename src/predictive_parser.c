@@ -44,12 +44,14 @@ void parser_match(ParserContext *ctx, Stack *stack) {
 
   // Porovnani a pripadne vyvolani chyby
   if (!parser_check_token(ctx, top->symbol.terminal)) {
+
     // Token na zasobniku a na vstupu jsou odlisne
     fprintf(stderr,
             "LL Parser: Soucasny vstupni terminal: %s\nSoucasny vrchol "
             "zasobniku: %s\n",
             token_type_name(ctx->current_token.type),
             token_type_name(top->symbol.terminal));
+
     error_exit(ERR_SYNTAX, ctx->current_token.line,
                "Odlisny terminal na vstupu a na vrcholu zasobniku.");
   }
@@ -119,13 +121,13 @@ void parser_match(ParserContext *ctx, Stack *stack) {
 
         Dále vytvoř funkci v LL_parser.h/.c
         void predictive_parser(ParserContext *ctx, NonterminalType
-        starting_nonterm, void *semantic_pointer);
+        starting_nonterm, void *starting_semantic_pointer);
 
         Která bude obsahovat samotný parser, který bude implementovat následující
         algoritmus:
 
         - Vytvoří se stack jako lokální proměnná a inicializuje se.
-        - Pushne se počáteční neterminál a semantic_pointer na stack pomocí
+        - Pushne se počáteční neterminál a starting_semantic_pointer na stack pomocí
           parser_stack_push, id_type bude ID_CONTEXT_NONE; toto políčko bude
           obvykle vyplněno callbacky a používá se především pro terminál ID,
           který bude zpracován speciálním callbackem. Toto prozatím není
@@ -179,16 +181,16 @@ void parser_match(ParserContext *ctx, Stack *stack) {
 */
 
 void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
-                       void *semantic_pointer) {
+                       void *starting_semantic_pointer) {
 
   // Kazda instance parseru ma vlastni zasobnik (kvuli rekurzi)
   Stack stack;
   parser_stack_init(&stack);
 
   // Pocatecni neterminal
-  GrammarSymbol start_symbol = {.is_terminal = false,
-                                .nonterminal = starting_nonterm};
-  parser_stack_push(&stack, start_symbol, semantic_pointer, ID_CONTEXT_NONE);
+  GrammarSymbol start_symbol = GRAMMAR_NONTERMINAL(starting_nonterm);
+  parser_stack_push(&stack, start_symbol, starting_semantic_pointer,
+                    ID_CONTEXT_NONE);
 
   while (!stack_is_empty(&stack)) {
 
@@ -212,6 +214,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
         error_exit(ERR_INTERNAL, ctx->current_token.line,
                    "LL Parser: Token na vstupu neni terminal LL tabulky.");
 
+      // Vyhledani pravidla
       const LLTableEntry *entry = &LL_TABLE[nonterm][ctx->current_token.type];
 
       if (entry->type == LL_RULE_ERROR)
@@ -220,10 +223,13 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
       // Uchovani semantickeho ukazatele a odstraneni neterminalu. Ukazatel top
       // po odebrani neni platny, proto se pouzije dale jen docasna promenna.
-      void *nonterm_pointer = top->semantic_pointer;
+      void *semantic_pointer = top->semantic_pointer;
       parser_stack_pop(&stack, NULL);
 
       if (entry->type == LL_RULE_STATIC) {
+        // Pravidlo je staticke
+
+        // Ziskame statickou produkci a zkontrolujeme ji
         const StaticProduction *production = entry->production;
 
         if (production == NULL ||
@@ -232,21 +238,31 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
                      "LL Parser: Neplatna staticka produkce v LL tabulce.");
 
         // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
+        // Staticka produkce jednoduse zkopiruje semanticky ukazatel do vlozenych symbolu
         for (size_t i = production->length; i > 0; i--)
-          parser_stack_push(&stack, production->production[i - 1], NULL,
-                            ID_CONTEXT_NONE);
-      } else if (entry->type == LL_RULE_SEMANTIC) {
+          parser_stack_push(&stack, production->production[i - 1],
+                            semantic_pointer, ID_CONTEXT_NONE);
+      }
+
+      else if (entry->type == LL_RULE_SEMANTIC) {
+        // Pravidlo je semanticke
+
         if (entry->callback == NULL)
           error_exit(ERR_INTERNAL, ctx->current_token.line,
                      "LL Parser: Callback v LL tabulce je NULL.");
 
         // Callback si produkci vlozi na zasobnik sam
-        entry->callback(&(ctx->semantic_context), nonterm_pointer, &stack);
-      } else {
+        entry->callback(&(ctx->semantic_context), semantic_pointer, &stack);
+      }
+
+      else {
+        // Neznamy typ pravidla
         error_exit(ERR_INTERNAL, ctx->current_token.line,
                    "LL Parser: Neznamy typ pravidla v LL tabulce.");
       }
-    } else {
+    }
+
+    else {
       // Terminal na vrcholu zasobniku
 
       // Prozatim jen vypis ID, pozdeji bude doplneno dalsi zpracovani.
@@ -260,5 +276,6 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
     }
   }
 
+  // Uklid zasobniku
   stack_free(&stack);
 }

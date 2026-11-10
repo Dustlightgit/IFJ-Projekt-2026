@@ -1,0 +1,4 @@
+val hello = *
+val hi: Int = slepice;
+return
+return ; return *;
