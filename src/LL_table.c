@@ -5,7 +5,8 @@
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        -
+        - xbalaka00 - staticke produkce presunuty do production.c a doplneny
+          o staticka pravidla cele gramatiky.
 
     Tento soubor obsahuje LL tabulku prediktivniho parseru a staticke produkce,
     na ktere se tabulka odkazuje. Prozatim je vyplnena jen testovaci podmnozina
@@ -20,6 +21,11 @@
 #include "production.h"
 #include "semantic_actions.h"
 #include "token.h"
+
+/*
+    Prompt pro presun statickych produkci do production.c a doplneni pravidel
+    gramatiky je v souboru production.c.
+*/
 
 /*
     Prompt pro vychozi testovaci obsah LL tabulky, staticke produkce, makra
@@ -108,17 +114,9 @@
 
 // Staticke produkce. Pravou stranu pravidla parser vlozi na zasobnik sam.
 
-// Pravidlo 6: <optionalEOL> => EOL
-static const StaticProduction PRODUCTION_OPTIONAL_EOL_PRESENT = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_EOL)},
-};
-
-// Pravidlo 7: <optionalEOL> => epsilon
-static const StaticProduction PRODUCTION_OPTIONAL_EOL_ABSENT = {.length = 0};
-
-// Pravidlo 13: <optionalType> => epsilon
-static const StaticProduction PRODUCTION_OPTIONAL_TYPE_ABSENT = {.length = 0};
+// Pozn.: pravidla 14, 15 a 28 jsou v gramatice se semantickou akci, jejich
+// produkce zde jsou jen testovaci pozustatek, dokud se LL tabulka neprepise
+// na callbacky. Ostatni staticke produkce jsou v production.c.
 
 // Pravidlo 14: <type> => Int
 static const StaticProduction PRODUCTION_TYPE_INT = {
@@ -132,66 +130,10 @@ static const StaticProduction PRODUCTION_TYPE_DOUBLE = {
     .production = {GRAMMAR_TERMINAL(TOKEN_KW_DOUBLE)},
 };
 
-// Pravidlo 23: <commandList> => <command> <commandList>
-static const StaticProduction PRODUCTION_COMMAND_LIST_NEXT = {
-    .length = 2,
-    .production =
-        {
-            GRAMMAR_NONTERMINAL(NONTERM_COMMAND),
-            GRAMMAR_NONTERMINAL(NONTERM_COMMAND_LIST),
-        },
-};
-
-// Pravidlo 24: <commandList> => epsilon
-static const StaticProduction PRODUCTION_COMMAND_LIST_END = {.length = 0};
-
-// Pravidlo 25: <commandEnd> => ; <optionalEOL>
-static const StaticProduction PRODUCTION_COMMAND_END_SEMICOLON = {
-    .length = 2,
-    .production =
-        {
-            GRAMMAR_TERMINAL(TOKEN_SEMICOLON),
-            GRAMMAR_NONTERMINAL(NONTERM_OPTIONAL_EOL),
-        },
-};
-
-// Pravidlo 26: <commandEnd> => EOL
-static const StaticProduction PRODUCTION_COMMAND_END_EOL = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_EOL)},
-};
-
 // Pravidlo 28: <valVar> => val
 static const StaticProduction PRODUCTION_VAL = {
     .length = 1,
     .production = {GRAMMAR_TERMINAL(TOKEN_KW_VAL)},
-};
-
-// Pravidlo 29: <valVar> => var
-static const StaticProduction PRODUCTION_VAR = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_KW_VAR)},
-};
-
-// Pravidlo 35: <returnValue> => <expr>
-static const StaticProduction PRODUCTION_RETURN_VALUE_EXPR = {
-    .length = 1,
-    .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
-};
-
-// Pravidlo 36: <returnValue> => epsilon
-static const StaticProduction PRODUCTION_RETURN_VALUE_EMPTY = {.length = 0};
-
-// Testovaci pravidlo mimo gramatiku: <expr> => *
-static const StaticProduction PRODUCTION_TEST_EXPR_STAR = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_STAR)},
-};
-
-// Testovaci pravidlo mimo gramatiku: <expr> => ID
-static const StaticProduction PRODUCTION_TEST_EXPR_ID = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_ID)},
 };
 
 // LL tabulka. Polozky bez zaznamu jsou LL_RULE_ERROR (hodnota 0).
