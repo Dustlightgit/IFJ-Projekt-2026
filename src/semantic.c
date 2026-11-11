@@ -48,6 +48,11 @@ typedef struct {
     SymTable *table;
 } Ctx;
 
+// Predbezne deklarace (funkce se volaji navzajem)
+static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected);
+static Type *analyze_block(Ctx *ctx, Block *b, const Type *expected);
+static void analyze_stmt(Ctx *ctx, Stmt *s);
+
 
 // Zapise vsechny funkce do tabulky symbolu a zkontroluje funkci s anotaci @main
 static void register_functions(Ctx *ctx, Program *program)
@@ -134,6 +139,71 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected)
         return e->type;
     }
 
+    case EXPR_UNARY: {
+        Type *t = analyze_expr(ctx, e->as.unary.operand, NULL);
+        if (e->as.unary.op == UNOP_NOT) {
+            if (t->kind != TYPE_BOOLEAN) {
+                error_exit(ERR_TYPE, e->line, "Operator ! vyzaduje Boolean");
+            }
+            return set_expr_type(e, TYPE_BOOLEAN);
+        }
+        // UNOP_PLUS a UNOP_NEG: jen cisla, typ se nemeni
+        if (!type_is_numeric(t)) {
+            error_exit(ERR_TYPE, e->line, "Unarni +/- vyzaduje cislo");
+        }
+        return set_expr_type(e, t->kind);
+    }
+
+    case EXPR_BINARY: {
+        Type *l = analyze_expr(ctx, e->as.binary.left, NULL);
+        Type *r = analyze_expr(ctx, e->as.binary.right, NULL);
+
+        switch (e->as.binary.op) {
+        case BINOP_ADD:
+            // String + String je konkatenace
+            if (l->kind == TYPE_STRING && r->kind == TYPE_STRING) {
+                return set_expr_type(e, TYPE_STRING);
+            }
+            return set_expr_type(e, arithmetic_result(l, r, e->line));
+
+        case BINOP_SUB:
+        case BINOP_MUL:
+        case BINOP_DIV:
+            return set_expr_type(e, arithmetic_result(l, r, e->line));
+
+        case BINOP_LT:
+        case BINOP_LE:
+        case BINOP_GT:
+        case BINOP_GE:
+            // dve cisla, nebo dva stringy
+            if (!((type_is_numeric(l) && type_is_numeric(r))
+                  || (l->kind == TYPE_STRING && r->kind == TYPE_STRING))) {
+                error_exit(ERR_TYPE, e->line, "Spatne operandy relacniho operatoru");
+            }
+            return set_expr_type(e, TYPE_BOOLEAN);
+
+        case BINOP_EQ:
+        case BINOP_NE:
+            // stejne typy, nebo dve cisla
+            if (!(type_equals(l, r) || (type_is_numeric(l) && type_is_numeric(r)))) {
+                error_exit(ERR_TYPE, e->line, "Porovnani hodnot ruznych typu");
+            }
+            return set_expr_type(e, TYPE_BOOLEAN);
+
+        case BINOP_AND:
+        case BINOP_OR:
+            if (l->kind != TYPE_BOOLEAN || r->kind != TYPE_BOOLEAN) {
+                error_exit(ERR_TYPE, e->line, "&& a || vyzaduji Boolean");
+            }
+            return set_expr_type(e, TYPE_BOOLEAN);
+
+        case BINOP_CONCAT_LIST:
+            error_exit(ERR_INTERNAL, e->line, "++ zatim neni implementovano");
+        }
+        break;
+    }
+
+
     default:
         error_exit(ERR_INTERNAL, e->line, "Tento druh vyrazu se zatim neanalyzuje");
     }
@@ -159,7 +229,7 @@ SymTable *semantic_analyze(Program *program)
 
     register_functions(&ctx, program);
 
-    // Dalsi kroky pribudou pozdeji
+    // Dalsi kroky
 
     return ctx.table; // Uvolni az main.c po generovani kodu
 }
