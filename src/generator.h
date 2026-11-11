@@ -35,6 +35,9 @@ void emit3(const char *op, const char *arg1, const char *arg2, const char *arg3)
     printf("%s %s %s %s\n", op, arg1, arg2, arg3);
 }
 
+//7.4.1 Práce s rámci, volání funkcí
+//===============================================================
+
 // 1. Generování hlavičky funkce
 void function_header(const char *func_name) {
     emit1("LABEL", func_name);
@@ -43,9 +46,17 @@ void function_header(const char *func_name) {
 }
 // 2. Generování paticky funkce
 void function_footer(const char *return_var) {
-    pushs(return_var);
+    pushs(return_var); // na zasobnik
     emit0("POPFRAME");
     emit0("RETURN");
+}
+// volani funkce, parametry pushne na zasobnik, chovani stdcall, prvni parametr je
+void call_function_UNIT(const char *func_name, int param_count, ...) {
+
+}
+
+void call_function(const char *func_name, int param_count, ...) {
+    
 }
 
 // Deklarace promenne
@@ -80,6 +91,10 @@ void while_footer(const char *loop_label, const char *done_label) {
     emit1("JUMP", loop_label);
     emit1("LABEL", done_label);
 }
+
+
+//7.4.3 Aritmetické, relační, booleovské a konverzní instrukce
+//===============================================================
 
 // nasobi arg1 a arg2 a zapise ho na dest
 void add(const char *dest, const char *arg1, const char *arg2) {
