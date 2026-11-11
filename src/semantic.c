@@ -54,6 +54,13 @@ static Type *analyze_block(Ctx *ctx, Block *b, const Type *expected);
 static void analyze_stmt(Ctx *ctx, Stmt *s);
 
 
+// Vytvori novy typ Unit (vlastni ho volajici)
+static Type *unit_type(void)
+{
+    return type_new(TYPE_UNIT);
+}
+
+
 // Zapise vsechny funkce do tabulky symbolu a zkontroluje funkci s anotaci @main
 static void register_functions(Ctx *ctx, Program *program)
 {
@@ -212,7 +219,84 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected)
 }
 
 
+// Zanalyzuje blok v novem rozsahu a vrati typ jeho vysledku (vlastni volajici)
+// Vysledek je typ posledniho prikazu, je-li to vyraz, jinak Unit
+static Type *analyze_block(Ctx *ctx, Block *b, const Type *expected)
+{
+    (void)expected; // Zatim nepouzito
 
+    symtable_enter_scope(ctx->table);
+
+    Type *result = NULL;
+    for (int i = 0; i < b->count; i++) {
+        Stmt *s = b->items[i];
+        analyze_stmt(ctx, s);
+
+        if (i == b->count - 1) {
+            if (s->kind == STMT_EXPR) {
+                result = type_clone(s->as.expr_stmt.expr->type);
+            }
+        }
+    }
+
+    symtable_exit_scope(ctx->table);
+
+    return result != NULL ? result : unit_type();
+}
+
+
+// Zanalyzuje jeden prikaz
+static void analyze_stmt(Ctx *ctx, Stmt *s)
+{
+    switch (s->kind) {
+    case STMT_EXPR:
+        analyze_expr(ctx, s->as.expr_stmt.expr, NULL);
+        break;
+
+    case STMT_VARDEF: {
+        Type *declared = s->as.vardef.declared_type; // muze byt NULL
+        Type *init_type = analyze_expr(ctx, s->as.vardef.init, declared);
+
+        Type *final_type;
+        if (declared != NULL) {
+            if (!type_assignable(declared, init_type)) {
+                error_exit(ERR_TYPE, s->line, "Inicializace nesouhlasi s uvedenym typem");
+            }
+            final_type = declared;
+        } else {
+            final_type = init_type;
+        }
+
+        // Definice az PO analyze initu, aby val x = x neprosel
+        Symbol *sym = symtable_define_var(ctx->table, s->as.vardef.name,
+                                          final_type, s->as.vardef.is_mutable);
+        if (sym == NULL) {
+            error_exit(ERR_REDEFINED, s->line, "Redefinice promenne");
+        }
+        s->as.vardef.symbol = sym;
+        break;
+    }
+
+    case STMT_ASSIGN: {
+        Symbol *sym = symtable_lookup(ctx->table, s->as.assign.name);
+        if (sym == NULL || sym->kind != SYM_VAR) {
+            error_exit(ERR_UNDEFINED, s->line, "Prirazeni do nedefinovane promenne");
+        }
+        if (!sym->as.var.is_mutable) {
+            error_exit(ERR_IMMUTABLE, s->line, "Prirazeni do nemodifikovatelne promenne");
+        }
+        Type *value_type = analyze_expr(ctx, s->as.assign.value, sym->as.var.type);
+        if (!type_assignable(sym->as.var.type, value_type)) {
+            error_exit(ERR_TYPE, s->line, "Prirazeni hodnoty nekompatibilniho typu");
+        }
+        s->as.assign.symbol = sym;
+        break;
+    }
+
+    default:
+        error_exit(ERR_INTERNAL, s->line, "Tento druh prikazu se zatim neanalyzuje");
+    }
+}
 
 
 
