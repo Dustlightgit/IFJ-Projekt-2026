@@ -1,5 +1,16 @@
-// xnovacm00
-// stack.h - obecny zasobnik prvku pevne velikosti
+/*
+    IFJ projekt 2026
+
+    stack.h
+
+    Puvodni autor: xnovacm00
+    Seznam zmen:
+        - xbalaka00 - doplneni doxygen dokumentace a sjednoceni komentaru
+          za asistence Claude.
+
+    Obecny zasobnik prvku pevne velikosti.
+
+*/
 
 #ifndef STACK_H
 #define STACK_H
@@ -7,41 +18,78 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+/**
+ * @brief Obecny zasobnik prvku pevne velikosti.
+ */
 typedef struct {
-  void *data;       // Souvisle pole prvku
-  size_t elem_size; // velikost jednoho prvku v bajtech (> 0)
-  size_t count;     // Pocet ulozenych prvku
-  size_t cap;       // Kapacita v prvcich
+  void *data;       ///< Souvisle pole prvku
+  size_t elem_size; ///< Velikost jednoho prvku v bajtech (> 0)
+  size_t count;     ///< Pocet ulozenych prvku
+  size_t cap;       ///< Kapacita v prvcich
 } Stack;
 
-// Inicializuje prazdny zasobnik prvku o velikosti elem_size (musi byt > 0)
+/**
+ * @brief Inicializuje prazdny zasobnik.
+ *
+ * @param s Zasobnik k inicializaci.
+ * @param elem_size Velikost jednoho prvku v bajtech, musi byt > 0.
+ */
 void stack_init(Stack *s, size_t elem_size);
 
-// Vlozi kopii prvku *elem na vrchol. Pri nedostatku pameti ukonci program s
-// kodem 99
+/**
+ * @brief Vlozi kopii prvku na vrchol zasobniku.
+ *
+ * Pri nedostatku pameti ukonci program s kodem 99.
+ *
+ * @param s Zasobnik.
+ * @param elem Ukazatel na prvek, ktery se zkopiruje.
+ */
 void stack_push(Stack *s, const void *elem);
 
-// Odebere prvek z vrcholu; je-li out != NULL
-// Vrací false, pokud je zásobník prázdný.
+/**
+ * @brief Odebere prvek z vrcholu zasobniku.
+ *
+ * @param s Zasobnik.
+ * @param out Kam se odebrany prvek zkopiruje, pokud neni NULL.
+ * @return False, pokud je zasobnik prazdny, jinak true.
+ */
 bool stack_pop(Stack *s, void *out);
 
-// Ukazatel na prvek na vrcholu, nebo NULL, je-li zasobnik prazdny
+/**
+ * @brief Vrati ukazatel na prvek na vrcholu zasobniku.
+ *
+ * @param s Zasobnik.
+ * @return Ukazatel na prvek na vrcholu, nebo NULL, je-li zasobnik prazdny.
+ */
 void *stack_top(const Stack *s);
 
-// Ukazatel na prvek v hloubce depth (0 = vrchol, 1 = tesne pod nim) nebo NULL,
-// pokud takovy prvek neni
+/**
+ * @brief Vrati ukazatel na prvek v dane hloubce.
+ *
+ * @param s Zasobnik.
+ * @param depth Hloubka, 0 je vrchol, 1 je prvek tesne pod nim.
+ * @return Ukazatel na prvek, nebo NULL, pokud takovy prvek neni.
+ */
 void *stack_peek(const Stack *s, size_t depth);
 
-// Pocet prvku na zásobníku
+/**
+ * @brief Vrati pocet prvku na zasobniku.
+ */
 size_t stack_size(const Stack *s);
 
-// True, je-li zasobnik prazdny
+/**
+ * @brief Vrati true, je-li zasobnik prazdny.
+ */
 bool stack_is_empty(const Stack *s);
 
-// Vyprazdni zasobnik, alokovanou pamet ponecha pro dalsi pouziti
+/**
+ * @brief Vyprazdni zasobnik, alokovanou pamet ponecha pro dalsi pouziti.
+ */
 void stack_clear(Stack *s);
 
-// Uvolni pamet zasobniku;
+/**
+ * @brief Uvolni pamet zasobniku.
+ */
 void stack_free(Stack *s);
 
-#endif
+#endif // STACK_H
