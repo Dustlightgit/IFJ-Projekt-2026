@@ -8,6 +8,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <string.h>
 
 
 // Vrati true, kdyz jsou dva typy uplne stejne (u seznamu se porovnava i typ prvku)
@@ -121,6 +122,49 @@ static TypeKind arithmetic_result(const Type *l, const Type *r, int line)
 }
 
 
+
+// Zkontroluje, ze vyraz ma typ Int (jinak chyba 6)
+static void expect_int(Ctx *ctx, Expr *e, const char *message)
+{
+    Type *t = analyze_expr(ctx, e, NULL);
+    if (t->kind != TYPE_INT) {
+        error_exit(ERR_TYPE, e->line, message);
+    }
+}
+
+
+// Vrati spolecny typ dvou typu prvku seznamu, nebo NULL kdyz nejsou kompatibilni
+// (Int a Double se slouci na Double, vlastni kopie patri volajicimu)
+static Type *common_type(const Type *a, const Type *b)
+{
+    if (type_equals(a, b)) {
+        return type_clone(a);
+    }
+    if (type_is_numeric(a) && type_is_numeric(b)) {
+        return type_new(TYPE_DOUBLE);
+    }
+    return NULL;
+}
+
+
+// Zkontroluje, ze clen ma presne dany pocet argumentu (jinak chyba 5)
+static void member_expect_count(const Expr *e, int count)
+{
+    if (e->as.member.arg_count != count) {
+        error_exit(ERR_ARGS, e->line, "Spatny pocet argumentu clenu");
+    }
+}
+
+// Zanalyzuje argument clenu na danem indexu a zkontroluje, ze je to Int (jinak chyba 5)
+static void member_int_arg(Ctx *ctx, Expr *e, int index)
+{
+    Type *t = analyze_expr(ctx, e->as.member.args[index], NULL);
+    if (t->kind != TYPE_INT) {
+        error_exit(ERR_ARGS, e->line, "Argument clenu musi byt Int");
+    }
+}
+
+
 // Zjisti typ vyrazu, ulozi ho do e->type a vrati jej (nevlastni ukazatel)
 // Parametr expected je typ, ktery se od vyrazu ocekava (zatim nepouzity, pozdeji pro List())
 static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected)
@@ -206,8 +250,20 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected)
             }
             return set_expr_type(e, TYPE_BOOLEAN);
 
-        case BINOP_CONCAT_LIST:
-            error_exit(ERR_INTERNAL, e->line, "++ zatim neni implementovano");
+        
+        case BINOP_CONCAT_LIST: {
+            if (l->kind != TYPE_LIST || r->kind != TYPE_LIST) {
+                error_exit(ERR_TYPE, e->line, "++ vyzaduje dva seznamy");
+            }
+            Type *elem = common_type(l->element, r->element);
+            if (elem == NULL) {
+                error_exit(ERR_TYPE, e->line, "++ spojuje seznamy ruznych typu");
+            }
+            e->type = type_new_list(elem);
+            return e->type;
+        }
+        
+        
         }
         break;
     }
@@ -273,6 +329,152 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected)
             type_free(else_type);
         }
         return e->type;
+    }
+
+    case EXPR_RANGE: {
+        expect_int(ctx, e->as.range.from, "Zacatek rozsahu musi byt Int");
+        expect_int(ctx, e->as.range.to, "Konec rozsahu musi byt Int");
+
+        Expr *step = e->as.range.step;
+        if (step != NULL) {
+            expect_int(ctx, step, "Krok rozsahu musi byt Int");
+            
+            if (step->kind == EXPR_LITERAL && step->as.literal.kind == LIT_INT
+                && step->as.literal.value.int_value == 0) {
+                error_exit(ERR_OTHER, e->line, "Nulovy krok rozsahu");
+            }
+        }
+
+        e->type = type_new_list(type_new(TYPE_INT));
+        return e->type;
+    }
+
+
+    case EXPR_LIST_LITERAL: {
+        int count = e->as.list_literal.count;
+
+        if (count == 0) {
+            if (expected == NULL || expected->kind != TYPE_LIST) {
+                error_exit(ERR_TYPE, e->line, "Typ prazdneho seznamu nelze odvodit");
+            }
+            e->type = type_clone(expected);
+            return e->type;
+        }
+
+        // Ocekavany typ prvku (pokud ho znam) predame prvkum dal
+        const Type *expected_elem = (expected != NULL && expected->kind == TYPE_LIST)
+                                        ? expected->element : NULL;
+
+        Type *elem = NULL; // spolecny typ prvku (vlastni ho tato funkce)
+        for (int i = 0; i < count; i++) {
+            Type *t = analyze_expr(ctx, e->as.list_literal.items[i], expected_elem);
+            if (elem == NULL) {
+                elem = type_clone(t);
+                continue;
+            }
+            Type *merged = common_type(elem, t);
+            if (merged == NULL) {
+                error_exit(ERR_TYPE, e->line, "Prvky seznamu maji ruzne typy");
+            }
+            type_free(elem);
+            elem = merged;
+        }
+
+        e->type = type_new_list(elem); // seznam prebira vlastnictvi elem
+        return e->type;
+    }
+
+
+    case EXPR_INDEX: {
+        Type *list = analyze_expr(ctx, e->as.index.list, NULL);
+        if (list->kind != TYPE_LIST) {
+            error_exit(ERR_TYPE, e->line, "Indexovat lze jen seznam");
+        }
+        expect_int(ctx, e->as.index.index, "Index seznamu musi byt Int");
+
+        e->type = type_clone(list->element);
+        return e->type;
+    }
+
+
+    case EXPR_LIST_RANGE: {
+        expect_int(ctx, e->as.list_range.start, "Zacatek List.range musi byt Int");
+        expect_int(ctx, e->as.list_range.end, "Konec List.range musi byt Int");
+
+        Expr *step = e->as.list_range.step;
+        if (step != NULL) {
+            expect_int(ctx, step, "Krok List.range musi byt Int");
+            if (step->kind == EXPR_LITERAL && step->as.literal.kind == LIT_INT
+                && step->as.literal.value.int_value == 0) {
+                error_exit(ERR_OTHER, e->line, "Nulovy krok List.range");
+            }
+        }
+
+        e->type = type_new_list(type_new(TYPE_INT));
+        return e->type;
+    }
+
+
+    case EXPR_MEMBER: {
+        Type *obj = analyze_expr(ctx, e->as.member.object, NULL);
+        const char *name = e->as.member.name;
+
+        // toString jde na cokoli
+        if (strcmp(name, "toString") == 0) {
+            member_expect_count(e, 0);
+            return set_expr_type(e, TYPE_STRING);
+        }
+
+        if (obj->kind == TYPE_DOUBLE) {
+            if (strcmp(name, "toInt") == 0) {
+                member_expect_count(e, 0);
+                return set_expr_type(e, TYPE_INT);
+            }
+            if (strcmp(name, "floor") == 0) {
+                member_expect_count(e, 0);
+                return set_expr_type(e, TYPE_DOUBLE);
+            }
+        }
+
+        if (obj->kind == TYPE_STRING && strcmp(name, "length") == 0) {
+            member_expect_count(e, 0);
+            return set_expr_type(e, TYPE_INT);
+        }
+
+        if (obj->kind == TYPE_LIST) {
+            // toList je jen na rozsahu (1 to 5).toList, ne na obycejnem seznamu
+            if (strcmp(name, "toList") == 0 && e->as.member.object->kind == EXPR_RANGE) {
+                member_expect_count(e, 0);
+                e->type = type_clone(obj);
+                return e->type;
+            }
+            if (strcmp(name, "drop") == 0 || strcmp(name, "take") == 0) {
+                member_expect_count(e, 1);
+                member_int_arg(ctx, e, 0);
+                e->type = type_clone(obj);
+                return e->type;
+            }
+            if (strcmp(name, "slice") == 0) {
+                member_expect_count(e, 2);
+                member_int_arg(ctx, e, 0);
+                member_int_arg(ctx, e, 1);
+                e->type = type_clone(obj);
+                return e->type;
+            }
+            if (strcmp(name, "head") == 0) {
+                member_expect_count(e, 0);
+                e->type = type_clone(obj->element);
+                return e->type;
+            }
+            if (strcmp(name, "tail") == 0) {
+                member_expect_count(e, 0);
+                e->type = type_clone(obj);
+                return e->type;
+            }
+        }
+
+        // Clen neexistuje pro dany typ
+        error_exit(ERR_TYPE, e->line, "Nepodporovany clen pro tento typ");
     }
 
 
@@ -390,6 +592,35 @@ static void analyze_stmt(Ctx *ctx, Stmt *s)
         if (ret->kind != TYPE_UNIT && !type_assignable(ret, t)) {
             error_exit(ERR_TYPE, s->line, "Typ return nesouhlasi s navratovym typem");
         }
+        break;
+    }
+
+    case STMT_FOR: {
+        Type *src = analyze_expr(ctx, s->as.for_loop.source, NULL);
+        if (src->kind != TYPE_LIST) {
+            error_exit(ERR_TYPE, s->line, "Zdroj cyklu for musi byt rozsah nebo seznam");
+        }
+        // Typ ridici promenne: prvek seznamu (u rozsahu Int)
+        const Type *elem = src->element;
+
+        symtable_enter_scope(ctx->table);
+
+        Symbol *sym = symtable_define_var(ctx->table, s->as.for_loop.var_name, elem, false);
+        if (sym == NULL) {
+            error_exit(ERR_REDEFINED, s->line, "Redefinice ridici promenne");
+        }
+        s->as.for_loop.symbol = sym;
+
+        for (int i = 0; i < s->as.for_loop.guard_count; i++) {
+            Type *g = analyze_expr(ctx, s->as.for_loop.guards[i], NULL);
+            if (g->kind != TYPE_BOOLEAN) {
+                error_exit(ERR_TYPE, s->line, "Straz cyklu for musi byt Boolean");
+            }
+        }
+
+        type_free(analyze_block(ctx, s->as.for_loop.body, NULL));
+
+        symtable_exit_scope(ctx->table);
         break;
     }
 
