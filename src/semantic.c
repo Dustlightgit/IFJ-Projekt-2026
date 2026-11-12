@@ -270,6 +270,27 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected)
 
     case EXPR_CALL: {
         Symbol *sym = symtable_lookup(ctx->table, e->as.call.name);
+
+        
+        // lst(i) zapsane jako volani: jmeno patri promenne typu List -> je to indexovani
+        if (sym != NULL && sym->kind == SYM_VAR) {
+            if (sym->as.var.type->kind != TYPE_LIST) {
+                error_exit(ERR_TYPE, e->line, "Volat lze jen funkci nebo indexovat seznam");
+            }
+            if (e->as.call.arg_count != 1) {
+                error_exit(ERR_ARGS, e->line, "Indexovani seznamu vyzaduje jeden index");
+            }
+            Type *idx = analyze_expr(ctx, e->as.call.args[0], NULL);
+            if (idx->kind != TYPE_INT) {
+                error_exit(ERR_TYPE, e->line, "Index seznamu musi byt Int");
+            }
+            e->as.call.symbol = sym; // V codegen se pozna indexovani podle SYM_VAR
+            e->type = type_clone(sym->as.var.type->element);
+            return e->type;
+        }
+
+
+
         if (sym == NULL || sym->kind != SYM_FUNC) {
             error_exit(ERR_UNDEFINED, e->line, "Volani nedefinovane funkce");
         }
