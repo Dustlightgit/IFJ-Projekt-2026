@@ -46,6 +46,7 @@ static bool type_assignable(const Type *target, const Type *src)
 // Sdileny stav pri analyze (zatim jen tabulka symbolu)
 typedef struct {
     SymTable *table;
+    FuncDef *current_func; // Funkce, jejiz telo se prave analyzuje
 } Ctx;
 
 // Predbezne deklarace (funkce se volaji navzajem)
@@ -300,6 +301,36 @@ static void analyze_stmt(Ctx *ctx, Stmt *s)
 
 
 
+// Zanalyzuje definici funkce: parametry, telo a kontrola navratoveho typu
+static void analyze_func(Ctx *ctx, FuncDef *func)
+{
+    ctx->current_func = func;
+
+    symtable_enter_scope(ctx->table);
+
+    // Parametry jsou nemodifikovatelne lokalni promenne
+    for (int i = 0; i < func->param_count; i++) {
+        Param *p = &func->params[i];
+        Symbol *sym = symtable_define_var(ctx->table, p->name, p->type, false);
+        if (sym == NULL) {
+            error_exit(ERR_REDEFINED, func->line, "Duplicitni jmeno parametru");
+        }
+        p->symbol = sym;
+    }
+
+    Type *body_type = analyze_block(ctx, func->body, NULL);
+
+    // Kontrola navratoveho typu (zatim jen kdyz je uveden)
+    if (func->return_type != NULL && func->return_type->kind != TYPE_UNIT) {
+        if (!type_assignable(func->return_type, body_type)) {
+            error_exit(ERR_TYPE, func->line, "Telo funkce nevraci navratovy typ");
+        }
+    }
+    type_free(body_type); // analyze_block vraci typ, ktery patri nam
+
+    symtable_exit_scope(ctx->table);
+    ctx->current_func = NULL;
+}
 
 
 
@@ -309,11 +340,14 @@ SymTable *semantic_analyze(Program *program)
 {
     Ctx ctx;
     ctx.table = symtable_new();
+    ctx.current_func = NULL;
     symtable_register_builtins(ctx.table);
 
     register_functions(&ctx, program);
 
-    // Dalsi kroky
+    for (int i = 0; i < program->func_count; i++) {
+        analyze_func(&ctx, program->funcs[i]);
+    }
 
-    return ctx.table; // Uvolni az main.c po generovani kodu
+    return ctx.table;
 }

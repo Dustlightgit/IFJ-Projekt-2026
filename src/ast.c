@@ -55,6 +55,36 @@ static void *grow_array(void *array, int count, size_t elem_size)
 }
 
 //--------------------------------------------------------------------------------//
+
+
+
+// Zkontroluje druh prikazu, nesoulad je chyba parseru a program skonci
+static void require_stmt(const Stmt *stmt, StmtKind kind)
+{
+    if (stmt == NULL || stmt->kind != kind) {
+        error_exit(ERR_INTERNAL, stmt == NULL ? 0 : stmt->line, "Spatny druh prikazu pri sestavovani stromu");
+    }
+}
+
+// Zkontroluje druh vyrazu, nesoulad je chyba parseru a program skonci
+static void require_expr(const Expr *expr, ExprKind kind)
+{
+    if (expr == NULL || expr->kind != kind) {
+        error_exit(ERR_INTERNAL, expr == NULL ? 0 : expr->line, "Spatny druh vyrazu pri sestavovani stromu");
+    }
+}
+
+// Zkontroluje, ze funkce existuje, NULL je chyba parseru a program skonci
+static void require_func(const FuncDef *func)
+{
+    if (func == NULL) {
+        error_exit(ERR_INTERNAL, 0, "Chybi definice funkce pri sestavovani stromu");
+    }
+}
+
+
+
+//--------------------------------------------------------------------------------//
 // Typy
 //--------------------------------------------------------------------------------//
 
@@ -199,6 +229,7 @@ Expr *expr_new_call(const char *name, int line)
 // Prida argument k existujicimu volani funkce a prebere jeho vlastnictvi
 void expr_call_add_arg(Expr *call, Expr *arg)
 {
+    require_expr(call, EXPR_CALL);
     call->as.call.args = grow_array(call->as.call.args, call->as.call.arg_count, sizeof(Expr *));
     call->as.call.args[call->as.call.arg_count] = arg;
     call->as.call.arg_count++;
@@ -238,6 +269,7 @@ Expr *expr_new_member(Expr *object, const char *name, int line)
 // Prida argument k existujicimu clenu/volani metody a prebere jeho vlastnictvi
 void expr_member_add_arg(Expr *member, Expr *arg)
 {
+    require_expr(member, EXPR_MEMBER);
     member->as.member.args = grow_array(member->as.member.args, member->as.member.arg_count, sizeof(Expr *));
     member->as.member.args[member->as.member.arg_count] = arg;
     member->as.member.arg_count++;
@@ -254,6 +286,7 @@ Expr *expr_new_list_literal(int line)
 // Prida polozku do list literalu a prebere jej vlastnictvi => List(1, 2, 3)
 void expr_list_add_item(Expr *list, Expr *item)
 {
+    require_expr(list, EXPR_LIST_LITERAL);
     list->as.list_literal.items = grow_array(list->as.list_literal.items, list->as.list_literal.count, sizeof(Expr *));
     list->as.list_literal.items[list->as.list_literal.count] = item;
     list->as.list_literal.count++;
@@ -368,6 +401,7 @@ Stmt *stmt_new_for(const char *var_name, Expr *source, int line)
 // Prida straz do cyklu for a prebere vlastnictvi vyrazu straze => if i != 3
 void stmt_for_add_guard(Stmt *for_stmt, Expr *guard)
 {
+    require_stmt(for_stmt, STMT_FOR);
     for_stmt->as.for_loop.guards = grow_array(for_stmt->as.for_loop.guards,
                                               for_stmt->as.for_loop.guard_count, sizeof(Expr *));
     for_stmt->as.for_loop.guards[for_stmt->as.for_loop.guard_count] = guard;
@@ -377,6 +411,8 @@ void stmt_for_add_guard(Stmt *for_stmt, Expr *guard)
 // Priradi telo k cyklu for a prebere vlastnictvi bloku => do print(i)
 void stmt_for_set_body(Stmt *for_stmt, Block *body)
 {
+    require_stmt(for_stmt, STMT_FOR);
+    block_free(for_stmt->as.for_loop.body);
     for_stmt->as.for_loop.body = body;
 }
 
@@ -404,6 +440,7 @@ FuncDef *funcdef_new(const char *name, bool is_main, int line)
 // Prida formalni parametr do definice funkce, naklonuje jmeno a prebere vlastnictvi datoveho typu => n: Int
 void funcdef_add_param(FuncDef *func, const char *name, Type *type)
 {
+    require_func(func);
     func->params = grow_array(func->params, func->param_count, sizeof(Param));
     func->params[func->param_count].name = xstrdup_opt(name);
     func->params[func->param_count].type = type;
@@ -414,12 +451,16 @@ void funcdef_add_param(FuncDef *func, const char *name, Type *type)
 // Nastavi navratovy typ funkce a prebere vlastnictvi datoveho typu => : Int
 void funcdef_set_return_type(FuncDef *func, Type *return_type)
 {
+    require_func(func);
+    type_free(func->return_type);
     func->return_type = return_type;
 }
 
 // Nastavi telo funkce a prebere vlastnictvi bloku prikazu => = val x = 42; return x
 void funcdef_set_body(FuncDef *func, Block *body)
 {
+    require_func(func);
+    block_free(func->body);
     func->body = body;
 }
 
@@ -619,22 +660,6 @@ void program_free(Program *program)
 // a jeho casti doplnovat postupne"
 
 
-// Zkontroluje druh prikazu, nesoulad je chyba parseru a program skonci
-static void require_stmt(const Stmt *stmt, StmtKind kind)
-{
-    if (stmt == NULL || stmt->kind != kind) {
-        error_exit(ERR_INTERNAL, stmt == NULL ? 0 : stmt->line, "Spatny druh prikazu pri sestavovani stromu");
-    }
-}
-
-// Zkontroluje druh vyrazu, nesoulad je chyba parseru a program skonci
-static void require_expr(const Expr *expr, ExprKind kind)
-{
-    if (expr == NULL || expr->kind != kind) {
-        error_exit(ERR_INTERNAL, expr == NULL ? 0 : expr->line, "Spatny druh vyrazu pri sestavovani stromu");
-    }
-}
-
 // Nahradi retezec novou kopii a puvodni uvolni (NULL smaze hodnotu)
 static void replace_string(char **target, const char *value)
 {
@@ -816,18 +841,14 @@ void expr_if_set_else(Expr *expr, Block *else_block)
 // Nastavi jmeno funkce (vytvori kopii)
 void funcdef_set_name(FuncDef *func, const char *name)
 {
-    if (func == NULL) {
-        error_exit(ERR_INTERNAL, 0, "Chybi definice funkce pri sestavovani stromu");
-    }
+    require_func(func);
     replace_string(&func->name, name);
 }
 
 // Nastavi priznak vstupni funkce (anotace @main)
 void funcdef_set_main(FuncDef *func, bool is_main)
 {
-    if (func == NULL) {
-        error_exit(ERR_INTERNAL, 0, "Chybi definice funkce pri sestavovani stromu");
-    }
+    require_func(func);
     func->is_main = is_main;
 }
 
