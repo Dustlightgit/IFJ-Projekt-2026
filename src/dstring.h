@@ -7,11 +7,10 @@
 #include <stddef.h>
 
 typedef struct {
-    char *data;  // Retezec ukonceny znakem '\0'
-    size_t len;  // Pocet znaku bez ukoncovaciho '\0'
-    size_t cap;  // Alokovana kapacita v bajtech
+  char *data; // Retezec ukonceny znakem '\0'
+  size_t len; // Pocet znaku bez ukoncovaciho '\0'
+  size_t cap; // Alokovana kapacita v bajtech
 } DString;
-
 
 // Pripravi prazdny retezec
 void dstr_init(DString *s);
