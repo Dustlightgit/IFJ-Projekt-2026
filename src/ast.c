@@ -30,6 +30,13 @@ static char *xstrdup(const char *str)
 }
 
 
+// Vytvori kopii retezce, NULL zustane NULL (pro casti uzlu, ktere zatim nejsou znamy)
+static char *xstrdup_opt(const char *str)
+{
+    return str == NULL ? NULL : xstrdup(str);
+}
+
+
 // Zmeni velikost pameti, pri neuspechu ukonci program s kodem interni chyby
 static void *xrealloc(void *old, size_t size)
 {
@@ -46,6 +53,36 @@ static void *grow_array(void *array, int count, size_t elem_size)
 {
     return xrealloc(array, (size_t)(count + 1) * elem_size);
 }
+
+//--------------------------------------------------------------------------------//
+
+
+
+// Zkontroluje druh prikazu, nesoulad je chyba parseru a program skonci
+static void require_stmt(const Stmt *stmt, StmtKind kind)
+{
+    if (stmt == NULL || stmt->kind != kind) {
+        error_exit(ERR_INTERNAL, stmt == NULL ? 0 : stmt->line, "Spatny druh prikazu pri sestavovani stromu");
+    }
+}
+
+// Zkontroluje druh vyrazu, nesoulad je chyba parseru a program skonci
+static void require_expr(const Expr *expr, ExprKind kind)
+{
+    if (expr == NULL || expr->kind != kind) {
+        error_exit(ERR_INTERNAL, expr == NULL ? 0 : expr->line, "Spatny druh vyrazu pri sestavovani stromu");
+    }
+}
+
+// Zkontroluje, ze funkce existuje, NULL je chyba parseru a program skonci
+static void require_func(const FuncDef *func)
+{
+    if (func == NULL) {
+        error_exit(ERR_INTERNAL, 0, "Chybi definice funkce pri sestavovani stromu");
+    }
+}
+
+
 
 //--------------------------------------------------------------------------------//
 // Typy
@@ -192,6 +229,7 @@ Expr *expr_new_call(const char *name, int line)
 // Prida argument k existujicimu volani funkce a prebere jeho vlastnictvi
 void expr_call_add_arg(Expr *call, Expr *arg)
 {
+    require_expr(call, EXPR_CALL);
     call->as.call.args = grow_array(call->as.call.args, call->as.call.arg_count, sizeof(Expr *));
     call->as.call.args[call->as.call.arg_count] = arg;
     call->as.call.arg_count++;
@@ -231,28 +269,30 @@ Expr *expr_new_member(Expr *object, const char *name, int line)
 // Prida argument k existujicimu clenu/volani metody a prebere jeho vlastnictvi
 void expr_member_add_arg(Expr *member, Expr *arg)
 {
+    require_expr(member, EXPR_MEMBER);
     member->as.member.args = grow_array(member->as.member.args, member->as.member.arg_count, sizeof(Expr *));
     member->as.member.args[member->as.member.arg_count] = arg;
     member->as.member.arg_count++;
 }
 
 
-// Vytvori prazdny vyraz pro list literal (seznam hodnot zapsany v kodu) => []
+// Vytvori prazdny vyraz pro list literal (seznam hodnot zapsany v kodu) => List()
 Expr *expr_new_list_literal(int line)
 {
     return expr_alloc(EXPR_LIST_LITERAL, line);
 }
 
-// Prida polozku do list literalu a prebere jej vlastnictvi => [..., item]
-// Prida polozku do list literalu a prebere jej vlastnictvi => [42, "hello"]
+
+// Prida polozku do list literalu a prebere jej vlastnictvi => List(1, 2, 3)
 void expr_list_add_item(Expr *list, Expr *item)
 {
+    require_expr(list, EXPR_LIST_LITERAL);
     list->as.list_literal.items = grow_array(list->as.list_literal.items, list->as.list_literal.count, sizeof(Expr *));
     list->as.list_literal.items[list->as.list_literal.count] = item;
     list->as.list_literal.count++;
 }
 
-// Vytvori vyraz pro rozsah seznamu a prebere vlastnictvi vyrazu start, end a step => [1 .. 10 by 2]
+// Vytvori vyraz pro rozsah seznamu a prebere vlastnictvi vyrazu start, end a step => List.range(1, 10, 2)
 Expr *expr_new_list_range(Expr *start, Expr *end, Expr *step, int line)
 {
     Expr *expr = expr_alloc(EXPR_LIST_RANGE, line);
@@ -262,7 +302,7 @@ Expr *expr_new_list_range(Expr *start, Expr *end, Expr *step, int line)
     return expr;
 }
 
-// Vytvori vyraz pro indexovani nebo pristup k prvku podle indexu a prebere vlastnictvi list a index => my_list[0]
+// Vytvori vyraz pro indexovani nebo pristup k prvku podle indexu a prebere vlastnictvi list a index => lst(0)
 Expr *expr_new_index(Expr *list, Expr *index, int line)
 {
     Expr *expr = expr_alloc(EXPR_INDEX, line);
@@ -276,7 +316,7 @@ Expr *expr_new_index(Expr *list, Expr *index, int line)
 // Bloky a prikazy
 //--------------------------------------------------------------------------------//
 
-// Vytvori novy prazdny blok a alokuje pro jej pamet => { }
+// Vytvori novy prazdny blok a alokuje pro jej pamet
 Block *block_new(void)
 {
     Block *block = xmalloc(sizeof *block);
@@ -285,7 +325,7 @@ Block *block_new(void)
     return block;
 }
 
-// Prida prikaz do bloku a prebere jeho vlastnictvi => { print(42); }
+// Prida prikaz do bloku a prebere jeho vlastnictvi
 void block_add(Block *block, Stmt *stmt)
 {
     block->items = grow_array(block->items, block->count, sizeof(Stmt *));
@@ -309,7 +349,7 @@ Stmt *stmt_new_vardef(bool is_mutable, const char *name, Type *declared_type, Ex
 {
     Stmt *stmt = stmt_alloc(STMT_VARDEF, line);
     stmt->as.vardef.is_mutable = is_mutable;
-    stmt->as.vardef.name = xstrdup(name);
+    stmt->as.vardef.name = xstrdup_opt(name);
     stmt->as.vardef.declared_type = declared_type;
     stmt->as.vardef.init = init;
     return stmt;
@@ -319,7 +359,7 @@ Stmt *stmt_new_vardef(bool is_mutable, const char *name, Type *declared_type, Ex
 Stmt *stmt_new_assign(const char *name, Expr *value, int line)
 {
     Stmt *stmt = stmt_alloc(STMT_ASSIGN, line);
-    stmt->as.assign.name = xstrdup(name);
+    stmt->as.assign.name = xstrdup_opt(name);
     stmt->as.assign.value = value;
     return stmt;
 }
@@ -353,7 +393,7 @@ Stmt *stmt_new_while(Expr *cond, Block *body, int line)
 Stmt *stmt_new_for(const char *var_name, Expr *source, int line)
 {
     Stmt *stmt = stmt_alloc(STMT_FOR, line);
-    stmt->as.for_loop.var_name = xstrdup(var_name);
+    stmt->as.for_loop.var_name = xstrdup_opt(var_name);
     stmt->as.for_loop.source = source;
     return stmt;
 }
@@ -361,6 +401,7 @@ Stmt *stmt_new_for(const char *var_name, Expr *source, int line)
 // Prida straz do cyklu for a prebere vlastnictvi vyrazu straze => if i != 3
 void stmt_for_add_guard(Stmt *for_stmt, Expr *guard)
 {
+    require_stmt(for_stmt, STMT_FOR);
     for_stmt->as.for_loop.guards = grow_array(for_stmt->as.for_loop.guards,
                                               for_stmt->as.for_loop.guard_count, sizeof(Expr *));
     for_stmt->as.for_loop.guards[for_stmt->as.for_loop.guard_count] = guard;
@@ -370,6 +411,8 @@ void stmt_for_add_guard(Stmt *for_stmt, Expr *guard)
 // Priradi telo k cyklu for a prebere vlastnictvi bloku => do print(i)
 void stmt_for_set_body(Stmt *for_stmt, Block *body)
 {
+    require_stmt(for_stmt, STMT_FOR);
+    block_free(for_stmt->as.for_loop.body);
     for_stmt->as.for_loop.body = body;
 }
 
@@ -383,34 +426,41 @@ void stmt_for_set_body(Stmt *for_stmt, Block *body)
 FuncDef *funcdef_new(const char *name, bool is_main, int line)
 {
     FuncDef *func = xmalloc(sizeof *func);
-    func->name = xstrdup(name);
+    func->name = xstrdup_opt(name);
     func->params = NULL;
     func->param_count = 0;
     func->return_type = NULL;
     func->body = NULL;
     func->is_main = is_main;
     func->line = line;
+    func->symbol = NULL;
     return func;
 }
 
 // Prida formalni parametr do definice funkce, naklonuje jmeno a prebere vlastnictvi datoveho typu => n: Int
 void funcdef_add_param(FuncDef *func, const char *name, Type *type)
 {
+    require_func(func);
     func->params = grow_array(func->params, func->param_count, sizeof(Param));
-    func->params[func->param_count].name = xstrdup(name);
+    func->params[func->param_count].name = xstrdup_opt(name);
     func->params[func->param_count].type = type;
+    func->params[func->param_count].symbol = NULL;
     func->param_count++;
 }
 
 // Nastavi navratovy typ funkce a prebere vlastnictvi datoveho typu => : Int
 void funcdef_set_return_type(FuncDef *func, Type *return_type)
 {
+    require_func(func);
+    type_free(func->return_type);
     func->return_type = return_type;
 }
 
 // Nastavi telo funkce a prebere vlastnictvi bloku prikazu => = val x = 42; return x
 void funcdef_set_body(FuncDef *func, Block *body)
 {
+    require_func(func);
+    block_free(func->body);
     func->body = body;
 }
 
@@ -595,6 +645,225 @@ void program_free(Program *program)
     }
     free(program->funcs);
     free(program);
+}
+
+// Vygenerovano AI (konec)
+//--------------------------------------------------------------------------------//
+
+
+//--------------------------------------------------------------------------------//
+// Postupne sestavovani uzlu
+//--------------------------------------------------------------------------------//
+
+// Vygenerovano AI (zacatek)
+// prompt: "Uprav ast.h a ast.c tak, aby parser rizeny tabulkou mohl uzel vytvorit prazdny
+// a jeho casti doplnovat postupne"
+
+
+// Nahradi retezec novou kopii a puvodni uvolni (NULL smaze hodnotu)
+static void replace_string(char **target, const char *value)
+{
+    char *copy = xstrdup_opt(value);
+    free(*target);
+    *target = copy;
+}
+
+// Vrati parametr funkce na danem indexu, neplatny index je chyba parseru
+static Param *get_param(FuncDef *func, int index)
+{
+    if (func == NULL || index < 0 || index >= func->param_count) {
+        error_exit(ERR_INTERNAL, func == NULL ? 0 : func->line, "Neplatny index parametru pri sestavovani stromu");
+    }
+    return &func->params[index];
+}
+
+
+// Typy
+
+// Nastavi typ prvku u typu List[T] a prebere jeho vlastnictvi
+void type_list_set_element(Type *list, Type *element)
+{
+    if (list == NULL || list->kind != TYPE_LIST) {
+        error_exit(ERR_INTERNAL, 0, "Typ prvku lze nastavit jen u seznamu");
+    }
+    type_free(list->element);
+    list->element = element;
+}
+
+
+// Pomocne funkce pro bloky
+
+// Vytvori blok s jednim prikazem a prebere jeho vlastnictvi
+Block *block_from_stmt(Stmt *stmt)
+{
+    Block *block = block_new();
+    block_add(block, stmt);
+    return block;
+}
+
+// Vytvori blok s jednim prikazem, ktery je vyraz, a prebere vlastnictvi vyrazu
+Block *block_from_expr(Expr *expr, int line)
+{
+    return block_from_stmt(stmt_new_expr(expr, line));
+}
+
+
+// Definice promenne
+
+// Nastavi, jestli je promenna modifikovatelna (true pro var, false pro val)
+void stmt_vardef_set_mutable(Stmt *stmt, bool is_mutable)
+{
+    require_stmt(stmt, STMT_VARDEF);
+    stmt->as.vardef.is_mutable = is_mutable;
+}
+
+// Nastavi jmeno definovane promenne (vytvori kopii)
+void stmt_vardef_set_name(Stmt *stmt, const char *name)
+{
+    require_stmt(stmt, STMT_VARDEF);
+    replace_string(&stmt->as.vardef.name, name);
+}
+
+// Nastavi typ napsany programatorem a prebere jeho vlastnictvi
+void stmt_vardef_set_type(Stmt *stmt, Type *declared_type)
+{
+    require_stmt(stmt, STMT_VARDEF);
+    type_free(stmt->as.vardef.declared_type);
+    stmt->as.vardef.declared_type = declared_type;
+}
+
+// Nastavi inicializacni vyraz a prebere jeho vlastnictvi
+void stmt_vardef_set_init(Stmt *stmt, Expr *init)
+{
+    require_stmt(stmt, STMT_VARDEF);
+    expr_free(stmt->as.vardef.init);
+    stmt->as.vardef.init = init;
+}
+
+
+// Prirazeni, return, samostatny vyraz
+
+// Nastavi jmeno promenne, do ktere se prirazuje (vytvori kopii)
+void stmt_assign_set_name(Stmt *stmt, const char *name)
+{
+    require_stmt(stmt, STMT_ASSIGN);
+    replace_string(&stmt->as.assign.name, name);
+}
+
+// Nastavi prirazovanou hodnotu a prebere jeji vlastnictvi
+void stmt_assign_set_value(Stmt *stmt, Expr *value)
+{
+    require_stmt(stmt, STMT_ASSIGN);
+    expr_free(stmt->as.assign.value);
+    stmt->as.assign.value = value;
+}
+
+// Nastavi vracenou hodnotu a prebere jeji vlastnictvi
+void stmt_return_set_value(Stmt *stmt, Expr *value)
+{
+    require_stmt(stmt, STMT_RETURN);
+    expr_free(stmt->as.ret.value);
+    stmt->as.ret.value = value;
+}
+
+// Nastavi vyraz samostatneho prikazu a prebere jeho vlastnictvi
+void stmt_expr_set_expr(Stmt *stmt, Expr *expr)
+{
+    require_stmt(stmt, STMT_EXPR);
+    expr_free(stmt->as.expr_stmt.expr);
+    stmt->as.expr_stmt.expr = expr;
+}
+
+
+// Cykly
+
+// Nastavi podminku cyklu while a prebere jeji vlastnictvi
+void stmt_while_set_cond(Stmt *stmt, Expr *cond)
+{
+    require_stmt(stmt, STMT_WHILE);
+    expr_free(stmt->as.while_loop.cond);
+    stmt->as.while_loop.cond = cond;
+}
+
+// Nastavi telo cyklu while a prebere jeho vlastnictvi
+void stmt_while_set_body(Stmt *stmt, Block *body)
+{
+    require_stmt(stmt, STMT_WHILE);
+    block_free(stmt->as.while_loop.body);
+    stmt->as.while_loop.body = body;
+}
+
+// Nastavi jmeno ridici promenne cyklu for (vytvori kopii)
+void stmt_for_set_var_name(Stmt *stmt, const char *var_name)
+{
+    require_stmt(stmt, STMT_FOR);
+    replace_string(&stmt->as.for_loop.var_name, var_name);
+}
+
+// Nastavi zdroj cyklu for a prebere jeho vlastnictvi
+void stmt_for_set_source(Stmt *stmt, Expr *source)
+{
+    require_stmt(stmt, STMT_FOR);
+    expr_free(stmt->as.for_loop.source);
+    stmt->as.for_loop.source = source;
+}
+
+
+// Podminka if
+
+// Nastavi podminku vyrazu if a prebere jeji vlastnictvi
+void expr_if_set_cond(Expr *expr, Expr *cond)
+{
+    require_expr(expr, EXPR_IF);
+    expr_free(expr->as.if_expr.cond);
+    expr->as.if_expr.cond = cond;
+}
+
+// Nastavi vetev then a prebere jeji vlastnictvi
+void expr_if_set_then(Expr *expr, Block *then_block)
+{
+    require_expr(expr, EXPR_IF);
+    block_free(expr->as.if_expr.then_block);
+    expr->as.if_expr.then_block = then_block;
+}
+
+// Nastavi vetev else a prebere jeji vlastnictvi
+void expr_if_set_else(Expr *expr, Block *else_block)
+{
+    require_expr(expr, EXPR_IF);
+    block_free(expr->as.if_expr.else_block);
+    expr->as.if_expr.else_block = else_block;
+}
+
+
+// Funkce
+
+// Nastavi jmeno funkce (vytvori kopii)
+void funcdef_set_name(FuncDef *func, const char *name)
+{
+    require_func(func);
+    replace_string(&func->name, name);
+}
+
+// Nastavi priznak vstupni funkce (anotace @main)
+void funcdef_set_main(FuncDef *func, bool is_main)
+{
+    require_func(func);
+    func->is_main = is_main;
+}
+
+// Nastavi jmeno parametru na danem indexu (vytvori kopii)
+void funcdef_param_set_name(FuncDef *func, int index, const char *name)
+{
+    replace_string(&get_param(func, index)->name, name);
+}
+
+// Nastavi typ parametru na danem indexu a prebere jeho vlastnictvi
+void funcdef_param_set_type(FuncDef *func, int index, Type *type)
+{
+    Param *param = get_param(func, index);
+    type_free(param->type);
+    param->type = type;
 }
 
 // Vygenerovano AI (konec)
