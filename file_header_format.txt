@@ -1,12 +1,12 @@
 /* 
     IFJ projekt 2026
 
-    Původní autor: xlogin00
-    Seznam změn:
-        - popis úpravy : xlogin00
-        - popis úpravy 2 : xlogin00 za asistence [chatbot jméno]
-        - ...
+    nonterminal.h
 
-    Popis funckionality souboru, co se v něm nachází, atd.
+    Puvodni autor: xbakaka00 za asistence Claude
+    Seznam zmen:
+        - Pridana hlavicka pro funkci nonterm_type_name
+
+    Tento soubor obsahuje vyctovy typ pro neterminaly a deklarace funkci pro praci s nimi.
 
 */
