@@ -7,6 +7,7 @@
     Seznam zmen:
         - Pridana hlavicka pro funkci nonterm_type_name
         - xbalaka00 - pridan NONTERM_ELSE_TERNARY_IF.
+        - xbalaka00 - odstranen NONTERM_OPTIONAL_SEMICOLON (nova gramatika).
 
     Tento soubor obsahuje vyctovy typ pro neterminaly a deklarace funkci pro
     praci s nimi.
@@ -62,7 +63,8 @@
 
 /*
     Prompt pro pridani NONTERM_ELSE_TERNARY_IF je v souboru
-    semantic_actions.c.
+    semantic_actions.c. Prompt pro odstraneni
+    NONTERM_OPTIONAL_SEMICOLON je v souboru production.c.
 */
 
 /**
@@ -85,16 +87,15 @@ typedef enum {
   NONTERM_TYPE,            ///< Datovy typ
 
   // Bloky a prikazy
-  NONTERM_BLOCK_OR_EXPR,      ///< Telo funkce, vyraz nebo blok
-  NONTERM_BLOCK,              ///< Odsazeny blok
-  NONTERM_COMMAND_LIST,       ///< Dalsi prikazy v bloku
-  NONTERM_COMMAND_END,        ///< Konec prikazu, strednik nebo EOL
-  NONTERM_COMMAND,            ///< Prikaz
-  NONTERM_VAL_VAR,            ///< val nebo var
-  NONTERM_ID_COMMAND,         ///< Prikaz zacinajici na ID
-  NONTERM_RETURN_VALUE,       ///< Nepovinna hodnota za return
-  NONTERM_BLOCK_OR_COMMAND,   ///< Telo cyklu nebo podminky
-  NONTERM_OPTIONAL_SEMICOLON, ///< Nepovinny strednik
+  NONTERM_BLOCK_OR_EXPR,    ///< Telo funkce, vyraz nebo blok
+  NONTERM_BLOCK,            ///< Odsazeny blok
+  NONTERM_COMMAND_LIST,     ///< Dalsi prikazy v bloku
+  NONTERM_COMMAND_END,      ///< Konec prikazu, strednik nebo EOL
+  NONTERM_COMMAND,          ///< Prikaz
+  NONTERM_VAL_VAR,          ///< val nebo var
+  NONTERM_ID_COMMAND,       ///< Prikaz zacinajici na ID
+  NONTERM_RETURN_VALUE,     ///< Nepovinna hodnota za return
+  NONTERM_BLOCK_OR_COMMAND, ///< Telo cyklu nebo podminky
 
   // Cyklus for
   NONTERM_FOR_HEADER, ///< Hlavicka for

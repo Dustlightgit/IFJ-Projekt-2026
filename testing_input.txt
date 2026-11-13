@@ -1,4 +1,4 @@
 val hello = *
-val hi: Int = slepice;
+val hi: Int = slepice
 return
-return ; return *;
+return ; return *

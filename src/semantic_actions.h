@@ -10,6 +10,7 @@
         - xbalaka00 - pridany semanticke akce pro pravidla 12, 27 a 34.
         - xbalaka00 - pridany semanticke akce pro vsechna ostatni pravidla
           gramatiky se semantickou akci.
+        - xbalaka00 - odstranena akce pravidla 32 (nyni v jadre parseru).
 
     Tento soubor obsahuje deklarace semantickych akci pravidel LL parseru.
     Akce stavi AST, semanticke kontroly (napr. kompatibilita typu) probihaji
@@ -24,7 +25,9 @@
 
 /*
     Prompt pro semanticke akce je v souboru LL_table.c. Prompt pro doplneni
-    akci vsech pravidel je v souboru semantic_actions.c.
+    akci vsech pravidel je v souboru semantic_actions.c, prompt pro aktualizaci
+    dle nove verze gramatiky a prompt pro upravu komentaru na ceskou
+    terminologii v souboru production.c.
 */
 
 /**
@@ -198,7 +201,7 @@ void semantic_action_declaration_command(SemanticContext *ctx,
                                          void *semantic_pointer, Stack *stack);
 
 /**
- * @brief Semanticka akce pravidla 28 (deklarace value).
+ * @brief Semanticka akce pravidla 28 (deklarace nemodifikovatelne promenne).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
@@ -221,19 +224,6 @@ void semantic_action_val(SemanticContext *ctx, void *semantic_pointer,
  * @param stack Zasobnik parseru.
  */
 void semantic_action_id_command(SemanticContext *ctx, void *semantic_pointer,
-                                Stack *stack);
-
-/**
- * @brief Semanticka akce pravidla 32 (prirazeni).
- *
- * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
- *
- * @param ctx Semanticky kontext.
- * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
- * @param stack Zasobnik parseru.
- */
-void semantic_action_assignment(SemanticContext *ctx, void *semantic_pointer,
                                 Stack *stack);
 
 /**
@@ -276,7 +266,7 @@ void semantic_action_for_command(SemanticContext *ctx, void *semantic_pointer,
                                  Stack *stack);
 
 /**
- * @brief Semanticka akce pravidla 39 (inline for header).
+ * @brief Semanticka akce pravidla 39 (jednoradkova hlavicka for).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
@@ -289,7 +279,7 @@ void semantic_action_for_header_inline(SemanticContext *ctx,
                                        void *semantic_pointer, Stack *stack);
 
 /**
- * @brief Semanticka akce pravidla 40 (blokovy for header).
+ * @brief Semanticka akce pravidla 40 (viceradkova hlavicka for).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
@@ -302,7 +292,7 @@ void semantic_action_for_header_block(SemanticContext *ctx,
                                       void *semantic_pointer, Stack *stack);
 
 /**
- * @brief Semanticka akce pravidla 41 (dalsi guard).
+ * @brief Semanticka akce pravidla 41 (dalsi straz).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
@@ -342,7 +332,7 @@ void semantic_action_optional_else_present(SemanticContext *ctx,
                                            Stack *stack);
 
 /**
- * @brief Semanticka akce pravidla 50 (ternarni if).
+ * @brief Semanticka akce pravidla 50 (ternarni podminka).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
@@ -355,7 +345,7 @@ void semantic_action_ternary_if(SemanticContext *ctx, void *semantic_pointer,
                                 Stack *stack);
 
 /**
- * @brief Semanticka akce pravidla 53 (odsazena else vetev).
+ * @brief Semanticka akce pravidla 53 (odsazena vetev else).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.

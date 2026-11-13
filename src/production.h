@@ -8,6 +8,8 @@
         - xbalaka00 - pridana makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL.
         - xbalaka00 - pridany deklarace statickych produkci z gramatiky
           (definice jsou v production.c).
+        - xbalaka00 - aktualizace deklaraci dle nove verze gramatiky
+          (odstranena pravidla 33, 45 a 46).
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
     prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
@@ -119,7 +121,7 @@ typedef struct {
 /**
  * @brief Staticka produkce, prava strana pravidla ulozena primo ve strukture.
  * 
- * Staticke produkce predavaji semanticky pointer z neterminalu na leve strane pravidla do vsech symbolu produkce.
+ * Staticke produkce predavaji semanticky ukazatel z neterminalu na leve strane pravidla do vsech symbolu produkce.
  */
 typedef struct {
   size_t length; ///< Pocet symbolu
@@ -129,7 +131,8 @@ typedef struct {
 
 /*
     Prompt pro deklarace statickych produkci a jejich definice v production.c
-    je v souboru production.c.
+    je v souboru production.c, stejne jako prompty pro jejich aktualizaci a pro upravu
+    komentaru na ceskou terminologii.
 */
 
 // Staticke produkce gramatiky, definice jsou v production.c. Cisla pravidel
@@ -166,7 +169,7 @@ extern const StaticProduction PRODUCTION_OPTIONAL_TYPE_PRESENT;
 /// Pravidlo 13 (Navratovy typ neni): <optionalType> => epsilon
 extern const StaticProduction PRODUCTION_OPTIONAL_TYPE_ABSENT;
 
-/// Pravidlo 20 (Inline expr misto bloku) (ptr): <blockOrExpr> => <expr> EOL
+/// Pravidlo 20 (Jednoradkovy vyraz misto bloku) (ptr): <blockOrExpr> => <expr> EOL
 extern const StaticProduction PRODUCTION_BLOCK_OR_EXPR_EXPR;
 
 /// Pravidlo 21 (Pouziti bloku) (ptr): <blockOrExpr> => <block>
@@ -178,20 +181,17 @@ extern const StaticProduction PRODUCTION_COMMAND_LIST_NEXT;
 /// Pravidlo 24 (Konec seznamu prikazu): <commandList> => epsilon
 extern const StaticProduction PRODUCTION_COMMAND_LIST_END;
 
-/// Pravidlo 25 (Konec prikazu - strednik): <commandEnd> => ; <optionalEOL>
+/// Pravidlo 25 (Konec prikazu - strednik): <commandEnd> => ;
 extern const StaticProduction PRODUCTION_COMMAND_END_SEMICOLON;
 
 /// Pravidlo 26 (Konec prikazu - EOL): <commandEnd> => EOL
 extern const StaticProduction PRODUCTION_COMMAND_END_EOL;
 
-/// Pravidlo 29 (Deklarace variable): <valVar> => var
+/// Pravidlo 29 (Deklarace modifikovatelne promenne): <valVar> => var
 extern const StaticProduction PRODUCTION_VAR;
 
 /// Pravidlo 30 (Prikaz vyrazu) (ptr): <command> => <exprNoID> <commandEnd>
 extern const StaticProduction PRODUCTION_COMMAND_EXPR;
-
-/// Pravidlo 33 (Vyraz zacinajici ID) (ptr): <IDcommand> => <expr>
-extern const StaticProduction PRODUCTION_ID_COMMAND_EXPR;
 
 /// Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
 extern const StaticProduction PRODUCTION_RETURN_VALUE_EXPR;
@@ -199,31 +199,25 @@ extern const StaticProduction PRODUCTION_RETURN_VALUE_EXPR;
 /// Pravidlo 36 (Prazdny return): <returnValue> => epsilon
 extern const StaticProduction PRODUCTION_RETURN_VALUE_EMPTY;
 
-/// Pravidlo 42 (Konec guardu): <guardList> => epsilon
+/// Pravidlo 42 (Konec strazi): <guardList> => epsilon
 extern const StaticProduction PRODUCTION_GUARD_LIST_END;
 
 /// Pravidlo 43 (Nasleduje blok) (ptr): <blockOrCommand> => <block>
 extern const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_BLOCK;
 
-/// Pravidlo 44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command> <optionalSemicolon> EOL
+/// Pravidlo 44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command>
 extern const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_COMMAND;
 
-/// Pravidlo 45 (Na konci je strednik): <optionalSemicolon> => ;
-extern const StaticProduction PRODUCTION_OPTIONAL_SEMICOLON_PRESENT;
-
-/// Pravidlo 46 (Na konci neni strednik): <optionalSemicolon> => epsilon
-extern const StaticProduction PRODUCTION_OPTIONAL_SEMICOLON_ABSENT;
-
-/// Pravidlo 49 (Vynechane else): <optionalElse> => epsilon
+/// Pravidlo 49 (Vynechana vetev else): <optionalElse> => epsilon
 extern const StaticProduction PRODUCTION_OPTIONAL_ELSE_ABSENT;
 
-/// Pravidlo 51 (Odsazeni vyrazu v ifu) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
+/// Pravidlo 51 (Odsazeni vyrazu v ternarni podmince) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
 extern const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED;
 
-/// Pravidlo 52 (Neodsazeny vyraz v ifu) (ptr): <exprOrIndentExpr> => <expr>
+/// Pravidlo 52 (Neodsazeny vyraz v ternarni podmince) (ptr): <exprOrIndentExpr> => <expr>
 extern const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN;
 
-/// Pravidlo 54 (Nedokoncena else vetev): <elseTernaryIf> => epsilon
+/// Pravidlo 54 (Nedokoncena vetev else): <elseTernaryIf> => epsilon
 extern const StaticProduction PRODUCTION_ELSE_TERNARY_IF_ABSENT;
 
 // Testovaci pravidla mimo gramatiku, v hotovem parseru je <expr> prechod

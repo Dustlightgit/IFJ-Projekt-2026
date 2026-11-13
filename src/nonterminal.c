@@ -6,6 +6,7 @@
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
         - xbalaka00 - pridan nazev pro NONTERM_ELSE_TERNARY_IF.
+        - xbalaka00 - odstranen nazev pro NONTERM_OPTIONAL_SEMICOLON.
 
     Tento soubor obsahuje pomocne funkce pro praci s neterminaly.
 
@@ -81,8 +82,6 @@ const char *nonterm_type_name(NonterminalType type) {
     return "navratova hodnota";
   case NONTERM_BLOCK_OR_COMMAND:
     return "blok nebo prikaz";
-  case NONTERM_OPTIONAL_SEMICOLON:
-    return "nepovinny strednik";
 
   // Cyklus for
   case NONTERM_FOR_HEADER:
