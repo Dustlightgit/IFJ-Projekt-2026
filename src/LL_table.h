@@ -6,9 +6,11 @@
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
         - xbalaka00 - include semantic_actions.h nahrazen semantic_types.h.
+        - xbalaka00 - pridana deklarace funkce ll_table_lookup a poznamka
+          o zname chybe v navrhu gramatiky.
 
     Tento soubor obsahuje deklarace pro LL tabulku, kterou bude vyuzivat
-    prediktivni parser.
+    prediktivni parser, a funkci pro vyhledani pravidla v ni.
 */
 
 #ifndef LL_TABLE_H
@@ -75,9 +77,43 @@ typedef struct {
   };
 } LLTableEntry;
 
+/*
+    Prompty pro funkci ll_table_lookup a poznamku o chybe gramatiky jsou
+    v souboru predictive_parser.c.
+*/
+
+/*
+    Zname chyba navrhu gramatiky (pravidla zatim nejsou opravena):
+    Rizeni konstrukce if s jednoradkovym telem then a pritomnym telem else
+    vyzaduje, aby prikaz uvnitr jednoradkoveho then nebyl terminovan, protoze
+    jeho ukonceni zajisti else. Pravidla ale prikaz v <blockOrCommand> terminuji
+    pomoci <commandEnd>, takze takovy zapis nelze odvodit. Chyba nevznikla
+    pri prevodu gramatiky do kodu, je dana navrhem gramatiky. Gramatika bude
+    prepracovana a pravidla v LL_table.c, production.c a semantic_actions.c
+    nasledne prepsana; do te doby LL tabulka tuto chybu obsahuje.
+*/
+
 /**
  * @brief LL tabulka indexovana neterminalem (radek) a terminalem (sloupec).
  */
 extern const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT];
+
+/**
+ * @brief Vyhleda pravidlo v LL tabulce pro dvojici neterminal a terminal.
+ *
+ * Funkce overi rozsah indexu, vyhleda zaznam a zkontroluje jeho platnost
+ * (znamy typ pravidla, u statickeho pravidla platnou produkci, u semantickeho
+ * nenulovy callback). Vracena pravidla jsou tedy vzdy staticka nebo semanticka.
+ * Volajici musi zajistit, ze terminal je indexem tabulky, tedy mensi nez
+ * TOKEN_LL_TERM_COUNT, jinak jde o interni chybu (ERR_INTERNAL). Pokud pro
+ * dvojici neexistuje pravidlo, ukonci program syntaktickou chybou (ERR_SYNTAX).
+ *
+ * @param nonterm Neterminal (radek tabulky).
+ * @param terminal Typ vstupniho terminalu (sloupec tabulky).
+ * @param line Cislo radku vstupniho tokenu pro chybova hlaseni.
+ * @return Ukazatel na zaznam, ktery neni prazdnym pravidlem a je platny.
+ */
+const LLTableEntry *ll_table_lookup(NonterminalType nonterm, TokenType terminal,
+                                    int line);
 
 #endif // LL_TABLE_H

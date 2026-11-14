@@ -12,9 +12,11 @@
           krome <expr> => * a <expr> => ID.
         - xbalaka00 - TOKEN_STAR jako docasny zastupce sloupce *dalsi,
           odstraneno testovaci pravidlo <expr> => ID.
+        - xbalaka00 - pridana funkce ll_table_lookup.
 
     Tento soubor obsahuje LL tabulku prediktivniho parseru vyplnenou podle
-    tabulky gramatiky (LL_gramatika.xlsx) a makra pro zapis jejich polozek.
+    tabulky gramatiky (LL_gramatika.xlsx), makra pro zapis jejich polozek
+    a funkci pro vyhledani pravidla v tabulce.
     Staticke produkce, na ktere se tabulka odkazuje, jsou v production.c,
     semanticke akce v semantic_actions.c. Sloupec *dalsi a neterminaly v
     odpovednosti jadra parseru (<IDcommand>, <exprNoID>) v tabulce nejsou.
@@ -26,10 +28,17 @@
 
 #include "LL_table.h"
 
+#include <stdio.h>
+
+#include "error.h"
 #include "nonterminal.h"
 #include "production.h"
 #include "semantic_actions.h"
 #include "token.h"
+
+/*
+    Prompty pro funkci ll_table_lookup jsou v souboru predictive_parser.c.
+*/
 
 /*
     Prompt pro presun statickych produkci do production.c a doplneni pravidel
@@ -409,3 +418,53 @@ const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT] = {
             [TOKEN_STAR] = LL_PROD(PRODUCTION_TEST_EXPR_STAR),
         },
 };
+
+const LLTableEntry *ll_table_lookup(NonterminalType nonterm, TokenType terminal,
+                                    int line) {
+
+  // NONTERM_COUNT neni skutecny neterminal
+  if (nonterm >= NONTERM_COUNT)
+    error_exit(ERR_INTERNAL, line,
+               "LL Parser: Spatne pouziti ll_table_lookup(): Neplatny "
+               "neterminal.");
+
+  // Do LL tabulky lze indexovat jen terminaly LL gramatiky
+  if (terminal >= TOKEN_LL_TERM_COUNT)
+    error_exit(ERR_INTERNAL, line,
+               "LL Parser: Spatne pouziti ll_table_lookup(): Terminal neni "
+               "indexem LL tabulky.");
+
+  // Vyhledani pravidla
+  const LLTableEntry *entry = &LL_TABLE[nonterm][terminal];
+
+  if (entry->type == LL_RULE_ERROR) {
+    fprintf(stderr,
+            "LL Parser: Soucasny vstupni terminal: %s\nSoucasny vrchol "
+            "zasobniku: %s\n",
+            token_type_name(terminal), nonterm_type_name(nonterm));
+
+    error_exit(ERR_SYNTAX, line, "LL Parser: Neni mozne zvolit pravidlo.");
+  }
+
+  // Kontrola platnosti zaznamu podle typu pravidla
+  if (entry->type == LL_RULE_STATIC) {
+    if (entry->production == NULL ||
+        entry->production->length > STATIC_PRODUCTION_MAX_LENGTH)
+      error_exit(ERR_INTERNAL, line,
+                 "LL Parser: Neplatna staticka produkce v LL tabulce.");
+  }
+
+  else if (entry->type == LL_RULE_SEMANTIC) {
+    if (entry->callback == NULL)
+      error_exit(ERR_INTERNAL, line,
+                 "LL Parser: Callback v LL tabulce je NULL.");
+  }
+
+  else {
+    // Neznamy typ pravidla
+    error_exit(ERR_INTERNAL, line,
+               "LL Parser: Neznamy typ pravidla v LL tabulce.");
+  }
+
+  return entry;
+}

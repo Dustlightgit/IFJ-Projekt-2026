@@ -7,6 +7,8 @@
     Seznam zmen:
         - xbalaka00 - pridana funkce predictive_parser (jadro parseru)
           za asistence Claude.
+        - xbalaka00 - vyhledani pravidla v LL tabulce vyclenene do funkce
+          ll_table_lookup (LL_table.c), jadro nyni pouziva tuto funkci.
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -178,6 +180,76 @@ void parser_match(ParserContext *ctx, Stack *stack) {
         jsi to ještě přesunout a upravit reference v komentářích apod.? Tento
         prompt nejspíše zahrň také, avšak v seznamech změn stačí jen jeden
         záznam o všech těchto změnách.
+
+    Prompt pro vycleneni vyhledani pravidla v LL tabulce do funkce
+    ll_table_lookup a pro poznamku o chybe v navrhu gramatiky. Stejny prompt
+    zpusobil zmeny take v LL_table.h a LL_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Pravidla jsem commitnul a otestoval jsem program. Bohužel jsem při
+        testování odhalil chybu, která je však dána návrhem gramatiky -
+        nevyvstala ze způsobu, jakým jsi pravidla vygeneroval. Gramatiku tedy
+        bude nutné znovu přepracovat a přegenerovat, ale teď to nenechám vše
+        vykolejit, budeme pokračovat i s chybnými pravidly. Excel ani soubory
+        se statickými produkcemi nebo callbacky tedy nebudeme zatím řešit.
+        Můžeš o této odhalené chybě přidat poznámku do LL_table.h - chyba
+        souvisí se situací, ve které řídící konstrukce if s jednořádkovým tělem
+        then a přítomným tělem else vyžaduje, aby příkaz uvnitř jednořádkového
+        then nebyl terminován (terminování zde zajistí else). Jak ale říkám,
+        prozatím pravidla v kódu necháme být.
+
+        Začneme s úpravami jádra v souboru predictive_parser.c, který jsem
+        přiložil. Využij i všechny ostatní soubory, se kterými jsme doteď
+        pracovali. První věc, kterou bych udělal, je vyčlenění vyhledání v LL
+        tabulce do vlastní metody.
+
+        Pokud to importy dovolí bez problémů s kruhovými vztahy mezi
+        hlavičkami, pak tuto metodu přidej do LL_table.*, jinak ji přidej jako
+        privátní metodu v predictive_parser.*
+        Metoda jen zabalí přístup k LL tabulky do pomocné metody. Zkontroluje se
+        v ní rozsah indexů, provede se indexace tabulky, ověření, že pravidlo
+        není NONE, a dle typu záznamu také, že získaný callback není NULL,
+        případně že statická produkce je validní - stejné kontroly, jaké jsou
+        teď přímo v jádře. V jádře však bude muset jistá kontrola indexů zůstat
+        také, protože vstupní token, kterým nelze indexovat LL tabulku, není
+        automaticky syntax error právě kvůli budoucí implementaci sloupce
+        *další. Uvnitř metody tedy kontrola indexů může vyvolat chybu špatného
+        použití této metody po vzoru parser_match, a v jádře zůstane ošetření
+        rozsahu indexu vstupního terminálu jako jedna z větví rozhodovací
+        struktury na místě, kde aktuálně je, s tím, že prozatím druhá větev
+        způsobí chybu jako dočasné řešení. Později právě na toto místo přijde
+        logika pro *další.
+
+        V souhrnu - indexace tabulky na řádku 218 společně s kontrolami
+        chybových stavů související s pokusem vyhledat pravidlo v LL tabulce na
+        řádcích 213, 220, 242, a 257. Metoda vrátí pointer na příslušný
+        LLTableEntry, o kterém víme, že není prázdné pravidlo a příslušný
+        záznam je validní.
+
+        Tok programu uvnitř větve, kdy je vrcholu neterminál, bude takovýto:
+
+        - vytažení neterminálu ze zásobníku do proměnné stejně jako je teď
+        - podmínka if pro kontrolu, že vstupní terminál je v rozsahu
+          indexování tabulky dle příslušné hodnoty enumu
+           - pokud není, prozatím se v této větvi vyhodí chyba
+           - pokud je, provede se vyhledání novou metodou
+           - získaný záznam se zpracuje tak, jako doposud podle toho, o jaký
+             záznam se jedná.
+
+    Prompt pro presun kontroly neznameho typu pravidla do funkce
+    ll_table_lookup. Stejny prompt zpusobil zmeny take v LL_table.h
+    a LL_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Pěkné. Je pravda, že kontrola neznámého typu pravidla také může přijít
+        do této metody, protože sémanticky vzato také spadá pod akci "vyhledej
+        v LL tabulce a ověř, že nenastala chyba.". Přesuň ji tedy do této
+        metody také, jádro bude zase o kus přehlednější.
+
+        Tato změna bude součástí stejného commitu jako změny po předchozím
+        promptu. Proto změnové záznamy uprav tak, aby změny v předchozím commitu
+        a tomto commitu byly zaverzovany jako jedna změna mezi commity.
+        Deklaruj však normálně i tento prompt.
 */
 
 void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
@@ -201,71 +273,47 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
     ParserStackEntry *top = parser_stack_top(&stack);
 
     if (!top->symbol.is_terminal) {
-      // Neterminal na vrcholu zasobniku
-      NonterminalType nonterm = top->symbol.nonterminal;
+      // Neterminal na vrcholu zasobniku, vytazeni ze zasobniku. Ukazatel top
+      // po odebrani neni platny, proto se dale pouziji jen hodnoty z kopie
+      // odebraneho zaznamu.
+      ParserStackEntry nonterm_entry;
+      parser_stack_pop(&stack, &nonterm_entry);
 
-      // NONTERM_COUNT neni skutecny neterminal
-      if (nonterm >= NONTERM_COUNT)
-        error_exit(ERR_INTERNAL, ctx->current_token.line,
-                   "LL Parser: Na zasobniku je neplatny neterminal.");
+      NonterminalType nonterm = nonterm_entry.symbol.nonterminal;
+      void *semantic_pointer = nonterm_entry.semantic_pointer;
 
       // Do LL tabulky lze indexovat jen terminaly LL gramatiky
-      if (ctx->current_token.type >= TOKEN_LL_TERM_COUNT)
-        error_exit(ERR_INTERNAL, ctx->current_token.line,
-                   "LL Parser: Token na vstupu neni terminal LL tabulky.");
+      if (ctx->current_token.type < TOKEN_LL_TERM_COUNT) {
+        // Vyhledani pravidla, pri neexistenci pravidla ukonci program
+        const LLTableEntry *entry = ll_table_lookup(
+            nonterm, ctx->current_token.type, ctx->current_token.line);
 
-      // Vyhledani pravidla
-      const LLTableEntry *entry = &LL_TABLE[nonterm][ctx->current_token.type];
+        if (entry->type == LL_RULE_STATIC) {
+          // Pravidlo je staticke
+          const StaticProduction *production = entry->production;
 
-      if (entry->type == LL_RULE_ERROR) {
-        fprintf(stderr,
-                "LL Parser: Soucasny vstupni terminal: %s\nSoucasny vrchol "
-                "zasobniku: %s\n",
-                token_type_name(ctx->current_token.type),
-                nonterm_type_name(nonterm));
+          // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
+          // Staticka produkce jednoduse zkopiruje semanticky ukazatel do
+          // vlozenych symbolu
+          for (size_t i = production->length; i > 0; i--)
+            parser_stack_push(&stack, production->production[i - 1],
+                              semantic_pointer, ID_CONTEXT_NONE);
+        }
 
-        error_exit(ERR_SYNTAX, ctx->current_token.line,
-                   "LL Parser: Neni mozne zvolit pravidlo.");
-      }
-
-      // Uchovani semantickeho ukazatele a odstraneni neterminalu. Ukazatel top
-      // po odebrani neni platny, proto se pouzije dale jen docasna promenna.
-      void *semantic_pointer = top->semantic_pointer;
-      parser_stack_pop(&stack, NULL);
-
-      if (entry->type == LL_RULE_STATIC) {
-        // Pravidlo je staticke
-
-        // Ziskame statickou produkci a zkontrolujeme ji
-        const StaticProduction *production = entry->production;
-
-        if (production == NULL ||
-            production->length > STATIC_PRODUCTION_MAX_LENGTH)
-          error_exit(ERR_INTERNAL, ctx->current_token.line,
-                     "LL Parser: Neplatna staticka produkce v LL tabulce.");
-
-        // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
-        // Staticka produkce jednoduse zkopiruje semanticky ukazatel do vlozenych symbolu
-        for (size_t i = production->length; i > 0; i--)
-          parser_stack_push(&stack, production->production[i - 1],
-                            semantic_pointer, ID_CONTEXT_NONE);
-      }
-
-      else if (entry->type == LL_RULE_SEMANTIC) {
-        // Pravidlo je semanticke
-
-        if (entry->callback == NULL)
-          error_exit(ERR_INTERNAL, ctx->current_token.line,
-                     "LL Parser: Callback v LL tabulce je NULL.");
-
-        // Callback si produkci vlozi na zasobnik sam
-        entry->callback(&(ctx->semantic_context), semantic_pointer, &stack);
+        else {
+          // Pravidlo je semanticke (ll_table_lookup zaruci, ze je zaznam
+          // staticky nebo semanticky), callback si produkci vlozi na zasobnik
+          // sam
+          entry->callback(&(ctx->semantic_context), semantic_pointer, &stack);
+        }
       }
 
       else {
-        // Neznamy typ pravidla
+        // Docasne reseni: vstupni token neni terminal LL tabulky. Zde pozdeji
+        // pribude logika pro sloupec *dalsi (tokeny, kterymi muze zacinat
+        // vyraz).
         error_exit(ERR_INTERNAL, ctx->current_token.line,
-                   "LL Parser: Neznamy typ pravidla v LL tabulce.");
+                   "LL Parser: Token na vstupu neni terminal LL tabulky.");
       }
     }
 
