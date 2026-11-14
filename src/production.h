@@ -11,6 +11,8 @@
         - xbalaka00 - aktualizace deklaraci dle nove verze gramatiky
           (odstranena pravidla 33, 45 a 46).
         - xbalaka00 - odstranena deklarace testovaci produkce <expr> => ID.
+        - xbalaka00 - zdokumentovano kopirovani semantickeho ukazatele
+          a kontextove anotace ve statickych produkcich.
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
     prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
@@ -121,8 +123,11 @@ typedef struct {
 
 /**
  * @brief Staticka produkce, prava strana pravidla ulozena primo ve strukture.
- * 
- * Staticke produkce predavaji semanticky ukazatel z neterminalu na leve strane pravidla do vsech symbolu produkce.
+ *
+ * Pri vlozeni staticke produkce na zasobnik parser vzdy zkopiruje semanticky
+ * ukazatel a kontextovou anotaci neterminalu na leve strane pravidla do
+ * vsech symbolu produkce. Staticka pravidla tak sirí tyto informace dal,
+ * aniz by musela byt callbacky.
  */
 typedef struct {
   size_t length; ///< Pocet symbolu
@@ -132,14 +137,17 @@ typedef struct {
 
 /*
     Prompt pro deklarace statickych produkci a jejich definice v production.c
-    je v souboru production.c, stejne jako prompty pro jejich aktualizaci a pro upravu
-    komentaru na ceskou terminologii. Prompt pro odstraneni testovaciho
-    pravidla <expr> => ID je v souboru LL_table.c.
+    je v souboru production.c, stejne jako prompty pro jejich aktualizaci
+    a pro upravu komentaru na ceskou terminologii. Prompt pro odstraneni
+    testovaciho pravidla <expr> => ID je v souboru LL_table.c. Prompt pro
+    kopirovani kontextove anotace ve statickych produkcich je v souboru
+    semantic_types.h.
 */
 
 // Staticke produkce gramatiky, definice jsou v production.c. Cisla pravidel
 // odpovidaji tabulce gramatiky (LL_gramatika.xlsx), (ptr) znaci pravidlo,
-// ktere predava semanticky ukazatel.
+// ktere predava semanticky ukazatel (parser ukazatel i kontextovou anotaci
+// kopiruje u vsech statickych produkci, znacka je jen informativni).
 
 /// Pravidlo 1 (Seznam deklaraci) (ptr): <defList> => <def> <defList>
 extern const StaticProduction PRODUCTION_DEF_LIST_NEXT;

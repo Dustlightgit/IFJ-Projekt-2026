@@ -7,6 +7,8 @@
     Seznam zmen:
         - xbalaka00 - pridani funkce parser_context_init za asistence Claude,
           prompt je v predictive_parser.c.
+        - xbalaka00 - parser_stack_push prijima ContextAnnotation misto
+          IDContextType.
 
     Tento soubor obsahuje funkce pro praci se zasobnikem parseru.
 
@@ -92,16 +94,21 @@ void parser_advance(ParserContext *ctx) {
         sizeof(ParserStackEntry) jako velikost prvku.
 */
 
+/*
+    Prompt pro zobecneni IDContextType na ContextAnnotation je v souboru
+    semantic_types.h.
+*/
+
 void parser_stack_init(Stack *stack) {
   stack_init(stack, sizeof(ParserStackEntry));
 }
 
 void parser_stack_push(Stack *stack, GrammarSymbol symbol,
-                       void *semantic_pointer, IDContextType id_type) {
+                       void *semantic_pointer, ContextAnnotation annotation) {
   ParserStackEntry entry = {
       .symbol = symbol,
       .semantic_pointer = semantic_pointer,
-      .id_type = id_type,
+      .annotation = annotation,
   };
 
   // Zasobnik si zaznam zkopiruje, lokalni entry tedy muze po volani zaniknout

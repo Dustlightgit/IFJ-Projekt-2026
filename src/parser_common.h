@@ -11,6 +11,8 @@
           parser_stack_pop a parser_stack_top.
         - xbalaka00 - pridani funkce parser_context_init za asistence Claude,
           prompt je v predictive_parser.c.
+        - xbalaka00 - ParserStackEntry a parser_stack_push nesou
+          ContextAnnotation misto IDContextType.
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery a funkce pro praci
@@ -73,6 +75,11 @@
         asi až později.
 */
 
+/*
+    Prompt pro zobecneni IDContextType na ContextAnnotation je v souboru
+    semantic_types.h.
+*/
+
 /**
  * @brief Zaznam ulozeny na zasobniku parseru.
  */
@@ -86,7 +93,11 @@ typedef struct {
      */
   void *semantic_pointer;
 
-  IDContextType id_type; ///< Kontext vyskytu tokenu ID ve strome
+  /**
+     * Kontextova anotace symbolu, sdeluje callbacku, jak ma s symbolem
+     * postupovat. Lze ji pripojit k terminalu i k neterminalu.
+     */
+  ContextAnnotation annotation;
 } ParserStackEntry;
 
 /**
@@ -144,11 +155,10 @@ void parser_stack_init(Stack *stack);
  * @param stack Zasobnik parseru.
  * @param symbol Symbol gramatiky.
  * @param semantic_pointer Ukazatel pro stavbu stromu.
- * @param id_type Kontext vyskytu tokenu ID, pro ostatni symboly
- *        ID_CONTEXT_NONE.
+ * @param annotation Kontextova anotace symbolu, bez anotace CONTEXT_NONE.
  */
 void parser_stack_push(Stack *stack, GrammarSymbol symbol,
-                       void *semantic_pointer, IDContextType id_type);
+                       void *semantic_pointer, ContextAnnotation annotation);
 
 /**
  * @brief Odebere zaznam z vrcholu zasobniku parseru.

@@ -9,6 +9,8 @@
           pravidlo 25 a 44, odstranena pravidla 33, 45 a 46, doplnene
           poznamky k pravidlum.
         - xbalaka00 - odstranena testovaci produkce <expr> => ID.
+        - xbalaka00 - zdokumentovano kopirovani semantickeho ukazatele
+          a kontextove anotace ve statickych produkcich.
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
     semanticke akce, a to jak s predanim semantickeho ukazatele (ptr), tak bez
@@ -122,12 +124,16 @@
 
 /*
     Prompt pro odstraneni testovaci produkce <expr> => ID je v souboru
-    LL_table.c.
+    LL_table.c. Prompt pro kopirovani kontextove anotace ve statickych
+    produkcich je v souboru semantic_types.h.
 */
 
 // Symboly jsou v produkcich v prirozenem poradi (zleva doprava), parser je
 // na zasobnik vklada od posledniho. Pravidla oznacena (ptr) predavaji
 // semanticky ukazatel z neterminalu na leve strane do symbolu produkce.
+// Parser pri vkladani staticke produkce vzdy kopiruje semanticky ukazatel
+// i kontextovou anotaci do vsech jejich symbolu, znacka (ptr) je jen
+// informativni.
 
 // Pravidlo 1 (Seznam deklaraci) (ptr): <defList> => <def> <defList>
 const StaticProduction PRODUCTION_DEF_LIST_NEXT = {

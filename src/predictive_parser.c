@@ -9,8 +9,10 @@
           za asistence Claude.
         - xbalaka00 - vyhledani pravidla v LL tabulce vyclenene do funkce
           ll_table_lookup (LL_table.c), jadro nyni pouziva tuto funkci.
-        - xbalaka00 - vlozeni statickeho pravidla na zasobnik vyclenene do
+        - xbalaka00 - vlozeni statickoho pravidla na zasobnik vyclenene do
           funkce parser_push_static_production.
+        - xbalaka00 - jadro predava kontextovou anotaci callbackum
+          a parser_push_static_production ji kopiruje do vlozenych symbolu.
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -270,18 +272,22 @@ void parser_match(ParserContext *ctx, Stack *stack) {
         pravidla" použít i ve větvi pro *další, bude tedy hezčí mít to v metodě
         než všude kopírovat ten samý cyklus. Tato změna bude nový commit, tedy
         udělej změnové záznamy.
+
+    Prompt pro predani kontextove anotace callbackum a kopirovani anotace
+    ve statickych produkcich je v souboru semantic_types.h.
 */
 
 void parser_push_static_production(Stack *stack,
                                    const StaticProduction *production,
-                                   void *semantic_pointer) {
+                                   void *semantic_pointer,
+                                   ContextAnnotation annotation) {
 
   // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
-  // Staticka produkce jednoduse zkopiruje semanticky ukazatel do vlozenych
-  // symbolu
+  // Staticka produkce jednoduse zkopiruje semanticky ukazatel i kontextovou
+  // anotaci do vsech vlozenych symbolu
   for (size_t i = production->length; i > 0; i--)
     parser_stack_push(stack, production->production[i - 1], semantic_pointer,
-                      ID_CONTEXT_NONE);
+                      annotation);
 }
 
 void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
@@ -294,7 +300,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
   // Pocatecni neterminal
   GrammarSymbol start_symbol = GRAMMAR_NONTERMINAL(starting_nonterm);
   parser_stack_push(&stack, start_symbol, starting_semantic_pointer,
-                    ID_CONTEXT_NONE);
+                    CONTEXT_NONE);
 
   while (!stack_is_empty(&stack)) {
 
@@ -313,6 +319,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
       NonterminalType nonterm = nonterm_entry.symbol.nonterminal;
       void *semantic_pointer = nonterm_entry.semantic_pointer;
+      ContextAnnotation annotation = nonterm_entry.annotation;
 
       // Do LL tabulky lze indexovat jen terminaly LL gramatiky
       if (ctx->current_token.type < TOKEN_LL_TERM_COUNT) {
@@ -323,14 +330,15 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
         if (entry->type == LL_RULE_STATIC) {
           // Pravidlo je staticke
           parser_push_static_production(&stack, entry->production,
-                                        semantic_pointer);
+                                        semantic_pointer, annotation);
         }
 
         else {
           // Pravidlo je semanticke (ll_table_lookup zaruci, ze je zaznam
           // staticky nebo semanticky), callback si produkci vlozi na zasobnik
           // sam
-          entry->callback(&(ctx->semantic_context), semantic_pointer, &stack);
+          entry->callback(&(ctx->semantic_context), semantic_pointer,
+                          annotation, &stack);
         }
       }
 

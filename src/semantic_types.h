@@ -5,7 +5,8 @@
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        -
+        - xbalaka00 - IDContextType zobecnen a prejmenovan na ContextAnnotation
+          (hodnoty CONTEXT_*), SemanticCallback prijima kontextovou anotaci.
 
     Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontext
     tokenu ID, semanticky kontext a typ callbacku semanticke akce. Je urcen
@@ -62,21 +63,60 @@
 /*
     Prompty pro IDContextType jsou v parser_common.h, odkud byl tento typ
     presunut.
+    Prompt pro zobecneni IDContextType na ContextAnnotation, predavani
+    anotace callbackum a kopirovani anotace ve statickych produkcich. Stejny
+    prompt zpusobil zmeny take v parser_common.h, parser_common.c,
+    semantic_actions.h, semantic_actions.c, production.h, production.c,
+    predictive_parser.h a predictive_parser.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dobrá, další věc, co bude potřeba upravit, je IDContextType. Původně
+        jsem zamýšlel, že tento enum umožní budoucímu callbacku pro zpracování
+        ID rozhodnout, co má udělat. Nejspíše ale bude potřeba tento enum
+        zobecnit na ContextAnnotation, který není vázaný pouze na ID, avšak
+        bude připojitelný k libovolnému terminálu či neterminálu, aby šlo
+        všeobecně každému callbacku sdělit, jak má postupovat.
+        Proto tento enum přejmenuj na ContextAnnotation, jeho "výchozí"
+        prázdná hodnota bude CONTEXT_NONE. Ostatní hodnoty budou doplněny dle
+        potřeb stavby AST, prozatím můžeš ponechat stávající ilustrativní
+        hodnoty bez prefixu ID_.
+        Kromě tohoto enumu budou potřeba následující úpravy:
+
+        * úprava zásobníkového záznamu parseru a jeho metod tak, aby nesl tento
+          zobecněný enum namísto starého.
+        * každé callbackové pravidlo bude přijímat i argument
+          ContextAnnotation.
+        * uvnitř callbacku bude možné kontextovou anotaci přiložit i k
+          neterminálu vkládanému , ne pouze k terminálu.
+        * vložení statické produkce na zásobník bude kromě sémantického
+          pointeru kopírovat i kontextovou anotaci. Zadokumentuj toto nové
+          pravidlo do komentářů.
+
+        V tomto zobecněném systému každý callback obdrží pointer a kontextovou
+        anotaci ze svého rozvíjeného neterminálu, aby věděl, co má provést a
+        věděl, kam to uložit. Na zásobník bude vkládat symboly své pravé strany
+        spolu s pointery a sémantickou anotací, aby jim sdělila, co mají udělat
+        a kam to uložit. Kopírování pointeru a anotace ve statických pravidlech
+        zajistí šíření těchto informací, aniž by bylo nutné z nich dělat
+        callbacky. Kopírování ve statickém callbacku je vždy do všech prvků
+        produkce.
 */
 
 /**
- * @brief Kontext, ve kterem se token ID vyskytl ve strome.
+ * @brief Kontextova anotace pripojena k symbolu na zasobniku parseru.
  *
- * Podle nej se ID zpracuje specialnim callbackem. Bude doplnen,
- * prozatim nemusi byt uplny.
+ * Anotaci lze pripojit k libovolnemu terminalu i neterminalu. Callback
+ * rozvadeneho neterminalu podle ni pozna, co ma provest a kam vysledek ulozit,
+ * a stejnou cestou anotuje symboly vkladane na zasobnik. Hodnoty budou
+ * doplneny dle potreb stavby AST, prozatim jsou ilustrativni.
  */
 typedef enum {
-  ID_CONTEXT_NONE,                      ///< Symbol neni identifikator
-  ID_CONTEXT_FUNCTION_DECLARATION_NAME, ///< Jmeno deklarovane funkce
-  ID_CONTEXT_DECLARATION_NAME,          ///< Jmeno deklarovane promenne
-  ID_CONTEXT_ASSIGNMENT_TARGET,         ///< Cil prirazeni
-  ID_CONTEXT_EXPRESSION_REFERENCE,      ///< Reference na ID ve vyrazu
-} IDContextType;
+  CONTEXT_NONE,                      ///< Vychozi hodnota, symbol bez anotace
+  CONTEXT_FUNCTION_DECLARATION_NAME, ///< Jmeno deklarovane funkce
+  CONTEXT_DECLARATION_NAME,          ///< Jmeno deklarovane promenne
+  CONTEXT_ASSIGNMENT_TARGET,         ///< Cil prirazeni
+  CONTEXT_EXPRESSION_REFERENCE,      ///< Reference na ID ve vyrazu
+} ContextAnnotation;
 
 /*
     Prompt pro vychozi kostru SemanticContext a SemanticCallback (puvodne
@@ -150,7 +190,12 @@ typedef struct {
 /**
  * @brief Semanticka akce pravidla.
  *
- * Akce se provede pri rozvoji neterminalu timto pravidlem.
+ * Akce se provede pri rozvoji neterminalu timto pravidlem. Callback dostane
+ * ukazatel a kontextovou anotaci rozvadeneho neterminalu, aby vedel, co ma
+ * provest a kam vysledek ulozit. Symboly sve prave strany vklada na zasobnik
+ * spolu s ukazateli a anotacemi, ktere jim sdeluji totez. Staticke produkce
+ * kopiruji ukazatel a anotaci neterminalu na leve strane vzdy do vsech symbolu
+ * produkce, aniz by musely byt callbacky.
  *
  * @param ctx Semanticky kontext sdileny mezi akcemi.
  * @param semantic_pointer Ukazatel ulozeny na zasobniku u neterminalu,
@@ -160,10 +205,12 @@ typedef struct {
  *          semanticka akce nahrazujici dany neterminal.
  *        - Ve vyrazovem parseru je to obvykle ukazatel na prislusny
  *          dokonceny vyrazovy podstrom.
+ * @param annotation Kontextova anotace ulozena na zasobniku u neterminalu,
+ *        ktery je timto pravidlem rozvadeny.
  * @param stack Zasobnik parseru, akce na nej muze pridat produkci
- *        a k ni rovnou atributy (ukazatele, kontext ID apod.).
+ *        a k ni rovnou atributy (ukazatele, kontextove anotace apod.).
  */
 typedef void (*SemanticCallback)(SemanticContext *ctx, void *semantic_pointer,
-                                 Stack *stack);
+                                 ContextAnnotation annotation, Stack *stack);
 
 #endif // SEMANTIC_TYPES_H

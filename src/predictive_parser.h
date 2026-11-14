@@ -10,6 +10,8 @@
           Claude, prompt je v predictive_parser.c.
         - xbalaka00 - pridana deklarace funkce parser_push_static_production
           za asistence Claude, prompt je v predictive_parser.c.
+        - xbalaka00 - parser_push_static_production kopiruje i kontextovou
+          anotaci.
 
     Hlavickovy soubor pro parser zalozeny na LL gramatice a jeho pomocne funkce.
 */
@@ -32,23 +34,26 @@ void parser_match(ParserContext *ctx, Stack *stack);
 
 /*
     Prompt pro funkci parser_push_static_production je v souboru
-    predictive_parser.c.
+    predictive_parser.c. Prompt pro kopirovani kontextove anotace je v souboru
+    semantic_types.h.
 */
 
 /**
  * @brief Vlozi symboly staticke produkce na zasobnik parseru.
  *
  * Symboly se vkladaji od posledniho, aby byl na vrcholu prvni symbol
- * produkce. Semanticky ukazatel se zkopiruje do vsech vlozenych symbolu,
- * jejich kontext ID je ID_CONTEXT_NONE. Pro produkci delky 0 se nic nevlozi.
+ * produkce. Semanticky ukazatel i kontextova anotace se zkopiruji do vsech
+ * vlozenych symbolu, vzdy, bez vyjimky. Pro produkci delky 0 se nic nevlozi.
  *
  * @param stack Zasobnik parseru.
  * @param production Staticka produkce, nesmi byt NULL.
  * @param semantic_pointer Semanticky ukazatel rozvadeneho neterminalu.
+ * @param annotation Kontextova anotace rozvadeneho neterminalu.
  */
 void parser_push_static_production(Stack *stack,
                                    const StaticProduction *production,
-                                   void *semantic_pointer);
+                                   void *semantic_pointer,
+                                   ContextAnnotation annotation);
 
 /**
  * @brief Jadro prediktivniho parseru rizeneho LL tabulkou.
