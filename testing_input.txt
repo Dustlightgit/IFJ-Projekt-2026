@@ -1,4 +1,22 @@
-val hello = *
-val hi: Int = slepice
-return
-return ; return *
+import ifj26.*
+
+def funkce(): Int = *
+
+/* skutecny main nefalsovany */
+@main
+def funkceDva(pepa: Double, petr: List[List[String]]): String =
+   val idx = * ; var idy = *
+   if * then val a = * else
+      return
+   return *
+
+/* tohle je skutecny main */
+@main def fce(hello: Int,
+                            ): Boolean =
+   while * do val value = *
+   for
+      kobliha <- *
+      if *
+      if *
+   do
+    val vinviprnbstrnipbntrobntipbnetib: Int = *; return

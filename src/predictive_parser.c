@@ -217,9 +217,16 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
       // Vyhledani pravidla
       const LLTableEntry *entry = &LL_TABLE[nonterm][ctx->current_token.type];
 
-      if (entry->type == LL_RULE_ERROR)
+      if (entry->type == LL_RULE_ERROR) {
+        fprintf(stderr,
+                "LL Parser: Soucasny vstupni terminal: %s\nSoucasny vrchol "
+                "zasobniku: %s\n",
+                token_type_name(ctx->current_token.type),
+                nonterm_type_name(nonterm));
+
         error_exit(ERR_SYNTAX, ctx->current_token.line,
                    "LL Parser: Neni mozne zvolit pravidlo.");
+      }
 
       // Uchovani semantickeho ukazatele a odstraneni neterminalu. Ukazatel top
       // po odebrani neni platny, proto se pouzije dale jen docasna promenna.

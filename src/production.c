@@ -8,6 +8,7 @@
         - xbalaka00 - aktualizace pravidel dle nove verze gramatiky: zmeneno
           pravidlo 25 a 44, odstranena pravidla 33, 45 a 46, doplnene
           poznamky k pravidlum.
+        - xbalaka00 - odstranena testovaci produkce <expr> => ID.
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
     semanticke akce, a to jak s predanim semantickeho ukazatele (ptr), tak bez
@@ -117,6 +118,11 @@
         bych čistý název. Pro tuto konkrétní spíše kosmetickou změnu není
         potřeba dělat změnový záznam, protože tato změna bude ve stejném
         commitu jako ta předešlá, která již změnové seznamy upravila.
+*/
+
+/*
+    Prompt pro odstraneni testovaci produkce <expr> => ID je v souboru
+    LL_table.c.
 */
 
 // Symboly jsou v produkcich v prirozenem poradi (zleva doprava), parser je
@@ -294,17 +300,11 @@ const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN = {
 // zaklade redukce ohranicene zavorkami.
 const StaticProduction PRODUCTION_ELSE_TERNARY_IF_ABSENT = {.length = 0};
 
-// Testovaci pravidla mimo gramatiku, v hotovem parseru je <expr> prechod
+// Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
 // do vyrazoveho parseru
 
 // Testovaci pravidlo mimo gramatiku: <expr> => *
 const StaticProduction PRODUCTION_TEST_EXPR_STAR = {
     .length = 1,
     .production = {GRAMMAR_TERMINAL(TOKEN_STAR)},
-};
-
-// Testovaci pravidlo mimo gramatiku: <expr> => ID
-const StaticProduction PRODUCTION_TEST_EXPR_ID = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_ID)},
 };

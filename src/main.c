@@ -14,7 +14,7 @@ int main() {
 
   parser_context_init(&parser_ctx);
 
-  predictive_parser(&parser_ctx, NONTERM_COMMAND_LIST, NULL);
+  predictive_parser(&parser_ctx, NONTERM_PROGRAM, NULL);
 
   return 0;
 }

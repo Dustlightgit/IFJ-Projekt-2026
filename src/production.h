@@ -10,6 +10,7 @@
           (definice jsou v production.c).
         - xbalaka00 - aktualizace deklaraci dle nove verze gramatiky
           (odstranena pravidla 33, 45 a 46).
+        - xbalaka00 - odstranena deklarace testovaci produkce <expr> => ID.
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
     prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
@@ -132,7 +133,8 @@ typedef struct {
 /*
     Prompt pro deklarace statickych produkci a jejich definice v production.c
     je v souboru production.c, stejne jako prompty pro jejich aktualizaci a pro upravu
-    komentaru na ceskou terminologii.
+    komentaru na ceskou terminologii. Prompt pro odstraneni testovaciho
+    pravidla <expr> => ID je v souboru LL_table.c.
 */
 
 // Staticke produkce gramatiky, definice jsou v production.c. Cisla pravidel
@@ -220,13 +222,10 @@ extern const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN;
 /// Pravidlo 54 (Nedokoncena vetev else): <elseTernaryIf> => epsilon
 extern const StaticProduction PRODUCTION_ELSE_TERNARY_IF_ABSENT;
 
-// Testovaci pravidla mimo gramatiku, v hotovem parseru je <expr> prechod
+// Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
 // do vyrazoveho parseru
 
 /// Testovaci pravidlo mimo gramatiku: <expr> => *
 extern const StaticProduction PRODUCTION_TEST_EXPR_STAR;
-
-/// Testovaci pravidlo mimo gramatiku: <expr> => ID
-extern const StaticProduction PRODUCTION_TEST_EXPR_ID;
 
 #endif // PRODUCTION_H

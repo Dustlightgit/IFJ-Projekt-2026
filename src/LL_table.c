@@ -7,11 +7,20 @@
     Seznam zmen:
         - xbalaka00 - staticke produkce presunuty do production.c a doplneny
           o staticka pravidla cele gramatiky.
+        - xbalaka00 - LL tabulka vyplnena podle tabulky gramatiky
+          (LL_gramatika.xlsx), odstranena testovaci pravidla a produkce
+          krome <expr> => * a <expr> => ID.
+        - xbalaka00 - TOKEN_STAR jako docasny zastupce sloupce *dalsi,
+          odstraneno testovaci pravidlo <expr> => ID.
 
-    Tento soubor obsahuje LL tabulku prediktivniho parseru a staticke produkce,
-    na ktere se tabulka odkazuje. Prozatim je vyplnena jen testovaci podmnozina
-    gramatiky: prikazy val/var a return, typy Int a Double a zastupny vyraz.
-    Cisla pravidel odpovidaji tabulce gramatiky (LL_gramatika.xlsx).
+    Tento soubor obsahuje LL tabulku prediktivniho parseru vyplnenou podle
+    tabulky gramatiky (LL_gramatika.xlsx) a makra pro zapis jejich polozek.
+    Staticke produkce, na ktere se tabulka odkazuje, jsou v production.c,
+    semanticke akce v semantic_actions.c. Sloupec *dalsi a neterminaly v
+    odpovednosti jadra parseru (<IDcommand>, <exprNoID>) v tabulce nejsou.
+    Pro <expr> je prozatim jen testovaci pravidlo mimo gramatiku (<expr> => *),
+    TOKEN_STAR je docasny zastupce sloupce *dalsi.
+    Cisla pravidel odpovidaji tabulce gramatiky.
 
 */
 
@@ -104,6 +113,49 @@
         změnách.
 */
 
+/*
+    Prompt pro vyplneni LL tabulky z tabulky gramatiky a odstraneni testovacich
+    pravidel. Stejny prompt zpusobil zmeny take v semantic_actions.c
+    a semantic_actions.h, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dobrá, nyní bych přešel na převedení LL tabulky z excelu do kódu.
+        Vyplň/přepiš LL tabulku na základě excelu po vzoru současného vyplnění
+        testovacími pravidly v souboru LL_table.c callbacky a statickými
+        produkcemi ze souborů static_production a využij příslušné makra a
+        pomocné funkce.
+
+        Sloupec s *další a chování neterminálů, které jsou odpovědností jádra
+        prozatím neber v úvahu; pouze vyplň LL tabulku. Smaž metody a statické
+        produkce atp., které byly ponechány pouze pro účely testovací
+        gramatiky. Ponechej však testovací pravidla <expr> -> * a <expr> -> ID
+        a ponech jim také záznamy v LL tabulce; výrazová analýza zatím není
+        napsaná, proto je nutné prozatím testovat bez ní.
+
+    Prompt pro docasneho zastupce sloupce *dalsi a odstraneni pravidla
+    <expr> => ID. Stejny prompt zpusobil zmeny take v production.c
+    a production.h, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Hmm, to se zástupcem *další je pravda. Sloupeček *další bude ve
+        finální verzi řešit jádro, protože to bude prakticky fallback pro
+        vstupní terminály, které nejsou indexátory LL tabulky, ale může jimi
+        začínat výraz - pak bude provedeno příslušné pravidlo ze sloupce dle
+        neterminálu na vrcholu zásobníku, případně chyba, pokud by na vrcholu
+        nebyl jeden z těchto neterminálů. Možná tedy hvězdičku jako zástupce za
+        *další přidej, aby byla prozatím všechna pravidla, která mají na prvním
+        místě produkce <expr> nebo by k tomuto směřovaly, provedena a
+        korektně se dokonvergovalo se k terminálu <expr>, který však prozatím
+        bude pouze přepsán na hvězdičku testovacím pravidlem. Tím pádem také
+        odstraň pravidlo <expr> -> ID; bude to přehlednější, když všude, kde je
+        očekáván výraz, prozatím bude napevno hvězdička pro testovací účely. Až
+        se bude doplňovat funkcionalita výrazového parseru, tak se tento
+        dočasný zástupce za *další a dočasné pravidlo <expr> -> * odstraní a
+        bude zavedeno finální řešení do jádra. Před plným testováním LL
+        gramatiky pak bude stačit doplnit funkcionalitu jádrových pravidel
+        souvisejících s <IDcommand> (to ale počká po dokončení LL tabulky).
+*/
+
 // Zapis polozky tabulky se statickou produkci
 #define LL_PROD(p)                                                             \
   { .type = LL_RULE_STATIC, .production = &(p) }
@@ -112,107 +164,248 @@
 #define LL_CALLBACK(f)                                                         \
   { .type = LL_RULE_SEMANTIC, .callback = (f) }
 
-// Staticke produkce. Pravou stranu pravidla parser vlozi na zasobnik sam.
-
-// Pozn.: pravidla 14, 15 a 28 jsou v gramatice se semantickou akci, jejich
-// produkce zde jsou jen testovaci pozustatek, dokud se LL tabulka neprepise
-// na callbacky. Ostatni staticke produkce jsou v production.c.
-
-// Pravidlo 14: <type> => Int
-static const StaticProduction PRODUCTION_TYPE_INT = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_KW_INT)},
-};
-
-// Pravidlo 15: <type> => Double
-static const StaticProduction PRODUCTION_TYPE_DOUBLE = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_KW_DOUBLE)},
-};
-
-// Pravidlo 28: <valVar> => val
-static const StaticProduction PRODUCTION_VAL = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_KW_VAL)},
-};
-
-// LL tabulka. Polozky bez zaznamu jsou LL_RULE_ERROR (hodnota 0).
+// LL tabulka podle tabulky gramatiky (LL_gramatika.xlsx). Polozky bez zaznamu
+// jsou LL_RULE_ERROR (hodnota 0). Sloupec *dalsi a neterminaly <IDcommand>
+// a <exprNoID> resi jadro parseru, v tabulce proto nejsou. Prozatim je sloupec
+// *dalsi docasne zastoupen terminalem TOKEN_STAR, aby se testovaci pravidlo
+// <expr> => * provedlo vsude, kde je ocekavan vyraz.
 const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT] = {
+    // Pravidlo 0
+    [NONTERM_PROGRAM] =
+        {
+            [TOKEN_KW_IMPORT] = LL_CALLBACK(semantic_action_prolog),
+        },
+
+    // Pravidla 1, 2
+    [NONTERM_DEF_LIST] =
+        {
+            [TOKEN_KW_DEF] = LL_PROD(PRODUCTION_DEF_LIST_NEXT),
+            [TOKEN_ANNOT_MAIN] = LL_PROD(PRODUCTION_DEF_LIST_NEXT),
+            [TOKEN_EOF] = LL_PROD(PRODUCTION_DEF_LIST_END),
+        },
+
+    // Pravidlo 3
+    [NONTERM_DEF] =
+        {
+            [TOKEN_KW_DEF] = LL_CALLBACK(semantic_action_function_definition),
+            [TOKEN_ANNOT_MAIN] =
+                LL_CALLBACK(semantic_action_function_definition),
+        },
+
+    // Pravidla 4, 5
+    [NONTERM_MAIN_ANNOTATION] =
+        {
+            [TOKEN_ANNOT_MAIN] = LL_CALLBACK(semantic_action_main_annotation),
+            [TOKEN_KW_DEF] = LL_PROD(PRODUCTION_MAIN_ABSENT),
+        },
+
     // Pravidla 6, 7
     [NONTERM_OPTIONAL_EOL] =
         {
             [TOKEN_EOL] = LL_PROD(PRODUCTION_OPTIONAL_EOL_PRESENT),
-            // Za EOL nasleduje dalsi prikaz nebo konec seznamu prikazu
-            [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_OPTIONAL_EOL_ABSENT),
-            [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_OPTIONAL_EOL_ABSENT),
-            [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_OPTIONAL_EOL_ABSENT),
-            [TOKEN_DEDENT] = LL_PROD(PRODUCTION_OPTIONAL_EOL_ABSENT),
-            [TOKEN_EOF] = LL_PROD(PRODUCTION_OPTIONAL_EOL_ABSENT),
+            [TOKEN_KW_DEF] = LL_PROD(PRODUCTION_OPTIONAL_EOL_ABSENT),
+        },
+
+    // Pravidla 8, 10
+    [NONTERM_PARAM_LIST] =
+        {
+            [TOKEN_ID] = LL_CALLBACK(semantic_action_param_add),
+            [TOKEN_RPAREN] = LL_PROD(PRODUCTION_PARAM_LIST_END),
+        },
+
+    // Pravidla 9, 11
+    [NONTERM_PARAM_LIST_TAIL] =
+        {
+            [TOKEN_COMMA] = LL_PROD(PRODUCTION_PARAM_LIST_TAIL_NEXT),
+            [TOKEN_RPAREN] = LL_PROD(PRODUCTION_PARAM_LIST_TAIL_END),
         },
 
     // Pravidla 12, 13
     [NONTERM_OPTIONAL_TYPE] =
         {
-            [TOKEN_COLON] = LL_CALLBACK(semantic_action_optional_type_present),
+            [TOKEN_COLON] = LL_PROD(PRODUCTION_OPTIONAL_TYPE_PRESENT),
             [TOKEN_ASSIGN] = LL_PROD(PRODUCTION_OPTIONAL_TYPE_ABSENT),
         },
 
-    // Pravidla 14, 15
+    // Pravidla 14-19
     [NONTERM_TYPE] =
         {
-            [TOKEN_KW_INT] = LL_PROD(PRODUCTION_TYPE_INT),
-            [TOKEN_KW_DOUBLE] = LL_PROD(PRODUCTION_TYPE_DOUBLE),
+            [TOKEN_KW_INT] = LL_CALLBACK(semantic_action_type_int),
+            [TOKEN_KW_DOUBLE] = LL_CALLBACK(semantic_action_type_double),
+            [TOKEN_KW_STRING] = LL_CALLBACK(semantic_action_type_string),
+            [TOKEN_KW_UNIT] = LL_CALLBACK(semantic_action_type_unit),
+            [TOKEN_KW_BOOLEAN] = LL_CALLBACK(semantic_action_type_boolean),
+            [TOKEN_KW_LIST] = LL_CALLBACK(semantic_action_type_list),
+        },
+
+    // Pravidla 20, 21
+    [NONTERM_BLOCK_OR_EXPR] =
+        {
+            [TOKEN_EOL] = LL_PROD(PRODUCTION_BLOCK_OR_EXPR_BLOCK),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_BLOCK_OR_EXPR_EXPR),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_BLOCK_OR_EXPR_EXPR),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_BLOCK_OR_EXPR_EXPR),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_BLOCK_OR_EXPR_EXPR),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_BLOCK_OR_EXPR_EXPR),
+        },
+
+    // Pravidlo 22
+    [NONTERM_BLOCK] =
+        {
+            [TOKEN_EOL] = LL_CALLBACK(semantic_action_block),
         },
 
     // Pravidla 23, 24
     [NONTERM_COMMAND_LIST] =
         {
+            [TOKEN_DEDENT] = LL_PROD(PRODUCTION_COMMAND_LIST_END),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
+            [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
+            [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
+            [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
             [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
             [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
-            [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
-            // Seznam konci DEDENT, v testech samostatny program konci EOF
-            [TOKEN_DEDENT] = LL_PROD(PRODUCTION_COMMAND_LIST_END),
-            [TOKEN_EOF] = LL_PROD(PRODUCTION_COMMAND_LIST_END),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_COMMAND_LIST_NEXT),
         },
 
     // Pravidla 25, 26
     [NONTERM_COMMAND_END] =
         {
-            [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_COMMAND_END_SEMICOLON),
             [TOKEN_EOL] = LL_PROD(PRODUCTION_COMMAND_END_EOL),
+            [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_COMMAND_END_SEMICOLON),
         },
 
-    // Pravidla 27, 34 (zatim jen deklarace a return)
+    // Pravidla 27, 30, 31, 34, 37, 38, 47
     [NONTERM_COMMAND] =
         {
+            [TOKEN_ID] = LL_CALLBACK(semantic_action_id_command),
+            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_if_command),
+            [TOKEN_KW_RETURN] = LL_CALLBACK(semantic_action_return_command),
+            [TOKEN_KW_WHILE] = LL_CALLBACK(semantic_action_while_command),
+            [TOKEN_KW_FOR] = LL_CALLBACK(semantic_action_for_command),
             [TOKEN_KW_VAL] = LL_CALLBACK(semantic_action_declaration_command),
             [TOKEN_KW_VAR] = LL_CALLBACK(semantic_action_declaration_command),
-            [TOKEN_KW_RETURN] = LL_CALLBACK(semantic_action_return_command),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_COMMAND_EXPR),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_COMMAND_EXPR),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_COMMAND_EXPR),
         },
 
     // Pravidla 28, 29
     [NONTERM_VAL_VAR] =
         {
-            [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_VAL),
+            [TOKEN_KW_VAL] = LL_CALLBACK(semantic_action_val),
             [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_VAR),
         },
 
     // Pravidla 35, 36
     [NONTERM_RETURN_VALUE] =
         {
-            // Zacatek vyrazu, v testech jen ID nebo *
-            [TOKEN_ID] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
-            [TOKEN_STAR] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
-            // Za prazdnym returnem nasleduje konec prikazu
-            [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_RETURN_VALUE_EMPTY),
             [TOKEN_EOL] = LL_PROD(PRODUCTION_RETURN_VALUE_EMPTY),
+            [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_RETURN_VALUE_EMPTY),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
         },
 
-    // Testovaci pravidla mimo gramatiku, v hotovem parseru je <expr> prechod
+    // Pravidla 43, 44
+    [NONTERM_BLOCK_OR_COMMAND] =
+        {
+            [TOKEN_EOL] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_BLOCK),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_BLOCK_OR_COMMAND_COMMAND),
+        },
+
+    // Pravidla 39, 40
+    [NONTERM_FOR_HEADER] =
+        {
+            [TOKEN_EOL] = LL_CALLBACK(semantic_action_for_header_block),
+            [TOKEN_ID] = LL_CALLBACK(semantic_action_for_header_inline),
+        },
+
+    // Pravidla 41, 42
+    [NONTERM_GUARD_LIST] =
+        {
+            [TOKEN_DEDENT] = LL_PROD(PRODUCTION_GUARD_LIST_END),
+            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_guard_next),
+        },
+
+    // Pravidla 48, 49
+    [NONTERM_OPTIONAL_ELSE] =
+        {
+            [TOKEN_DEDENT] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            // Pravidlo 48: konflikt s pravidlem 49 (visici else) je vyresen rucne
+            // ve prospech pravidla 48, else patri k nejblizsimu if.
+            [TOKEN_KW_ELSE] =
+                LL_CALLBACK(semantic_action_optional_else_present),
+        },
+
+    // Pravidlo 50
+    [NONTERM_TERNARY_IF] =
+        {
+            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_ternary_if),
+        },
+
+    // Pravidla 51, 52
+    [NONTERM_EXPR_OR_INDENT_EXPR] =
+        {
+            [TOKEN_EOL] = LL_PROD(PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN),
+        },
+
+    // Pravidla 53, 54
+    [NONTERM_ELSE_TERNARY_IF] =
+        {
+            [TOKEN_EOL] = LL_CALLBACK(semantic_action_else_ternary_if_indented),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            [TOKEN_KW_ELSE] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            [TOKEN_KW_THEN] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            [TOKEN_KW_DO] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+            [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
+        },
+
+    // Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
     // do vyrazoveho parseru
     [NONTERM_EXPR] =
         {
             [TOKEN_STAR] = LL_PROD(PRODUCTION_TEST_EXPR_STAR),
-            [TOKEN_ID] = LL_PROD(PRODUCTION_TEST_EXPR_ID),
         },
 };
