@@ -13,6 +13,8 @@
           funkce parser_push_static_production.
         - xbalaka00 - jadro predava kontextovou anotaci callbackum
           a parser_push_static_production ji kopiruje do vlozenych symbolu.
+        - xbalaka00 - vypis potkaneho ID v jadre nahrazen volanim
+          special_action_id (special_actions.h).
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -24,6 +26,7 @@
 
 #include "LL_table.h"
 #include "error.h"
+#include "special_actions.h"
 
 void parser_match(ParserContext *ctx, Stack *stack) {
 
@@ -274,7 +277,8 @@ void parser_match(ParserContext *ctx, Stack *stack) {
         udělej změnové záznamy.
 
     Prompt pro predani kontextove anotace callbackum a kopirovani anotace
-    ve statickych produkcich je v souboru semantic_types.h.
+    ve statickych produkcich je v souboru semantic_types.h. Prompt pro
+    specialni akci pro ID je v souboru special_actions.h.
 */
 
 void parser_push_static_production(Stack *stack,
@@ -354,11 +358,12 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
     else {
       // Terminal na vrcholu zasobniku
 
-      // Prozatim jen vypis ID, pozdeji bude doplneno dalsi zpracovani.
-      // Vypis musi probehnout pred parser_match, ktery token uvolni.
+      // Na vrcholu je ID a na vstupu je ID: specialni akce zpracuje token ID
+      // vcetne atributu. Musi probehnout pred parser_match, ktery token
+      // uvolni. Pri odlisnosti tokenu by parser_match vyvolal chybu.
       if (top->symbol.terminal == TOKEN_ID && parser_check_token(ctx, TOKEN_ID))
-        fprintf(stderr, "LL Parser: Potkan token ID, atribut: %s\n",
-                ctx->current_token.value.text);
+        special_action_id(&(ctx->semantic_context), top->semantic_pointer,
+                          top->annotation, &(ctx->current_token));
 
       // Porovna terminaly a oba odstrani
       parser_match(ctx, &stack);
