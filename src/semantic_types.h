@@ -7,6 +7,7 @@
     Seznam zmen:
         - xbalaka00 - IDContextType zobecnen a prejmenovan na ContextAnnotation
           (hodnoty CONTEXT_*), SemanticCallback prijima kontextovou anotaci.
+        - xbalaka00 - SemanticCallback prijima cislo radku.
 
     Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontext
     tokenu ID, semanticky kontext a typ callbacku semanticke akce. Je urcen
@@ -175,6 +176,20 @@ typedef enum {
         Myslím, že nakonec parser context nakonec nebude potřeba předávat
         callbacku. Bude existovat, ale budou v něm jen data společná pro
         všechny instance parseru.
+
+    Prompt pro predani cisla radku semantickym callbackum. Stejny prompt
+    zpusobil zmeny take v semantic_actions.h, semantic_actions.c
+    a predictive_parser.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Zdá se, že u stavby AST se bude do nodes doplňovat i číslo řádku kvůli
+        chybovým výpisům a obecně by bylo užitečné, kdyby sémantické callbacky
+        měly přístup k číslu řádku. Doplň tedy k sémantickému callbacku
+        argument čísla řádku; můžeš přidat jeho výpis i do trace_rule. V jádře
+        u volání callbacku předávej nejspíše číslo řádku aktuálního vstupního
+        terminálu, protože ten nejspíše bude nejblíž skutečnému umístění
+        konstrukce ve vstupním kódu. Do speciálního callbacku pro ID to nutné
+        není, protože ten má přístup k celému tokenu, kde je i číslo řádku.
 */
 
 /**
@@ -207,10 +222,14 @@ typedef struct {
  *          dokonceny vyrazovy podstrom.
  * @param annotation Kontextova anotace ulozena na zasobniku u neterminalu,
  *        ktery je timto pravidlem rozvadeny.
+ * @param line Cislo radku, obvykle radek aktualniho vstupniho terminalu,
+ *        ktery je nejblize skutecnemu umisteni konstrukce ve vstupu. Slouzi
+ *        napr. pro cislo radku v uzlech AST a pro chybova hlaseni.
  * @param stack Zasobnik parseru, akce na nej muze pridat produkci
  *        a k ni rovnou atributy (ukazatele, kontextove anotace apod.).
  */
 typedef void (*SemanticCallback)(SemanticContext *ctx, void *semantic_pointer,
-                                 ContextAnnotation annotation, Stack *stack);
+                                 ContextAnnotation annotation, int line,
+                                 Stack *stack);
 
 #endif // SEMANTIC_TYPES_H

@@ -15,6 +15,7 @@
           a parser_push_static_production ji kopiruje do vlozenych symbolu.
         - xbalaka00 - vypis potkaneho ID v jadre nahrazen volanim
           special_action_id (special_actions.h).
+        - xbalaka00 - callbackum se predava cislo radku vstupniho terminalu.
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -278,7 +279,8 @@ void parser_match(ParserContext *ctx, Stack *stack) {
 
     Prompt pro predani kontextove anotace callbackum a kopirovani anotace
     ve statickych produkcich je v souboru semantic_types.h. Prompt pro
-    specialni akci pro ID je v souboru special_actions.h.
+    specialni akci pro ID je v souboru special_actions.h. Prompt pro predani
+    cisla radku callbackum je v souboru semantic_types.h.
 */
 
 void parser_push_static_production(Stack *stack,
@@ -342,7 +344,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
           // staticky nebo semanticky), callback si produkci vlozi na zasobnik
           // sam
           entry->callback(&(ctx->semantic_context), semantic_pointer,
-                          annotation, &stack);
+                          annotation, ctx->current_token.line, &stack);
         }
       }
 

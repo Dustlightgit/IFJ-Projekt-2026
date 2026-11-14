@@ -15,6 +15,7 @@
           pravidlo je staticke).
         - xbalaka00 - callbacky prijimaji kontextovou anotaci
           (ContextAnnotation).
+        - xbalaka00 - callbacky prijimaji cislo radku.
 
     Tento soubor obsahuje deklarace semantickych akci pravidel LL parseru.
     Akce stavi AST, semanticke kontroly (napr. kompatibilita typu) probihaji
@@ -32,8 +33,9 @@
     akci vsech pravidel je v souboru semantic_actions.c, prompt pro aktualizaci
     dle nove verze gramatiky a prompt pro upravu komentaru na ceskou
     terminologii v souboru production.c. Prompt pro vyplneni LL tabulky
-    a odstraneni testovacich akci je v souboru LL_table.c. Prompt pro predani
-    kontextove anotace callbackum je v souboru semantic_types.h.
+    a odstraneni testovacich akci je v souboru LL_table.c. Prompty pro predani
+    kontextove anotace a cisla radku callbackum jsou v souboru
+    semantic_types.h.
 */
 
 /**
@@ -45,10 +47,12 @@
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_prolog(SemanticContext *ctx, void *semantic_pointer,
-                            ContextAnnotation annotation, Stack *stack);
+                            ContextAnnotation annotation, int line,
+                            Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 3 (deklarace funkce).
@@ -59,11 +63,12 @@ void semantic_action_prolog(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_function_definition(SemanticContext *ctx,
                                          void *semantic_pointer,
-                                         ContextAnnotation annotation,
+                                         ContextAnnotation annotation, int line,
                                          Stack *stack);
 
 /**
@@ -75,11 +80,12 @@ void semantic_action_function_definition(SemanticContext *ctx,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_main_annotation(SemanticContext *ctx,
                                      void *semantic_pointer,
-                                     ContextAnnotation annotation,
+                                     ContextAnnotation annotation, int line,
                                      Stack *stack);
 
 /**
@@ -91,10 +97,12 @@ void semantic_action_main_annotation(SemanticContext *ctx,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_param_add(SemanticContext *ctx, void *semantic_pointer,
-                               ContextAnnotation annotation, Stack *stack);
+                               ContextAnnotation annotation, int line,
+                               Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 14 (typ integer).
@@ -105,10 +113,12 @@ void semantic_action_param_add(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_type_int(SemanticContext *ctx, void *semantic_pointer,
-                              ContextAnnotation annotation, Stack *stack);
+                              ContextAnnotation annotation, int line,
+                              Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 15 (typ double).
@@ -119,10 +129,12 @@ void semantic_action_type_int(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_type_double(SemanticContext *ctx, void *semantic_pointer,
-                                 ContextAnnotation annotation, Stack *stack);
+                                 ContextAnnotation annotation, int line,
+                                 Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 16 (typ string).
@@ -133,10 +145,12 @@ void semantic_action_type_double(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_type_string(SemanticContext *ctx, void *semantic_pointer,
-                                 ContextAnnotation annotation, Stack *stack);
+                                 ContextAnnotation annotation, int line,
+                                 Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 17 (typ unit).
@@ -147,10 +161,12 @@ void semantic_action_type_string(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_type_unit(SemanticContext *ctx, void *semantic_pointer,
-                               ContextAnnotation annotation, Stack *stack);
+                               ContextAnnotation annotation, int line,
+                               Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 18 (typ boolean).
@@ -161,10 +177,12 @@ void semantic_action_type_unit(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_type_boolean(SemanticContext *ctx, void *semantic_pointer,
-                                  ContextAnnotation annotation, Stack *stack);
+                                  ContextAnnotation annotation, int line,
+                                  Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 19 (typ list).
@@ -175,10 +193,12 @@ void semantic_action_type_boolean(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_type_list(SemanticContext *ctx, void *semantic_pointer,
-                               ContextAnnotation annotation, Stack *stack);
+                               ContextAnnotation annotation, int line,
+                               Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 22 (blok a prvni prikaz).
@@ -189,10 +209,12 @@ void semantic_action_type_list(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_block(SemanticContext *ctx, void *semantic_pointer,
-                           ContextAnnotation annotation, Stack *stack);
+                           ContextAnnotation annotation, int line,
+                           Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 27 (prikaz deklarace).
@@ -203,11 +225,12 @@ void semantic_action_block(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_declaration_command(SemanticContext *ctx,
                                          void *semantic_pointer,
-                                         ContextAnnotation annotation,
+                                         ContextAnnotation annotation, int line,
                                          Stack *stack);
 
 /**
@@ -219,10 +242,11 @@ void semantic_action_declaration_command(SemanticContext *ctx,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_val(SemanticContext *ctx, void *semantic_pointer,
-                         ContextAnnotation annotation, Stack *stack);
+                         ContextAnnotation annotation, int line, Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 31 (prikaz zacinajici id).
@@ -233,10 +257,12 @@ void semantic_action_val(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_id_command(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, Stack *stack);
+                                ContextAnnotation annotation, int line,
+                                Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 34 (prikaz return).
@@ -247,11 +273,13 @@ void semantic_action_id_command(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_return_command(SemanticContext *ctx,
                                     void *semantic_pointer,
-                                    ContextAnnotation annotation, Stack *stack);
+                                    ContextAnnotation annotation, int line,
+                                    Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 37 (cyklus while).
@@ -262,10 +290,12 @@ void semantic_action_return_command(SemanticContext *ctx,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_while_command(SemanticContext *ctx, void *semantic_pointer,
-                                   ContextAnnotation annotation, Stack *stack);
+                                   ContextAnnotation annotation, int line,
+                                   Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 38 (cyklus for).
@@ -276,10 +306,12 @@ void semantic_action_while_command(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_for_command(SemanticContext *ctx, void *semantic_pointer,
-                                 ContextAnnotation annotation, Stack *stack);
+                                 ContextAnnotation annotation, int line,
+                                 Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 39 (jednoradkova hlavicka for).
@@ -290,11 +322,12 @@ void semantic_action_for_command(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_for_header_inline(SemanticContext *ctx,
                                        void *semantic_pointer,
-                                       ContextAnnotation annotation,
+                                       ContextAnnotation annotation, int line,
                                        Stack *stack);
 
 /**
@@ -306,11 +339,12 @@ void semantic_action_for_header_inline(SemanticContext *ctx,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_for_header_block(SemanticContext *ctx,
                                       void *semantic_pointer,
-                                      ContextAnnotation annotation,
+                                      ContextAnnotation annotation, int line,
                                       Stack *stack);
 
 /**
@@ -322,10 +356,12 @@ void semantic_action_for_header_block(SemanticContext *ctx,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_guard_next(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, Stack *stack);
+                                ContextAnnotation annotation, int line,
+                                Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 47 (podminka).
@@ -336,10 +372,12 @@ void semantic_action_guard_next(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_if_command(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, Stack *stack);
+                                ContextAnnotation annotation, int line,
+                                Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 48 (nepovinna cast else).
@@ -350,12 +388,13 @@ void semantic_action_if_command(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_optional_else_present(SemanticContext *ctx,
                                            void *semantic_pointer,
                                            ContextAnnotation annotation,
-                                           Stack *stack);
+                                           int line, Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 50 (ternarni podminka).
@@ -366,10 +405,12 @@ void semantic_action_optional_else_present(SemanticContext *ctx,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_ternary_if(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, Stack *stack);
+                                ContextAnnotation annotation, int line,
+                                Stack *stack);
 
 /**
  * @brief Semanticka akce pravidla 53 (odsazena vetev else).
@@ -380,11 +421,12 @@ void semantic_action_ternary_if(SemanticContext *ctx, void *semantic_pointer,
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
 void semantic_action_else_ternary_if_indented(SemanticContext *ctx,
                                               void *semantic_pointer,
                                               ContextAnnotation annotation,
-                                              Stack *stack);
+                                              int line, Stack *stack);
 
 #endif // SEMANTIC_ACTIONS_H
