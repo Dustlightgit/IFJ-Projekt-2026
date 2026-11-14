@@ -16,6 +16,8 @@
         - xbalaka00 - callbacky prijimaji kontextovou anotaci
           (ContextAnnotation).
         - xbalaka00 - callbacky prijimaji cislo radku.
+        - xbalaka00 - akce pravidla 31 anotuje ID a predava ukazatel
+          neterminalu <IDcommand>.
 
     Tento soubor obsahuje deklarace semantickych akci pravidel LL parseru.
     Akce stavi AST, semanticke kontroly (napr. kompatibilita typu) probihaji
@@ -35,7 +37,8 @@
     terminologii v souboru production.c. Prompt pro vyplneni LL tabulky
     a odstraneni testovacich akci je v souboru LL_table.c. Prompty pro predani
     kontextove anotace a cisla radku callbackum jsou v souboru
-    semantic_types.h.
+    semantic_types.h. Prompt pro chovani jadra pro <IDcommand>, anotaci CONTEXT_ID_COMMAND
+    a specialni akci pro ID je v souboru predictive_parser.c.
 */
 
 /**
@@ -252,7 +255,9 @@ void semantic_action_val(SemanticContext *ctx, void *semantic_pointer,
  * @brief Semanticka akce pravidla 31 (prikaz zacinajici id).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Terminalu ID priradi anotaci CONTEXT_ID_COMMAND, aby ho zpracovala
+ * special_action_id, a neterminalu <IDcommand> preda svuj semanticky ukazatel
+ * (kam ulozit prirazeni nebo vyraz). Dalsi atributy stavba stromu nepridava.
  *
  * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.

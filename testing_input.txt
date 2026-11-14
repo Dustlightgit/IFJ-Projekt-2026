@@ -10,6 +10,8 @@ def funkceDva(pepa: Double, petr: List[List[String]]): String =
    //   return
    return *
    *
+   knedle *
+   knedle = *
 
 /* tohle je skutecny main */
 @main def fce(hello: Int,

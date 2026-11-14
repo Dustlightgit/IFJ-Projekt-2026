@@ -8,16 +8,20 @@
         - xbalaka00 - IDContextType zobecnen a prejmenovan na ContextAnnotation
           (hodnoty CONTEXT_*), SemanticCallback prijima kontextovou anotaci.
         - xbalaka00 - SemanticCallback prijima cislo radku.
+        - xbalaka00 - pridana anotace CONTEXT_ID_COMMAND a polozka id_expr
+          v SemanticContext.
 
     Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontext
     tokenu ID, semanticky kontext a typ callbacku semanticke akce. Je urcen
     k zahrnuti z parser_common.h, semantic_actions.h i LL_table.h bez vzniku
-    cyklickych zavislosti, proto nezahrnuje nic krome stack.h.
+    cyklickych zavislosti, proto nezahrnuje nic krome stack.h a ast.h (ten nezavisi na dalsich
+    hlavickach projektu).
 */
 
 #ifndef SEMANTIC_TYPES_H
 #define SEMANTIC_TYPES_H
 
+#include "ast.h"
 #include "stack.h"
 
 /*
@@ -103,6 +107,11 @@
         produkce.
 */
 
+/*
+    Prompt pro chovani jadra pro <IDcommand>, anotaci CONTEXT_ID_COMMAND
+    a specialni akci pro ID je v souboru predictive_parser.c.
+*/
+
 /**
  * @brief Kontextova anotace pripojena k symbolu na zasobniku parseru.
  *
@@ -117,6 +126,7 @@ typedef enum {
   CONTEXT_DECLARATION_NAME,          ///< Jmeno deklarovane promenne
   CONTEXT_ASSIGNMENT_TARGET,         ///< Cil prirazeni
   CONTEXT_EXPRESSION_REFERENCE,      ///< Reference na ID ve vyrazu
+  CONTEXT_ID_COMMAND, ///< ID na zacatku prikazu, special_action_id vytvori uzel
 } ContextAnnotation;
 
 /*
@@ -200,6 +210,10 @@ typedef enum {
  */
 typedef struct {
   int temp; ///< Prozatim bez vyznamu
+  /// AST uzel ID na zacatku prikazu (vytvari ho special_action_id pri
+  /// anotaci CONTEXT_ID_COMMAND, zpracuje a uvolni jadro parseru). NULL, pokud
+  /// zadny takovy uzel prave neexistuje.
+  Expr *id_expr;
 } SemanticContext;
 
 /**

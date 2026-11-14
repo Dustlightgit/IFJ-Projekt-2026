@@ -16,6 +16,8 @@
         - xbalaka00 - callbacky prijimaji ContextAnnotation, push_terminal
           a push_nonterminal predavaji kontextovou anotaci.
         - xbalaka00 - callbacky prijimaji cislo radku, trace_rule ho vypisuje.
+        - xbalaka00 - akce pravidla 31 anotuje ID a predava ukazatel
+          neterminalu <IDcommand>.
 
     Tento soubor obsahuje semanticke akce pravidel LL parseru. Akce zatim
     pouze vypisuji cislo pravidla na stderr a vkladaji pravou stranu pravidla
@@ -69,7 +71,8 @@
     ceskou terminologii jsou v souboru production.c. Prompt pro vyplneni LL
     tabulky a odstraneni testovacich akci je v souboru LL_table.c. Prompty pro
     predani kontextove anotace a cisla radku callbackum jsou v souboru
-    semantic_types.h.
+    semantic_types.h. Prompt pro chovani jadra pro <IDcommand>, anotaci CONTEXT_ID_COMMAND
+    a specialni akci pro ID je v souboru predictive_parser.c.
 
     Prompt pro vraceni wrapperu push_terminal a push_nonterminal.
 
@@ -311,13 +314,15 @@ void semantic_action_id_command(SemanticContext *ctx, void *semantic_pointer,
                                 ContextAnnotation annotation, int line,
                                 Stack *stack) {
   (void)ctx;
-  (void)semantic_pointer;
   (void)annotation;
   trace_rule(31, line);
 
   push_nonterminal(stack, NONTERM_COMMAND_END, NULL, CONTEXT_NONE);
-  push_nonterminal(stack, NONTERM_ID_COMMAND, NULL, CONTEXT_NONE);
-  push_terminal(stack, TOKEN_ID, NULL, CONTEXT_NONE);
+  // <IDcommand> dostane ukazatel (kam ulozit prirazeni nebo vyraz), jadro
+  // parseru ho zpracuje pravidly 32 a 33
+  push_nonterminal(stack, NONTERM_ID_COMMAND, semantic_pointer, CONTEXT_NONE);
+  // ID zpracuje special_action_id, ktera vytvori AST uzel pro ID
+  push_terminal(stack, TOKEN_ID, NULL, CONTEXT_ID_COMMAND);
 }
 
 // Pravidlo 34 (Prikaz return): <command> => return <returnValue> <commandEnd>

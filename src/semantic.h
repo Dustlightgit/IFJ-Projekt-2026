@@ -7,7 +7,6 @@
 #include "ast.h"
 #include "symtable.h"
 
-
 // Projde cely program, zkontroluje ho a doplni typy a symboly do AST
 SymTable *semantic_analyze(Program *program);
 

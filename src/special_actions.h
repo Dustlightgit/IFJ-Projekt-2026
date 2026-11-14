@@ -5,7 +5,8 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - special_action_id vytvari AST uzel pro ID pri anotaci
+          CONTEXT_ID_COMMAND.
 
     Tento soubor obsahuje deklarace specialnich akci parseru, tedy callbacku,
     ktere nejsou vazane na pravidlo LL tabulky a maji vlastni rozhrani
@@ -20,6 +21,9 @@
 #include "token.h"
 
 /*
+    Prompt pro chovani akce pro CONTEXT_ID_COMMAND je v souboru
+    predictive_parser.c.
+
     Prompt pro specialni akci pro ID a vznik tohoto souboru. Stejny prompt
     zpusobil zmeny take v special_actions.c a predictive_parser.c, jeho zneni
     je pouze zde.
@@ -59,9 +63,12 @@
  * anotace pripojit nazev ID k uzlu urcenemu ukazatelem (napr. nazev funkce
  * nebo citace cyklu for), pripadne vytvorit uzel AST pro ID.
  *
- * Zatim jen vypise informaci o potkanem ID na stderr.
+ * Vzdy vypise informaci o potkanem ID na stderr. Podle anotace pak:
+ * - CONTEXT_ID_COMMAND: vytvori AST uzel pro ID (Expr typu EXPR_VARIABLE)
+ *   a ulozi ukazatel na nej do ctx->id_expr, odkud ho vezme jadro parseru.
+ * - ostatni anotace: zatim nic dalsiho (pozdeji nejspis interni chyba).
  *
- * @param ctx Semanticky kontext.
+ * @param ctx Semanticky kontext, do nej se uklada vytvoreny AST uzel.
  * @param semantic_pointer Ukazatel ulozeny u symbolu ID na zasobniku.
  * @param annotation Kontextova anotace ulozena u symbolu ID na zasobniku.
  * @param token Vstupni token ID ze scanneru. Token po skonceni akce uvolni
