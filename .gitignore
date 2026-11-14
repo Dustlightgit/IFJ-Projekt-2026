@@ -1,6 +1,7 @@
 __pycache__
 *build
 *output.txt
+*ifjcode.txt
 output
 .vscode
 .vscode/settings.json

@@ -1,11 +1,16 @@
-
 import sys
 import subprocess
 from pathlib import Path
 
+# Format polozky: ["COMPONENT", "test1", "test2", ...]
+INTERPRET_TESTS = [
+    ["generator", "example_program"],
+]
+
 
 def run_tests():
     scripts_dir = Path(__file__).parent.resolve()
+    interpret_bin = scripts_dir.parent / "interpret" / "ic26int-linux-x86_64"
 
     selected_component = None
     selected_test = None
@@ -86,11 +91,34 @@ def run_tests():
                 )
                 continue
 
+            use_interpret = False
+            for entry in INTERPRET_TESTS:
+                if (
+                    entry
+                    and entry[0] == component_name
+                    and test_dir.name in entry[1:]
+                ):
+                    use_interpret = True
+                    break
+
             try:
                 with open(input_file, "r", encoding="utf-8") as infile:
                     result = subprocess.run(
                         [str(runner_bin)],
                         stdin=infile,
+                        capture_output=True,
+                        text=True,
+                        check=False
+                    )
+
+                if result.returncode == 0 and use_interpret:
+                    ifjcode_file = test_dir / "ifjcode.txt"
+                    ifjcode_file.write_text(
+                        result.stdout,
+                        encoding="utf-8"
+                    )
+                    result = subprocess.run(
+                        [str(interpret_bin), str(ifjcode_file)],
                         capture_output=True,
                         text=True,
                         check=False
@@ -104,7 +132,7 @@ def run_tests():
                 if result.returncode != 0:
                     print(f"[FAIL] {test_dir.name}")
                     print(
-                        f"  - Runner skoncil s kodem "
+                        f"  - Proces skoncil s kodem "
                         f"{result.returncode}"
                     )
 
