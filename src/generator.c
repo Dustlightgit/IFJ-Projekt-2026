@@ -570,12 +570,15 @@ void gen_entry(Gen *g, const FuncDef *main_func) {
     gen_function_label(label, sizeof label, main_func->name);
 
     gen_emit(g, ".IFJcode26");
+    gen_emit(g, "");
     gen_emit(g, "DEFVAR %s", DISCARD_VAR);
     gen_emit(g, "CALL %s", label);
     gen_emit(g, "POPS %s", DISCARD_VAR);
     gen_emit(g, "EXIT int@0");
+    gen_emit(g, "");
     gen_emit(g, "LABEL %s", ERROR_LABEL);
     gen_emit(g, "EXIT int@40");
+    gen_emit(g, "");
 }
 
 void gen_return_sequence(Gen *g) {
@@ -640,7 +643,7 @@ void gen_function(Gen *g, const FuncDef *func) {
     g->cur = g->out;
 
     gen_function_label(label, sizeof label, func->name);
-    gen_emit(g, "LABEL %s", label);
+    gen_emit(g, "\nLABEL %s", label);
     gen_emit(g, "CREATEFRAME");
     gen_emit(g, "PUSHFRAME");
     flush_declarations(g);
@@ -694,7 +697,7 @@ void gen_emit_used_runtime(Gen *g) {
         if (g->used[i]) {
             char label[NAME_BUF];
             gen_function_label(label, sizeof label, RUNTIME[i].name);
-            gen_emit(g, "LABEL %s", label);
+            gen_emit(g, "\nLABEL %s", label);
             fputs(RUNTIME[i].body, g->cur);
         }
     }
