@@ -7,6 +7,7 @@
     Seznam zmen:
         - xbalaka00 - pridan nazev pro NONTERM_ELSE_TERNARY_IF.
         - xbalaka00 - odstranen nazev pro NONTERM_OPTIONAL_SEMICOLON.
+        - xbalaka00 - odstranen nazev pro NONTERM_EXPR_NO_ID.
 
     Tento soubor obsahuje pomocne funkce pro praci s neterminaly.
 
@@ -15,6 +16,8 @@
 #include "nonterminal.h"
 
 /*
+    Prompt pro odstraneni NONTERM_EXPR_NO_ID je v souboru nonterminal.h.
+
     Prompt pro Claude:
         Teď prosím po vzoru následujícího úryvku k tokenům vygeneruj funkci,
         která každému neterminálu přidá lidsky čitelný název. U tokenů byl
@@ -99,11 +102,9 @@ const char *nonterm_type_name(NonterminalType type) {
   case NONTERM_ELSE_TERNARY_IF:
     return "else vetev ternarniho ifu";
 
-  // Pseudoneterminaly
+  // Pseudoneterminal
   case NONTERM_EXPR:
     return "vyraz";
-  case NONTERM_EXPR_NO_ID:
-    return "vyraz nezacinajici identifikatorem";
 
   // Neni skutecny neterminal
   case NONTERM_COUNT:

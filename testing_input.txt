@@ -6,9 +6,10 @@ def funkce(): Int = *
 @main
 def funkceDva(pepa: Double, petr: List[List[String]]): String =
    val idx = * ; var idy = *
-   if * then val a = * else
-      return
+   //if * then val a = * else
+   //   return
    return *
+   *
 
 /* tohle je skutecny main */
 @main def fce(hello: Int,

@@ -13,13 +13,14 @@
         - xbalaka00 - TOKEN_STAR jako docasny zastupce sloupce *dalsi,
           odstraneno testovaci pravidlo <expr> => ID.
         - xbalaka00 - pridana funkce ll_table_lookup.
+        - xbalaka00 - poznamky o <exprNoID> upraveny (neterminal byl odstranen).
 
     Tento soubor obsahuje LL tabulku prediktivniho parseru vyplnenou podle
     tabulky gramatiky (LL_gramatika.xlsx), makra pro zapis jejich polozek
     a funkci pro vyhledani pravidla v tabulce.
     Staticke produkce, na ktere se tabulka odkazuje, jsou v production.c,
-    semanticke akce v semantic_actions.c. Sloupec *dalsi a neterminaly v
-    odpovednosti jadra parseru (<IDcommand>, <exprNoID>) v tabulce nejsou.
+    semanticke akce v semantic_actions.c. Sloupec *dalsi a neterminal v
+    odpovednosti jadra parseru (<IDcommand>) v tabulce nejsou.
     Pro <expr> je prozatim jen testovaci pravidlo mimo gramatiku (<expr> => *),
     TOKEN_STAR je docasny zastupce sloupce *dalsi.
     Cisla pravidel odpovidaji tabulce gramatiky.
@@ -174,8 +175,9 @@
   { .type = LL_RULE_SEMANTIC, .callback = (f) }
 
 // LL tabulka podle tabulky gramatiky (LL_gramatika.xlsx). Polozky bez zaznamu
-// jsou LL_RULE_ERROR (hodnota 0). Sloupec *dalsi a neterminaly <IDcommand>
-// a <exprNoID> resi jadro parseru, v tabulce proto nejsou. Prozatim je sloupec
+// jsou LL_RULE_ERROR (hodnota 0). Sloupec *dalsi a neterminal <IDcommand>
+// resi jadro parseru, v tabulce proto nejsou. Neterminal <exprNoID> z tabulky
+// gramatiky v implementaci neexistuje, nahrazuje ho <expr>. Prozatim je sloupec
 // *dalsi docasne zastoupen terminalem TOKEN_STAR, aby se testovaci pravidlo
 // <expr> => * provedlo vsude, kde je ocekavan vyraz.
 const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT] = {

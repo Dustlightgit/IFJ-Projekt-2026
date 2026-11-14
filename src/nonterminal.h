@@ -8,6 +8,8 @@
         - Pridana hlavicka pro funkci nonterm_type_name
         - xbalaka00 - pridan NONTERM_ELSE_TERNARY_IF.
         - xbalaka00 - odstranen NONTERM_OPTIONAL_SEMICOLON (nova gramatika).
+        - xbalaka00 - odstranen NONTERM_EXPR_NO_ID (chova se stejne jako
+          NONTERM_EXPR).
 
     Tento soubor obsahuje vyctovy typ pro neterminaly a deklarace funkci pro
     praci s nimi.
@@ -65,6 +67,22 @@
     Prompt pro pridani NONTERM_ELSE_TERNARY_IF je v souboru
     semantic_actions.c. Prompt pro odstraneni
     NONTERM_OPTIONAL_SEMICOLON je v souboru production.c.
+    Prompt pro odstraneni NONTERM_EXPR_NO_ID. Stejny prompt zpusobil zmeny
+    take v nonterminal.c, production.c, production.h a LL_table.c, jeho zneni
+    je pouze zde.
+
+    Prompt pro Claude:
+        Nová gramatika sice ještě není hotová, ale už teď můžeme poupravit
+        jednu drobnost - myslím, že neterminál NONTERM_EXPR_NO_ID nejspíše
+        nebude v implementaci existovat. V excelu byl odlišen pouze kvůli
+        výpočtům množin a LL tabulky. Čistě formálně a matematicky tedy sice
+        možná existuje, ale má naprosto totožné chování jako NONTERM_EXPR v
+        tom smyslu, že také způsobí přechod do výrazové analýzy. Proto jej v
+        kódu nebudeme odlišovat.
+
+        Smaž tedy NONTERM_EXPR_NO_ID z nonterminal.* a v pravidlech každý jeho
+        výskyt nahraď NONTERM_EXPR; myslím, že se jedná pouze o statické
+        pravidlo 30.
 */
 
 /**
@@ -107,11 +125,8 @@ typedef enum {
   NONTERM_EXPR_OR_INDENT_EXPR, ///< Vyraz, pripadne odsazeny
   NONTERM_ELSE_TERNARY_IF,     ///< Else vetev ternarniho ifu, pripadne odsazena
 
-  // Pseudoneterminaly, predani do vyrazove analyzy
-  NONTERM_EXPR,       ///< Vyraz
-  NONTERM_EXPR_NO_ID, ///< Vyraz nezacinajici na ID
-  // Pozn. - tento neterminal pravdepodobne nebude implementacne potreba,
-  // prozatim jej ponechavam.
+  // Pseudoneterminal, predani do vyrazove analyzy
+  NONTERM_EXPR, ///< Vyraz
 
   NONTERM_COUNT ///< Pocet neterminalu, napr. pro velikost LL tabulky
 } NonterminalType;

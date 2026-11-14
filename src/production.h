@@ -13,6 +13,8 @@
         - xbalaka00 - odstranena deklarace testovaci produkce <expr> => ID.
         - xbalaka00 - zdokumentovano kopirovani semantickeho ukazatele
           a kontextove anotace ve statickych produkcich.
+        - xbalaka00 - poznamka k pravidlu 30 (NONTERM_EXPR_NO_ID byl
+          odstranen, nahrazuje ho NONTERM_EXPR).
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
     prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
@@ -141,7 +143,8 @@ typedef struct {
     a pro upravu komentaru na ceskou terminologii. Prompt pro odstraneni
     testovaciho pravidla <expr> => ID je v souboru LL_table.c. Prompt pro
     kopirovani kontextove anotace ve statickych produkcich je v souboru
-    semantic_types.h.
+    semantic_types.h. Prompt pro odstraneni NONTERM_EXPR_NO_ID je v souboru
+    nonterminal.h.
 */
 
 // Staticke produkce gramatiky, definice jsou v production.c. Cisla pravidel
@@ -201,6 +204,7 @@ extern const StaticProduction PRODUCTION_COMMAND_END_EOL;
 extern const StaticProduction PRODUCTION_VAR;
 
 /// Pravidlo 30 (Prikaz vyrazu) (ptr): <command> => <exprNoID> <commandEnd>
+/// Pozn.: <exprNoID> z tabulky gramatiky je v implementaci nahrazen <expr>.
 extern const StaticProduction PRODUCTION_COMMAND_EXPR;
 
 /// Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>

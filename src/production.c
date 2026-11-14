@@ -11,6 +11,8 @@
         - xbalaka00 - odstranena testovaci produkce <expr> => ID.
         - xbalaka00 - zdokumentovano kopirovani semantickeho ukazatele
           a kontextove anotace ve statickych produkcich.
+        - xbalaka00 - pravidlo 30 pouziva NONTERM_EXPR misto odstraneneho
+          NONTERM_EXPR_NO_ID.
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
     semanticke akce, a to jak s predanim semantickeho ukazatele (ptr), tak bez
@@ -125,7 +127,8 @@
 /*
     Prompt pro odstraneni testovaci produkce <expr> => ID je v souboru
     LL_table.c. Prompt pro kopirovani kontextove anotace ve statickych
-    produkcich je v souboru semantic_types.h.
+    produkcich je v souboru semantic_types.h. Prompt pro odstraneni
+    NONTERM_EXPR_NO_ID je v souboru nonterminal.h.
 */
 
 // Symboly jsou v produkcich v prirozenem poradi (zleva doprava), parser je
@@ -242,13 +245,14 @@ const StaticProduction PRODUCTION_VAR = {
 };
 
 // Pravidlo 30 (Prikaz vyrazu) (ptr): <command> => <exprNoID> <commandEnd>
-// Pozn.: first(<exprNoID>) zastupuje jakykoliv token, kterym muze zacit vyraz,
-// krome ID a if. V implementaci pouze <expr>.
+// Pozn.: <exprNoID> z tabulky gramatiky zastupuje vyraz nezacinajici ID nebo
+// if a je odlisen jen kvuli vypoctu mnozin a LL tabulky. V implementaci
+// neexistuje, jeho chovani je shodne s <expr> (prechod do vyrazove analyzy).
 const StaticProduction PRODUCTION_COMMAND_EXPR = {
     .length = 2,
     .production =
         {
-            GRAMMAR_NONTERMINAL(NONTERM_EXPR_NO_ID),
+            GRAMMAR_NONTERMINAL(NONTERM_EXPR),
             GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END),
         },
 };
