@@ -9,6 +9,8 @@
           za asistence Claude.
         - xbalaka00 - vyhledani pravidla v LL tabulce vyclenene do funkce
           ll_table_lookup (LL_table.c), jadro nyni pouziva tuto funkci.
+        - xbalaka00 - vlozeni statickeho pravidla na zasobnik vyclenene do
+          funkce parser_push_static_production.
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -250,7 +252,37 @@ void parser_match(ParserContext *ctx, Stack *stack) {
         promptu. Proto změnové záznamy uprav tak, aby změny v předchozím commitu
         a tomto commitu byly zaverzovany jako jedna změna mezi commity.
         Deklaruj však normálně i tento prompt.
+
+    Prompt pro vycleneni vlozeni statickeho pravidla na zasobnik do funkce
+    parser_push_static_production. Stejny prompt zpusobil zmeny take
+    v predictive_parser.h, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dobrá. Nyní obdobným způsobem z jádra vyčleň do pomocné funkce i
+        naházení symbolů na zásobník ve statické produkci. Prakticky to znamená
+        do funkce přesounout for cyklus na řádcích 298 až 300. Vzhledem k tomu,
+        že proměnná production ze řádku 293 byla použita jen pro zjednodušení
+        zápisu tohoto cyklu, může v jádře být oddělána a entry->production se
+        použije na místě argumentu této nové metody.
+        Nová metoda bude v predictive_parser.*, protože je to pomocná metoda
+        samotného parseru, ne souboru a LL tabulkou či jiného. Opět se tím
+        jádro zpřehlední, navíc stejně bude nutné toto "zpracování statického
+        pravidla" použít i ve větvi pro *další, bude tedy hezčí mít to v metodě
+        než všude kopírovat ten samý cyklus. Tato změna bude nový commit, tedy
+        udělej změnové záznamy.
 */
+
+void parser_push_static_production(Stack *stack,
+                                   const StaticProduction *production,
+                                   void *semantic_pointer) {
+
+  // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
+  // Staticka produkce jednoduse zkopiruje semanticky ukazatel do vlozenych
+  // symbolu
+  for (size_t i = production->length; i > 0; i--)
+    parser_stack_push(stack, production->production[i - 1], semantic_pointer,
+                      ID_CONTEXT_NONE);
+}
 
 void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
                        void *starting_semantic_pointer) {
@@ -290,14 +322,8 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
         if (entry->type == LL_RULE_STATIC) {
           // Pravidlo je staticke
-          const StaticProduction *production = entry->production;
-
-          // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
-          // Staticka produkce jednoduse zkopiruje semanticky ukazatel do
-          // vlozenych symbolu
-          for (size_t i = production->length; i > 0; i--)
-            parser_stack_push(&stack, production->production[i - 1],
-                              semantic_pointer, ID_CONTEXT_NONE);
+          parser_push_static_production(&stack, entry->production,
+                                        semantic_pointer);
         }
 
         else {
