@@ -3,6 +3,7 @@
 #
 #    Původní autor: xsantar00
 #    Seznam změn:
+#			pridano mazani souboru output.txt a ifjcode.txt
 #
 #    makefile se stara a kompilaci specifickych zdrojovych kodu pro jejich nasledne otestovani v izolovanem prostredi
 # ====================================================================
