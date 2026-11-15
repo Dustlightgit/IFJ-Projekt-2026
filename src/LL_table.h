@@ -8,6 +8,9 @@
         - xbalaka00 - include semantic_actions.h nahrazen semantic_types.h.
         - xbalaka00 - pridana deklarace funkce ll_table_lookup a poznamka
           o zname chybe v navrhu gramatiky.
+        - xbalaka00 - velikost tabulky je NONTERM_LL_TABLE_COUNT radku,
+          upravena dokumentace ll_table_lookup (prompt je v nonterminal.h).
+          TOKEN_STAR zatim docasne zustava indexem tabulky.
 
     Tento soubor obsahuje deklarace pro LL tabulku, kterou bude vyuzivat
     prediktivni parser, a funkci pro vyhledani pravidla v ni.
@@ -83,6 +86,11 @@ typedef struct {
 */
 
 /*
+    Prompt pro zmenu velikosti tabulky na NONTERM_LL_TABLE_COUNT je v souboru
+    nonterminal.h.
+*/
+
+/*
     Zname chyba navrhu gramatiky (pravidla zatim nejsou opravena):
     Rizeni konstrukce if s jednoradkovym telem then a pritomnym telem else
     vyzaduje, aby prikaz uvnitr jednoradkoveho then nebyl terminovan, protoze
@@ -96,7 +104,7 @@ typedef struct {
 /**
  * @brief LL tabulka indexovana neterminalem (radek) a terminalem (sloupec).
  */
-extern const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT];
+extern const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT];
 
 /**
  * @brief Vyhleda pravidlo v LL tabulce pro dvojici neterminal a terminal.
@@ -104,8 +112,9 @@ extern const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT];
  * Funkce overi rozsah indexu, vyhleda zaznam a zkontroluje jeho platnost
  * (znamy typ pravidla, u statickeho pravidla platnou produkci, u semantickeho
  * nenulovy callback). Vracena pravidla jsou tedy vzdy staticka nebo semanticka.
- * Volajici musi zajistit, ze terminal je indexem tabulky, tedy mensi nez
- * TOKEN_LL_TERM_COUNT, jinak jde o interni chybu (ERR_INTERNAL). Pokud pro
+ * Volajici musi zajistit, ze neterminal je mensi nez NONTERM_LL_TABLE_COUNT
+ * a terminal mensi nez TOKEN_LL_TERM_COUNT, jinak jde o interni chybu
+ * (ERR_INTERNAL). Pokud pro
  * dvojici neexistuje pravidlo, ukonci program syntaktickou chybou (ERR_SYNTAX).
  *
  * @param nonterm Neterminal (radek tabulky).

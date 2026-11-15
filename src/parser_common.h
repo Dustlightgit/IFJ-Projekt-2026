@@ -13,6 +13,8 @@
           prompt je v predictive_parser.c.
         - xbalaka00 - ParserStackEntry a parser_stack_push nesou
           ContextAnnotation misto IDContextType.
+        - xbalaka00 - dokumentace parser_advance doplnena o overeni typu
+          tokenu (prompt je v nonterminal.h).
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery a funkce pro praci
@@ -128,7 +130,8 @@ bool parser_check_token(const ParserContext *ctx, TokenType expected);
  * @brief Posun ve vstupnim proudu dale. Kontroluje take koncovou carku.
  * 
  * Uvolni soucasny token a a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
- * tedy musi probehnout jeste pred zavolanim teto funkce.
+ * tedy musi probehnout jeste pred zavolanim teto funkce. Typ noveho tokenu
+ * overi funkci token_type_validate (neplatny typ je interni chyba).
  *
  * @param ctx Spolecny context parseru.
  */

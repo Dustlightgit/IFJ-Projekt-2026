@@ -16,6 +16,10 @@
         - xbalaka00 - poznamky o <exprNoID> upraveny (neterminal byl odstranen).
         - xbalaka00 - odkazy na excel s gramatikou zmeneny na
           parser_formalisms.xlsx.
+        - xbalaka00 - velikost tabulky je NONTERM_LL_TABLE_COUNT radku,
+          ll_table_lookup kontroluje rozsah dle novych oddelovacu (prompt je
+          v nonterminal.h). Docasny zastupce sloupce *dalsi (TOKEN_STAR) a
+          testovaci pravidlo <expr> => * zustavaji v tabulce.
 
     Tento soubor obsahuje LL tabulku prediktivniho parseru vyplnenou podle
     tabulky gramatiky (parser_formalisms.xlsx), makra pro zapis jejich polozek
@@ -24,7 +28,9 @@
     semanticke akce v semantic_actions.c. Sloupec *dalsi a neterminal v
     odpovednosti jadra parseru (<IDcommand>) v tabulce nejsou.
     Pro <expr> je prozatim jen testovaci pravidlo mimo gramatiku (<expr> => *),
-    TOKEN_STAR je docasny zastupce sloupce *dalsi.
+    TOKEN_STAR je docasny zastupce sloupce *dalsi. V budoucnu se TOKEN_STAR
+    z indexatoru LL tabulky odstrani (je to terminal vyrazove analyzy), spolu
+    s nim i vsechny jeho zaznamy a testovaci pravidlo v teto tabulce.
     Cisla pravidel odpovidaji tabulce gramatiky.
 
 */
@@ -38,6 +44,11 @@
 #include "production.h"
 #include "semantic_actions.h"
 #include "token.h"
+
+/*
+    Prompt pro zmenu velikosti tabulky na NONTERM_LL_TABLE_COUNT a upravu
+    kontrol v ll_table_lookup je v souboru nonterminal.h.
+*/
 
 /*
     Prompty pro funkci ll_table_lookup jsou v souboru predictive_parser.c. Prompt pro
@@ -183,7 +194,9 @@
 // gramatiky v implementaci neexistuje, nahrazuje ho <expr>. Prozatim je sloupec
 // *dalsi docasne zastoupen terminalem TOKEN_STAR, aby se testovaci pravidlo
 // <expr> => * provedlo vsude, kde je ocekavan vyraz.
-const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT] = {
+// POZOR: TOKEN_STAR je v tabulce jen docasne kvuli testovani, v budoucnu bude
+// spolu s vsemi svymi zaznamy odstranen (viz TOKEN_STAR v token.h).
+const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // Pravidlo 0
     [NONTERM_PROGRAM] =
         {
@@ -427,13 +440,13 @@ const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT] = {
 const LLTableEntry *ll_table_lookup(NonterminalType nonterm, TokenType terminal,
                                     int line) {
 
-  // NONTERM_COUNT neni skutecny neterminal
-  if (nonterm >= NONTERM_COUNT)
+  // Do LL tabulky lze indexovat jen neterminaly pred NONTERM_LL_TABLE_COUNT
+  if (nonterm >= NONTERM_LL_TABLE_COUNT)
     error_exit(ERR_INTERNAL, line,
                "LL Parser: Spatne pouziti ll_table_lookup(): Neplatny "
                "neterminal.");
 
-  // Do LL tabulky lze indexovat jen terminaly LL gramatiky
+  // Do LL tabulky lze indexovat jen tokeny pred TOKEN_LL_TERM_COUNT
   if (terminal >= TOKEN_LL_TERM_COUNT)
     error_exit(ERR_INTERNAL, line,
                "LL Parser: Spatne pouziti ll_table_lookup(): Terminal neni "

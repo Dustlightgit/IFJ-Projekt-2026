@@ -9,6 +9,8 @@
           prompt je v predictive_parser.c.
         - xbalaka00 - parser_stack_push prijima ContextAnnotation misto
           IDContextType.
+        - xbalaka00 - parser_advance overuje typ nacteneho tokenu funkci
+          token_type_validate (prompt je v nonterminal.h).
 
     Tento soubor obsahuje funkce pro praci se zasobnikem parseru.
 
@@ -32,6 +34,9 @@ void parser_advance(ParserContext *ctx) {
   // Nacteni noveho tokenu
   get_token(&(ctx->current_token));
   ctx->has_current_token = true;
+
+  // Dodatecna vnitrni kontrola, ze scanner vratil skutecny token
+  token_type_validate(ctx->current_token.type, ctx->current_token.line);
 
   // Kontrola koncove carky
   if (ctx->current_token.type == TOKEN_COMMA) {

@@ -18,6 +18,9 @@
         - xbalaka00 - callbackum se predava cislo radku vstupniho terminalu.
         - xbalaka00 - jadro obsahuje chovani pro neterminal <IDcommand>
           (pravidla 32 a 33, zatim bez stavby stromu a vyrazoveho parseru).
+        - xbalaka00 - jadro overuje funkcemi nonterm_type_validate
+          a token_type_validate neterminal vyjmuty ze zasobniku a terminal
+          na jeho vrcholu (prompt je v nonterminal.h).
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -442,6 +445,9 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
       void *semantic_pointer = nonterm_entry.semantic_pointer;
       ContextAnnotation annotation = nonterm_entry.annotation;
 
+      // Dodatecna vnitrni kontrola, ze neterminal ze zasobniku je skutecny
+      nonterm_type_validate(nonterm, ctx->current_token.line);
+
       if (nonterm == NONTERM_ID_COMMAND) {
         // Neterminal <IDcommand> (pravidla 32 a 33) je v odpovednosti jadra,
         // LL tabulka ani zadna dalsi akce se v teto iteraci neprovadi.
@@ -528,6 +534,9 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
     else {
       // Terminal na vrcholu zasobniku
+
+      // Dodatecna vnitrni kontrola, ze terminal na vrcholu je skutecny token
+      token_type_validate(top->symbol.terminal, ctx->current_token.line);
 
       // Na vrcholu je ID a na vstupu je ID: specialni akce zpracuje token ID
       // vcetne atributu. Musi probehnout pred parser_match, ktery token

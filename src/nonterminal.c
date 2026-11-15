@@ -8,12 +8,16 @@
         - xbalaka00 - pridan nazev pro NONTERM_ELSE_TERNARY_IF.
         - xbalaka00 - odstranen nazev pro NONTERM_OPTIONAL_SEMICOLON.
         - xbalaka00 - odstranen nazev pro NONTERM_EXPR_NO_ID.
+        - xbalaka00 - pridany nazvy pro NONTERM_TIF a NONTERM_ARGS, pridana
+          funkce nonterm_type_validate (prompt je v nonterminal.h).
 
     Tento soubor obsahuje pomocne funkce pro praci s neterminaly.
 
 */
 
 #include "nonterminal.h"
+
+#include "error.h"
 
 /*
     Prompt pro odstraneni NONTERM_EXPR_NO_ID je v souboru nonterminal.h.
@@ -106,9 +110,23 @@ const char *nonterm_type_name(NonterminalType type) {
   case NONTERM_EXPR:
     return "vyraz";
 
+  // Neterminaly mimo LL tabulku
+  case NONTERM_TIF:
+    return "ternarni if ve vyrazu";
+  case NONTERM_ARGS:
+    return "seznam argumentu";
+
   // Neni skutecny neterminal
+  case NONTERM_LL_TABLE_COUNT:
   case NONTERM_COUNT:
     break;
   }
   return "?";
+}
+
+void nonterm_type_validate(NonterminalType type, int line) {
+  // Pretypovani zachyti i zaporne hodnoty mimo enum
+  if ((unsigned)type >= (unsigned)NONTERM_COUNT ||
+      type == NONTERM_LL_TABLE_COUNT)
+    error_exit(ERR_INTERNAL, line, "Neplatny typ neterminalu.");
 }
