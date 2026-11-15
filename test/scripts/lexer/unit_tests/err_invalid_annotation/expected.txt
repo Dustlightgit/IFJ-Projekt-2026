@@ -1,0 +1,2 @@
+Error 1 (line 1): Neznama anotace, ocekava se @main
+EXIT CODE: 1

@@ -1,0 +1,2 @@
+Error 1 (line 1): Za '&' musi nasledovat dalsi '&'
+EXIT CODE: 1

@@ -1,0 +1,2 @@
+Error 1 (line 1): Podtrzitko v cisle musi byt mezi dvema cislicemi
+EXIT CODE: 1

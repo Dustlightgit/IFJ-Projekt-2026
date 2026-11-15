@@ -1,0 +1,2 @@
+Error 1 (line 1): Samotne podtrzitko neni identifikator
+EXIT CODE: 1
