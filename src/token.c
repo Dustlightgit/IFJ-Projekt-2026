@@ -8,6 +8,8 @@
         - xbalaka00 - pridana explicitni vetev default ve funkci
           token_type_name kvuli novym tokenum TOKEN_LL_TERM_COUNT
           a TOKEN_EXPRESSION_BEGINNING_DELIMITER.
+        - xbalaka00 - pridane nazvy tokenu TOKEN_ID_OPERATOR a TOKEN_DOLLAR,
+          pridana funkce token_type_validate (prompt je v nonterminal.h).
 
     Implementace funkci pro spravu a reprezentaci tokenu lexikalniho
     analyzatoru.
@@ -15,6 +17,8 @@
 */
 
 #include "token.h"
+
+#include "error.h"
 
 #include <stdlib.h>
 
@@ -125,6 +129,10 @@ const char *token_type_name(TokenType type) {
     return ";";
   case TOKEN_DOT:
     return ".";
+  case TOKEN_ID_OPERATOR:
+    return "ID_OPERATOR";
+  case TOKEN_DOLLAR:
+    return "$";
   default:
     return "?";
   }
@@ -135,4 +143,12 @@ void token_free(Token *t) {
   if (t->type == TOKEN_ID || t->type == TOKEN_STRING_LIT)
     free(t->value.text);
   t->value.text = NULL;
+}
+// Overi, ze typ tokenu je skutecny token (ne specialni hodnota enumu)
+void token_type_validate(TokenType type, int line) {
+  // Pretypovani zachyti i zaporne hodnoty mimo enum
+  if ((unsigned)type >= (unsigned)TOKEN_COUNT || type == TOKEN_LL_TERM_COUNT ||
+      type == TOKEN_EXPRESSION_BEGINNING_DELIMITER ||
+      type == TOKEN_EXPR_TERM_DELIMITER)
+    error_exit(ERR_INTERNAL, line, "Neplatny typ tokenu.");
 }

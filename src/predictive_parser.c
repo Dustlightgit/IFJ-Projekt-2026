@@ -7,6 +7,25 @@
     Seznam zmen:
         - xbalaka00 - pridana funkce predictive_parser (jadro parseru)
           za asistence Claude.
+        - xbalaka00 - vyhledani pravidla v LL tabulce vyclenene do funkce
+          ll_table_lookup (LL_table.c), jadro nyni pouziva tuto funkci.
+        - xbalaka00 - vlozeni statickoho pravidla na zasobnik vyclenene do
+          funkce parser_push_static_production.
+        - xbalaka00 - jadro predava kontextovou anotaci callbackum
+          a parser_push_static_production ji kopiruje do vlozenych symbolu.
+        - xbalaka00 - vypis potkaneho ID v jadre nahrazen volanim
+          special_action_id (special_actions.h).
+        - xbalaka00 - callbackum se predava cislo radku vstupniho terminalu.
+        - xbalaka00 - jadro obsahuje chovani pro neterminal <IDcommand>
+          (pravidla 32 a 33, zatim bez stavby stromu a vyrazoveho parseru).
+        - xbalaka00 - jadro overuje funkcemi nonterm_type_validate
+          a token_type_validate neterminal vyjmuty ze zasobniku a terminal
+          na jeho vrcholu (prompt je v nonterminal.h).
+        - xbalaka00 - vkladani na zasobnik predava priznak reduction_marker
+          false (prompt je v parser_common.c).
+        - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL
+          a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
+          prompt je v reduction_table.h).
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -17,7 +36,11 @@
 #include <stdio.h>
 
 #include "LL_table.h"
+#include "ast.h"
 #include "error.h"
+#include "grammar_symbol.h"
+#include "semantic_actions.h"
+#include "special_actions.h"
 
 void parser_match(ParserContext *ctx, Stack *stack) {
 
@@ -178,7 +201,224 @@ void parser_match(ParserContext *ctx, Stack *stack) {
         jsi to ještě přesunout a upravit reference v komentářích apod.? Tento
         prompt nejspíše zahrň také, avšak v seznamech změn stačí jen jeden
         záznam o všech těchto změnách.
+
+    Prompt pro vycleneni vyhledani pravidla v LL tabulce do funkce
+    ll_table_lookup a pro poznamku o chybe v navrhu gramatiky. Stejny prompt
+    zpusobil zmeny take v LL_table.h a LL_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Pravidla jsem commitnul a otestoval jsem program. Bohužel jsem při
+        testování odhalil chybu, která je však dána návrhem gramatiky -
+        nevyvstala ze způsobu, jakým jsi pravidla vygeneroval. Gramatiku tedy
+        bude nutné znovu přepracovat a přegenerovat, ale teď to nenechám vše
+        vykolejit, budeme pokračovat i s chybnými pravidly. Excel ani soubory
+        se statickými produkcemi nebo callbacky tedy nebudeme zatím řešit.
+        Můžeš o této odhalené chybě přidat poznámku do LL_table.h - chyba
+        souvisí se situací, ve které řídící konstrukce if s jednořádkovým tělem
+        then a přítomným tělem else vyžaduje, aby příkaz uvnitř jednořádkového
+        then nebyl terminován (terminování zde zajistí else). Jak ale říkám,
+        prozatím pravidla v kódu necháme být.
+
+        Začneme s úpravami jádra v souboru predictive_parser.c, který jsem
+        přiložil. Využij i všechny ostatní soubory, se kterými jsme doteď
+        pracovali. První věc, kterou bych udělal, je vyčlenění vyhledání v LL
+        tabulce do vlastní metody.
+
+        Pokud to importy dovolí bez problémů s kruhovými vztahy mezi
+        hlavičkami, pak tuto metodu přidej do LL_table.*, jinak ji přidej jako
+        privátní metodu v predictive_parser.*
+        Metoda jen zabalí přístup k LL tabulky do pomocné metody. Zkontroluje se
+        v ní rozsah indexů, provede se indexace tabulky, ověření, že pravidlo
+        není NONE, a dle typu záznamu také, že získaný callback není NULL,
+        případně že statická produkce je validní - stejné kontroly, jaké jsou
+        teď přímo v jádře. V jádře však bude muset jistá kontrola indexů zůstat
+        také, protože vstupní token, kterým nelze indexovat LL tabulku, není
+        automaticky syntax error právě kvůli budoucí implementaci sloupce
+        *další. Uvnitř metody tedy kontrola indexů může vyvolat chybu špatného
+        použití této metody po vzoru parser_match, a v jádře zůstane ošetření
+        rozsahu indexu vstupního terminálu jako jedna z větví rozhodovací
+        struktury na místě, kde aktuálně je, s tím, že prozatím druhá větev
+        způsobí chybu jako dočasné řešení. Později právě na toto místo přijde
+        logika pro *další.
+
+        V souhrnu - indexace tabulky na řádku 218 společně s kontrolami
+        chybových stavů související s pokusem vyhledat pravidlo v LL tabulce na
+        řádcích 213, 220, 242, a 257. Metoda vrátí pointer na příslušný
+        LLTableEntry, o kterém víme, že není prázdné pravidlo a příslušný
+        záznam je validní.
+
+        Tok programu uvnitř větve, kdy je vrcholu neterminál, bude takovýto:
+
+        - vytažení neterminálu ze zásobníku do proměnné stejně jako je teď
+        - podmínka if pro kontrolu, že vstupní terminál je v rozsahu
+          indexování tabulky dle příslušné hodnoty enumu
+           - pokud není, prozatím se v této větvi vyhodí chyba
+           - pokud je, provede se vyhledání novou metodou
+           - získaný záznam se zpracuje tak, jako doposud podle toho, o jaký
+             záznam se jedná.
+
+    Prompt pro presun kontroly neznameho typu pravidla do funkce
+    ll_table_lookup. Stejny prompt zpusobil zmeny take v LL_table.h
+    a LL_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Pěkné. Je pravda, že kontrola neznámého typu pravidla také může přijít
+        do této metody, protože sémanticky vzato také spadá pod akci "vyhledej
+        v LL tabulce a ověř, že nenastala chyba.". Přesuň ji tedy do této
+        metody také, jádro bude zase o kus přehlednější.
+
+        Tato změna bude součástí stejného commitu jako změny po předchozím
+        promptu. Proto změnové záznamy uprav tak, aby změny v předchozím commitu
+        a tomto commitu byly zaverzovany jako jedna změna mezi commity.
+        Deklaruj však normálně i tento prompt.
+
+    Prompt pro vycleneni vlozeni statickeho pravidla na zasobnik do funkce
+    parser_push_static_production. Stejny prompt zpusobil zmeny take
+    v predictive_parser.h, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dobrá. Nyní obdobným způsobem z jádra vyčleň do pomocné funkce i
+        naházení symbolů na zásobník ve statické produkci. Prakticky to znamená
+        do funkce přesounout for cyklus na řádcích 298 až 300. Vzhledem k tomu,
+        že proměnná production ze řádku 293 byla použita jen pro zjednodušení
+        zápisu tohoto cyklu, může v jádře být oddělána a entry->production se
+        použije na místě argumentu této nové metody.
+        Nová metoda bude v predictive_parser.*, protože je to pomocná metoda
+        samotného parseru, ne souboru a LL tabulkou či jiného. Opět se tím
+        jádro zpřehlední, navíc stejně bude nutné toto "zpracování statického
+        pravidla" použít i ve větvi pro *další, bude tedy hezčí mít to v metodě
+        než všude kopírovat ten samý cyklus. Tato změna bude nový commit, tedy
+        udělej změnové záznamy.
+
+    Prompt pro predani kontextove anotace callbackum a kopirovani anotace
+    ve statickych produkcich je v souboru semantic_types.h. Prompt pro
+    specialni akci pro ID je v souboru special_actions.h. Prompt pro predani
+    cisla radku callbackum je v souboru semantic_types.h.
+
+    Prompt pro doplneni chovani jadra pro neterminal <IDcommand> (pravidla
+    32 a 33), anotaci CONTEXT_ID_COMMAND, polozku id_expr v SemanticContext,
+    upravu callbacku pravidla 31 a specialni akce pro ID. Stejny prompt
+    zpusobil zmeny take v semantic_types.h, semantic_actions.h,
+    semantic_actions.c, special_actions.h a special_actions.c, jeho zneni je
+    pouze zde.
+
+    Prompt pro Claude:
+        Dobrá, nyní přidáme do jádra speciální chování pro neterminál
+        <IDcommand>. Nejdříve popíšu, co se zhruba stane. Začneme od pravidla
+        31:
+
+        - sémantická akce pro pravidlo 31 obdrží sémantický pointer na blok,
+          ke kterému se má připojit příkaz.
+        - akce pro pravidlo 31 dá do symbolu ID, které přidává na stack nějakou
+          sémantickou anotaci, že teď budeme zpracovávat IDcommand speciální
+          akci... a do <IDcommand> záznamu dá informace, kam uložit přiřazení
+          nebo expr (tedy sémantický pointer jen předá).
+        - speciální akce pro ID pro ID vytvoří uzel AST a pointer na něho uloží
+          někam, kde k němu bude mít přístup i jádro (takže třeba parser
+          context nebo semantic context asi). AST si zařídí, aby s atributem
+          názvu bylo z hlediska správy paměti náležitě zacházeno.
+        - ID na vstupu se normálně porovná a spotřebuje běžným způsobem po
+          vykonání callbacku.
+        - pak bude na vrcholu zásobníku <IDcommand>, takže jádro neprovede
+          klasickou akci, ale udělá toto:
+            - pokud je vstupní terminál =, tak vytvoří uzel přiřazení, dá do
+              něj název ID co se uložilo do AST uzlu, ten uzel přiřazení přidá
+              do pointeru podle toho co callback 31 uložil do záznamu
+              IDcommand, = oddělá ze zásobníku a ručně na něj přidá <expr> s
+              pointerem a anotací takovou, aby se ten expr připojil k tomu
+              přiřazení. Uzel AST se uvolní, protože už nebude potřeba.
+            - pokud je vstupní terminál cokoliv jiného, tak se vstupní token
+              nechá na pokoji a zavolá se výrazovka, které bude předaný
+              parametrem startovací ID symbol s pointerem na uzel ID AST.
+              Výrazovka si pak tenhle startovní symbol přidá na stack a vše tím
+              pádem bude stejné, jako kdyby si ID sama zpracovala ze vstupu.
+              (Výrazovka totiž nejspíše každé vstupní ID nebo literál s
+              atributem okamžitě předělá na uzel AST, aby se nemuselo řešit co
+              s atributama po dalším volání scanneru; redukce ID -> E pak jen
+              tento pointer předá dále; a pokud by ID nebylo využito jako list
+              stromu ale třeba jako název volané funkce, tak se opět vytáhne to
+              jméno a uzel pro ID se uvolní; ale toto už říkám extra).
+
+        Takže takhle to bude vypadat v hotovém systému cca. Přikládám ti
+        hlavičkový soubor ast.h, který vytvořil kolega. Zatím však nebudeme
+        vyplňovat stavbu AST a výrazový parser ještě neexistuje, proto
+        prozatím chování vytvoříme jen z části. Bude to vypadat takto:
+
+        * callback pravidla 31 vyplň tak, že do terminálu ID dá kontextovou
+          značku CONTEXT_ID_COMMAND, do neterminálu <IDcommand> předá svůj
+          pointer a zbytek zůstane null/NONE (myslím že víc nebude potřeba
+          dělat). Tímto možná bude callback 31 plně hotový...
+        * do semantic_context přidej položku pointeru na AST uzel pro ID, což
+          zmanená na strukturu typu Expr. Jmenovat se bude třeba helper_pointer
+          nebo tak, název můžeš vymyslet i jiný. Možná se časem stejně
+          semantic_context zruší pokud nebude mít jiné využití než toto;
+          potom by se tento pointer přesunul do parser context a do speciální
+          akce pro ID by se místo semantic context dal parser context, ale
+          prozatím necháme takto.
+        * ve speciálním callbacku pro ID zahaj switch case přes kontextové
+          anotace, který ve větvi pro CONTEXT_ID_COMMAND vytvoří ten AST uzel
+          pro ID (tedy Expr s typem položky EXPR_VARIABLE a do něj se předá
+          název ID a další informace, které uzel požaduje) a pointer na něj dá
+          do té položky v semantic_context. V běžném případě by callback pro
+          neznámou kontextovou anotaci pravděpodobně vyhodil interní chybu,
+          ale zatím to udělej tak, aby se jednoduše neudělalo nic kromě
+          vypsání, že bylo potkáno ID, pokud akce nedostala ten kontextový
+          token CONTEXT_ID_COMMAND. To potkání vypiš v obou případech.
+        * Tolik k úpravám existujících callbacků. Nyní ke změnám v jádře:
+           * do větve, kdy je na vrcholu zásobníku neterminál, přidej kontrolu,
+             zda je na vrcholu <IDcommand>. Pokud se vejde do této větve,
+             běžné vyhledání v LL tabulce ani jiné akce se neprovádí! Jedná se
+             o akce pro celou iteraci smyčky while jádra by se dalo říct. Pokud
+             chceš, můžeš akce pro tuto větev vyčlenit do speciálního callbacku
+             v special_actions.h pokud předáš relevantní informace přes
+             argument, ale zatím to klidně nechej přímo v jádře. Terminál
+             IDcommand bude normálně ze stacku vyjmut. Akce pro tuto větev:
+           * Pokud je vstupním tokenem =, pak se provede následující
+              * prozatím stavbu stromu nedoplňujeme; proto se AST uzel ID ze
+                semantic_context zatím jen uvolní. Před uvolněním zde později
+                proběhne tvorba uzlu přiřazení se jménem z toho uzlu AST, které
+                se přidá k bloku dle sémantického pointeru u položky <IDcommand>
+                na vrcholu. Můžeš vypsat na sdterr, že by zde bylo provedeno
+                pravidlo přiřazení a vypiš i jméno ID.
+              * Zavolá se parser_advance, aby byl terminál = přepsán novým
+                vstupním terminálem.
+              * Na zásobník se vloží <expr>, prozatím bez pointeru (později
+                pointer na vytvořený uzel přiřazení) a s kontextovou značkou
+                vyjadřující, že se má výraz připojit k přiřazení (zatím ale
+                může být NONE).
+              * toto celé se rovná pravidlu 32.
+           * Pokud není vstupním tokenem =, pak se nehledě na vstupní token
+             později přejde do výrazovky (přímo, nikoliv přes neterminál <expr>
+             na zásobníku) s předáním počátečního AST uzlu a dalších informací
+             apod a ta by sama vyhodnotila, jestli je ten druhý terminál
+             smysluplný. Jelikož však prozatím výrazový parser ještě neexistuje,
+             pouze se uvolní uzel AST v parser_context a na stack se přidá
+             <expr>, aby bylo možné jej přepsat na * jakožto testovací akce.
+             Před tím uvolněním vypiš na stderr zprávu o tom, že zde by se
+             přešlo do výrazové analýzy a vypiš jméno ID jako důkaz, že se v
+             pořádku dostalo až sem. Toto odpovídá pravidlu 33.
+
+        Takto budou prakticky pravidla 32 a 33 v odpovědnosti jádra
+        implementována do takové míry, jaká je možná s přihlédnutím k faktu, že
+        ještě výrazový parser ani stavba stromu neexistuje. Toto speciální
+        chování jádra by nemělo být ovlivněno změnami gramatiky, které budu
+        muset provést pro opravení té chyby s else větví ifu.
+        ast.h neměň a jinou funkcionalitu nepřidávej, pouze využij jeho funkce
+        pro vytvoření ID uzlu expr_new_variable a jeho uvolnění expr_free.
 */
+
+void parser_push_static_production(Stack *stack,
+                                   const StaticProduction *production,
+                                   void *semantic_pointer,
+                                   ContextAnnotation annotation) {
+
+  // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
+  // Staticka produkce jednoduse zkopiruje semanticky ukazatel i kontextovou
+  // anotaci do vsech vlozenych symbolu
+  for (size_t i = production->length; i > 0; i--)
+    parser_stack_push(stack, production->production[i - 1], semantic_pointer,
+                      annotation, false);
+}
 
 void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
                        void *starting_semantic_pointer) {
@@ -190,7 +430,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
   // Pocatecni neterminal
   GrammarSymbol start_symbol = GRAMMAR_NONTERMINAL(starting_nonterm);
   parser_stack_push(&stack, start_symbol, starting_semantic_pointer,
-                    ID_CONTEXT_NONE);
+                    CONTEXT_NONE, false);
 
   while (!stack_is_empty(&stack)) {
 
@@ -201,75 +441,116 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
     ParserStackEntry *top = parser_stack_top(&stack);
 
     if (!top->symbol.is_terminal) {
-      // Neterminal na vrcholu zasobniku
-      NonterminalType nonterm = top->symbol.nonterminal;
+      // Neterminal na vrcholu zasobniku, vytazeni ze zasobniku. Ukazatel top
+      // po odebrani neni platny, proto se dale pouziji jen hodnoty z kopie
+      // odebraneho zaznamu.
+      ParserStackEntry nonterm_entry;
+      parser_stack_pop(&stack, &nonterm_entry);
 
-      // NONTERM_COUNT neni skutecny neterminal
-      if (nonterm >= NONTERM_COUNT)
-        error_exit(ERR_INTERNAL, ctx->current_token.line,
-                   "LL Parser: Na zasobniku je neplatny neterminal.");
+      NonterminalType nonterm = nonterm_entry.symbol.nonterminal;
+      void *semantic_pointer = nonterm_entry.semantic_pointer;
+      ContextAnnotation annotation = nonterm_entry.annotation;
 
-      // Do LL tabulky lze indexovat jen terminaly LL gramatiky
-      if (ctx->current_token.type >= TOKEN_LL_TERM_COUNT)
-        error_exit(ERR_INTERNAL, ctx->current_token.line,
-                   "LL Parser: Token na vstupu neni terminal LL tabulky.");
+      // Dodatecna vnitrni kontrola, ze neterminal ze zasobniku je skutecny
+      nonterm_type_validate(nonterm, ctx->current_token.line);
 
-      // Vyhledani pravidla
-      const LLTableEntry *entry = &LL_TABLE[nonterm][ctx->current_token.type];
+      if (nonterm == NONTERM_ID_COMMAND) {
+        // Neterminal <IDcommand> (pravidla 32 a 33) je v odpovednosti jadra,
+        // LL tabulka ani zadna dalsi akce se v teto iteraci neprovadi.
+        // Uzel ID vytvorila special_action_id pri zpracovani ID na zacatku
+        // prikazu, ID je uz porovnano a spotrebovano.
+        Expr *id_expr = ctx->semantic_context.id_expr;
 
-      if (entry->type == LL_RULE_ERROR)
-        error_exit(ERR_SYNTAX, ctx->current_token.line,
-                   "LL Parser: Neni mozne zvolit pravidlo.");
-
-      // Uchovani semantickeho ukazatele a odstraneni neterminalu. Ukazatel top
-      // po odebrani neni platny, proto se pouzije dale jen docasna promenna.
-      void *semantic_pointer = top->semantic_pointer;
-      parser_stack_pop(&stack, NULL);
-
-      if (entry->type == LL_RULE_STATIC) {
-        // Pravidlo je staticke
-
-        // Ziskame statickou produkci a zkontrolujeme ji
-        const StaticProduction *production = entry->production;
-
-        if (production == NULL ||
-            production->length > STATIC_PRODUCTION_MAX_LENGTH)
+        if (id_expr == NULL)
           error_exit(ERR_INTERNAL, ctx->current_token.line,
-                     "LL Parser: Neplatna staticka produkce v LL tabulce.");
+                     "LL Parser: Pro <IDcommand> neni vytvoren AST uzel ID.");
 
-        // Symboly se vkladaji od posledniho, aby byl na vrcholu prvni
-        // Staticka produkce jednoduse zkopiruje semanticky ukazatel do vlozenych symbolu
-        for (size_t i = production->length; i > 0; i--)
-          parser_stack_push(&stack, production->production[i - 1],
-                            semantic_pointer, ID_CONTEXT_NONE);
+        GrammarSymbol expr_symbol = GRAMMAR_NONTERMINAL(NONTERM_EXPR);
+
+        if (parser_check_token(ctx, TOKEN_ASSIGN)) {
+          // Pravidlo 32: <IDcommand> => = <expr>
+          fprintf(stderr, "LL Parser: Pravidlo 32, prirazeni do ID: %s\n",
+                  id_expr->as.variable.name);
+
+          // Prirazeni se prida do bloku (nebo do tela cyklu ci vetve if)
+          Block *block = target_block(semantic_pointer, annotation,
+                                      ctx->current_token.line);
+          Stmt *assign =
+              stmt_new_assign(id_expr->as.variable.name, NULL, id_expr->line);
+          block_add(block, assign);
+
+          // AST uzel ID uz neni potreba, jmeno si prirazeni zkopirovalo
+          expr_free(id_expr);
+          ctx->semantic_context.id_expr = NULL;
+
+          // Terminal = se nahradi dalsim vstupnim terminalem
+          parser_advance(ctx);
+
+          // Vyraz za = se pripoji jako hodnota prirazeni
+          parser_stack_push(&stack, expr_symbol, assign, CONTEXT_ASSIGN_VALUE,
+                            false);
+        }
+
+        else {
+          // Pravidlo 33: <IDcommand> => prechod do vyrazove analyzy. Vstupni
+          // token se nemeni. Pozdeji se do vyrazoveho parseru preda pocatecni
+          // symbol ID s ukazatelem na uzel ID.
+          fprintf(stderr,
+                  "LL Parser: Pravidlo 33, zde by se preslo do vyrazove "
+                  "analyzy, pocatecni ID: %s\n",
+                  id_expr->as.variable.name);
+
+          // Do doby, nez bude vyrazovy parser, se uzel uvolni a na zasobnik
+          // se vlozi <expr>, ktery se prepise testovacim pravidlem
+          expr_free(id_expr);
+          ctx->semantic_context.id_expr = NULL;
+
+          parser_stack_push(&stack, expr_symbol, NULL, CONTEXT_NONE, false);
+        }
       }
 
-      else if (entry->type == LL_RULE_SEMANTIC) {
-        // Pravidlo je semanticke
+      // Do LL tabulky lze indexovat jen terminaly LL gramatiky
+      else if (ctx->current_token.type < TOKEN_LL_TERM_COUNT) {
+        // Vyhledani pravidla, pri neexistenci pravidla ukonci program
+        const LLTableEntry *entry = ll_table_lookup(
+            nonterm, ctx->current_token.type, ctx->current_token.line);
 
-        if (entry->callback == NULL)
-          error_exit(ERR_INTERNAL, ctx->current_token.line,
-                     "LL Parser: Callback v LL tabulce je NULL.");
+        if (entry->type == LL_RULE_STATIC) {
+          // Pravidlo je staticke
+          parser_push_static_production(&stack, entry->production,
+                                        semantic_pointer, annotation);
+        }
 
-        // Callback si produkci vlozi na zasobnik sam
-        entry->callback(&(ctx->semantic_context), semantic_pointer, &stack);
+        else {
+          // Pravidlo je semanticke (ll_table_lookup zaruci, ze je zaznam
+          // staticky nebo semanticky), callback si produkci vlozi na zasobnik
+          // sam
+          entry->callback(&(ctx->semantic_context), semantic_pointer,
+                          annotation, ctx->current_token.line, &stack);
+        }
       }
 
       else {
-        // Neznamy typ pravidla
+        // Docasne reseni: vstupni token neni terminal LL tabulky. Zde pozdeji
+        // pribude logika pro sloupec *dalsi (tokeny, kterymi muze zacinat
+        // vyraz).
         error_exit(ERR_INTERNAL, ctx->current_token.line,
-                   "LL Parser: Neznamy typ pravidla v LL tabulce.");
+                   "LL Parser: Token na vstupu neni terminal LL tabulky.");
       }
     }
 
     else {
       // Terminal na vrcholu zasobniku
 
-      // Prozatim jen vypis ID, pozdeji bude doplneno dalsi zpracovani.
-      // Vypis musi probehnout pred parser_match, ktery token uvolni.
+      // Dodatecna vnitrni kontrola, ze terminal na vrcholu je skutecny token
+      token_type_validate(top->symbol.terminal, ctx->current_token.line);
+
+      // Na vrcholu je ID a na vstupu je ID: specialni akce zpracuje token ID
+      // vcetne atributu. Musi probehnout pred parser_match, ktery token
+      // uvolni. Pri odlisnosti tokenu by parser_match vyvolal chybu.
       if (top->symbol.terminal == TOKEN_ID && parser_check_token(ctx, TOKEN_ID))
-        fprintf(stderr, "LL Parser: Potkan token ID, atribut: %s\n",
-                ctx->current_token.value.text);
+        special_action_id(&(ctx->semantic_context), top->semantic_pointer,
+                          top->annotation, &(ctx->current_token));
 
       // Porovna terminaly a oba odstrani
       parser_match(ctx, &stack);
