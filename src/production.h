@@ -181,9 +181,7 @@ extern const StaticProduction PRODUCTION_COMMAND_END_EOL;
 /// Pravidlo 29 (Deklarace modifikovatelne promenne): <valVar> => var
 extern const StaticProduction PRODUCTION_VAR;
 
-/// Pravidlo 30 (Prikaz vyrazu) (ptr): <command> => <exprNoID> <commandEnd>
-/// Pozn.: <exprNoID> z tabulky gramatiky je v implementaci nahrazen <expr>.
-extern const StaticProduction PRODUCTION_COMMAND_EXPR;
+
 
 
 /// Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>

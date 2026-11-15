@@ -269,18 +269,7 @@ const StaticProduction PRODUCTION_VAR = {
     .production = {GRAMMAR_TERMINAL(TOKEN_KW_VAR)},
 };
 
-// Pravidlo 30 (Prikaz vyrazu) (ptr): <command> => <exprNoID> <commandEnd>
-// Pozn.: <exprNoID> z tabulky gramatiky zastupuje vyraz nezacinajici ID nebo
-// if a je odlisen jen kvuli vypoctu mnozin a LL tabulky. V implementaci
-// neexistuje, jeho chovani je shodne s <expr> (prechod do vyrazove analyzy).
-const StaticProduction PRODUCTION_COMMAND_EXPR = {
-    .length = 2,
-    .production =
-        {
-            GRAMMAR_NONTERMINAL(NONTERM_EXPR),
-            GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END),
-        },
-};
+
 
 
 
