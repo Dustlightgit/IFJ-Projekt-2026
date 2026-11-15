@@ -17,6 +17,9 @@
 #include "special_actions.h"
 
 #include <stdio.h>
+#include <string.h>
+#include "ast.h"
+#include "error.h"
 
 /*
     Prompt pro specialni akci pro ID je v souboru special_actions.h. Prompt
@@ -25,7 +28,7 @@
 
 void special_action_id(SemanticContext *ctx, void *semantic_pointer,
                        ContextAnnotation annotation, const Token *token) {
-  (void)semantic_pointer;
+  
 
   // Potkani ID se vypise vzdy
   fprintf(stderr, "LL Parser: Potkan token ID, atribut: %s\n",
@@ -33,14 +36,34 @@ void special_action_id(SemanticContext *ctx, void *semantic_pointer,
 
   switch (annotation) {
   case CONTEXT_ID_COMMAND:
-    // ID na zacatku prikazu: vytvori se AST uzel, ke kteremu ma pristup jadro
-    // parseru (zpracuje ho v pravidlech 32 a 33 a uvolni ho)
     ctx->id_expr = expr_new_variable(token->value.text, token->line);
     break;
 
+  case CONTEXT_PROLOGUE_CHECK:
+    // Prolog musi byt presne import ifj26.*
+    if (strcmp(token->value.text, "ifj26") != 0)
+      error_exit(ERR_SYNTAX, token->line, "Prolog musi byt import ifj26.*");
+    break;
+
+  case CONTEXT_FUNCTION_DEF:
+    // funcdef_set_name si text zkopiruje, token uvolni parser_match
+    funcdef_set_name((FuncDef *)semantic_pointer, token->value.text);
+    break;
+  
+  case CONTEXT_PARAM_NAME:
+    // Typ se doplni pozdeji, az se rozvede <type> (CONTEXT_PARAM_TYPE)
+    funcdef_add_param((FuncDef *)semantic_pointer, token->value.text, NULL);
+    break;
+
+  case CONTEXT_DECLARATION_NAME:
+    stmt_vardef_set_name((Stmt *)semantic_pointer, token->value.text);
+    break;
+
+  case CONTEXT_FOR_VAR:
+    stmt_for_set_var_name((Stmt *)semantic_pointer, token->value.text);
+    break;
+
   default:
-    // Ostatni anotace se zatim nezpracovavaji, pozdeji zde pribude zpracovani
-    // dalsich kontextu (u neznameho kontextu nejspis interni chyba)
     break;
   }
 }
