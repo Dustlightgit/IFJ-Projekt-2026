@@ -40,9 +40,9 @@ _Static_assert(PRECEDENCE_RANGE_COUNT + PRECEDENCE_SWITCH_COUNT ==
 
 // Precedencni tabulka je prozatim prazdna, vsechny polozky jsou
 // DIRECTIVE_ERROR (hodnota 0).
-const PrecedenceDirective
-    PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE][PRECEDENCE_TABLE_SIZE] = {
-        {DIRECTIVE_ERROR},
+const PrecedenceDirective PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE]
+                                          [PRECEDENCE_TABLE_SIZE] = {
+                                              {DIRECTIVE_ERROR},
 };
 
 size_t precedence_table_index(TokenType terminal, int line) {

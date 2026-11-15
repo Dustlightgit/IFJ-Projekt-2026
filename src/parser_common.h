@@ -15,6 +15,8 @@
           ContextAnnotation misto IDContextType.
         - xbalaka00 - dokumentace parser_advance doplnena o overeni typu
           tokenu (prompt je v nonterminal.h).
+        - xbalaka00 - ParserStackEntry a parser_stack_push nesou priznak
+          reduction_marker (prompt je v parser_common.c).
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery a funkce pro praci
@@ -79,7 +81,8 @@
 
 /*
     Prompt pro zobecneni IDContextType na ContextAnnotation je v souboru
-    semantic_types.h.
+    semantic_types.h. Prompt pro priznak reduction_marker je v souboru
+    parser_common.c.
 */
 
 /**
@@ -100,6 +103,16 @@ typedef struct {
      * postupovat. Lze ji pripojit k terminalu i k neterminalu.
      */
   ContextAnnotation annotation;
+
+  /**
+     * Priznak znacky redukce pro precedencni parser. Je-li true, bezprostredne
+     * za timto zaznamem (smerem k vrcholu zasobniku) nasleduje symbol <,
+     * ktery v matematickem modelu oznacuje zacatek redukce. Handle tvori
+     * vsechny zaznamy od vrcholu zasobniku az po prvni zaznam s timto
+     * priznakem, tento zaznam do handle nepatri. Vychozi hodnota je false,
+     * prediktivni parser priznak nevyuziva.
+     */
+  bool reduction_marker;
 } ParserStackEntry;
 
 /**
@@ -159,9 +172,12 @@ void parser_stack_init(Stack *stack);
  * @param symbol Symbol gramatiky.
  * @param semantic_pointer Ukazatel pro stavbu stromu.
  * @param annotation Kontextova anotace symbolu, bez anotace CONTEXT_NONE.
+ * @param reduction_marker Priznak znacky redukce, bezne false (viz
+ *        ParserStackEntry).
  */
 void parser_stack_push(Stack *stack, GrammarSymbol symbol,
-                       void *semantic_pointer, ContextAnnotation annotation);
+                       void *semantic_pointer, ContextAnnotation annotation,
+                       bool reduction_marker);
 
 /**
  * @brief Odebere zaznam z vrcholu zasobniku parseru.

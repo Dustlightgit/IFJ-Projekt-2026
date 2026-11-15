@@ -21,6 +21,8 @@
         - xbalaka00 - jadro overuje funkcemi nonterm_type_validate
           a token_type_validate neterminal vyjmuty ze zasobniku a terminal
           na jeho vrcholu (prompt je v nonterminal.h).
+        - xbalaka00 - vkladani na zasobnik predava priznak reduction_marker
+          false (prompt je v parser_common.c).
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -411,7 +413,7 @@ void parser_push_static_production(Stack *stack,
   // anotaci do vsech vlozenych symbolu
   for (size_t i = production->length; i > 0; i--)
     parser_stack_push(stack, production->production[i - 1], semantic_pointer,
-                      annotation);
+                      annotation, false);
 }
 
 void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
@@ -424,7 +426,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
   // Pocatecni neterminal
   GrammarSymbol start_symbol = GRAMMAR_NONTERMINAL(starting_nonterm);
   parser_stack_push(&stack, start_symbol, starting_semantic_pointer,
-                    CONTEXT_NONE);
+                    CONTEXT_NONE, false);
 
   while (!stack_is_empty(&stack)) {
 
@@ -481,7 +483,8 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
           parser_advance(ctx);
 
           // Vyraz za = se pripoji jako hodnota prirazeni
-          parser_stack_push(&stack, expr_symbol, assign, CONTEXT_ASSIGN_VALUE);
+          parser_stack_push(&stack, expr_symbol, assign, CONTEXT_ASSIGN_VALUE,
+                            false);
         }
 
         else {
@@ -498,7 +501,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
           expr_free(id_expr);
           ctx->semantic_context.id_expr = NULL;
 
-          parser_stack_push(&stack, expr_symbol, NULL, CONTEXT_NONE);
+          parser_stack_push(&stack, expr_symbol, NULL, CONTEXT_NONE, false);
         }
       }
 

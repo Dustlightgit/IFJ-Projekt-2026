@@ -18,6 +18,8 @@
         - xbalaka00 - callbacky prijimaji cislo radku, trace_rule ho vypisuje.
         - xbalaka00 - akce pravidla 31 anotuje ID a predava ukazatel
           neterminalu <IDcommand>.
+        - xbalaka00 - push_terminal a push_nonterminal vkladaji zaznamy bez
+          znacky redukce (prompt je v parser_common.c).
 
     Tento soubor obsahuje semanticke akce pravidel LL parseru. Akce zatim
     pouze vypisuji cislo pravidla na stderr a vkladaji pravou stranu pravidla
@@ -96,7 +98,7 @@ static void trace_rule(int rule_number, int line) {
 static void push_terminal(Stack *stack, TokenType type, void *semantic_pointer,
                           ContextAnnotation annotation) {
   parser_stack_push(stack, (GrammarSymbol)GRAMMAR_TERMINAL(type),
-                    semantic_pointer, annotation);
+                    semantic_pointer, annotation, false);
 }
 
 // Vlozi na zasobnik neterminal. Stejne jako u terminalu se predavaji vsechny
@@ -105,7 +107,7 @@ static void push_nonterminal(Stack *stack, NonterminalType type,
                              void *semantic_pointer,
                              ContextAnnotation annotation) {
   parser_stack_push(stack, (GrammarSymbol)GRAMMAR_NONTERMINAL(type),
-                    semantic_pointer, annotation);
+                    semantic_pointer, annotation, false);
 }
 
 // Symboly prave strany se vkladaji od posledniho, aby na vrcholu zasobniku

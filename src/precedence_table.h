@@ -103,8 +103,8 @@ typedef enum {
  * Indexy terminalu urcuje funkce precedence_table_index. Polozky bez zaznamu
  * jsou DIRECTIVE_ERROR (hodnota 0).
  */
-extern const PrecedenceDirective
-    PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE][PRECEDENCE_TABLE_SIZE];
+extern const PrecedenceDirective PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE]
+                                                 [PRECEDENCE_TABLE_SIZE];
 
 /**
  * @brief Vrati index terminalu do precedencni tabulky.
@@ -136,7 +136,6 @@ size_t precedence_table_index(TokenType terminal, int line);
  * @return Direktiva, ktera neni DIRECTIVE_ERROR.
  */
 PrecedenceDirective precedence_table_lookup(TokenType stack_terminal,
-                                            TokenType input_terminal,
-                                            int line);
+                                            TokenType input_terminal, int line);
 
 #endif // PRECEDENCE_TABLE_H

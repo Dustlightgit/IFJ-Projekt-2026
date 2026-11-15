@@ -11,6 +11,7 @@
           IDContextType.
         - xbalaka00 - parser_advance overuje typ nacteneho tokenu funkci
           token_type_validate (prompt je v nonterminal.h).
+        - xbalaka00 - parser_stack_push prijima priznak reduction_marker.
 
     Tento soubor obsahuje funkce pro praci se zasobnikem parseru.
 
@@ -104,16 +105,34 @@ void parser_advance(ParserContext *ctx) {
     semantic_types.h.
 */
 
+/*
+    Prompt pro pridani priznaku reduction_marker do ParserStackEntry
+    a jeho predani funkci parser_stack_push. Stejny prompt zpusobil zmeny
+    take v parser_common.h, semantic_actions.c a predictive_parser.c, jeho
+    zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dobrá. Do StackEntry doplň boolean reduction_marker. Význam této
+        značky je, že bezprostředně po prvku s touto značkou jakože následuje
+        symbol <, který v matematickém modelu označuje začátek redukce. Handle
+        je tedy vždy tvořen všemi prvky od vrcholu zásobníku až po první
+        symbol opatřen touto značkou vyjma tohoto symbolu. Defaultně bude
+        nastaven na false a LL parser jej nebude využívat. Rozšiř nadstavbové
+        funkce nad stackem parser_stack_* o tento nový parametr.
+*/
+
 void parser_stack_init(Stack *stack) {
   stack_init(stack, sizeof(ParserStackEntry));
 }
 
 void parser_stack_push(Stack *stack, GrammarSymbol symbol,
-                       void *semantic_pointer, ContextAnnotation annotation) {
+                       void *semantic_pointer, ContextAnnotation annotation,
+                       bool reduction_marker) {
   ParserStackEntry entry = {
       .symbol = symbol,
       .semantic_pointer = semantic_pointer,
       .annotation = annotation,
+      .reduction_marker = reduction_marker,
   };
 
   // Zasobnik si zaznam zkopiruje, lokalni entry tedy muze po volani zaniknout
