@@ -8,15 +8,19 @@
         - xbalaka00 - aktualizace pravidel dle nove verze gramatiky: zmeneno
           pravidlo 25 a 44, odstranena pravidla 33, 45 a 46, doplnene
           poznamky k pravidlum.
+        - xbalaka00 - komentare pravidel prepsany s ceskou terminologii (straz,
+          visici else apod.).
         - xbalaka00 - odstranena testovaci produkce <expr> => ID.
         - xbalaka00 - zdokumentovano kopirovani semantickeho ukazatele
           a kontextove anotace ve statickych produkcich.
         - xbalaka00 - pravidlo 30 pouziva NONTERM_EXPR misto odstraneneho
           NONTERM_EXPR_NO_ID.
+        - xbalaka00 - odkazy na excel s gramatikou zmeneny na
+          parser_formalisms.xlsx.
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
     semanticke akce, a to jak s predanim semantickeho ukazatele (ptr), tak bez
-    nej. Cisla pravidel odpovidaji tabulce gramatiky (LL_gramatika.xlsx).
+    nej. Cisla pravidel odpovidaji tabulce gramatiky (parser_formalisms.xlsx).
     Pravidla se semantickou akci ("ano") jsou zpracovana callbacky.
 
 */
@@ -122,6 +126,24 @@
         bych čistý název. Pro tuto konkrétní spíše kosmetickou změnu není
         potřeba dělat změnový záznam, protože tato změna bude ve stejném
         commitu jako ta předešlá, která již změnové seznamy upravila.
+
+    Prompt pro prejmenovani odkazu na excel s gramatikou na
+    parser_formalisms.xlsx. Stejny prompt zpusobil zmeny take v production.h
+    a LL_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Provedl jsem předělání LL gramatiky. Opravil jsem ten problém, a
+        samozřejně vyvstal zase jiný, takže jsem to vyřešil tak, že jazyk
+        nepodporuje kombinaci inline then větve s řídící konstrukcí a přítomného
+        else.
+        Mohl bys všude v souborech změnit odkaz na starý název excelového
+        souboru na jeho nový název parser_formalisms.xlsx? Název byl změněn
+        proto, že nyní v druhém listu obsahuje i návrh výrazové gramatiky.
+        Chtěl bych soubor v aktuální podobě zaverzovat do gitu, aby byla jeho
+        podoba uchována, jak je. Padlo totiž rozhodnutí, že přepočet množin po
+        této v pořadí třetí úpravě pravidel převezme kolega, který jej provede
+        za pomocí AI - chci tedy, aby byla uložena podoba před zásahy AI, ve
+        které soubor needitoval nikdo jiný než já.
 */
 
 /*

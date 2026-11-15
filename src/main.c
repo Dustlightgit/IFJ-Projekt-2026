@@ -7,7 +7,6 @@
 #include "semantic.h"
 #include "symtable.h"
 
-
 static void print_block(const Block *b, int depth);
 
 /*
@@ -31,9 +30,15 @@ static void print_type(const Type *t) {
 static void print_stmt(const Stmt *s, int depth) {
   fprintf(stderr, "%*s", depth * 2, "");
   switch (s->kind) {
-  case STMT_VARDEF: fprintf(stderr, "VARDEF %s\n", s->as.vardef.name); break;
-  case STMT_ASSIGN: fprintf(stderr, "ASSIGN %s\n", s->as.assign.name); break;
-  case STMT_RETURN: fprintf(stderr, "RETURN\n"); break;
+  case STMT_VARDEF:
+    fprintf(stderr, "VARDEF %s\n", s->as.vardef.name);
+    break;
+  case STMT_ASSIGN:
+    fprintf(stderr, "ASSIGN %s\n", s->as.assign.name);
+    break;
+  case STMT_RETURN:
+    fprintf(stderr, "RETURN\n");
+    break;
   case STMT_WHILE:
     fprintf(stderr, "WHILE\n");
     print_block(s->as.while_loop.body, depth + 1);
@@ -59,7 +64,6 @@ static void print_stmt(const Stmt *s, int depth) {
     break;
   }
 }
-
 
 static void print_block(const Block *b, int depth) {
   if (b == NULL) {

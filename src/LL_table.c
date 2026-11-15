@@ -14,9 +14,11 @@
           odstraneno testovaci pravidlo <expr> => ID.
         - xbalaka00 - pridana funkce ll_table_lookup.
         - xbalaka00 - poznamky o <exprNoID> upraveny (neterminal byl odstranen).
+        - xbalaka00 - odkazy na excel s gramatikou zmeneny na
+          parser_formalisms.xlsx.
 
     Tento soubor obsahuje LL tabulku prediktivniho parseru vyplnenou podle
-    tabulky gramatiky (LL_gramatika.xlsx), makra pro zapis jejich polozek
+    tabulky gramatiky (parser_formalisms.xlsx), makra pro zapis jejich polozek
     a funkci pro vyhledani pravidla v tabulce.
     Staticke produkce, na ktere se tabulka odkazuje, jsou v production.c,
     semanticke akce v semantic_actions.c. Sloupec *dalsi a neterminal v
@@ -38,7 +40,8 @@
 #include "token.h"
 
 /*
-    Prompty pro funkci ll_table_lookup jsou v souboru predictive_parser.c.
+    Prompty pro funkci ll_table_lookup jsou v souboru predictive_parser.c. Prompt pro
+    prejmenovani odkazu na excel je v souboru production.c.
 */
 
 /*
@@ -174,8 +177,8 @@
 #define LL_CALLBACK(f)                                                         \
   { .type = LL_RULE_SEMANTIC, .callback = (f) }
 
-// LL tabulka podle tabulky gramatiky (LL_gramatika.xlsx). Polozky bez zaznamu
-// jsou LL_RULE_ERROR (hodnota 0). Sloupec *dalsi a neterminal <IDcommand>
+// LL tabulka podle tabulky gramatiky (parser_formalisms.xlsx). Polozky bez
+// zaznamu jsou LL_RULE_ERROR (hodnota 0). Sloupec *dalsi a neterminal <IDcommand>
 // resi jadro parseru, v tabulce proto nejsou. Neterminal <exprNoID> z tabulky
 // gramatiky v implementaci neexistuje, nahrazuje ho <expr>. Prozatim je sloupec
 // *dalsi docasne zastoupen terminalem TOKEN_STAR, aby se testovaci pravidlo
@@ -415,20 +418,10 @@ const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT] = {
 
     // Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
     // do vyrazoveho parseru
-
-    [NONTERM_EXPR] =
-        {
-            [TOKEN_STAR] = LL_CALLBACK(semantic_action_test_expr),
-        },
-    
-
-    ////// ZAKOMENTOVAL JSEM ZATIM ////////////////    
-    /*
     [NONTERM_EXPR] =
         {
             [TOKEN_STAR] = LL_PROD(PRODUCTION_TEST_EXPR_STAR),
         },
-    */
 };
 
 const LLTableEntry *ll_table_lookup(NonterminalType nonterm, TokenType terminal,

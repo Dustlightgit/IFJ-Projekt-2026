@@ -27,9 +27,9 @@
 
 #include "semantic_actions.h"
 
-#include <stdio.h>
 #include "ast.h"
 #include "error.h"
+#include <stdio.h>
 
 #include "nonterminal.h"
 #include "parser_common.h"
@@ -144,7 +144,8 @@ void semantic_action_function_definition(SemanticContext *ctx,
   trace_rule(3, line);
 
   Program *program = (Program *)semantic_pointer;
-  FuncDef *func = funcdef_new(NULL, false, line); // Jmeno doplni special_action_id
+  FuncDef *func =
+      funcdef_new(NULL, false, line); // Jmeno doplni special_action_id
   program_add_func(program, func);
 
   push_nonterminal(stack, NONTERM_BLOCK_OR_EXPR, func, CONTEXT_FUNCTION_BODY);
@@ -174,9 +175,6 @@ void semantic_action_main_annotation(SemanticContext *ctx,
   push_nonterminal(stack, NONTERM_OPTIONAL_EOL, NULL, CONTEXT_NONE);
   push_terminal(stack, TOKEN_ANNOT_MAIN, NULL, CONTEXT_NONE);
 }
-
-
-
 
 // Vrati blok, do ktereho se ma pridat prikaz. Pokud pointer ukazuje na
 // vlastnika tela (funkce, cyklus), blok se vytvori a pripoji.
@@ -247,8 +245,6 @@ void ast_attach_expr(void *ptr, ContextAnnotation annotation, Expr *expr,
   }
 }
 
-
-
 // Ulozi hotovy typ na misto urcene ukazatelem a anotaci (prebira vlastnictvi typu)
 static void store_type(void *semantic_pointer, ContextAnnotation annotation,
                        Type *type, int line) {
@@ -276,8 +272,6 @@ static void store_type(void *semantic_pointer, ContextAnnotation annotation,
   }
 }
 
-
-
 // Pravidlo 8 (Pridani parametru): <paramAdd> => ID : <type> <paramComma>
 void semantic_action_param_add(SemanticContext *ctx, void *semantic_pointer,
                                ContextAnnotation annotation, int line,
@@ -286,7 +280,8 @@ void semantic_action_param_add(SemanticContext *ctx, void *semantic_pointer,
   (void)annotation;
   trace_rule(8, line);
 
-  push_nonterminal(stack, NONTERM_PARAM_LIST_TAIL, semantic_pointer, CONTEXT_NONE);
+  push_nonterminal(stack, NONTERM_PARAM_LIST_TAIL, semantic_pointer,
+                   CONTEXT_NONE);
   push_nonterminal(stack, NONTERM_TYPE, semantic_pointer, CONTEXT_PARAM_TYPE);
   push_terminal(stack, TOKEN_COLON, NULL, CONTEXT_NONE);
   push_terminal(stack, TOKEN_ID, semantic_pointer, CONTEXT_PARAM_NAME);
@@ -337,7 +332,7 @@ void semantic_action_type_boolean(SemanticContext *ctx, void *semantic_pointer,
                                   ContextAnnotation annotation, int line,
                                   Stack *stack) {
   (void)ctx;
-  
+
   trace_rule(18, line);
   store_type(semantic_pointer, annotation, type_new(TYPE_BOOLEAN), line);
   push_terminal(stack, TOKEN_KW_BOOLEAN, NULL, CONTEXT_NONE);
@@ -429,7 +424,7 @@ void semantic_action_return_command(SemanticContext *ctx,
                                     ContextAnnotation annotation, int line,
                                     Stack *stack) {
   (void)ctx;
-  
+
   trace_rule(34, line);
   Block *block = target_block(semantic_pointer, annotation, line);
   Stmt *stmt = stmt_new_return(NULL, line);
@@ -596,14 +591,6 @@ void semantic_action_else_ternary_if_indented(SemanticContext *ctx,
   push_terminal(stack, TOKEN_INDENT, NULL, CONTEXT_NONE);
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
 }
-
-
-
-
-
-
-
-
 
 // Docasne pravidlo mimo gramatiku: <expr> => *, vytvori literal 0
 void semantic_action_test_expr(SemanticContext *ctx, void *semantic_pointer,

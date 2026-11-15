@@ -30,8 +30,8 @@
 #include "LL_table.h"
 #include "ast.h"
 #include "error.h"
-#include "special_actions.h"
 #include "semantic_actions.h"
+#include "special_actions.h"
 
 void parser_match(ParserContext *ctx, Stack *stack) {
 
@@ -457,15 +457,14 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
         if (parser_check_token(ctx, TOKEN_ASSIGN)) {
           // Pravidlo 32: <IDcommand> => = <expr>
-          fprintf(stderr,
-                  "LL Parser: Pravidlo 32, prirazeni do ID: %s\n",
+          fprintf(stderr, "LL Parser: Pravidlo 32, prirazeni do ID: %s\n",
                   id_expr->as.variable.name);
 
           // Prirazeni se prida do bloku (nebo do tela cyklu ci vetve if)
-          Block *block =
-              target_block(semantic_pointer, annotation, ctx->current_token.line);
-          Stmt *assign = stmt_new_assign(id_expr->as.variable.name, NULL,
-                                         id_expr->line);
+          Block *block = target_block(semantic_pointer, annotation,
+                                      ctx->current_token.line);
+          Stmt *assign =
+              stmt_new_assign(id_expr->as.variable.name, NULL, id_expr->line);
           block_add(block, assign);
 
           // AST uzel ID uz neni potreba, jmeno si prirazeni zkopirovalo

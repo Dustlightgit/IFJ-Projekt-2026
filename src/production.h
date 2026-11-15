@@ -10,11 +10,15 @@
           (definice jsou v production.c).
         - xbalaka00 - aktualizace deklaraci dle nove verze gramatiky
           (odstranena pravidla 33, 45 a 46).
+        - xbalaka00 - komentare pravidel prepsany s ceskou terminologii (straz,
+          visici else apod.).
         - xbalaka00 - odstranena deklarace testovaci produkce <expr> => ID.
         - xbalaka00 - zdokumentovano kopirovani semantickeho ukazatele
           a kontextove anotace ve statickych produkcich.
         - xbalaka00 - poznamka k pravidlu 30 (NONTERM_EXPR_NO_ID byl
           odstranen, nahrazuje ho NONTERM_EXPR).
+        - xbalaka00 - odkazy na excel s gramatikou zmeneny na
+          parser_formalisms.xlsx.
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
     prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
@@ -144,11 +148,12 @@ typedef struct {
     testovaciho pravidla <expr> => ID je v souboru LL_table.c. Prompt pro
     kopirovani kontextove anotace ve statickych produkcich je v souboru
     semantic_types.h. Prompt pro odstraneni NONTERM_EXPR_NO_ID je v souboru
-    nonterminal.h.
+    nonterminal.h. Prompt pro prejmenovani odkazu na excel je v souboru
+    production.c.
 */
 
 // Staticke produkce gramatiky, definice jsou v production.c. Cisla pravidel
-// odpovidaji tabulce gramatiky (LL_gramatika.xlsx), (ptr) znaci pravidlo,
+// odpovidaji tabulce gramatiky (parser_formalisms.xlsx), (ptr) znaci pravidlo,
 // ktere predava semanticky ukazatel (parser ukazatel i kontextovou anotaci
 // kopiruje u vsech statickych produkci, znacka je jen informativni).
 

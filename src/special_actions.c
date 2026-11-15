@@ -16,10 +16,10 @@
 
 #include "special_actions.h"
 
-#include <stdio.h>
-#include <string.h>
 #include "ast.h"
 #include "error.h"
+#include <stdio.h>
+#include <string.h>
 
 /*
     Prompt pro specialni akci pro ID je v souboru special_actions.h. Prompt
@@ -28,7 +28,6 @@
 
 void special_action_id(SemanticContext *ctx, void *semantic_pointer,
                        ContextAnnotation annotation, const Token *token) {
-  
 
   // Potkani ID se vypise vzdy
   fprintf(stderr, "LL Parser: Potkan token ID, atribut: %s\n",
@@ -49,7 +48,7 @@ void special_action_id(SemanticContext *ctx, void *semantic_pointer,
     // funcdef_set_name si text zkopiruje, token uvolni parser_match
     funcdef_set_name((FuncDef *)semantic_pointer, token->value.text);
     break;
-  
+
   case CONTEXT_PARAM_NAME:
     // Typ se doplni pozdeji, az se rozvede <type> (CONTEXT_PARAM_TYPE)
     funcdef_add_param((FuncDef *)semantic_pointer, token->value.text, NULL);

@@ -132,30 +132,27 @@ typedef enum {
   CONTEXT_FUNCTION_DEF,         ///< ID je jmeno definovane funkce
   CONTEXT_FUNCTION_RETURN_TYPE, ///< Typ je navratovy typ funkce
 
-
-  CONTEXT_PARAM_NAME,  ///< ID je jmeno parametru funkce
-  CONTEXT_PARAM_TYPE,  ///< Typ je typ naposledy pridaneho parametru
+  CONTEXT_PARAM_NAME,   ///< ID je jmeno parametru funkce
+  CONTEXT_PARAM_TYPE,   ///< Typ je typ naposledy pridaneho parametru
   CONTEXT_LIST_ELEMENT, ///< Typ je typ prvku seznamu (pointer je Type *)
 
+  CONTEXT_BLOCK_STMT,    ///< Pointer je Block *, prikaz se prida do nej
+  CONTEXT_FUNCTION_BODY, ///< Pointer je FuncDef *, blok je telo funkce
+  CONTEXT_WHILE_BODY,    ///< Pointer je Stmt * (while), blok je telo
+  CONTEXT_FOR_BODY,      ///< Pointer je Stmt * (for), blok je telo
+  CONTEXT_VARDEF_TYPE,   ///< Typ je deklarovany typ promenne (Stmt *)
+  CONTEXT_VARDEF_INIT,   ///< Vyraz je inicializace promenne (Stmt *)
+  CONTEXT_ASSIGN_VALUE,  ///< Vyraz je hodnota prirazeni (Stmt *)
+  CONTEXT_RETURN_VALUE,  ///< Vyraz je hodnota returnu (Stmt *)
 
-  CONTEXT_BLOCK_STMT,     ///< Pointer je Block *, prikaz se prida do nej
-  CONTEXT_FUNCTION_BODY,  ///< Pointer je FuncDef *, blok je telo funkce
-  CONTEXT_WHILE_BODY,     ///< Pointer je Stmt * (while), blok je telo
-  CONTEXT_FOR_BODY,       ///< Pointer je Stmt * (for), blok je telo
-  CONTEXT_VARDEF_TYPE,    ///< Typ je deklarovany typ promenne (Stmt *)
-  CONTEXT_VARDEF_INIT,    ///< Vyraz je inicializace promenne (Stmt *)
-  CONTEXT_ASSIGN_VALUE,   ///< Vyraz je hodnota prirazeni (Stmt *)
-  CONTEXT_RETURN_VALUE,   ///< Vyraz je hodnota returnu (Stmt *)
+  CONTEXT_WHILE_COND, ///< Vyraz je podminka while (Stmt *)
+  CONTEXT_FOR_VAR,    ///< ID je ridici promenna for (Stmt *)
+  CONTEXT_FOR_SOURCE, ///< Vyraz je zdroj for (Stmt *)
+  CONTEXT_FOR_GUARD,  ///< Vyraz je straz for (Stmt *)
 
-
-  CONTEXT_WHILE_COND,   ///< Vyraz je podminka while (Stmt *)
-  CONTEXT_FOR_VAR,      ///< ID je ridici promenna for (Stmt *)
-  CONTEXT_FOR_SOURCE,   ///< Vyraz je zdroj for (Stmt *)
-  CONTEXT_FOR_GUARD,    ///< Vyraz je straz for (Stmt *)
-
-  CONTEXT_IF_THEN,  ///< Blok je vetev then (Expr * if)
-  CONTEXT_IF_ELSE,  ///< Blok je vetev else (Expr * if)
-  CONTEXT_IF_COND,  ///< Vyraz je podminka if (Expr * if)
+  CONTEXT_IF_THEN, ///< Blok je vetev then (Expr * if)
+  CONTEXT_IF_ELSE, ///< Blok je vetev else (Expr * if)
+  CONTEXT_IF_COND, ///< Vyraz je podminka if (Expr * if)
 } ContextAnnotation;
 
 /*
