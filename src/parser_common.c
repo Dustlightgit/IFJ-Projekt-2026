@@ -12,6 +12,8 @@
         - xbalaka00 - parser_advance overuje typ nacteneho tokenu funkci
           token_type_validate (prompt je v nonterminal.h).
         - xbalaka00 - parser_stack_push prijima priznak reduction_marker.
+        - xbalaka00 - pridana funkce parser_stack_peek (prompt je v
+          semantic_types.h).
 
     Tento soubor obsahuje funkce pro praci se zasobnikem parseru.
 
@@ -147,7 +149,12 @@ ParserStackEntry *parser_stack_top(const Stack *stack) {
   return stack_top(stack);
 }
 
+ParserStackEntry *parser_stack_peek(const Stack *stack, size_t depth) {
+  return stack_peek(stack, depth);
+}
+
 /*
+    Prompt pro funkci parser_stack_peek je v souboru semantic_types.h.
     Prompt pro funkci parser_context_init je v souboru predictive_parser.c.
 */
 

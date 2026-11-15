@@ -17,6 +17,8 @@
           tokenu (prompt je v nonterminal.h).
         - xbalaka00 - ParserStackEntry a parser_stack_push nesou priznak
           reduction_marker (prompt je v parser_common.c).
+        - xbalaka00 - pridana funkce parser_stack_peek (prompt je v
+          semantic_types.h).
         - xbalaka00 - include grammar_symbol.h pro GrammarSymbol (GrammarSymbol presunut do grammar_symbol.h,
           prompt je v reduction_table.h).
 
@@ -199,7 +201,17 @@ bool parser_stack_pop(Stack *stack, ParserStackEntry *out);
  */
 ParserStackEntry *parser_stack_top(const Stack *stack);
 
+/**
+ * @brief Vrati zaznam na zasobniku parseru v dane hloubce.
+ *
+ * @param stack Zasobnik parseru.
+ * @param depth Hloubka, 0 je vrchol, 1 je zaznam tesne pod nim.
+ * @return Ukazatel na zaznam, nebo NULL, pokud takovy zaznam neni.
+ */
+ParserStackEntry *parser_stack_peek(const Stack *stack, size_t depth);
+
 /*
+    Prompt pro funkci parser_stack_peek je v souboru semantic_types.h.
     Prompt pro nasledujici deklaraci funkce je v souboru predictive_parser.c.
 */
 

@@ -5,11 +5,14 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - pridana polozka ReductionTableEntry, konstanta
+          REDUCTION_TABLE_SIZE a deklarace tabulky REDUCTION_TABLE (prompt je
+          v semantic_types.h).
 
     Tento soubor bude obsahovat tabulku redukcnich pravidel (pravidel vyrazove
-    gramatiky), ktera mapuje handle jednotlivych pravidel na jejich semanticky
-    callback. Zatim obsahuje jen vyhledavaci prvek tabulky, tedy handle.
+    gramatiky), ktera mapuje handle jednotlivych pravidel na jejich semanticke
+    akce. Obsahuje vyhledavaci prvek tabulky (handle), polozku tabulky
+    a deklaraci tabulky. Tabulka je zatim prazdna.
 */
 
 #ifndef REDUCTION_TABLE_H
@@ -18,6 +21,7 @@
 #include <stddef.h>
 
 #include "grammar_symbol.h"
+#include "semantic_types.h"
 
 /*
     Prompt pro vycleneni GrammarSymbol do grammar_symbol.h, vznik tohoto
@@ -75,5 +79,33 @@ typedef struct {
   /// Symboly, vyuzito je prvnich length
   GrammarSymbol symbols[HANDLE_MAX_LENGTH];
 } SearchHandle;
+
+/*
+    Prompt pro polozku ReductionTableEntry a tabulku REDUCTION_TABLE je
+    v souboru semantic_types.h.
+*/
+
+/**
+ * @brief Pocet radku (pravidel) redukcni tabulky.
+ */
+#define REDUCTION_TABLE_SIZE 40
+
+/**
+ * @brief Polozka redukcni tabulky, jedno pravidlo vyrazove gramatiky.
+ */
+typedef struct {
+  /// Semanticka akce pravidla, provede se pri redukci handle
+  PrecedenceSemanticAction action;
+  /// Handle pravidla, tedy symboly jeho prave strany
+  const SearchHandle handle;
+} ReductionTableEntry;
+
+/**
+ * @brief Tabulka redukcnich pravidel vyrazove gramatiky.
+ *
+ * Mapuje handle pravidla na jeho semantickou akci. Prozatim je prazdna,
+ * polozky bez zaznamu maji action NULL a handle delky 0.
+ */
+extern const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE];
 
 #endif // REDUCTION_TABLE_H

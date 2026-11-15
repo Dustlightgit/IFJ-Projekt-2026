@@ -10,18 +10,22 @@
         - xbalaka00 - SemanticCallback prijima cislo radku.
         - xbalaka00 - pridana anotace CONTEXT_ID_COMMAND a polozka id_expr
           v SemanticContext.
+        - xbalaka00 - pridany typy ReductionResult a PrecedenceSemanticAction
+          (semanticka akce precedencniho parseru), include grammar_symbol.h.
 
     Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontext
     tokenu ID, semanticky kontext a typ callbacku semanticke akce. Je urcen
     k zahrnuti z parser_common.h, semantic_actions.h i LL_table.h bez vzniku
-    cyklickych zavislosti, proto nezahrnuje nic krome stack.h a ast.h (ten nezavisi na dalsich
-    hlavickach projektu).
+    cyklickych zavislosti, proto nezahrnuje nic krome stack.h, ast.h (ten nezavisi na dalsich
+    hlavickach projektu) a grammar_symbol.h (ten zavisi jen na token.h
+    a nonterminal.h).
 */
 
 #ifndef SEMANTIC_TYPES_H
 #define SEMANTIC_TYPES_H
 
 #include "ast.h"
+#include "grammar_symbol.h"
 #include "stack.h"
 
 /*
@@ -271,5 +275,115 @@ typedef struct {
 typedef void (*SemanticCallback)(SemanticContext *ctx, void *semantic_pointer,
                                  ContextAnnotation annotation, int line,
                                  Stack *stack);
+
+/*
+    Prompt pro semantickou akci precedencniho parseru (PrecedenceSemanticAction
+    a ReductionResult), polozku redukcni tabulky, tabulku redukci
+    v reduction_table.* a funkci parser_stack_peek. Stejny prompt zpusobil
+    zmeny take v reduction_table.h, reduction_table.c, parser_common.h
+    a parser_common.c, jeho zneni je pouze zde. V promptu je uvedeno
+    PredictiveSemanticAction a predictive_semantic_actions.*, myslen je tim
+    PrecedenceSemanticAction a precedence_semantic_actions.*.
+
+    Prompt pro Claude:
+        Dobrá, teď bych navrhnul ten callback. Rovnou řeknu, že jim tu budu
+        říkat callback, ale v komentářích je pojmenovávej česky bez
+        diakritiky. Oficiální název je sémantická akce precedenčního parseru,
+        v kódu PrecedenceSemanticAction.
+
+        Callback reprezentuje pravidlo a koná stavbu stromu. Zde asi nebudu
+        rozlišovat dva druhy pravidel, protože téměř všechna pravidla
+        výrazovky potřebují provést užitečnou akci - vzít podstromy z
+        jednotlivých uzlů, složit je do nového uzlu a ten nechat v
+        neterminálu, na který se pravidlo redukuje.
+
+        Pokud je pravidlo zavoláno, pak to bylo na základě toho, že byl jeho
+        handle vyhledán v redukční tabulce, a SearchHandle bude sestavován z
+        prvků zásobníku. Callback tedy v moment zavolání má zaručeno, že
+        prvních i prvků stacku jsou přesně symboly odpovídající jeho pravé
+        straně. Aby nebylo potřeba do callbacku dávat směšně velké množství
+        informací, bude tedy callback mít právo používat parser_stack_peek a
+        nahlížet na data symbolů jeho handle přímo na zásobníku. Argumentem
+        callbacku tedy bude stack.
+
+        Vyklízení handle ze zásobníku a vložení neterminálu, na který byla
+        produkce redukovaná, bude odpovědností jádra (protože handle v době
+        zavolání callbacku musí být stále na stacku, a handle musí být
+        vyklizen dříve, než je vložen redukovaný neterminál). Callback tedy
+        nebude měnit zásobník.
+
+        Jádru bude muset předat symbol, sémantický pointer a sémantickou
+        anotaci, kterou chce vložit do nového ParserStackEntry. Protože to je
+        větší množství informací, budou vraceny přes pointerový argument
+        místo returnu.
+
+        Prozatím jen přidej deklaraci PredictiveSemanticAction do
+        semantic_types.h; samotné callbacky a jejich deklarace pro účely
+        importů budou v páru predictive_semantic_actions.*
+        Prozatím však callbacky nevytvářej.
+
+        Rovnou můžeme vytvořit i zbytek redukční tabulky (ta bude v
+        reduction_table.h).
+        ReductionTableEntry bude tvořen pointerem na výše uvedenou sémantickou
+        akci, a konstantním SearchHandle. V search handle bude později
+        zapsán handle pravidla v podobě symbolů.
+
+        Samotná tabulka pak bude
+        extern static ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE];
+
+        S tím že velikost bude
+        #define REDUCTION_TABLE_SIZE 40
+
+        K tabulce bude přistupováno vyhledávací funkcí, kterou ale asi
+        navrhneme až v dalším kroku. Ještě přemýšlím, jestli je potřeba, aby
+        byla tabulka veřejně viditelná v hlavičkovém souboru, když se k ní
+        stejně vždy bude přistupovat přes tu vyhledávací metodu; totéž možná
+        platí o všech tabulkách, ale zatím to asi uděláme takto a necháme to
+        být. Zatím myslím všude do hlavičky dávám všechno, včetně věcí, které
+        nejspíš nikdo mimo danou funkci nevyužije, ale případně se to předělá
+        až ke konci, jestli to bude potřeba.
+
+        Tabulka bude vyplněna a callbacky budou vytvořeny až později.
+*/
+
+/**
+ * @brief Vysledek redukce, ktery semanticka akce predava jadru precedencniho
+ * parseru.
+ *
+ * Z techto hodnot jadro sestavi novy ParserStackEntry s redukovanym
+ * neterminalem. Priznak reduction_marker nastavuje jadro samo.
+ */
+typedef struct {
+  GrammarSymbol symbol;         ///< Neterminal, na ktery se pravidlo redukuje
+  void *semantic_pointer;       ///< Semanticky ukazatel noveho zaznamu, obvykle
+                                ///< hotovy podstrom
+  ContextAnnotation annotation; ///< Kontextova anotace noveho zaznamu
+} ReductionResult;
+
+/**
+ * @brief Semanticka akce precedencniho parseru, reprezentuje redukcni pravidlo.
+ *
+ * Akce se zavola, kdyz byl handle pravidla vyhledan v redukcni tabulce.
+ * Handle se sklada primo z prvku zasobniku, akce tedy ma zaruceno, ze
+ * prvnich length symbolu na zasobniku (od vrcholu) jsou presne symboly prave
+ * strany pravidla, kde length je delka handle pravidla. Data techto symbolu
+ * si akce prohlizi pomoci parser_stack_peek (hloubka 0 je vrchol, tedy posledni
+ * symbol handle). Vezme podstromy z jednotlivych symbolu, slozi je do noveho
+ * uzlu a ten preda jadru pres result jako semanticky ukazatel redukovaneho
+ * neterminalu.
+ *
+ * Akce zasobnik nemeni. Vyklizeni handle a vlozeni redukovaneho neterminalu
+ * je odpovednosti jadra, protoze handle musi byt v dobe volani akce stale na
+ * zasobniku a musi byt vyklizen drive, nez se vlozi redukovany neterminal.
+ *
+ * @param stack Zasobnik parseru, akce z nej cte, ale nemeni ho.
+ * @param line Cislo radku, obvykle radek aktualniho vstupniho terminalu,
+ *        ktery je nejblize skutecnemu umisteni konstrukce ve vstupu. Slouzi
+ *        napr. pro cislo radku v uzlech AST a pro chybova hlaseni.
+ * @param result Vystup, symbol, semanticky ukazatel a anotace, ktere jadro
+ *        vlozi do noveho zaznamu na zasobniku.
+ */
+typedef void (*PrecedenceSemanticAction)(const Stack *stack, int line,
+                                         ReductionResult *result);
 
 #endif // SEMANTIC_TYPES_H
