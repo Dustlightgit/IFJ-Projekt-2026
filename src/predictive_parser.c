@@ -31,6 +31,7 @@
 #include "ast.h"
 #include "error.h"
 #include "special_actions.h"
+#include "semantic_actions.h"
 
 void parser_match(ParserContext *ctx, Stack *stack) {
 
@@ -456,23 +457,26 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
         if (parser_check_token(ctx, TOKEN_ASSIGN)) {
           // Pravidlo 32: <IDcommand> => = <expr>
-          // Pozdeji zde vznikne uzel prirazeni se jmenem z uzlu ID, ktery se
-          // pripoji k bloku podle semantic_pointer.
           fprintf(stderr,
-                  "LL Parser: Pravidlo 32, zde by bylo provedeno prirazeni do "
-                  "ID: %s\n",
+                  "LL Parser: Pravidlo 32, prirazeni do ID: %s\n",
                   id_expr->as.variable.name);
 
-          // AST uzel ID uz neni potreba
+          // Prirazeni se prida do bloku (nebo do tela cyklu ci vetve if)
+          Block *block =
+              target_block(semantic_pointer, annotation, ctx->current_token.line);
+          Stmt *assign = stmt_new_assign(id_expr->as.variable.name, NULL,
+                                         id_expr->line);
+          block_add(block, assign);
+
+          // AST uzel ID uz neni potreba, jmeno si prirazeni zkopirovalo
           expr_free(id_expr);
           ctx->semantic_context.id_expr = NULL;
 
           // Terminal = se nahradi dalsim vstupnim terminalem
           parser_advance(ctx);
 
-          // Za = nasleduje vyraz. Pozdeji ponese ukazatel na uzel prirazeni
-          // a anotaci, podle ktere se vyraz k prirazeni pripoji.
-          parser_stack_push(&stack, expr_symbol, NULL, CONTEXT_NONE);
+          // Vyraz za = se pripoji jako hodnota prirazeni
+          parser_stack_push(&stack, expr_symbol, assign, CONTEXT_ASSIGN_VALUE);
         }
 
         else {
