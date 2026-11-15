@@ -19,6 +19,8 @@
           kvuli testovacim pravidlum), pridany TOKEN_ID_OPERATOR, TOKEN_DOLLAR,
           oddelovac TOKEN_EXPR_TERM_DELIMITER a koncova hodnota TOKEN_COUNT,
           pridana funkce token_type_validate (prompt je v nonterminal.h).
+        - xbalaka00 - text vlastni i TOKEN_ID_OPERATOR, ktery vznika prebarvenim
+          TOKEN_ID (prompt je v precedence_helpers.h).
 
     Definice typu tokenu, struktury tokenu a prototypu funkci pro lexer.
 
@@ -138,7 +140,7 @@ typedef enum {
   TOKEN_OR,       ///< || (BOOLTHEN)
 
   // Specialni terminaly vyrazove analyzy, scanner je nevraci
-  TOKEN_ID_OPERATOR, ///< ID prebarvene na operator (infixova metoda)
+  TOKEN_ID_OPERATOR, ///< ID prebarvene na operator (nese text jako ID)
   TOKEN_DOLLAR,      ///< $ (konec vyrazu)
 
   // Zde konci indexatory precedencni tabulky.
@@ -162,7 +164,7 @@ typedef enum {
 typedef union {
   long long int_val; ///< TOKEN_INT_LIT
   double double_val; ///< TOKEN_DOUBLE_LIT
-  char *text;        ///< TOKEN_ID, TOKEN_STRING_LIT
+  char *text;        ///< TOKEN_ID, TOKEN_ID_OPERATOR, TOKEN_STRING_LIT
 } TokenAttribute;
 
 /**
@@ -202,7 +204,7 @@ void token_type_validate(TokenType type, int line);
 /**
  * @brief Uvolni pamet, kterou token vlastni, a token zneplatni.
  *
- * Uvolnuje se jen text u TOKEN_ID a TOKEN_STRING_LIT.
+ * Uvolnuje se jen text u TOKEN_ID, TOKEN_ID_OPERATOR a TOKEN_STRING_LIT.
  *
  * @param t Token, jehoz pamet se uvolni.
  */

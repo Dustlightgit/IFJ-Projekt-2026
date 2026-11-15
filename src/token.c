@@ -10,6 +10,8 @@
           a TOKEN_EXPRESSION_BEGINNING_DELIMITER.
         - xbalaka00 - pridane nazvy tokenu TOKEN_ID_OPERATOR a TOKEN_DOLLAR,
           pridana funkce token_type_validate (prompt je v nonterminal.h).
+        - xbalaka00 - token_free uvolnuje text i u TOKEN_ID_OPERATOR (prompt
+          je v precedence_helpers.h).
 
     Implementace funkci pro spravu a reprezentaci tokenu lexikalniho
     analyzatoru.
@@ -138,9 +140,10 @@ const char *token_type_name(TokenType type) {
   }
 }
 
-// Uvolni text vlastneny tokenem (jen u ID a retezcu) a token zneplatni
+// Uvolni text vlastneny tokenem (jen u ID, ID_OPERATOR a retezcu) a token zneplatni
 void token_free(Token *t) {
-  if (t->type == TOKEN_ID || t->type == TOKEN_STRING_LIT)
+  if (t->type == TOKEN_ID || t->type == TOKEN_ID_OPERATOR ||
+      t->type == TOKEN_STRING_LIT)
     free(t->value.text);
   t->value.text = NULL;
 }
