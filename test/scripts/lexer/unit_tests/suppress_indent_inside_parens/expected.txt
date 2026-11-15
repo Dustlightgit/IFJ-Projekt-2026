@@ -1,0 +1,7 @@
+ID
+(
+INT_LIT
+,
+INT_LIT
+Error 1 (line 4): Pokracovaci radek v zavorkach musi byt odsazen vic
+EXIT CODE: 1

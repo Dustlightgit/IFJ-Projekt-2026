@@ -1,0 +1,4 @@
+val x = 1 /* vnejsi
+/* vnitrni */
+konec */
+val y = 2

@@ -1,0 +1,136 @@
+// import ifj26.*
+
+// def showLine(text: String): Unit =
+//   print(text)
+//   print("\n")
+
+// @main def stringsExample(): Unit =
+//   val message = "Ahoj"
+//   showLine(message)
+//   print("to byla vitaci zprava")
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdlib.h>
+
+#include "ast.h"
+#include "symtable.h"
+
+static Symbol *make_var_symbol(const char *name, TypeKind type_kind, bool is_mutable, int unique_id) {
+    Symbol *sym = calloc(1, sizeof(Symbol));
+    if (!sym) {
+        exit(99);
+    }
+    sym->kind = SYM_VAR;
+    sym->name = (char *)name;
+    sym->as.var.type = type_new(type_kind);
+    sym->as.var.is_mutable = is_mutable;
+    sym->as.var.unique_id = unique_id;
+    return sym;
+}
+
+static Symbol *make_func_symbol(const char *name, FuncDef *def, int param_count, Type **param_types, TypeKind return_kind, bool is_builtin) {
+    Symbol *sym = calloc(1, sizeof(Symbol));
+    if (!sym) {
+        exit(99);
+    }
+    sym->kind = SYM_FUNC;
+    sym->name = (char *)name;
+    sym->as.func.def = def;
+    sym->as.func.param_count = param_count;
+    sym->as.func.param_types = param_types;
+    sym->as.func.return_type = type_new(return_kind);
+    sym->as.func.is_builtin = is_builtin;
+    return sym;
+}
+
+Program *build_ast(void) {
+    Program *program = program_new();
+
+    // Symbol pro vestavenou funkci print(Any): Unit
+    Type **print_params = calloc(1, sizeof(Type *));
+    if (!print_params) {
+        exit(99);
+    }
+    Symbol *sym_print = make_func_symbol("print", NULL, 1, print_params, TYPE_UNIT, true);
+
+    // def showLine(text: String): Unit
+    FuncDef *fn_show_line = funcdef_new("showLine", false, 3);
+    Type **show_line_params = calloc(1, sizeof(Type *));
+    if (!show_line_params) {
+        exit(99);
+    }
+    show_line_params[0] = type_new(TYPE_STRING);
+    Symbol *sym_show_line = make_func_symbol("showLine", fn_show_line, 1, show_line_params, TYPE_UNIT, false);
+    Symbol *sym_text = make_var_symbol("text", TYPE_STRING, false, 1);
+
+    fn_show_line->symbol = sym_show_line;
+    funcdef_add_param(fn_show_line, "text", type_new(TYPE_STRING));
+    fn_show_line->params[0].symbol = sym_text;
+    funcdef_set_return_type(fn_show_line, type_new(TYPE_UNIT));
+
+    Block *show_line_body = block_new();
+
+    // print(text)
+    Expr *arg_text = expr_new_variable("text", 4);
+    arg_text->type = type_new(TYPE_STRING);
+    arg_text->as.variable.symbol = sym_text;
+    Expr *call_print_text = expr_new_call("print", 4);
+    call_print_text->type = type_new(TYPE_UNIT);
+    call_print_text->as.call.symbol = sym_print;
+    expr_call_add_arg(call_print_text, arg_text);
+    block_add(show_line_body, stmt_new_expr(call_print_text, 4));
+
+    // print("\n")
+    Expr *arg_newline = expr_new_string("\n", 5);
+    arg_newline->type = type_new(TYPE_STRING);
+    Expr *call_print_nl = expr_new_call("print", 5);
+    call_print_nl->type = type_new(TYPE_UNIT);
+    call_print_nl->as.call.symbol = sym_print;
+    expr_call_add_arg(call_print_nl, arg_newline);
+    block_add(show_line_body, stmt_new_expr(call_print_nl, 5));
+
+    funcdef_set_body(fn_show_line, show_line_body);
+    program_add_func(program, fn_show_line);
+
+    // @main def stringsExample(): Unit
+    FuncDef *fn_main = funcdef_new("stringsExample", true, 7);
+    Symbol *sym_main = make_func_symbol("stringsExample", fn_main, 0, NULL, TYPE_UNIT, false);
+    Symbol *sym_message = make_var_symbol("message", TYPE_STRING, false, 2);
+
+    fn_main->symbol = sym_main;
+    funcdef_set_return_type(fn_main, type_new(TYPE_UNIT));
+
+    Block *main_body = block_new();
+
+    // val message = "Ahoj"
+    Expr *init_msg = expr_new_string("Ahoj", 8);
+    init_msg->type = type_new(TYPE_STRING);
+    Stmt *def_msg = stmt_new_vardef(false, "message", NULL, init_msg, 8);
+    def_msg->as.vardef.symbol = sym_message;
+    block_add(main_body, def_msg);
+
+    // showLine(message)
+    Expr *arg_msg = expr_new_variable("message", 9);
+    arg_msg->type = type_new(TYPE_STRING);
+    arg_msg->as.variable.symbol = sym_message;
+    Expr *call_show_line = expr_new_call("showLine", 9);
+    call_show_line->type = type_new(TYPE_UNIT);
+    call_show_line->as.call.symbol = sym_show_line;
+    expr_call_add_arg(call_show_line, arg_msg);
+    block_add(main_body, stmt_new_expr(call_show_line, 9));
+
+    // print("to byla vitaci zprava")
+    Expr *arg_outro = expr_new_string("to byla vitaci zprava", 10);
+    arg_outro->type = type_new(TYPE_STRING);
+    Expr *call_print_outro = expr_new_call("print", 10);
+    call_print_outro->type = type_new(TYPE_UNIT);
+    call_print_outro->as.call.symbol = sym_print;
+    expr_call_add_arg(call_print_outro, arg_outro);
+    block_add(main_body, stmt_new_expr(call_print_outro, 10));
+
+    funcdef_set_body(fn_main, main_body);
+    program_add_func(program, fn_main);
+
+    return program;
+}

@@ -1,0 +1,3 @@
+if x then
+    while y do
+        x = 1
