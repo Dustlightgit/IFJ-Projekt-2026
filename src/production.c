@@ -282,6 +282,68 @@ const StaticProduction PRODUCTION_COMMAND_EXPR = {
         },
 };
 
+
+
+// Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
+// Pozn.: <exprNoID> je v implementaci nahrazen <expr>, viz pravidlo 30 vyse.
+const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR = {
+    .length = 1,
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
+};
+
+// Pravidlo 45 (Jednoduchy prikaz) (ptr): <command> => <commandSimple> <commandEnd>
+const StaticProduction PRODUCTION_COMMAND_SIMPLE = {
+    .length = 2,
+    .production =
+        {
+            GRAMMAR_NONTERMINAL(NONTERM_COMMAND_SIMPLE),
+            GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END),
+        },
+};
+
+// Pravidlo 46 (Ridici prikaz) (ptr): <command> => <commandControl>
+const StaticProduction PRODUCTION_COMMAND_CONTROL = {
+    .length = 1,
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_CONTROL)},
+};
+
+// Pravidlo 55 (Then vetev s blokem) (ptr): <thenBranch> => <block> <optionalElse>
+const StaticProduction PRODUCTION_THEN_BRANCH_BLOCK = {
+    .length = 2,
+    .production =
+        {
+            GRAMMAR_NONTERMINAL(NONTERM_BLOCK),
+            GRAMMAR_NONTERMINAL(NONTERM_OPTIONAL_ELSE),
+        },
+};
+
+// Pravidlo 56 (Then vetev s prikazem) (ptr): <thenBranch> => <commandSimple> <elseOrCommandEnd>
+// Pozn.: else musi nasledovat na stejnem radku jako inline then.
+const StaticProduction PRODUCTION_THEN_BRANCH_SIMPLE = {
+    .length = 2,
+    .production =
+        {
+            GRAMMAR_NONTERMINAL(NONTERM_COMMAND_SIMPLE),
+            GRAMMAR_NONTERMINAL(NONTERM_ELSE_OR_COMMAND_END),
+        },
+};
+
+// Pravidlo 57 (Then vetev s ridicim prikazem) (ptr): <thenBranch> => <commandControl>
+// Pozn.: Bez vetve else, else tak vzdy patri k nejblizsimu if.
+const StaticProduction PRODUCTION_THEN_BRANCH_CONTROL = {
+    .length = 1,
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_CONTROL)},
+};
+
+// Pravidlo 58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
+const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END = {
+    .length = 1,
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END)},
+};
+
+
+
+
 // Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
 const StaticProduction PRODUCTION_RETURN_VALUE_EXPR = {
     .length = 1,

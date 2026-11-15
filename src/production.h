@@ -185,6 +185,30 @@ extern const StaticProduction PRODUCTION_VAR;
 /// Pozn.: <exprNoID> z tabulky gramatiky je v implementaci nahrazen <expr>.
 extern const StaticProduction PRODUCTION_COMMAND_EXPR;
 
+
+/// Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
+/// Pozn.: nahradi PRODUCTION_COMMAND_EXPR, ktere se odstrani v LL tabulce.
+extern const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR;
+
+/// Pravidlo 45 (Jednoduchy prikaz) (ptr): <command> => <commandSimple> <commandEnd>
+extern const StaticProduction PRODUCTION_COMMAND_SIMPLE;
+
+/// Pravidlo 46 (Ridici prikaz) (ptr): <command> => <commandControl>
+extern const StaticProduction PRODUCTION_COMMAND_CONTROL;
+
+/// Pravidlo 55 (Then vetev s blokem) (ptr): <thenBranch> => <block> <optionalElse>
+extern const StaticProduction PRODUCTION_THEN_BRANCH_BLOCK;
+
+/// Pravidlo 56 (Then vetev s prikazem) (ptr): <thenBranch> => <commandSimple> <elseOrCommandEnd>
+extern const StaticProduction PRODUCTION_THEN_BRANCH_SIMPLE;
+
+/// Pravidlo 57 (Then vetev s ridicim prikazem, bez else) (ptr): <thenBranch> => <commandControl>
+extern const StaticProduction PRODUCTION_THEN_BRANCH_CONTROL;
+
+/// Pravidlo 58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
+extern const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END;
+
+
 /// Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
 extern const StaticProduction PRODUCTION_RETURN_VALUE_EXPR;
 

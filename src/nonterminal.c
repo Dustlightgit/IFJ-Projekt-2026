@@ -116,6 +116,17 @@ const char *nonterm_type_name(NonterminalType type) {
   case NONTERM_ARGS:
     return "seznam argumentu";
 
+  
+  case NONTERM_COMMAND_SIMPLE:
+    return "jednoduchy prikaz";
+  case NONTERM_COMMAND_CONTROL:
+    return "ridici prikaz";
+  case NONTERM_THEN_BRANCH:
+    return "vetev then";
+  case NONTERM_ELSE_OR_COMMAND_END:
+    return "else nebo konec prikazu";
+
+
   // Neni skutecny neterminal
   case NONTERM_LL_TABLE_COUNT:
   case NONTERM_COUNT:
