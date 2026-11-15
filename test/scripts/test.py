@@ -132,7 +132,7 @@ def run_tests():
                 output_file.write_text(output_text, encoding="utf-8")
 
             except OSError as error:
-                print(f"[FAIL] {test_dir.name}")
+                print(f"\033[33m[FAIL] {test_dir.name}\033[0m")
                 print(f"  - Chyba: {error}")
                 total_failed += 1
                 continue
@@ -150,22 +150,14 @@ def run_tests():
                 for line in output_text.splitlines()
                 if line.strip()
             ]
-
+            returncodemsg = ""
+            if result.returncode != 0:
+                returncodemsg = f"\033[90m  - Proces skoncil s kodem {result.returncode}\033[0m"
             if actual_lines == expected_lines:
-                print(f"[OK]   {test_dir.name}")
-                if result.returncode != 0:
-                    print(
-                        f"  - Proces skoncil s kodem "
-                        f"{result.returncode}"
-                    )
+                print(f"\033[92m[OK]\033[0m   {test_dir.name}      {returncodemsg}")
                 total_passed += 1
             else:
-                print(f"[FAIL] {test_dir.name}")
-                if result.returncode != 0:
-                    print(
-                        f"  - Proces skoncil s kodem "
-                        f"{result.returncode}"
-                    )
+                print(f"\033[91m[FAIL]\033[0m {test_dir.name}      {returncodemsg}")
                 total_failed += 1
 
                 max_lines = max(

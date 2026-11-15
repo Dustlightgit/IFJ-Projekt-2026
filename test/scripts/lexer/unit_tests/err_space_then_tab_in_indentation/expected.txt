@@ -1,0 +1,2 @@
+Error 1 (line 1): Odsazeni nesmi obsahovat tabulator
+EXIT CODE: 1
