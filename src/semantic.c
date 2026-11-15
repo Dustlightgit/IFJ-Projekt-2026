@@ -473,6 +473,7 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected) {
 
     // Clen neexistuje pro dany typ
     error_exit(ERR_TYPE, e->line, "Nepodporovany clen pro tento typ");
+    break;
   }
 
   default:
