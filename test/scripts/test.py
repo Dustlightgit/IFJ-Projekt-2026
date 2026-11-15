@@ -124,23 +124,12 @@ def run_tests():
                         check=False
                     )
 
-                output_file.write_text(
-                    result.stdout,
-                    encoding="utf-8"
-                )
-
+                parts = [p.rstrip("\n") for p in (result.stdout, result.stderr) if p]
                 if result.returncode != 0:
-                    print(f"[FAIL] {test_dir.name}")
-                    print(
-                        f"  - Proces skoncil s kodem "
-                        f"{result.returncode}"
-                    )
+                    parts.append(f"EXIT CODE: {result.returncode}")
 
-                    if result.stderr:
-                        print(f"  - {result.stderr.strip()}")
-
-                    total_failed += 1
-                    continue
+                output_text = "\n".join(parts) + ("\n" if parts else "")
+                output_file.write_text(output_text, encoding="utf-8")
 
             except OSError as error:
                 print(f"[FAIL] {test_dir.name}")
@@ -158,15 +147,25 @@ def run_tests():
 
             actual_lines = [
                 line.strip()
-                for line in result.stdout.splitlines()
+                for line in output_text.splitlines()
                 if line.strip()
             ]
 
             if actual_lines == expected_lines:
                 print(f"[OK]   {test_dir.name}")
+                if result.returncode != 0:
+                    print(
+                        f"  - Proces skoncil s kodem "
+                        f"{result.returncode}"
+                    )
                 total_passed += 1
             else:
                 print(f"[FAIL] {test_dir.name}")
+                if result.returncode != 0:
+                    print(
+                        f"  - Proces skoncil s kodem "
+                        f"{result.returncode}"
+                    )
                 total_failed += 1
 
                 max_lines = max(
