@@ -23,6 +23,9 @@
           na jeho vrcholu (prompt je v nonterminal.h).
         - xbalaka00 - vkladani na zasobnik predava priznak reduction_marker
           false (prompt je v parser_common.c).
+        - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL
+          a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
+          prompt je v reduction_table.h).
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -35,6 +38,7 @@
 #include "LL_table.h"
 #include "ast.h"
 #include "error.h"
+#include "grammar_symbol.h"
 #include "semantic_actions.h"
 #include "special_actions.h"
 

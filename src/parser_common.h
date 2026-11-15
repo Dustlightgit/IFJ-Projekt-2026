@@ -17,6 +17,8 @@
           tokenu (prompt je v nonterminal.h).
         - xbalaka00 - ParserStackEntry a parser_stack_push nesou priznak
           reduction_marker (prompt je v parser_common.c).
+        - xbalaka00 - include grammar_symbol.h pro GrammarSymbol (GrammarSymbol presunut do grammar_symbol.h,
+          prompt je v reduction_table.h).
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery a funkce pro praci
@@ -26,6 +28,7 @@
 #ifndef PARSER_COMMON_H
 #define PARSER_COMMON_H
 
+#include "grammar_symbol.h"
 #include "production.h"
 #include "semantic_types.h"
 #include "stack.h"

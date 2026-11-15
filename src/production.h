@@ -19,6 +19,10 @@
           odstranen, nahrazuje ho NONTERM_EXPR).
         - xbalaka00 - odkazy na excel s gramatikou zmeneny na
           parser_formalisms.xlsx.
+        - xbalaka00 - GrammarSymbol a makra GRAMMAR_TERMINAL
+          a GRAMMAR_NONTERMINAL presunuty do grammar_symbol.h,
+          STATIC_PRODUCTION_MAX_LENGTH snizena na 5 (prompt je v
+          reduction_table.h).
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
     prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
@@ -30,11 +34,9 @@
 #ifndef PRODUCTION_H
 #define PRODUCTION_H
 
-#include <stdbool.h>
 #include <stddef.h>
 
-#include "nonterminal.h"
-#include "token.h"
+#include "grammar_symbol.h"
 
 /*
     Prompt pro vychozi kostru souboru s GrammarSymbol a StaticProduction
@@ -88,44 +90,15 @@
 /**
  * @brief Maximalni pocet symbolu v jedne staticke produkci.
  *
- * Hodnota bude upravena pro nejlepsi vyuziti pameti, prozatim je dle
- * nejdelsiho pravidla, ktere ale neni staticke.
+ * Hodnota odpovida nejdelsi staticke produkci (pravidlo 51).
  */
-#define STATIC_PRODUCTION_MAX_LENGTH 9
-
-/**
- * @brief Symbol gramatiky, terminal nebo neterminal.
- */
-typedef struct {
-  bool is_terminal; ///< Odliseni terminalu od neterminalu
-  union {
-    TokenType terminal;          ///< Platne, pokud je is_terminal true
-    NonterminalType nonterminal; ///< Platne, pokud je is_terminal false
-  };
-} GrammarSymbol;
+#define STATIC_PRODUCTION_MAX_LENGTH 5
 
 /*
-    Prompt pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL je v souboru
-    LL_table.c.
+    GrammarSymbol a makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL jsou v souboru
+    grammar_symbol.h. Prompt pro jejich presun je v souboru reduction_table.h,
+    prompt pro makra je v souboru LL_table.c.
 */
-
-/**
- * @brief Inicializator GrammarSymbol pro terminal.
- *
- * Pouziva se pri inicializaci promenne nebo pole, napr.
- * GrammarSymbol symbol = GRAMMAR_TERMINAL(TOKEN_ID);
- */
-#define GRAMMAR_TERMINAL(t)                                                    \
-  { .is_terminal = true, .terminal = (t) }
-
-/**
- * @brief Inicializator GrammarSymbol pro neterminal.
- *
- * Pouziva se pri inicializaci promenne nebo pole, napr.
- * GrammarSymbol symbol = GRAMMAR_NONTERMINAL(NONTERM_TYPE);
- */
-#define GRAMMAR_NONTERMINAL(n)                                                 \
-  { .is_terminal = false, .nonterminal = (n) }
 
 /**
  * @brief Staticka produkce, prava strana pravidla ulozena primo ve strukture.

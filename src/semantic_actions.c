@@ -20,6 +20,8 @@
           neterminalu <IDcommand>.
         - xbalaka00 - push_terminal a push_nonterminal vkladaji zaznamy bez
           znacky redukce (prompt je v parser_common.c).
+        - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
+          prompt je v reduction_table.h).
 
     Tento soubor obsahuje semanticke akce pravidel LL parseru. Akce zatim
     pouze vypisuji cislo pravidla na stderr a vkladaji pravou stranu pravidla
@@ -33,6 +35,7 @@
 #include "error.h"
 #include <stdio.h>
 
+#include "grammar_symbol.h"
 #include "nonterminal.h"
 #include "parser_common.h"
 #include "production.h"

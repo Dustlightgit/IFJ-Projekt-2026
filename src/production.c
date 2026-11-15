@@ -17,6 +17,8 @@
           NONTERM_EXPR_NO_ID.
         - xbalaka00 - odkazy na excel s gramatikou zmeneny na
           parser_formalisms.xlsx.
+        - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
+          prompt je v reduction_table.h).
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
     semanticke akce, a to jak s predanim semantickeho ukazatele (ptr), tak bez
@@ -27,6 +29,7 @@
 
 #include "production.h"
 
+#include "grammar_symbol.h"
 #include "nonterminal.h"
 #include "token.h"
 
