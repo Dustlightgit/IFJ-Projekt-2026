@@ -415,10 +415,20 @@ const LLTableEntry LL_TABLE[NONTERM_COUNT][TOKEN_LL_TERM_COUNT] = {
 
     // Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
     // do vyrazoveho parseru
+
+    [NONTERM_EXPR] =
+        {
+            [TOKEN_STAR] = LL_CALLBACK(semantic_action_test_expr),
+        },
+    
+
+    ////// ZAKOMENTOVAL JSEM ZATIM ////////////////    
+    /*
     [NONTERM_EXPR] =
         {
             [TOKEN_STAR] = LL_PROD(PRODUCTION_TEST_EXPR_STAR),
         },
+    */
 };
 
 const LLTableEntry *ll_table_lookup(NonterminalType nonterm, TokenType terminal,
