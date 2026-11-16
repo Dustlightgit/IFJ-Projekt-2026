@@ -5,16 +5,19 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - pridana deklarace funkce precedence_parser (prompt je
+          zde).
 
     Hlavickovy soubor pro precedencni parser vyrazu (zalozeny na precedencni
-    tabulce) a jeho pomocne funkce. Zatim obsahuje jen provedeni redukce.
+    tabulce) a jeho pomocne funkce. Zatim obsahuje provedeni redukce a deklaraci jadra parseru.
 */
 
 #ifndef PRECEDENCE_PARSER_H
 #define PRECEDENCE_PARSER_H
 
+#include "ast.h"
 #include "parser_common.h"
+#include "semantic_types.h"
 #include "stack.h"
 
 /*
@@ -78,5 +81,58 @@
  * @param stack Zasobnik precedencniho parseru.
  */
 void parser_execute_reduction(const ParserContext *ctx, Stack *stack);
+
+/*
+    Prompt pro funkci precedence_parser je nize.
+*/
+
+/*
+    Prompt pro deklaraci a prazdnou hlavicku funkce precedence_parser. Stejny
+    prompt zpusobil zmeny take v precedence_parser.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dobrá, nyní asi můžeme přejít k samotnému jádru výrazového parseru.
+
+        Expr *precedence_parser(ParserContext *ctx, ReductionResult
+        *starting_stack_entry);
+
+        Precedenční parser obdrží parser context se společným vstupním tokenem
+        ze scanneru a také volitelný počáteční stack entry, který se využije
+        pouze ve speciální situaci jádrových pravidel 32 a 33 LL gramatiky -
+        rozlišení přiřazení od výrazu, který začíná ID. starting_stack_entry
+        tedy ve většině případů bude NULL. Parser vrací ukazatel na vytvořený
+        podstrom.
+
+        Stavba stromu však ještě probíhat nebude, proto prozatím budeme vracet
+        NULL (protože callbacky do všech redukcí prozatím dají NULL jako
+        sémantický pointer).
+
+        Víš ty co, možná ho zkusím napsat ručně, ať nezakrním v psaní kódu.
+        Vytvoř pro něj tedy jen deklaraci a prázdnou hlavičku funkce v
+        precedence_parser.*
+*/
+
+/**
+ * @brief Jadro precedencniho parseru vyrazu.
+ *
+ * Zpracuje vyraz ze vstupniho proudu sdileneho pres ctx a vrati ukazatel na
+ * vytvoreny podstrom. Pri chybe ukonci program pres error_exit. Funkce si
+ * vytvori vlastni zasobnik, takze se muze rekurzivne volat (napr. pro
+ * ternarni if).
+ *
+ * Volitelny pocatecni zaznam se pouziva jen ve specialnim pripade jadrovych
+ * pravidel 32 a 33 LL gramatiky, tedy pri rozliseni prirazeni od vyrazu
+ * zacinajiciho ID, kdy je ID uz zpracovano LL parserem. Ve vetsine pripadu je
+ * NULL.
+ *
+ * Stavba stromu zatim neprobiha, funkce prozatim vraci NULL.
+ *
+ * @param ctx Spolecny kontext parseru, vstupni token je uz nacteny.
+ * @param starting_stack_entry Volitelny pocatecni zaznam zasobniku (symbol,
+ *        semanticky ukazatel a anotace), nebo NULL.
+ * @return Ukazatel na vytvoreny podstrom vyrazu, prozatim NULL.
+ */
+Expr *precedence_parser(ParserContext *ctx,
+                        ReductionResult *starting_stack_entry);
 
 #endif // PRECEDENCE_PARSER_H

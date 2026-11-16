@@ -5,7 +5,8 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - pridana prazdna hlavicka funkce precedence_parser
+          (prompt je v precedence_parser.h).
 
     Tento soubor obsahuje implementaci precedencniho parseru vyrazu a jeho
     pomocnych funkci. Prompt pro vznik souboru je v souboru
@@ -52,4 +53,13 @@ void parser_execute_reduction(const ParserContext *ctx, Stack *stack) {
   // Vlozeni redukovaneho neterminalu
   parser_stack_push(stack, result.symbol, result.semantic_pointer,
                     result.annotation, false);
+}
+
+Expr *precedence_parser(ParserContext *ctx,
+                        ReductionResult *starting_stack_entry) {
+  (void)ctx;
+  (void)starting_stack_entry;
+
+  // Prozatim bez stavby stromu
+  return NULL;
 }
