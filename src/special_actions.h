@@ -8,6 +8,8 @@
         - xbalaka00 - special_action_id vytvari AST uzel pro ID pri anotaci
           CONTEXT_ID_COMMAND.
         - xbalaka00 - pridana prozatim prazdna deklarace pro specialni akci predzpracovani terminalu
+        - xbalaka00 - doplnena dokumentace a funkcionalita akce
+          special_action_precedence_preprocessing (prompt je zde).
 
     Tento soubor obsahuje deklarace specialnich akci parseru, tedy callbacku,
     ktere nejsou vazane na pravidlo LL tabulky a maji vlastni rozhrani
@@ -78,7 +80,83 @@
 void special_action_id(SemanticContext *ctx, void *semantic_pointer,
                        ContextAnnotation annotation, const Token *token);
 
-/* Popis a implementace budou doplneny pozdeji */
+/*
+    Prompt pro specialni akci predzpracovani terminalu precedencniho parseru.
+    Stejny prompt zpusobil zmeny take v special_actions.c, jeho zneni je
+    pouze zde.
+
+    Prompt pro Claude:
+        Dobrá, nyní bych vyplnil speciální akci
+        special_action_precedence_preprocessing, aby tam nebyla jen prázdná
+        deklarace bez dokumentace.
+
+        Akce přijme ukazatel na token, a provede následující:
+
+        * pokud se jedná o token s atributem, tzn. ID/ID_OPERATOR nebo literál
+          string, double nebo int, tak pro něj vytvoří příslušný uzel AST a
+          vrátí ukazatel na něj. Jak pro ID, tak pro ID_OPERATOR se vytvoří
+          uzel pomocí expr_new_variable. Pro ostatní se použije
+          expr_new_[int|double|string].
+        * pro ostatní tokeny vrátí NULL.
+
+        Důvodem je, že je nutné zpracovat atribut tokenu ještě před jeho
+        uvolněním, a takto bude atribut rovnou uchován v uzlu AST, nebude tedy
+        nutné si název ID apod. někam kopírovat... U literálu a ID na místě
+        běžného operandu by stejně proběhla tvorba AST uzlu, takto se jen
+        provede ještě před redukcí na E; tam, kde ID nebo ID_OPERATOR nakonec
+        nebude využito jako listová proměnná (např. název funkce u volání
+        funkce, nebo ID_OPERATOR, tedy ID použité jako infixový operátor) se
+        využije název uložený v tomto uzlu AST pro vytvoření skutečně
+        potřebného uzlu a ten pomocný se uvolní.
+        Bude tedy existovat pravidlo, že terminály s atributem na stack
+        precedenčního parseru putují již jako AST node a callback pro redukci
+        literálu/ID na E pointer pouze předá. Chování parseru ve speciálním
+        případě jádrových pravidel 32 a 33 pro rozlišení přiřazení a výrazu,
+        který začíná na ID, s tímto již počítá a pokud tedy prediktivní
+        parser zavolá precedenční se specifikovaným prvním terminálem, předá
+        také ukazatel na uzel AST jako jeho semantic_pointer - proto se tento
+        preprocessing neprovádí i na tomto specifikovaném vstupním tokenu.
+
+        U ostatních symbolů podobné předvytvoření AST uzlu nutné není, proto
+        na stack poputují se sémantickým ukazatelem NULL a AST se vytvoří
+        normálně v sémantických akcích precedenčního parseru.
+*/
+
+/**
+ * @brief Specialni akce predzpracovani vstupniho terminalu precedencniho
+ * parseru.
+ *
+ * Jadro precedencniho parseru ji vola jednou pro kazdy vstupni token, a to
+ * po vyhodnoceni prediktoru (token je tedy pripadne uz prebarveny z TOKEN_ID
+ * na TOKEN_ID_OPERATOR) a pred jeho zpracovanim a uvolnenim. Atribut tokenu
+ * je tak zpracovan driv, nez ho parser_advance uvolni.
+ *
+ * Pro tokeny s atributem vytvori uzel AST a vrati ukazatel na nej:
+ * - TOKEN_ID a TOKEN_ID_OPERATOR: expr_new_variable (jmeno z atributu),
+ * - TOKEN_INT_LIT: expr_new_int,
+ * - TOKEN_DOUBLE_LIT: expr_new_double,
+ * - TOKEN_STRING_LIT: expr_new_string.
+ * Pro ostatni tokeny vrati NULL.
+ *
+ * Vraceny ukazatel jadro ulozi jako semanticky ukazatel terminalu na zasobniku
+ * precedencniho parseru, terminaly s atributem tedy na zasobniku jsou uz
+ * uzlem AST a semanticka akce redukce literalu nebo ID na E ukazatel pouze
+ * preda. Pokud se ID nebo ID_OPERATOR nakonec nepouzije jako listova
+ * promenna (napr. nazev volane funkce nebo ID pouzite jako infixovy operator),
+ * vezme se z uzlu jmeno, vytvori se skutecne potrebny uzel a pomocny uzel se
+ * uvolni. Tento zpusob umoznuje, aby atribut tokenu zustal uchovan v uzlu AST
+ * a nebylo ho treba nikam jinam kopirovat.
+ *
+ * Akce se neprovadi na pocatecnim terminalu, ktery prediktivni parser predava
+ * precedencnimu parseru (jadrova pravidla 32 a 33); u nej prediktivni parser
+ * predava uzel AST rovnou jako semanticky ukazatel.
+ *
+ * @param input_token Vstupni token, nesmi byt NULL. Token se nemeni, akce si
+ *        text atributu predava funkci expr_new_*, token ho uvolni pozdeji
+ *        parser_advance.
+ * @return Ukazatel na vytvoreny uzel AST (Expr *), nebo NULL pro token bez
+ *         atributu.
+ */
 void *special_action_precedence_preprocessing(Token *input_token);
 
 #endif // SPECIAL_ACTIONS_H

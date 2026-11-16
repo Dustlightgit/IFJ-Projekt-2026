@@ -8,6 +8,8 @@
         - xbalaka00 - special_action_id vytvari AST uzel pro ID pri anotaci
           CONTEXT_ID_COMMAND.
         - xbalaka00 - pridana prozatim prazdna funkce pro specialni akci predzpracovani terminalu
+        - xbalaka00 - implementace special_action_precedence_preprocessing
+          (prompt je v special_actions.h).
 
     Tento soubor obsahuje specialni akce parseru, ktere nejsou vazane na
     pravidlo LL tabulky. Zatim jen kostry, funkcionalita se doplni pri
@@ -25,6 +27,8 @@
 /*
     Prompt pro specialni akci pro ID je v souboru special_actions.h. Prompt
     pro chovani akce pro CONTEXT_ID_COMMAND je v souboru predictive_parser.c.
+    Prompt pro specialni akci predzpracovani terminalu precedencniho parseru
+    je v souboru special_actions.h.
 */
 
 void special_action_id(SemanticContext *ctx, void *semantic_pointer,
@@ -68,8 +72,26 @@ void special_action_id(SemanticContext *ctx, void *semantic_pointer,
   }
 }
 
-// Bude doplneno pozdeji
 void *special_action_precedence_preprocessing(Token *input_token) {
-  (void)input_token;
-  return NULL;
+  switch (input_token->type) {
+  case TOKEN_ID:
+  case TOKEN_ID_OPERATOR:
+    // ID i ID_OPERATOR nesou jmeno, rozhodnuti o skutecnem uzlu padne az pri
+    // redukci
+    return expr_new_variable(input_token->value.text, input_token->line);
+
+  case TOKEN_INT_LIT:
+    // Atribut tokenu je long long, uzel AST uchovava int
+    return expr_new_int((int)input_token->value.int_val, input_token->line);
+
+  case TOKEN_DOUBLE_LIT:
+    return expr_new_double(input_token->value.double_val, input_token->line);
+
+  case TOKEN_STRING_LIT:
+    return expr_new_string(input_token->value.text, input_token->line);
+
+  // Ostatni tokeny atribut nemaji
+  default:
+    return NULL;
+  }
 }
