@@ -12,6 +12,9 @@
           v SemanticContext.
         - xbalaka00 - pridany typy ReductionResult a PrecedenceSemanticAction
           (semanticka akce precedencniho parseru), include grammar_symbol.h.
+        - xbalaka00 - ReductionResult prejmenovan na AnnotatedSymbol, protoze
+          uz neni jen vysledkem redukce, ale obecne symbol s semantickym
+          ukazatelem a anotaci (prompt je zde).
 
     Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontext
     tokenu ID, semanticky kontext a typ callbacku semanticke akce. Je urcen
@@ -278,7 +281,8 @@ typedef void (*SemanticCallback)(SemanticContext *ctx, void *semantic_pointer,
 
 /*
     Prompt pro semantickou akci precedencniho parseru (PrecedenceSemanticAction
-    a ReductionResult), polozku redukcni tabulky, tabulku redukci
+    a ReductionResult, pozdeji prejmenovan na AnnotatedSymbol), polozku
+    redukcni tabulky, tabulku redukci
     v reduction_table.* a funkci parser_stack_peek. Stejny prompt zpusobil
     zmeny take v reduction_table.h, reduction_table.c, parser_common.h
     a parser_common.c, jeho zneni je pouze zde. V promptu je uvedeno
@@ -346,19 +350,51 @@ typedef void (*SemanticCallback)(SemanticContext *ctx, void *semantic_pointer,
         Tabulka bude vyplněna a callbacky budou vytvořeny až později.
 */
 
+/*
+    Prompt pro prejmenovani ReductionResult na AnnotatedSymbol. Stejny prompt
+    zpusobil zmeny take v precedence_parser.h a precedence_parser.c, jeho
+    zneni je pouze zde. Nazev AnnotatedSymbol vybral Claude. Deklarace typu
+    v tomto souboru jiz byla, k presunu proto nedoslo.
+
+    Prompt pro Claude:
+        Poslední věc, kterou jsem udělal, je vytvoření kódu jádra
+        precedenčního parseru. Využil jsem u toho strukturu ReductionResult,
+        která původně byla myšlena jako návratový typ callbacku precedenčního
+        parseru, ve kterém akce určí, na který neterminál má být handle
+        redukován. Použil jsem ho však i jako vstup precedenční analýzy pro
+        specifikování prvotního terminálu na vstupu, aby bylo možné pracovat
+        se speciálním chováním pravidel rozlišujících přiřazení a výraz
+        začínající na ID.
+
+        Proto myslím, že název ReductionResult možná už není výstižný, protože
+        už nespecifikuje pouze výsledek redukce, tedy neterminál. Beze změny
+        funkcionality kódu bych ho přejmenoval na SymbolWithMetadata nebo na
+        SymbolWithContext nebo AnnotatedSymbol (asi vyber, co zní nejlépe) a
+        jeho deklaraci přesunul do semantic_types.h. Proveď tuto změnu a uprav
+        příslušně importy v projektu tak, aby tento přesun zohlednily.
+        Struktura tedy bude obecněji pojatá jako symbol, u kterého jsou
+        uložena i sémantická anotace a pointer, a slouží spíše pro snížení
+        množství parametrů funkcí při přesunu dat. Využit bude však přesně na
+        stejných místech jako stávající ReductionResult.
+*/
+
 /**
- * @brief Vysledek redukce, ktery semanticka akce predava jadru precedencniho
- * parseru.
+ * @brief Symbol gramatiky doplneny o semanticky ukazatel a kontextovou
+ * anotaci.
  *
- * Z techto hodnot jadro sestavi novy ParserStackEntry s redukovanym
- * neterminalem. Priznak reduction_marker nastavuje jadro samo.
+ * Slouzi ke snizeni poctu parametru funkci pri predavani dat budouciho zaznamu
+ * zasobniku. Pouziva se na dvou mistech: jako vystup semanticke akce
+ * precedencniho parseru (neterminal, na ktery se pravidlo redukuje) a jako
+ * volitelny pocatecni terminal vstupu precedencniho parseru. Z techto hodnot
+ * jadro sestavi novy ParserStackEntry. Priznak reduction_marker nastavuje
+ * jadro samo.
  */
 typedef struct {
-  GrammarSymbol symbol;         ///< Neterminal, na ktery se pravidlo redukuje
+  GrammarSymbol symbol;         ///< Symbol, u vysledku redukce neterminal
   void *semantic_pointer;       ///< Semanticky ukazatel noveho zaznamu, obvykle
                                 ///< hotovy podstrom
   ContextAnnotation annotation; ///< Kontextova anotace noveho zaznamu
-} ReductionResult;
+} AnnotatedSymbol;
 
 /**
  * @brief Semanticka akce precedencniho parseru, reprezentuje redukcni pravidlo.
@@ -384,6 +420,6 @@ typedef struct {
  *        vlozi do noveho zaznamu na zasobniku.
  */
 typedef void (*PrecedenceSemanticAction)(const Stack *stack, int line,
-                                         ReductionResult *result);
+                                         AnnotatedSymbol *result);
 
 #endif // SEMANTIC_TYPES_H

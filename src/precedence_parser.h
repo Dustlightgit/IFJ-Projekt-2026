@@ -10,6 +10,8 @@
         - xbalaka00 - upravena deklarace precedence_parser
         - xbalaka00 - pridana deklarace a dokumentace funkce
           parser_execute_directive (prompt je zde).
+        - xbalaka00 - ReductionResult prejmenovan na AnnotatedSymbol (prompt
+          je v semantic_types.h).
 
     Hlavickovy soubor pro precedencni parser vyrazu (zalozeny na precedencni
     tabulce) a jeho pomocne funkce. Zatim obsahuje provedeni redukce,
@@ -69,7 +71,7 @@
  * 1. Sestavi handle ze zasobniku (parser_build_handle).
  * 2. Vyhleda v redukcni tabulce semantickou akci (reduction_table_lookup).
  * 3. Zavola akci, handle je v tu chvili jeste na zasobniku. Akce vrati pres
- *    ReductionResult symbol, semanticky ukazatel a anotaci noveho zaznamu.
+ *    AnnotatedSymbol symbol, semanticky ukazatel a anotaci noveho zaznamu.
  * 4. Vyklidi handle ze zasobniku (tolikrat parser_stack_pop, kolik je delka
  *    handle).
  * 5. Smaze znacku redukce ze zaznamu na vrcholu, protoze redukce, kterou
@@ -169,6 +171,8 @@ bool parser_execute_directive(ParserContext *ctx, Stack *stack,
                               void *semantic_pointer);
 
 /*
+    Prompt pro prejmenovani ReductionResult na AnnotatedSymbol je v souboru
+    semantic_types.h.
     Prompt pro funkci precedence_parser je nize.
 */
 
@@ -218,6 +222,6 @@ bool parser_execute_directive(ParserContext *ctx, Stack *stack,
  *        semanticky ukazatel a anotace), nebo NULL.
  * @return Ukazatel na vytvoreny podstrom vyrazu, prozatim NULL.
  */
-Expr *precedence_parser(ParserContext *ctx, ReductionResult *starting_terminal);
+Expr *precedence_parser(ParserContext *ctx, AnnotatedSymbol *starting_terminal);
 
 #endif // PRECEDENCE_PARSER_H

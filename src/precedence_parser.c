@@ -13,6 +13,8 @@
           provadi jednou pro kazdy token, opravena ukoncovaci podminka
           a kontroly prazdneho vyrazu, terminalu v pocatecnim zaznamu
           a zacykleni (prompt je v precedence_parser.h).
+        - xbalaka00 - ReductionResult prejmenovan na AnnotatedSymbol (prompt
+          je v semantic_types.h).
 
     Tento soubor obsahuje implementaci precedencniho parseru vyrazu a jeho
     pomocnych funkci. Prompt pro vznik souboru je v souboru
@@ -54,7 +56,7 @@ void parser_execute_reduction(const ParserContext *ctx, Stack *stack) {
   PrecedenceSemanticAction action = reduction_table_lookup(&handle, line);
 
   // Provedeni akce, handle je v tu chvili stale na zasobniku
-  ReductionResult result = {0};
+  AnnotatedSymbol result = {0};
   action(stack, line, &result);
 
   // Redukci musi vzniknout neterminal, jinak je chyba v akci
@@ -136,7 +138,7 @@ bool parser_execute_directive(ParserContext *ctx, Stack *stack,
 }
 
 Expr *precedence_parser(ParserContext *ctx,
-                        ReductionResult *starting_terminal) {
+                        AnnotatedSymbol *starting_terminal) {
 
   // Priprava stacku
   Stack stack;
