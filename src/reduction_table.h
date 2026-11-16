@@ -10,11 +10,13 @@
         - xbalaka00 - pridana polozka ReductionTableEntry, konstanta
           REDUCTION_TABLE_SIZE a deklarace tabulky REDUCTION_TABLE (prompt je
           v semantic_types.h).
+        - xbalaka00 - tabulka REDUCTION_TABLE je vyplnena (prompt je
+          v reduction_table.c), upravena dokumentace.
 
-    Tento soubor bude obsahovat tabulku redukcnich pravidel (pravidel vyrazove
+    Tento soubor obsahuje tabulku redukcnich pravidel (pravidel vyrazove
     gramatiky), ktera mapuje handle jednotlivych pravidel na jejich semanticke
     akce. Obsahuje vyhledavaci prvek tabulky (handle), polozku tabulky
-    a deklaraci tabulky. Tabulka je zatim prazdna.
+    a deklaraci tabulky.
 */
 
 #ifndef REDUCTION_TABLE_H
@@ -84,7 +86,8 @@ typedef struct {
 
 /*
     Prompt pro polozku ReductionTableEntry a tabulku REDUCTION_TABLE je
-    v souboru semantic_types.h.
+    v souboru semantic_types.h. Prompt pro vyplneni tabulky je v souboru
+    reduction_table.c.
 */
 
 /**
@@ -108,7 +111,8 @@ typedef struct {
  * Mapuje handle pravidla na jeho semantickou akci. Polozky jsou serazeny
  * vzestupne podle delky handle (poradi neodpovida cislum pravidel), na jejich
  * poradi se spoleha funkce reduction_table_lookup. Pripadne nevyuzite polozky
- * s action NULL jsou az na konci tabulky. Prozatim je tabulka prazdna.
+ * s action NULL jsou az na konci tabulky. Tabulka obsahuje vsech 40 pravidel
+ * vyrazove gramatiky (E0 az E39), nevyuzite polozky tedy zatim zadne nejsou.
  */
 extern const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE];
 
