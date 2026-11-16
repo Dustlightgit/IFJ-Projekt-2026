@@ -8,9 +8,12 @@
         - xbalaka00 - pridana deklarace funkce precedence_parser (prompt je
           zde).
         - xbalaka00 - upravena deklarace precedence_parser
+        - xbalaka00 - pridana deklarace a dokumentace funkce
+          parser_execute_directive (prompt je zde).
 
     Hlavickovy soubor pro precedencni parser vyrazu (zalozeny na precedencni
-    tabulce) a jeho pomocne funkce. Zatim obsahuje provedeni redukce a deklaraci jadra parseru.
+    tabulce) a jeho pomocne funkce. Zatim obsahuje provedeni redukce,
+    provedeni direktivy a deklaraci jadra parseru.
 */
 
 #ifndef PRECEDENCE_PARSER_H
@@ -82,6 +85,88 @@
  * @param stack Zasobnik precedencniho parseru.
  */
 void parser_execute_reduction(const ParserContext *ctx, Stack *stack);
+
+/*
+    Prompt pro kontrolu rucne napsaneho jadra precedencniho parseru,
+    doxygen dokumentaci funkce parser_execute_directive a opravy v souborech
+    precedence_parser.c, precedence_table.c, precedence_table.h
+    a special_actions.c/.h. Jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Zde jsou aktualizované soubory s mojí ruční implementací jádra
+        precedenčního parseru - můžeš jimi aktualizovat své soubory. Snad jsem
+        všechny záznamy a komentáře doplnil správně; myslím, že jsem však
+        neudělal doxygen komentář k funkci parser_execute_directive.
+        Zkontroluješ, že jsem někde na nic nezapomněl? Nějaké kontroly jsem do
+        kódu přidal, avšak pokud myslíš, že by se někde hodila další, klidně
+        ji doplň.
+
+        parser_execute_directive dostane kromě kontextu a stacku i příznak,
+        zda má využít specifikovaný terminál, poté argument s terminálem
+        (který se ignoruje, pokud je příznak false) a sémantický pointer,
+        který se má vložit do záznamu, pokud by nějaký záznam měl být vložen.
+
+        Funkce prakticky implementuje provedení direktiv. Pokud není
+        specifikovaný terminál, funkce použije ten vstupní, a rovnou zavolá
+        další, pokud to tedy direktiva přikazuje. Pokud je terminál
+        specifikován, pak se na vstupní token nesahá. Sémantickou anotaci
+        nakonec dává none, protože podle mě nebude potřeba, a i kdyby
+        náhodou, tak se doplní později.
+
+        No a jádro parseru jsem napsal tak, jak bych ti ho stejně zdlouhavě
+        popsal textem. Nejdřív připraví stack a přízaky, potom zpracuje
+        specifikovaný vstupní terminál, jako kdyby byl vstupní, následně
+        probíhá hlavní smyčka parseru, dokud není detekován ukončovač.
+        Pokud je na vstupu if, tak se zpracuje ve zvláštní větvi, která
+        převezme odpovědnost za celý stav parseru (zajistí správnou změnu
+        redukční značky, příznaku parser_running i prediktoru; bude u nich
+        totiž záviset, jakým způsobem byl ternární if zpracován (pravidlo 53
+        nebo 54)). Jinak se provede direktiva a vyhodnotí prediktor.
+
+        Při ukončování parseru se opět provádí kroky dle nařízení
+        precedenční tabulky, avšak místo vstupního token je použit
+        TOKEN_DOLLAR, protože ukončovač se nesmí změnit - je to již první
+        token vyšší instance precedenčního parseru. Precedenční tabulka při
+        správném návrhu pro tento terminál přikazuje pouze redukce. Na konci
+        se ověří, že stack skončil tak, jak je předpokládané ($ E) a vrátí se
+        sémantický pointer z E (vytvořený podstrom, až ho callbacky budou
+        skládat).
+
+        Větev pro ternární if ještě není hotová, stejně tak speciální akci
+        pro preprocessing (a dokumentaci k ní) doplníme za chvíli.
+*/
+
+/**
+ * @brief Provede direktivu precedencni tabulky.
+ *
+ * Najde terminal nejblize vrcholu zasobniku (parser_top_terminal) a vyhleda
+ * direktivu v precedencni tabulce pro dvojici tento terminal a vstupni
+ * terminal. Podle direktivy:
+ * - DIRECTIVE_REDUCTION_EXECUTE: provede redukci (parser_execute_reduction),
+ *   vstup se nemeni.
+ * - DIRECTIVE_REDUCTION_MARKER: nastavi znacku redukce u terminalu nejblize
+ *   vrcholu a pak postupuje jako u DIRECTIVE_SHIFT_SYMBOL.
+ * - DIRECTIVE_SHIFT_SYMBOL: vlozi vstupni terminal na zasobnik se
+ *   semantickym ukazatelem a anotaci CONTEXT_NONE. Pokud neni pouzit
+ *   specifikovany terminal, posune se take vstup (parser_advance).
+ *
+ * Neplatna kombinace terminalu (DIRECTIVE_ERROR) skonci chybou uz pri
+ * vyhledani v precedencni tabulce.
+ *
+ * @param ctx Spolecny kontext parseru, vstupni token je uz nacteny.
+ * @param stack Zasobnik precedencniho parseru.
+ * @param use_specified_terminal Je-li true, pouzije se misto vstupniho tokenu
+ *        terminal v argumentu terminal a vstup se nemeni.
+ * @param terminal Terminal pouzity misto vstupniho tokenu, ignoruje se, je-li
+ *        use_specified_terminal false.
+ * @param semantic_pointer Semanticky ukazatel noveho zaznamu, pokud se nejaky
+ *        vklada na zasobnik.
+ * @return True, pokud byl spotrebovan vstupni token (vstup byl posunut), jinak
+ *         false (redukce nebo pouzit specifikovany terminal).
+ */
+bool parser_execute_directive(ParserContext *ctx, Stack *stack,
+                              bool use_specified_terminal, TokenType terminal,
+                              void *semantic_pointer);
 
 /*
     Prompt pro funkci precedence_parser je nize.

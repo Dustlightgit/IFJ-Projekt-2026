@@ -8,6 +8,11 @@
         - xbalaka00 - pridana prazdna hlavicka funkce precedence_parser
           (prompt je v precedence_parser.h).
         - xbalaka00 - napsana implementace precedencniho parseru
+        - xbalaka00 - kontrola a opravy jadra: parser_execute_directive vraci,
+          zda byl spotrebovan vstupni token, predikce a predzpracovani se
+          provadi jednou pro kazdy token, opravena ukoncovaci podminka
+          a kontroly prazdneho vyrazu, terminalu v pocatecnim zaznamu
+          a zacykleni (prompt je v precedence_parser.h).
 
     Tento soubor obsahuje implementaci precedencniho parseru vyrazu a jeho
     pomocnych funkci. Prompt pro vznik souboru je v souboru
@@ -74,7 +79,7 @@ void parser_execute_reduction(const ParserContext *ctx, Stack *stack) {
                     result.annotation, false);
 }
 
-void parser_execute_directive(ParserContext *ctx, Stack *stack,
+bool parser_execute_directive(ParserContext *ctx, Stack *stack,
                               bool use_specified_terminal, TokenType terminal,
                               void *semantic_pointer) {
   int line = ctx->current_token.line;
@@ -93,6 +98,9 @@ void parser_execute_directive(ParserContext *ctx, Stack *stack,
   // Vyhledani direktivy v precedencni tabulce
   PrecedenceDirective directive =
       precedence_table_lookup(top_terminal->symbol.terminal, input_index, line);
+
+  // Priznak, zda byl spotrebovan vstupni token
+  bool input_consumed = false;
 
   // Rozhodnuti o provedene akci
   switch (directive) {
@@ -113,20 +121,22 @@ void parser_execute_directive(ParserContext *ctx, Stack *stack,
                       semantic_pointer, CONTEXT_NONE, false);
 
     // Pokud byl misto vstupniho tokenu vyuzit specifikovany terminal, vstup nesmi byt zmenen
-    if (!use_specified_terminal)
+    if (!use_specified_terminal) {
       parser_advance(ctx);
+      input_consumed = true;
+    }
     break;
 
   // DIRECTIVE_ERROR byl jiz osetren pri vyhledavani direktivy
   default:
     break;
   }
+
+  return input_consumed;
 }
 
 Expr *precedence_parser(ParserContext *ctx,
                         ReductionResult *starting_terminal) {
-  (void)ctx;
-  (void)starting_terminal;
 
   // Priprava stacku
   Stack stack;
@@ -144,9 +154,14 @@ Expr *precedence_parser(ParserContext *ctx,
 
   if (starting_terminal != NULL) {
     // Pokud byl specifikovany pocatecni terminal, je pro nej provedena akce, jako kdyby prisel normalni cestou na vstup.
-    // Toto se provede nehlede na hodnotu priznaku behu parseru - tento terminal se povazuje za prvni symbol vstupu.
+    // Toto se provede bez ohledu na hodnotu priznaku behu parseru - tento terminal se povazuje za prvni symbol vstupu.
     // Pokud se nejedna o validni znak vyrazove analyzy, bude vyhozena chyba pri indexaci tabulky.
     // Jeho metadata jsou pripadne vlozena na zasobnik spolu se symbolem.
+
+    // Pocatecni zaznam musi nest terminal
+    if (!starting_terminal->symbol.is_terminal)
+      error_exit(ERR_INTERNAL, ctx->current_token.line,
+                 "Precedencni parser: Pocatecni zaznam neni terminal.");
 
     // Vyhodnoceni prediktoru
     // Vstupni token musi zustat beze zmeny, proto se vytvori falesny vstupni token
@@ -157,7 +172,7 @@ Expr *precedence_parser(ParserContext *ctx,
 
     token_free(&fake_token);
 
-    // Neni nutne zohlednit prebarveni ID na ID_OPERAND, protoze u prvniho symbolu se nikdy neprovede
+    // Neni nutne zohlednit prebarveni ID na ID_OPERATOR, protoze u prvniho symbolu se nikdy neprovede
 
     // Provedeni direktivy dle tabulky
     parser_execute_directive(ctx, &stack, true,
@@ -165,7 +180,7 @@ Expr *precedence_parser(ParserContext *ctx,
                              starting_terminal->semantic_pointer);
   }
 
-  // Hlavni smycka precedencniho parseru
+  // Hlavni smycka precedencniho parseru, kazda jeji iterace zpracuje jeden vstupni token
   while (parser_running) {
 
     if (ctx->current_token.type == TOKEN_KW_IF) {
@@ -179,30 +194,61 @@ Expr *precedence_parser(ParserContext *ctx,
                  "Precedencni parser: Ternarni if prozatim neni podporovan.");
     } else {
 
-      // Provedeni specialni akce pro predzpracovani vstupniho terminalu
+      // Vyhodnoceni prediktoru, vstupni token se pripadne prebarvi z ID na ID_OPERATOR.
+      // Provadi se prave jednou pro kazdy vstupni token, a to pred jeho zpracovanim,
+      // aby byl pro indexaci tabulky pouzit uz prebarveny token.
+      predictor = parser_evaluate_predictor(&ctx->current_token, predictor);
+
+      // Provedeni specialni akce pro predzpracovani vstupniho terminalu, take jednou pro kazdy token
       void *preprocessing_result =
           special_action_precedence_preprocessing(&ctx->current_token);
 
-      // Provedeni direktivy dle precedencni tabulky (ctvrty argument je ignorovan)
-      parser_execute_directive(ctx, &stack, false, TOKEN_KW_IF,
-                               preprocessing_result);
+      // Provadeni direktiv dle precedencni tabulky, dokud neni vstupni token
+      // spotrebovan (jedna z direktiv muze byt redukce, ktera vstup nemeni).
+      // Kazda platna redukce odstrani ze zasobniku aspon jeden terminal, pocet
+      // pruchodu je proto omezen velikosti zasobniku (+ 1 pro vlozeni tokenu).
+      size_t directives_left = stack_size(&stack) + 1;
+      bool input_consumed = false;
 
-      // Vyhodnoceni priznaku behu a prediktoru
+      while (!input_consumed) {
+        if (directives_left-- == 0)
+          error_exit(ERR_INTERNAL, ctx->current_token.line,
+                     "Precedencni parser: Zacyklene provadeni redukci.");
+
+        // Ctvrty argument je ignorovan
+        input_consumed = parser_execute_directive(
+            ctx, &stack, false, TOKEN_KW_IF, preprocessing_result);
+      }
+
+      // Vyhodnoceni priznaku behu, na vstupu je uz dalsi token
       parser_running = !parser_is_expression_terminator(&ctx->current_token);
-      predictor = parser_evaluate_predictor(&ctx->current_token, predictor);
     }
   }
 
   // Ukoncovaci smycka precedencniho parseru
-  // Smycka bezi, dokud na zasobniku nezustane pouze $ a neterminal
-  while (stack_size(&stack) > 2 &&
-         parser_stack_top(&stack)->symbol.is_terminal) {
+  // Smycka bezi, dokud na zasobniku nezustane pouze $ a neterminal. Pokud je na zasobniku
+  // jen $, je vyraz prazdny, smycka se neprovede.
+  size_t reductions_left = stack_size(&stack);
+
+  while (stack_size(&stack) > 1 &&
+         (stack_size(&stack) > 2 ||
+          parser_stack_top(&stack)->symbol.is_terminal)) {
+
+    // Kazda platna redukce odstrani ze zasobniku aspon jeden terminal
+    if (reductions_left-- == 0)
+      error_exit(ERR_INTERNAL, ctx->current_token.line,
+                 "Precedencni parser: Zacyklene provadeni redukci.");
 
     // Za vstupni terminal je povazovan $,
     parser_execute_directive(ctx, &stack, true, TOKEN_DOLLAR, NULL);
 
     // Neprovadi se vyhodnoceni prediktoru (bylo by zbytecne)
   }
+
+  // Na zasobniku zustalo jen $, vyraz je prazdny
+  if (stack_size(&stack) < 2)
+    error_exit(ERR_SYNTAX, ctx->current_token.line,
+               "Precedencni parser: Vyraz je prazdny.");
 
   // Overeni, ze dno zasobniku zustalo neporuseno
   ParserStackEntry *stack_floor = parser_stack_peek(&stack, 1);
@@ -216,7 +262,7 @@ Expr *precedence_parser(ParserContext *ctx,
   ParserStackEntry *result = parser_stack_top(&stack);
 
   // Overeni, ze se skutecne jedna o neterminal E
-  if (result->symbol.nonterminal != NONTERM_EXPR)
+  if (result->symbol.is_terminal || result->symbol.nonterminal != NONTERM_EXPR)
     error_exit(ERR_SYNTAX, ctx->current_token.line,
                "Precedencni parser: Beh neskoncil neterminalem E.");
 

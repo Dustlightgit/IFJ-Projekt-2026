@@ -78,7 +78,7 @@
 void special_action_id(SemanticContext *ctx, void *semantic_pointer,
                        ContextAnnotation annotation, const Token *token);
 
-#endif // SPECIAL_ACTIONS_H
-
 /* Popis a implementace budou doplneny pozdeji */
 void *special_action_precedence_preprocessing(Token *input_token);
+
+#endif // SPECIAL_ACTIONS_H

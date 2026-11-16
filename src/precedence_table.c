@@ -5,7 +5,9 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - vstupni token, ktery neindexuje precedencni tabulku,
+          je v precedence_table_lookup syntakticka chyba (ERR_SYNTAX) misto
+          interni (prompt je v precedence_parser.h).
 
     Tento soubor obsahuje precedencni tabulku precedencniho parseru vyrazu
     a funkce pro prevod terminalu na jeji index a vyhledani direktivy.
@@ -45,54 +47,79 @@ const PrecedenceDirective PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE]
                                               {DIRECTIVE_ERROR},
 };
 
-size_t precedence_table_index(TokenType terminal, int line) {
-
-  // Overeni, ze se jedna o skutecny token
-  token_type_validate(terminal, line);
+// Zjisti index terminalu do precedencni tabulky. Vraci false, pokud terminal
+// precedencni tabulku neindexuje. Token musi byt uz overeny.
+static bool precedence_table_try_index(TokenType terminal, size_t *index) {
 
   // Terminaly v souvislem rozsahu mezi TOKEN_LL_TERM_COUNT
   // a TOKEN_EXPR_TERM_DELIMITER, indexy zacinaji od 0
   if (terminal > TOKEN_LL_TERM_COUNT && terminal < TOKEN_EXPR_TERM_DELIMITER) {
-    size_t index = (size_t)terminal - (size_t)TOKEN_LL_TERM_COUNT - 1;
+    *index = (size_t)terminal - (size_t)TOKEN_LL_TERM_COUNT - 1;
 
     // Oddelovac TOKEN_EXPRESSION_BEGINNING_DELIMITER neni terminal
     if (terminal > TOKEN_EXPRESSION_BEGINNING_DELIMITER)
-      index--;
+      (*index)--;
 
-    return index;
+    return true;
   }
 
   // Terminaly zamichane mezi indexatory LL tabulky, indexy za souvislym
   // rozsahem
   switch (terminal) {
   case TOKEN_KW_LIST:
-    return PRECEDENCE_RANGE_COUNT + 0;
+    *index = PRECEDENCE_RANGE_COUNT + 0;
+    return true;
   case TOKEN_LPAREN:
-    return PRECEDENCE_RANGE_COUNT + 1;
+    *index = PRECEDENCE_RANGE_COUNT + 1;
+    return true;
   case TOKEN_RPAREN:
-    return PRECEDENCE_RANGE_COUNT + 2;
+    *index = PRECEDENCE_RANGE_COUNT + 2;
+    return true;
   case TOKEN_COMMA:
-    return PRECEDENCE_RANGE_COUNT + 3;
+    *index = PRECEDENCE_RANGE_COUNT + 3;
+    return true;
   case TOKEN_ID:
-    return PRECEDENCE_RANGE_COUNT + 4;
+    *index = PRECEDENCE_RANGE_COUNT + 4;
+    return true;
   case TOKEN_STAR: // Docasne, TOKEN_STAR se v budoucnu presune do rozsahu
-    return PRECEDENCE_RANGE_COUNT + 5;
+    *index = PRECEDENCE_RANGE_COUNT + 5;
+    return true;
   default:
-    break;
+    return false;
   }
+}
 
-  error_exit(ERR_INTERNAL, line,
-             "Precedencni parser: Spatne pouziti precedence_table_index(): "
-             "Token neni indexem precedencni tabulky.");
-  return 0;
+size_t precedence_table_index(TokenType terminal, int line) {
+
+  // Overeni, ze se jedna o skutecny token
+  token_type_validate(terminal, line);
+
+  size_t index;
+  if (!precedence_table_try_index(terminal, &index))
+    error_exit(ERR_INTERNAL, line,
+               "Precedencni parser: Spatne pouziti precedence_table_index(): "
+               "Token neni indexem precedencni tabulky.");
+
+  return index;
 }
 
 PrecedenceDirective precedence_table_lookup(TokenType stack_terminal,
                                             TokenType input_terminal,
                                             int line) {
 
+  // Terminal na zasobniku je vzdy indexem tabulky, jinak jde o internich chybu
   size_t row = precedence_table_index(stack_terminal, line);
-  size_t column = precedence_table_index(input_terminal, line);
+
+  // Vstupni token muze byt cokoliv, token, ktery precedencni tabulku
+  // neindexuje, je chyba ve vstupnim programu
+  token_type_validate(input_terminal, line);
+  size_t column;
+  if (!precedence_table_try_index(input_terminal, &column)) {
+    fprintf(stderr, "Precedencni parser: Neocekavany token na vstupu: %s\n",
+            token_type_name(input_terminal));
+    error_exit(ERR_SYNTAX, line,
+               "Precedencni parser: Token se nesmi vyskytovat ve vyrazu.");
+  }
 
   PrecedenceDirective directive = PRECEDENCE_TABLE[row][column];
 

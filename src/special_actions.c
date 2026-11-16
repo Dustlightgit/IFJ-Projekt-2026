@@ -72,4 +72,4 @@ void special_action_id(SemanticContext *ctx, void *semantic_pointer,
 void *special_action_precedence_preprocessing(Token *input_token) {
   (void)input_token;
   return NULL;
-};
+}
