@@ -434,6 +434,15 @@ void semantic_action_else_ternary_if_indented(SemanticContext *ctx,
                                               ContextAnnotation annotation,
                                               int line, Stack *stack);
 
+
+// Semanticka akce pravidla 59
+void semantic_action_else_or_command_end_else(SemanticContext *ctx,
+                                              void *semantic_pointer,
+                                              ContextAnnotation annotation,
+                                              int line, Stack *stack);
+
+
+
 void ast_attach_expr(void *ptr, ContextAnnotation annotation, Expr *expr,
                      int line);
 
