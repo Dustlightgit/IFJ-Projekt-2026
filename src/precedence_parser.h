@@ -7,6 +7,7 @@
     Seznam zmen:
         - xbalaka00 - pridana deklarace funkce precedence_parser (prompt je
           zde).
+        - xbalaka00 - upravena deklarace precedence_parser
 
     Hlavickovy soubor pro precedencni parser vyrazu (zalozeny na precedencni
     tabulce) a jeho pomocne funkce. Zatim obsahuje provedeni redukce a deklaraci jadra parseru.
@@ -125,14 +126,13 @@ void parser_execute_reduction(const ParserContext *ctx, Stack *stack);
  * zacinajiciho ID, kdy je ID uz zpracovano LL parserem. Ve vetsine pripadu je
  * NULL.
  *
- * Stavba stromu zatim neprobiha, funkce prozatim vraci NULL.
+ * Stavba stromu zatim neprobiha, funkce prozatim vraci NULL, protoze NULL vraci i callbacky.
  *
  * @param ctx Spolecny kontext parseru, vstupni token je uz nacteny.
- * @param starting_stack_entry Volitelny pocatecni zaznam zasobniku (symbol,
+ * @param starting_terminal Volitelny pocatecni zaznam zasobniku (symbol,
  *        semanticky ukazatel a anotace), nebo NULL.
  * @return Ukazatel na vytvoreny podstrom vyrazu, prozatim NULL.
  */
-Expr *precedence_parser(ParserContext *ctx,
-                        ReductionResult *starting_stack_entry);
+Expr *precedence_parser(ParserContext *ctx, ReductionResult *starting_terminal);
 
 #endif // PRECEDENCE_PARSER_H

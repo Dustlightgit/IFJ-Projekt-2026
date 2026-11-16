@@ -7,6 +7,7 @@
     Seznam zmen:
         - xbalaka00 - special_action_id vytvari AST uzel pro ID pri anotaci
           CONTEXT_ID_COMMAND.
+        - xbalaka00 - pridana prozatim prazdna funkce pro specialni akci predzpracovani terminalu
 
     Tento soubor obsahuje specialni akce parseru, ktere nejsou vazane na
     pravidlo LL tabulky. Zatim jen kostry, funkcionalita se doplni pri
@@ -66,3 +67,9 @@ void special_action_id(SemanticContext *ctx, void *semantic_pointer,
     break;
   }
 }
+
+// Bude doplneno pozdeji
+void *special_action_precedence_preprocessing(Token *input_token) {
+  (void)input_token;
+  return NULL;
+};
