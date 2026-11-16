@@ -5,7 +5,9 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - parser_evaluate_predictor prebarvuje TOKEN_PLUS
+          a TOKEN_MINUS na unarni varianty, je-li ocekavan operand (prompt je
+          v token.h).
 
     Tento soubor obsahuje implementaci podpurnych funkci jadra precedencniho
     parseru. Prompt pro vznik souboru je v souboru precedence_helpers.h.
@@ -69,7 +71,21 @@ PredictorValue parser_evaluate_predictor(Token *token,
     return EXPECT_OPERAND;
   }
 
+  // + a - ze scanneru na miste operandu se prebarvi na unarni variantu, po
+  // operatoru nasleduje operand
+  if (predictor == EXPECT_OPERAND) {
+    if (token->type == TOKEN_PLUS) {
+      token->type = TOKEN_PLUS_UNARY;
+      return EXPECT_OPERAND;
+    }
+    if (token->type == TOKEN_MINUS) {
+      token->type = TOKEN_MINUS_UNARY;
+      return EXPECT_OPERAND;
+    }
+  }
+
   // Po ukoncovaci zavorce a operandech nasleduje operator, jinak operand
+  // (po + a - v obou variantach nasleduje operand, resi je vetev default)
   switch (token->type) {
   case TOKEN_RPAREN:
   case TOKEN_ID:

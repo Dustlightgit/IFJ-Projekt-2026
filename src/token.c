@@ -12,6 +12,8 @@
           pridana funkce token_type_validate (prompt je v nonterminal.h).
         - xbalaka00 - token_free uvolnuje text i u TOKEN_ID_OPERATOR (prompt
           je v precedence_helpers.h).
+        - xbalaka00 - pridane nazvy tokenu TOKEN_PLUS_UNARY
+          a TOKEN_MINUS_UNARY (prompt je v token.h).
 
     Implementace funkci pro spravu a reprezentaci tokenu lexikalniho
     analyzatoru.
@@ -131,6 +133,10 @@ const char *token_type_name(TokenType type) {
     return ";";
   case TOKEN_DOT:
     return ".";
+  case TOKEN_PLUS_UNARY:
+    return "+ (unarni)";
+  case TOKEN_MINUS_UNARY:
+    return "- (unarni)";
   case TOKEN_ID_OPERATOR:
     return "ID_OPERATOR";
   case TOKEN_DOLLAR:

@@ -5,7 +5,8 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - akce pravidel E7 a E8 pocitaji s operatorem
+          TOKEN_PLUS_UNARY resp. TOKEN_MINUS_UNARY (prompt je v token.h).
 
     Tento soubor obsahuje semanticke akce pravidel precedencniho parseru. Akce
     zatim pouze vypisuji cislo pravidla na stderr a nastavuji neterminal, na
@@ -143,24 +144,26 @@ void precedence_action_term_unit(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E7 (Operator + unarni): E <= + E
+// Pravidlo E7 (Operator + unarni): E <= + E (TOKEN_PLUS_UNARY)
 void precedence_action_unary_plus(const Stack *stack, int line,
                                   AnnotatedSymbol *result) {
   (void)stack;
   trace_rule(false, 7, line);
 
+  // Operator je terminal TOKEN_PLUS_UNARY
   // ParserStackEntry *operator_token = parser_stack_peek(stack, 1);
   // ParserStackEntry *operand_expr = parser_stack_peek(stack, 0);
 
   set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E8 (Operator - unarni): E <= - E
+// Pravidlo E8 (Operator - unarni): E <= - E (TOKEN_MINUS_UNARY)
 void precedence_action_unary_minus(const Stack *stack, int line,
                                    AnnotatedSymbol *result) {
   (void)stack;
   trace_rule(false, 8, line);
 
+  // Operator je terminal TOKEN_MINUS_UNARY
   // ParserStackEntry *operator_token = parser_stack_peek(stack, 1);
   // ParserStackEntry *operand_expr = parser_stack_peek(stack, 0);
 

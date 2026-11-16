@@ -5,7 +5,9 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - upravena dokumentace parser_evaluate_predictor,
+          prebarvovani TOKEN_PLUS a TOKEN_MINUS na unarni varianty (prompt je
+          v token.h).
 
     Tento soubor obsahuje podpurne funkce jadra precedencniho parseru: hledani
     terminalu na zasobniku, sestaveni handle ze zasobniku, predikci operatoru
@@ -139,13 +141,17 @@ void parser_build_handle(const Stack *stack, SearchHandle *handle, int line);
  * @brief Vyhodnoti predikci operatoru a operandu pro vstupni token.
  *
  * Pokud je na vstupu ID a je predpovidan operator, zmeni se typ tokenu na
- * TOKEN_ID_OPERATOR (atribut tokenu zustava). Nova predikce se pak urci
+ * TOKEN_ID_OPERATOR (atribut tokenu zustava). Pokud je na vstupu TOKEN_PLUS
+ * nebo TOKEN_MINUS ze scanneru a je predpovidan operand, zmeni se typ tokenu
+ * na TOKEN_PLUS_UNARY resp. TOKEN_MINUS_UNARY. Nova predikce se pak urci
  * podle tokenu: po ), ID, INT_LIT, DOUBLE_LIT, STRING_LIT, true a false se
  * predpovida operator, jinak operand. ID prepsane na ID_OPERATOR je operator,
  * takze po nem nasleduje operand; nezmenene ID je operand, po nem nasleduje
- * operator.
+ * operator. Po + a - (binarnich i unarnich) nasleduje vzdy operand.
  *
- * @param token Vstupni token, muze byt zmenen z TOKEN_ID na TOKEN_ID_OPERATOR.
+ * @param token Vstupni token, muze byt zmenen z TOKEN_ID na TOKEN_ID_OPERATOR,
+ *        z TOKEN_PLUS na TOKEN_PLUS_UNARY nebo z TOKEN_MINUS na
+ *        TOKEN_MINUS_UNARY.
  * @param predictor Soucasna hodnota predikce.
  * @return Nova hodnota predikce.
  */

@@ -8,6 +8,8 @@
         - xbalaka00 - upravena dokumentace precedence_table_lookup, vstupni
           token mimo tabulku je syntakticka chyba (prompt je v
           precedence_parser.h).
+        - xbalaka00 - PRECEDENCE_TABLE_SIZE zvetsena z 27 na 29 kvuli novym
+          tokenum TOKEN_PLUS_UNARY a TOKEN_MINUS_UNARY (prompt je v token.h).
 
     Tento soubor obsahuje deklarace pro precedencni tabulku, kterou bude
     vyuzivat precedencni parser vyrazu, a funkce pro prevod terminalu na
@@ -84,7 +86,7 @@
  * Odpovida poctu terminalu vyrazove analyzy, ktere indexuji precedencni
  * tabulku (viz TokenType v token.h).
  */
-#define PRECEDENCE_TABLE_SIZE 27
+#define PRECEDENCE_TABLE_SIZE 29
 
 /**
  * @brief Direktiva precedencni tabulky.

@@ -21,6 +21,9 @@
           pridana funkce token_type_validate (prompt je v nonterminal.h).
         - xbalaka00 - text vlastni i TOKEN_ID_OPERATOR, ktery vznika prebarvenim
           TOKEN_ID (prompt je v precedence_helpers.h).
+        - xbalaka00 - pridany tokeny TOKEN_PLUS_UNARY a TOKEN_MINUS_UNARY mezi
+          unarni operatory, TOKEN_PLUS a TOKEN_MINUS presunuty mezi binarni
+          terminaly vyrazove analyzy (prompt je v token.h).
 
     Definice typu tokenu, struktury tokenu a prototypu funkci pro lexer.
 
@@ -30,6 +33,27 @@
 #define TOKEN_H
 
 #include <stdbool.h>
+
+/*
+    Prompt pro pridani tokenu TOKEN_PLUS_UNARY a TOKEN_MINUS_UNARY. Stejny
+    prompt zpusobil zmeny take v token.c, reduction_table.c,
+    precedence_semantic_actions.c, precedence_semantic_actions.h,
+    precedence_table.c, precedence_table.h, precedence_helpers.c
+    a precedence_helpers.h, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dělám parser založený na hybridu prediktivní a precedenční analýzy. Přikládám relevantní soubory. Pokud by ti některý soubor chyběl, vyžádej si jej, než začneš pracovat. Kontext návrhu a význam kódu si přečti v komentářích a deklarovaných promptech. Dodržuj jmenné konvence (včetně komentářů v češtině bez diakritiky - používej české názvy všech věcí i přesto, že v promptech někdy věci pojmenuji anglicky; prompty ale cituj doslovně po vzoru souborů), formát hlaviček souborů s popisem souboru, dle vzoru přiložených souborů také deklaruj prompty a aktualizuj změnové seznamy. Kód můžeš zkompilovat, ale podle mě není nutné ho testovat na vlastní implementaci.
+
+        Mohl by jsi prosím provést následující změny:
+
+        * do token.* přidej nové tokeny TOKEN_PLUS_UNARY a TOKEN_MINUS_UNARY - zařaď je mezi unární operátory a stávající TOKEN_PLUS dej mezi ty binární. Přidej i case do výpisové funkce atd.
+        * uprav sémantické akce pravidel E7 a E8, aby místo stávajícího plus a mínus používaly tyto nové unární verze.
+        * stejně tak uprav i SearchHandle v redukční tabulce pro tato pravidla.
+        * Uprav metodu parser_evaluate_predictor tak, aby po vzoru ID_OPERATOR provedla toto:
+           * pokud je očekáván operand a přijde + nebo - ze scanneru, je přebarveno na svoji unární variantu
+           * po + a - v obou variantách je očekáván operand.
+        * Uprav také indexační funkci a konstanty velikostí v precedenční tabulce tak, aby tyto nové tokeny podporovaly. Tabulku zatím nevyplňuj.
+*/
 
 /**
  * @brief Typ tokenu.
@@ -49,8 +73,10 @@
  * - Hodnoty za TOKEN_EXPR_TERM_DELIMITER neindexuji zadnou z tabulek.
  *
  * Vyraz nesmi zacinat tokenem, ktery je v enumu za
- * TOKEN_EXPRESSION_BEGINNING_DELIMITER. Hodnoty TOKEN_ID_OPERATOR a
- * TOKEN_DOLLAR scanner nevraci, vznikaji az ve vyrazovem scanneru.
+ * TOKEN_EXPRESSION_BEGINNING_DELIMITER. Hodnoty TOKEN_ID_OPERATOR,
+ * TOKEN_PLUS_UNARY, TOKEN_MINUS_UNARY a TOKEN_DOLLAR scanner nevraci,
+ * vznikaji az ve vyrazovem scanneru (scanner vraci TOKEN_PLUS a TOKEN_MINUS,
+ * ktere se na miste operandu prebarvi na unarni varianty).
  * Hodnoty TOKEN_LL_TERM_COUNT, TOKEN_EXPRESSION_BEGINNING_DELIMITER,
  * TOKEN_EXPR_TERM_DELIMITER a TOKEN_COUNT nejsou skutecne tokeny.
  */
@@ -115,17 +141,21 @@ typedef enum {
   TOKEN_KW_FALSE, ///< BOOLTHEN
 
   // Unarni operatory
-  TOKEN_PLUS,  ///< +
-  TOKEN_MINUS, ///< -
-  TOKEN_NOT,   ///< ! (BOOLTHEN)
+  TOKEN_PLUS_UNARY,  ///< + (unarni, scanner nevraci, vznika prebarvenim)
+  TOKEN_MINUS_UNARY, ///< - (unarni, scanner nevraci, vznika prebarvenim)
+  TOKEN_NOT,         ///< ! (BOOLTHEN)
 
   // Od tohoto bodu dal jsou terminaly, kterymi nesmi zacinat vyraz - lze je
   // rovnou detekovat jako chybu, pokud by se preslo do vyrazoveho parseru
   // na zaklade pristiho tokenu.
 
+  // Binarni operatory
+  TOKEN_PLUS,     ///< + (binarni, scanner vraci i pro unarni)
+  TOKEN_MINUS,    ///< - (binarni, scanner vraci i pro unarni)
+
   /// Vyraz nesmi zacinat terminalem s hodnotou vetsi nez tento oddelovac
   TOKEN_EXPRESSION_BEGINNING_DELIMITER,
-
+  
   // Ostatni terminaly vyrazove analyzy, indexuji precedencni tabulku
   TOKEN_SLASH,    ///< /
   TOKEN_DOT,      ///< . (VALMEM, LISTS, import)

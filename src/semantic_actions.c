@@ -608,7 +608,7 @@ void semantic_action_else_or_command_end_else(SemanticContext *ctx,
                                               int line, Stack *stack) {
   (void)ctx;
   (void)annotation;
-  trace_rule(59, line);
+  trace_rule(true, 59, line);
 
   push_nonterminal(stack, NONTERM_BLOCK_OR_COMMAND, semantic_pointer,
                    CONTEXT_IF_ELSE);

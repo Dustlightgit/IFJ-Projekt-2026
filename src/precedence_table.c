@@ -8,6 +8,10 @@
         - xbalaka00 - vstupni token, ktery neindexuje precedencni tabulku,
           je v precedence_table_lookup syntakticka chyba (ERR_SYNTAX) misto
           interni (prompt je v precedence_parser.h).
+        - xbalaka00 - indexace podporuje tokeny TOKEN_PLUS_UNARY
+          a TOKEN_MINUS_UNARY, ktere jsou (stejne jako TOKEN_PLUS
+          a TOKEN_MINUS) ve souvislem rozsahu enumu, vypocet indexu tedy
+          zustava, zvetsil se jen PRECEDENCE_RANGE_COUNT (prompt je v token.h).
 
     Tento soubor obsahuje precedencni tabulku precedencniho parseru vyrazu
     a funkce pro prevod terminalu na jeji index a vyhledani direktivy.
@@ -24,6 +28,7 @@
 
 // Pocet terminalu v souvislem rozsahu enumu TokenType mezi TOKEN_LL_TERM_COUNT
 // a TOKEN_EXPR_TERM_DELIMITER bez oddelovace TOKEN_EXPRESSION_BEGINNING_DELIMITER
+// (zahrnuje i TOKEN_PLUS_UNARY, TOKEN_MINUS_UNARY, TOKEN_PLUS a TOKEN_MINUS)
 #define PRECEDENCE_RANGE_COUNT                                                 \
   ((size_t)TOKEN_EXPR_TERM_DELIMITER - (size_t)TOKEN_LL_TERM_COUNT - 2)
 

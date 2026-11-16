@@ -9,6 +9,8 @@
           reduction_table.h).
         - xbalaka00 - vyplnena tabulka REDUCTION_TABLE vsemi pravidly E0 az
           E39 a pomocna makra pro zapis polozek (prompt je zde).
+        - xbalaka00 - handle pravidel E7 a E8 pouzivaji TOKEN_PLUS_UNARY
+          a TOKEN_MINUS_UNARY (prompt je v token.h).
 
     Tento soubor obsahuje tabulku redukcnich pravidel vyrazove gramatiky,
     ktera mapuje handle jednotlivych pravidel na jejich semanticke akce.
@@ -82,10 +84,10 @@ const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE] = {
     REDUCTION_RULE(precedence_action_term_unit, SYM_TERM(TOKEN_LPAREN),
                    SYM_TERM(TOKEN_RPAREN)),
     // E7: E <= + E
-    REDUCTION_RULE(precedence_action_unary_plus, SYM_TERM(TOKEN_PLUS),
+    REDUCTION_RULE(precedence_action_unary_plus, SYM_TERM(TOKEN_PLUS_UNARY),
                    SYM_NONTERM(NONTERM_EXPR)),
     // E8: E <= - E
-    REDUCTION_RULE(precedence_action_unary_minus, SYM_TERM(TOKEN_MINUS),
+    REDUCTION_RULE(precedence_action_unary_minus, SYM_TERM(TOKEN_MINUS_UNARY),
                    SYM_NONTERM(NONTERM_EXPR)),
     // E9: E <= ! E
     REDUCTION_RULE(precedence_action_unary_not, SYM_TERM(TOKEN_NOT),

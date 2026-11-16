@@ -5,7 +5,8 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - dokumentace akci E7 a E8 upravena, operatorem handle je
+          TOKEN_PLUS_UNARY resp. TOKEN_MINUS_UNARY (prompt je v token.h).
 
     Tento soubor obsahuje deklarace semantickych akci pravidel precedencniho
     parseru. Akce odpovidaji pravidlum z redukcni tabulky (E0 az E39), zatim
@@ -139,7 +140,7 @@ void precedence_action_term_unit(const Stack *stack, int line,
 /**
  * @brief Semanticka akce pravidla E7 (Operator + unarni).
  *
- * Pravidlo: E <= + E
+ * Pravidlo: E <= + E (operator je terminal TOKEN_PLUS_UNARY)
  *
  * Vypise cislo pravidla na stderr a nastavi neterminal E, na ktery se
  * handle redukuje. Stavbu stromu zatim neprovadi, semanticky ukazatel
@@ -155,7 +156,7 @@ void precedence_action_unary_plus(const Stack *stack, int line,
 /**
  * @brief Semanticka akce pravidla E8 (Operator - unarni).
  *
- * Pravidlo: E <= - E
+ * Pravidlo: E <= - E (operator je terminal TOKEN_MINUS_UNARY)
  *
  * Vypise cislo pravidla na stderr a nastavi neterminal E, na ktery se
  * handle redukuje. Stavbu stromu zatim neprovadi, semanticky ukazatel
