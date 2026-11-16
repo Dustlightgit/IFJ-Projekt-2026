@@ -14,8 +14,11 @@
         - xbalaka00 - parser_stack_push prijima priznak reduction_marker.
         - xbalaka00 - pridana funkce parser_stack_peek (prompt je v
           semantic_types.h).
+        - xbalaka00 - pridana funkce trace_rule (puvodne staticka v
+          semantic_actions.c), zobecnena pro oba parsery, prompt je zde.
 
-    Tento soubor obsahuje funkce pro praci se zasobnikem parseru.
+    Tento soubor obsahuje funkce pro praci se zasobnikem parseru a spolecny
+    ladici vypis pouzitych pravidel.
 
 */
 
@@ -23,6 +26,7 @@
 
 #include "error.h"
 #include "scanner.h"
+#include <stdio.h>
 
 bool parser_check_token(const ParserContext *ctx, TokenType expected) {
   return ctx->has_current_token && ctx->current_token.type == expected;
@@ -165,4 +169,29 @@ void parser_context_init(ParserContext *ctx) {
 
   // Ziskani prvniho vstupniho tokenu
   parser_advance(ctx);
+}
+
+/*
+    Prompt pro funkci trace_rule. Stejny prompt zpusobil zmeny take
+    v parser_common.h a semantic_actions.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Mohl by jsi funkci trace_rule zobecnit tak, aby mohla vypisovat
+        pravidla jak LL parseru, tak prediktivního parseru?
+        Přidej do ní parametr bool is_predictive_parser na základě kterého
+        vypíše buď
+        "LL Parser: Pravidlo L%d (radek %d)\n"
+        nebo
+        "Precedencni parser: Pravidlo E%d (radek %d)\n"
+
+        Funkci přesuň do parser_common.* a uprav stávající volání v
+        semantic_actions.c
+*/
+
+void trace_rule(bool is_predictive_parser, int rule_number, int line) {
+  if (is_predictive_parser)
+    fprintf(stderr, "LL Parser: Pravidlo L%d (radek %d)\n", rule_number, line);
+  else
+    fprintf(stderr, "Precedencni parser: Pravidlo E%d (radek %d)\n",
+            rule_number, line);
 }
