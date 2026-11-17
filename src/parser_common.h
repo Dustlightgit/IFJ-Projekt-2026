@@ -22,6 +22,7 @@
         - xbalaka00 - include grammar_symbol.h pro GrammarSymbol (GrammarSymbol presunut do grammar_symbol.h,
           prompt je v reduction_table.h).
         - xbalaka00 - pridana funkce trace_rule (prompt je v parser_common.c).
+        - xbalaka00 - upraven popis funkce parser_advance
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery, funkce pro praci
@@ -148,9 +149,12 @@ bool parser_check_token(const ParserContext *ctx, TokenType expected);
 /**
  * @brief Posun ve vstupnim proudu dale. Kontroluje take koncovou carku.
  * 
- * Uvolni soucasny token a a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
+ * Uvolni soucasny token a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
  * tedy musi probehnout jeste pred zavolanim teto funkce. Typ noveho tokenu
  * overi funkci token_type_validate (neplatny typ je interni chyba).
+ * 
+ * Funkce take kontroluje zakaz dvou po sobe jdoucich carek a koncovou carku v seznamu.
+ * Kontrola je tedy spolecna pro oba parsery.
  *
  * @param ctx Spolecny context parseru.
  */

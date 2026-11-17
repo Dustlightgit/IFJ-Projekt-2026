@@ -7,3 +7,6 @@ List.range("ello", 2) + List.range(2, 2).world.help.huhuhaha
 List(2, 3, i) ++ List(1, 9, 88, 52, hello, 5+5) ++ List()
 2.toString
 2.toString
+List(1, 9, 88, 52,
+   hello, 5+5,
+      )

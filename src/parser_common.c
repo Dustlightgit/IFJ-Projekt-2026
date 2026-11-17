@@ -16,6 +16,7 @@
           semantic_types.h).
         - xbalaka00 - pridana funkce trace_rule (puvodne staticka v
           semantic_actions.c), zobecnena pro oba parsery, prompt je zde.
+        - xbalaka00 - kontrola koncove carky rozsirena, aby kontrolovala take zakaz dvou po sobe jdoucich carek.
 
     Tento soubor obsahuje funkce pro praci se zasobnikem parseru a spolecny
     ladici vypis pouzitych pravidel.
@@ -45,14 +46,19 @@ void parser_advance(ParserContext *ctx) {
   // Dodatecna vnitrni kontrola, ze scanner vratil skutecny token
   token_type_validate(ctx->current_token.type, ctx->current_token.line);
 
-  // Kontrola koncove carky
+  // Kontrola koncove carky a dvou carek po sobe
   if (ctx->current_token.type == TOKEN_COMMA) {
+    // Pokud je aktualni token carka, a predesly byl take carka, pak nastala chyba
+    if (ctx->previous_token_was_comma)
+      error_exit(ERR_SYNTAX, ctx->current_token.line,
+                 "Parser: Nepovolene dve carky bezprostredne za sebou");
+
     ctx->previous_token_was_comma = true;
   } else if (ctx->current_token.type == TOKEN_RPAREN) {
     // Pokud je aktualni token ), předesly token byla carka a pred ) nebyl \n, pak nastala chyba
     if (ctx->previous_token_was_comma && !(ctx->current_token.nl_before))
       error_exit(ERR_SYNTAX, ctx->current_token.line,
-                 "Nepovolena koncova carka");
+                 "Parser: Nepovolena koncova carka");
 
     ctx->previous_token_was_comma = false;
   } else {
