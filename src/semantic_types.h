@@ -15,6 +15,8 @@
         - xbalaka00 - ReductionResult prejmenovan na AnnotatedSymbol, protoze
           uz neni jen vysledkem redukce, ale obecne symbol s semantickym
           ukazatelem a anotaci (prompt je zde).
+        - xbalaka00 - pridana anotace CONTEXT_RANGE_WITHOUT_STEP (prompt je
+          v precedence_semantic_actions.c).
 
     Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontext
     tokenu ID, semanticky kontext a typ callbacku semanticke akce. Je urcen
@@ -160,6 +162,10 @@ typedef enum {
   CONTEXT_IF_THEN, ///< Blok je vetev then (Expr * if)
   CONTEXT_IF_ELSE, ///< Blok je vetev else (Expr * if)
   CONTEXT_IF_COND, ///< Vyraz je podminka if (Expr * if)
+
+  /// Neterminal E je rozsah bez kroku (Expr * EXPR_RANGE vytvoreny pravidlem
+  /// "to" nebo "until"), pripustny levy operand infixoveho "by"
+  CONTEXT_RANGE_WITHOUT_STEP,
 } ContextAnnotation;
 
 /*

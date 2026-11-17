@@ -138,7 +138,10 @@ int main() {
 
   while (parser_ctx.current_token.type != TOKEN_EOF) {
 
-    precedence_parser(&parser_ctx, NULL);
+    Expr *result = precedence_parser(&parser_ctx, NULL);
+
+    expr_free(result);
+
     parser_advance(&parser_ctx);
     fprintf(stderr, "\n------------------------------\n");
   }

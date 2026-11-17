@@ -423,4 +423,35 @@ void funcdef_param_set_type(FuncDef *func, int index, Type *type);
 // Vygenerovano AI (konec)
 //--------------------------------------------------------------------------------//
 
+//--------------------------------------------------------------------------------//
+// Pomocne funkce pro precedencni parser
+//--------------------------------------------------------------------------------//
+
+// Vygenerovano AI (zacatek)
+// prompt: viz precedence_semantic_actions.c (napojeni akci precedencniho parseru na AST)
+//
+// Struktury AST zustaly beze zmeny, pridany jsou jen funkce, ktere doplnuji
+// informace k existujicim uzlum. Vyrazovy parser uchovava seznam argumentu
+// (neterminal ARGS) jako pomocny uzel EXPR_LIST_LITERAL, funkce *_take_args
+// a expr_list_take_items z neho prvky presunou a pomocny uzel uvolni.
+
+// Nastavi krok rozsahu a prebere jeho vlastnictvi, puvodni krok uvolni
+void expr_range_set_step(Expr *range, Expr *step);
+
+// Presune vsechny prvky list literalu na konec argumentu volani funkce
+// a prebere vlastnictvi prvku. List literal (pomocny uzel) uvolni.
+void expr_call_take_args(Expr *call, Expr *args);
+
+// Presune vsechny prvky list literalu na konec argumentu clenu a prebere
+// vlastnictvi prvku. List literal (pomocny uzel) uvolni.
+void expr_member_take_args(Expr *member, Expr *args);
+
+// Vyjme prvky z list literalu: do *items da pole ukazatelu (volajici ho
+// uvolni funkci free, jeho prvky prebira) a do *count jejich pocet. List
+// literal zustane prazdny a uvolni ho volajici pomoci expr_free.
+void expr_list_take_items(Expr *list, Expr ***items, int *count);
+
+// Vygenerovano AI (konec)
+//--------------------------------------------------------------------------------//
+
 #endif

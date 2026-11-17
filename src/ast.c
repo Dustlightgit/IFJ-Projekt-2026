@@ -767,3 +767,57 @@ void funcdef_param_set_type(FuncDef *func, int index, Type *type) {
 
 // Vygenerovano AI (konec)
 //--------------------------------------------------------------------------------//
+
+//--------------------------------------------------------------------------------//
+// Pomocne funkce pro precedencni parser
+//--------------------------------------------------------------------------------//
+
+// Vygenerovano AI (zacatek)
+// prompt: viz precedence_semantic_actions.c (napojeni akci precedencniho parseru na AST)
+
+// Nastavi krok rozsahu a prebere jeho vlastnictvi
+void expr_range_set_step(Expr *range, Expr *step) {
+  require_expr(range, EXPR_RANGE);
+  expr_free(range->as.range.step);
+  range->as.range.step = step;
+}
+
+// Uvolni pouze schranku list literalu, jeho prvky uz patri nekomu jinemu
+static void list_free_shell(Expr *list) {
+  free(list->as.list_literal.items);
+  list->as.list_literal.items = NULL;
+  list->as.list_literal.count = 0;
+  expr_free(list);
+}
+
+// Presune prvky list literalu do argumentu volani funkce
+void expr_call_take_args(Expr *call, Expr *args) {
+  require_expr(call, EXPR_CALL);
+  require_expr(args, EXPR_LIST_LITERAL);
+  for (int i = 0; i < args->as.list_literal.count; i++) {
+    expr_call_add_arg(call, args->as.list_literal.items[i]);
+  }
+  list_free_shell(args);
+}
+
+// Presune prvky list literalu do argumentu clenu
+void expr_member_take_args(Expr *member, Expr *args) {
+  require_expr(member, EXPR_MEMBER);
+  require_expr(args, EXPR_LIST_LITERAL);
+  for (int i = 0; i < args->as.list_literal.count; i++) {
+    expr_member_add_arg(member, args->as.list_literal.items[i]);
+  }
+  list_free_shell(args);
+}
+
+// Vyjme prvky z list literalu, list literal zustane prazdny
+void expr_list_take_items(Expr *list, Expr ***items, int *count) {
+  require_expr(list, EXPR_LIST_LITERAL);
+  *items = list->as.list_literal.items;
+  *count = list->as.list_literal.count;
+  list->as.list_literal.items = NULL;
+  list->as.list_literal.count = 0;
+}
+
+// Vygenerovano AI (konec)
+//--------------------------------------------------------------------------------//

@@ -5,15 +5,15 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        - xbalaka00 - pridana pravidla E32 a E33 (staticka funkce seznamu bez
-          parametru a s parametrem), pravidla E33 az E39 precislovana na E35
-          az E41 (prompt je v precedence_semantic_actions.c).
         - xbalaka00 - pridana funkce reduction_table_lookup (prompt je v
           reduction_table.h).
         - xbalaka00 - vyplnena tabulka REDUCTION_TABLE vsemi pravidly E0 az
           E39 a pomocna makra pro zapis polozek (prompt je zde).
         - xbalaka00 - handle pravidel E7 a E8 pouzivaji TOKEN_PLUS_UNARY
           a TOKEN_MINUS_UNARY (prompt je v token.h).
+        - xbalaka00 - pridana pravidla E32 a E33 (staticka funkce seznamu bez
+          parametru a s parametrem), pravidla E33 az E39 precislovana na E35
+          az E41 (prompt je v precedence_semantic_actions.c).
 
     Tento soubor obsahuje tabulku redukcnich pravidel vyrazove gramatiky,
     ktera mapuje handle jednotlivych pravidel na jejich semanticke akce.
