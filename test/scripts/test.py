@@ -4,7 +4,7 @@ from pathlib import Path
 
 # Format polozky: ["COMPONENT", "test1", "test2", ...]
 INTERPRET_TESTS = [
-    ["generator", "example_program"],
+    ["generator", "example_program", "sem_valid_program"],
 ]
 
 
