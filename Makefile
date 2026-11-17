@@ -16,7 +16,7 @@ SRC_DIR    := src
 BUILD_DIR  := build
 OUTPUT_DIR := output
 
-PACKAGE_FILES := Makefile rozsireni
+PACKAGE_FILES := Makefile rozsireni rozdeleni dokumentace.pdf
 
 TARGET := $(BUILD_DIR)/main
 
