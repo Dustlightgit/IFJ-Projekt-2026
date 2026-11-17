@@ -1,6 +1,8 @@
 /* 
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     nonterminal.h
 
     Puvodni autor: xbakaka00 za asistence Claude
