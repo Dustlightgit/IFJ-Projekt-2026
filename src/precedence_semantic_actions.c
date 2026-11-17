@@ -7,6 +7,10 @@
     Seznam zmen:
         - xbalaka00 - akce pravidel E7 a E8 pocitaji s operatorem
           TOKEN_PLUS_UNARY resp. TOKEN_MINUS_UNARY (prompt je v token.h).
+        - xbalaka00 - pridany akce pravidel E32 a E33 (staticka funkce
+          seznamu bez parametru a s parametrem), akce puvodniho pravidla E32
+          prejmenovana na ...multiple_args a pravidla E33 az E39 precislovana
+          na E35 az E41 (prompt je zde).
 
     Tento soubor obsahuje semanticke akce pravidel precedencniho parseru. Akce
     zatim pouze vypisuji cislo pravidla na stderr a nastavuji neterminal, na
@@ -49,6 +53,19 @@
         Pokud by ti chyběl nějaký soubor, řekni si o něj, než začneš pracovat.
         Callbacky a jejich deklarace dej do nového páru precedence_semantic_actions.*
         Callbacky LL parseru nechť slouží jako vzor, jak by to mohlo vypadat.
+*/
+
+/*
+    Prompt pro pridani pravidel E32 a E33 (staticka funkce seznamu bez
+    parametru a s jednim parametrem) a prislusne precislovani. Stejny prompt
+    zpusobil zmeny take v precedence_semantic_actions.h, reduction_table.c
+    a reduction_table.h, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Přidal jsem nová pravidla precedenční gramatiky. Konkrétně je nové pravidlo 32 a 33. Mohl by jsi je zavést do kódu? To znamená, vytvořit jim po vzoru ostatních sémantickou akci (resp. její kostru) v precedence_semantic_actions.* a přidat záznamy do redukční tabulky v reduction_table.*
+        Ostatní pravidla jsou beze změny, pouze se přečíslovaly pravidla, která následují po 33 - přečísluj je prosím také.
+
+        <zde jsem prekopiroval tabulku pravidel z parser_formalisms.xlsx>
 */
 
 // Nastavi vysledek redukce. Funkce pouze schovava makro a pretypovani, predavaji
@@ -478,11 +495,45 @@ void precedence_action_method_multiple_args(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E32 (Staticka funkce seznamu): E <= List . ID ( ARGS )
-void precedence_action_list_static_function(const Stack *stack, int line,
-                                            AnnotatedSymbol *result) {
+// Pravidlo E32 (Staticka funkce seznamu bez parametru): E <= List . ID ( )
+void precedence_action_list_static_function_no_args(const Stack *stack,
+                                                    int line,
+                                                    AnnotatedSymbol *result) {
   (void)stack;
   trace_rule(false, 32, line);
+
+  // ParserStackEntry *list_keyword = parser_stack_peek(stack, 4);
+  // ParserStackEntry *dot = parser_stack_peek(stack, 3);
+  // ParserStackEntry *function_name = parser_stack_peek(stack, 2);
+  // ParserStackEntry *lparen = parser_stack_peek(stack, 1);
+  // ParserStackEntry *rparen = parser_stack_peek(stack, 0);
+
+  set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
+}
+
+// Pravidlo E33 (Staticka funkce seznamu s parametrem): E <= List . ID ( E )
+void precedence_action_list_static_function_one_arg(const Stack *stack,
+                                                    int line,
+                                                    AnnotatedSymbol *result) {
+  (void)stack;
+  trace_rule(false, 33, line);
+
+  // ParserStackEntry *list_keyword = parser_stack_peek(stack, 5);
+  // ParserStackEntry *dot = parser_stack_peek(stack, 4);
+  // ParserStackEntry *function_name = parser_stack_peek(stack, 3);
+  // ParserStackEntry *lparen = parser_stack_peek(stack, 2);
+  // ParserStackEntry *argument_expr = parser_stack_peek(stack, 1);
+  // ParserStackEntry *rparen = parser_stack_peek(stack, 0);
+
+  set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
+}
+
+// Pravidlo E34 (Staticka funkce seznamu s vice parametry):
+// E <= List . ID ( ARGS )
+void precedence_action_list_static_function_multiple_args(
+    const Stack *stack, int line, AnnotatedSymbol *result) {
+  (void)stack;
+  trace_rule(false, 34, line);
 
   // ParserStackEntry *list_keyword = parser_stack_peek(stack, 5);
   // ParserStackEntry *dot = parser_stack_peek(stack, 4);
@@ -494,11 +545,11 @@ void precedence_action_list_static_function(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E33 (Tvorba seznamu parametru): ARGS <= E , E
+// Pravidlo E35 (Tvorba seznamu parametru): ARGS <= E , E
 void precedence_action_args_create(const Stack *stack, int line,
                                    AnnotatedSymbol *result) {
   (void)stack;
-  trace_rule(false, 33, line);
+  trace_rule(false, 35, line);
 
   // ParserStackEntry *first_expr = parser_stack_peek(stack, 2);
   // ParserStackEntry *comma = parser_stack_peek(stack, 1);
@@ -507,11 +558,11 @@ void precedence_action_args_create(const Stack *stack, int line,
   set_result(result, NONTERM_ARGS, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E34 (Konsolidace parametru): ARGS <= ARGS , E
+// Pravidlo E36 (Konsolidace parametru): ARGS <= ARGS , E
 void precedence_action_args_append(const Stack *stack, int line,
                                    AnnotatedSymbol *result) {
   (void)stack;
-  trace_rule(false, 34, line);
+  trace_rule(false, 36, line);
 
   // ParserStackEntry *args = parser_stack_peek(stack, 2);
   // ParserStackEntry *comma = parser_stack_peek(stack, 1);
@@ -520,11 +571,11 @@ void precedence_action_args_append(const Stack *stack, int line,
   set_result(result, NONTERM_ARGS, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E35 (Likvidace koncove carky (za vyrazem)): ARGS <= E ,
+// Pravidlo E37 (Likvidace koncove carky (za vyrazem)): ARGS <= E ,
 void precedence_action_args_trailing_comma_expr(const Stack *stack, int line,
                                                 AnnotatedSymbol *result) {
   (void)stack;
-  trace_rule(false, 35, line);
+  trace_rule(false, 37, line);
 
   // ParserStackEntry *expr = parser_stack_peek(stack, 1);
   // ParserStackEntry *comma = parser_stack_peek(stack, 0);
@@ -532,11 +583,11 @@ void precedence_action_args_trailing_comma_expr(const Stack *stack, int line,
   set_result(result, NONTERM_ARGS, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E36 (Likvidace koncove carky (za seznamem)): ARGS <= ARGS ,
+// Pravidlo E38 (Likvidace koncove carky (za seznamem)): ARGS <= ARGS ,
 void precedence_action_args_trailing_comma_args(const Stack *stack, int line,
                                                 AnnotatedSymbol *result) {
   (void)stack;
-  trace_rule(false, 36, line);
+  trace_rule(false, 38, line);
 
   // ParserStackEntry *args = parser_stack_peek(stack, 1);
   // ParserStackEntry *comma = parser_stack_peek(stack, 0);
@@ -544,11 +595,11 @@ void precedence_action_args_trailing_comma_args(const Stack *stack, int line,
   set_result(result, NONTERM_ARGS, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E37 (Redukce uzavorkovanych vyrazu): E <= ( E )
+// Pravidlo E39 (Redukce uzavorkovanych vyrazu): E <= ( E )
 void precedence_action_parenthesized_expr(const Stack *stack, int line,
                                           AnnotatedSymbol *result) {
   (void)stack;
-  trace_rule(false, 37, line);
+  trace_rule(false, 39, line);
 
   // ParserStackEntry *lparen = parser_stack_peek(stack, 2);
   // ParserStackEntry *inner_expr = parser_stack_peek(stack, 1);
@@ -557,11 +608,11 @@ void precedence_action_parenthesized_expr(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E38 (Pripojeni else vetve): E <= TIF E
+// Pravidlo E40 (Pripojeni else vetve): E <= TIF E
 void precedence_action_ternary_else(const Stack *stack, int line,
                                     AnnotatedSymbol *result) {
   (void)stack;
-  trace_rule(false, 38, line);
+  trace_rule(false, 40, line);
 
   // ParserStackEntry *tif = parser_stack_peek(stack, 1);
   // ParserStackEntry *else_expr = parser_stack_peek(stack, 0);
@@ -569,11 +620,11 @@ void precedence_action_ternary_else(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo E39 (Infixova metoda): E <= E ID_OPERATOR E
+// Pravidlo E41 (Infixova metoda): E <= E ID_OPERATOR E
 void precedence_action_infix_method(const Stack *stack, int line,
                                     AnnotatedSymbol *result) {
   (void)stack;
-  trace_rule(false, 39, line);
+  trace_rule(false, 41, line);
 
   // ParserStackEntry *left_expr = parser_stack_peek(stack, 2);
   // ParserStackEntry *method_operator = parser_stack_peek(stack, 1);

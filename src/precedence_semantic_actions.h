@@ -7,9 +7,13 @@
     Seznam zmen:
         - xbalaka00 - dokumentace akci E7 a E8 upravena, operatorem handle je
           TOKEN_PLUS_UNARY resp. TOKEN_MINUS_UNARY (prompt je v token.h).
+        - xbalaka00 - pridany deklarace akci pravidel E32 a E33, akce puvodniho
+          pravidla E32 prejmenovana na ...multiple_args (nyni E34), pravidla
+          E33 az E39 precislovana na E35 az E41 (prompt je v
+          precedence_semantic_actions.c).
 
     Tento soubor obsahuje deklarace semantickych akci pravidel precedencniho
-    parseru. Akce odpovidaji pravidlum z redukcni tabulky (E0 az E39), zatim
+    parseru. Akce odpovidaji pravidlum z redukcni tabulky (E0 az E41), zatim
     pouze vypisuji cislo pravidla a urcuji neterminal, na ktery se handle
     redukuje. Datove typy akci jsou v semantic_types.h, prompt, ze ktereho
     soubor vznikl, je v souboru precedence_semantic_actions.c.
@@ -538,7 +542,42 @@ void precedence_action_method_multiple_args(const Stack *stack, int line,
                                             AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E32 (Staticka funkce seznamu).
+ * @brief Semanticka akce pravidla E32 (Staticka funkce seznamu bez parametru).
+ *
+ * Pravidlo: E <= List . ID ( )
+ *
+ * Vypise cislo pravidla na stderr a nastavi neterminal E, na ktery se
+ * handle redukuje. Stavbu stromu zatim neprovadi, semanticky ukazatel
+ * a kontextova anotace vysledku jsou NULL a CONTEXT_NONE.
+ *
+ * @param stack Zasobnik parseru, akce z nej cte, ale nemeni ho.
+ * @param line Cislo radku, obvykle radek aktualniho vstupniho terminalu.
+ * @param result Vystup, symbol a atributy noveho zaznamu na zasobniku.
+ */
+void precedence_action_list_static_function_no_args(const Stack *stack,
+                                                    int line,
+                                                    AnnotatedSymbol *result);
+
+/**
+ * @brief Semanticka akce pravidla E33 (Staticka funkce seznamu s parametrem).
+ *
+ * Pravidlo: E <= List . ID ( E )
+ *
+ * Vypise cislo pravidla na stderr a nastavi neterminal E, na ktery se
+ * handle redukuje. Stavbu stromu zatim neprovadi, semanticky ukazatel
+ * a kontextova anotace vysledku jsou NULL a CONTEXT_NONE.
+ *
+ * @param stack Zasobnik parseru, akce z nej cte, ale nemeni ho.
+ * @param line Cislo radku, obvykle radek aktualniho vstupniho terminalu.
+ * @param result Vystup, symbol a atributy noveho zaznamu na zasobniku.
+ */
+void precedence_action_list_static_function_one_arg(const Stack *stack,
+                                                    int line,
+                                                    AnnotatedSymbol *result);
+
+/**
+ * @brief Semanticka akce pravidla E34 (Staticka funkce seznamu s vice
+ * parametry).
  *
  * Pravidlo: E <= List . ID ( ARGS )
  *
@@ -550,11 +589,11 @@ void precedence_action_method_multiple_args(const Stack *stack, int line,
  * @param line Cislo radku, obvykle radek aktualniho vstupniho terminalu.
  * @param result Vystup, symbol a atributy noveho zaznamu na zasobniku.
  */
-void precedence_action_list_static_function(const Stack *stack, int line,
-                                            AnnotatedSymbol *result);
+void precedence_action_list_static_function_multiple_args(
+    const Stack *stack, int line, AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E33 (Tvorba seznamu parametru).
+ * @brief Semanticka akce pravidla E35 (Tvorba seznamu parametru).
  *
  * Pravidlo: ARGS <= E , E
  *
@@ -570,7 +609,7 @@ void precedence_action_args_create(const Stack *stack, int line,
                                    AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E34 (Konsolidace parametru).
+ * @brief Semanticka akce pravidla E36 (Konsolidace parametru).
  *
  * Pravidlo: ARGS <= ARGS , E
  *
@@ -586,7 +625,7 @@ void precedence_action_args_append(const Stack *stack, int line,
                                    AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E35 (Likvidace koncove carky (za vyrazem)).
+ * @brief Semanticka akce pravidla E37 (Likvidace koncove carky (za vyrazem)).
  *
  * Pravidlo: ARGS <= E ,
  *
@@ -602,7 +641,7 @@ void precedence_action_args_trailing_comma_expr(const Stack *stack, int line,
                                                 AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E36 (Likvidace koncove carky (za seznamem)).
+ * @brief Semanticka akce pravidla E38 (Likvidace koncove carky (za seznamem)).
  *
  * Pravidlo: ARGS <= ARGS ,
  *
@@ -618,7 +657,7 @@ void precedence_action_args_trailing_comma_args(const Stack *stack, int line,
                                                 AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E37 (Redukce uzavorkovanych vyrazu).
+ * @brief Semanticka akce pravidla E39 (Redukce uzavorkovanych vyrazu).
  *
  * Pravidlo: E <= ( E )
  *
@@ -634,7 +673,7 @@ void precedence_action_parenthesized_expr(const Stack *stack, int line,
                                           AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E38 (Pripojeni else vetve).
+ * @brief Semanticka akce pravidla E40 (Pripojeni else vetve).
  *
  * Pravidlo: E <= TIF E
  *
@@ -650,7 +689,7 @@ void precedence_action_ternary_else(const Stack *stack, int line,
                                     AnnotatedSymbol *result);
 
 /**
- * @brief Semanticka akce pravidla E39 (Infixova metoda).
+ * @brief Semanticka akce pravidla E41 (Infixova metoda).
  *
  * Pravidlo: E <= E ID_OPERATOR E
  *

@@ -2,5 +2,7 @@
 List.hello(2, 5)
 5 to 2 by 3
 2.1 * 2
+List.hello(2) + List.hello().world.help.huhuhaha
 "hello " + "world"
 List(2, 3, i) ++ List(1, 9, 88, 52, hello, 5+5) ++ List()
+2.toString

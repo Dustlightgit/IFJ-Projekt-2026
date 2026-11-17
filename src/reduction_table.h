@@ -12,6 +12,8 @@
           v semantic_types.h).
         - xbalaka00 - tabulka REDUCTION_TABLE je vyplnena (prompt je
           v reduction_table.c), upravena dokumentace.
+        - xbalaka00 - REDUCTION_TABLE_SIZE zvysena na 42 kvuli novym pravidlum
+          E32 a E33 (prompt je v precedence_semantic_actions.c).
 
     Tento soubor obsahuje tabulku redukcnich pravidel (pravidel vyrazove
     gramatiky), ktera mapuje handle jednotlivych pravidel na jejich semanticke
@@ -93,7 +95,7 @@ typedef struct {
 /**
  * @brief Pocet radku (pravidel) redukcni tabulky.
  */
-#define REDUCTION_TABLE_SIZE 40
+#define REDUCTION_TABLE_SIZE 42
 
 /**
  * @brief Polozka redukcni tabulky, jedno pravidlo vyrazove gramatiky.
@@ -111,8 +113,8 @@ typedef struct {
  * Mapuje handle pravidla na jeho semantickou akci. Polozky jsou serazeny
  * vzestupne podle delky handle (poradi neodpovida cislum pravidel), na jejich
  * poradi se spoleha funkce reduction_table_lookup. Pripadne nevyuzite polozky
- * s action NULL jsou az na konci tabulky. Tabulka obsahuje vsech 40 pravidel
- * vyrazove gramatiky (E0 az E39), nevyuzite polozky tedy zatim zadne nejsou.
+ * s action NULL jsou az na konci tabulky. Tabulka obsahuje vsech 42 pravidel
+ * vyrazove gramatiky (E0 az E41), nevyuzite polozky tedy zatim zadne nejsou.
  */
 extern const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE];
 

@@ -5,6 +5,9 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
+        - xbalaka00 - pridana pravidla E32 a E33 (staticka funkce seznamu bez
+          parametru a s parametrem), pravidla E33 az E39 precislovana na E35
+          az E41 (prompt je v precedence_semantic_actions.c).
         - xbalaka00 - pridana funkce reduction_table_lookup (prompt je v
           reduction_table.h).
         - xbalaka00 - vyplnena tabulka REDUCTION_TABLE vsemi pravidly E0 az
@@ -62,8 +65,8 @@
 
 // Tabulka je serazena vzestupne podle delky handle (na tom stavi funkce
 // reduction_table_lookup), uvnitr skupiny stejne delky podle cisla pravidla.
-// Cislo pravidla je v komentari u kazde polozky. Handle delky 5 zadne
-// pravidlo nema. Tabulka je zaplnena celou svou velikosti.
+// Cislo pravidla je v komentari u kazde polozky. Tabulka je zaplnena celou svou
+// velikosti.
 const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE] = {
     // Handle delky 1
     // E0: E <= ID
@@ -92,13 +95,13 @@ const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE] = {
     // E9: E <= ! E
     REDUCTION_RULE(precedence_action_unary_not, SYM_TERM(TOKEN_NOT),
                    SYM_NONTERM(NONTERM_EXPR)),
-    // E35: ARGS <= E ,
+    // E37: ARGS <= E ,
     REDUCTION_RULE(precedence_action_args_trailing_comma_expr,
                    SYM_NONTERM(NONTERM_EXPR), SYM_TERM(TOKEN_COMMA)),
-    // E36: ARGS <= ARGS ,
+    // E38: ARGS <= ARGS ,
     REDUCTION_RULE(precedence_action_args_trailing_comma_args,
                    SYM_NONTERM(NONTERM_ARGS), SYM_TERM(TOKEN_COMMA)),
-    // E38: E <= TIF E
+    // E40: E <= TIF E
     REDUCTION_RULE(precedence_action_ternary_else, SYM_NONTERM(NONTERM_TIF),
                    SYM_NONTERM(NONTERM_EXPR)),
 
@@ -151,16 +154,16 @@ const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE] = {
     // E29: E <= E . ID
     REDUCTION_RULE(precedence_action_member_access, SYM_NONTERM(NONTERM_EXPR),
                    SYM_TERM(TOKEN_DOT), SYM_TERM(TOKEN_ID)),
-    // E33: ARGS <= E , E
+    // E35: ARGS <= E , E
     REDUCTION_RULE(precedence_action_args_create, SYM_NONTERM(NONTERM_EXPR),
                    SYM_TERM(TOKEN_COMMA), SYM_NONTERM(NONTERM_EXPR)),
-    // E34: ARGS <= ARGS , E
+    // E36: ARGS <= ARGS , E
     REDUCTION_RULE(precedence_action_args_append, SYM_NONTERM(NONTERM_ARGS),
                    SYM_TERM(TOKEN_COMMA), SYM_NONTERM(NONTERM_EXPR)),
-    // E37: E <= ( E )
+    // E39: E <= ( E )
     REDUCTION_RULE(precedence_action_parenthesized_expr, SYM_TERM(TOKEN_LPAREN),
                    SYM_NONTERM(NONTERM_EXPR), SYM_TERM(TOKEN_RPAREN)),
-    // E39: E <= E ID_OPERATOR E
+    // E41: E <= E ID_OPERATOR E
     REDUCTION_RULE(precedence_action_infix_method, SYM_NONTERM(NONTERM_EXPR),
                    SYM_TERM(TOKEN_ID_OPERATOR), SYM_NONTERM(NONTERM_EXPR)),
 
@@ -182,6 +185,13 @@ const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE] = {
                    SYM_TERM(TOKEN_KW_LIST), SYM_TERM(TOKEN_LPAREN),
                    SYM_NONTERM(NONTERM_ARGS), SYM_TERM(TOKEN_RPAREN)),
 
+    // Handle delky 5
+    // E32: E <= List . ID ( )
+    REDUCTION_RULE(precedence_action_list_static_function_no_args,
+                   SYM_TERM(TOKEN_KW_LIST), SYM_TERM(TOKEN_DOT),
+                   SYM_TERM(TOKEN_ID), SYM_TERM(TOKEN_LPAREN),
+                   SYM_TERM(TOKEN_RPAREN)),
+
     // Handle delky 6
     // E30: E <= E . ID ( E )
     REDUCTION_RULE(precedence_action_method_one_arg, SYM_NONTERM(NONTERM_EXPR),
@@ -193,8 +203,13 @@ const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE] = {
                    SYM_NONTERM(NONTERM_EXPR), SYM_TERM(TOKEN_DOT),
                    SYM_TERM(TOKEN_ID), SYM_TERM(TOKEN_LPAREN),
                    SYM_NONTERM(NONTERM_ARGS), SYM_TERM(TOKEN_RPAREN)),
-    // E32: E <= List . ID ( ARGS )
-    REDUCTION_RULE(precedence_action_list_static_function,
+    // E33: E <= List . ID ( E )
+    REDUCTION_RULE(precedence_action_list_static_function_one_arg,
+                   SYM_TERM(TOKEN_KW_LIST), SYM_TERM(TOKEN_DOT),
+                   SYM_TERM(TOKEN_ID), SYM_TERM(TOKEN_LPAREN),
+                   SYM_NONTERM(NONTERM_EXPR), SYM_TERM(TOKEN_RPAREN)),
+    // E34: E <= List . ID ( ARGS )
+    REDUCTION_RULE(precedence_action_list_static_function_multiple_args,
                    SYM_TERM(TOKEN_KW_LIST), SYM_TERM(TOKEN_DOT),
                    SYM_TERM(TOKEN_ID), SYM_TERM(TOKEN_LPAREN),
                    SYM_NONTERM(NONTERM_ARGS), SYM_TERM(TOKEN_RPAREN)),
