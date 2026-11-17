@@ -50,6 +50,7 @@ package:
 	@mkdir -p $(OUTPUT_DIR)
 	@rm -f $(OUTPUT_DIR)/archive.zip
 	@zip -r $(OUTPUT_DIR)/archive.zip $(SRC_DIR)/* $(PACKAGE_FILES)
+	@./is_it_ok.sh $(OUTPUT_DIR)/archive.zip
 
 clean:
 	rm -rf $(BUILD_DIR) $(OUTPUT_DIR)
