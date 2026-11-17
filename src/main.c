@@ -107,7 +107,6 @@ int main() {
 
 */
 
-/*
 int main() {
   ParserContext parser_ctx;
   parser_context_init(&parser_ctx);
@@ -129,8 +128,8 @@ int main() {
   program_free(program);
   return 0;
 }
-*/
 
+/*
 int main() {
 
   ParserContext parser_ctx;
@@ -146,3 +145,4 @@ int main() {
     fprintf(stderr, "\n------------------------------\n");
   }
 }
+*/
