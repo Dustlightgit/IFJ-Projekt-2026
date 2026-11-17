@@ -1,0 +1,12 @@
+if
+ID
+then
+EOL
+INDENT
+val
+ID
+=
+INT_LIT
+EOL
+Error 1 (line 3): Nesedici odsazeni
+EXIT CODE: 1

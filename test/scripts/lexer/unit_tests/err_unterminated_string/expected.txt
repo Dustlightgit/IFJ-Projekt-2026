@@ -1,0 +1,2 @@
+Error 1 (line 1): Neukonceny retezec
+EXIT CODE: 1

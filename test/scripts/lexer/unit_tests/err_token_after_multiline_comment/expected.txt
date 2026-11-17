@@ -1,0 +1,2 @@
+Error 1 (line 2): Za blokovym komentarem s koncem radku nesmi nasledovat token
+EXIT CODE: 1

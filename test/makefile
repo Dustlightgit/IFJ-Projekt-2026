@@ -91,4 +91,5 @@ endif
 
 clean:
 	@rm -rf $(foreach component,$(COMPONENTS),$(SCRIPTS_DIR)/$(component)/build)
+	$(if $(COMPONENTS),@find $(foreach component,$(COMPONENTS),$(SCRIPTS_DIR)/$(component)) -type f \( -name "output.txt" -o -name "ifjcode.txt" \) -delete 2>/dev/null || true)
 	@echo "Test builds cleaned."

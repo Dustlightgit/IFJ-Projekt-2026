@@ -7,8 +7,19 @@
     Seznam zmen:
         - xbalaka00 - pridani funkce parser_context_init za asistence Claude,
           prompt je v predictive_parser.c.
+        - xbalaka00 - parser_stack_push prijima ContextAnnotation misto
+          IDContextType.
+        - xbalaka00 - parser_advance overuje typ nacteneho tokenu funkci
+          token_type_validate (prompt je v nonterminal.h).
+        - xbalaka00 - parser_stack_push prijima priznak reduction_marker.
+        - xbalaka00 - pridana funkce parser_stack_peek (prompt je v
+          semantic_types.h).
+        - xbalaka00 - pridana funkce trace_rule (puvodne staticka v
+          semantic_actions.c), zobecnena pro oba parsery, prompt je zde.
+        - xbalaka00 - kontrola koncove carky rozsirena, aby kontrolovala take zakaz dvou po sobe jdoucich carek.
 
-    Tento soubor obsahuje funkce pro praci se zasobnikem parseru.
+    Tento soubor obsahuje funkce pro praci se zasobnikem parseru a spolecny
+    ladici vypis pouzitych pravidel.
 
 */
 
@@ -16,6 +27,7 @@
 
 #include "error.h"
 #include "scanner.h"
+#include <stdio.h>
 
 bool parser_check_token(const ParserContext *ctx, TokenType expected) {
   return ctx->has_current_token && ctx->current_token.type == expected;
@@ -31,14 +43,22 @@ void parser_advance(ParserContext *ctx) {
   get_token(&(ctx->current_token));
   ctx->has_current_token = true;
 
-  // Kontrola koncove carky
+  // Dodatecna vnitrni kontrola, ze scanner vratil skutecny token
+  token_type_validate(ctx->current_token.type, ctx->current_token.line);
+
+  // Kontrola koncove carky a dvou carek po sobe
   if (ctx->current_token.type == TOKEN_COMMA) {
+    // Pokud je aktualni token carka, a predesly byl take carka, pak nastala chyba
+    if (ctx->previous_token_was_comma)
+      error_exit(ERR_SYNTAX, ctx->current_token.line,
+                 "Parser: Nepovolene dve carky bezprostredne za sebou");
+
     ctx->previous_token_was_comma = true;
   } else if (ctx->current_token.type == TOKEN_RPAREN) {
     // Pokud je aktualni token ), předesly token byla carka a pred ) nebyl \n, pak nastala chyba
     if (ctx->previous_token_was_comma && !(ctx->current_token.nl_before))
       error_exit(ERR_SYNTAX, ctx->current_token.line,
-                 "Nepovolena koncova carka");
+                 "Parser: Nepovolena koncova carka");
 
     ctx->previous_token_was_comma = false;
   } else {
@@ -92,16 +112,39 @@ void parser_advance(ParserContext *ctx) {
         sizeof(ParserStackEntry) jako velikost prvku.
 */
 
+/*
+    Prompt pro zobecneni IDContextType na ContextAnnotation je v souboru
+    semantic_types.h.
+*/
+
+/*
+    Prompt pro pridani priznaku reduction_marker do ParserStackEntry
+    a jeho predani funkci parser_stack_push. Stejny prompt zpusobil zmeny
+    take v parser_common.h, semantic_actions.c a predictive_parser.c, jeho
+    zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dobrá. Do StackEntry doplň boolean reduction_marker. Význam této
+        značky je, že bezprostředně po prvku s touto značkou jakože následuje
+        symbol <, který v matematickém modelu označuje začátek redukce. Handle
+        je tedy vždy tvořen všemi prvky od vrcholu zásobníku až po první
+        symbol opatřen touto značkou vyjma tohoto symbolu. Defaultně bude
+        nastaven na false a LL parser jej nebude využívat. Rozšiř nadstavbové
+        funkce nad stackem parser_stack_* o tento nový parametr.
+*/
+
 void parser_stack_init(Stack *stack) {
   stack_init(stack, sizeof(ParserStackEntry));
 }
 
 void parser_stack_push(Stack *stack, GrammarSymbol symbol,
-                       void *semantic_pointer, IDContextType id_type) {
+                       void *semantic_pointer, ContextAnnotation annotation,
+                       bool reduction_marker) {
   ParserStackEntry entry = {
       .symbol = symbol,
       .semantic_pointer = semantic_pointer,
-      .id_type = id_type,
+      .annotation = annotation,
+      .reduction_marker = reduction_marker,
   };
 
   // Zasobnik si zaznam zkopiruje, lokalni entry tedy muze po volani zaniknout
@@ -116,7 +159,12 @@ ParserStackEntry *parser_stack_top(const Stack *stack) {
   return stack_top(stack);
 }
 
+ParserStackEntry *parser_stack_peek(const Stack *stack, size_t depth) {
+  return stack_peek(stack, depth);
+}
+
 /*
+    Prompt pro funkci parser_stack_peek je v souboru semantic_types.h.
     Prompt pro funkci parser_context_init je v souboru predictive_parser.c.
 */
 
@@ -127,4 +175,29 @@ void parser_context_init(ParserContext *ctx) {
 
   // Ziskani prvniho vstupniho tokenu
   parser_advance(ctx);
+}
+
+/*
+    Prompt pro funkci trace_rule. Stejny prompt zpusobil zmeny take
+    v parser_common.h a semantic_actions.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Mohl by jsi funkci trace_rule zobecnit tak, aby mohla vypisovat
+        pravidla jak LL parseru, tak prediktivního parseru?
+        Přidej do ní parametr bool is_predictive_parser na základě kterého
+        vypíše buď
+        "LL Parser: Pravidlo L%d (radek %d)\n"
+        nebo
+        "Precedencni parser: Pravidlo E%d (radek %d)\n"
+
+        Funkci přesuň do parser_common.* a uprav stávající volání v
+        semantic_actions.c
+*/
+
+void trace_rule(bool is_predictive_parser, int rule_number, int line) {
+  if (is_predictive_parser)
+    fprintf(stderr, "LL Parser: Pravidlo L%d (radek %d)\n", rule_number, line);
+  else
+    fprintf(stderr, "Precedencni parser: Pravidlo E%d (radek %d)\n",
+            rule_number, line);
 }

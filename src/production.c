@@ -5,17 +5,31 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - aktualizace pravidel dle nove verze gramatiky: zmeneno
+          pravidlo 25 a 44, odstranena pravidla 33, 45 a 46, doplnene
+          poznamky k pravidlum.
+        - xbalaka00 - komentare pravidel prepsany s ceskou terminologii (straz,
+          visici else apod.).
+        - xbalaka00 - odstranena testovaci produkce <expr> => ID.
+        - xbalaka00 - zdokumentovano kopirovani semantickeho ukazatele
+          a kontextove anotace ve statickych produkcich.
+        - xbalaka00 - pravidlo 30 pouziva NONTERM_EXPR misto odstraneneho
+          NONTERM_EXPR_NO_ID.
+        - xbalaka00 - odkazy na excel s gramatikou zmeneny na
+          parser_formalisms.xlsx.
+        - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
+          prompt je v reduction_table.h).
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
     semanticke akce, a to jak s predanim semantickeho ukazatele (ptr), tak bez
-    nej. Cisla pravidel odpovidaji tabulce gramatiky (LL_gramatika.xlsx).
+    nej. Cisla pravidel odpovidaji tabulce gramatiky (parser_formalisms.xlsx).
     Pravidla se semantickou akci ("ano") jsou zpracovana callbacky.
 
 */
 
 #include "production.h"
 
+#include "grammar_symbol.h"
 #include "nonterminal.h"
 #include "token.h"
 
@@ -73,11 +87,81 @@
         excelu.
 
         Pokud něco není jasné, zeptej se, než začneš generovat.
+
+    Prompt pro aktualizaci pravidel dle nove verze gramatiky (LL_gramatika).
+    Stejny prompt zpusobil zmeny take v production.h, semantic_actions.c,
+    semantic_actions.h, nonterminal.h a nonterminal.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Nakonec jsem musel gramatiku ještě přepracovat. Zde je nejnovější
+        verze. Aktualizuj prosím pravidla v kódu.
+
+        V prvním kroku bych jen přegeneroval pravidla, vyplnění LL tabulky do
+        kódu bude další krok. Bylo změněno pravidlo 25 a 44 pokud si dobře
+        vzpomínám. Pravidla 45 a 46 byla zrušena, pravidla 32 a 33 byly
+        převedeny do odpovědnosti jádra. Přibyly nová pravidla související s
+        ternárním if a mnoho, mnoho poznámek. Byl zrušen jeden neterminál a
+        jeden zaveden. Teď už nevím, jestli jsem náhodou nezměnil i něco ve
+        sloupci rozlišující callbacky od statických pravidel, kdyžtak pak
+        taková pravidla také přegeneruj na druhou variantu.
+
+        Prozatím testovací LL tabulku a vše, co potřebuje, ponech, jak je; po
+        testovací sadě bych pouklízel v dalším kroku.
+
+    Prompt pro upravu komentaru na ceskou terminologii (guard, dangling else
+    apod.) a pro prejmenovani odkazu na LL_gramatika_1.xlsx na LL_gramatika.xlsx.
+    Stejny prompt zpusobil zmeny take v production.h, semantic_actions.c
+    a semantic_actions.h, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Máme hotové statické produkce a callbacky; než však přejdeme na
+        samotnou LL tabulku, chtěl bych ještě upravit komentáře v souborech
+        production a semantic_actions. V excelu jsem nepoužíval striktně
+        českou terminologii v komentářích a názvech pravidel. Mohl by jsi tyto
+        komentáře v kódu (ne v excelu) přepsat tak, aby například vyjádření
+        typu guard, dangling else apod. bylo nahrazeno českými výrazy, jako je
+        stráž? Samozřejmě, odkazuje-li se text na název/textové vyjádření
+        terminálu, neterminálu nebo proměnné/funkce apod., tak toto může
+        zůstat doslovné. Kód samotný zatím neměň.
+
+        Dále také změň reference na LL_gramatika_1.xlsx na LL_gramatika.xlsx -
+        ta jednička vznikla jen díky souborovému systému a více verzím, uváděl
+        bych čistý název. Pro tuto konkrétní spíše kosmetickou změnu není
+        potřeba dělat změnový záznam, protože tato změna bude ve stejném
+        commitu jako ta předešlá, která již změnové seznamy upravila.
+
+    Prompt pro prejmenovani odkazu na excel s gramatikou na
+    parser_formalisms.xlsx. Stejny prompt zpusobil zmeny take v production.h
+    a LL_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Provedl jsem předělání LL gramatiky. Opravil jsem ten problém, a
+        samozřejně vyvstal zase jiný, takže jsem to vyřešil tak, že jazyk
+        nepodporuje kombinaci inline then větve s řídící konstrukcí a přítomného
+        else.
+        Mohl bys všude v souborech změnit odkaz na starý název excelového
+        souboru na jeho nový název parser_formalisms.xlsx? Název byl změněn
+        proto, že nyní v druhém listu obsahuje i návrh výrazové gramatiky.
+        Chtěl bych soubor v aktuální podobě zaverzovat do gitu, aby byla jeho
+        podoba uchována, jak je. Padlo totiž rozhodnutí, že přepočet množin po
+        této v pořadí třetí úpravě pravidel převezme kolega, který jej provede
+        za pomocí AI - chci tedy, aby byla uložena podoba před zásahy AI, ve
+        které soubor needitoval nikdo jiný než já.
+*/
+
+/*
+    Prompt pro odstraneni testovaci produkce <expr> => ID je v souboru
+    LL_table.c. Prompt pro kopirovani kontextove anotace ve statickych
+    produkcich je v souboru semantic_types.h. Prompt pro odstraneni
+    NONTERM_EXPR_NO_ID je v souboru nonterminal.h.
 */
 
 // Symboly jsou v produkcich v prirozenem poradi (zleva doprava), parser je
 // na zasobnik vklada od posledniho. Pravidla oznacena (ptr) predavaji
 // semanticky ukazatel z neterminalu na leve strane do symbolu produkce.
+// Parser pri vkladani staticke produkce vzdy kopiruje semanticky ukazatel
+// i kontextovou anotaci do vsech jejich symbolu, znacka (ptr) je jen
+// informativni.
 
 // Pravidlo 1 (Seznam deklaraci) (ptr): <defList> => <def> <defList>
 const StaticProduction PRODUCTION_DEF_LIST_NEXT = {
@@ -105,6 +189,7 @@ const StaticProduction PRODUCTION_OPTIONAL_EOL_PRESENT = {
 const StaticProduction PRODUCTION_OPTIONAL_EOL_ABSENT = {.length = 0};
 
 // Pravidlo 9 (Pridani carky) (ptr): <paramComma> => , <paramAdd>
+// Pozn.: Novy radek mezi koncovou carkou a tokenem ) testuje semanticka akce.
 const StaticProduction PRODUCTION_PARAM_LIST_TAIL_NEXT = {
     .length = 2,
     .production =
@@ -133,7 +218,8 @@ const StaticProduction PRODUCTION_OPTIONAL_TYPE_PRESENT = {
 // Pravidlo 13 (Navratovy typ neni): <optionalType> => epsilon
 const StaticProduction PRODUCTION_OPTIONAL_TYPE_ABSENT = {.length = 0};
 
-// Pravidlo 20 (Inline expr misto bloku) (ptr): <blockOrExpr> => <expr> EOL
+// Pravidlo 20 (Jednoradkovy vyraz misto bloku) (ptr): <blockOrExpr> => <expr> EOL
+// Pozn.: Volani funkce je take expr kvuli FUNEXP.
 const StaticProduction PRODUCTION_BLOCK_OR_EXPR_EXPR = {
     .length = 2,
     .production =
@@ -150,6 +236,7 @@ const StaticProduction PRODUCTION_BLOCK_OR_EXPR_BLOCK = {
 };
 
 // Pravidlo 23 (Dalsi prikaz) (ptr): <commandList> => <command> <commandList>
+// Pozn.: Prikazy konci bud koncem logickeho radku, nebo strednikem.
 const StaticProduction PRODUCTION_COMMAND_LIST_NEXT = {
     .length = 2,
     .production =
@@ -162,14 +249,12 @@ const StaticProduction PRODUCTION_COMMAND_LIST_NEXT = {
 // Pravidlo 24 (Konec seznamu prikazu): <commandList> => epsilon
 const StaticProduction PRODUCTION_COMMAND_LIST_END = {.length = 0};
 
-// Pravidlo 25 (Konec prikazu - strednik): <commandEnd> => ; <optionalEOL>
+// Pravidlo 25 (Konec prikazu - strednik): <commandEnd> => ;
+// Pozn.: Prikaz se strednikem na konci bloku je zakazan, protoze by pri
+// spotrebovani DEDENT ze zasobniku nastala chyba.
 const StaticProduction PRODUCTION_COMMAND_END_SEMICOLON = {
-    .length = 2,
-    .production =
-        {
-            GRAMMAR_TERMINAL(TOKEN_SEMICOLON),
-            GRAMMAR_NONTERMINAL(NONTERM_OPTIONAL_EOL),
-        },
+    .length = 1,
+    .production = {GRAMMAR_TERMINAL(TOKEN_SEMICOLON)},
 };
 
 // Pravidlo 26 (Konec prikazu - EOL): <commandEnd> => EOL
@@ -178,26 +263,67 @@ const StaticProduction PRODUCTION_COMMAND_END_EOL = {
     .production = {GRAMMAR_TERMINAL(TOKEN_EOL)},
 };
 
-// Pravidlo 29 (Deklarace variable): <valVar> => var
+// Pravidlo 29 (Deklarace modifikovatelne promenne): <valVar> => var
 const StaticProduction PRODUCTION_VAR = {
     .length = 1,
     .production = {GRAMMAR_TERMINAL(TOKEN_KW_VAR)},
 };
 
-// Pravidlo 30 (Prikaz vyrazu) (ptr): <command> => <exprNoID> <commandEnd>
-const StaticProduction PRODUCTION_COMMAND_EXPR = {
+// Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
+// Pozn.: <exprNoID> je v implementaci nahrazen <expr>, viz pravidlo 30 vyse.
+const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR = {
+    .length = 1,
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
+};
+
+// Pravidlo 45 (Jednoduchy prikaz) (ptr): <command> => <commandSimple> <commandEnd>
+const StaticProduction PRODUCTION_COMMAND_SIMPLE = {
     .length = 2,
     .production =
         {
-            GRAMMAR_NONTERMINAL(NONTERM_EXPR_NO_ID),
+            GRAMMAR_NONTERMINAL(NONTERM_COMMAND_SIMPLE),
             GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END),
         },
 };
 
-// Pravidlo 33 (Vyraz zacinajici ID) (ptr): <IDcommand> => <expr>
-const StaticProduction PRODUCTION_ID_COMMAND_EXPR = {
+// Pravidlo 46 (Ridici prikaz) (ptr): <command> => <commandControl>
+const StaticProduction PRODUCTION_COMMAND_CONTROL = {
     .length = 1,
-    .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_CONTROL)},
+};
+
+// Pravidlo 55 (Then vetev s blokem) (ptr): <thenBranch> => <block> <optionalElse>
+const StaticProduction PRODUCTION_THEN_BRANCH_BLOCK = {
+    .length = 2,
+    .production =
+        {
+            GRAMMAR_NONTERMINAL(NONTERM_BLOCK),
+            GRAMMAR_NONTERMINAL(NONTERM_OPTIONAL_ELSE),
+        },
+};
+
+// Pravidlo 56 (Then vetev s prikazem) (ptr): <thenBranch> => <commandSimple> <elseOrCommandEnd>
+// Pozn.: else musi nasledovat na stejnem radku jako inline then.
+const StaticProduction PRODUCTION_THEN_BRANCH_SIMPLE = {
+    .length = 2,
+    .production =
+        {
+            GRAMMAR_NONTERMINAL(NONTERM_COMMAND_SIMPLE),
+            GRAMMAR_NONTERMINAL(NONTERM_ELSE_OR_COMMAND_END),
+        },
+};
+
+// Pravidlo 57 (Then vetev s ridicim prikazem) (ptr): <thenBranch> => <commandControl>
+// Pozn.: Bez vetve else, else tak vzdy patri k nejblizsimu if.
+const StaticProduction PRODUCTION_THEN_BRANCH_CONTROL = {
+    .length = 1,
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_CONTROL)},
+};
+
+// Pravidlo 58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
+const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END = {
+    .length = 1,
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END)},
 };
 
 // Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
@@ -209,7 +335,7 @@ const StaticProduction PRODUCTION_RETURN_VALUE_EXPR = {
 // Pravidlo 36 (Prazdny return): <returnValue> => epsilon
 const StaticProduction PRODUCTION_RETURN_VALUE_EMPTY = {.length = 0};
 
-// Pravidlo 42 (Konec guardu): <guardList> => epsilon
+// Pravidlo 42 (Konec strazi): <guardList> => epsilon
 const StaticProduction PRODUCTION_GUARD_LIST_END = {.length = 0};
 
 // Pravidlo 43 (Nasleduje blok) (ptr): <blockOrCommand> => <block>
@@ -218,30 +344,17 @@ const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_BLOCK = {
     .production = {GRAMMAR_NONTERMINAL(NONTERM_BLOCK)},
 };
 
-// Pravidlo 44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command> <optionalSemicolon> EOL
+// Pravidlo 44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command>
 const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_COMMAND = {
-    .length = 3,
-    .production =
-        {
-            GRAMMAR_NONTERMINAL(NONTERM_COMMAND),
-            GRAMMAR_NONTERMINAL(NONTERM_OPTIONAL_SEMICOLON),
-            GRAMMAR_TERMINAL(TOKEN_EOL),
-        },
-};
-
-// Pravidlo 45 (Na konci je strednik): <optionalSemicolon> => ;
-const StaticProduction PRODUCTION_OPTIONAL_SEMICOLON_PRESENT = {
     .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_SEMICOLON)},
+    .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND)},
 };
 
-// Pravidlo 46 (Na konci neni strednik): <optionalSemicolon> => epsilon
-const StaticProduction PRODUCTION_OPTIONAL_SEMICOLON_ABSENT = {.length = 0};
-
-// Pravidlo 49 (Vynechane else): <optionalElse> => epsilon
+// Pravidlo 49 (Vynechana vetev else): <optionalElse> => epsilon
 const StaticProduction PRODUCTION_OPTIONAL_ELSE_ABSENT = {.length = 0};
 
-// Pravidlo 51 (Odsazeni vyrazu v ifu) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
+// Pravidlo 51 (Odsazeni vyrazu v ternarni podmince) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
+// Pozn.: Pravidla 51 a 53 maji shodnou pravou stranu, ale lisi se chovanim.
 const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED = {
     .length = 5,
     .production =
@@ -254,26 +367,23 @@ const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED = {
         },
 };
 
-// Pravidlo 52 (Neodsazeny vyraz v ifu) (ptr): <exprOrIndentExpr> => <expr>
+// Pravidlo 52 (Neodsazeny vyraz v ternarni podmince) (ptr): <exprOrIndentExpr> => <expr>
 const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
 };
 
-// Pravidlo 54 (Nedokoncena else vetev): <elseTernaryIf> => epsilon
+// Pravidlo 54 (Nedokoncena vetev else): <elseTernaryIf> => epsilon
+// Pozn.: Do vyrazovky se vrati neterminal TIF, ktery bude redukovan a pripoji
+// vetev else. Uvnitr zavorek odsazeni nehraje roli, vetev else se pripoji na
+// zaklade redukce ohranicene zavorkami.
 const StaticProduction PRODUCTION_ELSE_TERNARY_IF_ABSENT = {.length = 0};
 
-// Testovaci pravidla mimo gramatiku, v hotovem parseru je <expr> prechod
+// Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
 // do vyrazoveho parseru
 
 // Testovaci pravidlo mimo gramatiku: <expr> => *
 const StaticProduction PRODUCTION_TEST_EXPR_STAR = {
     .length = 1,
     .production = {GRAMMAR_TERMINAL(TOKEN_STAR)},
-};
-
-// Testovaci pravidlo mimo gramatiku: <expr> => ID
-const StaticProduction PRODUCTION_TEST_EXPR_ID = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_ID)},
 };

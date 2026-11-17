@@ -11,15 +11,28 @@
           parser_stack_pop a parser_stack_top.
         - xbalaka00 - pridani funkce parser_context_init za asistence Claude,
           prompt je v predictive_parser.c.
+        - xbalaka00 - ParserStackEntry a parser_stack_push nesou
+          ContextAnnotation misto IDContextType.
+        - xbalaka00 - dokumentace parser_advance doplnena o overeni typu
+          tokenu (prompt je v nonterminal.h).
+        - xbalaka00 - ParserStackEntry a parser_stack_push nesou priznak
+          reduction_marker (prompt je v parser_common.c).
+        - xbalaka00 - pridana funkce parser_stack_peek (prompt je v
+          semantic_types.h).
+        - xbalaka00 - include grammar_symbol.h pro GrammarSymbol (GrammarSymbol presunut do grammar_symbol.h,
+          prompt je v reduction_table.h).
+        - xbalaka00 - pridana funkce trace_rule (prompt je v parser_common.c).
+        - xbalaka00 - upraven popis funkce parser_advance
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
-    na zasobniku parseru, kontext sdileny mezi parsery a funkce pro praci
-    se zasobnikem parseru.
+    na zasobniku parseru, kontext sdileny mezi parsery, funkce pro praci
+    se zasobnikem parseru a spolecny ladici vypis pravidel.
 */
 
 #ifndef PARSER_COMMON_H
 #define PARSER_COMMON_H
 
+#include "grammar_symbol.h"
 #include "production.h"
 #include "semantic_types.h"
 #include "stack.h"
@@ -73,6 +86,12 @@
         asi až později.
 */
 
+/*
+    Prompt pro zobecneni IDContextType na ContextAnnotation je v souboru
+    semantic_types.h. Prompt pro priznak reduction_marker je v souboru
+    parser_common.c.
+*/
+
 /**
  * @brief Zaznam ulozeny na zasobniku parseru.
  */
@@ -86,7 +105,21 @@ typedef struct {
      */
   void *semantic_pointer;
 
-  IDContextType id_type; ///< Kontext vyskytu tokenu ID ve strome
+  /**
+     * Kontextova anotace symbolu, sdeluje callbacku, jak ma s symbolem
+     * postupovat. Lze ji pripojit k terminalu i k neterminalu.
+     */
+  ContextAnnotation annotation;
+
+  /**
+     * Priznak znacky redukce pro precedencni parser. Je-li true, bezprostredne
+     * za timto zaznamem (smerem k vrcholu zasobniku) nasleduje symbol <,
+     * ktery v matematickem modelu oznacuje zacatek redukce. Handle tvori
+     * vsechny zaznamy od vrcholu zasobniku az po prvni zaznam s timto
+     * priznakem, tento zaznam do handle nepatri. Vychozi hodnota je false,
+     * prediktivni parser priznak nevyuziva.
+     */
+  bool reduction_marker;
 } ParserStackEntry;
 
 /**
@@ -116,8 +149,12 @@ bool parser_check_token(const ParserContext *ctx, TokenType expected);
 /**
  * @brief Posun ve vstupnim proudu dale. Kontroluje take koncovou carku.
  * 
- * Uvolni soucasny token a a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
- * tedy musi probehnout jeste pred zavolanim teto funkce.
+ * Uvolni soucasny token a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
+ * tedy musi probehnout jeste pred zavolanim teto funkce. Typ noveho tokenu
+ * overi funkci token_type_validate (neplatny typ je interni chyba).
+ * 
+ * Funkce take kontroluje zakaz dvou po sobe jdoucich carek a koncovou carku v seznamu.
+ * Kontrola je tedy spolecna pro oba parsery.
  *
  * @param ctx Spolecny context parseru.
  */
@@ -144,11 +181,13 @@ void parser_stack_init(Stack *stack);
  * @param stack Zasobnik parseru.
  * @param symbol Symbol gramatiky.
  * @param semantic_pointer Ukazatel pro stavbu stromu.
- * @param id_type Kontext vyskytu tokenu ID, pro ostatni symboly
- *        ID_CONTEXT_NONE.
+ * @param annotation Kontextova anotace symbolu, bez anotace CONTEXT_NONE.
+ * @param reduction_marker Priznak znacky redukce, bezne false (viz
+ *        ParserStackEntry).
  */
 void parser_stack_push(Stack *stack, GrammarSymbol symbol,
-                       void *semantic_pointer, IDContextType id_type);
+                       void *semantic_pointer, ContextAnnotation annotation,
+                       bool reduction_marker);
 
 /**
  * @brief Odebere zaznam z vrcholu zasobniku parseru.
@@ -167,7 +206,17 @@ bool parser_stack_pop(Stack *stack, ParserStackEntry *out);
  */
 ParserStackEntry *parser_stack_top(const Stack *stack);
 
+/**
+ * @brief Vrati zaznam na zasobniku parseru v dane hloubce.
+ *
+ * @param stack Zasobnik parseru.
+ * @param depth Hloubka, 0 je vrchol, 1 je zaznam tesne pod nim.
+ * @return Ukazatel na zaznam, nebo NULL, pokud takovy zaznam neni.
+ */
+ParserStackEntry *parser_stack_peek(const Stack *stack, size_t depth);
+
 /*
+    Prompt pro funkci parser_stack_peek je v souboru semantic_types.h.
     Prompt pro nasledujici deklaraci funkce je v souboru predictive_parser.c.
 */
 
@@ -180,5 +229,24 @@ ParserStackEntry *parser_stack_top(const Stack *stack);
  * @param ctx Kontext parseru k inicializaci.
  */
 void parser_context_init(ParserContext *ctx);
+
+/*
+    Prompt pro nasledujici deklaraci funkce je v souboru parser_common.c.
+*/
+
+/**
+ * @brief Vypise pouzite pravidlo a cislo radku na stderr (ladici vystup).
+ *
+ * Format vystupu urcuje parametr is_predictive_parser. Pravidla prediktivniho
+ * (LL) parseru se vypisuji jako "LL Parser: Pravidlo L<cislo> (radek <radek>)",
+ * pravidla precedencniho parseru jako
+ * "Precedencni parser: Pravidlo E<cislo> (radek <radek>)".
+ *
+ * @param is_predictive_parser True pro pravidlo prediktivniho (LL) parseru,
+ *        false pro pravidlo precedencniho parseru.
+ * @param rule_number Cislo pravidla.
+ * @param line Cislo radku vstupu.
+ */
+void trace_rule(bool is_predictive_parser, int rule_number, int line);
 
 #endif // PARSER_COMMON_H

@@ -1,0 +1,2 @@
+Error 1 (line 1): Neukonceny blokovy komentar
+EXIT CODE: 1
