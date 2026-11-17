@@ -269,10 +269,6 @@ const StaticProduction PRODUCTION_VAR = {
     .production = {GRAMMAR_TERMINAL(TOKEN_KW_VAR)},
 };
 
-
-
-
-
 // Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
 // Pozn.: <exprNoID> je v implementaci nahrazen <expr>, viz pravidlo 30 vyse.
 const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR = {
@@ -329,9 +325,6 @@ const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END)},
 };
-
-
-
 
 // Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
 const StaticProduction PRODUCTION_RETURN_VALUE_EXPR = {

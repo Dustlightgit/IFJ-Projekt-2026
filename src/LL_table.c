@@ -322,7 +322,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
             [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_COMMAND_CONTROL),
             [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_COMMAND_CONTROL),
         },
-    
+
     // Pravidla 55, 56, 57
     [NONTERM_THEN_BRANCH] =
         {
@@ -342,12 +342,13 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // Pravidla 58, 59
     [NONTERM_ELSE_OR_COMMAND_END] =
         {
-            [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END),
+            [TOKEN_SEMICOLON] =
+                LL_PROD(PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END),
             [TOKEN_EOL] = LL_PROD(PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END),
-            [TOKEN_KW_ELSE] = LL_CALLBACK(semantic_action_else_or_command_end_else),
+            [TOKEN_KW_ELSE] =
+                LL_CALLBACK(semantic_action_else_or_command_end_else),
         },
 
-    
     // Pravidla 27, 30, 31, 34 (jednoduche prikazy)
     [NONTERM_COMMAND_SIMPLE] =
         {
@@ -368,8 +369,6 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
             [TOKEN_KW_WHILE] = LL_CALLBACK(semantic_action_while_command),
             [TOKEN_KW_FOR] = LL_CALLBACK(semantic_action_for_command),
         },
-
-
 
     // Pravidla 28, 29
     [NONTERM_VAL_VAR] =
@@ -426,7 +425,8 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // Pravidla 48, 49
     [NONTERM_OPTIONAL_ELSE] =
         {
-            [TOKEN_KW_ELSE] = LL_CALLBACK(semantic_action_optional_else_present),
+            [TOKEN_KW_ELSE] =
+                LL_CALLBACK(semantic_action_optional_else_present),
             [TOKEN_DEDENT] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_ID] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
@@ -474,20 +474,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
             [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
         },
 
-
-
-
-
-
-
-
-
-/////////////////////// DULEZITE, VELMI DULEZITE /////////////
-
-
-
-
-
+    /////////////////////// DULEZITE, VELMI DULEZITE /////////////
 
     // Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
     // do vyrazoveho parseru
@@ -500,25 +487,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
         },
 };
 
-
-
-
 /////////////////////// DULEZITE, VELMI DULEZITE /////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const LLTableEntry *ll_table_lookup(NonterminalType nonterm, TokenType terminal,
                                     int line) {

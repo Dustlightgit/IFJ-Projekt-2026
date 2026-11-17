@@ -150,12 +150,12 @@ typedef enum {
   // na zaklade pristiho tokenu.
 
   // Binarni operatory
-  TOKEN_PLUS,     ///< + (binarni, scanner vraci i pro unarni)
-  TOKEN_MINUS,    ///< - (binarni, scanner vraci i pro unarni)
+  TOKEN_PLUS,  ///< + (binarni, scanner vraci i pro unarni)
+  TOKEN_MINUS, ///< - (binarni, scanner vraci i pro unarni)
 
   /// Vyraz nesmi zacinat terminalem s hodnotou vetsi nez tento oddelovac
   TOKEN_EXPRESSION_BEGINNING_DELIMITER,
-  
+
   // Ostatni terminaly vyrazove analyzy, indexuji precedencni tabulku
   TOKEN_SLASH,    ///< /
   TOKEN_DOT,      ///< . (VALMEM, LISTS, import)

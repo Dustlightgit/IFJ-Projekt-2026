@@ -181,9 +181,6 @@ extern const StaticProduction PRODUCTION_COMMAND_END_EOL;
 /// Pravidlo 29 (Deklarace modifikovatelne promenne): <valVar> => var
 extern const StaticProduction PRODUCTION_VAR;
 
-
-
-
 /// Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
 /// Pozn.: nahradi PRODUCTION_COMMAND_EXPR, ktere se odstrani v LL tabulce.
 extern const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR;
@@ -205,7 +202,6 @@ extern const StaticProduction PRODUCTION_THEN_BRANCH_CONTROL;
 
 /// Pravidlo 58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
 extern const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END;
-
 
 /// Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
 extern const StaticProduction PRODUCTION_RETURN_VALUE_EXPR;

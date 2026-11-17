@@ -3,6 +3,7 @@
 #include "ast.h"
 #include "nonterminal.h"
 #include "parser_common.h"
+#include "precedence_parser.h"
 #include "predictive_parser.h"
 #include "semantic.h"
 #include "symtable.h"
@@ -106,6 +107,7 @@ int main() {
 
 */
 
+/*
 int main() {
   ParserContext parser_ctx;
   parser_context_init(&parser_ctx);
@@ -126,4 +128,18 @@ int main() {
   symtable_free(table);
   program_free(program);
   return 0;
+}
+*/
+
+int main() {
+
+  ParserContext parser_ctx;
+  parser_context_init(&parser_ctx);
+
+  while (parser_ctx.current_token.type != TOKEN_EOF) {
+
+    precedence_parser(&parser_ctx, NULL);
+    parser_advance(&parser_ctx);
+    fprintf(stderr, "\n------------------------------\n");
+  }
 }

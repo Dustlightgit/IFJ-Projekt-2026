@@ -390,7 +390,6 @@ void semantic_action_declaration_command(SemanticContext *ctx,
   Stmt *stmt = stmt_new_vardef(true, NULL, NULL, NULL, line); // val to prepise
   block_add(block, stmt);
 
-  
   push_nonterminal(stack, NONTERM_EXPR, stmt, CONTEXT_VARDEF_INIT);
   push_terminal(stack, TOKEN_ASSIGN, NULL, CONTEXT_NONE);
   push_nonterminal(stack, NONTERM_OPTIONAL_TYPE, stmt, CONTEXT_VARDEF_TYPE);
@@ -419,7 +418,6 @@ void semantic_action_id_command(SemanticContext *ctx, void *semantic_pointer,
   (void)ctx;
   trace_rule(true, 31, line);
 
- 
   // Pointer a anotace se predaji jadru, ktere z nich pri prirazeni urci blok
   push_nonterminal(stack, NONTERM_ID_COMMAND, semantic_pointer, annotation);
   push_terminal(stack, TOKEN_ID, NULL, CONTEXT_ID_COMMAND);
@@ -437,7 +435,6 @@ void semantic_action_return_command(SemanticContext *ctx,
   Stmt *stmt = stmt_new_return(NULL, line);
   block_add(block, stmt);
 
-  
   push_nonterminal(stack, NONTERM_RETURN_VALUE, stmt, CONTEXT_RETURN_VALUE);
   push_terminal(stack, TOKEN_KW_RETURN, NULL, CONTEXT_NONE);
 }
@@ -536,7 +533,6 @@ void semantic_action_if_command(SemanticContext *ctx, void *semantic_pointer,
   Expr *ifx = expr_new_if(NULL, NULL, NULL, line);
   block_add(block, stmt_new_expr(ifx, line));
 
-  
   push_nonterminal(stack, NONTERM_THEN_BRANCH, ifx, CONTEXT_IF_THEN);
   push_terminal(stack, TOKEN_KW_THEN, NULL, CONTEXT_NONE);
   push_nonterminal(stack, NONTERM_EXPR, ifx, CONTEXT_IF_COND);
@@ -599,7 +595,6 @@ void semantic_action_else_ternary_if_indented(SemanticContext *ctx,
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
 }
 
-
 // Pravidlo 59 (Else za inline then): <elseOrCommandEnd> => else <blockOrCommand>
 // Pozn.: Chova se stejne jako pravidlo 48, jen patri k jinemu neterminalu.
 void semantic_action_else_or_command_end_else(SemanticContext *ctx,
@@ -614,7 +609,6 @@ void semantic_action_else_or_command_end_else(SemanticContext *ctx,
                    CONTEXT_IF_ELSE);
   push_terminal(stack, TOKEN_KW_ELSE, NULL, CONTEXT_NONE);
 }
-
 
 // Docasne pravidlo mimo gramatiku: <expr> => *, vytvori literal 0
 void semantic_action_test_expr(SemanticContext *ctx, void *semantic_pointer,
