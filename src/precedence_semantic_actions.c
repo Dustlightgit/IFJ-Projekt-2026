@@ -14,6 +14,9 @@
         - xbalaka00 - akce pravidel E0 az E41 stavi uzly AST z podstromu na
           zasobniku, seznam argumentu ARGS je pomocny uzel EXPR_LIST_LITERAL
           (prompt je zde).
+        - xbalaka00 - pridano pravidlo E30 (clenska notace bez parametru),
+          pravidla E30 az E41 precislovana na E31 az E42 (prompt je v
+          precedence_semantic_actions.c).
 
     Tento soubor obsahuje semanticke akce pravidel precedencniho parseru. Akce
     vypisuji cislo pravidla na stderr, stavi uzly AST z podstromu handle
@@ -106,6 +109,21 @@
         Volání funkce a indexace seznamu má stejný tvar a možná to má v AST odlišné uzly. Neodlišuj to - vždy vytvoř volání funkce a sémantický analyzátor to vyřeší.
 
         AST ideálně neměň. Smíš si však doplnit funkce, které například doplní nějakou informaci k existujícímu uzlu, pokud by taková někde chyběla. Pokud využiješ dynamickou paměť pro ty delší seznamy argumentů, vyčleň si případně pomocné funkce pro práci s pamětí z ast.* do nového souboru memory.* - neměň však za žádných okolností samotné struktury reprezentující AST, protože to by znamenalo rozhození všech navazujících stupňů překladače.
+*/
+
+/*
+    Prompt pro pridani pravidla E30 (clenska notace bez parametru) a prislusne
+    precislovani. Stejny prompt zpusobil zmeny take v
+    precedence_semantic_actions.h, reduction_table.c a reduction_table.h, jeho
+    zneni je pouze zde.
+
+    Prompt pro Claude:
+        To s tím pravidlem E.ID() je pravda. Všiml jsem si toho také a plánoval jsem to řešit. Pravidlo jsem už zavedl do excelu. Pravidlo má číslo 30, pravidla, které po něm následují, se přečíslovala.
+
+        Pro jistotu, tedy je výňatek z upravené tabulky:
+        <zde jsem prekopiroval vynatek z upravene tabulky>
+
+        Zaveď prosím toto nové pravidlo jako sémantickou akci a zapiš jej do redukční tabulky. Akce vyhodí sémantickou chybu ERR_UNDEFINED, protože žádná taková metoda v námi zvolených rozšířeních není.
 */
 
 // Nastavi vysledek redukce. Funkce pouze schovava makro a pretypovani, predavaji
@@ -480,7 +498,7 @@ void precedence_action_list_multiple_elements(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, args, CONTEXT_NONE);
 }
 
-// Pravidlo E29 (Clenska notace bez parametru): E <= E . ID
+// Pravidlo E29 (Clenska notace): E <= E . ID
 void precedence_action_member_access(const Stack *stack, int line,
                                      AnnotatedSymbol *result) {
   trace_rule(false, 29, line);
@@ -493,10 +511,25 @@ void precedence_action_member_access(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, member, CONTEXT_NONE);
 }
 
-// Pravidlo E30 (Clenska metoda s parametrem): E <= E . ID ( E )
+// Pravidlo E30 (Clenska notace bez parametru): E <= E . ID ( )
+void precedence_action_method_no_args(const Stack *stack, int line,
+                                      AnnotatedSymbol *result) {
+  (void)result;
+  trace_rule(false, 30, line);
+
+  // Expr *object_expr = stack_expr(stack, 4, line);
+  Expr *method_name = stack_expr(stack, 2, line);
+
+  // V zvolenych rozsirenich neexistuje zadna metoda bez parametru
+  require_id_node(method_name, line);
+  error_exit(ERR_UNDEFINED, method_name->line,
+             "Neexistujici clenska metoda bez parametru.");
+}
+
+// Pravidlo E31 (Clenska metoda s parametrem): E <= E . ID ( E )
 void precedence_action_method_one_arg(const Stack *stack, int line,
                                       AnnotatedSymbol *result) {
-  trace_rule(false, 30, line);
+  trace_rule(false, 31, line);
 
   Expr *object_expr = stack_expr(stack, 5, line);
   Expr *method_name = stack_expr(stack, 3, line);
@@ -508,10 +541,10 @@ void precedence_action_method_one_arg(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, member, CONTEXT_NONE);
 }
 
-// Pravidlo E31 (Clenska metoda s vice parametry): E <= E . ID ( ARGS )
+// Pravidlo E32 (Clenska metoda s vice parametry): E <= E . ID ( ARGS )
 void precedence_action_method_multiple_args(const Stack *stack, int line,
                                             AnnotatedSymbol *result) {
-  trace_rule(false, 31, line);
+  trace_rule(false, 32, line);
 
   Expr *object_expr = stack_expr(stack, 5, line);
   Expr *method_name = stack_expr(stack, 3, line);
@@ -523,38 +556,38 @@ void precedence_action_method_multiple_args(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, member, CONTEXT_NONE);
 }
 
-// Pravidlo E32 (Staticka funkce seznamu bez parametru): E <= List . ID ( )
+// Pravidlo E33 (Staticka funkce seznamu bez parametru): E <= List . ID ( )
 void precedence_action_list_static_function_no_args(const Stack *stack,
-                                                    int line,
-                                                    AnnotatedSymbol *result) {
-  (void)stack;
-  (void)result;
-  trace_rule(false, 32, line);
-
-  // Jedina staticka funkce seznamu je List.range, ta vyzaduje 2 nebo 3
-  // argumenty (viz E34), jinou obecnou staticku funkci AST nezna
-  error_exit(ERR_ARGS, line,
-             "Staticka funkce seznamu List.<id> vyzaduje alespon 2 argumenty.");
-}
-
-// Pravidlo E33 (Staticka funkce seznamu s parametrem): E <= List . ID ( E )
-void precedence_action_list_static_function_one_arg(const Stack *stack,
                                                     int line,
                                                     AnnotatedSymbol *result) {
   (void)stack;
   (void)result;
   trace_rule(false, 33, line);
 
-  // Viz E32, jeden argument nestaci pro zadnou staticku funkci seznamu
+  // Jedina staticka funkce seznamu je List.range, ta vyzaduje 2 nebo 3
+  // argumenty (viz E35), jinou obecnou staticku funkci AST nezna
   error_exit(ERR_ARGS, line,
              "Staticka funkce seznamu List.<id> vyzaduje alespon 2 argumenty.");
 }
 
-// Pravidlo E34 (Staticka funkce seznamu s vice parametry):
+// Pravidlo E34 (Staticka funkce seznamu s parametrem): E <= List . ID ( E )
+void precedence_action_list_static_function_one_arg(const Stack *stack,
+                                                    int line,
+                                                    AnnotatedSymbol *result) {
+  (void)stack;
+  (void)result;
+  trace_rule(false, 34, line);
+
+  // Viz E33, jeden argument nestaci pro zadnou staticku funkci seznamu
+  error_exit(ERR_ARGS, line,
+             "Staticka funkce seznamu List.<id> vyzaduje alespon 2 argumenty.");
+}
+
+// Pravidlo E35 (Staticka funkce seznamu s vice parametry):
 // E <= List . ID ( ARGS )
 void precedence_action_list_static_function_multiple_args(
     const Stack *stack, int line, AnnotatedSymbol *result) {
-  trace_rule(false, 34, line);
+  trace_rule(false, 35, line);
 
   Expr *function_name = stack_expr(stack, 3, line);
   Expr *args = stack_args(stack, 1, line);
@@ -582,10 +615,10 @@ void precedence_action_list_static_function_multiple_args(
   set_result(result, NONTERM_EXPR, range, CONTEXT_NONE);
 }
 
-// Pravidlo E35 (Tvorba seznamu parametru): ARGS <= E , E
+// Pravidlo E36 (Tvorba seznamu parametru): ARGS <= E , E
 void precedence_action_args_create(const Stack *stack, int line,
                                    AnnotatedSymbol *result) {
-  trace_rule(false, 35, line);
+  trace_rule(false, 36, line);
 
   Expr *first_expr = stack_expr(stack, 2, line);
   Expr *second_expr = stack_expr(stack, 0, line);
@@ -598,10 +631,10 @@ void precedence_action_args_create(const Stack *stack, int line,
   set_result(result, NONTERM_ARGS, args, CONTEXT_NONE);
 }
 
-// Pravidlo E36 (Konsolidace parametru): ARGS <= ARGS , E
+// Pravidlo E37 (Konsolidace parametru): ARGS <= ARGS , E
 void precedence_action_args_append(const Stack *stack, int line,
                                    AnnotatedSymbol *result) {
-  trace_rule(false, 36, line);
+  trace_rule(false, 37, line);
 
   Expr *args = stack_args(stack, 2, line);
   Expr *expr = stack_expr(stack, 0, line);
@@ -611,10 +644,10 @@ void precedence_action_args_append(const Stack *stack, int line,
   set_result(result, NONTERM_ARGS, args, CONTEXT_NONE);
 }
 
-// Pravidlo E37 (Likvidace koncove carky (za vyrazem)): ARGS <= E ,
+// Pravidlo E38 (Likvidace koncove carky (za vyrazem)): ARGS <= E ,
 void precedence_action_args_trailing_comma_expr(const Stack *stack, int line,
                                                 AnnotatedSymbol *result) {
-  trace_rule(false, 37, line);
+  trace_rule(false, 38, line);
 
   // Jediny argument se zabali do seznamu argumentu, aby ARGS bylo na zasobniku
   // vzdy pomocny EXPR_LIST_LITERAL (jinak by nebylo poznat od vyrazu)
@@ -626,20 +659,20 @@ void precedence_action_args_trailing_comma_expr(const Stack *stack, int line,
   set_result(result, NONTERM_ARGS, args, CONTEXT_NONE);
 }
 
-// Pravidlo E38 (Likvidace koncove carky (za seznamem)): ARGS <= ARGS ,
+// Pravidlo E39 (Likvidace koncove carky (za seznamem)): ARGS <= ARGS ,
 void precedence_action_args_trailing_comma_args(const Stack *stack, int line,
                                                 AnnotatedSymbol *result) {
-  trace_rule(false, 38, line);
+  trace_rule(false, 39, line);
 
   Expr *args = stack_args(stack, 1, line);
 
   set_result(result, NONTERM_ARGS, args, CONTEXT_NONE);
 }
 
-// Pravidlo E39 (Redukce uzavorkovanych vyrazu): E <= ( E )
+// Pravidlo E40 (Redukce uzavorkovanych vyrazu): E <= ( E )
 void precedence_action_parenthesized_expr(const Stack *stack, int line,
                                           AnnotatedSymbol *result) {
-  trace_rule(false, 39, line);
+  trace_rule(false, 40, line);
 
   // Zavorky se zahodi, anotace vnitrniho vyrazu se zachova, aby (1 to 5) by 2
   // fungovalo stejne jako 1 to 5 by 2
@@ -649,10 +682,10 @@ void precedence_action_parenthesized_expr(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, inner_expr, inner_entry->annotation);
 }
 
-// Pravidlo E40 (Pripojeni else vetve): E <= TIF E
+// Pravidlo E41 (Pripojeni else vetve): E <= TIF E
 void precedence_action_ternary_else(const Stack *stack, int line,
                                     AnnotatedSymbol *result) {
-  trace_rule(false, 40, line);
+  trace_rule(false, 41, line);
 
   Expr *tif = stack_expr(stack, 1, line);
   Expr *else_expr = stack_expr(stack, 0, line);
@@ -667,10 +700,10 @@ void precedence_action_ternary_else(const Stack *stack, int line,
   set_result(result, NONTERM_EXPR, tif, CONTEXT_NONE);
 }
 
-// Pravidlo E41 (Infixova metoda): E <= E ID_OPERATOR E
+// Pravidlo E42 (Infixova metoda): E <= E ID_OPERATOR E
 void precedence_action_infix_method(const Stack *stack, int line,
                                     AnnotatedSymbol *result) {
-  trace_rule(false, 41, line);
+  trace_rule(false, 42, line);
 
   ParserStackEntry *left_entry = parser_stack_peek(stack, 2);
   Expr *left_expr = stack_expr(stack, 2, line);

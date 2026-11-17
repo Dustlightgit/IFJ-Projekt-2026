@@ -1,8 +1,9 @@
 (5 + 5) * 9 to 12 * 5
-List.hello(2, 5)
+List.range(2, 5)
 5 to 2 by 3
-2.1 * 2
-List.hello(2) + List.hello().world.help.huhuhaha
+//2.1 * -++-++++++22
+List.range("ello", 2) + List.range(2, 2).world.help.huhuhaha
 "hello " + "world"
 List(2, 3, i) ++ List(1, 9, 88, 52, hello, 5+5) ++ List()
+2.toString
 2.toString
