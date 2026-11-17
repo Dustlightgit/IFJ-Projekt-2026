@@ -1,0 +1,2 @@
+Error 1 (line 1): Zatim neumim tento znak
+EXIT CODE: 1

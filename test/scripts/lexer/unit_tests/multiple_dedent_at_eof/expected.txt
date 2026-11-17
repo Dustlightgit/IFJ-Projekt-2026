@@ -1,0 +1,17 @@
+if
+ID
+then
+EOL
+INDENT
+while
+ID
+do
+EOL
+INDENT
+ID
+=
+INT_LIT
+EOL
+DEDENT
+DEDENT
+EOF
