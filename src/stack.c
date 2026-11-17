@@ -1,5 +1,12 @@
-// xnovacm00
-// stack.c - implementace obecneho zasobniku
+/*
+    IFJ projekt 2026
+
+    xnovacm00 Michal Novacek
+
+    stack.c
+
+    Tento soubor obsahuje implementaci obecneho zasobniku.
+*/
 
 #include "stack.h"
 

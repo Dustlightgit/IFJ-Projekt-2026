@@ -1,5 +1,12 @@
-// xnovacm00
-// semantic.c - semanticka analyza
+/*
+    IFJ projekt 2026
+
+    xnovacm00 Michal Novacek
+
+    semantic.c
+
+    Tento soubor obsahuje implementaci semanticke analyzy.
+*/
 
 #include "semantic.h"
 #include "ast.h"
@@ -54,6 +61,13 @@ static void analyze_func(Ctx *ctx, FuncDef *func);
 // Vytvori novy typ Unit (vlastni ho volajici)
 static Type *unit_type(void) { return type_new(TYPE_UNIT); }
 
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Napis funkci register_functions, ktera zapise vsechny funkce
+ * programu do tabulky symbolu a pri redefinici skonci chybou. Zkontroluj take
+ * funkci s anotaci @main: musi byt prave jedna, bez parametru a s navratovym
+ * typem Unit (nebo bez uvedeneho typu)."
+ */
+
 // Zapise vsechny funkce do tabulky symbolu a zkontroluje funkci s anotaci @main
 static void register_functions(Ctx *ctx, Program *program) {
   int main_count = 0;
@@ -89,6 +103,8 @@ static void register_functions(Ctx *ctx, Program *program) {
   }
 }
 
+/* ----- Konec casti generovane AI ----- */
+
 // Nastavi vyrazu typ daneho druhu a vrati ukazatel na nej (typ patri vyrazu)
 static Type *set_expr_type(Expr *e, TypeKind kind) {
   e->type = type_new(kind);
@@ -116,6 +132,13 @@ static void expect_int(Ctx *ctx, Expr *e, const char *message) {
   }
 }
 
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Mam v C semantickou analyzu a potrebuju pomocnou funkci
+ * common_type(a, b), ktera vrati spolecny typ prvku dvou seznamu. Kdyz jsou
+ * typy stejne, vrat kopii. Kdyz jsou oba ciselne (Int a Double), vrat Double.
+ * Jinak vrat NULL. Vysledek ma byt vlastni kopie, kterou uvolni volajici."
+ */
+
 // Vrati spolecny typ dvou typu prvku seznamu, nebo NULL kdyz nejsou kompatibilni
 // (Int a Double se slouci na Double, vlastni kopie patri volajicimu)
 static Type *common_type(const Type *a, const Type *b) {
@@ -127,6 +150,8 @@ static Type *common_type(const Type *a, const Type *b) {
   }
   return NULL;
 }
+
+/* ----- Konec casti generovane AI ----- */
 
 // Zkontroluje, ze clen ma presne dany pocet argumentu (jinak chyba 5)
 static void member_expect_count(const Expr *e, int count) {
@@ -412,6 +437,12 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected) {
     return e->type;
   }
 
+  /* ----- Zacatek casti generovane AI (Claude) -----
+   * Prompt: "Do semanticke analyzy pridej vyraz pro volani clenu na
+   * hodnotach: toString na cokoli, toInt a floor na Double, length na String
+   * a toList, drop, take, slice, head a tail na seznamu. Kontroluj pocet a
+   * typ argumentu a u nepodporovaneho clenu skonci chybou."
+   */
   case EXPR_MEMBER: {
     Type *obj = analyze_expr(ctx, e->as.member.object, NULL);
     const char *name = e->as.member.name;
@@ -475,6 +506,8 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected) {
     error_exit(ERR_TYPE, e->line, "Nepodporovany clen pro tento typ");
     break;
   }
+
+  /* ----- Konec casti generovane AI ----- */
 
   default:
     error_exit(ERR_INTERNAL, e->line, "Tento druh vyrazu se zatim neanalyzuje");
@@ -630,6 +663,13 @@ static void analyze_stmt(Ctx *ctx, Stmt *s) {
   }
 }
 
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Napis v C funkci block_returns(const Block *b), ktera vrati true,
+ * kdyz blok vzdy skonci prikazem return. Posledni prikaz musi byt bud return,
+ * nebo if s else, jehoz obe vetve vzdy konci returnem. Pouzij rekurzi a
+ * osetri prazdny blok i NULL."
+ */
+
 // Vrati true, kdyz blok vzdy skonci prikazem return
 // (posledni prikaz je return, nebo if s else, jehoz obe vetve vzdy konci returnem)
 static bool block_returns(const Block *b) {
@@ -653,6 +693,8 @@ static bool block_returns(const Block *b) {
   }
   return false;
 }
+
+/* ----- Konec casti generovane AI ----- */
 
 // Zanalyzuje definici funkce: parametry, telo a kontrola navratoveho typu
 static void analyze_func(Ctx *ctx, FuncDef *func) {
@@ -698,6 +740,13 @@ static void analyze_func(Ctx *ctx, FuncDef *func) {
   ctx->current_func = saved;
 }
 
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Napis hlavni funkci semantic_analyze(Program *program). Vytvori
+ * tabulku symbolu, zaregistruje vestavene funkce a vsechny uzivatelske funkce
+ * a pak zanalyzuje jejich tela. Funkci, jejiz navratovy typ se uz odvodil pri
+ * volani z jine funkce, preskoc. Nakonec zkontroluj, ze @main vraci Unit."
+ */
+
 SymTable *semantic_analyze(Program *program) {
   Ctx ctx;
   ctx.table = symtable_new();
@@ -726,3 +775,5 @@ SymTable *semantic_analyze(Program *program) {
 
   return ctx.table;
 }
+
+/* ----- Konec casti generovane AI ----- */
