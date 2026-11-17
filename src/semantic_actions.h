@@ -18,6 +18,8 @@
         - xbalaka00 - callbacky prijimaji cislo radku.
         - xbalaka00 - akce pravidla 31 anotuje ID a predava ukazatel
           neterminalu <IDcommand>.
+        - xbalaka00 - funkce ast_attach_expr presunuta do special_actions.h
+          a prejmenovana na special_action_expr (prompt je tam).
 
     Tento soubor obsahuje deklarace semantickych akci pravidel LL parseru.
     Akce stavi AST, semanticke kontroly (napr. kompatibilita typu) probihaji
@@ -38,7 +40,9 @@
     a odstraneni testovacich akci je v souboru LL_table.c. Prompty pro predani
     kontextove anotace a cisla radku callbackum jsou v souboru
     semantic_types.h. Prompt pro chovani jadra pro <IDcommand>, anotaci CONTEXT_ID_COMMAND
-    a specialni akci pro ID je v souboru predictive_parser.c.
+    a specialni akci pro ID je v souboru predictive_parser.c. Prompt pro
+    presun funkce ast_attach_expr do special_actions.h a jeji prejmenovani na
+    special_action_expr je v souboru special_actions.h.
 */
 
 /**
@@ -439,9 +443,6 @@ void semantic_action_else_or_command_end_else(SemanticContext *ctx,
                                               void *semantic_pointer,
                                               ContextAnnotation annotation,
                                               int line, Stack *stack);
-
-void ast_attach_expr(void *ptr, ContextAnnotation annotation, Expr *expr,
-                     int line);
 
 void semantic_action_test_expr(SemanticContext *ctx, void *semantic_pointer,
                                ContextAnnotation annotation, int line,

@@ -25,6 +25,9 @@
         - xbalaka00 - funkce trace_rule presunuta do parser_common.c
           a zobecnena (prompt je tam), volani doplnena o argument true
           (pravidla LL parseru).
+        - xbalaka00 - funkce ast_attach_expr presunuta do special_actions.c
+          a prejmenovana na special_action_expr (prompt je v
+          special_actions.h), include special_actions.h.
 
     Tento soubor obsahuje semanticke akce pravidel LL parseru. Akce zatim
     pouze vypisuji cislo pravidla na stderr a vkladaji pravou stranu pravidla
@@ -41,6 +44,7 @@
 #include "nonterminal.h"
 #include "parser_common.h"
 #include "production.h"
+#include "special_actions.h"
 #include "token.h"
 
 /*
@@ -95,7 +99,9 @@
 
 /*
     Prompt pro presun funkce trace_rule do parser_common.c a jeji zobecneni
-    je v souboru parser_common.c.
+    je v souboru parser_common.c. Prompt pro presun funkce ast_attach_expr
+    do special_actions.c a jeji prejmenovani na special_action_expr je v
+    souboru special_actions.h.
 */
 
 // Vlozi na zasobnik terminal. Funkce pouze schovava makro a pretypovani,
@@ -214,42 +220,6 @@ Block *target_block(void *ptr, ContextAnnotation annotation, int line) {
     error_exit(ERR_INTERNAL, line, "Prikaz nema urceno, kam se ma pridat");
   }
   return NULL;
-}
-
-// Ulozi hotovy vyraz podle anotace (vola ji vyrazovy parser)
-void ast_attach_expr(void *ptr, ContextAnnotation annotation, Expr *expr,
-                     int line) {
-  switch (annotation) {
-  case CONTEXT_RETURN_VALUE:
-    stmt_return_set_value((Stmt *)ptr, expr);
-    break;
-  case CONTEXT_VARDEF_INIT:
-    stmt_vardef_set_init((Stmt *)ptr, expr);
-    break;
-  case CONTEXT_ASSIGN_VALUE:
-    stmt_assign_set_value((Stmt *)ptr, expr);
-    break;
-
-  case CONTEXT_WHILE_COND:
-    stmt_while_set_cond((Stmt *)ptr, expr);
-    break;
-  case CONTEXT_FOR_SOURCE:
-    stmt_for_set_source((Stmt *)ptr, expr);
-    break;
-  case CONTEXT_FOR_GUARD:
-    stmt_for_add_guard((Stmt *)ptr, expr);
-    break;
-
-  case CONTEXT_IF_COND:
-    expr_if_set_cond((Expr *)ptr, expr);
-    break;
-
-  default: {
-    // Samostatny vyraz (prikaz nebo jednoradkove telo)
-    Block *block = target_block(ptr, annotation, line);
-    block_add(block, stmt_new_expr(expr, line));
-  }
-  }
 }
 
 // Ulozi hotovy typ na misto urcene ukazatelem a anotaci (prebira vlastnictvi typu)
@@ -616,6 +586,7 @@ void semantic_action_test_expr(SemanticContext *ctx, void *semantic_pointer,
                                Stack *stack) {
   (void)ctx;
   trace_rule(true, 999, line);
-  ast_attach_expr(semantic_pointer, annotation, expr_new_int(0, line), line);
+  special_action_expr(semantic_pointer, annotation, expr_new_int(0, line),
+                      line);
   push_terminal(stack, TOKEN_STAR, NULL, CONTEXT_NONE);
 }

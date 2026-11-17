@@ -10,6 +10,9 @@
         - xbalaka00 - pridana prozatim prazdna deklarace pro specialni akci predzpracovani terminalu
         - xbalaka00 - doplnena dokumentace a funkcionalita akce
           special_action_precedence_preprocessing (prompt je zde).
+        - xbalaka00 - pridana special_action_execute_expr_rule a presunuta
+          funkce ast_attach_expr ze semantic_actions.h, prejmenovana na
+          special_action_expr (prompt je zde), include parser_common.h.
 
     Tento soubor obsahuje deklarace specialnich akci parseru, tedy callbacku,
     ktere nejsou vazane na pravidlo LL tabulky a maji vlastni rozhrani
@@ -20,7 +23,9 @@
 #ifndef SPECIAL_ACTIONS_H
 #define SPECIAL_ACTIONS_H
 
+#include "parser_common.h"
 #include "semantic_types.h"
+#include "stack.h"
 #include "token.h"
 
 /*
@@ -158,5 +163,117 @@ void special_action_id(SemanticContext *ctx, void *semantic_pointer,
  *         atributu.
  */
 void *special_action_precedence_preprocessing(Token *input_token);
+
+/*
+    Prompt pro specialni akci provedeni pravidla vyrazu a pro presun funkce
+    ast_attach_expr z semantic_actions.* a jeji prejmenovani na
+    special_action_expr. Stejny prompt zpusobil zmeny take v special_actions.c,
+    semantic_actions.h a semantic_actions.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dělám parser založený na hybridu prediktivní a precedenční analýzy.
+        Přikládám relevantní soubory. Pokud by ti některý soubor chyběl,
+        vyžádej si jej, než začneš pracovat. Kontext návrhu a význam kódu si
+        přečti v komentářích a deklarovaných promptech. Dodržuj jmenné
+        konvence (včetně komentářů v češtině bez diakritiky - používej české
+        názvy všech věcí i přesto, že v promptech někdy věci pojmenuji anglicky;
+        prompty ale cituj doslovně po vzoru souborů), formát hlaviček souborů s
+        popisem souboru, dle vzoru přiložených souborů také deklaruj prompty a
+        aktualizuj změnové seznamy. Kód nekompiluj ani netestuj.
+
+        Mohl by jsi do special_actions.* implementovat novou funkci
+        special_action_execute_expr_rule, která provede určité pravidlo v
+        situaci, kdy je na vstupu terminál, který neindexuje LL tabulku, ale
+        kterým smí začínat výraz? Při zavolání funkce bylo již ověřeno, že tato
+        situace nastala, terminál tedy není nutné jakkoliv kontrolovat. Funkce
+        bude mít parametry typu ParserContext a AnnotatedSymbol s neterminálem
+        na vrcholu a jeho metadaty. Podle neterminálu přes switch case vybere a
+        provede příslušné pravidlo dle mapování, které ti dám na konec promptu.
+        Vždy se buď zavolá sémantická akce pravidla, nebo se zavolá funkce s
+        deklarací
+
+        void parser_push_static_production(Stack *stack,
+                                           const StaticProduction *production,
+                                           void *semantic_pointer,
+                                           ContextAnnotation annotation);
+
+        pro statické pravidlo. Pokud neterminál není jeden z uvedených, vyhodí
+        se chyba zavoláním
+        error_exit(ERR_SYNTAX, line, "LL Parser: Neni mozne zvolit pravidlo.");
+
+        Dále také přesuň do special_actions.* funkci ast_attach_expr ze souboru
+        semantic_actions.* a přejmenuj ji na special_action_expr. Tělo funkce
+        neměň.
+
+        Mapování neterminál na číslo pravidla:
+        NONTERM_BLOCK_OR_EXPR 20
+        NONTERM_COMMAND 45
+        NONTERM_COMMAND_LIST 23
+        NONTERM_COMMAND_SIMPLE 30
+        NONTERM_RETURN_VALUE 35
+        NONTERM_BLOCK_OR_COMMAND 44
+        NONTERM_THEN_BRANCH 56
+        NONTERM_OPTIONAL_ELSE 49
+        NONTERM_EXPR_OR_INDENT_EXPR 52
+        NONTERM_ELSE_TERNARY_IF 54
+
+    Prompt pro Claude (doplneni parser_common.h):
+        Zde je parser_common.h; `parser_push_static_production` je aktuálně v
+        predictive_parser.h - pokud by měl vzniknout cyklus, tak ji ručně
+        přesunu třeba do production.* kde také dává smysl, aby byla.
+*/
+
+/**
+ * @brief Specialni akce provedeni pravidla pro vstupni terminal, kterym smi
+ * zacinat vyraz.
+ *
+ * Jadro ji vola, kdyz je na vstupu terminal, ktery neindexuje LL tabulku, ale
+ * muze jim zacinat vyraz. Tato situace je pri volani jiz overena, funkce
+ * vstupni terminal nijak nekontroluje. Podle neterminalu z vrcholu zasobniku
+ * vybere pravidlo, ktere se pro vyraz na vstupu pouzije, a provede ho vlozenim
+ * prave strany staticke produkce na zasobnik (zadne z vybranych pravidel nema
+ * semantickou akci). Neterminal musi byt v dobe volani uz odebrany ze
+ * zasobniku, jeho semanticky ukazatel a anotaci predava jadro v top a funkce je
+ * podle pravidla pro staticke produkce zkopiruje do vsech vlozenych symbolu.
+ *
+ * Mapovani neterminalu na pravidla gramatiky:
+ * - NONTERM_BLOCK_OR_EXPR: pravidlo 20,
+ * - NONTERM_COMMAND: pravidlo 45,
+ * - NONTERM_COMMAND_LIST: pravidlo 23,
+ * - NONTERM_COMMAND_SIMPLE: pravidlo 30,
+ * - NONTERM_RETURN_VALUE: pravidlo 35,
+ * - NONTERM_BLOCK_OR_COMMAND: pravidlo 44,
+ * - NONTERM_THEN_BRANCH: pravidlo 56,
+ * - NONTERM_OPTIONAL_ELSE: pravidlo 49,
+ * - NONTERM_EXPR_OR_INDENT_EXPR: pravidlo 52,
+ * - NONTERM_ELSE_TERNARY_IF: pravidlo 54.
+ *
+ * Pro jiny neterminal skonci program chybou ERR_SYNTAX s hlasenim "LL Parser:
+ * Neni mozne zvolit pravidlo.".
+ *
+ * @param ctx Spolecny kontext parseru, z nej se bere cislo radku pro chybu.
+ * @param stack Zasobnik prediktivniho parseru, na nej se vklada produkce.
+ * @param top Neterminal odebrany z vrcholu zasobniku spolu s jeho semantickym
+ *        ukazatelem a kontextovou anotaci.
+ */
+void special_action_execute_expr_rule(ParserContext *ctx, Stack *stack,
+                                      const AnnotatedSymbol *top);
+
+/**
+ * @brief Ulozi hotovy vyraz podle kontextove anotace.
+ *
+ * Vola ji vyrazovy parser po dokonceni vyrazu. Podle anotace vyraz ulozi na
+ * misto urcene ukazatelem (hodnota returnu, inicializace promenne, hodnota
+ * prirazeni, podminka cyklu while nebo if, zdroj nebo straz cyklu for).
+ * Pri ostatnich anotacich se vyraz prida jako samostatny prikaz do bloku
+ * ziskaneho funkci target_block. Drive ast_attach_expr v semantic_actions.*.
+ *
+ * @param ptr Semanticky ukazatel ulozeny u neterminalu, jehoz vyraz se uklada.
+ * @param annotation Kontextova anotace ulozena u tohoto neterminalu.
+ * @param expr Hotovy vyraz, funkce prebira jeho vlastnictvi.
+ * @param line Cislo radku pro uzly AST a chybova hlaseni.
+ */
+void special_action_expr(void *ptr, ContextAnnotation annotation, Expr *expr,
+                         int line);
 
 #endif // SPECIAL_ACTIONS_H
