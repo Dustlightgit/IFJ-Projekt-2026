@@ -1,11 +1,11 @@
+val
 ID
 =
 INT_LIT
 EOL
+val
 ID
 =
-INT_LIT
-+
 INT_LIT
 EOL
 EOF

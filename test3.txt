@@ -1,0 +1,15 @@
+import ifj26.*
+
+def a(): Int =
+    var y = *; y = *; y = *
+    if * then
+        y = *
+    else if * then
+        y = *
+    else if * then
+        y = *
+    else
+        y = *
+    return *
+
+@main def run(): Unit = *

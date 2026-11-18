@@ -1,5 +1,7 @@
 __pycache__
-build
+*build
+*output.txt
+*ifjcode.txt
 output
 .vscode
 .vscode/settings.json
@@ -10,3 +12,4 @@ jednoduchy_interpret_ukazka
 test/IFJ26_examples/.bsp
 test/IFJ26_examples/.scala-build
 *.log
+.bsp

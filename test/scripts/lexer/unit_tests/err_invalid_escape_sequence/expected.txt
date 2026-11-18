@@ -1,0 +1,2 @@
+Error 1 (line 1): Neplatna escape sekvence
+EXIT CODE: 1
