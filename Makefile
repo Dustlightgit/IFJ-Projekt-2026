@@ -1,14 +1,17 @@
-
 # ====================================================================
 #   IFJ projekt 2026
 #
-#   Původní autor: xsantar00
-#   Seznam změn:
-#       - uprava testovani: xsantar00
-#		- uprava package, nyni i testuje pomoci `is_it_ok.sh`: xbalaka00
-#		- default je ted pouze build, opraven valgrind test a syntaxe: xsantar00
+#   xsantar00 Radovan Santavy
 #
-#   makefile se stara o kompilaci specifickych zdrojovych kodu pro jejich nasledne otestovani v izolovanem prostredi
+#   Makefile
+#
+#   Seznam zmen:
+#       - uprava testovani: xsantar00
+#       - uprava package, nyni i testuje pomoci `is_it_ok.sh`: xbalaka00
+#       - default je ted pouze build, opraven valgrind test a syntaxe: xsantar00
+#
+#   Makefile se stara o kompilaci specifickych zdrojovych kodu pro jejich
+#   nasledne otestovani v izolovanem prostredi
 # ====================================================================
 
 CC        := gcc
