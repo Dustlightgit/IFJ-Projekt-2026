@@ -1,51 +1,49 @@
 /*
     IFJ projekt 2026
 
+    xsantar00 Radovan Santar
+
     generator.c
 
-    Puvodni autor: xsantar00 za asistence Claude
-    Seznam zmen:
-        
-
-    Tento soubor obsahuje funkce pro generovaní finálního kódu z AST stromu.
-    Dále obsahuje statické definice vestavěných funkcí které ma jazyk podporovat.
+    Tento soubor obsahuje funkce pro generovani finalniho kodu z AST stromu.
+    Dale obsahuje staticke definice vestavenych funkci ktere ma jazyk podporovat.
 
 */
 
 /*
     Prompt pro Claude:
-        Implemetuj kód odpovidající deklaracím v generator.h.
-        Styl: principy YAGNI, KISS, DRY. Jména snake_case, konstanty a enum SCREAMING_SNAKE_CASE, typy PascalCase. 
-        Výrazy generuj zásobníkově: každý výraz nechá hodnotu na vrcholu datového zásobníku, příkaz zanechá zásobník beze změny. 
-        Hloubku zásobníku sleduj v generátoru relativně k začátku funkce a kontroluj ji po příkazech a výrazech.
-        Tělo funkce generuj do bufferu přes open_memstream. 
-        Nejdřív vypiš hlavičku (LABEL, CREATEFRAME, PUSHFRAME), pak všechny DEFVAR zaevidované během generování, pak tělo. 
-        Proměnné jsou LF@<jméno>_<unique_id>, dočasné LF@$tN.
-        Každá funkce vrací právě jednu hodnotu, Unit vrací nil@nil a volající ji zahodí do GF@$discard.
-        Pokud pod návratovou hodnotou zůstávají rozpracované hodnoty, ulož ji do dočasné proměnné, přebytek popni do GF@$discard a teprve pak POPFRAME a RETURN.
-        Vestavěné funkce (print, toStr, readLine, readInt, readDouble, readBoolean, toInt, strLength, subStr, ord, chr) 
-        a pomocné rutiny (double$floor, list$get, list$range, list$slice, list$tail, list$concat) jsou funkce v cílovém kódu. 
-        Emituj jen ty, které program použil, včetně závislostí.
-        print a toStr rozlišují typ za běhu instrukcí TYP.
-        Běhové chyby skáčou na sdílené návěští s EXIT int@40
-        Seznam je pole: prvek 0 drží délku, prvky od indexu 1.
-        ++, take, drop, slice, head, tail a toString řeš přes rutiny nebo toStr.
-        Podporuj rozšíření BOOLTHEN, CONTROL (if jako výraz, for, rozsahy), FUNEXP, VALMEM a LISTS.
-        Int je 64bitový, přetečení neřeš. Int se převádí na Double jen instrukcí INT2FLOATS v místech, kde se čeká Double.
-        Double literály píš ve formátu %a. Řetězcové literály escapuj jako \xyz pro znaky 0–32, 35, 92 a od 127. 
-        Záporná čísla generuj jako násobení -1.
+        Implemetuj kod odpovidajici deklaracim v generator.h.
+        Styl: principy YAGNI, KISS, DRY. Jmena snake_case, konstanty a enum SCREAMING_SNAKE_CASE, typy PascalCase. 
+        Vyrazy generuj zasobnikove: kazdy vyraz necha hodnotu na vrcholu datoveho zasobniku, prikaz zanecha zasobnik beze zmeny. 
+        Hloubku zasobniku sleduj v generatoru relativne k zacatku funkce a kontroluj ji po prikazech a vyrazech.
+        Telo funkce generuj do bufferu pres open_memstream. 
+        Nejdriv vypis hlavicku (LABEL, CREATEFRAME, PUSHFRAME), pak vsechny DEFVAR zaevidovane behem generovani, pak telo. 
+        Promenne jsou LF@<jmeno>_<unique_id>, docasne LF@$tN.
+        Kazda funkce vraci prave jednu hodnotu, Unit vraci nil@nil a volajici ji zahodi do GF@$discard.
+        Pokud pod navratovou hodnotou zustavaji rozpracovane hodnoty, uloz ji do docasne promenne, prebytek popni do GF@$discard a teprve pak POPFRAME a RETURN.
+        Vestavene funkce (print, toStr, readLine, readInt, readDouble, readBoolean, toInt, strLength, subStr, ord, chr) 
+        a pomocne rutiny (double$floor, list$get, list$range, list$slice, list$tail, list$concat) jsou funkce v cilovem kodu. 
+        Emituj jen ty, ktere program pouzil, vcetne zavislosti.
+        print a toStr rozlisuji typ za behu instrukci TYP.
+        Behove chyby skaci na sdilene navesti s EXIT int@40
+        Seznam je pole: prvek 0 drzi delku, prvky od indexu 1.
+        ++, take, drop, slice, head, tail a toString res pres rutiny nebo toStr.
+        Podporuj rozsireni BOOLTHEN, CONTROL (if jako vyraz, for, rozsahy), FUNEXP, VALMEM a LISTS.
+        Int je 64bitovy, preteceni neres. Int se prevadi na Double jen instrukci INT2FLOATS v mistech, kde se ceka Double.
+        Double literaly pis ve formatu %a. Retezcove literaly escapuj jako \xyz pro znaky 0–32, 35, 92 a od 127. 
+        Zaporna cisla generuj jako nasobeni -1.
 */
 
 /*
- * generator.c - generator cilového kódu IFJcode26 z AST
+ * generator.c - generator cilovego kodu IFJcode26 z AST
  *
- * Popis návrhu je na začátku generator.h. Soubor je rozdělen na:
- *  1. rutiny v cílovém kódu (vestavěné funkce a práce se seznamy),
- *  2. stav generátoru a základní zápis instrukcí,
- *  3. jména, literály a konverze,
+ * Popis navrhu je na zacatku generator.h. Soubor je rozdelen na:
+ *  1. rutiny v cilovem kodu (vestavene funkce a prace se seznamy),
+ *  2. stav generatoru a zakladni zapis instrukci,
+ *  3. jmena, literaly a konverze,
  *  4. program a funkce,
- *  5. bloky a příkazy,
- *  6. výrazy.
+ *  5. bloky a prikazy,
+ *  6. vyrazy.
  */
 
 #define _POSIX_C_SOURCE 200809L /* open_memstream a strdup */
@@ -60,22 +58,22 @@
 #include "error.h"
 #include "stack.h"
 
-#define NAME_BUF 256 /* velikost bufferů pro jména proměnných a funkcí */
-#define LABEL_BUF 64 /* velikost bufferů pro generovaná návěští */
+#define NAME_BUF 256 /* velikost bufferu pro jmena promennych a funkci */
+#define LABEL_BUF 64 /* velikost bufferu pro generovana navesti */
 #define DISCARD_VAR "GF@$discard"
-#define ERROR_LABEL "$error$40" /* sdílené návěští pro běhovou chybu 40 */
+#define ERROR_LABEL "$error$40" /* sdilene navesti pro behovou chybu 40 */
 #define INT_MAX_LITERAL "int@2147483647"
 
 /*--------------------------------------------------------------------------------*/
-/* 1. Rutiny v cílovém kódu                                                       */
+/* 1. Rutiny v cilovem kodu                                                       */
 /*--------------------------------------------------------------------------------*/
 
 /*
- * Každá rutina je funkce s voláním stejným jako u uživatelských funkcí:
- * argumenty jsou na datovém zásobníku (poslední argument nahoře) a výsledek
- * se vrací na zásobník. Návěští "LABEL $jmeno" přidává gen_emit_used_runtime,
- * tělo začíná vytvořením rámce. Všechny DEFVAR jsou hned na začátku, aby se
- * nikdy nevykonaly dvakrát.
+ * Kazda rutina je funkce s volanim stejnym jako u uzivatelskych funkci:
+ * argumenty jsou na datovem zasobniku (posledni argument nahore) a vysledek
+ * se vraci na zasobnik. Navesti "LABEL $jmeno" pridava gen_emit_used_runtime,
+ * telo zacina vytvorenim ramce. Vsechny DEFVAR jsou hned na zacatku, aby se
+ * nikdy nevykonaly dvakrat.
  */
 
 #define FN_BEGIN "CREATEFRAME\nPUSHFRAME\n"
@@ -83,12 +81,12 @@
 #define DEF_VAR(v) "DEFVAR LF@" v "\n"
 #define POP_VAR(v) "DEFVAR LF@" v "\nPOPS LF@" v "\n"
 
-/* Rutina s jedním parametrem v, která výsledek spočítá jedinou instrukcí. */
+/* Rutina s jednim parametrem v, ktera vysledek spocita jedinou instrukci. */
 #define UNARY_BODY(instr)                                                      \
   FN_BEGIN POP_VAR("v") DEF_VAR("r") instr " LF@r LF@v\n"                      \
                                            "PUSHS LF@r\n" FN_END
 
-/* Čtení ze vstupu: při nil (chybný vstup nebo EOF) se dosadí výchozí hodnota. */
+/* Cteni ze vstupu: pri nil (chybny vstup nebo EOF) se dosadi vychozi hodnota. */
 #define READ_BODY(name, type, default_value)                                   \
   FN_BEGIN DEF_VAR("r") DEF_VAR("t") "READ LF@r " type "\n"                    \
                                      "TYPE LF@t LF@r\n"                        \
@@ -172,7 +170,7 @@ static const char BODY_TO_INT[] = UNARY_BODY("FLOAT2INT");
 static const char BODY_STR_LENGTH[] = UNARY_BODY("STRLEN");
 static const char BODY_CHR[] = UNARY_BODY("INT2CHAR");
 
-/* subStr: pět podmínek ze specifikace vede na běhovou chybu 40. */
+/* subStr: pet podminek ze specifikace vede na behovou chybu 40. */
 static const char BODY_SUB_STR[] =
     FN_BEGIN POP_VAR("e") POP_VAR("s") POP_VAR("v") DEF_VAR("len") DEF_VAR("c")
         DEF_VAR("r") DEF_VAR("ch") "STRLEN LF@len LF@v\n"
@@ -196,7 +194,7 @@ static const char BODY_SUB_STR[] =
                                    "LABEL $subStr$done\n"
                                    "PUSHS LF@r\n" FN_END;
 
-/* ord: prázdný řetězec nebo index mimo rozsah vrací -1. */
+/* ord: prazdny retezec nebo index mimo rozsah vraci -1. */
 static const char BODY_ORD[] = FN_BEGIN POP_VAR("i") POP_VAR("v") DEF_VAR("len")
     DEF_VAR("c") DEF_VAR("r") "MOVE LF@r int@-1\n"
                               "STRLEN LF@len LF@v\n"
@@ -208,7 +206,7 @@ static const char BODY_ORD[] = FN_BEGIN POP_VAR("i") POP_VAR("v") DEF_VAR("len")
                               "LABEL $ord$end\n"
                               "PUSHS LF@r\n" FN_END;
 
-/* floor: FLOAT2INT osekává k nule, u záporných necelých čísel se proto odečte 1. */
+/* floor: FLOAT2INT osekava k nule, u zapornych necelych cisel se proto odecte 1. */
 static const char BODY_FLOOR[] = FN_BEGIN POP_VAR("v") DEF_VAR("i") DEF_VAR("f")
     DEF_VAR("c") "FLOAT2INT LF@i LF@v\n"
                  "INT2FLOAT LF@f LF@i\n"
@@ -219,7 +217,7 @@ static const char BODY_FLOOR[] = FN_BEGIN POP_VAR("v") DEF_VAR("i") DEF_VAR("f")
                  "INT2FLOAT LF@f LF@i\n"
                  "PUSHS LF@f\n" FN_END;
 
-/* list$get(list, index): index mimo meze je běhová chyba 40. */
+/* list$get(list, index): index mimo meze je behova chyba 40. */
 static const char BODY_LIST_GET[] =
     FN_BEGIN POP_VAR("i") POP_VAR("l") DEF_VAR("n") DEF_VAR("c")
         DEF_VAR("r") "ARRAYGET LF@n LF@l int@0\n"
@@ -233,9 +231,9 @@ static const char BODY_LIST_GET[] =
 
 /*
  * list$range(start, end, step, inclusive): seznam od start po end (vyjma end,
- * nebo včetně při inclusive) s krokem step. Pravý okraj se u inclusive posune
- * o jedna ve směru kroku, pak se počet prvků spočítá stejně jako u exkluzivního
- * rozsahu. Nulový krok je běžná chyba 40.
+ * nebo vcetne pri inclusive) s krokem step. Pravy okraj se u inclusive posune
+ * o jedna ve smeru kroku, pak se pocet prvku spocita stejne jako u exkluzivniho
+ * rozsahu. Nulovy krok je bezna chyba 40.
  */
 static const char BODY_LIST_RANGE[] =
     FN_BEGIN POP_VAR("incl") POP_VAR("step") POP_VAR("end") POP_VAR("start")
@@ -285,7 +283,7 @@ static const char BODY_LIST_RANGE[] =
 
 /*
  * list$slice(list, from, until): prvky s indexy z intervalu <from, until),
- * meze se oříznou na <0, délka>. Pomocí ní jsou řešené také take a drop.
+ * meze se oriznou na <0, delka>. Pomoci ni jsou resene take take a drop.
  */
 static const char BODY_LIST_SLICE[] =
     FN_BEGIN POP_VAR("u") POP_VAR("f") POP_VAR("l") DEF_VAR("n") DEF_VAR("c")
@@ -319,7 +317,7 @@ static const char BODY_LIST_SLICE[] =
                          "LABEL $list$slice$done\n"
                          "PUSHS LF@r\n" FN_END;
 
-/* list$tail(list): prázdný seznam je běžná chyba 40, jinak slice od indexu 1. */
+/* list$tail(list): prazdny seznam je bezna chyba 40, jinak slice od indexu 1. */
 static const char BODY_LIST_TAIL[] =
     FN_BEGIN POP_VAR("l") DEF_VAR("n") "ARRAYGET LF@n LF@l int@0\n"
                                        "JUMPIFEQ " ERROR_LABEL " LF@n int@0\n"
@@ -328,7 +326,7 @@ static const char BODY_LIST_TAIL[] =
                                        "PUSHS " INT_MAX_LITERAL "\n"
                                        "CALL $list$slice\n" FN_END;
 
-/* list$concat(a, b): nový seznam s prvky a a za nimi prvky b. */
+/* list$concat(a, b): novy seznam s prvky a a za nimi prvky b. */
 static const char BODY_LIST_CONCAT[] = FN_BEGIN POP_VAR("b") POP_VAR("a")
     DEF_VAR("na") DEF_VAR("nb") DEF_VAR("m") DEF_VAR("s") DEF_VAR("c")
         DEF_VAR("i") DEF_VAR("j") DEF_VAR("d") DEF_VAR("x")
@@ -359,11 +357,11 @@ static const char BODY_LIST_CONCAT[] = FN_BEGIN POP_VAR("b") POP_VAR("a")
                          "LABEL $list$concat$done\n"
                          "PUSHS LF@r\n" FN_END;
 
-/* Záznam v tabulce rutin. */
+/* Zaznam v tabulce rutin. */
 typedef struct {
-  const char *name;  /* jméno rutiny, návěští je "$" + jméno */
-  const char *needs; /* rutina, kterou tato rutina volá, jinak NULL */
-  const char *body; /* tělo v IFJcode26 včetně vytvoření a ukončení rámce */
+  const char *name;  /* jmeno rutiny, navesti je "$" + jmeno */
+  const char *needs; /* rutina, kterou tato rutina vola, jinak NULL */
+  const char *body;  /* telo v IFJcode26 vcetne vytvoreni a ukonceni ramce */
 } Runtime;
 
 static const Runtime RUNTIME[] = {
@@ -389,21 +387,21 @@ static const Runtime RUNTIME[] = {
 #define RUNTIME_COUNT (sizeof RUNTIME / sizeof RUNTIME[0])
 
 /*--------------------------------------------------------------------------------*/
-/* 2. Stav generátoru a základní zápis instrukcí                                  */
+/* 2. Stav generatoru a zakladni zapis instrukci                                  */
 /*--------------------------------------------------------------------------------*/
 
 struct Gen {
-  FILE *out;  /* výstup programu */
-  FILE *cur;  /* aktuální cíl zápisu: out nebo buffer těla funkce */
-  Stack vars; /* proměnné aktuální funkce k deklaraci (char *) */
-  int depth;  /* hloubka datového zásobníku vůči začátku funkce */
+  FILE *out;  /* vystup programu */
+  FILE *cur;  /* aktualni cil zapisu: out nebo buffer tela funkce */
+  Stack vars; /* promenne aktualni funkce k deklaraci (char *) */
+  int depth;  /* hloubka datoveho zasobniku vuci zacatku funkce */
   int label_counter;
   int temp_counter;
-  const FuncDef *func;      /* funkce, jejíž tělo se právě generuje */
-  bool used[RUNTIME_COUNT]; /* které rutiny program použil */
+  const FuncDef *func;      /* funkce, jejiz telo se prave generuje */
+  bool used[RUNTIME_COUNT]; /* ktere rutiny program pouzil */
 };
 
-/* Typ Double pro konverze, aby nebylo nutné ho alokovat. */
+/* Typ Double pro konverze, aby nebylo nutne ho alokovat. */
 static const Type DOUBLE_TYPE = {TYPE_DOUBLE, NULL};
 
 void gen_emit(Gen *g, const char *fmt, ...) {
@@ -438,7 +436,7 @@ void gen_check_depth(const Gen *g, int expected, int line) {
   }
 }
 
-/* Zapíše JUMPIFEQS na label, který odebere ze zásobníku dvě hodnoty. */
+/* Zapise JUMPIFEQS na label, ktery odebere ze zasobniku dve hodnoty. */
 static void emit_jumpifeqs(Gen *g, const char *label) {
   char op[LABEL_BUF + 16];
   snprintf(op, sizeof op, "JUMPIFEQS %s", label);
@@ -446,7 +444,7 @@ static void emit_jumpifeqs(Gen *g, const char *label) {
 }
 
 /*--------------------------------------------------------------------------------*/
-/* 3. Jména, literály a konverze                                                  */
+/* 3. Jmena, literaly a konverze                                                  */
 /*--------------------------------------------------------------------------------*/
 
 void gen_make_label(Gen *g, char *buf, size_t size, const char *prefix) {
@@ -476,14 +474,14 @@ void gen_new_temp(Gen *g, char *buf, size_t size) {
   gen_declare_var(g, buf);
 }
 
-/* Přidá celý řetězec na konec dynamického řetězce. */
+/* Prida cely retezec na konec dynamickeho retezce. */
 static void dstr_append_str(DString *s, const char *text) {
   for (; *text != '\0'; text++) {
     dstr_append_char(s, *text);
   }
 }
 
-/* Pushne řetězcový literál se zakódovanými escape sekvencemi. */
+/* Pushne retezcovy literal se zakodovanymi escape sekvencemi. */
 static void push_string_literal(Gen *g, const char *text) {
   DString literal;
   dstr_init(&literal);
@@ -555,7 +553,7 @@ void gen_entry(Gen *g, const FuncDef *main_func) {
 }
 
 void gen_return_sequence(Gen *g) {
-  int excess = g->depth - 1; /* hodnoty pod návratovou hodnotou */
+  int excess = g->depth - 1; /* hodnoty pod navratovou hodnotou */
 
   if (excess > 0) {
     char value[NAME_BUF];
@@ -571,7 +569,7 @@ void gen_return_sequence(Gen *g) {
   gen_emit(g, "RETURN");
 }
 
-/* Vypíše DEFVAR všech zaevidovaných proměnných funkce a uvolní seznam. */
+/* Vypise DEFVAR vsech zaevidovanych promennych funkce a uvolni seznam. */
 static void flush_declarations(Gen *g) {
   char **vars = g->vars.data;
 
@@ -588,13 +586,13 @@ void gen_function(Gen *g, const FuncDef *func) {
   char label[NAME_BUF];
 
   g->func = func;
-  g->depth = func->param_count; /* argumenty leží na zásobníku */
+  g->depth = func->param_count; /* argumenty lezi na zasobniku */
   g->cur = open_memstream(&body, &body_size);
   if (g->cur == NULL) {
     error_exit(ERR_INTERNAL, func->line, "Nedostatek pameti");
   }
 
-  /* Poslední argument je nahoře, proto se parametry popují od posledního. */
+  /* Posledni argument je nahore, proto se parametry popuji od posledniho. */
   for (int i = func->param_count - 1; i >= 0; i--) {
     char name[NAME_BUF];
     gen_var_name(name, sizeof name, func->params[i].symbol);
@@ -625,10 +623,10 @@ void gen_function(Gen *g, const FuncDef *func) {
 }
 
 /*--------------------------------------------------------------------------------*/
-/* Pomocné rutiny                                                                 */
+/* Pomocne rutiny                                                                 */
 /*--------------------------------------------------------------------------------*/
 
-/* Vrátí index rutiny v tabulce. Neznámé jméno je chyba generátoru. */
+/* Vrati index rutiny v tabulce. Nezname jmeno je chyba generatoru. */
 static size_t find_runtime(const char *name) {
   for (size_t i = 0; i < RUNTIME_COUNT; i++) {
     if (strcmp(RUNTIME[i].name, name) == 0) {
@@ -676,7 +674,7 @@ void gen_emit_used_runtime(Gen *g) {
 }
 
 /*--------------------------------------------------------------------------------*/
-/* 5. Bloky a příkazy                                                             */
+/* 5. Bloky a prikazy                                                             */
 /*--------------------------------------------------------------------------------*/
 
 void gen_block(Gen *g, const Block *block, const Type *want) {
@@ -691,7 +689,7 @@ void gen_block(Gen *g, const Block *block, const Type *want) {
 
     gen_stmt(g, stmt);
     if (is_last && want != NULL) {
-      gen_push(g, "nil@nil"); /* blok nekončí výrazem, výsledek je Unit */
+      gen_push(g, "nil@nil"); /* blok nekonci vyrazem, vysledek je Unit */
     }
   }
 }
@@ -751,7 +749,7 @@ void gen_stmt_return(Gen *g, const Stmt *stmt) {
   int depth = g->depth;
 
   if (ret->kind == TYPE_UNIT) {
-    /* Hodnota se vyhodnotí a zahodí, funkce vrací nil@nil. */
+    /* Hodnota se vyhodnoti a zahodi, funkce vraci nil@nil. */
     if (value != NULL) {
       gen_expr(g, value);
       gen_discard(g);
@@ -762,7 +760,7 @@ void gen_stmt_return(Gen *g, const Stmt *stmt) {
   }
 
   gen_return_sequence(g);
-  g->depth = depth; /* kód za returnem je jiný tok řízení */
+  g->depth = depth; /* kod za returnem je jiny tok rizeni */
 }
 
 void gen_stmt_while(Gen *g, const Stmt *stmt) {
@@ -793,8 +791,8 @@ void gen_for_guards(Gen *g, const Stmt *stmt, const char *skip_label) {
 }
 
 /*
- * Zapíše test konce rozsahu: porovná čítač s mezí instrukcí op a skočí na done,
- * když výsledek porovnání je expect.
+ * Zapise test konce rozsahu: porovna citac s mezi instrukci op a skoci na done,
+ * kdyz vysledek porovnani je expect.
  */
 static void emit_range_exit(Gen *g, const char *op, bool expect,
                             const char *var, const char *end, const char *cond,
@@ -821,7 +819,7 @@ void gen_for_range(Gen *g, const Stmt *stmt) {
   gen_make_label(g, next, sizeof next, "for_next");
   gen_make_label(g, done, sizeof done, "for_done");
 
-  /* Meze a krok se vyhodnotí jednou, zleva doprava. Řídicí proměnná je zároveň čítač. */
+  /* Meze a krok se vyhodnoti jednou, zleva doprava. Ridici promenna je zaroven citac. */
   gen_expr(g, range->as.range.from);
   gen_pop(g, var);
   gen_expr(g, range->as.range.to);
@@ -834,7 +832,7 @@ void gen_for_range(Gen *g, const Stmt *stmt) {
   }
   gen_emit(g, "JUMPIFEQ %s %s int@0", ERROR_LABEL, step);
 
-  /* Směr se určí za běhu podle znaménka kroku. */
+  /* Smer se urci za behu podle znamenka kroku. */
   gen_emit(g, "LABEL %s", check);
   gen_emit(g, "GT %s %s int@0", cond, step);
   gen_emit(g, "JUMPIFEQ %s %s bool@true", up, cond);
@@ -885,7 +883,7 @@ void gen_for_list(Gen *g, const Stmt *stmt) {
 }
 
 /*--------------------------------------------------------------------------------*/
-/* 6. Výrazy                                                                      */
+/* 6. Vyrazy                                                                      */
 /*--------------------------------------------------------------------------------*/
 
 void gen_expr(Gen *g, const Expr *expr) {
@@ -962,7 +960,7 @@ void gen_expr_unary(Gen *g, const Expr *expr) {
   }
 }
 
-/* Vrátí Double, když je některý operand Double (druhý se převede), jinak NULL. */
+/* Vrati Double, kdyz je nektery operand Double (druhy se prevede), jinak NULL. */
 static const Type *operand_target(const Expr *left, const Expr *right) {
   if (left->type->kind == TYPE_DOUBLE || right->type->kind == TYPE_DOUBLE) {
     return &DOUBLE_TYPE;
@@ -1042,7 +1040,7 @@ void gen_comparison(Gen *g, const Expr *expr) {
   gen_expr_as(g, left, target);
   gen_expr_as(g, right, target);
 
-  /* <= a >= se skládají z opačného porovnání a negace, != z rovnosti a negace. */
+  /* <= a >= se skladaji z opaceneho porovnani a negace, != z rovnosti a negace. */
   switch (expr->as.binary.op) {
   case BINOP_LT:
     gen_stack_op(g, "LTS", 2, 1);
@@ -1072,7 +1070,7 @@ void gen_comparison(Gen *g, const Expr *expr) {
 }
 
 void gen_logical(Gen *g, const Expr *expr) {
-  /* && skončí hned na false, || hned na true. */
+  /* && skonci hned na false, || hned na true. */
   const char *shortcut =
       (expr->as.binary.op == BINOP_AND) ? "bool@false" : "bool@true";
   char short_label[LABEL_BUF], end_label[LABEL_BUF];
@@ -1097,7 +1095,7 @@ void gen_expr_call(Gen *g, const Expr *expr) {
   const Symbol *symbol = expr->as.call.symbol;
   int argc = expr->as.call.arg_count;
 
-  /* lst(i): sémantika u indexování nastaví symbol proměnné. */
+  /* lst(i): semantika u indexovani nastavi symbol promenne. */
   if (symbol->kind == SYM_VAR) {
     char name[NAME_BUF];
     gen_var_name(name, sizeof name, symbol);
@@ -1120,7 +1118,7 @@ void gen_expr_call(Gen *g, const Expr *expr) {
   }
 }
 
-/* Větev if jako hodnota: chybějící větev i větev s want == NULL dají nil@nil. */
+/* Vetev if jako hodnota: chybejici vetev i vetev s want == NULL daji nil@nil. */
 static void gen_branch(Gen *g, const Block *block, const Type *want) {
   if (block == NULL) {
     gen_push(g, "nil@nil");
@@ -1150,7 +1148,7 @@ void gen_expr_if(Gen *g, const Expr *expr) {
   gen_emit(g, "LABEL %s", end_label);
 }
 
-/* Členy bez argumentů, které jsou jen voláním rutiny nad objektem. */
+/* Cleny bez argumentu, ktere jsou jen volanim rutiny nad objektem. */
 typedef struct {
   const char *member;
   const char *runtime;
@@ -1168,7 +1166,7 @@ void gen_expr_member(Gen *g, const Expr *expr) {
   gen_expr(g, expr->as.member.object);
 
   if (strcmp(name, "toList") == 0) {
-    return; /* rozsah už vznikl jako seznam */
+    return; /* rozsah uz vznikl jako seznam */
   }
 
   for (size_t i = 0; i < sizeof SIMPLE_MEMBERS / sizeof SIMPLE_MEMBERS[0];
@@ -1179,7 +1177,7 @@ void gen_expr_member(Gen *g, const Expr *expr) {
     }
   }
 
-  /* head, take, drop a slice se převedou na list$get a list$slice. */
+  /* head, take, drop a slice se prevedou na list$get a list$slice. */
   if (strcmp(name, "head") == 0) {
     gen_push(g, "int@0");
     gen_call_runtime(g, "list$get", 2);
@@ -1218,7 +1216,7 @@ void gen_expr_list_literal(Gen *g, const Expr *expr) {
   gen_push(g, array);
 }
 
-/* Společná část rozsahů: argumenty a volání rutiny list$range. */
+/* Spolecna cast rozsahu: argumenty a volani rutiny list$range. */
 static void gen_range_call(Gen *g, const Expr *from, const Expr *to,
                            const Expr *step, bool inclusive) {
   gen_expr(g, from);
@@ -1249,7 +1247,7 @@ void gen_expr_index(Gen *g, const Expr *expr) {
 }
 
 /*--------------------------------------------------------------------------------*/
-/* Veřejné rozhraní                                                               */
+/* Verejne rozhrani                                                               */
 /*--------------------------------------------------------------------------------*/
 
 void generate_program(Program *program, FILE *out) {

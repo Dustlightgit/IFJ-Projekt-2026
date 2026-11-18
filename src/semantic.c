@@ -507,7 +507,7 @@ static Type *analyze_expr(Ctx *ctx, Expr *e, const Type *expected) {
     break;
   }
 
-  /* ----- Konec casti generovane AI ----- */
+    /* ----- Konec casti generovane AI ----- */
 
   default:
     error_exit(ERR_INTERNAL, e->line, "Tento druh vyrazu se zatim neanalyzuje");

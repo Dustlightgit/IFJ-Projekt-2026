@@ -1,6 +1,7 @@
-
 /*
     IFJ projekt 2026
+
+    xbalaka00 Artur Balak
 
     predictive_parser.h
 

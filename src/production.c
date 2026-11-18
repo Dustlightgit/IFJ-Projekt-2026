@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     production.c
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -21,8 +23,7 @@
           prompt je v reduction_table.h).
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
-    semanticke akce, a to jak s predanim semantickeho ukazatele (ptr), tak bez
-    nej. Cisla pravidel odpovidaji tabulce gramatiky (parser_formalisms.xlsx).
+    semanticke akce. Cisla pravidel odpovidaji tabulce gramatiky (parser_formalisms.xlsx).
     Pravidla se semantickou akci ("ano") jsou zpracovana callbacky.
 
 */

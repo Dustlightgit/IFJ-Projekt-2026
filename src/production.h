@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     production.h
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
@@ -24,8 +26,7 @@
           STATIC_PRODUCTION_MAX_LENGTH snizena na 5 (prompt je v
           reduction_table.h).
 
-    Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci
-    prvku na zasobniku parseru a pro reprezentaci produkci bez semanticke akce.
+    Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci produkci bez semanticke akce.
     Produkce je prakticky prava strana daneho pravidla. Obsahuje take
     deklarace konkretnich statickych produkci pro LL tabulku.
 

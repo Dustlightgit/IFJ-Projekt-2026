@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     precedence_semantic_actions.c
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -19,8 +21,7 @@
           precedence_semantic_actions.c).
 
     Tento soubor obsahuje semanticke akce pravidel precedencniho parseru. Akce
-    vypisuji cislo pravidla na stderr, stavi uzly AST z podstromu handle
-    ulozenych na zasobniku a nastavuji neterminal, na ktery se handle redukuje.
+    vypisuji cislo pravidla na stderr, stavi uzly AST z podstromu ulozenych na zasobniku a nastavuji neterminal, na ktery se handle redukuje.
 
 */
 

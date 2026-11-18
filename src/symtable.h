@@ -29,8 +29,8 @@
  * @brief Druh symbolu.
  */
 typedef enum {
-  SYM_VAR,  ///< Promenna (val, var) nebo parametr funkce.
-  SYM_FUNC  ///< Funkce uzivatelska nebo vestavena.
+  SYM_VAR, ///< Promenna (val, var) nebo parametr funkce.
+  SYM_FUNC ///< Funkce uzivatelska nebo vestavena.
 } SymbolKind;
 
 /**
@@ -55,12 +55,15 @@ struct Symbol {
     } var;
     /** Pro SYM_FUNC. */
     struct {
-      FuncDef *def;        ///< Definice v AST (nevlastni), NULL pro vestavenou funkci.
-      int param_count;     ///< Pocet parametru.
-      Type **param_types;  ///< Typy parametru (vlastni kopie), NULL prvek znamena Any.
-      Type *return_type;   ///< Navratovy typ (vlastni kopie), NULL dokud neni znamy.
-      bool is_builtin;     ///< True pro vestavene funkce (print, readInt...).
-      bool being_inferred; ///< True, kdyz se navratovy typ prave odvozuje (detekce rekurze).
+      FuncDef *def; ///< Definice v AST (nevlastni), NULL pro vestavenou funkci.
+      int param_count; ///< Pocet parametru.
+      Type **
+          param_types; ///< Typy parametru (vlastni kopie), NULL prvek znamena Any.
+      Type *
+          return_type; ///< Navratovy typ (vlastni kopie), NULL dokud neni znamy.
+      bool is_builtin; ///< True pro vestavene funkce (print, readInt...).
+      bool
+          being_inferred; ///< True, kdyz se navratovy typ prave odvozuje (detekce rekurze).
     } func;
   } as;
 };

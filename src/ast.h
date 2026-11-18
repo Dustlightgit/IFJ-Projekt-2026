@@ -84,19 +84,19 @@ typedef enum {
  * @brief Binarni operatory.
  */
 typedef enum {
-  BINOP_ADD,         ///< Scitani a konkatenace retezcu, +.
-  BINOP_SUB,         ///< Odecitani, -.
-  BINOP_MUL,         ///< Nasobeni, *.
-  BINOP_DIV,         ///< Deleni, /.
-  BINOP_LT,          ///< Mensi, <.
-  BINOP_LE,          ///< Mensi nebo rovno, <=.
-  BINOP_GT,          ///< Vetsi, >.
-  BINOP_GE,          ///< Vetsi nebo rovno, >=.
-  BINOP_EQ,          ///< Rovno, ==.
-  BINOP_NE,          ///< Nerovno, !=.
-  BINOP_AND,         ///< Logicky soucin, && (rozsireni BOOLTHEN).
-  BINOP_OR,          ///< Logicky soucet, || (rozsireni BOOLTHEN).
-  BINOP_CONCAT_LIST  ///< Spojeni seznamu, ++ (rozsireni LISTS).
+  BINOP_ADD,        ///< Scitani a konkatenace retezcu, +.
+  BINOP_SUB,        ///< Odecitani, -.
+  BINOP_MUL,        ///< Nasobeni, *.
+  BINOP_DIV,        ///< Deleni, /.
+  BINOP_LT,         ///< Mensi, <.
+  BINOP_LE,         ///< Mensi nebo rovno, <=.
+  BINOP_GT,         ///< Vetsi, >.
+  BINOP_GE,         ///< Vetsi nebo rovno, >=.
+  BINOP_EQ,         ///< Rovno, ==.
+  BINOP_NE,         ///< Nerovno, !=.
+  BINOP_AND,        ///< Logicky soucin, && (rozsireni BOOLTHEN).
+  BINOP_OR,         ///< Logicky soucet, || (rozsireni BOOLTHEN).
+  BINOP_CONCAT_LIST ///< Spojeni seznamu, ++ (rozsireni LISTS).
 } BinaryOp;
 
 //--------------------------------------------------------------------------------//
@@ -124,13 +124,14 @@ typedef enum {
 typedef struct Expr {
   ExprKind kind; ///< Urcuje, kterou polozku z as cist.
   int line;      ///< Radek ve zdrojovem kodu pro chybova hlaseni.
-  Type *type;    ///< Typ vyrazu, vyplni semanticka analyza (parser nastavi NULL).
+  Type *type; ///< Typ vyrazu, vyplni semanticka analyza (parser nastavi NULL).
   union {
     Literal literal; ///< Pro EXPR_LITERAL.
     struct {
-      char *name;            ///< Jmeno promenne, vlastni kopie.
-      struct Symbol *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semanticka analyza.
-    } variable;              ///< Pro EXPR_VARIABLE.
+      char *name; ///< Jmeno promenne, vlastni kopie.
+      struct Symbol *
+          symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semanticka analyza.
+    } variable; ///< Pro EXPR_VARIABLE.
     struct {
       UnaryOp op;           ///< Ktery operator.
       struct Expr *operand; ///< Vyraz, na ktery se operator pouzije.
@@ -141,11 +142,12 @@ typedef struct Expr {
       struct Expr *right; ///< Pravy operand.
     } binary;             ///< Pro EXPR_BINARY.
     struct {
-      char *name;            ///< Jmeno volane funkce, vlastni kopie.
-      struct Expr **args;    ///< Pole ukazatelu na argumenty.
-      int arg_count;         ///< Pocet argumentu.
-      struct Symbol *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
-    } call;                  ///< Pro EXPR_CALL.
+      char *name;         ///< Jmeno volane funkce, vlastni kopie.
+      struct Expr **args; ///< Pole ukazatelu na argumenty.
+      int arg_count;      ///< Pocet argumentu.
+      struct Symbol
+          *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
+    } call;        ///< Pro EXPR_CALL.
     struct {
       struct Expr *cond; ///< Podminka.
       Block *then_block; ///< Vetev then.
@@ -209,17 +211,19 @@ struct Stmt {
   int line;      ///< Radek ve zdrojovem kodu pro chybova hlaseni.
   union {
     struct {
-      bool is_mutable;       ///< True pro var, false pro val.
-      char *name;            ///< Jmeno promenne, vlastni kopie.
-      Type *declared_type;   ///< Typ napsany programatorem, NULL kdyz chybi.
-      Expr *init;            ///< Pocatecni hodnota.
-      struct Symbol *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
-    } vardef;                ///< Pro STMT_VARDEF.
+      bool is_mutable;     ///< True pro var, false pro val.
+      char *name;          ///< Jmeno promenne, vlastni kopie.
+      Type *declared_type; ///< Typ napsany programatorem, NULL kdyz chybi.
+      Expr *init;          ///< Pocatecni hodnota.
+      struct Symbol
+          *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
+    } vardef;      ///< Pro STMT_VARDEF.
     struct {
-      char *name;            ///< Jmeno promenne, vlastni kopie.
-      Expr *value;           ///< Nova hodnota.
-      struct Symbol *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
-    } assign;                ///< Pro STMT_ASSIGN.
+      char *name;  ///< Jmeno promenne, vlastni kopie.
+      Expr *value; ///< Nova hodnota.
+      struct Symbol
+          *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
+    } assign;      ///< Pro STMT_ASSIGN.
     struct {
       Expr *value; ///< Vracena hodnota, NULL pro prazdny return.
     } ret;         ///< Pro STMT_RETURN.
@@ -231,13 +235,14 @@ struct Stmt {
       Block *body; ///< Telo cyklu.
     } while_loop;  ///< Pro STMT_WHILE.
     struct {
-      char *var_name;        ///< Jmeno ridici promenne, vlastni kopie.
-      Expr *source;          ///< Zdroj: rozsah nebo seznam.
-      Expr **guards;         ///< Pole strazi (vyrazy typu Boolean).
-      int guard_count;       ///< Pocet strazi, muze byt 0.
-      Block *body;           ///< Telo cyklu.
-      struct Symbol *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
-    } for_loop;              ///< Pro STMT_FOR.
+      char *var_name;  ///< Jmeno ridici promenne, vlastni kopie.
+      Expr *source;    ///< Zdroj: rozsah nebo seznam.
+      Expr **guards;   ///< Pole strazi (vyrazy typu Boolean).
+      int guard_count; ///< Pocet strazi, muze byt 0.
+      Block *body;     ///< Telo cyklu.
+      struct Symbol
+          *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
+    } for_loop;    ///< Pro STMT_FOR.
   } as;
 };
 
@@ -247,23 +252,25 @@ struct Stmt {
  * @brief Parametr funkce, napr. n: Int.
  */
 typedef struct {
-  char *name;            ///< Jmeno parametru, vlastni kopie.
-  Type *type;            ///< Typ parametru, vzdy zadany.
-  struct Symbol *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
+  char *name; ///< Jmeno parametru, vlastni kopie.
+  Type *type; ///< Typ parametru, vzdy zadany.
+  struct Symbol
+      *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
 } Param;
 
 /**
  * @brief Definice funkce.
  */
 typedef struct {
-  char *name;            ///< Jmeno funkce, vlastni kopie.
-  Param *params;         ///< Pole parametru.
-  int param_count;       ///< Pocet parametru, muze byt 0.
-  Type *return_type;     ///< Navratovy typ, NULL kdyz ho programator nenapsal.
-  Block *body;           ///< Telo funkce.
-  bool is_main;          ///< True pro funkci s anotaci @main.
-  int line;              ///< Radek ve zdrojovem kodu pro chybova hlaseni.
-  struct Symbol *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
+  char *name;        ///< Jmeno funkce, vlastni kopie.
+  Param *params;     ///< Pole parametru.
+  int param_count;   ///< Pocet parametru, muze byt 0.
+  Type *return_type; ///< Navratovy typ, NULL kdyz ho programator nenapsal.
+  Block *body;       ///< Telo funkce.
+  bool is_main;      ///< True pro funkci s anotaci @main.
+  int line;          ///< Radek ve zdrojovem kodu pro chybova hlaseni.
+  struct Symbol
+      *symbol; ///< Symbol z tabulky symbolu (nevlastni), vyplni semantika.
 } FuncDef;
 
 /**
@@ -938,7 +945,6 @@ void funcdef_param_set_type(FuncDef *func, int index, Type *type);
  *   Pozadavky: jasne vlastnictvi pameti (funkce prvky prebiraji),
  *   zadne uniky pameti
  */
-
 
 /**
  * @brief Nastavi krok rozsahu a prebere jeho vlastnictvi.

@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     precedence_semantic_actions.h
 
     Puvodni autor: xbalaka00 za asistence Claude
