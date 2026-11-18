@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     parser_common.h
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
@@ -26,7 +28,7 @@
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery, funkce pro praci
-    se zasobnikem parseru a spolecny ladici vypis pravidel.
+    se zasobnikem parseru, se vstupnim proudem tokenu a spolecny ladici vypis pravidel.
 */
 
 #ifndef PARSER_COMMON_H

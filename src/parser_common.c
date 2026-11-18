@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     parser_common.c
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -18,9 +20,8 @@
           semantic_actions.c), zobecnena pro oba parsery, prompt je zde.
         - xbalaka00 - kontrola koncove carky rozsirena, aby kontrolovala take zakaz dvou po sobe jdoucich carek.
 
-    Tento soubor obsahuje funkce pro praci se zasobnikem parseru a spolecny
-    ladici vypis pouzitych pravidel.
-
+    Tento soubor obsahuje funkce spolecne pro oba parsery, predevsim funkce pro praci se spolecnym vstupnim
+    proudem ze scanneru, funkce pro praci se zasobnikem parseru a spolecny ladici vypis pouzitych pravidel.
 */
 
 #include "parser_common.h"

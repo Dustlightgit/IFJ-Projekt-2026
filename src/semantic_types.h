@@ -1,6 +1,9 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+    xnovacm00 Michal Novacek
+
     semantic_types.h
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
@@ -10,6 +13,7 @@
         - xbalaka00 - SemanticCallback prijima cislo radku.
         - xbalaka00 - pridana anotace CONTEXT_ID_COMMAND a polozka id_expr
           v SemanticContext.
+        - xnovacm00 - pridany nove hodnoty ContextAnnotation za ucelem stavby AST
         - xbalaka00 - pridany typy ReductionResult a PrecedenceSemanticAction
           (semanticka akce precedencniho parseru), include grammar_symbol.h.
         - xbalaka00 - ReductionResult prejmenovan na AnnotatedSymbol, protoze
@@ -18,12 +22,8 @@
         - xbalaka00 - pridana anotace CONTEXT_RANGE_WITHOUT_STEP (prompt je
           v precedence_semantic_actions.c).
 
-    Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontext
-    tokenu ID, semanticky kontext a typ callbacku semanticke akce. Je urcen
-    k zahrnuti z parser_common.h, semantic_actions.h i LL_table.h bez vzniku
-    cyklickych zavislosti, proto nezahrnuje nic krome stack.h, ast.h (ten nezavisi na dalsich
-    hlavickach projektu) a grammar_symbol.h (ten zavisi jen na token.h
-    a nonterminal.h).
+    Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontextovou
+    anotaci prvku na zasobniku parseru, semanticky kontext a typy semantickych akci.
 */
 
 #ifndef SEMANTIC_TYPES_H

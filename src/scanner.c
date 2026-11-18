@@ -1,5 +1,12 @@
-// xnovacm00
-// scanner.c - lexikalni analyzator implementace
+/*
+    IFJ projekt 2026
+
+    xnovacm00 Michal Novacek
+
+    scanner.c
+
+    Tento soubor obsahuje implementaci lexikalniho analyzatoru.
+*/
 
 #include "scanner.h"
 #include "stack.h"
@@ -157,6 +164,13 @@ static void put_back(int character) {
   pushback[pushback_count++] = character;
 }
 
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Napis funkci single_char_type(int character, TokenType *type),
+ * ktera zjisti, jestli je znak samostatny token z jednoho znaku. Pro znaky
+ * ( ) [ ] , : ; * - nastav odpovidajici typ tokenu a vrat true, jinak vrat
+ * false."
+ */
+
 // Zjisti, jestli je znak samostatny token z jednoho znaku
 // Pokud ano, vrati true a nastavi typ tokenu
 static bool single_char_type(int character, TokenType *type) {
@@ -193,6 +207,16 @@ static bool single_char_type(int character, TokenType *type) {
   }
 }
 
+/* ----- Konec casti generovane AI ----- */
+
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Vytvor tabulku klicovych slov meho jazyka (def, do, else, if,
+ * import, return, then, val, var, while, for, true, false a datove typy Int,
+ * Double, String, Unit, Boolean, List) a funkci lookup_keyword, ktera pro
+ * dane slovo vrati typ tokenu, nebo TOKEN_ID, kdyz slovo klicove neni. Slova
+ * to, until, by a main nejsou klicova, jsou to identifikatory."
+ */
+
 // Tabulka klicovych slov
 // Slova "to", "until", "by" a "main" tu nejsou, jsou to identifikatory
 typedef struct {
@@ -221,6 +245,8 @@ static TokenType lookup_keyword(const char *word) {
   }
   return TOKEN_ID;
 }
+
+/* ----- Konec casti generovane AI ----- */
 
 // Dokonci celociselny literal: zkontroluje nulu na zacatku a prevede text na
 // cislo
@@ -882,6 +908,17 @@ static void make_token(Token *token, TokenType type, int token_line) {
   token->nl_before = true;
 }
 
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Pro scanner potrebuju generovat tokeny INDENT a DEDENT podle
+ * odsazeni. Napis funkci apply_indent(Token *token), ktera u
+ * prvniho tokenu logickeho radku porovna pocet mezer se zasobnikem odsazeni.
+ * Vetsi odsazeni vlozi na zasobnik a vrati INDENT, mensi odebira ze zasobniku
+ * a vrati DEDENT pro kazdy uzavreny blok. Puvodni token si podrz a vrat ho
+ * az po INDENT/DEDENT. Tabulator v odsazeni a nesedici uroven je lexikalni
+ * chyba. Pridej taky funkci flush_indent, ktera na konci souboru uzavre
+ * vsechny zbyvajici bloky."
+ */
+
 // Prvni token logickeho radku: porovna odsazeni se zasobnikem
 // Podrzi token a misto nej vrati INDENT nebo DEDENT
 static void apply_indent(Token *token) {
@@ -958,6 +995,8 @@ static void flush_indent(Token *token) {
   // Vraceni prvniho tokenu DEDENT misto konce souboru
   make_token(token, TOKEN_DEDENT, held_token.line);
 }
+
+/* ----- Konec casti generovane AI ----- */
 
 // Precte dalsi token a udrzuje stav scanneru mezi tokeny
 void get_token(Token *token) {

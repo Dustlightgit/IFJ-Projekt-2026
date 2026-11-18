@@ -1,6 +1,9 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+    xnovacm00 Michal Novacek
+
     semantic_actions.h
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
@@ -18,6 +21,7 @@
         - xbalaka00 - callbacky prijimaji cislo radku.
         - xbalaka00 - akce pravidla 31 anotuje ID a predava ukazatel
           neterminalu <IDcommand>.
+        - xnovacm00 - pridany deklarace pomocnych funkci pro stavbu AST
         - xbalaka00 - funkce ast_attach_expr presunuta do special_actions.h
           a prejmenovana na special_action_expr (prompt je tam).
 

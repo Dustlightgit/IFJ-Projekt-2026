@@ -1,11 +1,9 @@
 /*
     IFJ projekt 2026
 
-    error.h
+    xnovacm00 Michal Novacek
 
-    Puvodni autor: xnovacm00
-    Seznam zmen:
-        -
+    error.h
 
     Chybove navratove kody podle specifikace a funkce pro ukonceni programu
     s chybou.

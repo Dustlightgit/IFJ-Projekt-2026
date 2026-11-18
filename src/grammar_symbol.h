@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     grammar_symbol.h
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
