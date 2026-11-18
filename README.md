@@ -26,7 +26,7 @@
 - Konstanty a položky enum - SCREAMING_SNAKE_CASE
 - Datové typy - PascalCase
 
-- Komentáře česky
+- Komentáře česky bez diakritiky
 - Kód, git messages anglicky
 
 ## Překlad a testování
