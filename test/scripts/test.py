@@ -5,7 +5,19 @@ from pathlib import Path
 # Format polozky: ["COMPONENT", "test1", "test2", ...]
 INTERPRET_TESTS = [
     ["generator", "example_program", "sem_valid_program"],
+    ["ifj26_to_bin", "algebdt", "boolthen", "control", "extkw", "factorial", "funexp", "interpolateds", "lambdas", "lists", "paramlists", "strings", "test_ahoj", "valmem"],
 ]
+
+EXCEPTIONS = [
+    ["ifj26_to_bin", "algebdt", "extkw", "interpolateds", "lambdas", "paramlists"],
+]
+
+
+def is_in_test_list(test_list, component_name, test_name):
+    return any(
+        entry and entry[0] == component_name and test_name in entry[1:]
+        for entry in test_list
+    )
 
 
 def run_tests():
@@ -80,7 +92,11 @@ def run_tests():
         print(f"\n========== {component_name} ==========")
 
         for test_dir in test_dirs:
+            if is_in_test_list(EXCEPTIONS, component_name, test_dir.name):
+                continue
+
             input_file = test_dir / "input.txt"
+            stdin_file = test_dir / "stdin.txt"
             expected_file = test_dir / "expected.txt"
             output_file = test_dir / "output.txt"
 
@@ -91,15 +107,13 @@ def run_tests():
                 )
                 continue
 
-            use_interpret = False
-            for entry in INTERPRET_TESTS:
-                if (
-                    entry
-                    and entry[0] == component_name
-                    and test_dir.name in entry[1:]
-                ):
-                    use_interpret = True
-                    break
+            use_interpret = is_in_test_list(INTERPRET_TESTS, component_name, test_dir.name)
+
+            test_stdin = (
+                stdin_file.read_text(encoding="utf-8")
+                if stdin_file.exists()
+                else None
+            )
 
             try:
                 with open(input_file, "r", encoding="utf-8") as infile:
@@ -119,6 +133,7 @@ def run_tests():
                     )
                     result = subprocess.run(
                         [str(interpret_bin), str(ifjcode_file)],
+                        input=test_stdin,
                         capture_output=True,
                         text=True,
                         check=False

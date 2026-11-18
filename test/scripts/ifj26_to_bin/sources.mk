@@ -1,0 +1,1 @@
+SOURCES := $(filter-out $(SRC_DIR)/main.c,$(wildcard $(SRC_DIR)/*.c))
