@@ -1,7 +1,7 @@
 /*
     IFJ projekt 2026
 
-    xsantar00 Radovan Santar
+    xsantar00 Radovan Santavy
     xnovacm00 Michal Novacek
     xbalaka00 Artur Balak
 
