@@ -1,11 +1,14 @@
+
 # ====================================================================
 #   IFJ projekt 2026
 #
 #   Původní autor: xsantar00
 #   Seznam změn:
-#		- uprava testovani: xsantar00
+#       - uprava testovani: xsantar00
+#		- uprava package, nyni i testuje pomoci `is_it_ok.sh`: xbalaka00
+#		- default je ted pouze build, opraven valgrind test a syntaxe: xsantar00
 #
-#   makefile se stara a kompilaci specifickych zdrojovych kodu pro jejich nasledne otestovani v izolovanem prostredi
+#   makefile se stara o kompilaci specifickych zdrojovych kodu pro jejich nasledne otestovani v izolovanem prostredi
 # ====================================================================
 
 CC        := gcc
@@ -25,7 +28,7 @@ OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 .PHONY: all build package clean test clean-build-test clean-build build-test format build-run run
 
-all: build-test
+all: build
 
 run: build
 	@./$(TARGET)
@@ -35,15 +38,16 @@ build: $(TARGET)
 $(TARGET): $(OBJS)
 	@mkdir -p $(@D)
 	@$(CC) $(OBJS) $(LDFLAGS) -o $@ || { \
-		@echo "ERROR: Build failed."; \
-		@exit 1; \
+		echo "ERROR: Build failed."; \
+		exit 1; \
 	}
+	@echo "Build successful."
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@ || { \
-		@echo "ERROR: Build failed while compiling $<."; \
-		@exit 1; \
+		echo "ERROR: Build failed while compiling $<."; \
+		exit 1; \
 	}
 
 package:
@@ -57,19 +61,21 @@ clean:
 
 test:
 	@if ! command -v valgrind >/dev/null 2>&1; then \
-		@echo "ERROR: Valgrind is not installed."; \
-		@exit 1; \
+		echo "ERROR: Valgrind is not installed."; \
+		exit 1; \
 	fi
-	valgrind --leak-check=yes $(TARGET)
+	valgrind --leak-check=yes $(TARGET) <test/scripts/ifj26_to_bin/unit_tests/test_ahoj/input.txt
 	$(MAKE) -C test
 
 format:
 	@if ! command -v clang-format >/dev/null 2>&1; then \
-		@echo "ERROR: clang-format is not installed."; \
-		@exit 1; \
+		echo "ERROR: clang-format is not installed."; \
+		exit 1; \
 	fi
 	clang-format -i $(SRCS)
 
 clean-build-test: clean build test
+
 clean-build: clean build
+
 build-test: build test
