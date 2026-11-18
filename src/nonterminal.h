@@ -217,6 +217,8 @@ typedef enum {
   NONTERM_COMMAND_LIST,     ///< Dalsi prikazy v bloku
   NONTERM_COMMAND_END,      ///< Konec prikazu, strednik nebo EOL
   NONTERM_COMMAND,          ///< Prikaz
+  NONTERM_COMMAND_SIMPLE,   ///< Jednoduchy prikaz (val/var, return, ID, vyraz)
+  NONTERM_COMMAND_CONTROL,  ///< Ridici prikaz (while, for, if)
   NONTERM_VAL_VAR,          ///< val nebo var
   NONTERM_RETURN_VALUE,     ///< Nepovinna hodnota za return
   NONTERM_BLOCK_OR_COMMAND, ///< Telo cyklu nebo podminky
@@ -227,6 +229,8 @@ typedef enum {
 
   // Podminky
   NONTERM_OPTIONAL_ELSE,       ///< Nepovinna vetev else
+  NONTERM_THEN_BRANCH,         ///< Vetev then za podminkou
+  NONTERM_ELSE_OR_COMMAND_END, ///< Else za inline then, nebo konec prikazu
   NONTERM_TERNARY_IF,          ///< Ternarni if
   NONTERM_EXPR_OR_INDENT_EXPR, ///< Vyraz, pripadne odsazeny
   NONTERM_ELSE_TERNARY_IF,     ///< Else vetev ternarniho ifu, pripadne odsazena

@@ -307,20 +307,67 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
             [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_COMMAND_END_SEMICOLON),
         },
 
-    // Pravidla 27, 30, 31, 34, 37, 38, 47
+    // Pravidla 45, 46
     [NONTERM_COMMAND] =
         {
+            [TOKEN_ID] = LL_PROD(PRODUCTION_COMMAND_SIMPLE),
+            [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_COMMAND_SIMPLE),
+            [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_COMMAND_SIMPLE),
+            [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_COMMAND_SIMPLE),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_COMMAND_SIMPLE),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_COMMAND_SIMPLE),
+            // Docasny zastupce sloupce *dalsi
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_COMMAND_SIMPLE),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_COMMAND_CONTROL),
+            [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_COMMAND_CONTROL),
+            [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_COMMAND_CONTROL),
+        },
+
+    // Pravidla 55, 56, 57
+    [NONTERM_THEN_BRANCH] =
+        {
+            [TOKEN_EOL] = LL_PROD(PRODUCTION_THEN_BRANCH_BLOCK),
+            [TOKEN_ID] = LL_PROD(PRODUCTION_THEN_BRANCH_SIMPLE),
+            [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_THEN_BRANCH_SIMPLE),
+            [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_THEN_BRANCH_SIMPLE),
+            [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_THEN_BRANCH_SIMPLE),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_THEN_BRANCH_SIMPLE),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_THEN_BRANCH_SIMPLE),
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_THEN_BRANCH_SIMPLE),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_THEN_BRANCH_CONTROL),
+            [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_THEN_BRANCH_CONTROL),
+            [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_THEN_BRANCH_CONTROL),
+        },
+
+    // Pravidla 58, 59
+    [NONTERM_ELSE_OR_COMMAND_END] =
+        {
+            [TOKEN_SEMICOLON] =
+                LL_PROD(PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END),
+            [TOKEN_EOL] = LL_PROD(PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END),
+            [TOKEN_KW_ELSE] =
+                LL_CALLBACK(semantic_action_else_or_command_end_else),
+        },
+
+    // Pravidla 27, 30, 31, 34 (jednoduche prikazy)
+    [NONTERM_COMMAND_SIMPLE] =
+        {
             [TOKEN_ID] = LL_CALLBACK(semantic_action_id_command),
-            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_if_command),
             [TOKEN_KW_RETURN] = LL_CALLBACK(semantic_action_return_command),
-            [TOKEN_KW_WHILE] = LL_CALLBACK(semantic_action_while_command),
-            [TOKEN_KW_FOR] = LL_CALLBACK(semantic_action_for_command),
             [TOKEN_KW_VAL] = LL_CALLBACK(semantic_action_declaration_command),
             [TOKEN_KW_VAR] = LL_CALLBACK(semantic_action_declaration_command),
-            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_COMMAND_EXPR),
-            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_COMMAND_EXPR),
+            [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_COMMAND_SIMPLE_EXPR),
+            [TOKEN_LPAREN] = LL_PROD(PRODUCTION_COMMAND_SIMPLE_EXPR),
             // Docasny zastupce sloupce *dalsi
-            [TOKEN_STAR] = LL_PROD(PRODUCTION_COMMAND_EXPR),
+            [TOKEN_STAR] = LL_PROD(PRODUCTION_COMMAND_SIMPLE_EXPR),
+        },
+
+    // Pravidla 37, 38, 47 (ridici prikazy)
+    [NONTERM_COMMAND_CONTROL] =
+        {
+            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_if_command),
+            [TOKEN_KW_WHILE] = LL_CALLBACK(semantic_action_while_command),
+            [TOKEN_KW_FOR] = LL_CALLBACK(semantic_action_for_command),
         },
 
     // Pravidla 28, 29
@@ -335,6 +382,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
         {
             [TOKEN_EOL] = LL_PROD(PRODUCTION_RETURN_VALUE_EMPTY),
             [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_RETURN_VALUE_EMPTY),
+            [TOKEN_KW_ELSE] = LL_PROD(PRODUCTION_RETURN_VALUE_EMPTY),
             [TOKEN_ID] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
             [TOKEN_KW_IF] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
             [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_RETURN_VALUE_EXPR),
@@ -377,22 +425,19 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // Pravidla 48, 49
     [NONTERM_OPTIONAL_ELSE] =
         {
+            [TOKEN_KW_ELSE] =
+                LL_CALLBACK(semantic_action_optional_else_present),
             [TOKEN_DEDENT] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_ID] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
-            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
-            [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
-            [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_KW_VAL] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_LPAREN] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
-            // Docasny zastupce sloupce *dalsi
             [TOKEN_STAR] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
-            // Pravidlo 48: konflikt s pravidlem 49 (visici else) je vyresen rucne
-            // ve prospech pravidla 48, else patri k nejblizsimu if.
-            [TOKEN_KW_ELSE] =
-                LL_CALLBACK(semantic_action_optional_else_present),
+            [TOKEN_KW_IF] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_WHILE] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
+            [TOKEN_KW_FOR] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
         },
 
     // Pravidlo 50
@@ -429,13 +474,20 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
             [TOKEN_SEMICOLON] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
         },
 
+    /////////////////////// DULEZITE, VELMI DULEZITE /////////////
+
     // Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
     // do vyrazoveho parseru
     [NONTERM_EXPR] =
         {
-            [TOKEN_STAR] = LL_PROD(PRODUCTION_TEST_EXPR_STAR),
+            // Varianta bez AST (jen vlozi * na zasobnik):
+            // [TOKEN_STAR] = LL_PROD(PRODUCTION_TEST_EXPR_STAR),
+            // Varianta s AST (vytvori literal 0 a pripoji ho do stromu):
+            [TOKEN_STAR] = LL_CALLBACK(semantic_action_test_expr),
         },
 };
+
+/////////////////////// DULEZITE, VELMI DULEZITE /////////////
 
 const LLTableEntry *ll_table_lookup(NonterminalType nonterm, TokenType terminal,
                                     int line) {

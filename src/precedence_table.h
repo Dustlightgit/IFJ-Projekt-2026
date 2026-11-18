@@ -5,7 +5,11 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
-        -
+        - xbalaka00 - upravena dokumentace precedence_table_lookup, vstupni
+          token mimo tabulku je syntakticka chyba (prompt je v
+          precedence_parser.h).
+        - xbalaka00 - PRECEDENCE_TABLE_SIZE zvetsena z 27 na 29 kvuli novym
+          tokenum TOKEN_PLUS_UNARY a TOKEN_MINUS_UNARY (prompt je v token.h).
 
     Tento soubor obsahuje deklarace pro precedencni tabulku, kterou bude
     vyuzivat precedencni parser vyrazu, a funkce pro prevod terminalu na
@@ -82,7 +86,7 @@
  * Odpovida poctu terminalu vyrazove analyzy, ktere indexuji precedencni
  * tabulku (viz TokenType v token.h).
  */
-#define PRECEDENCE_TABLE_SIZE 27
+#define PRECEDENCE_TABLE_SIZE 29
 
 /**
  * @brief Direktiva precedencni tabulky.
@@ -126,9 +130,12 @@ size_t precedence_table_index(TokenType terminal, int line);
 /**
  * @brief Vyhleda direktivu v precedencni tabulce.
  *
- * Zavola precedence_table_index pro oba terminaly a zaindexuje tabulku. Pokud
- * je pole prazdne (DIRECTIVE_ERROR), kombinace terminalu neni platna a program
- * skonci syntaktickou chybou (ERR_SYNTAX) s vypisem pouzitych indexu.
+ * Zaindexuje tabulku terminalem na zasobniku (ten je vzdy indexem tabulky,
+ * jinak jde o internich chybu) a terminalem na vstupu. Vstupni terminal, ktery
+ * precedencni tabulku neindexuje, je chyba ve vstupnim programu a program
+ * skonci syntaktickou chybou (ERR_SYNTAX). Pokud je pole tabulky prazdne
+ * (DIRECTIVE_ERROR), kombinace terminalu neni platna a program skonci take
+ * syntaktickou chybou (ERR_SYNTAX) s vypisem pouzitych indexu.
  *
  * @param stack_terminal Terminal na zasobniku (radek tabulky).
  * @param input_terminal Terminal na vstupu (sloupec tabulky).

@@ -5,14 +5,23 @@
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
+        - xbalaka00 - pridana funkce reduction_table_lookup (prompt je v
+          reduction_table.h).
         - xbalaka00 - pridana polozka ReductionTableEntry, konstanta
           REDUCTION_TABLE_SIZE a deklarace tabulky REDUCTION_TABLE (prompt je
           v semantic_types.h).
+        - xbalaka00 - tabulka REDUCTION_TABLE je vyplnena (prompt je
+          v reduction_table.c), upravena dokumentace.
+        - xbalaka00 - REDUCTION_TABLE_SIZE zvysena na 42 kvuli novym pravidlum
+          E32 a E33 (prompt je v precedence_semantic_actions.c).
+        - xbalaka00 - pridano pravidlo E30 (clenska notace bez parametru),
+          pravidla E30 az E41 precislovana na E31 az E42 (prompt je v
+          precedence_semantic_actions.c).
 
-    Tento soubor bude obsahovat tabulku redukcnich pravidel (pravidel vyrazove
+    Tento soubor obsahuje tabulku redukcnich pravidel (pravidel vyrazove
     gramatiky), ktera mapuje handle jednotlivych pravidel na jejich semanticke
     akce. Obsahuje vyhledavaci prvek tabulky (handle), polozku tabulky
-    a deklaraci tabulky. Tabulka je zatim prazdna.
+    a deklaraci tabulky.
 */
 
 #ifndef REDUCTION_TABLE_H
@@ -82,13 +91,14 @@ typedef struct {
 
 /*
     Prompt pro polozku ReductionTableEntry a tabulku REDUCTION_TABLE je
-    v souboru semantic_types.h.
+    v souboru semantic_types.h. Prompt pro vyplneni tabulky je v souboru
+    reduction_table.c.
 */
 
 /**
  * @brief Pocet radku (pravidel) redukcni tabulky.
  */
-#define REDUCTION_TABLE_SIZE 40
+#define REDUCTION_TABLE_SIZE 43
 
 /**
  * @brief Polozka redukcni tabulky, jedno pravidlo vyrazove gramatiky.
@@ -103,9 +113,67 @@ typedef struct {
 /**
  * @brief Tabulka redukcnich pravidel vyrazove gramatiky.
  *
- * Mapuje handle pravidla na jeho semantickou akci. Prozatim je prazdna,
- * polozky bez zaznamu maji action NULL a handle delky 0.
+ * Mapuje handle pravidla na jeho semantickou akci. Polozky jsou serazeny
+ * vzestupne podle delky handle (poradi neodpovida cislum pravidel), na jejich
+ * poradi se spoleha funkce reduction_table_lookup. Pripadne nevyuzite polozky
+ * s action NULL jsou az na konci tabulky. Tabulka obsahuje vsech 43 pravidel
+ * vyrazove gramatiky (E0 az E42), nevyuzite polozky tedy zatim zadne nejsou.
  */
 extern const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE];
+
+/*
+    Prompt pro vyhledavaci funkci reduction_table_lookup. Stejny prompt
+    zpusobil zmeny take v reduction_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        OK, teď bych udělal tu vyhledávací funkci. Je to prakticky vyhledávací
+        tabulka, která ale má pevně daný a neměnný počet položek. Proto bude
+        bohatě stačit O(n) vyhledávání. V tabulce bude search handle klíčem,
+        podle kterého bude vyhledávána položka pointeru na sémantickou akci.
+
+        Vyhledávací funkce reduction_table_lookup dostane jako argument
+        SearchHandle, které jádro vyplní symboly ze stacku dle příslušné
+        konvence, a funkce bude vracet callback uložený na této pozici
+        (případně sama vyhodí chybu).
+
+        Položky v tabulce budou seřazeny přednostně podle délky handle
+        (navzdory tomu, že to neodpovídá číslům pravidel).
+
+        Prvně se bude vyhledávat podle délky handle - tedy první záznamy se
+        pouze prosviští jednoduchou kontrolou, dokud se nedojde k posloupnosti
+        stejně dlouhých handle. Tyto handle se pak po jednom budou srovnávat s
+        klíčem, podle kterého hledáme; při první neshodě se postoupí o index
+        seznamu ReductionTableEntry dále. Takto se prohledají všechny záznamy
+        se stejnou délkou handle; jakmile se dojde k první položce s delším
+        handle, víme, že můžeme skončit.
+
+        Pokud chceš, můžeš udělat i předpoklad lexikografického seřazení
+        pravidel dle handle (ať už primárně, nebo sekundárně), a vyhledávat
+        handle lexikograficky, avšak mám dojem, že to nebude tvořit moc velký
+        rozdíl. Pokud by však bylo použito lexikografické vyhledávání, je
+        nutné zajistit, že celý vyhledávaný handle skutečně odpovídá celému
+        handle nalezeného pravidla.
+
+        Úspěšné vyhledání pravidla vrátí příslušný callback, aby jej jádro
+        mohlo zavolat. Neúspěšné vyhledání vyhodí ERR_SYNTAX.
+*/
+
+/**
+ * @brief Vyhleda v redukcni tabulce pravidlo podle handle.
+ *
+ * Tabulka je serazena podle delky handle, funkce proto preskoci kratsi
+ * handle, porovna cely vyhledavany handle (delku i vsechny symboly) postupne
+ * se vsemi handle stejne delky a pri prvnim delsim handle vyhledavani konci.
+ * Delka vyhledavaneho handle musi byt v rozsahu 1 az HANDLE_MAX_LENGTH, jinak
+ * jde o internich chybu (ERR_INTERNAL). Pokud pravidlo neexistuje, program
+ * skonci syntaktickou chybou (ERR_SYNTAX) a na stderr vypise hledany handle.
+ *
+ * @param handle Vyhledavany handle, sestaveny jadrem ze symbolu zasobniku
+ *        v prirozenem poradi (viz SearchHandle), nesmi byt NULL.
+ * @param line Cislo radku vstupniho tokenu pro chybova hlaseni.
+ * @return Semanticka akce nalezeneho pravidla, nikdy NULL.
+ */
+PrecedenceSemanticAction reduction_table_lookup(const SearchHandle *handle,
+                                                int line);
 
 #endif // REDUCTION_TABLE_H

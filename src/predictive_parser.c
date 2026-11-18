@@ -26,6 +26,7 @@
         - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL
           a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
           prompt je v reduction_table.h).
+        - xbalaka00 - jadro propojeno s precedencnim parserem
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -39,6 +40,7 @@
 #include "ast.h"
 #include "error.h"
 #include "grammar_symbol.h"
+#include "precedence_parser.h"
 #include "semantic_actions.h"
 #include "special_actions.h"
 
@@ -454,7 +456,17 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
       // Dodatecna vnitrni kontrola, ze neterminal ze zasobniku je skutecny
       nonterm_type_validate(nonterm, ctx->current_token.line);
 
-      if (nonterm == NONTERM_ID_COMMAND) {
+      if (nonterm == NONTERM_EXPR) {
+        // Specialni neterminal <expr> reprezentujici prechod do vyrazove analyzy
+
+        // Zavolani precedencniho parseru
+        Expr *result = precedence_parser(ctx, NULL);
+
+        // Zavolani specialni akce pro pripojeni vyrazu k AST
+        special_action_expr(semantic_pointer, annotation, result,
+                            ctx->current_token.line);
+
+      } else if (nonterm == NONTERM_ID_COMMAND) {
         // Neterminal <IDcommand> (pravidla 32 a 33) je v odpovednosti jadra,
         // LL tabulka ani zadna dalsi akce se v teto iteraci neprovadi.
         // Uzel ID vytvorila special_action_id pri zpracovani ID na zacatku
@@ -493,19 +505,23 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
         else {
           // Pravidlo 33: <IDcommand> => prechod do vyrazove analyzy. Vstupni
-          // token se nemeni. Pozdeji se do vyrazoveho parseru preda pocatecni
+          // token se nemeni. Do vyrazoveho parseru je predan pocatecni
           // symbol ID s ukazatelem na uzel ID.
           fprintf(stderr,
-                  "LL Parser: Pravidlo 33, zde by se preslo do vyrazove "
-                  "analyzy, pocatecni ID: %s\n",
+                  "LL Parser: Pravidlo 33, prechod do vyrazove analyzy, "
+                  "pocatecni ID: %s\n",
                   id_expr->as.variable.name);
 
-          // Do doby, nez bude vyrazovy parser, se uzel uvolni a na zasobnik
-          // se vlozi <expr>, ktery se prepise testovacim pravidlem
-          expr_free(id_expr);
-          ctx->semantic_context.id_expr = NULL;
+          // Priprava pocatecniho terminalu
+          AnnotatedSymbol starting_id = {.symbol = GRAMMAR_TERMINAL(TOKEN_ID),
+                                         .semantic_pointer = id_expr};
 
-          parser_stack_push(&stack, expr_symbol, NULL, CONTEXT_NONE, false);
+          // Zavolani precedencniho parseru
+          Expr *result = precedence_parser(ctx, &starting_id);
+
+          // Zavolani specialni akce pro pripojeni vyrazu k AST
+          special_action_expr(semantic_pointer, annotation, result,
+                              ctx->current_token.line);
         }
       }
 
@@ -530,12 +546,23 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
         }
       }
 
+      else if (ctx->current_token.type < TOKEN_EXPRESSION_BEGINNING_DELIMITER) {
+        // Objevil se terminal, ktery neindexuje LL tabulku, avsak je platnym zacatkem vyrazu
+
+        // Provedeni pravidla dle aktualniho neterminalu
+        AnnotatedSymbol current_nonterm_info = {
+            .symbol = GRAMMAR_NONTERMINAL(nonterm),
+            .semantic_pointer = semantic_pointer,
+            .annotation = annotation};
+
+        special_action_execute_expr_rule(ctx, &stack, &current_nonterm_info);
+      }
+
       else {
-        // Docasne reseni: vstupni token neni terminal LL tabulky. Zde pozdeji
-        // pribude logika pro sloupec *dalsi (tokeny, kterymi muze zacinat
-        // vyraz).
-        error_exit(ERR_INTERNAL, ctx->current_token.line,
-                   "LL Parser: Token na vstupu neni terminal LL tabulky.");
+        // Vstupni token neni terminal LL tabulky ani zacatek vyrazu.
+        error_exit(ERR_SYNTAX, ctx->current_token.line,
+                   "LL Parser: Token na vstupu neni terminal LL tabulky ani "
+                   "zacatek vyrazu.");
       }
     }
 

@@ -35,7 +35,6 @@
         Záporná čísla generuj jako násobení -1.
 */
 
-
 /*
  * generator.h - generator cilového kódu IFJcode26 z AST
  *
@@ -73,7 +72,6 @@
 #include "ast.h"
 #include "symtable.h"
 
-
 /*--------------------------------------------------------------------------------*/
 /* Veřejné rozhraní                                                               */
 /*--------------------------------------------------------------------------------*/
@@ -85,7 +83,6 @@
  * Pořadí výstupu: ".IFJcode26", vstupní bod, všechny funkce, použité rutiny.
  */
 void generate_program(Program *program, FILE *out);
-
 
 /*--------------------------------------------------------------------------------*/
 /* Stav generátoru                                                                */
@@ -100,7 +97,6 @@ void generate_program(Program *program, FILE *out);
  * rutin. Definice struktury je v generator.c.
  */
 typedef struct Gen Gen;
-
 
 /*--------------------------------------------------------------------------------*/
 /* Základní zápis instrukcí                                                       */
@@ -134,7 +130,6 @@ void gen_stack_op(Gen *g, const char *op, int consumed, int produced);
  */
 void gen_check_depth(const Gen *g, int expected, int line);
 
-
 /*--------------------------------------------------------------------------------*/
 /* Jména, návěští, proměnné                                                       */
 /*--------------------------------------------------------------------------------*/
@@ -163,7 +158,6 @@ void gen_declare_var(Gen *g, const char *var);
 /* Vytvoří a zaeviduje novou dočasnou proměnnou "LF@$tN". */
 void gen_new_temp(Gen *g, char *buf, size_t size);
 
-
 /*--------------------------------------------------------------------------------*/
 /* Literály a konverze                                                            */
 /*--------------------------------------------------------------------------------*/
@@ -182,7 +176,6 @@ void gen_push_literal(Gen *g, const Literal *literal);
  * ve všech ostatních případech nic nezapíše. NULL typ znamená "bez konverze".
  */
 void gen_convert(Gen *g, const Type *from, const Type *to);
-
 
 /*--------------------------------------------------------------------------------*/
 /* Program a funkce                                                               */
@@ -213,7 +206,6 @@ void gen_function(Gen *g, const FuncDef *func);
  */
 void gen_return_sequence(Gen *g);
 
-
 /*--------------------------------------------------------------------------------*/
 /* Pomocné rutiny v cílovém kódu (vestavěné funkce, práce se seznamy)             */
 /*--------------------------------------------------------------------------------*/
@@ -240,7 +232,6 @@ void gen_call_runtime(Gen *g, const char *name, int argc);
  * Rutiny jsou záznamy v tabulce v generator.c.
  */
 void gen_emit_used_runtime(Gen *g);
-
 
 /*--------------------------------------------------------------------------------*/
 /* Bloky a příkazy (po příkazu je hloubka zásobníku stejná jako před ním)         */
@@ -296,7 +287,6 @@ void gen_for_list(Gen *g, const Stmt *stmt);
  * (konec iterace, kde se posune čítač).
  */
 void gen_for_guards(Gen *g, const Stmt *stmt, const char *skip_label);
-
 
 /*--------------------------------------------------------------------------------*/
 /* Výrazy (každý nechá na zásobníku právě jednu hodnotu)                          */

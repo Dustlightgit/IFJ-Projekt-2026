@@ -21,10 +21,12 @@
           semantic_types.h).
         - xbalaka00 - include grammar_symbol.h pro GrammarSymbol (GrammarSymbol presunut do grammar_symbol.h,
           prompt je v reduction_table.h).
+        - xbalaka00 - pridana funkce trace_rule (prompt je v parser_common.c).
+        - xbalaka00 - upraven popis funkce parser_advance
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
-    na zasobniku parseru, kontext sdileny mezi parsery a funkce pro praci
-    se zasobnikem parseru.
+    na zasobniku parseru, kontext sdileny mezi parsery, funkce pro praci
+    se zasobnikem parseru a spolecny ladici vypis pravidel.
 */
 
 #ifndef PARSER_COMMON_H
@@ -147,9 +149,12 @@ bool parser_check_token(const ParserContext *ctx, TokenType expected);
 /**
  * @brief Posun ve vstupnim proudu dale. Kontroluje take koncovou carku.
  * 
- * Uvolni soucasny token a a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
+ * Uvolni soucasny token a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu
  * tedy musi probehnout jeste pred zavolanim teto funkce. Typ noveho tokenu
  * overi funkci token_type_validate (neplatny typ je interni chyba).
+ * 
+ * Funkce take kontroluje zakaz dvou po sobe jdoucich carek a koncovou carku v seznamu.
+ * Kontrola je tedy spolecna pro oba parsery.
  *
  * @param ctx Spolecny context parseru.
  */
@@ -224,5 +229,24 @@ ParserStackEntry *parser_stack_peek(const Stack *stack, size_t depth);
  * @param ctx Kontext parseru k inicializaci.
  */
 void parser_context_init(ParserContext *ctx);
+
+/*
+    Prompt pro nasledujici deklaraci funkce je v souboru parser_common.c.
+*/
+
+/**
+ * @brief Vypise pouzite pravidlo a cislo radku na stderr (ladici vystup).
+ *
+ * Format vystupu urcuje parametr is_predictive_parser. Pravidla prediktivniho
+ * (LL) parseru se vypisuji jako "LL Parser: Pravidlo L<cislo> (radek <radek>)",
+ * pravidla precedencniho parseru jako
+ * "Precedencni parser: Pravidlo E<cislo> (radek <radek>)".
+ *
+ * @param is_predictive_parser True pro pravidlo prediktivniho (LL) parseru,
+ *        false pro pravidlo precedencniho parseru.
+ * @param rule_number Cislo pravidla.
+ * @param line Cislo radku vstupu.
+ */
+void trace_rule(bool is_predictive_parser, int rule_number, int line);
 
 #endif // PARSER_COMMON_H

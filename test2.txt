@@ -1,0 +1,17 @@
+import ifj26.*
+
+def a(x: Int): Int =
+    var y = *
+    y = *
+    while * do
+        y = *
+    for i <- * do
+        y = *
+    if * then
+        y = *
+    else
+        y = *
+    return *
+
+
+@main def run(): Unit = *
