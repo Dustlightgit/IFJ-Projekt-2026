@@ -1,11 +1,16 @@
 # conf.py
 DOXYFILE = 'Doxyfile'
 
-# Main site navigation bar links
+LINKS_NAVBAR1 = [
+    ("Classes", 'annotated', []),
+    ("Files", 'files', []),
+]
+LINKS_NAVBAR2 = []
 
+SHOW_UNDOCUMENTED = True
+SEARCH_DISABLED = True
 
-# Theme styling configuration
-HTML_EXTRA_FILES = []
-M_PAGE_HEADER = ""
-M_PAGE_FOOTER = ""
-M_THEME_COLOR = "#22272e"  # Dark theme accent color
+EXTRA_FILES = []
+PAGE_HEADER = ""
+PAGE_FOOTER = ""
+THEME_COLOR = "#22272e"

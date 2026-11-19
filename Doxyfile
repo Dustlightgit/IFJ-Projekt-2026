@@ -1,6 +1,8 @@
 PROJECT_NAME           = "IFJ-Projekt-2026"
-INPUT                  = include/
+INPUT                  = src/
 RECURSIVE              = YES
+EXTRACT_ALL            = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
 
 # Disable default Doxygen HTML output
 GENERATE_HTML          = NO
