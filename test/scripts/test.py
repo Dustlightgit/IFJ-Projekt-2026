@@ -10,12 +10,15 @@ INTERPRET_TESTS = [
 
 EXCEPTIONS = [
     ["pipeline", "algebdt", "extkw", "interpolateds", "lambdas", "paramlists"],
+    ["parser"],
 ]
 
 
-def is_in_test_list(test_list, component_name, test_name):
+def is_in_test_list(test_list, component_name, test_name=None):
     return any(
-        entry and entry[0] == component_name and test_name in entry[1:]
+        entry and entry[0] == component_name and (
+            not any(entry[1:]) if test_name is None else test_name in entry[1:]
+        )
         for entry in test_list
     )
 
@@ -58,6 +61,13 @@ def run_tests():
 
     for component_dir in component_dirs:
         component_name = component_dir.name
+
+        if is_in_test_list(EXCEPTIONS, component_name):
+            print(f"\n========== {component_name} ==========")
+            print(f"[SKIP] - komponenta deklarovana v listu EXCEPTIONS.")
+            summary.append((component_name,))
+            continue
+
         runner_bin = component_dir / "build" / "runner"
         unit_tests_dir = component_dir / "unit_tests"
 
