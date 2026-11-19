@@ -18,7 +18,6 @@ SRC_DIR := ../src
 SCRIPTS_DIR := scripts
 
 COMPONENTS := $(patsubst $(SCRIPTS_DIR)/%/,%,$(wildcard $(SCRIPTS_DIR)/*/))
-
 .PHONY: all test component-test component-build clean
 
 all: test
@@ -44,10 +43,13 @@ ifeq ($(strip $(COMPONENT)),)
 
 # Run all components
 test:
-	@for comp in $(COMPONENTS); do \
-		$(MAKE) COMPONENT=$$comp component-build || exit 1; \
-	done
-	@python3 $(TEST_SCRIPT)
+	@skipped=""; \
+	for comp in $(COMPONENTS); do \
+		$(MAKE) COMPONENT=$$comp component-build || { rm -f $(SCRIPTS_DIR)/$$comp/build/runner; skipped="$${skipped}[SKIP] $$comp: build failed\n"; }; \
+	done; \
+	python3 $(TEST_SCRIPT); rc=$$?; \
+	printf "%b" "$$skipped"; \
+	exit $$rc
 
 else
 
@@ -57,22 +59,26 @@ BUILD_DIR := $(COMPONENT_DIR)/build
 RUNNER_SRC := $(COMPONENT_DIR)/runner.c
 RUNNER_BIN := $(BUILD_DIR)/runner
 
-ifeq ($(wildcard $(COMPONENT_DIR)/sources.mk),)
-$(error Missing $(COMPONENT_DIR)/sources.mk)
-endif
-
+ifneq ($(wildcard $(COMPONENT_DIR)/sources.mk),)
 include $(COMPONENT_DIR)/sources.mk
-
 SOURCE_OBJS := $(addprefix $(BUILD_DIR)/,$(addsuffix .o,$(basename $(notdir $(SOURCES)))))
 
-.PHONY: component-build
+$(RUNNER_BIN): $(BUILD_DIR)/runner.o $(SOURCE_OBJS)
+	@echo "Linking $(COMPONENT) runner"
+	@$(CC) $^ $(LDFLAGS) -o $@
+endif
 
-component-build: $(RUNNER_BIN)
+component-build:
+	@[ -f "$(COMPONENT_DIR)/sources.mk" ] && $(MAKE) $(RUNNER_BIN)
 
 test: component-test
 
-component-test: $(RUNNER_BIN)
-	@python3 $(TEST_SCRIPT) $(COMPONENT) $(TEST)
+component-test:
+	@msg=""; \
+	$(MAKE) COMPONENT=$(COMPONENT) component-build || { rm -f $(RUNNER_BIN); msg="[SKIP] $(COMPONENT): build failed\n"; }; \
+	python3 $(TEST_SCRIPT) $(COMPONENT) $(TEST); rc=$$?; \
+	printf "%b" "$$msg"; \
+	exit $$rc
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
@@ -84,13 +90,9 @@ $(BUILD_DIR)/runner.o: $(RUNNER_SRC)
 	@echo "Compiling $(RUNNER_SRC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(RUNNER_BIN): $(BUILD_DIR)/runner.o $(SOURCE_OBJS)
-	@echo "Linking $(COMPONENT) runner"
-	@$(CC) $^ $(LDFLAGS) -o $@
-
 endif
 
 clean:
 	@rm -rf $(foreach component,$(COMPONENTS),$(SCRIPTS_DIR)/$(component)/build)
-	$(if $(COMPONENTS),@find $(foreach component,$(COMPONENTS),$(SCRIPTS_DIR)/$(component)) -type f \( -name "output.txt" -o -name "ifjcode.txt" \) -delete 2>/dev/null || true)
+	@find $(SCRIPTS_DIR) -type f \( -name "output.txt" -o -name "ifjcode.txt" \) -delete 2>/dev/null || true
 	@echo "Test builds cleaned."

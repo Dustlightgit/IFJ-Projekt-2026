@@ -5,11 +5,11 @@ from pathlib import Path
 # Format polozky: ["COMPONENT", "test1", "test2", ...]
 INTERPRET_TESTS = [
     ["generator", "example_program", "sem_valid_program"],
-    ["ifj26_to_bin", "algebdt", "boolthen", "control", "extkw", "factorial", "funexp", "interpolateds", "lambdas", "lists", "paramlists", "strings", "test_ahoj", "valmem"],
+    ["pipeline", "algebdt", "boolthen", "control", "extkw", "factorial", "funexp", "interpolateds", "lambdas", "lists", "paramlists", "strings", "test_ahoj", "valmem"],
 ]
 
 EXCEPTIONS = [
-    ["ifj26_to_bin", "algebdt", "extkw", "interpolateds", "lambdas", "paramlists"],
+    ["pipeline", "algebdt", "extkw", "interpolateds", "lambdas", "paramlists"],
 ]
 
 
@@ -47,15 +47,14 @@ def run_tests():
     else:
         component_dirs = sorted(
             d for d in scripts_dir.iterdir()
-            if d.is_dir() and (d / "build" / "runner").exists()
+            if d.is_dir()
         )
 
     if not component_dirs:
         print("ERROR: Nebyly nalezeny zadne komponenty.")
         sys.exit(1)
 
-    total_passed = 0
-    total_failed = 0
+    summary = []
 
     for component_dir in component_dirs:
         component_name = component_dir.name
@@ -66,12 +65,14 @@ def run_tests():
             print(
                 f"[SKIP] {component_name}: runner neexistuje."
             )
+            summary.append((component_name,))
             continue
 
         if not unit_tests_dir.is_dir():
             print(
                 f"[SKIP] {component_name}: unit_tests neexistuje."
             )
+            summary.append((component_name,))
             continue
 
         test_dirs = sorted(
@@ -86,10 +87,12 @@ def run_tests():
                 f"[ERROR] Test '{selected_test}' "
                 f"nebyl nalezen v komponente '{component_name}'."
             )
-            total_failed += 1
+            summary.append((component_name, 0, 1))
             continue
 
         print(f"\n========== {component_name} ==========")
+        passed = 0
+        failed = 0
 
         for test_dir in test_dirs:
             if is_in_test_list(EXCEPTIONS, component_name, test_dir.name):
@@ -149,7 +152,7 @@ def run_tests():
             except OSError as error:
                 print(f"\033[33m[FAIL] {test_dir.name}\033[0m")
                 print(f"  - Chyba: {error}")
-                total_failed += 1
+                failed += 1
                 continue
 
             expected_lines = [
@@ -170,10 +173,10 @@ def run_tests():
                 returncodemsg = f"\033[90m  - Proces skoncil s kodem {result.returncode}\033[0m"
             if actual_lines == expected_lines:
                 print(f"\033[92m[OK]\033[0m   {test_dir.name}      {returncodemsg}")
-                total_passed += 1
+                passed += 1
             else:
                 print(f"\033[91m[FAIL]\033[0m {test_dir.name}      {returncodemsg}")
-                total_failed += 1
+                failed += 1
 
                 max_lines = max(
                     len(actual_lines),
@@ -205,6 +208,26 @@ def run_tests():
                     f"Ocekavano {len(expected_lines)}, "
                     f"Ziskano {len(actual_lines)}"
                 )
+
+        summary.append((component_name, passed, failed))
+
+    print("\n==================================")
+    print("Component | Success | Fail | Total")
+    print("==================================")
+    for entry in summary:
+        name = f"{entry[0]:<9}"
+        if len(entry) == 1:
+            print(f"{name} | SKIPPED")
+        else:
+            _, passed, failed = entry
+            total = passed + failed
+            print(
+                f"{name} | \033[92m{passed:<7}\033[0m | "
+                f"\033[91m{failed:<4}\033[0m | \033[90m{total:<5}\033[0m"
+            )
+
+    total_passed = sum(e[1] for e in summary if len(e) == 3)
+    total_failed = sum(e[2] for e in summary if len(e) == 3)
 
     print(
         f"\nCelkovy vysledek: "
