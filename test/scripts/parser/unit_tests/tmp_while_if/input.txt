@@ -1,0 +1,8 @@
+import ifj26.*
+
+@main def run(): Unit =
+    var y: Int = *
+    while * do
+        if * then y = * else y = *
+        y = *
+    y = *

@@ -29,7 +29,7 @@ TARGET := $(BUILD_DIR)/main
 SRCS := $(wildcard $(SRC_DIR)/*.c)
 OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
-.PHONY: all build package clean test clean-build-test clean-build build-test format build-run run
+.PHONY: all build package clean test format run rebuild
 
 all: build
 
@@ -60,15 +60,17 @@ package:
 	@./is_it_ok.sh $(OUTPUT_DIR)/archive.zip
 
 clean:
-	rm -rf $(BUILD_DIR) $(OUTPUT_DIR)
+	@rm -rf $(BUILD_DIR) $(OUTPUT_DIR) *.log
+	@$(MAKE) -C test clean
+	@echo Clean done.
 
-test:
+test: rebuild
 	@if ! command -v valgrind >/dev/null 2>&1; then \
 		echo "ERROR: Valgrind is not installed."; \
 		exit 1; \
 	fi
-	valgrind --leak-check=yes $(TARGET) <test/scripts/ifj26_to_bin/unit_tests/test_ahoj/input.txt
-	$(MAKE) -C test
+	valgrind --leak-check=yes --log-fd=9 $(TARGET) <test/scripts/pipeline/unit_tests/test_ahoj/input.txt 9>&2 >/dev/null 2>&1
+	@$(MAKE) -C test
 
 format:
 	@if ! command -v clang-format >/dev/null 2>&1; then \
@@ -77,8 +79,4 @@ format:
 	fi
 	clang-format -i $(SRCS)
 
-clean-build-test: clean build test
-
-clean-build: clean build
-
-build-test: build test
+rebuild: clean build
