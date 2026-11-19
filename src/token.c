@@ -1,6 +1,9 @@
 /*
     IFJ projekt 2026
 
+    xnovacm00 Michal Novacek
+    xbalaka00 Artur Balak
+
     token.c
 
     Puvodni autor: xnovacm00

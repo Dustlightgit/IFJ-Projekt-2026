@@ -1,6 +1,10 @@
 /*
     IFJ projekt 2026
 
+    xsantar00 Radovan Santavy
+    xnovacm00 Michal Novacek
+    xbalaka00 Artur Balak
+
     token.h
 
     Puvodni autor: xsantar00 - prvni verze vyctoveho typu enumu
@@ -26,6 +30,7 @@
           terminaly vyrazove analyzy (prompt je v token.h).
 
     Definice typu tokenu, struktury tokenu a prototypu funkci pro lexer.
+    Pouzivano i jako terminal parseru.
 
 */
 
