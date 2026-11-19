@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     reduction_table.h
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -18,7 +20,7 @@
           pravidla E30 az E41 precislovana na E31 az E42 (prompt je v
           precedence_semantic_actions.c).
 
-    Tento soubor obsahuje tabulku redukcnich pravidel (pravidel vyrazove
+    Tento soubor obsahuje deklarace pro tabulku redukcnich pravidel (pravidel vyrazove
     gramatiky), ktera mapuje handle jednotlivych pravidel na jejich semanticke
     akce. Obsahuje vyhledavaci prvek tabulky (handle), polozku tabulky
     a deklaraci tabulky.

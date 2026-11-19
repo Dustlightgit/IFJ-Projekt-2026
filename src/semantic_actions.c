@@ -1,6 +1,9 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+    xnovacm00 Michal Novacek
+
     semantic_actions.c
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -18,6 +21,7 @@
         - xbalaka00 - callbacky prijimaji cislo radku, trace_rule ho vypisuje.
         - xbalaka00 - akce pravidla 31 anotuje ID a predava ukazatel
           neterminalu <IDcommand>.
+        - xnovacm00 - doplnena stavba AST do semantickych akci, pridany pomocne funkce pro tento ucel
         - xbalaka00 - push_terminal a push_nonterminal vkladaji zaznamy bez
           znacky redukce (prompt je v parser_common.c).
         - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
@@ -29,9 +33,8 @@
           a prejmenovana na special_action_expr (prompt je v
           special_actions.h), include special_actions.h.
 
-    Tento soubor obsahuje semanticke akce pravidel LL parseru. Akce zatim
-    pouze vypisuji cislo pravidla na stderr a vkladaji pravou stranu pravidla
-    na zasobnik, atributy pro stavbu stromu zatim nepridavaji.
+    Tento soubor obsahuje semanticke akce pravidel LL parseru, ktere vypisuji cislo pravidla
+    na stderr a stavi AST.
 
 */
 

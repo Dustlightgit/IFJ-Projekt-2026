@@ -1,12 +1,16 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+    xnovacm00 Michal Novacek
+
     special_actions.c
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
         - xbalaka00 - special_action_id vytvari AST uzel pro ID pri anotaci
           CONTEXT_ID_COMMAND.
+        - xnovacm00 - vyplnena funkce special_action_id
         - xbalaka00 - pridana prozatim prazdna funkce pro specialni akci predzpracovani terminalu
         - xbalaka00 - implementace special_action_precedence_preprocessing
           (prompt je v special_actions.h).
@@ -14,10 +18,8 @@
           funkce ast_attach_expr z semantic_actions.c, prejmenovana na
           special_action_expr (prompt je v special_actions.h).
 
-    Tento soubor obsahuje specialni akce parseru, ktere nejsou vazane na
-    pravidlo LL tabulky. Zatim jen kostry, funkcionalita se doplni pri
-    propojeni s AST.
-
+    Tento soubor obsahuje specialni akce parseru, napriklad akce pro stavbu AST,
+    ktere ale nejsou samy pravidlem.
 */
 
 #include "special_actions.h"
