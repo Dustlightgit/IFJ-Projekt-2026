@@ -17,6 +17,7 @@
           a zacykleni (prompt je v precedence_parser.h).
         - xbalaka00 - ReductionResult prejmenovan na AnnotatedSymbol (prompt
           je v semantic_types.h).
+        - xbalaka00 - zaveden ternarni if do jadra
 
     Tento soubor obsahuje implementaci precedencniho parseru vyrazu a jeho
     pomocnych funkci. Prompt pro vznik souboru je v souboru
@@ -29,6 +30,7 @@
 #include "nonterminal.h"
 #include "precedence_helpers.h"
 #include "precedence_table.h"
+#include "predictive_parser.h"
 #include "reduction_table.h"
 #include "semantic_types.h"
 #include "special_actions.h"
@@ -189,13 +191,50 @@ Expr *precedence_parser(ParserContext *ctx,
 
     if (ctx->current_token.type == TOKEN_KW_IF) {
       // Na vstupu je token if
+      // Ternarni if musi zpracovat prediktivni parser
 
-      // Pozdeji zde bude zavolani precedencniho parseru, aby zpracoval ternarni if,
-      // a zapojeni vysledku na stack. Tato vetev take rucne nastavi priznak a prediktor.
+      // Priprava AnnotatedSymbol, aby bylo mozne predat vysledek
+      AnnotatedSymbol ternary_if = {0};
 
-      // Prozatim ternarni if neni podporovan
-      error_exit(ERR_INTERNAL, ctx->current_token.line,
-                 "Precedencni parser: Ternarni if prozatim neni podporovan.");
+      // Zavolani prediktivniho parseru s neterminalem <ternaryIf>
+      predictive_parser(ctx, NONTERM_TERNARY_IF, &ternary_if);
+
+      if (ternary_if.symbol.is_terminal) {
+        // Byl vracen terminal - pripad pravidla L54 resp. virtualniho pravidla C
+        // Prediktivni parser by mel vratit terminal TIF reprezentujici ternarni if bez else vetve,
+        // kterou pripoji az pravidlo E41
+
+        // Overeni, ze se jedna o TIF
+        if (ternary_if.symbol.terminal != TOKEN_TIF)
+          error_exit(ERR_INTERNAL, ctx->current_token.line,
+                     "Precedencni parser: Prediktivni parser vratil "
+                     "neocekavany vysledek ternaniho if.");
+
+        // TIF musi byt zaveden jako radny terminal na zasobnik
+        parser_execute_directive(ctx, &stack, true, TOKEN_TIF,
+                                 ternary_if.semantic_pointer);
+
+        // Na zacatku vetve else ternarniho ifu ocekavam operand
+        predictor = EXPECT_OPERAND;
+      } else {
+        // Byl vracen neterminal - pripad pravidla L53 resp. virtualniho pravidla B
+        // Prediktivni parser by mel vratit hotovy neterminal E s ternarnim ifem.
+
+        // Overeni, ze se jedna o E
+        if (ternary_if.symbol.nonterminal != NONTERM_EXPR)
+          error_exit(ERR_INTERNAL, ctx->current_token.line,
+                     "Precedencni parser: Prediktivni parser vratil "
+                     "neocekavany vysledek ternaniho if.");
+
+        // Vlozeni neterminalu na zasobnik
+        parser_stack_push(&stack, ternary_if.symbol,
+                          ternary_if.semantic_pointer, ternary_if.annotation,
+                          false);
+
+        // Tento dokonceny ternarni if ukoncuje vyraz kvuli odsazene vetvi
+        parser_running = false;
+      }
+
     } else {
 
       // Vyhodnoceni prediktoru, vstupni token se pripadne prebarvi z ID na ID_OPERATOR.

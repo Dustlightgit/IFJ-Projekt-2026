@@ -37,6 +37,7 @@
           sjednocen format cisel pravidel a prejmenovany akce na predictive_action_*.
           Soubor byl prejmenovan na predictive_semantic_actions.c
         - xbalaka00 - odstranen SemanticContext z akci, protoze akce jej nevyuzivaly.
+        - xbalaka00 - vyplneny semanticke akce pro ternarni if
 
     Tento soubor obsahuje semanticke akce pravidel LL parseru, ktere vypisuji cislo pravidla
     na stderr a stavi AST.
@@ -456,15 +457,26 @@ void predictive_action_optional_else_present(void *semantic_pointer,
 void predictive_action_ternary_if(void *semantic_pointer,
                                   ContextAnnotation annotation, int line,
                                   Stack *stack) {
-  (void)semantic_pointer;
   (void)annotation;
   trace_rule(true, 50, line);
 
-  push_nonterminal(stack, NONTERM_ELSE_TERNARY_IF, NULL, CONTEXT_NONE);
+  // Ziskani mista pro ulozeni vysledku
+  AnnotatedSymbol *result = (AnnotatedSymbol *)semantic_pointer;
+
+  // Tvorba uzlu
+  Expr *if_node = expr_new_if(NULL, NULL, NULL, line);
+
+  // Vraceni do prediktivniho parseru
+  // Predpoklad, ze bude vracen jako TIF
+  result->symbol = (GrammarSymbol)GRAMMAR_TERMINAL(TOKEN_TIF);
+  result->semantic_pointer = if_node;
+
+  push_nonterminal(stack, NONTERM_ELSE_TERNARY_IF, result, CONTEXT_NONE);
   push_terminal(stack, TOKEN_KW_ELSE, NULL, CONTEXT_NONE);
-  push_nonterminal(stack, NONTERM_EXPR_OR_INDENT_EXPR, NULL, CONTEXT_NONE);
+  push_nonterminal(stack, NONTERM_EXPR_OR_INDENT_EXPR, if_node,
+                   CONTEXT_IF_THEN);
   push_terminal(stack, TOKEN_KW_THEN, NULL, CONTEXT_NONE);
-  push_nonterminal(stack, NONTERM_EXPR, NULL, CONTEXT_NONE);
+  push_nonterminal(stack, NONTERM_EXPR, if_node, CONTEXT_IF_COND);
   push_terminal(stack, TOKEN_KW_IF, NULL, CONTEXT_NONE);
 }
 
@@ -475,13 +487,20 @@ void predictive_action_ternary_if(void *semantic_pointer,
 void predictive_action_else_ternary_if_indented(void *semantic_pointer,
                                                 ContextAnnotation annotation,
                                                 int line, Stack *stack) {
-  (void)semantic_pointer;
   (void)annotation;
   trace_rule(true, 53, line);
 
+  // Ziskani mista pro ulozeni vysledku
+  AnnotatedSymbol *result = (AnnotatedSymbol *)semantic_pointer;
+
+  // Toto pravidlo prepisuje predpoklad, ze ternarni if bude navracen
+  // nedokonceny jako TIF
+  result->symbol = (GrammarSymbol)GRAMMAR_NONTERMINAL(NONTERM_EXPR);
+
   push_terminal(stack, TOKEN_DEDENT, NULL, CONTEXT_NONE);
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
-  push_nonterminal(stack, NONTERM_EXPR, NULL, CONTEXT_NONE);
+  push_nonterminal(stack, NONTERM_EXPR, result->semantic_pointer,
+                   CONTEXT_IF_ELSE);
   push_terminal(stack, TOKEN_INDENT, NULL, CONTEXT_NONE);
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
 }
