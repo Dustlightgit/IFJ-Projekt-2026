@@ -1,11 +1,29 @@
-// xnovacm00
-// ast.c - implementace abstraktniho syntaktickeho stromu
+/*
+    IFJ projekt 2026
+
+    xnovacm00 Michal Novacek
+
+    ast.c
+
+    Tento soubor obsahuje implementaci funkci pro vytvareni, postupne
+    sestavovani a uvolnovani abstraktniho syntaktickeho stromu.
+*/
 
 #include "ast.h"
 #include "error.h"
 
 #include <stdlib.h>
 #include <string.h>
+
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Do ast.c potrebuju pomocne funkce pro praci s pameti, aby se
+ * kontrola vysledku alokace nemusela opakovat v kazdem konstruktoru.
+ * Napis xmalloc a xrealloc, ktere pri neuspechu ukonci program pres
+ * error_exit s kodem ERR_INTERNAL. Dale xstrdup pro kopii retezce
+ * a xstrdup_opt, ktera ponecha NULL jako NULL. Nakonec grow_array, ktera
+ * zvetsi dynamicke pole o jedno misto a pro pole s ukazatelem NULL ho
+ * vytvori."
+ */
 
 // Alokuje pamet, pri neuspechu ukonci program s kodem interni chyby
 static void *xmalloc(size_t size) {
@@ -45,7 +63,17 @@ static void *grow_array(void *array, int count, size_t elem_size) {
   return xrealloc(array, (size_t)(count + 1) * elem_size);
 }
 
+/* ----- Konec casti generovane AI ----- */
+
 //--------------------------------------------------------------------------------//
+
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Napis kontrolni funkce require_stmt, require_expr
+ * a require_func, ktere na zacatku kazdeho setteru overi, ze dostaly
+ * uzel spravneho druhu. Pokud je ukazatel NULL nebo ma uzel jiny druh,
+ * jde o chybu parseru, takze program skonci pres error_exit s kodem
+ * ERR_INTERNAL a radkem uzlu (u NULL radek 0)."
+ */
 
 // Zkontroluje druh prikazu, nesoulad je chyba parseru a program skonci
 static void require_stmt(const Stmt *stmt, StmtKind kind) {
@@ -69,6 +97,8 @@ static void require_func(const FuncDef *func) {
     error_exit(ERR_INTERNAL, 0, "Chybi definice funkce pri sestavovani stromu");
   }
 }
+
+/* ----- Konec casti generovane AI ----- */
 
 //--------------------------------------------------------------------------------//
 // Typy
@@ -429,8 +459,14 @@ void program_add_func(Program *program, FuncDef *func) {
 //--------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------//
-// Vygenerovano AI (zacatek)
-// prompt: "Napis pametove destruktory a uvolnovaci funkce pro AST (expressions, statements, blocks, functions, program)."
+
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Napis funkce pro uvolnovani celeho AST: expr_free, stmt_free,
+ * block_free, funcdef_free a program_free. Uvolnovani je rekurzivni,
+ * u kazdeho druhu uzlu uvolni vlastni retezce, typy, podvyrazy, bloky
+ * a pole, ktera uzel vlastni. Vsechny funkce akceptuji NULL. Pro pole
+ * vyrazu pridej pomocnou funkci free_expr_array."
+ */
 
 // Uvolni pole ukazatelu na vyrazy i se vsemi vyrazy v nem (napr. pole strazi u cyklu for)
 static void free_expr_array(Expr **items, int count) {
@@ -578,16 +614,21 @@ void program_free(Program *program) {
   free(program);
 }
 
-// Vygenerovano AI (konec)
+/* ----- Konec casti generovane AI ----- */
+
 //--------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------//
 // Postupne sestavovani uzlu
 //--------------------------------------------------------------------------------//
 
-// Vygenerovano AI (zacatek)
-// prompt: "Uprav ast.h a ast.c tak, aby parser rizeny tabulkou mohl uzel vytvorit prazdny
-// a jeho casti doplnovat postupne"
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Pro settery v ast.c potrebuju dve pomocne funkce.
+ * replace_string nahradi retezec novou kopii a puvodni uvolni, NULL hodnotu
+ * smaze. get_param vrati parametr funkce podle indexu, protoze se pole
+ * parametru pri pridani presouva a ukazatel by nebyl platny. Neplatny
+ * index nebo NULL funkce je chyba parseru a konci s ERR_INTERNAL."
+ */
 
 // Nahradi retezec novou kopii a puvodni uvolni (NULL smaze hodnotu)
 static void replace_string(char **target, const char *value) {
@@ -604,6 +645,28 @@ static Param *get_param(FuncDef *func, int index) {
   }
   return &func->params[index];
 }
+
+/* ----- Konec casti generovane AI ----- */
+
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Parser rizeny tabulkou sklada AST postupne pri redukci pravidel,
+ * takze v okamziku vytvoreni uzlu jeste nezna vsechny jeho casti. Uprav
+ * ast.c tak, aby se uzel dal vytvorit neuplny a jeho casti se
+ * doplnovaly pozdeji pomoci setteru.
+ * Pozadavky:
+ *   - konstruktory (stmt_new_vardef, stmt_new_assign, stmt_new_for,
+ *     funcdef_new, funcdef_add_param) akceptuji NULL u jmena, ktere
+ *     zatim neni zname; expr_new_if, stmt_new_while, stmt_new_return
+ *     a stmt_new_expr akceptuji NULL u casti uzlu,
+ *   - settery prebiraji vlastnictvi predaneho ukazatele (retezce kopiruji)
+ *     a puvodni hodnotu uvolni,
+ *   - setter zavolany na uzel jineho druhu ukonci program s chybou
+ *     ERR_INTERNAL,
+ *   - parametry funkce se adresuji indexem, ne ukazatelem, protoze se
+ *     pole pri pridani presouva (realloc),
+ *   - pridej pomocne funkce block_from_stmt a block_from_expr pro
+ *     jednoradkova tela a vetve ternarniho if."
+ */
 
 // Typy
 
@@ -765,15 +828,23 @@ void funcdef_param_set_type(FuncDef *func, int index, Type *type) {
   param->type = type;
 }
 
-// Vygenerovano AI (konec)
+/* ----- Konec casti generovane AI ----- */
+
 //--------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------//
 // Pomocne funkce pro precedencni parser
 //--------------------------------------------------------------------------------//
 
-// Vygenerovano AI (zacatek)
-// prompt: viz precedence_semantic_actions.c (napojeni akci precedencniho parseru na AST)
+/* ----- Zacatek casti generovane AI (Claude) -----
+ * Prompt: "Do precedencniho parseru potrebuju pomocne funkce pro napojeni
+ * semantickych akci na AST: expr_range_set_step pro nastaveni kroku
+ * rozsahu, expr_call_take_args a expr_member_take_args pro presun prvku
+ * z pomocneho list literalu do argumentu volani nebo clenu
+ * a expr_list_take_items pro vyjmuti prvku z list literalu. Funkce
+ * prebiraji vlastnictvi prvku a pomocny list literal se po presunu
+ * uvolni bez uvolneni prvku."
+ */
 
 // Nastavi krok rozsahu a prebere jeho vlastnictvi
 void expr_range_set_step(Expr *range, Expr *step) {
@@ -819,5 +890,6 @@ void expr_list_take_items(Expr *list, Expr ***items, int *count) {
   list->as.list_literal.count = 0;
 }
 
-// Vygenerovano AI (konec)
+/* ----- Konec casti generovane AI ----- */
+
 //--------------------------------------------------------------------------------//

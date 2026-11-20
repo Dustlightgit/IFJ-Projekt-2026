@@ -1,5 +1,12 @@
-// xnovacm00
-// symtable.c - tabulka symbolu implementovana jako AVL strom
+/*
+    IFJ projekt 2026
+ 
+    xnovacm00 Michal Novacek
+ 
+    symtable.c
+ 
+    Tento soubor obsahuje implementaci tabulky symbolu pomoci AVL stromu.
+*/
 
 #include <stdlib.h>
 #include <string.h>

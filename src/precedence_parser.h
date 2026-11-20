@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     precedence_parser.h
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -14,7 +16,7 @@
           je v semantic_types.h).
 
     Hlavickovy soubor pro precedencni parser vyrazu (zalozeny na precedencni
-    tabulce) a jeho pomocne funkce. Zatim obsahuje provedeni redukce,
+    tabulce) a jeho pomocne funkce. Obsahuje deklarace funkci pro provedeni redukce,
     provedeni direktivy a deklaraci jadra parseru.
 */
 
