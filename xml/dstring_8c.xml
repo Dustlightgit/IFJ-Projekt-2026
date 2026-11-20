@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dstring_8c" kind="file" language="C++">
+    <compoundname>dstring.c</compoundname>
+    <includes refid="dstring_8h" local="yes">dstring.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/dstring.c</label>
+        <link refid="dstring_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>dstring.h</label>
+        <link refid="dstring_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+      <node id="4">
+        <label>stdlib.h</label>
+      </node>
+      <node id="5">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="dstring_8c_1ab6a0d822eb3b1f92946b2089f076fe82" prot="public" static="no">
+        <name>INITIAL_CAP</name>
+        <initializer>16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dstring.c" line="18" column="9" bodyfile="src/dstring.c" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="dstring_8c_1a45d6b9260a2148043647e3025eaf8dd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dstr_init</definition>
+        <argsstring>(DString *s)</argsstring>
+        <name>dstr_init</name>
+        <param>
+          <type><ref refid="structDString" kindref="compound">DString</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Pripravi prazdny retezec. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Retezec k inicializaci. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dstring.c" line="21" column="6" bodyfile="src/dstring.c" bodystart="21" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="dstring_8c_1af632405d46492cee2ca898d3a9c16f97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dstr_append_char</definition>
+        <argsstring>(DString *s, char c)</argsstring>
+        <name>dstr_append_char</name>
+        <param>
+          <type><ref refid="structDString" kindref="compound">DString</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>Prida znak na konec retezce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Retezec, do ktereho se pridava. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pridavany znak. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dstring.c" line="31" column="6" bodyfile="src/dstring.c" bodystart="31" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="dstring_8c_1ae33030315ea93d98162d7d279be9ebdc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dstr_clear</definition>
+        <argsstring>(DString *s)</argsstring>
+        <name>dstr_clear</name>
+        <param>
+          <type><ref refid="structDString" kindref="compound">DString</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Vyprazdni retezec, pamet ponecha. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Retezec k vyprazdneni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dstring.c" line="47" column="6" bodyfile="src/dstring.c" bodystart="47" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="dstring_8c_1a1a4695b50ea08263f32dbc927ccf6842" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char * dstr_copy</definition>
+        <argsstring>(const DString *s)</argsstring>
+        <name>dstr_copy</name>
+        <param>
+          <type>const <ref refid="structDString" kindref="compound">DString</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori novou kopii retezce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Retezec ke zkopirovani. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nova kopie, kterou musi volajici uvolnit pres free. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dstring.c" line="53" column="6" bodyfile="src/dstring.c" bodystart="53" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="dstring_8c_1a5d4d7be41d0707eac04194f20faa0049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dstr_free</definition>
+        <argsstring>(DString *s)</argsstring>
+        <name>dstr_free</name>
+        <param>
+          <type><ref refid="structDString" kindref="compound">DString</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni pamet retezce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Retezec k uvolneni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dstring.c" line="62" column="6" bodyfile="src/dstring.c" bodystart="62" bodyend="67"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/dstring.c"/>
+  </compounddef>
+</doxygen>

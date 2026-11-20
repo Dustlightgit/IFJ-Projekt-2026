@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structParserStackEntry" kind="struct" language="C++" prot="public">
+    <compoundname>ParserStackEntry</compoundname>
+    <includes refid="parser__common_8h" local="no">parser_common.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structParserStackEntry_1a2b78ee2bae0a606d8e0ee7ba2564be58" prot="public" static="no" mutable="no">
+        <type><ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref></type>
+        <definition>GrammarSymbol ParserStackEntry::symbol</definition>
+        <argsstring></argsstring>
+        <name>symbol</name>
+        <qualifiedname>ParserStackEntry::symbol</qualifiedname>
+        <briefdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> na zasobniku. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="101" column="17" bodyfile="src/parser_common.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParserStackEntry_1a707806461d5b1c886e5c01385fbbf7b4" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* ParserStackEntry::semantic_pointer</definition>
+        <argsstring></argsstring>
+        <name>semantic_pointer</name>
+        <qualifiedname>ParserStackEntry::semantic_pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Ukazatel pro stavbu stromu, obvykle ho vklada semanticka akce neterminalu. V LL parseru ukazuje na uzel, ke kteremu se pripoji dalsi cast stromu, ve vyrazovem parseru na vyrazovy podstrom. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="108" column="8" bodyfile="src/parser_common.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParserStackEntry_1a737f73d3df65e7bc2026a1bf2c427f60" prot="public" static="no" mutable="no">
+        <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+        <definition>ContextAnnotation ParserStackEntry::annotation</definition>
+        <argsstring></argsstring>
+        <name>annotation</name>
+        <qualifiedname>ParserStackEntry::annotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Kontextova anotace symbolu, sdeluje callbacku, jak ma s symbolem postupovat. Lze ji pripojit k terminalu i k neterminalu. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="114" column="21" bodyfile="src/parser_common.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParserStackEntry_1a52557a7b3770b972666a6013e4c5e9d4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ParserStackEntry::reduction_marker</definition>
+        <argsstring></argsstring>
+        <name>reduction_marker</name>
+        <qualifiedname>ParserStackEntry::reduction_marker</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Priznak znacky redukce pro precedencni parser. Je-li true, bezprostredne za timto zaznamem (smerem k vrcholu zasobniku) nasleduje symbol &lt;, ktery v matematickem modelu oznacuje zacatek redukce. Handle tvori vsechny zaznamy od vrcholu zasobniku az po prvni zaznam s timto priznakem, tento zaznam do handle nepatri. Vychozi hodnota je false, prediktivni parser priznak nevyuziva. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="124" column="8" bodyfile="src/parser_common.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Zaznam ulozeny na zasobniku parseru. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>GrammarSymbol</label>
+        <link refid="structGrammarSymbol"/>
+      </node>
+      <node id="1">
+        <label>ParserStackEntry</label>
+        <link refid="structParserStackEntry"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/parser_common.h" line="100" column="1" bodyfile="src/parser_common.h" bodystart="100" bodyend="125"/>
+    <listofallmembers>
+      <member refid="structParserStackEntry_1a737f73d3df65e7bc2026a1bf2c427f60" prot="public" virt="non-virtual"><scope>ParserStackEntry</scope><name>annotation</name></member>
+      <member refid="structParserStackEntry_1a52557a7b3770b972666a6013e4c5e9d4" prot="public" virt="non-virtual"><scope>ParserStackEntry</scope><name>reduction_marker</name></member>
+      <member refid="structParserStackEntry_1a707806461d5b1c886e5c01385fbbf7b4" prot="public" virt="non-virtual"><scope>ParserStackEntry</scope><name>semantic_pointer</name></member>
+      <member refid="structParserStackEntry_1a2b78ee2bae0a606d8e0ee7ba2564be58" prot="public" virt="non-virtual"><scope>ParserStackEntry</scope><name>symbol</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

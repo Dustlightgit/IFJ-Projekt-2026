@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/token.h file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>token.h <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              union <a href="unionTokenAttribute.html" class="m-doc">TokenAttribute</a>
+            </dt>
+            <dd>Hodnota tokenu, platny clen urcuje typ tokenu.</dd>
+            <dt>
+              struct <a href="structToken.html" class="m-doc">Token</a>
+            </dt>
+            <dd><a href="structToken.html" class="m-doc">Token</a> lexikalni analyzy.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> { </span><span class="m-doc-wrap"><a href="#aa520fbf142ba1e7e659590c07da31921aa130df27256cd45f5781fc74deeb50dc" class="m-doc">TOKEN_EOF</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" class="m-doc">TOKEN_EOL</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921abe35698de6c054dd0906f4869678e5e5" class="m-doc">TOKEN_DEDENT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a30d3c23e6256ee2349a066b4de360a72" class="m-doc">TOKEN_KW_DEF</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aaa77962f31ff1907bf5bcabf2c3a5d76" class="m-doc">TOKEN_KW_DO</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a547528f9338f062664cdbb5eb31a7a75" class="m-doc">TOKEN_KW_ELSE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921af9ac81a39613f70696d2b11a9a4f3a5d" class="m-doc">TOKEN_KW_IF</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a300f0df298b95bcd89f44f34f1a177ae" class="m-doc">TOKEN_KW_IMPORT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a345a9050f5b89b634f2c5ec787ea54c4" class="m-doc">TOKEN_KW_RETURN</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a089f5a83bf72bd3ece2a8fd07b546761" class="m-doc">TOKEN_KW_THEN</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921adaa096d9b5644c541a953793ccd06980" class="m-doc">TOKEN_KW_VAL</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a6ffacab6b61365785f103c5ca66cba9c" class="m-doc">TOKEN_KW_VAR</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a32ff7400f585a66b51d3ba9569b618ab" class="m-doc">TOKEN_KW_WHILE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a95ef43533be2a36dbeeab3fd76361e19" class="m-doc">TOKEN_KW_FOR</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a742cf96ad3e40d1c94c19cd2a599389b" class="m-doc">TOKEN_KW_INT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921ad86779bfd6c7e01953afa16cbe05dcdc" class="m-doc">TOKEN_KW_DOUBLE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921af45ae58b7506113e9cb1c65d8d0db6b1" class="m-doc">TOKEN_KW_STRING</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a42cea1e15300c2860e3b82a444dcae02" class="m-doc">TOKEN_KW_UNIT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a2aa68a623d0c1028cfbfb78d0cdc3229" class="m-doc">TOKEN_KW_BOOLEAN</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921abd360478d160e90b985c9ca1e73ba1c6" class="m-doc">TOKEN_KW_LIST</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a45b3a0292bfd356ff14a4e8cb25738af" class="m-doc">TOKEN_LARROW</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921af4143395fefba1c6a30e58240dd0c827" class="m-doc">TOKEN_LPAREN</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921ace232c359d5697cc5c459c22a7be226b" class="m-doc">TOKEN_RPAREN</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a8d265e17914bc733c8b9a880dd097a9e" class="m-doc">TOKEN_COMMA</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a92a35ac6329421e77882bf3739a75e47" class="m-doc">TOKEN_COLON</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921ac8c74b281e178c87923363a90f6ff371" class="m-doc">TOKEN_SEMICOLON</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a98aa9bac1626f8a09231049287187f39" class="m-doc">TOKEN_ID</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a0e9d614b28003ca6272fd3c731587ea7" class="m-doc">TOKEN_ASSIGN</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a6a9787e9d8e78561864753f558080fc1" class="m-doc">TOKEN_ANNOT_MAIN</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a3851183212d24b397e6474745f1e12a0" class="m-doc">TOKEN_LL_TERM_COUNT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921afc93f7c09207edf6cd136968f217b457" class="m-doc">TOKEN_INT_LIT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a711b1e30d1130737ff93a38b59814e37" class="m-doc">TOKEN_DOUBLE_LIT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a0d74a532ff9d28be0add8021681809da" class="m-doc">TOKEN_STRING_LIT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a0bfe75e32e6efc883f386554e8c173dd" class="m-doc">TOKEN_KW_TRUE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a86f1c50587c517e1cbe1589e13228866" class="m-doc">TOKEN_KW_FALSE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a091b054f5996a03d51ee21badb118238" class="m-doc">TOKEN_PLUS_UNARY</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a391686aaef9dc565814b57d5ef52adfa" class="m-doc">TOKEN_MINUS_UNARY</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a103f608e741c11627e4d4a984f8ab8d6" class="m-doc">TOKEN_NOT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a7f0601b40fea37f0d4598b0a61f828f2" class="m-doc">TOKEN_PLUS</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a160171b541dcf45a3bd712598963ea39" class="m-doc">TOKEN_MINUS</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921ae4d8eb0f4f6e613bf75801bfb9aad51c" class="m-doc">TOKEN_EXPRESSION_BEGINNING_DELIMITER</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a1109083cbeff0c33b619eb9b3177940a" class="m-doc">TOKEN_STAR</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a7bb488da02f984b2c055687da13856e2" class="m-doc">TOKEN_SLASH</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921ab565ebfaaa53dcee6ddda201e270733e" class="m-doc">TOKEN_DOT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aba68ee0a391d5807711846ba9e11170e" class="m-doc">TOKEN_PLUSPLUS</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aa3aef76940413ed1a121e71fa1b82519" class="m-doc">TOKEN_LT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a2eccbcdff9c4795abee454d7558e8dab" class="m-doc">TOKEN_LE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aa5d81c076968a75a50ec61593495d894" class="m-doc">TOKEN_GT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a0e30112e555feb2996120db9cafbe28d" class="m-doc">TOKEN_GE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aeba19c29eb600289d1e973bf335139fe" class="m-doc">TOKEN_EQ</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aa134765c8c52d90da35d8bd922bc532c" class="m-doc">TOKEN_NE</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a7203710f75ffd67d36a92024eca9b4ab" class="m-doc">TOKEN_AND</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921af82eae34ce15da4d9e334b9a2e3b5675" class="m-doc">TOKEN_OR</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921adb83473d4d59f69cf2a47de35ec719fd" class="m-doc">TOKEN_ID_OPERATOR</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aea65f3c75f7858f5a8d2de53d0e5d3ed" class="m-doc">TOKEN_DOLLAR</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a1b5625928930e6edf6b2d33746afa76f" class="m-doc">TOKEN_TIF</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aa4f86cbc44e1acf7d32cdd85380d7538" class="m-doc">TOKEN_EXPR_TERM_DELIMITER</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aa6daeeb50a89fd2ff9a9a273cba429c9" class="m-doc">TOKEN_INDENT</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aba3b192746df43ba2ca588fb9480b350" class="m-doc">TOKEN_LBRACKET</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921aaae9681b054655d0b31f3b694f17ab88" class="m-doc">TOKEN_RBRACKET</a>,
+              <a href="#aa520fbf142ba1e7e659590c07da31921a9b1a96b84fe05e866534a7acc24caa37" class="m-doc">TOKEN_COUNT</a> }</span>
+            </dt>
+            <dd>Typ tokenu.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4ad4786141f0747550700e5d174c302f" class="m-doc">token_type_name</a>(</span><span class="m-doc-wrap"><a href="#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> type) -&gt; const char*</span>
+            </dt>
+            <dd>Vrati citelny nazev typu tokenu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8cb811e15754a2e13f86b7b4fa87d7d6" class="m-doc">token_type_validate</a>(</span><span class="m-doc-wrap"><a href="#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> type,
+              int line)</span>
+            </dt>
+            <dd>Overi, ze typ tokenu je skutecny token.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2e80c4219a24cd05c46e8d079ca7ccd1" class="m-doc">token_free</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* t)</span>
+            </dt>
+            <dd>Uvolni pamet, kterou token vlastni, a token zneplatni.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="aa520fbf142ba1e7e659590c07da31921"><div>
+            <h3>
+              enum <a href="#aa520fbf142ba1e7e659590c07da31921" class="m-doc-self">TokenType</a>
+            </h3>
+            <p>Typ tokenu.</p>
+<p>Poradi hodnot urcuje, kterou tabulku lze tokenem indexovat:</p><ul><li>Hodnoty mensi nez TOKEN_LL_TERM_COUNT indexuji LL tabulku. Jsou mezi nimi i terminaly vyrazove analyzy, ktere se vyskytuji take v LL gramatice (ID, (, ), carka a List), ty tedy indexuji i precedencni tabulku.</li><li>Hodnoty mezi TOKEN_LL_TERM_COUNT a TOKEN_EXPRESSION_BEGINNING_DELIMITER jsou dalsi terminaly vyrazove analyzy, kterymi smi zacinat vyraz.</li><li>Hodnoty mezi TOKEN_EXPRESSION_BEGINNING_DELIMITER a TOKEN_EXPR_TERM_DELIMITER jsou dalsi terminaly vyrazove analyzy, kterymi vyraz zacinat nesmi.</li><li>Hodnoty za TOKEN_EXPR_TERM_DELIMITER neindexuji zadnou z tabulek.</li></ul><p>Vyraz nesmi zacinat tokenem, ktery je v enumu za TOKEN_EXPRESSION_BEGINNING_DELIMITER. Hodnoty TOKEN_ID_OPERATOR, TOKEN_PLUS_UNARY, TOKEN_MINUS_UNARY, TOKEN_DOLLAR a TOKEN_TIF scanner nevraci, vznikaji az ve vyrazovem scanneru (scanner vraci TOKEN_PLUS a TOKEN_MINUS, ktere se na miste operandu prebarvi na unarni varianty). Hodnoty TOKEN_LL_TERM_COUNT, TOKEN_EXPRESSION_BEGINNING_DELIMITER, TOKEN_EXPR_TERM_DELIMITER a TOKEN_COUNT nejsou skutecne tokeny.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aa130df27256cd45f5781fc74deeb50dc" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aa130df27256cd45f5781fc74deeb50dc">TOKEN_EOF</a></td>
+                  <td>
+                  <p>Konec vstupu.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85">TOKEN_EOL</a></td>
+                  <td>
+                  <p>Konec logickeho radku.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921abe35698de6c054dd0906f4869678e5e5" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921abe35698de6c054dd0906f4869678e5e5">TOKEN_DEDENT</a></td>
+                  <td>
+                  <p>Konec bloku (jedna uzavrena uroven)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a30d3c23e6256ee2349a066b4de360a72" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a30d3c23e6256ee2349a066b4de360a72">TOKEN_KW_DEF</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aaa77962f31ff1907bf5bcabf2c3a5d76" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aaa77962f31ff1907bf5bcabf2c3a5d76">TOKEN_KW_DO</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a547528f9338f062664cdbb5eb31a7a75" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a547528f9338f062664cdbb5eb31a7a75">TOKEN_KW_ELSE</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921af9ac81a39613f70696d2b11a9a4f3a5d" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921af9ac81a39613f70696d2b11a9a4f3a5d">TOKEN_KW_IF</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a300f0df298b95bcd89f44f34f1a177ae" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a300f0df298b95bcd89f44f34f1a177ae">TOKEN_KW_IMPORT</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a345a9050f5b89b634f2c5ec787ea54c4" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a345a9050f5b89b634f2c5ec787ea54c4">TOKEN_KW_RETURN</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a089f5a83bf72bd3ece2a8fd07b546761" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a089f5a83bf72bd3ece2a8fd07b546761">TOKEN_KW_THEN</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921adaa096d9b5644c541a953793ccd06980" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921adaa096d9b5644c541a953793ccd06980">TOKEN_KW_VAL</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a6ffacab6b61365785f103c5ca66cba9c" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a6ffacab6b61365785f103c5ca66cba9c">TOKEN_KW_VAR</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a32ff7400f585a66b51d3ba9569b618ab" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a32ff7400f585a66b51d3ba9569b618ab">TOKEN_KW_WHILE</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a95ef43533be2a36dbeeab3fd76361e19" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a95ef43533be2a36dbeeab3fd76361e19">TOKEN_KW_FOR</a></td>
+                  <td>
+                  <p>CONTROL.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a742cf96ad3e40d1c94c19cd2a599389b" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a742cf96ad3e40d1c94c19cd2a599389b">TOKEN_KW_INT</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921ad86779bfd6c7e01953afa16cbe05dcdc" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921ad86779bfd6c7e01953afa16cbe05dcdc">TOKEN_KW_DOUBLE</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921af45ae58b7506113e9cb1c65d8d0db6b1" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921af45ae58b7506113e9cb1c65d8d0db6b1">TOKEN_KW_STRING</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a42cea1e15300c2860e3b82a444dcae02" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a42cea1e15300c2860e3b82a444dcae02">TOKEN_KW_UNIT</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a2aa68a623d0c1028cfbfb78d0cdc3229" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a2aa68a623d0c1028cfbfb78d0cdc3229">TOKEN_KW_BOOLEAN</a></td>
+                  <td>
+                  <p>BOOLTHEN.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921abd360478d160e90b985c9ca1e73ba1c6" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921abd360478d160e90b985c9ca1e73ba1c6">TOKEN_KW_LIST</a></td>
+                  <td>
+                  <p>LISTS.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a45b3a0292bfd356ff14a4e8cb25738af" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a45b3a0292bfd356ff14a4e8cb25738af">TOKEN_LARROW</a></td>
+                  <td>
+                  <p>&lt;- (CONTROL: generator ve for)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921af4143395fefba1c6a30e58240dd0c827" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921af4143395fefba1c6a30e58240dd0c827">TOKEN_LPAREN</a></td>
+                  <td>
+                  <p>(</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921ace232c359d5697cc5c459c22a7be226b" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921ace232c359d5697cc5c459c22a7be226b">TOKEN_RPAREN</a></td>
+                  <td>
+                  <p>)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a8d265e17914bc733c8b9a880dd097a9e" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a8d265e17914bc733c8b9a880dd097a9e">TOKEN_COMMA</a></td>
+                  <td>
+                  <p>,</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a92a35ac6329421e77882bf3739a75e47" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a92a35ac6329421e77882bf3739a75e47">TOKEN_COLON</a></td>
+                  <td>
+                  <p>:</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921ac8c74b281e178c87923363a90f6ff371" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921ac8c74b281e178c87923363a90f6ff371">TOKEN_SEMICOLON</a></td>
+                  <td>
+                  <p>;</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a98aa9bac1626f8a09231049287187f39" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a98aa9bac1626f8a09231049287187f39">TOKEN_ID</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a0e9d614b28003ca6272fd3c731587ea7" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a0e9d614b28003ca6272fd3c731587ea7">TOKEN_ASSIGN</a></td>
+                  <td>
+                  <p>=</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a6a9787e9d8e78561864753f558080fc1" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a6a9787e9d8e78561864753f558080fc1">TOKEN_ANNOT_MAIN</a></td>
+                  <td>
+                  <p>Cele &quot;@main&quot;.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a3851183212d24b397e6474745f1e12a0" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a3851183212d24b397e6474745f1e12a0">TOKEN_LL_TERM_COUNT</a></td>
+                  <td>
+                  <p>Pocet indexatoru LL tabulky (neni skutecny token)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921afc93f7c09207edf6cd136968f217b457" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921afc93f7c09207edf6cd136968f217b457">TOKEN_INT_LIT</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a711b1e30d1130737ff93a38b59814e37" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a711b1e30d1130737ff93a38b59814e37">TOKEN_DOUBLE_LIT</a></td>
+                  <td>
+                  <p><span></span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a0d74a532ff9d28be0add8021681809da" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a0d74a532ff9d28be0add8021681809da">TOKEN_STRING_LIT</a></td>
+                  <td>
+                  <p>Jednoradkovy i viceradkovy &quot;&quot;&quot;...&quot;&quot;&quot;.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a0bfe75e32e6efc883f386554e8c173dd" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a0bfe75e32e6efc883f386554e8c173dd">TOKEN_KW_TRUE</a></td>
+                  <td>
+                  <p>BOOLTHEN, jsou klicova slova i literaly naraz...</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a86f1c50587c517e1cbe1589e13228866" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a86f1c50587c517e1cbe1589e13228866">TOKEN_KW_FALSE</a></td>
+                  <td>
+                  <p>BOOLTHEN.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a091b054f5996a03d51ee21badb118238" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a091b054f5996a03d51ee21badb118238">TOKEN_PLUS_UNARY</a></td>
+                  <td>
+<ul><li>(unarni, scanner nevraci, vznika prebarvenim)</li></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a391686aaef9dc565814b57d5ef52adfa" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a391686aaef9dc565814b57d5ef52adfa">TOKEN_MINUS_UNARY</a></td>
+                  <td>
+<ul><li>(unarni, scanner nevraci, vznika prebarvenim)</li></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a103f608e741c11627e4d4a984f8ab8d6" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a103f608e741c11627e4d4a984f8ab8d6">TOKEN_NOT</a></td>
+                  <td>
+                  <p>! (BOOLTHEN)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a7f0601b40fea37f0d4598b0a61f828f2" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a7f0601b40fea37f0d4598b0a61f828f2">TOKEN_PLUS</a></td>
+                  <td>
+<ul><li>(binarni, scanner vraci i pro unarni)</li></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a160171b541dcf45a3bd712598963ea39" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a160171b541dcf45a3bd712598963ea39">TOKEN_MINUS</a></td>
+                  <td>
+<ul><li>(binarni, scanner vraci i pro unarni)</li></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921ae4d8eb0f4f6e613bf75801bfb9aad51c" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921ae4d8eb0f4f6e613bf75801bfb9aad51c">TOKEN_EXPRESSION_BEGINNING_DELIMITER</a></td>
+                  <td>
+                  <p>Vyraz nesmi zacinat terminalem s hodnotou vetsi nez tento oddelovac.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a1109083cbeff0c33b619eb9b3177940a" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a1109083cbeff0c33b619eb9b3177940a">TOKEN_STAR</a></td>
+                  <td>
+<ul><li>(take v &quot;import ifj26.*&quot;, mimo vyraz neni operator)</li></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a7bb488da02f984b2c055687da13856e2" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a7bb488da02f984b2c055687da13856e2">TOKEN_SLASH</a></td>
+                  <td>
+                  <p>/</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921ab565ebfaaa53dcee6ddda201e270733e" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921ab565ebfaaa53dcee6ddda201e270733e">TOKEN_DOT</a></td>
+                  <td>
+                  <p>. (VALMEM, LISTS, import)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aba68ee0a391d5807711846ba9e11170e" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aba68ee0a391d5807711846ba9e11170e">TOKEN_PLUSPLUS</a></td>
+                  <td>
+                  <p>++ (LISTS: spojeni seznamu)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aa3aef76940413ed1a121e71fa1b82519" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aa3aef76940413ed1a121e71fa1b82519">TOKEN_LT</a></td>
+                  <td>
+                  <p>&lt;</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a2eccbcdff9c4795abee454d7558e8dab" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a2eccbcdff9c4795abee454d7558e8dab">TOKEN_LE</a></td>
+                  <td>
+                  <p>&lt;=</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aa5d81c076968a75a50ec61593495d894" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aa5d81c076968a75a50ec61593495d894">TOKEN_GT</a></td>
+                  <td>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a0e30112e555feb2996120db9cafbe28d" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a0e30112e555feb2996120db9cafbe28d">TOKEN_GE</a></td>
+                  <td>
+                  <p>&gt;=</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aeba19c29eb600289d1e973bf335139fe" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aeba19c29eb600289d1e973bf335139fe">TOKEN_EQ</a></td>
+                  <td>
+                  <p>==</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aa134765c8c52d90da35d8bd922bc532c" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aa134765c8c52d90da35d8bd922bc532c">TOKEN_NE</a></td>
+                  <td>
+                  <p>!=</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a7203710f75ffd67d36a92024eca9b4ab" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a7203710f75ffd67d36a92024eca9b4ab">TOKEN_AND</a></td>
+                  <td>
+                  <p>&amp;&amp; (BOOLTHEN)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921af82eae34ce15da4d9e334b9a2e3b5675" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921af82eae34ce15da4d9e334b9a2e3b5675">TOKEN_OR</a></td>
+                  <td>
+                  <p>|| (BOOLTHEN)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921adb83473d4d59f69cf2a47de35ec719fd" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921adb83473d4d59f69cf2a47de35ec719fd">TOKEN_ID_OPERATOR</a></td>
+                  <td>
+                  <p>ID prebarvene na operator (nese text jako ID)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aea65f3c75f7858f5a8d2de53d0e5d3ed" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aea65f3c75f7858f5a8d2de53d0e5d3ed">TOKEN_DOLLAR</a></td>
+                  <td>
+                  <p>$ (konec vyrazu)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a1b5625928930e6edf6b2d33746afa76f" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a1b5625928930e6edf6b2d33746afa76f">TOKEN_TIF</a></td>
+                  <td>
+                  <p>Ternarni if ve vyrazu (TIF)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aa4f86cbc44e1acf7d32cdd85380d7538" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aa4f86cbc44e1acf7d32cdd85380d7538">TOKEN_EXPR_TERM_DELIMITER</a></td>
+                  <td>
+<p>Hodnoty za timto oddelovacem neindexuji zadnou z tabulek (neni to pocet, precedencni tabulku indexuji i nektere terminaly pred TOKEN_LL_TERM_COUNT)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aa6daeeb50a89fd2ff9a9a273cba429c9" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aa6daeeb50a89fd2ff9a9a273cba429c9">TOKEN_INDENT</a></td>
+                  <td>
+                  <p>Zacatek bloku (odsazeni vic)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aba3b192746df43ba2ca588fb9480b350" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aba3b192746df43ba2ca588fb9480b350">TOKEN_LBRACKET</a></td>
+                  <td>
+                  <p>[ (LISTS: List[Int])</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921aaae9681b054655d0b31f3b694f17ab88" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921aaae9681b054655d0b31f3b694f17ab88">TOKEN_RBRACKET</a></td>
+                  <td>
+                  <p>]</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aa520fbf142ba1e7e659590c07da31921a9b1a96b84fe05e866534a7acc24caa37" class="m-doc-self" id="aa520fbf142ba1e7e659590c07da31921a9b1a96b84fe05e866534a7acc24caa37">TOKEN_COUNT</a></td>
+                  <td>
+                  <p>Pocet hodnot enumu (neni skutecny token)</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a4ad4786141f0747550700e5d174c302f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ad4786141f0747550700e5d174c302f" class="m-doc-self">token_type_name</a>(</span><span class="m-doc-wrap"><a href="#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> type)</span></span>
+            </h3>
+            <p>Vrati citelny nazev typu tokenu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Typ tokenu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Retezec s nazvem typu, pro tokeny bez nazvu &quot;?&quot;.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Pouziva se pro ladici vypisy a chybova hlaseni.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8cb811e15754a2e13f86b7b4fa87d7d6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8cb811e15754a2e13f86b7b4fa87d7d6" class="m-doc-self">token_type_validate</a>(</span><span class="m-doc-wrap"><a href="#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> type,
+              int line)</span></span>
+            </h3>
+            <p>Overi, ze typ tokenu je skutecny token.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Overovany typ tokenu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku pro chybove hlaseni, &lt;= 0 pokud neni znam.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Pri neplatne hodnote ukonci program s kodem ERR_INTERNAL. Neplatne jsou specialni hodnoty (TOKEN_LL_TERM_COUNT, TOKEN_EXPRESSION_BEGINNING_DELIMITER, TOKEN_EXPR_TERM_DELIMITER, TOKEN_COUNT) a hodnoty mimo enum. Funkce tokeny dale neklasifikuje, tedy nezjistuje, ktere tabulce slouzi jako indexator.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2e80c4219a24cd05c46e8d079ca7ccd1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e80c4219a24cd05c46e8d079ca7ccd1" class="m-doc-self">token_free</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* t)</span></span>
+            </h3>
+            <p>Uvolni pamet, kterou token vlastni, a token zneplatni.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">t</td>
+                  <td><a href="structToken.html" class="m-doc">Token</a>, jehoz pamet se uvolni.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Uvolnuje se jen text u TOKEN_ID, TOKEN_ID_OPERATOR a TOKEN_STRING_LIT.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

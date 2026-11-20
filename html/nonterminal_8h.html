@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/nonterminal.h file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>nonterminal.h <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a85d4bc22c0246920638f94d69fe381dd" class="m-doc">NonterminalType</a> { </span><span class="m-doc-wrap"><a href="#a85d4bc22c0246920638f94d69fe381dda0f8a0aa174f79ae9107466861c9f5e0b" class="m-doc">NONTERM_PROGRAM</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda27b99ef35c270bdd7cd0ce57602848e8" class="m-doc">NONTERM_DEF_LIST</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda23c9124625178f6e23eb071fd51d0fce" class="m-doc">NONTERM_DEF</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda398122b4f1677fdd12d362f1617bcf34" class="m-doc">NONTERM_MAIN_ANNOTATION</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddac8174c245a09523aea719937fe1db54a" class="m-doc">NONTERM_OPTIONAL_EOL</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda42cd8d571ee5b038c6b34117764d7b9c" class="m-doc">NONTERM_PARAM_LIST</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddaed370341c2aa7934c74970570cefd8c1" class="m-doc">NONTERM_PARAM_LIST_TAIL</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddabef9852bb2660026da3b4ea12e685467" class="m-doc">NONTERM_OPTIONAL_TYPE</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda7e3bfd20d0f891f2e78dd55de77f754e" class="m-doc">NONTERM_TYPE</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda0e5dcd5b715cb79b6d5b1be5b86132b8" class="m-doc">NONTERM_BLOCK_OR_EXPR</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda17798dcee94f1a20a30115d86792d901" class="m-doc">NONTERM_BLOCK</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddae4dcca4e64eff019189f8d80138b4db4" class="m-doc">NONTERM_COMMAND_LIST</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda43f6165f745d0553608324ee46ff0460" class="m-doc">NONTERM_COMMAND_END</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddaacbec80867dea79582134ab408527532" class="m-doc">NONTERM_COMMAND</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda0be5df54c703b0c14c1327199ddf4afa" class="m-doc">NONTERM_COMMAND_SIMPLE</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda4ca79d92d9782cc380a98cbb40f9f116" class="m-doc">NONTERM_COMMAND_CONTROL</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddab81eaa3aa16b1c13557c28f397df0bf3" class="m-doc">NONTERM_VAL_VAR</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddadb7e813a0a0fe76869fd0d79cd6acbf3" class="m-doc">NONTERM_RETURN_VALUE</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda41c3b35d9c1c76e31f627403cb80fcfc" class="m-doc">NONTERM_BLOCK_OR_COMMAND</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddae2da9d535660490f299576794e6a0af1" class="m-doc">NONTERM_FOR_HEADER</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda96c7da341c583fdcace98fe91945b34a" class="m-doc">NONTERM_GUARD_LIST</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddad5bdeb3cb0ff9817d7aa75b5eb376af0" class="m-doc">NONTERM_OPTIONAL_ELSE</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda4febc78a788b8b3cacd3580c9adeb623" class="m-doc">NONTERM_THEN_BRANCH</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda81816cdbe4fe045c7557136a8c578079" class="m-doc">NONTERM_ELSE_OR_COMMAND_END</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda22dc523e410bd2d2c1bb2d4c0a7279c4" class="m-doc">NONTERM_TERNARY_IF</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda9f21ac75a9b9540166bb117ab5cce769" class="m-doc">NONTERM_EXPR_OR_INDENT_EXPR</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda7800e685e5d195c693e3a9e7102892c1" class="m-doc">NONTERM_ELSE_TERNARY_IF</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda1ac4ad5e641e9cd246e473111edbf004" class="m-doc">NONTERM_LL_TABLE_COUNT</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" class="m-doc">NONTERM_EXPR</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381ddad4fa93b64c1e5479daad33c7c89c28aa" class="m-doc">NONTERM_ID_COMMAND</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda248c93b7e061d912794269c389318c3b" class="m-doc">NONTERM_ARGS</a>,
+              <a href="#a85d4bc22c0246920638f94d69fe381dda385f62a28a17ac94bae8e633b9740d0d" class="m-doc">NONTERM_COUNT</a> }</span>
+            </dt>
+            <dd>Neterminaly LL gramatiky a vyrazove analyzy.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2d2a841983eb39614e8aeea6bd70d58f" class="m-doc">nonterm_type_name</a>(</span><span class="m-doc-wrap"><a href="#a85d4bc22c0246920638f94d69fe381dd" class="m-doc">NonterminalType</a> type) -&gt; const char*</span>
+            </dt>
+            <dd>Vrati citelny nazev neterminalu pro chybove vypisy.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a794f1dfd5949934851b9e9c820445903" class="m-doc">nonterm_type_validate</a>(</span><span class="m-doc-wrap"><a href="#a85d4bc22c0246920638f94d69fe381dd" class="m-doc">NonterminalType</a> type,
+              int line)</span>
+            </dt>
+            <dd>Overi, ze typ neterminalu je skutecny neterminal.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a85d4bc22c0246920638f94d69fe381dd"><div>
+            <h3>
+              enum <a href="#a85d4bc22c0246920638f94d69fe381dd" class="m-doc-self">NonterminalType</a>
+            </h3>
+            <p>Neterminaly LL gramatiky a vyrazove analyzy.</p>
+<p>Hodnoty mensi nez NONTERM_LL_TABLE_COUNT indexuji LL tabulku. Hodnoty za timto oddelovacem LL tabulku neindexuji a na jejich cislene hodnote nezalezi. Poradi neterminalu pred oddelovacem odpovida prvnimu vyskytu v pravidlech gramatiky.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda0f8a0aa174f79ae9107466861c9f5e0b" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda0f8a0aa174f79ae9107466861c9f5e0b">NONTERM_PROGRAM</a></td>
+                  <td>
+                  <p>Startovni neterminal.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda27b99ef35c270bdd7cd0ce57602848e8" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda27b99ef35c270bdd7cd0ce57602848e8">NONTERM_DEF_LIST</a></td>
+                  <td>
+                  <p>Seznam deklaraci funkci.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda23c9124625178f6e23eb071fd51d0fce" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda23c9124625178f6e23eb071fd51d0fce">NONTERM_DEF</a></td>
+                  <td>
+                  <p>Deklarace funkce.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda398122b4f1677fdd12d362f1617bcf34" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda398122b4f1677fdd12d362f1617bcf34">NONTERM_MAIN_ANNOTATION</a></td>
+                  <td>
+                  <p>Anotace @main.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddac8174c245a09523aea719937fe1db54a" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddac8174c245a09523aea719937fe1db54a">NONTERM_OPTIONAL_EOL</a></td>
+                  <td>
+                  <p>Nepovinny EOL.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda42cd8d571ee5b038c6b34117764d7b9c" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda42cd8d571ee5b038c6b34117764d7b9c">NONTERM_PARAM_LIST</a></td>
+                  <td>
+                  <p>Parametr nebo konec parametru.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddaed370341c2aa7934c74970570cefd8c1" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddaed370341c2aa7934c74970570cefd8c1">NONTERM_PARAM_LIST_TAIL</a></td>
+                  <td>
+                  <p>Dalsi parametr za carkou nebo konec.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddabef9852bb2660026da3b4ea12e685467" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddabef9852bb2660026da3b4ea12e685467">NONTERM_OPTIONAL_TYPE</a></td>
+                  <td>
+                  <p>Nepovinny typ.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda7e3bfd20d0f891f2e78dd55de77f754e" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda7e3bfd20d0f891f2e78dd55de77f754e">NONTERM_TYPE</a></td>
+                  <td>
+                  <p>Datovy typ.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda0e5dcd5b715cb79b6d5b1be5b86132b8" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda0e5dcd5b715cb79b6d5b1be5b86132b8">NONTERM_BLOCK_OR_EXPR</a></td>
+                  <td>
+                  <p>Telo funkce, vyraz nebo blok.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda17798dcee94f1a20a30115d86792d901" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda17798dcee94f1a20a30115d86792d901">NONTERM_BLOCK</a></td>
+                  <td>
+                  <p>Odsazeny blok.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddae4dcca4e64eff019189f8d80138b4db4" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddae4dcca4e64eff019189f8d80138b4db4">NONTERM_COMMAND_LIST</a></td>
+                  <td>
+                  <p>Dalsi prikazy v bloku.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda43f6165f745d0553608324ee46ff0460" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda43f6165f745d0553608324ee46ff0460">NONTERM_COMMAND_END</a></td>
+                  <td>
+                  <p>Konec prikazu, strednik nebo EOL.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddaacbec80867dea79582134ab408527532" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddaacbec80867dea79582134ab408527532">NONTERM_COMMAND</a></td>
+                  <td>
+                  <p>Prikaz.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda0be5df54c703b0c14c1327199ddf4afa" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda0be5df54c703b0c14c1327199ddf4afa">NONTERM_COMMAND_SIMPLE</a></td>
+                  <td>
+                  <p>Jednoduchy prikaz (val/var, return, ID, vyraz)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda4ca79d92d9782cc380a98cbb40f9f116" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda4ca79d92d9782cc380a98cbb40f9f116">NONTERM_COMMAND_CONTROL</a></td>
+                  <td>
+                  <p>Ridici prikaz (while, for, if)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddab81eaa3aa16b1c13557c28f397df0bf3" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddab81eaa3aa16b1c13557c28f397df0bf3">NONTERM_VAL_VAR</a></td>
+                  <td>
+                  <p>val nebo var</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddadb7e813a0a0fe76869fd0d79cd6acbf3" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddadb7e813a0a0fe76869fd0d79cd6acbf3">NONTERM_RETURN_VALUE</a></td>
+                  <td>
+                  <p>Nepovinna hodnota za return.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda41c3b35d9c1c76e31f627403cb80fcfc" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda41c3b35d9c1c76e31f627403cb80fcfc">NONTERM_BLOCK_OR_COMMAND</a></td>
+                  <td>
+                  <p>Telo cyklu nebo podminky.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddae2da9d535660490f299576794e6a0af1" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddae2da9d535660490f299576794e6a0af1">NONTERM_FOR_HEADER</a></td>
+                  <td>
+                  <p>Hlavicka for.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda96c7da341c583fdcace98fe91945b34a" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda96c7da341c583fdcace98fe91945b34a">NONTERM_GUARD_LIST</a></td>
+                  <td>
+                  <p>Seznam strazi.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddad5bdeb3cb0ff9817d7aa75b5eb376af0" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddad5bdeb3cb0ff9817d7aa75b5eb376af0">NONTERM_OPTIONAL_ELSE</a></td>
+                  <td>
+                  <p>Nepovinna vetev else.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda4febc78a788b8b3cacd3580c9adeb623" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda4febc78a788b8b3cacd3580c9adeb623">NONTERM_THEN_BRANCH</a></td>
+                  <td>
+                  <p>Vetev then za podminkou.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda81816cdbe4fe045c7557136a8c578079" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda81816cdbe4fe045c7557136a8c578079">NONTERM_ELSE_OR_COMMAND_END</a></td>
+                  <td>
+                  <p>Else za inline then, nebo konec prikazu.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda22dc523e410bd2d2c1bb2d4c0a7279c4" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda22dc523e410bd2d2c1bb2d4c0a7279c4">NONTERM_TERNARY_IF</a></td>
+                  <td>
+                  <p>Ternarni if.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda9f21ac75a9b9540166bb117ab5cce769" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda9f21ac75a9b9540166bb117ab5cce769">NONTERM_EXPR_OR_INDENT_EXPR</a></td>
+                  <td>
+                  <p>Vyraz, pripadne odsazeny.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda7800e685e5d195c693e3a9e7102892c1" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda7800e685e5d195c693e3a9e7102892c1">NONTERM_ELSE_TERNARY_IF</a></td>
+                  <td>
+                  <p>Else vetev ternarniho ifu, pripadne odsazena<br /></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda1ac4ad5e641e9cd246e473111edbf004" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda1ac4ad5e641e9cd246e473111edbf004">NONTERM_LL_TABLE_COUNT</a></td>
+                  <td>
+                  <p>Pocet neterminalu indexujicich LL tabulku.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6">NONTERM_EXPR</a></td>
+                  <td>
+                  <p>Vyraz (v precedencni gramatice neterminal E, v prediktivni &lt;expr&gt;)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381ddad4fa93b64c1e5479daad33c7c89c28aa" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381ddad4fa93b64c1e5479daad33c7c89c28aa">NONTERM_ID_COMMAND</a></td>
+                  <td>
+                  <p>Prikaz zacinajici na ID (v odpovednosti jadra)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda248c93b7e061d912794269c389318c3b" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda248c93b7e061d912794269c389318c3b">NONTERM_ARGS</a></td>
+                  <td>
+                  <p>Seznam argumentu ve vyrazove analyze (ARGS)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a85d4bc22c0246920638f94d69fe381dda385f62a28a17ac94bae8e633b9740d0d" class="m-doc-self" id="a85d4bc22c0246920638f94d69fe381dda385f62a28a17ac94bae8e633b9740d0d">NONTERM_COUNT</a></td>
+                  <td>
+                  <p>Pocet hodnot enumu, pouze informativni.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a2d2a841983eb39614e8aeea6bd70d58f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d2a841983eb39614e8aeea6bd70d58f" class="m-doc-self">nonterm_type_name</a>(</span><span class="m-doc-wrap"><a href="#a85d4bc22c0246920638f94d69fe381dd" class="m-doc">NonterminalType</a> type)</span></span>
+            </h3>
+            <p>Vrati citelny nazev neterminalu pro chybove vypisy.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Typ neterminalu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Retezec s nazvem neterminalu, pro neplatnou hodnotu &quot;?&quot;.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a794f1dfd5949934851b9e9c820445903"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a794f1dfd5949934851b9e9c820445903" class="m-doc-self">nonterm_type_validate</a>(</span><span class="m-doc-wrap"><a href="#a85d4bc22c0246920638f94d69fe381dd" class="m-doc">NonterminalType</a> type,
+              int line)</span></span>
+            </h3>
+            <p>Overi, ze typ neterminalu je skutecny neterminal.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Overovany typ neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku pro chybove hlaseni, &lt;= 0 pokud neni znam.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Pri neplatne hodnote ukonci program s kodem ERR_INTERNAL. Neplatne jsou specialni hodnoty (NONTERM_LL_TABLE_COUNT, NONTERM_COUNT) a hodnoty mimo enum. Funkce neterminaly dale neklasifikuje, tedy nezjistuje, zda indexuji LL tabulku.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

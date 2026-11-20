@@ -1,0 +1,350 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSymbol" kind="struct" language="C++" prot="public">
+    <compoundname>Symbol</compoundname>
+    <includes refid="symtable_8h" local="no">symtable.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSymbol_1a15ea2d09721ddb027b2502717d27de0a" prot="public" static="no" mutable="no">
+        <type><ref refid="symtable_8h_1a05812818de02fb4b202d7513ce50745d" kindref="member">SymbolKind</ref></type>
+        <definition>SymbolKind Symbol::kind</definition>
+        <argsstring></argsstring>
+        <name>kind</name>
+        <qualifiedname>Symbol::kind</qualifiedname>
+        <briefdescription>
+<para>Urcuje, kterou polozku z as cist. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="47" column="14" bodyfile="src/symtable.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1aa9ba617cd9de17ed73148893a6c14606" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Symbol::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>Symbol::name</qualifiedname>
+        <briefdescription>
+<para>Jmeno, vlastni kopie. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="48" column="8" bodyfile="src/symtable.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1aef1817df07977c196cea6c46261b4049" prot="public" static="no" mutable="no">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type* Symbol::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>Symbol::type</qualifiedname>
+        <briefdescription>
+<para>Typ promenne, vlastni kopie. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="52" column="12" bodyfile="src/symtable.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1a5334dae4aa73c33e0ccf675da67d22c9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Symbol::is_mutable</definition>
+        <argsstring></argsstring>
+        <name>is_mutable</name>
+        <qualifiedname>Symbol::is_mutable</qualifiedname>
+        <briefdescription>
+<para>True pro var, false pro val a parametry. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="53" column="12" bodyfile="src/symtable.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1a9021011055137bfd999eebb115fe6902" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Symbol::unique_id</definition>
+        <argsstring></argsstring>
+        <name>unique_id</name>
+        <qualifiedname>Symbol::unique_id</qualifiedname>
+        <briefdescription>
+<para>Jedinecne cislo, aby se zastinene promenne nepletly. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="54" column="11" bodyfile="src/symtable.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1ac9e1135ec38b3478e4719cbb4681bfce" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structSymbol" kindref="compound">Symbol</ref></type>
+        <definition>struct Symbol Symbol::var</definition>
+        <argsstring></argsstring>
+        <name>var</name>
+        <qualifiedname>Symbol::var</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pro SYM_VAR. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="55" column="9"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1a803ae4e24e071a47cc4d9e67f3835f28" prot="public" static="no" mutable="no">
+        <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+        <definition>FuncDef* Symbol::def</definition>
+        <argsstring></argsstring>
+        <name>def</name>
+        <qualifiedname>Symbol::def</qualifiedname>
+        <briefdescription>
+<para>Definice v AST (nevlastni), NULL pro vestavenou funkci. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="58" column="15" bodyfile="src/symtable.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1a0a65692aed768a077b41eb6783de9086" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Symbol::param_count</definition>
+        <argsstring></argsstring>
+        <name>param_count</name>
+        <qualifiedname>Symbol::param_count</qualifiedname>
+        <briefdescription>
+<para>Pocet parametru. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="59" column="11" bodyfile="src/symtable.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1aafca63282d7b626fbfb43c7c3d1ac47d" prot="public" static="no" mutable="no">
+        <type><ref refid="structType" kindref="compound">Type</ref> **</type>
+        <definition>Type** Symbol::param_types</definition>
+        <argsstring></argsstring>
+        <name>param_types</name>
+        <qualifiedname>Symbol::param_types</qualifiedname>
+        <briefdescription>
+<para>Typy parametru (vlastni kopie), NULL prvek znamena Any. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="61" column="11" bodyfile="src/symtable.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1a7ea6f6f8ee238ba1a89e59d0e7567567" prot="public" static="no" mutable="no">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type* Symbol::return_type</definition>
+        <argsstring></argsstring>
+        <name>return_type</name>
+        <qualifiedname>Symbol::return_type</qualifiedname>
+        <briefdescription>
+<para>Navratovy typ (vlastni kopie), NULL dokud neni znamy. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="63" column="11" bodyfile="src/symtable.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1abba1d8d80b49d618fd22e506fa8172ae" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Symbol::is_builtin</definition>
+        <argsstring></argsstring>
+        <name>is_builtin</name>
+        <qualifiedname>Symbol::is_builtin</qualifiedname>
+        <briefdescription>
+<para>True pro vestavene funkce (print, readInt...). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="64" column="12" bodyfile="src/symtable.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1a439c41e14e29507c123da30c4fecbcaf" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Symbol::being_inferred</definition>
+        <argsstring></argsstring>
+        <name>being_inferred</name>
+        <qualifiedname>Symbol::being_inferred</qualifiedname>
+        <briefdescription>
+<para>True, kdyz se navratovy typ prave odvozuje (detekce rekurze). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="66" column="11" bodyfile="src/symtable.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1a7a5143077a31c13ccf65948a260048e8" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structSymbol" kindref="compound">Symbol</ref></type>
+        <definition>struct Symbol Symbol::func</definition>
+        <argsstring></argsstring>
+        <name>func</name>
+        <qualifiedname>Symbol::func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pro SYM_FUNC. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="67" column="10"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymbol_1af08cf922cfee0e3996639446a68f244c" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structSymbol" kindref="compound">Symbol</ref></type>
+        <definition>union Symbol Symbol::as</definition>
+        <argsstring></argsstring>
+        <name>as</name>
+        <qualifiedname>Symbol::as</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.h" line="68" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Definice struktury <ref refid="structSymbol" kindref="compound">Symbol</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Polozka kind urcuje, ktera varianta unie as je platna. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="4">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/symtable.h" line="46" column="1" bodyfile="src/symtable.h" bodystart="46" bodyend="69"/>
+    <listofallmembers>
+      <member refid="structSymbol_1af08cf922cfee0e3996639446a68f244c" prot="public" virt="non-virtual"><scope>Symbol</scope><name>as</name></member>
+      <member refid="structSymbol_1a439c41e14e29507c123da30c4fecbcaf" prot="public" virt="non-virtual"><scope>Symbol</scope><name>being_inferred</name></member>
+      <member refid="structSymbol_1a803ae4e24e071a47cc4d9e67f3835f28" prot="public" virt="non-virtual"><scope>Symbol</scope><name>def</name></member>
+      <member refid="structSymbol_1a7a5143077a31c13ccf65948a260048e8" prot="public" virt="non-virtual"><scope>Symbol</scope><name>func</name></member>
+      <member refid="structSymbol_1abba1d8d80b49d618fd22e506fa8172ae" prot="public" virt="non-virtual"><scope>Symbol</scope><name>is_builtin</name></member>
+      <member refid="structSymbol_1a5334dae4aa73c33e0ccf675da67d22c9" prot="public" virt="non-virtual"><scope>Symbol</scope><name>is_mutable</name></member>
+      <member refid="structSymbol_1a15ea2d09721ddb027b2502717d27de0a" prot="public" virt="non-virtual"><scope>Symbol</scope><name>kind</name></member>
+      <member refid="structSymbol_1aa9ba617cd9de17ed73148893a6c14606" prot="public" virt="non-virtual"><scope>Symbol</scope><name>name</name></member>
+      <member refid="structSymbol_1a0a65692aed768a077b41eb6783de9086" prot="public" virt="non-virtual"><scope>Symbol</scope><name>param_count</name></member>
+      <member refid="structSymbol_1aafca63282d7b626fbfb43c7c3d1ac47d" prot="public" virt="non-virtual"><scope>Symbol</scope><name>param_types</name></member>
+      <member refid="structSymbol_1a7ea6f6f8ee238ba1a89e59d0e7567567" prot="public" virt="non-virtual"><scope>Symbol</scope><name>return_type</name></member>
+      <member refid="structSymbol_1aef1817df07977c196cea6c46261b4049" prot="public" virt="non-virtual"><scope>Symbol</scope><name>type</name></member>
+      <member refid="structSymbol_1a9021011055137bfd999eebb115fe6902" prot="public" virt="non-virtual"><scope>Symbol</scope><name>unique_id</name></member>
+      <member refid="structSymbol_1ac9e1135ec38b3478e4719cbb4681bfce" prot="public" virt="non-virtual"><scope>Symbol</scope><name>var</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

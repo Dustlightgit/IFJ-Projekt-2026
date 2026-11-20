@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structCtx" kind="struct" language="C++" prot="public">
+    <compoundname>Ctx</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structCtx_1aa2ee18c2656d1fef7b6d140dd90bdeae" prot="public" static="no" mutable="no">
+        <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+        <definition>SymTable* Ctx::table</definition>
+        <argsstring></argsstring>
+        <name>table</name>
+        <qualifiedname>Ctx::table</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="51" column="12" bodyfile="src/semantic.c" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structCtx_1a99c2a111bd330298d8caf42355dcc3b2" prot="public" static="no" mutable="no">
+        <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+        <definition>FuncDef* Ctx::current_func</definition>
+        <argsstring></argsstring>
+        <name>current_func</name>
+        <qualifiedname>Ctx::current_func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="52" column="11" bodyfile="src/semantic.c" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>AvlNode</label>
+        <link refid="structAvlNode"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>left</edgelabel>
+          <edgelabel>right</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Ctx</label>
+        <link refid="structCtx"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>current_func</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="7">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SymTable</label>
+        <link refid="structSymTable"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>root</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/semantic.c" line="50" column="1" bodyfile="src/semantic.c" bodystart="50" bodyend="53"/>
+    <listofallmembers>
+      <member refid="structCtx_1a99c2a111bd330298d8caf42355dcc3b2" prot="public" virt="non-virtual"><scope>Ctx</scope><name>current_func</name></member>
+      <member refid="structCtx_1aa2ee18c2656d1fef7b6d140dd90bdeae" prot="public" virt="non-virtual"><scope>Ctx</scope><name>table</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

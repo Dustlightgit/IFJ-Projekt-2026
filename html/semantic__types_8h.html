@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/semantic_types.h file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>semantic_types.h <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structSemanticContext.html" class="m-doc">SemanticContext</a>
+            </dt>
+            <dd>Semanticky kontext sdileny mezi semantickymi akcemi.</dd>
+            <dt>
+              struct <a href="structAnnotatedSymbol.html" class="m-doc">AnnotatedSymbol</a>
+            </dt>
+            <dd><a href="structSymbol.html" class="m-doc">Symbol</a> gramatiky doplneny o semanticky ukazatel a kontextovou anotaci.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> { </span><span class="m-doc-wrap"><a href="#a1982e4c9bda350aa5385b920694c7ebfac24319930c0604b6fd7e77d4966a4c38" class="m-doc">CONTEXT_NONE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfae928da37a67aafc3797a43ca7531f6f6" class="m-doc">CONTEXT_FUNCTION_DECLARATION_NAME</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa67e769bd12f63c10e51dac176ed26562" class="m-doc">CONTEXT_DECLARATION_NAME</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfaabbfb968fcac10a94a08472a7094da98" class="m-doc">CONTEXT_ASSIGNMENT_TARGET</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa1d8b9f3a87025a555b4e98ecc37e7004" class="m-doc">CONTEXT_EXPRESSION_REFERENCE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfac887d3850591effcbfce0877fd9249da" class="m-doc">CONTEXT_ID_COMMAND</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa23cd5ecfba33e9974f490d0a395ae966" class="m-doc">CONTEXT_PROLOGUE_CHECK</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfaf7c4e38f1b079364a2c4c82ac6cd6261" class="m-doc">CONTEXT_FUNCTION_DEF</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfadfc49a39ab78aa2fc24803f8b0b4f7ec" class="m-doc">CONTEXT_FUNCTION_RETURN_TYPE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfaa53eb634b0e7c8afd557fe7a9a0fb342" class="m-doc">CONTEXT_PARAM_NAME</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfaf880762eb7c9288f2fe5d01456c839c9" class="m-doc">CONTEXT_PARAM_TYPE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa86140e54797854e0c038555d4da83726" class="m-doc">CONTEXT_LIST_ELEMENT</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfaf525d2ee1c7a4a42a75f6aab5be9a32a" class="m-doc">CONTEXT_BLOCK_STMT</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa1b584b55e212536ded6668217e63b195" class="m-doc">CONTEXT_FUNCTION_BODY</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfad89c1b12621001098d583c5c67e64669" class="m-doc">CONTEXT_WHILE_BODY</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa383e94414f446299b2758bccfcc54ce4" class="m-doc">CONTEXT_FOR_BODY</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa3e0064a391e85bc806339363ced42e91" class="m-doc">CONTEXT_VARDEF_TYPE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa7e5cfd5feb074848134e8a3879c22df8" class="m-doc">CONTEXT_VARDEF_INIT</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfabd3fca73a716618f6413d1a8c06dbc48" class="m-doc">CONTEXT_ASSIGN_VALUE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa89c767e57757e497aac18f1403d030c8" class="m-doc">CONTEXT_RETURN_VALUE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfaa8221a9f56dd7ee5d0e5a0da84102cba" class="m-doc">CONTEXT_WHILE_COND</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa437bfc3d759441ec859872cf6d2c7889" class="m-doc">CONTEXT_FOR_VAR</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa6f6ded5e652fade05895ef1435c155f7" class="m-doc">CONTEXT_FOR_SOURCE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa9fdd3804b78a97f7676d064054bae5d3" class="m-doc">CONTEXT_FOR_GUARD</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfac73b48985118dac598df8cdc42a376db" class="m-doc">CONTEXT_IF_THEN</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfae8d165bd7b0afaa3b07b27e94d5d20e5" class="m-doc">CONTEXT_IF_ELSE</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa7656fe8f7be3356a80e379fd6a47354e" class="m-doc">CONTEXT_IF_COND</a>,
+              <a href="#a1982e4c9bda350aa5385b920694c7ebfa578ded8b382a053cdb130e90f3ca9c15" class="m-doc">CONTEXT_RANGE_WITHOUT_STEP</a> }</span>
+            </dt>
+            <dd>Kontextova anotace pripojena k symbolu na zasobniku parseru.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt>
+              using <a href="#acbe2ed0b0877f90cab9d7f87ff6d89bd" class="m-doc">SemanticCallback</a> = void(*)(SemanticContext*ctx, void*semantic_pointer, ContextAnnotation annotation, int line, Stack*stack)
+            </dt>
+            <dd>Semanticka akce pravidla.</dd>
+            <dt>
+              using <a href="#a6ea4594c8b87bee8d9d968786952c01c" class="m-doc">PrecedenceSemanticAction</a> = void(*)(const Stack*stack, int line, AnnotatedSymbol*result)
+            </dt>
+            <dd>Semanticka akce precedencniho parseru, reprezentuje redukcni pravidlo.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a1982e4c9bda350aa5385b920694c7ebf"><div>
+            <h3>
+              enum <a href="#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc-self">ContextAnnotation</a>
+            </h3>
+            <p>Kontextova anotace pripojena k symbolu na zasobniku parseru.</p>
+<p>Anotaci lze pripojit k libovolnemu terminalu i neterminalu. Callback rozvadeneho neterminalu podle ni pozna, co ma provest a kam vysledek ulozit, a stejnou cestou anotuje symboly vkladane na zasobnik. Hodnoty budou doplneny dle potreb stavby AST, prozatim jsou ilustrativni.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfac24319930c0604b6fd7e77d4966a4c38" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfac24319930c0604b6fd7e77d4966a4c38">CONTEXT_NONE</a></td>
+                  <td>
+                  <p>Vychozi hodnota, symbol bez anotace.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfae928da37a67aafc3797a43ca7531f6f6" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfae928da37a67aafc3797a43ca7531f6f6">CONTEXT_FUNCTION_DECLARATION_NAME</a></td>
+                  <td>
+                  <p>Jmeno deklarovane funkce.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa67e769bd12f63c10e51dac176ed26562" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa67e769bd12f63c10e51dac176ed26562">CONTEXT_DECLARATION_NAME</a></td>
+                  <td>
+                  <p>Jmeno deklarovane promenne.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfaabbfb968fcac10a94a08472a7094da98" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfaabbfb968fcac10a94a08472a7094da98">CONTEXT_ASSIGNMENT_TARGET</a></td>
+                  <td>
+                  <p>Cil prirazeni.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa1d8b9f3a87025a555b4e98ecc37e7004" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa1d8b9f3a87025a555b4e98ecc37e7004">CONTEXT_EXPRESSION_REFERENCE</a></td>
+                  <td>
+                  <p>Reference na ID ve vyrazu.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfac887d3850591effcbfce0877fd9249da" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfac887d3850591effcbfce0877fd9249da">CONTEXT_ID_COMMAND</a></td>
+                  <td>
+                  <p>ID na zacatku prikazu, special_action_id vytvori uzel.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa23cd5ecfba33e9974f490d0a395ae966" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa23cd5ecfba33e9974f490d0a395ae966">CONTEXT_PROLOGUE_CHECK</a></td>
+                  <td>
+                  <p>ID v prologu, kontrola ifj26.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfaf7c4e38f1b079364a2c4c82ac6cd6261" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfaf7c4e38f1b079364a2c4c82ac6cd6261">CONTEXT_FUNCTION_DEF</a></td>
+                  <td>
+                  <p>ID je jmeno definovane funkce.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfadfc49a39ab78aa2fc24803f8b0b4f7ec" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfadfc49a39ab78aa2fc24803f8b0b4f7ec">CONTEXT_FUNCTION_RETURN_TYPE</a></td>
+                  <td>
+                  <p>Typ je navratovy typ funkce.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfaa53eb634b0e7c8afd557fe7a9a0fb342" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfaa53eb634b0e7c8afd557fe7a9a0fb342">CONTEXT_PARAM_NAME</a></td>
+                  <td>
+                  <p>ID je jmeno parametru funkce.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfaf880762eb7c9288f2fe5d01456c839c9" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfaf880762eb7c9288f2fe5d01456c839c9">CONTEXT_PARAM_TYPE</a></td>
+                  <td>
+                  <p>Typ je typ naposledy pridaneho parametru.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa86140e54797854e0c038555d4da83726" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa86140e54797854e0c038555d4da83726">CONTEXT_LIST_ELEMENT</a></td>
+                  <td>
+                  <p>Typ je typ prvku seznamu (pointer je <a href="structType.html" class="m-doc">Type</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfaf525d2ee1c7a4a42a75f6aab5be9a32a" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfaf525d2ee1c7a4a42a75f6aab5be9a32a">CONTEXT_BLOCK_STMT</a></td>
+                  <td>
+                  <p>Pointer je <a href="structBlock.html" class="m-doc">Block</a> *, prikaz se prida do nej.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa1b584b55e212536ded6668217e63b195" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa1b584b55e212536ded6668217e63b195">CONTEXT_FUNCTION_BODY</a></td>
+                  <td>
+                  <p>Pointer je <a href="structFuncDef.html" class="m-doc">FuncDef</a> *, blok je telo funkce.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfad89c1b12621001098d583c5c67e64669" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfad89c1b12621001098d583c5c67e64669">CONTEXT_WHILE_BODY</a></td>
+                  <td>
+                  <p>Pointer je <a href="structStmt.html" class="m-doc">Stmt</a> * (while), blok je telo.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa383e94414f446299b2758bccfcc54ce4" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa383e94414f446299b2758bccfcc54ce4">CONTEXT_FOR_BODY</a></td>
+                  <td>
+                  <p>Pointer je <a href="structStmt.html" class="m-doc">Stmt</a> * (for), blok je telo.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa3e0064a391e85bc806339363ced42e91" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa3e0064a391e85bc806339363ced42e91">CONTEXT_VARDEF_TYPE</a></td>
+                  <td>
+                  <p>Typ je deklarovany typ promenne (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa7e5cfd5feb074848134e8a3879c22df8" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa7e5cfd5feb074848134e8a3879c22df8">CONTEXT_VARDEF_INIT</a></td>
+                  <td>
+                  <p>Vyraz je inicializace promenne (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfabd3fca73a716618f6413d1a8c06dbc48" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfabd3fca73a716618f6413d1a8c06dbc48">CONTEXT_ASSIGN_VALUE</a></td>
+                  <td>
+                  <p>Vyraz je hodnota prirazeni (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa89c767e57757e497aac18f1403d030c8" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa89c767e57757e497aac18f1403d030c8">CONTEXT_RETURN_VALUE</a></td>
+                  <td>
+                  <p>Vyraz je hodnota returnu (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfaa8221a9f56dd7ee5d0e5a0da84102cba" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfaa8221a9f56dd7ee5d0e5a0da84102cba">CONTEXT_WHILE_COND</a></td>
+                  <td>
+                  <p>Vyraz je podminka while (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa437bfc3d759441ec859872cf6d2c7889" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa437bfc3d759441ec859872cf6d2c7889">CONTEXT_FOR_VAR</a></td>
+                  <td>
+                  <p>ID je ridici promenna for (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa6f6ded5e652fade05895ef1435c155f7" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa6f6ded5e652fade05895ef1435c155f7">CONTEXT_FOR_SOURCE</a></td>
+                  <td>
+                  <p>Vyraz je zdroj for (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa9fdd3804b78a97f7676d064054bae5d3" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa9fdd3804b78a97f7676d064054bae5d3">CONTEXT_FOR_GUARD</a></td>
+                  <td>
+                  <p>Vyraz je straz for (<a href="structStmt.html" class="m-doc">Stmt</a> *)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfac73b48985118dac598df8cdc42a376db" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfac73b48985118dac598df8cdc42a376db">CONTEXT_IF_THEN</a></td>
+                  <td>
+                  <p>Blok je vetev then (<a href="structExpr.html" class="m-doc">Expr</a> * if)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfae8d165bd7b0afaa3b07b27e94d5d20e5" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfae8d165bd7b0afaa3b07b27e94d5d20e5">CONTEXT_IF_ELSE</a></td>
+                  <td>
+                  <p>Blok je vetev else (<a href="structExpr.html" class="m-doc">Expr</a> * if)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa7656fe8f7be3356a80e379fd6a47354e" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa7656fe8f7be3356a80e379fd6a47354e">CONTEXT_IF_COND</a></td>
+                  <td>
+                  <p>Vyraz je podminka if (<a href="structExpr.html" class="m-doc">Expr</a> * if)</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1982e4c9bda350aa5385b920694c7ebfa578ded8b382a053cdb130e90f3ca9c15" class="m-doc-self" id="a1982e4c9bda350aa5385b920694c7ebfa578ded8b382a053cdb130e90f3ca9c15">CONTEXT_RANGE_WITHOUT_STEP</a></td>
+                  <td>
+<p>Neterminal E je rozsah bez kroku (<a href="structExpr.html" class="m-doc">Expr</a> * EXPR_RANGE vytvoreny pravidlem &quot;to&quot; nebo &quot;until&quot;), pripustny levy operand infixoveho &quot;by&quot;</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="acbe2ed0b0877f90cab9d7f87ff6d89bd"><div>
+            <h3>
+              typedef void(*<a href="#acbe2ed0b0877f90cab9d7f87ff6d89bd" class="m-doc-self">SemanticCallback</a>)(SemanticContext*ctx, void*semantic_pointer, ContextAnnotation annotation, int line, Stack*stack)
+            </h3>
+            <p>Semanticka akce pravidla.</p>
+<p>Akce se provede pri rozvoji neterminalu timto pravidlem. Callback dostane ukazatel a kontextovou anotaci rozvadeneho neterminalu, aby vedel, co ma provest a kam vysledek ulozit. Symboly sve prave strany vklada na zasobnik spolu s ukazateli a anotacemi, ktere jim sdeluji totez. Staticke produkce kopiruji ukazatel a anotaci neterminalu na leve strane vzdy do vsech symbolu produkce, aniz by musely byt callbacky.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6ea4594c8b87bee8d9d968786952c01c"><div>
+            <h3>
+              typedef void(*<a href="#a6ea4594c8b87bee8d9d968786952c01c" class="m-doc-self">PrecedenceSemanticAction</a>)(const Stack*stack, int line, AnnotatedSymbol*result)
+            </h3>
+            <p>Semanticka akce precedencniho parseru, reprezentuje redukcni pravidlo.</p>
+<p>Akce se zavola, kdyz byl handle pravidla vyhledan v redukcni tabulce. Handle se sklada primo z prvku zasobniku, akce tedy ma zaruceno, ze prvnich length symbolu na zasobniku (od vrcholu) jsou presne symboly prave strany pravidla, kde length je delka handle pravidla. Data techto symbolu si akce prohlizi pomoci parser_stack_peek (hloubka 0 je vrchol, tedy posledni symbol handle). Vezme podstromy z jednotlivych symbolu, slozi je do noveho uzlu a ten preda jadru pres result jako semanticky ukazatel redukovaneho neterminalu.</p><p>Akce zasobnik nemeni. Vyklizeni handle a vlozeni redukovaneho neterminalu je odpovednosti jadra, protoze handle musi byt v dobe volani akce stale na zasobniku a musi byt vyklizen drive, nez se vlozi redukovany neterminal.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="semantic_8h" kind="file" language="C++">
+    <compoundname>semantic.h</compoundname>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="symtable_8h" local="yes">symtable.h</includes>
+    <includedby refid="main_8c" local="yes">src/main.c</includedby>
+    <includedby refid="semantic_8c" local="yes">src/semantic.c</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/semantic.h</label>
+        <link refid="semantic_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>symtable.h</label>
+        <link refid="symtable_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="3">
+        <label>src/semantic.c</label>
+        <link refid="semantic_8c"/>
+      </node>
+      <node id="1">
+        <label>src/semantic.h</label>
+        <link refid="semantic_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="semantic_8h_1a52ee22faa1144c0fd938405761ef91d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+        <definition>SymTable * semantic_analyze</definition>
+        <argsstring>(Program *program)</argsstring>
+        <name>semantic_analyze</name>
+        <param>
+          <type><ref refid="structProgram" kindref="compound">Program</ref> *</type>
+          <declname>program</declname>
+        </param>
+        <briefdescription>
+<para>Provede semantickou analyzu celeho programu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Projde cely program, zkontroluje ho a doplni typy a symboly do AST.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>program</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structProgram" kindref="compound">Program</ref> (AST) k analyze. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Tabulka symbolu vytvorena behem analyzy. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.h" line="25" column="10" bodyfile="src/semantic.c" bodystart="750" bodyend="777" declfile="src/semantic.h" declline="25" declcolumn="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/semantic.h"/>
+  </compounddef>
+</doxygen>

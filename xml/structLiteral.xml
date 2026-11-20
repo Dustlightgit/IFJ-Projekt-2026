@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structLiteral" kind="struct" language="C++" prot="public">
+    <compoundname>Literal</compoundname>
+    <includes refid="ast_8h" local="no">ast.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structLiteral_1a329f60ae1762b84de3a133d29d55d3ac" prot="public" static="no" mutable="no">
+        <type><ref refid="ast_8h_1a8cb9fbb7d80c9134ae81ee008d7b33d6" kindref="member">LiteralKind</ref></type>
+        <definition>LiteralKind Literal::kind</definition>
+        <argsstring></argsstring>
+        <name>kind</name>
+        <qualifiedname>Literal::kind</qualifiedname>
+        <briefdescription>
+<para>Urcuje, kterou polozku z value cist. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="40" column="15" bodyfile="src/ast.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLiteral_1a124e3045c17b3c3d382b547c9888953e" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Literal::int_value</definition>
+        <argsstring></argsstring>
+        <name>int_value</name>
+        <qualifiedname>Literal::int_value</qualifiedname>
+        <briefdescription>
+<para>Pro LIT_INT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="42" column="9" bodyfile="src/ast.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLiteral_1acd24affb6af69d483ac2af05a0f9fe10" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Literal::double_value</definition>
+        <argsstring></argsstring>
+        <name>double_value</name>
+        <qualifiedname>Literal::double_value</qualifiedname>
+        <briefdescription>
+<para>Pro LIT_DOUBLE. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="43" column="12" bodyfile="src/ast.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLiteral_1af4cc257d1ea5ff16d6c1c0a32a123d82" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Literal::string_value</definition>
+        <argsstring></argsstring>
+        <name>string_value</name>
+        <qualifiedname>Literal::string_value</qualifiedname>
+        <briefdescription>
+<para>Pro LIT_STRING, vlastni kopie retezce. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="44" column="10" bodyfile="src/ast.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLiteral_1a84bfee7f5bc3add1f8bb7dbb4cd687fb" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Literal::bool_value</definition>
+        <argsstring></argsstring>
+        <name>bool_value</name>
+        <qualifiedname>Literal::bool_value</qualifiedname>
+        <briefdescription>
+<para>Pro LIT_BOOL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="45" column="10" bodyfile="src/ast.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLiteral_1a677abfddad8394d42c8566c38478034a" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structLiteral" kindref="compound">Literal</ref></type>
+        <definition>union Literal Literal::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>Literal::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="46" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="structLiteral" kindref="compound">Literal</ref>: druh a hodnota. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/ast.h" line="39" column="1" bodyfile="src/ast.h" bodystart="39" bodyend="47"/>
+    <listofallmembers>
+      <member refid="structLiteral_1a84bfee7f5bc3add1f8bb7dbb4cd687fb" prot="public" virt="non-virtual"><scope>Literal</scope><name>bool_value</name></member>
+      <member refid="structLiteral_1acd24affb6af69d483ac2af05a0f9fe10" prot="public" virt="non-virtual"><scope>Literal</scope><name>double_value</name></member>
+      <member refid="structLiteral_1a124e3045c17b3c3d382b547c9888953e" prot="public" virt="non-virtual"><scope>Literal</scope><name>int_value</name></member>
+      <member refid="structLiteral_1a329f60ae1762b84de3a133d29d55d3ac" prot="public" virt="non-virtual"><scope>Literal</scope><name>kind</name></member>
+      <member refid="structLiteral_1af4cc257d1ea5ff16d6c1c0a32a123d82" prot="public" virt="non-virtual"><scope>Literal</scope><name>string_value</name></member>
+      <member refid="structLiteral_1a677abfddad8394d42c8566c38478034a" prot="public" virt="non-virtual"><scope>Literal</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

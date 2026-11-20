@@ -1,0 +1,600 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="nonterminal_8h" kind="file" language="C++">
+    <compoundname>nonterminal.h</compoundname>
+    <includedby refid="LL__table_8c" local="yes">src/LL_table.c</includedby>
+    <includedby refid="LL__table_8h" local="yes">src/LL_table.h</includedby>
+    <includedby refid="grammar__symbol_8h" local="yes">src/grammar_symbol.h</includedby>
+    <includedby refid="main_8c" local="yes">src/main.c</includedby>
+    <includedby refid="nonterminal_8c" local="yes">src/nonterminal.c</includedby>
+    <includedby refid="precedence__parser_8c" local="yes">src/precedence_parser.c</includedby>
+    <includedby refid="precedence__semantic__actions_8c" local="yes">src/precedence_semantic_actions.c</includedby>
+    <includedby refid="predictive__parser_8h" local="yes">src/predictive_parser.h</includedby>
+    <includedby refid="production_8c" local="yes">src/production.c</includedby>
+    <includedby refid="reduction__table_8c" local="yes">src/reduction_table.c</includedby>
+    <includedby refid="semantic__actions_8c" local="yes">src/semantic_actions.c</includedby>
+    <includedby refid="special__actions_8c" local="yes">src/special_actions.c</includedby>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/LL_table.c</label>
+        <link refid="LL__table_8c"/>
+      </node>
+      <node id="3">
+        <label>src/LL_table.h</label>
+        <link refid="LL__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="25">
+        <label>src/nonterminal.c</label>
+        <link refid="nonterminal_8c"/>
+      </node>
+      <node id="1">
+        <label>src/nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>src/parser_common.c</label>
+        <link refid="parser__common_8c"/>
+      </node>
+      <node id="6">
+        <label>src/parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/precedence_helpers.c</label>
+        <link refid="precedence__helpers_8c"/>
+      </node>
+      <node id="9">
+        <label>src/precedence_helpers.h</label>
+        <link refid="precedence__helpers_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="12">
+        <label>src/precedence_parser.h</label>
+        <link refid="precedence__parser_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>src/precedence_semantic_actions.c</label>
+        <link refid="precedence__semantic__actions_8c"/>
+      </node>
+      <node id="23">
+        <label>src/precedence_semantic_actions.h</label>
+        <link refid="precedence__semantic__actions_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+      <node id="14">
+        <label>src/predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>src/production.c</label>
+        <link refid="production_8c"/>
+      </node>
+      <node id="19">
+        <label>src/production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+      </node>
+      <node id="21">
+        <label>src/reduction_table.h</label>
+        <link refid="reduction__table_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>src/semantic_actions.c</label>
+        <link refid="semantic__actions_8c"/>
+      </node>
+      <node id="24">
+        <label>src/semantic_actions.h</label>
+        <link refid="semantic__actions_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>src/semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+      </node>
+      <node id="17">
+        <label>src/special_actions.h</label>
+        <link refid="special__actions_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" prot="public" static="no" strong="no">
+        <type></type>
+        <name>NonterminalType</name>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda0f8a0aa174f79ae9107466861c9f5e0b" prot="public">
+          <name>NONTERM_PROGRAM</name>
+          <briefdescription>
+<para>Startovni neterminal. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda27b99ef35c270bdd7cd0ce57602848e8" prot="public">
+          <name>NONTERM_DEF_LIST</name>
+          <briefdescription>
+<para>Seznam deklaraci funkci. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda23c9124625178f6e23eb071fd51d0fce" prot="public">
+          <name>NONTERM_DEF</name>
+          <briefdescription>
+<para>Deklarace funkce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda398122b4f1677fdd12d362f1617bcf34" prot="public">
+          <name>NONTERM_MAIN_ANNOTATION</name>
+          <briefdescription>
+<para>Anotace @main. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddac8174c245a09523aea719937fe1db54a" prot="public">
+          <name>NONTERM_OPTIONAL_EOL</name>
+          <briefdescription>
+<para>Nepovinny EOL. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda42cd8d571ee5b038c6b34117764d7b9c" prot="public">
+          <name>NONTERM_PARAM_LIST</name>
+          <briefdescription>
+<para>Parametr nebo konec parametru. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddaed370341c2aa7934c74970570cefd8c1" prot="public">
+          <name>NONTERM_PARAM_LIST_TAIL</name>
+          <briefdescription>
+<para>Dalsi parametr za carkou nebo konec. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddabef9852bb2660026da3b4ea12e685467" prot="public">
+          <name>NONTERM_OPTIONAL_TYPE</name>
+          <briefdescription>
+<para>Nepovinny typ. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda7e3bfd20d0f891f2e78dd55de77f754e" prot="public">
+          <name>NONTERM_TYPE</name>
+          <briefdescription>
+<para>Datovy typ. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda0e5dcd5b715cb79b6d5b1be5b86132b8" prot="public">
+          <name>NONTERM_BLOCK_OR_EXPR</name>
+          <briefdescription>
+<para>Telo funkce, vyraz nebo blok. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda17798dcee94f1a20a30115d86792d901" prot="public">
+          <name>NONTERM_BLOCK</name>
+          <briefdescription>
+<para>Odsazeny blok. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae4dcca4e64eff019189f8d80138b4db4" prot="public">
+          <name>NONTERM_COMMAND_LIST</name>
+          <briefdescription>
+<para>Dalsi prikazy v bloku. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda43f6165f745d0553608324ee46ff0460" prot="public">
+          <name>NONTERM_COMMAND_END</name>
+          <briefdescription>
+<para>Konec prikazu, strednik nebo EOL. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddaacbec80867dea79582134ab408527532" prot="public">
+          <name>NONTERM_COMMAND</name>
+          <briefdescription>
+<para>Prikaz. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda0be5df54c703b0c14c1327199ddf4afa" prot="public">
+          <name>NONTERM_COMMAND_SIMPLE</name>
+          <briefdescription>
+<para>Jednoduchy prikaz (val/var, return, ID, vyraz) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda4ca79d92d9782cc380a98cbb40f9f116" prot="public">
+          <name>NONTERM_COMMAND_CONTROL</name>
+          <briefdescription>
+<para>Ridici prikaz (while, for, if) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddab81eaa3aa16b1c13557c28f397df0bf3" prot="public">
+          <name>NONTERM_VAL_VAR</name>
+          <briefdescription>
+<para>val nebo var </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddadb7e813a0a0fe76869fd0d79cd6acbf3" prot="public">
+          <name>NONTERM_RETURN_VALUE</name>
+          <briefdescription>
+<para>Nepovinna hodnota za return. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda41c3b35d9c1c76e31f627403cb80fcfc" prot="public">
+          <name>NONTERM_BLOCK_OR_COMMAND</name>
+          <briefdescription>
+<para>Telo cyklu nebo podminky. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae2da9d535660490f299576794e6a0af1" prot="public">
+          <name>NONTERM_FOR_HEADER</name>
+          <briefdescription>
+<para>Hlavicka for. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda96c7da341c583fdcace98fe91945b34a" prot="public">
+          <name>NONTERM_GUARD_LIST</name>
+          <briefdescription>
+<para>Seznam strazi. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddad5bdeb3cb0ff9817d7aa75b5eb376af0" prot="public">
+          <name>NONTERM_OPTIONAL_ELSE</name>
+          <briefdescription>
+<para>Nepovinna vetev else. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda4febc78a788b8b3cacd3580c9adeb623" prot="public">
+          <name>NONTERM_THEN_BRANCH</name>
+          <briefdescription>
+<para>Vetev then za podminkou. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda81816cdbe4fe045c7557136a8c578079" prot="public">
+          <name>NONTERM_ELSE_OR_COMMAND_END</name>
+          <briefdescription>
+<para>Else za inline then, nebo konec prikazu. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda22dc523e410bd2d2c1bb2d4c0a7279c4" prot="public">
+          <name>NONTERM_TERNARY_IF</name>
+          <briefdescription>
+<para>Ternarni if. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda9f21ac75a9b9540166bb117ab5cce769" prot="public">
+          <name>NONTERM_EXPR_OR_INDENT_EXPR</name>
+          <briefdescription>
+<para>Vyraz, pripadne odsazeny. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda7800e685e5d195c693e3a9e7102892c1" prot="public">
+          <name>NONTERM_ELSE_TERNARY_IF</name>
+          <briefdescription>
+<para>Else vetev ternarniho ifu, pripadne odsazena <linebreak/>
+ </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda1ac4ad5e641e9cd246e473111edbf004" prot="public">
+          <name>NONTERM_LL_TABLE_COUNT</name>
+          <briefdescription>
+<para>Pocet neterminalu indexujicich LL tabulku. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" prot="public">
+          <name>NONTERM_EXPR</name>
+          <briefdescription>
+<para>Vyraz (v precedencni gramatice neterminal E, v prediktivni &lt;expr&gt;) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddad4fa93b64c1e5479daad33c7c89c28aa" prot="public">
+          <name>NONTERM_ID_COMMAND</name>
+          <briefdescription>
+<para>Prikaz zacinajici na ID (v odpovednosti jadra) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda248c93b7e061d912794269c389318c3b" prot="public">
+          <name>NONTERM_ARGS</name>
+          <briefdescription>
+<para>Seznam argumentu ve vyrazove analyze (ARGS) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda385f62a28a17ac94bae8e633b9740d0d" prot="public">
+          <name>NONTERM_COUNT</name>
+          <briefdescription>
+<para>Pocet hodnot enumu, pouze informativni. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Neterminaly LL gramatiky a vyrazove analyzy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Hodnoty mensi nez NONTERM_LL_TABLE_COUNT indexuji LL tabulku. Hodnoty za timto oddelovacem LL tabulku neindexuji a na jejich cislene hodnote nezalezi. Poradi neterminalu pred oddelovacem odpovida prvnimu vyskytu v pravidlech gramatiky. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nonterminal.h" line="209" column="1" bodyfile="src/nonterminal.h" bodystart="209" bodyend="256"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="nonterminal_8h_1a2d2a841983eb39614e8aeea6bd70d58f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * nonterm_type_name</definition>
+        <argsstring>(NonterminalType type)</argsstring>
+        <name>nonterm_type_name</name>
+        <param>
+          <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Vrati citelny nazev neterminalu pro chybove vypisy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Retezec s nazvem neterminalu, pro neplatnou hodnotu &quot;?&quot;. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nonterminal.h" line="264" column="12" bodyfile="src/nonterminal.c" bodystart="54" bodyend="137" declfile="src/nonterminal.h" declline="264" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="nonterminal_8h_1a794f1dfd5949934851b9e9c820445903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nonterm_type_validate</definition>
+        <argsstring>(NonterminalType type, int line)</argsstring>
+        <name>nonterm_type_validate</name>
+        <param>
+          <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Overi, ze typ neterminalu je skutecny neterminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri neplatne hodnote ukonci program s kodem ERR_INTERNAL. Neplatne jsou specialni hodnoty (NONTERM_LL_TABLE_COUNT, NONTERM_COUNT) a hodnoty mimo enum. Funkce neterminaly dale neklasifikuje, tedy nezjistuje, zda indexuji LL tabulku.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Overovany typ neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku pro chybove hlaseni, &lt;= 0 pokud neni znam. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nonterminal.h" line="277" column="6" bodyfile="src/nonterminal.c" bodystart="139" bodyend="144" declfile="src/nonterminal.h" declline="277" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/nonterminal.h"/>
+  </compounddef>
+</doxygen>

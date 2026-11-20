@@ -1,0 +1,911 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="token_8h" kind="file" language="C++">
+    <compoundname>token.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includedby refid="LL__table_8c" local="yes">src/LL_table.c</includedby>
+    <includedby refid="LL__table_8h" local="yes">src/LL_table.h</includedby>
+    <includedby refid="grammar__symbol_8h" local="yes">src/grammar_symbol.h</includedby>
+    <includedby refid="parser__common_8h" local="yes">src/parser_common.h</includedby>
+    <includedby refid="precedence__helpers_8h" local="yes">src/precedence_helpers.h</includedby>
+    <includedby refid="precedence__semantic__actions_8c" local="yes">src/precedence_semantic_actions.c</includedby>
+    <includedby refid="precedence__table_8c" local="yes">src/precedence_table.c</includedby>
+    <includedby refid="precedence__table_8h" local="yes">src/precedence_table.h</includedby>
+    <includedby refid="production_8c" local="yes">src/production.c</includedby>
+    <includedby refid="reduction__table_8c" local="yes">src/reduction_table.c</includedby>
+    <includedby refid="scanner_8h" local="yes">src/scanner.h</includedby>
+    <includedby refid="semantic__actions_8c" local="yes">src/semantic_actions.c</includedby>
+    <includedby refid="special__actions_8h" local="yes">src/special_actions.h</includedby>
+    <includedby refid="token_8c" local="yes">src/token.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/LL_table.c</label>
+        <link refid="LL__table_8c"/>
+      </node>
+      <node id="3">
+        <label>src/LL_table.h</label>
+        <link refid="LL__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="8">
+        <label>src/parser_common.c</label>
+        <link refid="parser__common_8c"/>
+      </node>
+      <node id="6">
+        <label>src/parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/precedence_helpers.c</label>
+        <link refid="precedence__helpers_8c"/>
+      </node>
+      <node id="9">
+        <label>src/precedence_helpers.h</label>
+        <link refid="precedence__helpers_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="12">
+        <label>src/precedence_parser.h</label>
+        <link refid="precedence__parser_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>src/precedence_semantic_actions.c</label>
+        <link refid="precedence__semantic__actions_8c"/>
+      </node>
+      <node id="23">
+        <label>src/precedence_semantic_actions.h</label>
+        <link refid="precedence__semantic__actions_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>src/precedence_table.c</label>
+        <link refid="precedence__table_8c"/>
+      </node>
+      <node id="26">
+        <label>src/precedence_table.h</label>
+        <link refid="precedence__table_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+      <node id="14">
+        <label>src/predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>src/production.c</label>
+        <link refid="production_8c"/>
+      </node>
+      <node id="19">
+        <label>src/production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+      </node>
+      <node id="21">
+        <label>src/reduction_table.h</label>
+        <link refid="reduction__table_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>src/scanner.c</label>
+        <link refid="scanner_8c"/>
+      </node>
+      <node id="27">
+        <label>src/scanner.h</label>
+        <link refid="scanner_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>src/semantic_actions.c</label>
+        <link refid="semantic__actions_8c"/>
+      </node>
+      <node id="24">
+        <label>src/semantic_actions.h</label>
+        <link refid="semantic__actions_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>src/semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+      </node>
+      <node id="17">
+        <label>src/special_actions.h</label>
+        <link refid="special__actions_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>src/token.c</label>
+        <link refid="token_8c"/>
+      </node>
+      <node id="1">
+        <label>src/token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="unionTokenAttribute" prot="public">TokenAttribute</innerclass>
+    <innerclass refid="structToken" prot="public">Token</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="token_8h_1aa520fbf142ba1e7e659590c07da31921" prot="public" static="no" strong="no">
+        <type></type>
+        <name>TokenType</name>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aa130df27256cd45f5781fc74deeb50dc" prot="public">
+          <name>TOKEN_EOF</name>
+          <briefdescription>
+<para>Konec vstupu. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" prot="public">
+          <name>TOKEN_EOL</name>
+          <briefdescription>
+<para>Konec logickeho radku. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921abe35698de6c054dd0906f4869678e5e5" prot="public">
+          <name>TOKEN_DEDENT</name>
+          <briefdescription>
+<para>Konec bloku (jedna uzavrena uroven) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a30d3c23e6256ee2349a066b4de360a72" prot="public">
+          <name>TOKEN_KW_DEF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aaa77962f31ff1907bf5bcabf2c3a5d76" prot="public">
+          <name>TOKEN_KW_DO</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a547528f9338f062664cdbb5eb31a7a75" prot="public">
+          <name>TOKEN_KW_ELSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921af9ac81a39613f70696d2b11a9a4f3a5d" prot="public">
+          <name>TOKEN_KW_IF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a300f0df298b95bcd89f44f34f1a177ae" prot="public">
+          <name>TOKEN_KW_IMPORT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a345a9050f5b89b634f2c5ec787ea54c4" prot="public">
+          <name>TOKEN_KW_RETURN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a089f5a83bf72bd3ece2a8fd07b546761" prot="public">
+          <name>TOKEN_KW_THEN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921adaa096d9b5644c541a953793ccd06980" prot="public">
+          <name>TOKEN_KW_VAL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a6ffacab6b61365785f103c5ca66cba9c" prot="public">
+          <name>TOKEN_KW_VAR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a32ff7400f585a66b51d3ba9569b618ab" prot="public">
+          <name>TOKEN_KW_WHILE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a95ef43533be2a36dbeeab3fd76361e19" prot="public">
+          <name>TOKEN_KW_FOR</name>
+          <briefdescription>
+<para>CONTROL. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a742cf96ad3e40d1c94c19cd2a599389b" prot="public">
+          <name>TOKEN_KW_INT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921ad86779bfd6c7e01953afa16cbe05dcdc" prot="public">
+          <name>TOKEN_KW_DOUBLE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921af45ae58b7506113e9cb1c65d8d0db6b1" prot="public">
+          <name>TOKEN_KW_STRING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a42cea1e15300c2860e3b82a444dcae02" prot="public">
+          <name>TOKEN_KW_UNIT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a2aa68a623d0c1028cfbfb78d0cdc3229" prot="public">
+          <name>TOKEN_KW_BOOLEAN</name>
+          <briefdescription>
+<para>BOOLTHEN. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921abd360478d160e90b985c9ca1e73ba1c6" prot="public">
+          <name>TOKEN_KW_LIST</name>
+          <briefdescription>
+<para>LISTS. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a45b3a0292bfd356ff14a4e8cb25738af" prot="public">
+          <name>TOKEN_LARROW</name>
+          <briefdescription>
+<para>&lt;- (CONTROL: generator ve for) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921af4143395fefba1c6a30e58240dd0c827" prot="public">
+          <name>TOKEN_LPAREN</name>
+          <briefdescription>
+<para>( </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921ace232c359d5697cc5c459c22a7be226b" prot="public">
+          <name>TOKEN_RPAREN</name>
+          <briefdescription>
+<para>) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a8d265e17914bc733c8b9a880dd097a9e" prot="public">
+          <name>TOKEN_COMMA</name>
+          <briefdescription>
+<para>, </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a92a35ac6329421e77882bf3739a75e47" prot="public">
+          <name>TOKEN_COLON</name>
+          <briefdescription>
+<para>: </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921ac8c74b281e178c87923363a90f6ff371" prot="public">
+          <name>TOKEN_SEMICOLON</name>
+          <briefdescription>
+<para>; </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a98aa9bac1626f8a09231049287187f39" prot="public">
+          <name>TOKEN_ID</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a0e9d614b28003ca6272fd3c731587ea7" prot="public">
+          <name>TOKEN_ASSIGN</name>
+          <briefdescription>
+<para>= </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a6a9787e9d8e78561864753f558080fc1" prot="public">
+          <name>TOKEN_ANNOT_MAIN</name>
+          <briefdescription>
+<para>Cele &quot;@main&quot;. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a3851183212d24b397e6474745f1e12a0" prot="public">
+          <name>TOKEN_LL_TERM_COUNT</name>
+          <briefdescription>
+<para>Pocet indexatoru LL tabulky (neni skutecny token) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921afc93f7c09207edf6cd136968f217b457" prot="public">
+          <name>TOKEN_INT_LIT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a711b1e30d1130737ff93a38b59814e37" prot="public">
+          <name>TOKEN_DOUBLE_LIT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a0d74a532ff9d28be0add8021681809da" prot="public">
+          <name>TOKEN_STRING_LIT</name>
+          <briefdescription>
+<para>Jednoradkovy i viceradkovy &quot;&quot;&quot;...&quot;&quot;&quot;. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a0bfe75e32e6efc883f386554e8c173dd" prot="public">
+          <name>TOKEN_KW_TRUE</name>
+          <briefdescription>
+<para>BOOLTHEN, jsou klicova slova i literaly naraz... </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a86f1c50587c517e1cbe1589e13228866" prot="public">
+          <name>TOKEN_KW_FALSE</name>
+          <briefdescription>
+<para>BOOLTHEN. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a091b054f5996a03d51ee21badb118238" prot="public">
+          <name>TOKEN_PLUS_UNARY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><itemizedlist>
+<listitem><para>(unarni, scanner nevraci, vznika prebarvenim) </para>
+</listitem></itemizedlist>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a391686aaef9dc565814b57d5ef52adfa" prot="public">
+          <name>TOKEN_MINUS_UNARY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><itemizedlist>
+<listitem><para>(unarni, scanner nevraci, vznika prebarvenim) </para>
+</listitem></itemizedlist>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a103f608e741c11627e4d4a984f8ab8d6" prot="public">
+          <name>TOKEN_NOT</name>
+          <briefdescription>
+<para>! (BOOLTHEN) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a7f0601b40fea37f0d4598b0a61f828f2" prot="public">
+          <name>TOKEN_PLUS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><itemizedlist>
+<listitem><para>(binarni, scanner vraci i pro unarni) </para>
+</listitem></itemizedlist>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a160171b541dcf45a3bd712598963ea39" prot="public">
+          <name>TOKEN_MINUS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><itemizedlist>
+<listitem><para>(binarni, scanner vraci i pro unarni) </para>
+</listitem></itemizedlist>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921ae4d8eb0f4f6e613bf75801bfb9aad51c" prot="public">
+          <name>TOKEN_EXPRESSION_BEGINNING_DELIMITER</name>
+          <briefdescription>
+<para>Vyraz nesmi zacinat terminalem s hodnotou vetsi nez tento oddelovac. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a1109083cbeff0c33b619eb9b3177940a" prot="public">
+          <name>TOKEN_STAR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><itemizedlist>
+<listitem><para>(take v &quot;import ifj26.*&quot;, mimo vyraz neni operator) </para>
+</listitem></itemizedlist>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a7bb488da02f984b2c055687da13856e2" prot="public">
+          <name>TOKEN_SLASH</name>
+          <briefdescription>
+<para>/ </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921ab565ebfaaa53dcee6ddda201e270733e" prot="public">
+          <name>TOKEN_DOT</name>
+          <briefdescription>
+<para>. (VALMEM, LISTS, import) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aba68ee0a391d5807711846ba9e11170e" prot="public">
+          <name>TOKEN_PLUSPLUS</name>
+          <briefdescription>
+<para>++ (LISTS: spojeni seznamu) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aa3aef76940413ed1a121e71fa1b82519" prot="public">
+          <name>TOKEN_LT</name>
+          <briefdescription>
+<para>&lt; </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a2eccbcdff9c4795abee454d7558e8dab" prot="public">
+          <name>TOKEN_LE</name>
+          <briefdescription>
+<para>&lt;= </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aa5d81c076968a75a50ec61593495d894" prot="public">
+          <name>TOKEN_GT</name>
+          <briefdescription>
+<para><blockquote><para><zwj/> </para>
+</blockquote></para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a0e30112e555feb2996120db9cafbe28d" prot="public">
+          <name>TOKEN_GE</name>
+          <briefdescription>
+<para>&gt;= </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aeba19c29eb600289d1e973bf335139fe" prot="public">
+          <name>TOKEN_EQ</name>
+          <briefdescription>
+<para>== </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aa134765c8c52d90da35d8bd922bc532c" prot="public">
+          <name>TOKEN_NE</name>
+          <briefdescription>
+<para>!= </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a7203710f75ffd67d36a92024eca9b4ab" prot="public">
+          <name>TOKEN_AND</name>
+          <briefdescription>
+<para>&amp;&amp; (BOOLTHEN) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921af82eae34ce15da4d9e334b9a2e3b5675" prot="public">
+          <name>TOKEN_OR</name>
+          <briefdescription>
+<para>|| (BOOLTHEN) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921adb83473d4d59f69cf2a47de35ec719fd" prot="public">
+          <name>TOKEN_ID_OPERATOR</name>
+          <briefdescription>
+<para>ID prebarvene na operator (nese text jako ID) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aea65f3c75f7858f5a8d2de53d0e5d3ed" prot="public">
+          <name>TOKEN_DOLLAR</name>
+          <briefdescription>
+<para>$ (konec vyrazu) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a1b5625928930e6edf6b2d33746afa76f" prot="public">
+          <name>TOKEN_TIF</name>
+          <briefdescription>
+<para>Ternarni if ve vyrazu (TIF) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aa4f86cbc44e1acf7d32cdd85380d7538" prot="public">
+          <name>TOKEN_EXPR_TERM_DELIMITER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Hodnoty za timto oddelovacem neindexuji zadnou z tabulek (neni to pocet, precedencni tabulku indexuji i nektere terminaly pred TOKEN_LL_TERM_COUNT) </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aa6daeeb50a89fd2ff9a9a273cba429c9" prot="public">
+          <name>TOKEN_INDENT</name>
+          <briefdescription>
+<para>Zacatek bloku (odsazeni vic) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aba3b192746df43ba2ca588fb9480b350" prot="public">
+          <name>TOKEN_LBRACKET</name>
+          <briefdescription>
+<para>[ (LISTS: List[Int]) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921aaae9681b054655d0b31f3b694f17ab88" prot="public">
+          <name>TOKEN_RBRACKET</name>
+          <briefdescription>
+<para>] </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="token_8h_1aa520fbf142ba1e7e659590c07da31921a9b1a96b84fe05e866534a7acc24caa37" prot="public">
+          <name>TOKEN_COUNT</name>
+          <briefdescription>
+<para>Pocet hodnot enumu (neni skutecny token) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Typ tokenu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Poradi hodnot urcuje, kterou tabulku lze tokenem indexovat:<itemizedlist>
+<listitem><para>Hodnoty mensi nez TOKEN_LL_TERM_COUNT indexuji LL tabulku. Jsou mezi nimi i terminaly vyrazove analyzy, ktere se vyskytuji take v LL gramatice (ID, (, ), carka a List), ty tedy indexuji i precedencni tabulku.</para>
+</listitem><listitem><para>Hodnoty mezi TOKEN_LL_TERM_COUNT a TOKEN_EXPRESSION_BEGINNING_DELIMITER jsou dalsi terminaly vyrazove analyzy, kterymi smi zacinat vyraz.</para>
+</listitem><listitem><para>Hodnoty mezi TOKEN_EXPRESSION_BEGINNING_DELIMITER a TOKEN_EXPR_TERM_DELIMITER jsou dalsi terminaly vyrazove analyzy, kterymi vyraz zacinat nesmi.</para>
+</listitem><listitem><para>Hodnoty za TOKEN_EXPR_TERM_DELIMITER neindexuji zadnou z tabulek.</para>
+</listitem></itemizedlist>
+</para>
+<para>Vyraz nesmi zacinat tokenem, ktery je v enumu za TOKEN_EXPRESSION_BEGINNING_DELIMITER. Hodnoty TOKEN_ID_OPERATOR, TOKEN_PLUS_UNARY, TOKEN_MINUS_UNARY, TOKEN_DOLLAR a TOKEN_TIF scanner nevraci, vznikaji az ve vyrazovem scanneru (scanner vraci TOKEN_PLUS a TOKEN_MINUS, ktere se na miste operandu prebarvi na unarni varianty). Hodnoty TOKEN_LL_TERM_COUNT, TOKEN_EXPRESSION_BEGINNING_DELIMITER, TOKEN_EXPR_TERM_DELIMITER a TOKEN_COUNT nejsou skutecne tokeny. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="114" column="1" bodyfile="src/token.h" bodystart="114" bodyend="217"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="token_8h_1a4ad4786141f0747550700e5d174c302f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * token_type_name</definition>
+        <argsstring>(TokenType type)</argsstring>
+        <name>token_type_name</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Vrati citelny nazev typu tokenu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pouziva se pro ladici vypisy a chybova hlaseni.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ tokenu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Retezec s nazvem typu, pro tokeny bez nazvu &quot;?&quot;. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="247" column="12" bodyfile="src/token.c" bodystart="34" bodyend="153" declfile="src/token.h" declline="247" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="token_8h_1a8cb811e15754a2e13f86b7b4fa87d7d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void token_type_validate</definition>
+        <argsstring>(TokenType type, int line)</argsstring>
+        <name>token_type_validate</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Overi, ze typ tokenu je skutecny token. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri neplatne hodnote ukonci program s kodem ERR_INTERNAL. Neplatne jsou specialni hodnoty (TOKEN_LL_TERM_COUNT, TOKEN_EXPRESSION_BEGINNING_DELIMITER, TOKEN_EXPR_TERM_DELIMITER, TOKEN_COUNT) a hodnoty mimo enum. Funkce tokeny dale neklasifikuje, tedy nezjistuje, ktere tabulce slouzi jako indexator.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Overovany typ tokenu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku pro chybove hlaseni, &lt;= 0 pokud neni znam. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="260" column="6" bodyfile="src/token.c" bodystart="163" bodyend="169" declfile="src/token.h" declline="260" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="token_8h_1a2e80c4219a24cd05c46e8d079ca7ccd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void token_free</definition>
+        <argsstring>(Token *t)</argsstring>
+        <name>token_free</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni pamet, kterou token vlastni, a token zneplatni. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uvolnuje se jen text u TOKEN_ID, TOKEN_ID_OPERATOR a TOKEN_STRING_LIT.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structToken" kindref="compound">Token</ref>, jehoz pamet se uvolni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="269" column="6" bodyfile="src/token.c" bodystart="156" bodyend="161" declfile="src/token.h" declline="269" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/token.h"/>
+  </compounddef>
+</doxygen>

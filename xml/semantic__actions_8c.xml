@@ -1,0 +1,2166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="semantic__actions_8c" kind="file" language="C++">
+    <compoundname>semantic_actions.c</compoundname>
+    <includes refid="semantic__actions_8h" local="yes">semantic_actions.h</includes>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes refid="grammar__symbol_8h" local="yes">grammar_symbol.h</includes>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="parser__common_8h" local="yes">parser_common.h</includes>
+    <includes refid="production_8h" local="yes">production.h</includes>
+    <includes refid="special__actions_8h" local="yes">special_actions.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="6">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="12">
+        <label>parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/semantic_actions.c</label>
+        <link refid="semantic__actions_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>semantic_actions.h</label>
+        <link refid="semantic__actions_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>special_actions.h</label>
+        <link refid="special__actions_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdbool.h</label>
+      </node>
+      <node id="10">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="semantic__actions_8c_1a802e3e1d041bd6fcf4c10cc8d340ff15" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void push_terminal</definition>
+        <argsstring>(Stack *stack, TokenType type, void *semantic_pointer, ContextAnnotation annotation)</argsstring>
+        <name>push_terminal</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="112" column="13" bodyfile="src/semantic_actions.c" bodystart="112" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1ac79563040a781cae3cf48682f5ca01ce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void push_nonterminal</definition>
+        <argsstring>(Stack *stack, NonterminalType type, void *semantic_pointer, ContextAnnotation annotation)</argsstring>
+        <name>push_nonterminal</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="120" column="13" bodyfile="src/semantic_actions.c" bodystart="120" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a84abb0a6f1e7b9aa0e2f0f7fe2687a3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_prolog</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_prolog</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 0 (prolog). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="135" column="6" bodyfile="src/semantic_actions.c" bodystart="135" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a33b94b90eb74066840d05665e1460475" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_function_definition</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_function_definition</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 3 (deklarace funkce). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="154" column="6" bodyfile="src/semantic_actions.c" bodystart="154" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a63d05ed2eab809319d0d0575e1def80c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_main_annotation</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_main_annotation</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 4 (anotace main). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="181" column="6" bodyfile="src/semantic_actions.c" bodystart="181" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a2d17b0353c9c8ee648d4e2781d9b4193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+        <definition>Block * target_block</definition>
+        <argsstring>(void *ptr, ContextAnnotation annotation, int line)</argsstring>
+        <name>target_block</name>
+        <param>
+          <type>void *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="197" column="7" bodyfile="src/semantic_actions.c" bodystart="197" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1ae25d5953895843c390669947de36aa51" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void store_type</definition>
+        <argsstring>(void *semantic_pointer, ContextAnnotation annotation, Type *type, int line)</argsstring>
+        <name>store_type</name>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="229" column="13" bodyfile="src/semantic_actions.c" bodystart="229" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a7d20a204ab5eeddf4466a2eed28fecfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_param_add</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_param_add</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 8 (pridani parametru). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="256" column="6" bodyfile="src/semantic_actions.c" bodystart="256" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1abca363c0dee931d76ba5deba7b3aefa5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_type_int</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_type_int</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 14 (typ integer). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="271" column="6" bodyfile="src/semantic_actions.c" bodystart="271" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1ada5b64f35fb8e632b8dd49a93a88b936" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_type_double</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_type_double</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 15 (typ double). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="281" column="6" bodyfile="src/semantic_actions.c" bodystart="281" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a5e1307e241174849b065f0a00e53c466" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_type_string</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_type_string</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 16 (typ string). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="291" column="6" bodyfile="src/semantic_actions.c" bodystart="291" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a11043671538a2b24905adad30713b634" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_type_unit</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_type_unit</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 17 (typ unit). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="301" column="6" bodyfile="src/semantic_actions.c" bodystart="301" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a03780a50e16ae80bb0869402be6de9bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_type_boolean</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_type_boolean</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 18 (typ boolean). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="311" column="6" bodyfile="src/semantic_actions.c" bodystart="311" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a519aac962bbf81f7089e933500fc6ab8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_type_list</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_type_list</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 19 (typ list). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="323" column="6" bodyfile="src/semantic_actions.c" bodystart="323" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1ab5065dae1188259ce0f2c07b29e0ec4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_block</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_block</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 22 (blok a prvni prikaz). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="340" column="6" bodyfile="src/semantic_actions.c" bodystart="340" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a78bfba35fcd216fc0dd1f60a9ab52967" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_declaration_command</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_declaration_command</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 27 (prikaz deklarace). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="356" column="6" bodyfile="src/semantic_actions.c" bodystart="356" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a2ff985fbcc59c5d5c27b7c0484b3b288" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_val</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_val</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 28 (deklarace nemodifikovatelne promenne). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="374" column="6" bodyfile="src/semantic_actions.c" bodystart="374" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a35538b7b126a0b29f0dd63a56f9b3fc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_id_command</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_id_command</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 31 (prikaz zacinajici id). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Terminalu ID priradi anotaci CONTEXT_ID_COMMAND, aby ho zpracovala special_action_id, a neterminalu &lt;IDcommand&gt; preda svuj semanticky ukazatel (kam ulozit prirazeni nebo vyraz). Dalsi atributy stavba stromu nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="388" column="6" bodyfile="src/semantic_actions.c" bodystart="388" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1afbf29aa30bc0b12434562b6315ed9949" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_return_command</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_return_command</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 34 (prikaz return). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="400" column="6" bodyfile="src/semantic_actions.c" bodystart="400" bodyend="413"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a7552de2e31348adf3c8fab9d2cc08a31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_while_command</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_while_command</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 37 (cyklus while). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="416" column="6" bodyfile="src/semantic_actions.c" bodystart="416" bodyend="429"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a9030d25e09d551ad7adc3b264c26396c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_for_command</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_for_command</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 38 (cyklus for). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="432" column="6" bodyfile="src/semantic_actions.c" bodystart="432" bodyend="447"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a68c579d3eccf8644f7c76bce093dc7b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_for_header_inline</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_for_header_inline</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 39 (jednoradkova hlavicka for). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="450" column="6" bodyfile="src/semantic_actions.c" bodystart="450" bodyend="461"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a4456d2a4d1992d452ac2da8f8e624144" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_for_header_block</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_for_header_block</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 40 (viceradkova hlavicka for). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="465" column="6" bodyfile="src/semantic_actions.c" bodystart="465" bodyend="481"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a17fb616a64d7391261ba85b1c46f0e0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_guard_next</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_guard_next</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 41 (dalsi straz). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="485" column="6" bodyfile="src/semantic_actions.c" bodystart="485" bodyend="496"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1ae0a28382292f3df2797d3339340f0021" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_if_command</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_if_command</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 47 (podminka). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="500" column="6" bodyfile="src/semantic_actions.c" bodystart="500" bodyend="513"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a70f1c8f6b4f9d75af28ca6ad6193f97e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_optional_else_present</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_optional_else_present</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 48 (nepovinna cast else). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="518" column="6" bodyfile="src/semantic_actions.c" bodystart="518" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1abedda2a868f03a7916873277c120be37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_ternary_if</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_ternary_if</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 50 (ternarni podminka). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="535" column="6" bodyfile="src/semantic_actions.c" bodystart="535" bodyend="549"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a10595bab05838d48245a086b709f1160" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_else_ternary_if_indented</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_else_ternary_if_indented</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla 53 (odsazena vetev else). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="555" column="6" bodyfile="src/semantic_actions.c" bodystart="555" bodyend="569"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a810f56afde10fd6933439ac56bb8be4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_else_or_command_end_else</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_else_or_command_end_else</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="573" column="6" bodyfile="src/semantic_actions.c" bodystart="573" bodyend="584"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic__actions_8c_1a76fbb74b0f481accbd6e3f747281b740" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semantic_action_test_expr</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>semantic_action_test_expr</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_actions.c" line="587" column="6" bodyfile="src/semantic_actions.c" bodystart="587" bodyend="595"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/semantic_actions.c"/>
+  </compounddef>
+</doxygen>

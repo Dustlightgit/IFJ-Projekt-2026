@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/production.c file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>production.c <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#var-members">Variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt id="abf8589ae83e46c088749974c88360ee0">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#abf8589ae83e46c088749974c88360ee0" class="m-doc-self">PRODUCTION_DEF_LIST_NEXT</a>
+            </dt>
+            <dd>Pravidlo 1 (Seznam deklaraci) (ptr): &lt;defList&gt; =&gt; &lt;def&gt; &lt;defList&gt;</dd>
+            <dt id="a4dd2edd3aaeaa2714a4188a18b7e1ba1">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a4dd2edd3aaeaa2714a4188a18b7e1ba1" class="m-doc-self">PRODUCTION_DEF_LIST_END</a>
+            </dt>
+            <dd>Pravidlo 2 (Konec deklaraci): &lt;defList&gt; =&gt; epsilon.</dd>
+            <dt id="a117a9e3d123f54204176edc1a895221e">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a117a9e3d123f54204176edc1a895221e" class="m-doc-self">PRODUCTION_MAIN_ABSENT</a>
+            </dt>
+            <dd>Pravidlo 5 (Anotace neni): &lt;main&gt; =&gt; epsilon.</dd>
+            <dt id="aa7b505463aa5ec584a4fc84a718d0d1c">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#aa7b505463aa5ec584a4fc84a718d0d1c" class="m-doc-self">PRODUCTION_OPTIONAL_EOL_PRESENT</a>
+            </dt>
+            <dd>Pravidlo 6 (EOL je): &lt;optionalEOL&gt; =&gt; EOL.</dd>
+            <dt id="ad5610a00fc592bf5fc8f9a4b6f23fffa">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#ad5610a00fc592bf5fc8f9a4b6f23fffa" class="m-doc-self">PRODUCTION_OPTIONAL_EOL_ABSENT</a>
+            </dt>
+            <dd>Pravidlo 7 (EOL neni): &lt;optionalEOL&gt; =&gt; epsilon.</dd>
+            <dt id="ad4b91d23e58b0321cb625f95c6397b79">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#ad4b91d23e58b0321cb625f95c6397b79" class="m-doc-self">PRODUCTION_PARAM_LIST_TAIL_NEXT</a>
+            </dt>
+            <dd>Pravidlo 9 (Pridani carky) (ptr): &lt;paramComma&gt; =&gt; , &lt;paramAdd&gt;</dd>
+            <dt id="a5b3954af4c09ccfdf7394c3cc7f59a66">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a5b3954af4c09ccfdf7394c3cc7f59a66" class="m-doc-self">PRODUCTION_PARAM_LIST_END</a>
+            </dt>
+            <dd>Pravidlo 10 (Konec parametru A): &lt;paramAdd&gt; =&gt; epsilon.</dd>
+            <dt id="aeffb2196939f818f8db405dda4c39c08">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#aeffb2196939f818f8db405dda4c39c08" class="m-doc-self">PRODUCTION_PARAM_LIST_TAIL_END</a>
+            </dt>
+            <dd>Pravidlo 11 (Konec parametru B): &lt;paramComma&gt; =&gt; epsilon.</dd>
+            <dt id="aa0ef438a80c1fed74a5ed59aebd30ede">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#aa0ef438a80c1fed74a5ed59aebd30ede" class="m-doc-self">PRODUCTION_OPTIONAL_TYPE_PRESENT</a>
+            </dt>
+            <dd>Pravidlo 12 (Navratovy typ je) (ptr): &lt;optionalType&gt; =&gt; : &lt;type&gt;</dd>
+            <dt id="a717a0943ca21974dea9a341ef02ebdf6">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a717a0943ca21974dea9a341ef02ebdf6" class="m-doc-self">PRODUCTION_OPTIONAL_TYPE_ABSENT</a>
+            </dt>
+            <dd>Pravidlo 13 (Navratovy typ neni): &lt;optionalType&gt; =&gt; epsilon.</dd>
+            <dt id="a383b434a57b7339c735d38f920701b3c">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a383b434a57b7339c735d38f920701b3c" class="m-doc-self">PRODUCTION_BLOCK_OR_EXPR_EXPR</a>
+            </dt>
+            <dd>Pravidlo 20 (Jednoradkovy vyraz misto bloku) (ptr): &lt;blockOrExpr&gt; =&gt; &lt;expr&gt; EOL.</dd>
+            <dt id="ae19f99e5fe0dfd046051342049cf58e8">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#ae19f99e5fe0dfd046051342049cf58e8" class="m-doc-self">PRODUCTION_BLOCK_OR_EXPR_BLOCK</a>
+            </dt>
+            <dd>Pravidlo 21 (Pouziti bloku) (ptr): &lt;blockOrExpr&gt; =&gt; &lt;block&gt;</dd>
+            <dt id="add0267d7f9b7cdf765a53a632c2b20ff">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#add0267d7f9b7cdf765a53a632c2b20ff" class="m-doc-self">PRODUCTION_COMMAND_LIST_NEXT</a>
+            </dt>
+            <dd>Pravidlo 23 (Dalsi prikaz) (ptr): &lt;commandList&gt; =&gt; &lt;command&gt; &lt;commandList&gt;</dd>
+            <dt id="afad67b26043b61a2a40d3777492ed161">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#afad67b26043b61a2a40d3777492ed161" class="m-doc-self">PRODUCTION_COMMAND_LIST_END</a>
+            </dt>
+            <dd>Pravidlo 24 (Konec seznamu prikazu): &lt;commandList&gt; =&gt; epsilon.</dd>
+            <dt id="a5489dbe7d414253f4a2fc8c65a7501bc">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a5489dbe7d414253f4a2fc8c65a7501bc" class="m-doc-self">PRODUCTION_COMMAND_END_SEMICOLON</a>
+            </dt>
+            <dd>Pravidlo 25 (Konec prikazu - strednik): &lt;commandEnd&gt; =&gt; ;.</dd>
+            <dt id="a5446f346934e11139e0888e1fe0d70e5">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a5446f346934e11139e0888e1fe0d70e5" class="m-doc-self">PRODUCTION_COMMAND_END_EOL</a>
+            </dt>
+            <dd>Pravidlo 26 (Konec prikazu - EOL): &lt;commandEnd&gt; =&gt; EOL.</dd>
+            <dt id="aff986aea8332b32b403b34796bcca0e2">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#aff986aea8332b32b403b34796bcca0e2" class="m-doc-self">PRODUCTION_VAR</a>
+            </dt>
+            <dd>Pravidlo 29 (Deklarace modifikovatelne promenne): &lt;valVar&gt; =&gt; var.</dd>
+            <dt>
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#ac9ca375208424396b2cb2e87ebfdfa84" class="m-doc">PRODUCTION_COMMAND_SIMPLE_EXPR</a>
+            </dt>
+            <dd></dd>
+            <dt id="a80c0f05039eff69e668f8f21b4d1eef5">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a80c0f05039eff69e668f8f21b4d1eef5" class="m-doc-self">PRODUCTION_COMMAND_SIMPLE</a>
+            </dt>
+            <dd>Pravidlo 45 (Jednoduchy prikaz) (ptr): &lt;command&gt; =&gt; &lt;commandSimple&gt; &lt;commandEnd&gt;</dd>
+            <dt id="a5fa90b9106f54c670bb50ffd43dfa07f">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a5fa90b9106f54c670bb50ffd43dfa07f" class="m-doc-self">PRODUCTION_COMMAND_CONTROL</a>
+            </dt>
+            <dd>Pravidlo 46 (Ridici prikaz) (ptr): &lt;command&gt; =&gt; &lt;commandControl&gt;</dd>
+            <dt id="abcda87ed99c2efae13a6563bd8d230c6">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#abcda87ed99c2efae13a6563bd8d230c6" class="m-doc-self">PRODUCTION_THEN_BRANCH_BLOCK</a>
+            </dt>
+            <dd>Pravidlo 55 (Then vetev s blokem) (ptr): &lt;thenBranch&gt; =&gt; &lt;block&gt; &lt;optionalElse&gt;</dd>
+            <dt id="a2a848d2109ad8723d60d588fbd3b8053">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a2a848d2109ad8723d60d588fbd3b8053" class="m-doc-self">PRODUCTION_THEN_BRANCH_SIMPLE</a>
+            </dt>
+            <dd>Pravidlo 56 (Then vetev s prikazem) (ptr): &lt;thenBranch&gt; =&gt; &lt;commandSimple&gt; &lt;elseOrCommandEnd&gt;</dd>
+            <dt id="a9144c950bed073e0f117b476af1e6da3">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a9144c950bed073e0f117b476af1e6da3" class="m-doc-self">PRODUCTION_THEN_BRANCH_CONTROL</a>
+            </dt>
+            <dd>Pravidlo 57 (Then vetev s ridicim prikazem, bez else) (ptr): &lt;thenBranch&gt; =&gt; &lt;commandControl&gt;</dd>
+            <dt id="ab777926960a8fa8c77f6734085a39492">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#ab777926960a8fa8c77f6734085a39492" class="m-doc-self">PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END</a>
+            </dt>
+            <dd>Pravidlo 58 (Konec prikazu v then vetvi) (ptr): &lt;elseOrCommandEnd&gt; =&gt; &lt;commandEnd&gt;</dd>
+            <dt id="ad3b0b7a9ef6fff0db7943c8518a76253">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#ad3b0b7a9ef6fff0db7943c8518a76253" class="m-doc-self">PRODUCTION_RETURN_VALUE_EXPR</a>
+            </dt>
+            <dd>Pravidlo 35 (Return vyrazu) (ptr): &lt;returnValue&gt; =&gt; &lt;expr&gt;</dd>
+            <dt id="a3526e871d180bda63626cd8f07ea9656">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a3526e871d180bda63626cd8f07ea9656" class="m-doc-self">PRODUCTION_RETURN_VALUE_EMPTY</a>
+            </dt>
+            <dd>Pravidlo 36 (Prazdny return): &lt;returnValue&gt; =&gt; epsilon.</dd>
+            <dt id="a2ffd2dde705c583199b315257ff5af8c">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a2ffd2dde705c583199b315257ff5af8c" class="m-doc-self">PRODUCTION_GUARD_LIST_END</a>
+            </dt>
+            <dd>Pravidlo 42 (Konec strazi): &lt;guardList&gt; =&gt; epsilon.</dd>
+            <dt id="a117c03d59f093c23590390d2a3b59956">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a117c03d59f093c23590390d2a3b59956" class="m-doc-self">PRODUCTION_BLOCK_OR_COMMAND_BLOCK</a>
+            </dt>
+            <dd>Pravidlo 43 (Nasleduje blok) (ptr): &lt;blockOrCommand&gt; =&gt; &lt;block&gt;</dd>
+            <dt id="a56b755281c55319c5dad39fe41fc8983">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a56b755281c55319c5dad39fe41fc8983" class="m-doc-self">PRODUCTION_BLOCK_OR_COMMAND_COMMAND</a>
+            </dt>
+            <dd>Pravidlo 44 (Nasleduje prikaz) (ptr): &lt;blockOrCommand&gt; =&gt; &lt;command&gt;</dd>
+            <dt id="aab32edd9baebbc80588a1112129f78b5">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#aab32edd9baebbc80588a1112129f78b5" class="m-doc-self">PRODUCTION_OPTIONAL_ELSE_ABSENT</a>
+            </dt>
+            <dd>Pravidlo 49 (Vynechana vetev else): &lt;optionalElse&gt; =&gt; epsilon.</dd>
+            <dt id="a46e4a444d3f9c3ac35f6a6c9e801b084">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a46e4a444d3f9c3ac35f6a6c9e801b084" class="m-doc-self">PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED</a>
+            </dt>
+            <dd>Pravidlo 51 (Odsazeni vyrazu v ternarni podmince) (ptr): &lt;exprOrIndentExpr&gt; =&gt; EOL INDENT &lt;expr&gt; EOL DEDENT.</dd>
+            <dt id="a1c33bd81975579744b87ed9d7f80cb15">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a1c33bd81975579744b87ed9d7f80cb15" class="m-doc-self">PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN</a>
+            </dt>
+            <dd>Pravidlo 52 (Neodsazeny vyraz v ternarni podmince) (ptr): &lt;exprOrIndentExpr&gt; =&gt; &lt;expr&gt;</dd>
+            <dt id="a24d5784d91101cec5105e7f28603fd50">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a24d5784d91101cec5105e7f28603fd50" class="m-doc-self">PRODUCTION_ELSE_TERNARY_IF_ABSENT</a>
+            </dt>
+            <dd>Pravidlo 54 (Nedokoncena vetev else): &lt;elseTernaryIf&gt; =&gt; epsilon.</dd>
+            <dt id="a6fd2d5a90748180d8f2ecfb4229856b5">
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#a6fd2d5a90748180d8f2ecfb4229856b5" class="m-doc-self">PRODUCTION_TEST_EXPR_STAR</a>
+            </dt>
+            <dd>Testovaci pravidlo mimo gramatiku: &lt;expr&gt; =&gt; *.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="ac9ca375208424396b2cb2e87ebfdfa84"><div>
+            <h3>
+              const <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <a href="#ac9ca375208424396b2cb2e87ebfdfa84" class="m-doc-self">PRODUCTION_COMMAND_SIMPLE_EXPR</a>
+            </h3>
+<p>Pravidlo 30 (Prikaz vyrazu) (ptr): &lt;commandSimple&gt; =&gt; &lt;exprNoID&gt; Pozn.: nahradi PRODUCTION_COMMAND_EXPR, ktere se odstrani v LL tabulce.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

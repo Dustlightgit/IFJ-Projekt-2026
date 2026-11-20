@@ -1,0 +1,929 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="scanner_8c" kind="file" language="C++">
+    <compoundname>scanner.c</compoundname>
+    <includes refid="scanner_8h" local="yes">scanner.h</includes>
+    <includes refid="stack_8h" local="yes">stack.h</includes>
+    <includes refid="dstring_8h" local="yes">dstring.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <incdepgraph>
+      <node id="7">
+        <label>dstring.h</label>
+        <link refid="dstring_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="1">
+        <label>src/scanner.c</label>
+        <link refid="scanner_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>scanner.h</label>
+        <link refid="scanner_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="6">
+        <label>stddef.h</label>
+      </node>
+      <node id="9">
+        <label>stdio.h</label>
+      </node>
+      <node id="10">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structKeyword" prot="public">Keyword</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="scanner_8c_1a2582c4e6850358df29c0f91a5379e0f4" prot="public" static="no">
+        <name>PUSHBACK_MAX</name>
+        <initializer>16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="21" column="9" bodyfile="src/scanner.c" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8" prot="public" static="no" strong="no">
+        <type></type>
+        <name>State</name>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a1844f314039d713261df43a309145446" prot="public">
+          <name>STATE_START</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a4ee43fa807d5cf21c9c7c09dca543a31" prot="public">
+          <name>STATE_ASSIGN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a006e0d031efafc9a4090885bb0a4f41c" prot="public">
+          <name>STATE_NOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8aadeb10440fb26d8f31d9de08fbed7846" prot="public">
+          <name>STATE_GREATER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a1b0fb017716e122fc6025e81c34d104c" prot="public">
+          <name>STATE_PLUS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a212e63d95e4f2e190ebdc2f061d87884" prot="public">
+          <name>STATE_AMPERSAND</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a5fb7e79aded19518bef06477f923f2e7" prot="public">
+          <name>STATE_PIPE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8ab81b1aa81da3be3cb1a232f34241bc8b" prot="public">
+          <name>STATE_LESS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a0d15cc14df5481149a1cb18245e81f84" prot="public">
+          <name>STATE_SLASH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a792a3b49035cf7bd25659aeb87241190" prot="public">
+          <name>STATE_LINE_COMMENT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8af945292230bd3cfe3c72961cf271c7db" prot="public">
+          <name>STATE_BLOCK_COMMENT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a8c43b02ad4f995b1b47932494369a640" prot="public">
+          <name>STATE_BLOCK_SLASH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a2d366667dd3d06c9c2cbbc82ee0fd265" prot="public">
+          <name>STATE_BLOCK_STAR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8afc8df9b178ba8b45d7090e3a083363fa" prot="public">
+          <name>STATE_ID</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a0303a773c5ac4ecf942519d6e2f1a160" prot="public">
+          <name>STATE_INT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8ae0614c921832f0200e1cd670db018d93" prot="public">
+          <name>STATE_INT_UNDERSCORE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a237a1eca2b0d8a897edcc492456887a1" prot="public">
+          <name>STATE_DOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a827f0c56a09e5ab9b124b0e84556f4b1" prot="public">
+          <name>STATE_INT_DOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8adb8cf83503a0a137426a7bdaf6ee1f86" prot="public">
+          <name>STATE_FRAC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a09b7cf9eb221e61f21a66b6405e16f80" prot="public">
+          <name>STATE_FRAC_UNDERSCORE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a2359ae7432717bf6b90ec68410e1127f" prot="public">
+          <name>STATE_EXP_START</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a339ade39235e45a427f1bc69221efd59" prot="public">
+          <name>STATE_EXP_SIGN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8ae99dc282a9a66b5ae4884fa6e214e0d0" prot="public">
+          <name>STATE_EXP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a0d7fa6368e0eececf1c4c0c1bf971a12" prot="public">
+          <name>STATE_EXP_UNDERSCORE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8afd4949461895b03bbb1200e0c349d818" prot="public">
+          <name>STATE_STRING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a5067b1d743db85c137c946a67aa6e1a9" prot="public">
+          <name>STATE_STRING_ESCAPE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a4264c868cb35e93f76ab4851c98b7484" prot="public">
+          <name>STATE_QUOTE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8ab43eb682d9353ebadba83202e31a8e9c" prot="public">
+          <name>STATE_QUOTE2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8a4d4783f4584458f1b5985ddbcec94398" prot="public">
+          <name>STATE_MULTI</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="scanner_8c_1a5d74787dedbc4e11c1ab15bf487e61f8acfa1c6b40ba771d0c6d9a98793f28472" prot="public">
+          <name>STATE_AT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="100" column="1" bodyfile="src/scanner.c" bodystart="100" bodyend="132"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="scanner_8c_1a147d0cecc85d0cf77386195384c07e31" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int pushback[PUSHBACK_MAX]</definition>
+        <argsstring>[PUSHBACK_MAX]</argsstring>
+        <name>pushback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="22" column="12" bodyfile="src/scanner.c" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1aeb73a6e94497a0021447ebad5eee352c" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int pushback_count</definition>
+        <argsstring></argsstring>
+        <name>pushback_count</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="23" column="12" bodyfile="src/scanner.c" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a41ebd28ef1d7c6ade45642cb6acc1039" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int line</definition>
+        <argsstring></argsstring>
+        <name>line</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="26" column="12" bodyfile="src/scanner.c" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1af2b180be70437a168b4d9ad7872cccd3" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool line_has_token</definition>
+        <argsstring></argsstring>
+        <name>line_has_token</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="29" column="13" bodyfile="src/scanner.c" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a931a02e52cc8d96b0e353f0659c6ef7b" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int paren_depth</definition>
+        <argsstring></argsstring>
+        <name>paren_depth</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="32" column="12" bodyfile="src/scanner.c" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1af297cce2a6c1ef1967bffaf9503ff681" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool pending_nl</definition>
+        <argsstring></argsstring>
+        <name>pending_nl</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="35" column="13" bodyfile="src/scanner.c" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a5d32854a401a57bde7ef810563735e9e" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool after_newline_comment</definition>
+        <argsstring></argsstring>
+        <name>after_newline_comment</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="38" column="13" bodyfile="src/scanner.c" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1aeaf76160841175eb81ddd71c1ce5f2ce" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool at_line_start</definition>
+        <argsstring></argsstring>
+        <name>at_line_start</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="41" column="13" bodyfile="src/scanner.c" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1adc35f6ca17ff034e455e57f4b4534738" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int indent_count</definition>
+        <argsstring></argsstring>
+        <name>indent_count</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="42" column="12" bodyfile="src/scanner.c" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a788fac370810bcf26af170a04785d67f" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool indent_has_tab</definition>
+        <argsstring></argsstring>
+        <name>indent_has_tab</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="43" column="13" bodyfile="src/scanner.c" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a2c40f5594c5226ff61412c82ca521c83" prot="public" static="yes" mutable="no">
+        <type><ref refid="structStack" kindref="compound">Stack</ref></type>
+        <definition>Stack indent_stack</definition>
+        <argsstring></argsstring>
+        <name>indent_stack</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="46" column="14" bodyfile="src/scanner.c" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1aa18a430754f2be3fbd46f9750e6e1ee0" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool indent_ready</definition>
+        <argsstring></argsstring>
+        <name>indent_ready</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="47" column="13" bodyfile="src/scanner.c" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1ab2f61239a02d5a1bcefc1bcc24b3b4c9" prot="public" static="yes" mutable="no">
+        <type><ref refid="structToken" kindref="compound">Token</ref></type>
+        <definition>Token held_token</definition>
+        <argsstring></argsstring>
+        <name>held_token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="50" column="14" bodyfile="src/scanner.c" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a8a031a5db56bea828aab6a13c7aaa06d" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool has_held</definition>
+        <argsstring></argsstring>
+        <name>has_held</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="51" column="13" bodyfile="src/scanner.c" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a26949d8b40212ab769eb0aa42476411c" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int pending_dedents</definition>
+        <argsstring></argsstring>
+        <name>pending_dedents</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="52" column="12" bodyfile="src/scanner.c" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a717cf38349e4d18d8302b6410db5e800" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int logical_indent</definition>
+        <argsstring></argsstring>
+        <name>logical_indent</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="55" column="12" bodyfile="src/scanner.c" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a1c92fdfe12195912db8c8863adcc7e6d" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool pending_check</definition>
+        <argsstring></argsstring>
+        <name>pending_check</name>
+        <initializer>=
+    false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="56" column="13" bodyfile="src/scanner.c" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a81c04cf87844963b7351fe163fa14607" prot="public" static="yes" mutable="no">
+        <type><ref refid="structDString" kindref="compound">DString</ref></type>
+        <definition>DString buffer</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="60" column="16" bodyfile="src/scanner.c" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a13b12497d15bbfcd427d3da3a202e495" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool buffer_active</definition>
+        <argsstring></argsstring>
+        <name>buffer_active</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="61" column="13" bodyfile="src/scanner.c" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="scanner_8c_1a162a0e6c52794f353e28cf3cd8d2bc80" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="structKeyword" kindref="compound">Keyword</ref></type>
+        <definition>const Keyword keywords[]</definition>
+        <argsstring>[]</argsstring>
+        <name>keywords</name>
+        <initializer>= {
+    {&quot;def&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a30d3c23e6256ee2349a066b4de360a72" kindref="member">TOKEN_KW_DEF</ref>},       {&quot;do&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aaa77962f31ff1907bf5bcabf2c3a5d76" kindref="member">TOKEN_KW_DO</ref>},
+    {&quot;else&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a547528f9338f062664cdbb5eb31a7a75" kindref="member">TOKEN_KW_ELSE</ref>},     {&quot;if&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921af9ac81a39613f70696d2b11a9a4f3a5d" kindref="member">TOKEN_KW_IF</ref>},
+    {&quot;import&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a300f0df298b95bcd89f44f34f1a177ae" kindref="member">TOKEN_KW_IMPORT</ref>}, {&quot;return&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a345a9050f5b89b634f2c5ec787ea54c4" kindref="member">TOKEN_KW_RETURN</ref>},
+    {&quot;then&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a089f5a83bf72bd3ece2a8fd07b546761" kindref="member">TOKEN_KW_THEN</ref>},     {&quot;val&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921adaa096d9b5644c541a953793ccd06980" kindref="member">TOKEN_KW_VAL</ref>},
+    {&quot;var&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a6ffacab6b61365785f103c5ca66cba9c" kindref="member">TOKEN_KW_VAR</ref>},       {&quot;while&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a32ff7400f585a66b51d3ba9569b618ab" kindref="member">TOKEN_KW_WHILE</ref>},
+    {&quot;for&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a95ef43533be2a36dbeeab3fd76361e19" kindref="member">TOKEN_KW_FOR</ref>},       {&quot;true&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a0bfe75e32e6efc883f386554e8c173dd" kindref="member">TOKEN_KW_TRUE</ref>},
+    {&quot;false&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a86f1c50587c517e1cbe1589e13228866" kindref="member">TOKEN_KW_FALSE</ref>},   {&quot;Int&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a742cf96ad3e40d1c94c19cd2a599389b" kindref="member">TOKEN_KW_INT</ref>},
+    {&quot;Double&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921ad86779bfd6c7e01953afa16cbe05dcdc" kindref="member">TOKEN_KW_DOUBLE</ref>}, {&quot;String&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921af45ae58b7506113e9cb1c65d8d0db6b1" kindref="member">TOKEN_KW_STRING</ref>},
+    {&quot;Unit&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a42cea1e15300c2860e3b82a444dcae02" kindref="member">TOKEN_KW_UNIT</ref>},     {&quot;Boolean&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a2aa68a623d0c1028cfbfb78d0cdc3229" kindref="member">TOKEN_KW_BOOLEAN</ref>},
+    {&quot;List&quot;, <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921abd360478d160e90b985c9ca1e73ba1c6" kindref="member">TOKEN_KW_LIST</ref>},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="227" column="22" bodyfile="src/scanner.c" bodystart="227" bodyend="238"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="scanner_8c_1a60c30b726bc8db486fe0a2832625356f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void buf_start</definition>
+        <argsstring>(void)</argsstring>
+        <name>buf_start</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="63" column="13" bodyfile="src/scanner.c" bodystart="63" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a1950520fff85f7078ba49448da7c683f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void buf_release</definition>
+        <argsstring>(void)</argsstring>
+        <name>buf_release</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="68" column="13" bodyfile="src/scanner.c" bodystart="68" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a34661f8436cfe1239ce0a61e643d2a3a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void free_token_text</definition>
+        <argsstring>(Token *token)</argsstring>
+        <name>free_token_text</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="76" column="13" bodyfile="src/scanner.c" bodystart="76" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1ae307f99bc34167a9d83a1f8e99e1c8a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void scanner_cleanup</definition>
+        <argsstring>(void)</argsstring>
+        <name>scanner_cleanup</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="85" column="6" bodyfile="src/scanner.c" bodystart="85" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1ab6a4c441ff65fe3a889d04a8ea940c0c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool is_alpha</definition>
+        <argsstring>(int character)</argsstring>
+        <name>is_alpha</name>
+        <param>
+          <type>int</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="135" column="13" bodyfile="src/scanner.c" bodystart="135" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a599076e297a6f10d92496cf4e8b12352" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool is_digit</definition>
+        <argsstring>(int character)</argsstring>
+        <name>is_digit</name>
+        <param>
+          <type>int</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="140" column="13" bodyfile="src/scanner.c" bodystart="140" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a4ae53a063476d1fbc729d99519c65efb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int next_char</definition>
+        <argsstring>(void)</argsstring>
+        <name>next_char</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="145" column="12" bodyfile="src/scanner.c" bodystart="145" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1ad06e316696ef55794e223b9e0753061d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void put_back</definition>
+        <argsstring>(int character)</argsstring>
+        <name>put_back</name>
+        <param>
+          <type>int</type>
+          <declname>character</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="158" column="13" bodyfile="src/scanner.c" bodystart="158" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a54e98a8e4d3b0808badf4a6a087dd09d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool single_char_type</definition>
+        <argsstring>(int character, TokenType *type)</argsstring>
+        <name>single_char_type</name>
+        <param>
+          <type>int</type>
+          <declname>character</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="176" column="13" bodyfile="src/scanner.c" bodystart="176" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1ae6120006e4406a8670568f6d9ac39fb3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+        <definition>static TokenType lookup_keyword</definition>
+        <argsstring>(const char *word)</argsstring>
+        <name>lookup_keyword</name>
+        <param>
+          <type>const char *</type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="241" column="18" bodyfile="src/scanner.c" bodystart="241" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a772af955db1c96434f04deb3ebc4780f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void finish_int</definition>
+        <argsstring>(Token *token, DString *buffer)</argsstring>
+        <name>finish_int</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type><ref refid="structDString" kindref="compound">DString</ref> *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="253" column="13" bodyfile="src/scanner.c" bodystart="253" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a026e3fdf25c33a235b21ecdc7aa633d5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void finish_double</definition>
+        <argsstring>(Token *token, DString *buffer)</argsstring>
+        <name>finish_double</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type><ref refid="structDString" kindref="compound">DString</ref> *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="264" column="13" bodyfile="src/scanner.c" bodystart="264" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1ae0deabf8648062a17d205a30e7baca68" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void read_token</definition>
+        <argsstring>(Token *token)</argsstring>
+        <name>read_token</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="271" column="13" bodyfile="src/scanner.c" bodystart="271" bodyend="901"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a4dc286585ce81c39765228eb7c7ed1cc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void make_token</definition>
+        <argsstring>(Token *token, TokenType type, int token_line)</argsstring>
+        <name>make_token</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>token_line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="904" column="13" bodyfile="src/scanner.c" bodystart="904" bodyend="909"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a6f7d7d4c0be3459e7f17d77928ca63a2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void apply_indent</definition>
+        <argsstring>(Token *token)</argsstring>
+        <name>apply_indent</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="924" column="13" bodyfile="src/scanner.c" bodystart="924" bodyend="972"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a5d9e137df40bf99ef084fe4848d3d5f9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void flush_indent</definition>
+        <argsstring>(Token *token)</argsstring>
+        <name>flush_indent</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="975" column="13" bodyfile="src/scanner.c" bodystart="975" bodyend="997"/>
+      </memberdef>
+      <memberdef kind="function" id="scanner_8c_1a9f25c94c4af354e3996b5f0691005053" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void get_token</definition>
+        <argsstring>(Token *token)</argsstring>
+        <name>get_token</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>t</declname>
+          <defname>token</defname>
+        </param>
+        <briefdescription>
+<para>Precte dalsi token ze standardniho vstupu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, do ktereho se ulozi nacteny token. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="1002" column="6" bodyfile="src/scanner.c" bodystart="1002" bodyend="1078"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/scanner.c"/>
+  </compounddef>
+</doxygen>

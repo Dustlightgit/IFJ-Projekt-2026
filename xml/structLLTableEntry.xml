@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structLLTableEntry" kind="struct" language="C++" prot="public">
+    <compoundname>LLTableEntry</compoundname>
+    <includes refid="LL__table_8h" local="no">LL_table.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structLLTableEntry_1aa370d1287fb0b6116c02c8ab5e580e2b" prot="public" static="no" mutable="no">
+        <type><ref refid="LL__table_8h_1afbeab96fe38bbd25326643845660fd17" kindref="member">LLRuleType</ref></type>
+        <definition>LLRuleType LLTableEntry::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>LLTableEntry::type</qualifiedname>
+        <briefdescription>
+<para>Urcuje, ktery clen unie je platny. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LL_table.h" line="79" column="14" bodyfile="src/LL_table.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLLTableEntry_1a924e7e8d951c34c0e985b6236e53a69a" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref> *</type>
+        <definition>const StaticProduction* LLTableEntry::production</definition>
+        <argsstring></argsstring>
+        <name>production</name>
+        <qualifiedname>LLTableEntry::production</qualifiedname>
+        <briefdescription>
+<para>Platne pro LL_RULE_STATIC. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LL_table.h" line="81" column="28" bodyfile="src/LL_table.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLLTableEntry_1a7b82dc59e0ac6fd52016ce14715c0e86" prot="public" static="no" mutable="no">
+        <type><ref refid="semantic__types_8h_1acbe2ed0b0877f90cab9d7f87ff6d89bd" kindref="member">SemanticCallback</ref></type>
+        <definition>SemanticCallback LLTableEntry::callback</definition>
+        <argsstring></argsstring>
+        <name>callback</name>
+        <qualifiedname>LLTableEntry::callback</qualifiedname>
+        <briefdescription>
+<para>Platne pro LL_RULE_SEMANTIC. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LL_table.h" line="82" column="22" bodyfile="src/LL_table.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structLLTableEntry_1a79ee481aed4a0691ab757cf1f15d4c7c" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structLLTableEntry" kindref="compound">LLTableEntry</ref></type>
+        <definition>union LLTableEntry LLTableEntry</definition>
+        <argsstring></argsstring>
+        <name></name>
+        <qualifiedname>LLTableEntry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LL_table.h" line="83" column="3"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Polozka LL tabulky. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>U callbacku vklada produkci na zasobnik akce sama, aby mohla rovnou pripojit i sve atributy podle potreby. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="11">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>GrammarSymbol</label>
+        <link refid="structGrammarSymbol"/>
+      </node>
+      <node id="1">
+        <label>LLTableEntry</label>
+        <link refid="structLLTableEntry"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>production</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>callback</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="10">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SemanticContext</label>
+        <link refid="structSemanticContext"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>id_expr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>StaticProduction</label>
+        <link refid="structStaticProduction"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>production</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/LL_table.h" line="78" column="1" bodyfile="src/LL_table.h" bodystart="78" bodyend="84"/>
+    <listofallmembers>
+      <member refid="structLLTableEntry_1a7b82dc59e0ac6fd52016ce14715c0e86" prot="public" virt="non-virtual"><scope>LLTableEntry</scope><name>callback</name></member>
+      <member refid="structLLTableEntry_1a924e7e8d951c34c0e985b6236e53a69a" prot="public" virt="non-virtual"><scope>LLTableEntry</scope><name>production</name></member>
+      <member refid="structLLTableEntry_1aa370d1287fb0b6116c02c8ab5e580e2b" prot="public" virt="non-virtual"><scope>LLTableEntry</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

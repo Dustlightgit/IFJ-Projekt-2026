@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structRuntime" kind="struct" language="C++" prot="public">
+    <compoundname>Runtime</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structRuntime_1ab372ff6ea16eac7ae86de4c20e35d520" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Runtime::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>Runtime::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="362" column="14" bodyfile="src/generator.c" bodystart="362" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structRuntime_1af092178fadc6934e7446dc8d38d37cbb" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Runtime::needs</definition>
+        <argsstring></argsstring>
+        <name>needs</name>
+        <qualifiedname>Runtime::needs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="363" column="14" bodyfile="src/generator.c" bodystart="363" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structRuntime_1a4d13b5145ded40b07482f803709c35f1" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Runtime::body</definition>
+        <argsstring></argsstring>
+        <name>body</name>
+        <qualifiedname>Runtime::body</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="364" column="14" bodyfile="src/generator.c" bodystart="364" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/generator.c" line="361" column="1" bodyfile="src/generator.c" bodystart="361" bodyend="365"/>
+    <listofallmembers>
+      <member refid="structRuntime_1a4d13b5145ded40b07482f803709c35f1" prot="public" virt="non-virtual"><scope>Runtime</scope><name>body</name></member>
+      <member refid="structRuntime_1ab372ff6ea16eac7ae86de4c20e35d520" prot="public" virt="non-virtual"><scope>Runtime</scope><name>name</name></member>
+      <member refid="structRuntime_1af092178fadc6934e7446dc8d38d37cbb" prot="public" virt="non-virtual"><scope>Runtime</scope><name>needs</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

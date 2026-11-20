@@ -1,0 +1,2414 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="precedence__semantic__actions_8h" kind="file" language="C++">
+    <compoundname>precedence_semantic_actions.h</compoundname>
+    <includes refid="semantic__types_8h" local="yes">semantic_types.h</includes>
+    <includedby refid="precedence__semantic__actions_8c" local="yes">src/precedence_semantic_actions.c</includedby>
+    <includedby refid="reduction__table_8c" local="yes">src/reduction_table.c</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="1">
+        <label>src/precedence_semantic_actions.h</label>
+        <link refid="precedence__semantic__actions_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="9">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/precedence_semantic_actions.c</label>
+        <link refid="precedence__semantic__actions_8c"/>
+      </node>
+      <node id="1">
+        <label>src/precedence_semantic_actions.h</label>
+        <link refid="precedence__semantic__actions_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1aa1620e4de53417859236e7bc46e39e78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_term_id</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_term_id</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E0 (Term ID). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= ID</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Terminal s atributem je na zasobniku uz uzel AST (EXPR_VARIABLE) vytvoreny akci special_action_precedence_preprocessing, akce proto jen preda jeho ukazatel jako vyrazovy podstrom E. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="53" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="219" bodyend="227" declfile="src/precedence_semantic_actions.h" declline="53" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1aee0d8e510c464a368a7663385dd17ba8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_term_int</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_term_int</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E1 (Term integer). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= INT_LIT</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Terminal s atributem je na zasobniku uz uzel AST (EXPR_LITERAL typu int) vytvoreny akci special_action_precedence_preprocessing, akce proto jen preda jeho ukazatel jako vyrazovy podstrom E. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="71" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="230" bodyend="238" declfile="src/precedence_semantic_actions.h" declline="71" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a5abf3af6581971e278179e81609ea7e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_term_double</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_term_double</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E2 (Term double). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= DOUBLE_LIT</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Terminal s atributem je na zasobniku uz uzel AST (EXPR_LITERAL typu double) vytvoreny akci special_action_precedence_preprocessing, akce proto jen preda jeho ukazatel jako vyrazovy podstrom E. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="89" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="241" bodyend="249" declfile="src/precedence_semantic_actions.h" declline="89" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a276b68fceaab165d3886353c49515ee7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_term_string</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_term_string</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E3 (Term string). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= STRING_LIT</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Terminal s atributem je na zasobniku uz uzel AST (EXPR_LITERAL typu string) vytvoreny akci special_action_precedence_preprocessing, akce proto jen preda jeho ukazatel jako vyrazovy podstrom E. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="107" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="252" bodyend="260" declfile="src/precedence_semantic_actions.h" declline="107" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a03e4883c6b612e550065353fed0e9aef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_term_true</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_term_true</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E4 (Term true). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= true</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Klicove slovo atribut nema, akce proto vytvori literal pres expr_new_bool(true). Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="123" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="263" bodyend="272" declfile="src/precedence_semantic_actions.h" declline="123" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a855252c6e262d0e73a62ad34eb45893a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_term_false</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_term_false</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E5 (Term false). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= false</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Klicove slovo atribut nema, akce proto vytvori literal pres expr_new_bool(false). Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="139" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="275" bodyend="283" declfile="src/precedence_semantic_actions.h" declline="139" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1acd175e315e10007e5331cbeb74943949" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_term_unit</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_term_unit</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E6 (Term unit). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= ( )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori literal unit pres expr_new_unit. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="154" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="286" bodyend="294" declfile="src/precedence_semantic_actions.h" declline="154" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a527ebcb08f1dfb5298af6c371c072f2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_unary_plus</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_unary_plus</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E7 (Operator + unarni). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= + E (operator je terminal TOKEN_PLUS_UNARY)</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori unarni uzel (expr_new_unary, UNOP_PLUS) z operandu pod operatorem. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="170" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="297" bodyend="303" declfile="src/precedence_semantic_actions.h" declline="170" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a299ac39cf47ec053b49b74cdf63a4f1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_unary_minus</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_unary_minus</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E8 (Operator - unarni). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= - E (operator je terminal TOKEN_MINUS_UNARY)</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori unarni uzel (expr_new_unary, UNOP_NEG) z operandu pod operatorem. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="186" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="306" bodyend="312" declfile="src/precedence_semantic_actions.h" declline="186" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a45e3ef00e186aa598d2188a86dd82caf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_unary_not</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_unary_not</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E9 (Operator ! unarni). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= ! E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori unarni uzel (expr_new_unary, UNOP_NOT) z operandu pod operatorem. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="202" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="315" bodyend="320" declfile="src/precedence_semantic_actions.h" declline="202" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a2b67cc9df744914628761fcbd56bbc21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_multiply</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_multiply</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E10 (Operator *). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E * E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_MUL) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="218" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="323" bodyend="328" declfile="src/precedence_semantic_actions.h" declline="218" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a4248611923178b44b09fada5f7c00c20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_divide</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_divide</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E11 (Operator /). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E / E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_DIV) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="234" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="331" bodyend="336" declfile="src/precedence_semantic_actions.h" declline="234" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a0c24aa6846bd75142bafa864adb3bb75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_add</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_add</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E12 (Operator +). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E + E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_ADD) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="250" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="339" bodyend="344" declfile="src/precedence_semantic_actions.h" declline="250" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a503e1220d3aa2f91180f063a6ba92e83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_subtract</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_subtract</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E13 (Operator -). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E - E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_SUB) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="266" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="347" bodyend="352" declfile="src/precedence_semantic_actions.h" declline="266" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a608d50c92c2236e8d3c7927e12f96d23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_concat</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_concat</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E14 (Operator ++). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E ++ E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_CONCAT_LIST) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="282" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="355" bodyend="360" declfile="src/precedence_semantic_actions.h" declline="282" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1aaab45e6ef67bc75a523c675381326d58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_less</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_less</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E15 (Operator &lt;). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E &lt; E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_LT) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="298" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="363" bodyend="368" declfile="src/precedence_semantic_actions.h" declline="298" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a2d9ad181a04faa8907d8edb4533917ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_less_equal</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_less_equal</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E16 (Operator &lt;=). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E &lt;= E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_LE) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="314" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="371" bodyend="376" declfile="src/precedence_semantic_actions.h" declline="314" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1aed33c74bdf7faa08fa12237ddec929b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_greater</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_greater</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E17 (Operator &gt;). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E &gt; E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_GT) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="330" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="379" bodyend="384" declfile="src/precedence_semantic_actions.h" declline="330" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1acb5813b36399ca699754d7f1ca7e09ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_greater_equal</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_greater_equal</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E18 (Operator &gt;=). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E &gt;= E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_GE) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="346" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="387" bodyend="392" declfile="src/precedence_semantic_actions.h" declline="346" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a04c447d82fe43b9cdf379a021f520382" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_equal</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_equal</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E19 (Operator ==). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E == E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_EQ) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="362" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="395" bodyend="400" declfile="src/precedence_semantic_actions.h" declline="362" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1ac266109add2fc4ae8f2156ae099224ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_not_equal</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_not_equal</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E20 (Operator !=). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E != E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_NE) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="378" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="403" bodyend="408" declfile="src/precedence_semantic_actions.h" declline="378" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1af857f32f83b766963ab7168c001106f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_and</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_and</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E21 (Operator &amp;&amp;). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E &amp;&amp; E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_AND) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="394" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="411" bodyend="416" declfile="src/precedence_semantic_actions.h" declline="394" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a1df0d3ab02f2958dfd27bca94b4673ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_or</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_or</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E22 (Operator ||). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E || E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori binarni uzel (expr_new_binary, BINOP_OR) z leveho a praveho operandu. Operator atribut nema. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="410" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="419" bodyend="424" declfile="src/precedence_semantic_actions.h" declline="410" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1ad878082f7ab4f3d65758cc99060b20bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_call_no_args</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_call_no_args</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E23 (Volani funkce bez parametru). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= ID ( )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Z pomocneho uzlu ID vezme jmeno, vytvori volani funkce bez argumentu (expr_new_call) a pomocny uzel uvolni. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="426" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="427" bodyend="436" declfile="src/precedence_semantic_actions.h" declline="426" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1af4794b96e514bf269d635ada28f0bf56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_call_one_arg</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_call_one_arg</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E24 (Volani funkce s parametrem). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= ID ( E )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Z pomocneho uzlu ID vezme jmeno, vytvori volani funkce (expr_new_call) a prida mu argument. Indexace seznamu ma stejny tvar, proto se vzdy vytvari volani funkce a rozlisi ho semanticky analyzator. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="444" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="439" bodyend="452" declfile="src/precedence_semantic_actions.h" declline="444" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a22f14e1ea6c4b5b94cbc7c73b229d978" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_call_multiple_args</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_call_multiple_args</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E25 (Volani funkce s vice parametry). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= ID ( ARGS )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori volani funkce se jmenem z pomocneho uzlu ID. ARGS je na zasobniku pomocny uzel EXPR_LIST_LITERAL (viz E36), jehoz prvky se presunou do volani (expr_call_take_args), schranka se uvolni. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="462" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="455" bodyend="466" declfile="src/precedence_semantic_actions.h" declline="462" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a880c5791a1875a75afec6b551d34835c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_list_empty</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_list_empty</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E26 (Prazdny seznam). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= List ( )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori prazdny seznam (expr_new_list_literal). Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="477" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="469" bodyend="477" declfile="src/precedence_semantic_actions.h" declline="477" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a15ab125241b4cd07d558a63626b596a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_list_one_element</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_list_one_element</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E27 (Jednoprvkovy seznam). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= List ( E )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori seznam (expr_new_list_literal) s jednim prvkem. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="493" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="480" bodyend="490" declfile="src/precedence_semantic_actions.h" declline="493" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a9bee2eb302c67d4ab0aedac08b58ddea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_list_multiple_elements</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_list_multiple_elements</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E28 (Viceprvkovy seznam). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= List ( ARGS )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. ARGS je na zasobniku pomocny uzel EXPR_LIST_LITERAL (viz E36), ktery je rovnou hledanym seznamem, akce jej proto jen preda jako vyrazovy podstrom E. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="510" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="493" bodyend="501" declfile="src/precedence_semantic_actions.h" declline="510" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a18856fbe79ca2099860adc65ed0372d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_member_access</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_member_access</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E29 (Clenska notace). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E . ID</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori clen bez argumentu (expr_new_member), jmeno vezme z pomocneho uzlu ID, ktery uvolni. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="526" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="504" bodyend="514" declfile="src/precedence_semantic_actions.h" declline="526" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a2115b970a18bd1f5dfc11b839733cbe1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_method_no_args</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_method_no_args</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E30 (Clenska notace bez parametru). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E . ID ( )</para>
+<para>Vypise cislo pravidla na stderr a skonci chybou ERR_UNDEFINED, protoze v zvolenych rozsirenich neexistuje zadna clenska metoda bez parametru.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, akce ho nenastavuje (konci chybou). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="541" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="517" bodyend="529" declfile="src/precedence_semantic_actions.h" declline="541" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1ae9207e9042eb84588ae899ace52c18d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_method_one_arg</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_method_one_arg</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E31 (Clenska metoda s parametrem). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E . ID ( E )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori clen (expr_new_member) se jmenem z pomocneho uzlu ID a prida mu jeden argument. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="557" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="532" bodyend="544" declfile="src/precedence_semantic_actions.h" declline="557" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a664a72fe5761da6f0e859ce34d103a04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_method_multiple_args</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_method_multiple_args</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E32 (Clenska metoda s vice parametry). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E . ID ( ARGS )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Vytvori clen (expr_new_member) se jmenem z pomocneho uzlu ID. Prvky ARGS (pomocny EXPR_LIST_LITERAL) presune do clenu (expr_member_take_args). Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="574" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="547" bodyend="559" declfile="src/precedence_semantic_actions.h" declline="574" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a6047abab19dc65b13d6ddbf7682681ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_list_static_function_no_args</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_list_static_function_no_args</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E33 (Staticka funkce seznamu bez parametru). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= List . ID ( )</para>
+<para>Vypise cislo pravidla na stderr. List.range ma v AST vlastni uzel (viz E34) a obecna staticka funkce seznamu neexistuje, akce proto vzdy skonci chybou ERR_ARGS (nespravny pocet parametru).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="590" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="562" bodyend="573" declfile="src/precedence_semantic_actions.h" declline="590" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1aa084c74247e54c18a33f32e21f53cb37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_list_static_function_one_arg</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_list_static_function_one_arg</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E34 (Staticka funkce seznamu s parametrem). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= List . ID ( E )</para>
+<para>Vypise cislo pravidla na stderr. List.range ma v AST vlastni uzel (viz E34) a obecna staticka funkce seznamu neexistuje, akce proto vzdy skonci chybou ERR_ARGS (nespravny pocet parametru).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="607" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="576" bodyend="586" declfile="src/precedence_semantic_actions.h" declline="607" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1afe5a0934364619efdf19bbd3f0dec000" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_list_static_function_multiple_args</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_list_static_function_multiple_args</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E35 (Staticka funkce seznamu s vice parametry). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= List . ID ( ARGS )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Jmeno v ID musi byt presne range, jinak skonci chybou ERR_UNDEFINED. ARGS (pomocny EXPR_LIST_LITERAL) musi mit 2 nebo 3 prvky, jinak skonci chybou ERR_ARGS. Vytvori uzel expr_new_list_range (start, end, nepovinne step). Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="627" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="590" bodyend="618" declfile="src/precedence_semantic_actions.h" declline="627" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a6fadf5b98dd470d73d9e6aa107625466" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_args_create</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_args_create</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E36 (Tvorba seznamu parametru). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: ARGS &lt;= E , E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal ARGS. Vytvori seznam argumentu, tedy pomocny uzel EXPR_LIST_LITERAL se dvema prvky. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="643" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="621" bodyend="634" declfile="src/precedence_semantic_actions.h" declline="643" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a7a3fb10d34178051a49c73d92105e681" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_args_append</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_args_append</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E37 (Konsolidace parametru). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: ARGS &lt;= ARGS , E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal ARGS. Prida vyraz na konec seznamu argumentu (pomocneho uzlu EXPR_LIST_LITERAL), ktery preda dale. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="659" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="637" bodyend="647" declfile="src/precedence_semantic_actions.h" declline="659" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a3040a36938e8f7d488941414bdd7125c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_args_trailing_comma_expr</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_args_trailing_comma_expr</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E38 (Likvidace koncove carky (za vyrazem)). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: ARGS &lt;= E ,</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal ARGS. Koncova carka se zahodi, jediny vyraz se zabali do seznamu argumentu (pomocneho uzlu EXPR_LIST_LITERAL), aby se ARGS na zasobniku dalo vzdy poznat od vyrazu. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="676" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="650" bodyend="662" declfile="src/precedence_semantic_actions.h" declline="676" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1af4ed12085404a2e9404011cb49e413ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_args_trailing_comma_args</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_args_trailing_comma_args</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E39 (Likvidace koncove carky (za seznamem)). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: ARGS &lt;= ARGS ,</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal ARGS. Koncova carka se zahodi, ukazatel na seznam argumentu se jen preda. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="692" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="665" bodyend="672" declfile="src/precedence_semantic_actions.h" declline="692" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a920da125001e68400324ef4c744fdb0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_parenthesized_expr</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_parenthesized_expr</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E40 (Redukce uzavorkovanych vyrazu). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= ( E )</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Zavorky se zahodi, ukazatel na vnitrni vyraz se jen preda. Zachova se i jeho anotace, aby (1 to 5) by 2 fungovalo stejne jako 1 to 5 by 2. Anotace vysledku je anotace vnitrniho vyrazu.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="709" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="675" bodyend="685" declfile="src/precedence_semantic_actions.h" declline="709" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a26751169c6aafbc9bd30e0977be93d3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_ternary_else</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_ternary_else</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E41 (Pripojeni else vetve). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= TIF E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. TIF je rozpracovany uzel EXPR_IF bez else vetve. Akce z praveho vyrazu vytvori blok (block_from_expr), pripoji ho jako else vetev (expr_if_set_else) a uzel preda jako vyraz E. Anotace vysledku je CONTEXT_NONE.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="726" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="688" bodyend="703" declfile="src/precedence_semantic_actions.h" declline="726" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__semantic__actions_8h_1a20c3c61b34ec9ede014744c86c7aa581" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void precedence_action_infix_method</definition>
+        <argsstring>(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>precedence_action_infix_method</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Semanticka akce pravidla E42 (Infixova metoda). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo: E &lt;= E ID_OPERATOR E</para>
+<para>Vypise cislo pravidla na stderr a redukuje handle na neterminal E. Podle jmena v ID_OPERATOR: &quot;to&quot; a &quot;until&quot; vytvori rozsah bez kroku (expr_new_range) s anotaci CONTEXT_RANGE_WITHOUT_STEP; &quot;by&quot; doplni krok (expr_range_set_step) k rozsahu v levem operandu, ktery musi mit tuto anotaci, jinak skonci chybou ERR_OTHER; cokoliv jineho vytvori clen s jednim argumentem (expr_new_member), jehoz platnost overi semanticky analyzator. Anotace vysledku je CONTEXT_NONE, jen pro &quot;to&quot; a &quot;until&quot; CONTEXT_RANGE_WITHOUT_STEP.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol a atributy noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_semantic_actions.h" line="747" column="6" bodyfile="src/precedence_semantic_actions.c" bodystart="706" bodyend="744" declfile="src/precedence_semantic_actions.h" declline="747" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/precedence_semantic_actions.h"/>
+  </compounddef>
+</doxygen>
