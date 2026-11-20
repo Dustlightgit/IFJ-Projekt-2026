@@ -41,3 +41,5 @@
 - **formátování** všech souborů v `src/` – `make format`
 - výsledné **zabalení** do `output/` – `make package`
 - **čištění** složek `build/`, `output/` a zbytků po testech - `make clean`
+- `make show-docs` otevře na portu 8000 dokumentaci od doxy
+  - `make stop-docs` proces ukončí
