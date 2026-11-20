@@ -18,7 +18,7 @@ def factorialRecursive(n: Int): Int =
     return n * smaller
 
 @main def factorialExample(): Unit =
-  val n = readInt()  // nemodifikovatelna promenna
+  val n = readInt()  // nemodifikovatelna promenna //
   // Int je ve Scale 32b - vice nez 12! by preteklo.
   // V IFJ chovani v krajnich situacich (pre-/podteceni) prilis netestujeme,
   // ale je vhodne se k tomu nejak konkretne pri implementaci postavit.

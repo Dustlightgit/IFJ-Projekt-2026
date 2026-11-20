@@ -15,6 +15,8 @@
         - xbalaka00 - pridan oddelovac NONTERM_LL_TABLE_COUNT, za nej
           presunut NONTERM_ID_COMMAND a pridany NONTERM_TIF a NONTERM_ARGS
           z vyrazove analyzy, pridana funkce nonterm_type_validate.
+        - xbalaka00 - odstranen NONTERM_TIF, ternarni if ve vyrazu je nyni
+          terminal TOKEN_TIF (prompt je v token.h).
 
     Tento soubor obsahuje vyctovy typ pro neterminaly a deklarace funkci pro
     praci s nimi.
@@ -191,6 +193,11 @@
         pravidlo 30.
 */
 
+/*
+    Prompt pro odstraneni NONTERM_TIF (TIF je nyni terminal TOKEN_TIF) je
+    v souboru token.h.
+*/
+
 /**
  * @brief Neterminaly LL gramatiky a vyrazove analyzy.
  *
@@ -235,17 +242,14 @@ typedef enum {
   NONTERM_ELSE_OR_COMMAND_END, ///< Else za inline then, nebo konec prikazu
   NONTERM_TERNARY_IF,          ///< Ternarni if
   NONTERM_EXPR_OR_INDENT_EXPR, ///< Vyraz, pripadne odsazeny
-  NONTERM_ELSE_TERNARY_IF,     ///< Else vetev ternarniho ifu, pripadne odsazena
+  NONTERM_ELSE_TERNARY_IF,     ///< Else vetev ternarniho ifu, pripadne odsazena  
 
-  // Pseudoneterminal, predani do vyrazove analyzy. Prozatim indexuje LL
-  // tabulku kvuli testovacim pravidlum, pozdeji bude presunut za oddelovac.
-  NONTERM_EXPR, ///< Vyraz (v precedencni gramatice neterminal E)
-
+  // Tento oddelovac oddeluje indexatory LL tabulky od ostatnich neterminalu
   NONTERM_LL_TABLE_COUNT, ///< Pocet neterminalu indexujicich LL tabulku
 
   // Neterminaly, ktere LL tabulku neindexuji
+  NONTERM_EXPR, ///< Vyraz (v precedencni gramatice neterminal E, v prediktivni <expr>)
   NONTERM_ID_COMMAND, ///< Prikaz zacinajici na ID (v odpovednosti jadra)
-  NONTERM_TIF,        ///< Ternarni if ve vyrazove analyze (TIF)
   NONTERM_ARGS,       ///< Seznam argumentu ve vyrazove analyze (ARGS)
 
   NONTERM_COUNT ///< Pocet hodnot enumu, pouze informativni

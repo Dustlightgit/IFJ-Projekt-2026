@@ -17,6 +17,7 @@
           je v precedence_helpers.h).
         - xbalaka00 - pridane nazvy tokenu TOKEN_PLUS_UNARY
           a TOKEN_MINUS_UNARY (prompt je v token.h).
+        - xbalaka00 - pridan nazev tokenu TOKEN_TIF (prompt je v souboru token.h).
 
     Implementace funkci pro spravu a reprezentaci tokenu lexikalniho
     analyzatoru.
@@ -144,6 +145,8 @@ const char *token_type_name(TokenType type) {
     return "ID_OPERATOR";
   case TOKEN_DOLLAR:
     return "$";
+  case TOKEN_TIF:
+    return "TIF";
   default:
     return "?";
   }
