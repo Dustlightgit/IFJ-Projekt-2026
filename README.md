@@ -31,16 +31,13 @@
 
 ## Překlad a testování
 
+- **výchozí** chování příkazu **`make` je `build`**
 - kompilace do `build/` – `make build`
-- spouštění `build/main` - `make run`
-- testování – `make test` - spusti vsechny unit testy ve slozce `/test/scripts` jednotlivych casti prekladace a zatoven otestuje prekladac pomoci _valgrind_
-    - vic info o testovani v `/test/tests.md`
-- formátování všech souborů v `src/` – `make format`
-- výsledné zabalení do `output/` – `make package`
-- přikaz `make` - `build-test`
-- čištění složek `build/` a `output/` - `make clean`
-
-- další příkazy `make`:
-    - `clean-build`
-    - `clean-build-test`
-    - `build-test`
+    - **rekompilace** - `make rebuild` (spustí `clean` a pak `build`)
+- **spouštění překladače** v `build/main` - `make run`
+- **testování** – `make test` - otestuje překladač pomocí **_valgrind_** a zároveň spustí všechny **unit testy** ve složce `/test/scripts` jednotlivých částí překladače 
+    - vždy spustí `rebuild`
+    - více informací o testování v `/test/tests.md`
+- **formátování** všech souborů v `src/` – `make format`
+- výsledné **zabalení** do `output/` – `make package`
+- **čištění** složek `build/`, `output/` a zbytků po testech - `make clean`

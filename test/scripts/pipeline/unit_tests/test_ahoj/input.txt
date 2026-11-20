@@ -1,0 +1,10 @@
+import ifj26.*
+
+def showLine(text: String): Unit =
+  print(text)
+  print("\n")
+
+@main def stringsExample(): Unit =
+  val message = "Ahoj"
+  showLine(message)
+  print("to byla vitaci zprava")
