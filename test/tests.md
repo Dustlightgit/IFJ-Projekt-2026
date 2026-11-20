@@ -18,7 +18,7 @@
 ## Aktualně ignorované
 | COMPONENT | TEST |
 | --- | --- |
-| `pipeline` | `algebdt`, `extkw`, `interpolateds`, `lambdas`, `paramlists` |
+| `pipeline` | `algebdt`, `extkw`, `interpolateds`, `lambdas`, `paramlists`, `lists` |
 | `parser` | *všechny testy* |
 
 # MISC

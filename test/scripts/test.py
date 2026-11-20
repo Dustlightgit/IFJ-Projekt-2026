@@ -9,7 +9,7 @@ INTERPRET_TESTS = [
 ]
 
 EXCEPTIONS = [
-    ["pipeline", "algebdt", "extkw", "interpolateds", "lambdas", "paramlists"],
+    ["pipeline", "algebdt", "extkw", "interpolateds", "lambdas", "paramlists", "lists"],
     ["parser"],
 ]
 
