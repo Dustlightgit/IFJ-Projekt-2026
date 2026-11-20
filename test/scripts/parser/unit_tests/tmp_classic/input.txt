@@ -1,0 +1,12 @@
+import ifj26.*
+
+def add(a: Int, b: Int): Int =
+    val s: Int = *
+    return *
+
+def twice(x: Int): Int = *
+
+@main def run(): Unit =
+    val r: Int = *
+    var t: Int = *
+    t = *
