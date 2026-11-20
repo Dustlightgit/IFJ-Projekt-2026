@@ -7,7 +7,7 @@
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
     Seznam zmen:
-        - xbalaka00 - include semantic_actions.h nahrazen semantic_types.h.
+        - xbalaka00 - include predictive_semantic_actions.h nahrazen semantic_types.h.
         - xbalaka00 - pridana deklarace funkce ll_table_lookup a poznamka
           o zname chybe v navrhu gramatiky.
         - xbalaka00 - velikost tabulky je NONTERM_LL_TABLE_COUNT radku,
@@ -23,7 +23,7 @@
 #define LL_TABLE_H
 
 /*
-    Zmena includu (semantic_actions.h nahrazen semantic_types.h) byla
+    Zmena includu (predictive_semantic_actions.h nahrazen semantic_types.h) byla
     zpusobena prompty, jejichz zneni je v souboru semantic_types.h.
 */
 
@@ -79,7 +79,7 @@ typedef struct {
   LLRuleType type; ///< Urcuje, ktery clen unie je platny
   union {
     const StaticProduction *production; ///< Platne pro LL_RULE_STATIC
-    SemanticCallback callback;          ///< Platne pro LL_RULE_SEMANTIC
+    PredictiveSemanticAction callback;          ///< Platne pro LL_RULE_SEMANTIC
   };
 } LLTableEntry;
 
@@ -100,7 +100,7 @@ typedef struct {
     jeho ukonceni zajisti else. Pravidla ale prikaz v <blockOrCommand> terminuji
     pomoci <commandEnd>, takze takovy zapis nelze odvodit. Chyba nevznikla
     pri prevodu gramatiky do kodu, je dana navrhem gramatiky. Gramatika bude
-    prepracovana a pravidla v LL_table.c, production.c a semantic_actions.c
+    prepracovana a pravidla v LL_table.c, production.c a predictive_semantic_actions.c
     nasledne prepsana; do te doby LL tabulka tuto chybu obsahuje.
 */
 

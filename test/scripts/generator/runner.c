@@ -4,7 +4,7 @@
 
 #include "ast.h"
 #include "generator.h"
-#include "semantic.h"
+#include "semantic_analyzer.h"
 #include "symtable.h"
 
 #define SO_PATH "/tmp/ifj_ast.so"

@@ -29,12 +29,13 @@
           token.h).
         - xbalaka00 - cisla pravidel v komentarich maji tvar L<n> po vzoru
           E<n> u precedencnich pravidel (prompt je v token.h).
+        - xbalaka00 - akce byly prejmenovany na predictive_action_*
 
     Tento soubor obsahuje LL tabulku prediktivniho parseru vyplnenou podle
     tabulky gramatiky (parser_formalisms.xlsx), makra pro zapis jejich polozek
     a funkci pro vyhledani pravidla v tabulce.
     Staticke produkce, na ktere se tabulka odkazuje, jsou v production.c,
-    semanticke akce v semantic_actions.c. Sloupec *dalsi a neterminal v
+    semanticke akce v predictive_semantic_actions.c. Sloupec *dalsi a neterminal v
     odpovednosti jadra parseru (<IDcommand>) v tabulce nejsou. Radek <expr>
     je prazdny, prechod do vyrazove analyzy resi jadro parseru.
     Pravidla jsou cislovana s prefixem L (napr. L8) po vzoru pravidel E8
@@ -48,8 +49,8 @@
 
 #include "error.h"
 #include "nonterminal.h"
+#include "predictive_semantic_actions.h"
 #include "production.h"
-#include "semantic_actions.h"
 #include "token.h"
 
 /*
@@ -74,8 +75,8 @@
 
 /*
     Prompt pro vychozi testovaci obsah LL tabulky, staticke produkce, makra
-    LL_PROD a LL_CALLBACK a semanticke akce v semantic_actions.c. Stejny prompt
-    zpusobil zmeny take v semantic_actions.h, semantic_actions.c a production.h,
+    LL_PROD a LL_CALLBACK a semanticke akce v predictive_semantic_actions.c. Stejny prompt
+    zpusobil zmeny take v predictive_semantic_actions.h, predictive_semantic_actions.c a production.h,
     jeho zneni je pouze zde.
 
     Prompt pro Claude:
@@ -151,8 +152,8 @@
 
 /*
     Prompt pro vyplneni LL tabulky z tabulky gramatiky a odstraneni testovacich
-    pravidel. Stejny prompt zpusobil zmeny take v semantic_actions.c
-    a semantic_actions.h, jeho zneni je pouze zde.
+    pravidel. Stejny prompt zpusobil zmeny take v predictive_semantic_actions.c
+    a predictive_semantic_actions.h, jeho zneni je pouze zde.
 
     Prompt pro Claude:
         Dobrá, nyní bych přešel na převedení LL tabulky z excelu do kódu.
@@ -209,7 +210,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L0
     [NONTERM_PROGRAM] =
         {
-            [TOKEN_KW_IMPORT] = LL_CALLBACK(semantic_action_prolog),
+            [TOKEN_KW_IMPORT] = LL_CALLBACK(predictive_action_prolog),
         },
 
     // L1, L2
@@ -223,15 +224,15 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L3
     [NONTERM_DEF] =
         {
-            [TOKEN_KW_DEF] = LL_CALLBACK(semantic_action_function_definition),
+            [TOKEN_KW_DEF] = LL_CALLBACK(predictive_action_function_definition),
             [TOKEN_ANNOT_MAIN] =
-                LL_CALLBACK(semantic_action_function_definition),
+                LL_CALLBACK(predictive_action_function_definition),
         },
 
     // L4, L5
     [NONTERM_MAIN_ANNOTATION] =
         {
-            [TOKEN_ANNOT_MAIN] = LL_CALLBACK(semantic_action_main_annotation),
+            [TOKEN_ANNOT_MAIN] = LL_CALLBACK(predictive_action_main_annotation),
             [TOKEN_KW_DEF] = LL_PROD(PRODUCTION_MAIN_ABSENT),
         },
 
@@ -245,7 +246,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L8, L10
     [NONTERM_PARAM_LIST] =
         {
-            [TOKEN_ID] = LL_CALLBACK(semantic_action_param_add),
+            [TOKEN_ID] = LL_CALLBACK(predictive_action_param_add),
             [TOKEN_RPAREN] = LL_PROD(PRODUCTION_PARAM_LIST_END),
         },
 
@@ -266,12 +267,12 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L14-L19
     [NONTERM_TYPE] =
         {
-            [TOKEN_KW_INT] = LL_CALLBACK(semantic_action_type_int),
-            [TOKEN_KW_DOUBLE] = LL_CALLBACK(semantic_action_type_double),
-            [TOKEN_KW_STRING] = LL_CALLBACK(semantic_action_type_string),
-            [TOKEN_KW_UNIT] = LL_CALLBACK(semantic_action_type_unit),
-            [TOKEN_KW_BOOLEAN] = LL_CALLBACK(semantic_action_type_boolean),
-            [TOKEN_KW_LIST] = LL_CALLBACK(semantic_action_type_list),
+            [TOKEN_KW_INT] = LL_CALLBACK(predictive_action_type_int),
+            [TOKEN_KW_DOUBLE] = LL_CALLBACK(predictive_action_type_double),
+            [TOKEN_KW_STRING] = LL_CALLBACK(predictive_action_type_string),
+            [TOKEN_KW_UNIT] = LL_CALLBACK(predictive_action_type_unit),
+            [TOKEN_KW_BOOLEAN] = LL_CALLBACK(predictive_action_type_boolean),
+            [TOKEN_KW_LIST] = LL_CALLBACK(predictive_action_type_list),
         },
 
     // L20, L21
@@ -287,7 +288,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L22
     [NONTERM_BLOCK] =
         {
-            [TOKEN_EOL] = LL_CALLBACK(semantic_action_block),
+            [TOKEN_EOL] = LL_CALLBACK(predictive_action_block),
         },
 
     // L23, L24
@@ -348,16 +349,16 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
                 LL_PROD(PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END),
             [TOKEN_EOL] = LL_PROD(PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END),
             [TOKEN_KW_ELSE] =
-                LL_CALLBACK(semantic_action_else_or_command_end_else),
+                LL_CALLBACK(predictive_action_else_or_command_end_else),
         },
 
     // L27, L30, L31, L34 (jednoduche prikazy)
     [NONTERM_COMMAND_SIMPLE] =
         {
-            [TOKEN_ID] = LL_CALLBACK(semantic_action_id_command),
-            [TOKEN_KW_RETURN] = LL_CALLBACK(semantic_action_return_command),
-            [TOKEN_KW_VAL] = LL_CALLBACK(semantic_action_declaration_command),
-            [TOKEN_KW_VAR] = LL_CALLBACK(semantic_action_declaration_command),
+            [TOKEN_ID] = LL_CALLBACK(predictive_action_id_command),
+            [TOKEN_KW_RETURN] = LL_CALLBACK(predictive_action_return_command),
+            [TOKEN_KW_VAL] = LL_CALLBACK(predictive_action_declaration_command),
+            [TOKEN_KW_VAR] = LL_CALLBACK(predictive_action_declaration_command),
             [TOKEN_KW_LIST] = LL_PROD(PRODUCTION_COMMAND_SIMPLE_EXPR),
             [TOKEN_LPAREN] = LL_PROD(PRODUCTION_COMMAND_SIMPLE_EXPR),
         },
@@ -365,15 +366,15 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L37, L38, L47 (ridici prikazy)
     [NONTERM_COMMAND_CONTROL] =
         {
-            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_if_command),
-            [TOKEN_KW_WHILE] = LL_CALLBACK(semantic_action_while_command),
-            [TOKEN_KW_FOR] = LL_CALLBACK(semantic_action_for_command),
+            [TOKEN_KW_IF] = LL_CALLBACK(predictive_action_if_command),
+            [TOKEN_KW_WHILE] = LL_CALLBACK(predictive_action_while_command),
+            [TOKEN_KW_FOR] = LL_CALLBACK(predictive_action_for_command),
         },
 
     // L28, L29
     [NONTERM_VAL_VAR] =
         {
-            [TOKEN_KW_VAL] = LL_CALLBACK(semantic_action_val),
+            [TOKEN_KW_VAL] = LL_CALLBACK(predictive_action_val),
             [TOKEN_KW_VAR] = LL_PROD(PRODUCTION_VAR),
         },
 
@@ -407,22 +408,22 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L39, L40
     [NONTERM_FOR_HEADER] =
         {
-            [TOKEN_EOL] = LL_CALLBACK(semantic_action_for_header_block),
-            [TOKEN_ID] = LL_CALLBACK(semantic_action_for_header_inline),
+            [TOKEN_EOL] = LL_CALLBACK(predictive_action_for_header_block),
+            [TOKEN_ID] = LL_CALLBACK(predictive_action_for_header_inline),
         },
 
     // L41, L42
     [NONTERM_GUARD_LIST] =
         {
             [TOKEN_DEDENT] = LL_PROD(PRODUCTION_GUARD_LIST_END),
-            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_guard_next),
+            [TOKEN_KW_IF] = LL_CALLBACK(predictive_action_guard_next),
         },
 
     // L48, L49
     [NONTERM_OPTIONAL_ELSE] =
         {
             [TOKEN_KW_ELSE] =
-                LL_CALLBACK(semantic_action_optional_else_present),
+                LL_CALLBACK(predictive_action_optional_else_present),
             [TOKEN_DEDENT] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_ID] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
             [TOKEN_KW_RETURN] = LL_PROD(PRODUCTION_OPTIONAL_ELSE_ABSENT),
@@ -438,7 +439,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
     // L50
     [NONTERM_TERNARY_IF] =
         {
-            [TOKEN_KW_IF] = LL_CALLBACK(semantic_action_ternary_if),
+            [TOKEN_KW_IF] = LL_CALLBACK(predictive_action_ternary_if),
         },
 
     // L51, L52
@@ -453,7 +454,7 @@ const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT] = {
 
     // L53, L54
     [NONTERM_ELSE_TERNARY_IF] = {
-        [TOKEN_EOL] = LL_CALLBACK(semantic_action_else_ternary_if_indented),
+        [TOKEN_EOL] = LL_CALLBACK(predictive_action_else_ternary_if_indented),
         [TOKEN_ID] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
         [TOKEN_KW_IF] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),
         [TOKEN_KW_ELSE] = LL_PROD(PRODUCTION_ELSE_TERNARY_IF_ABSENT),

@@ -24,6 +24,7 @@
     cislo pravidla, stavi uzly AST z podstromu ulozenych na zasobniku a urcuji
     neterminal, na ktery se handle redukuje. Datove typy akci jsou v semantic_types.h, prompt, ze ktereho
     soubor vznikl, je v souboru precedence_semantic_actions.c.
+    Semanticke kontroly jsou prevazne zajistovany analyzatorem v souboru semantic_analyzer.*
 */
 
 #ifndef PRECEDENCE_SEMANTIC_ACTIONS_H

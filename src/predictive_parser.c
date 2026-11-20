@@ -45,7 +45,7 @@
 #include "error.h"
 #include "grammar_symbol.h"
 #include "precedence_parser.h"
-#include "semantic_actions.h"
+#include "predictive_semantic_actions.h"
 #include "special_actions.h"
 
 void parser_match(ParserContext *ctx, Stack *stack) {
@@ -304,8 +304,8 @@ void parser_match(ParserContext *ctx, Stack *stack) {
     Prompt pro doplneni chovani jadra pro neterminal <IDcommand> (pravidla
     32 a 33), anotaci CONTEXT_ID_COMMAND, polozku id_expr v SemanticContext,
     upravu callbacku pravidla 31 a specialni akce pro ID. Stejny prompt
-    zpusobil zmeny take v semantic_types.h, semantic_actions.h,
-    semantic_actions.c, special_actions.h a special_actions.c, jeho zneni je
+    zpusobil zmeny take v semantic_types.h, predictive_semantic_actions.h,
+    predictive_semantic_actions.c, special_actions.h a special_actions.c, jeho zneni je
     pouze zde.
 
     Prompt pro Claude:
@@ -489,8 +489,8 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
                   id_expr->as.variable.name);
 
           // Prirazeni se prida do bloku (nebo do tela cyklu ci vetve if)
-          Block *block = target_block(semantic_pointer, annotation,
-                                      ctx->current_token.line);
+          Block *block = special_action_block(semantic_pointer, annotation,
+                                              ctx->current_token.line);
           Stmt *assign =
               stmt_new_assign(id_expr->as.variable.name, NULL, id_expr->line);
           block_add(block, assign);

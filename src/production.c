@@ -21,6 +21,9 @@
           parser_formalisms.xlsx.
         - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
           prompt je v reduction_table.h).
+        - xbalaka00 - odstraneny pozustatky testovaciho pravidla <expr> -> *
+        - xbalaka00 - cislovani pravidel bylo prevedeno na novy format L<n>, aby ladilo s E<n>
+          u precedencniho parseru
 
     Tento soubor obsahuje staticke produkce LL gramatiky, tedy pravidla bez
     semanticke akce. Cisla pravidel odpovidaji tabulce gramatiky (parser_formalisms.xlsx).
@@ -164,7 +167,7 @@
 // i kontextovou anotaci do vsech jejich symbolu, znacka (ptr) je jen
 // informativni.
 
-// Pravidlo 1 (Seznam deklaraci) (ptr): <defList> => <def> <defList>
+// Pravidlo L1 (Seznam deklaraci) (ptr): <defList> => <def> <defList>
 const StaticProduction PRODUCTION_DEF_LIST_NEXT = {
     .length = 2,
     .production =
@@ -174,22 +177,22 @@ const StaticProduction PRODUCTION_DEF_LIST_NEXT = {
         },
 };
 
-// Pravidlo 2 (Konec deklaraci): <defList> => epsilon
+// Pravidlo L2 (Konec deklaraci): <defList> => epsilon
 const StaticProduction PRODUCTION_DEF_LIST_END = {.length = 0};
 
-// Pravidlo 5 (Anotace neni): <main> => epsilon
+// Pravidlo L5 (Anotace neni): <main> => epsilon
 const StaticProduction PRODUCTION_MAIN_ABSENT = {.length = 0};
 
-// Pravidlo 6 (EOL je): <optionalEOL> => EOL
+// Pravidlo L6 (EOL je): <optionalEOL> => EOL
 const StaticProduction PRODUCTION_OPTIONAL_EOL_PRESENT = {
     .length = 1,
     .production = {GRAMMAR_TERMINAL(TOKEN_EOL)},
 };
 
-// Pravidlo 7 (EOL neni): <optionalEOL> => epsilon
+// Pravidlo L7 (EOL neni): <optionalEOL> => epsilon
 const StaticProduction PRODUCTION_OPTIONAL_EOL_ABSENT = {.length = 0};
 
-// Pravidlo 9 (Pridani carky) (ptr): <paramComma> => , <paramAdd>
+// Pravidlo L9 (Pridani carky) (ptr): <paramComma> => , <paramAdd>
 // Pozn.: Novy radek mezi koncovou carkou a tokenem ) testuje semanticka akce.
 const StaticProduction PRODUCTION_PARAM_LIST_TAIL_NEXT = {
     .length = 2,
@@ -200,13 +203,13 @@ const StaticProduction PRODUCTION_PARAM_LIST_TAIL_NEXT = {
         },
 };
 
-// Pravidlo 10 (Konec parametru A): <paramAdd> => epsilon
+// Pravidlo L10 (Konec parametru A): <paramAdd> => epsilon
 const StaticProduction PRODUCTION_PARAM_LIST_END = {.length = 0};
 
-// Pravidlo 11 (Konec parametru B): <paramComma> => epsilon
+// Pravidlo L11 (Konec parametru B): <paramComma> => epsilon
 const StaticProduction PRODUCTION_PARAM_LIST_TAIL_END = {.length = 0};
 
-// Pravidlo 12 (Navratovy typ je) (ptr): <optionalType> => : <type>
+// Pravidlo L12 (Navratovy typ je) (ptr): <optionalType> => : <type>
 const StaticProduction PRODUCTION_OPTIONAL_TYPE_PRESENT = {
     .length = 2,
     .production =
@@ -216,10 +219,10 @@ const StaticProduction PRODUCTION_OPTIONAL_TYPE_PRESENT = {
         },
 };
 
-// Pravidlo 13 (Navratovy typ neni): <optionalType> => epsilon
+// Pravidlo L13 (Navratovy typ neni): <optionalType> => epsilon
 const StaticProduction PRODUCTION_OPTIONAL_TYPE_ABSENT = {.length = 0};
 
-// Pravidlo 20 (Jednoradkovy vyraz misto bloku) (ptr): <blockOrExpr> => <expr> EOL
+// Pravidlo L20 (Jednoradkovy vyraz misto bloku) (ptr): <blockOrExpr> => <expr> EOL
 // Pozn.: Volani funkce je take expr kvuli FUNEXP.
 const StaticProduction PRODUCTION_BLOCK_OR_EXPR_EXPR = {
     .length = 2,
@@ -230,13 +233,13 @@ const StaticProduction PRODUCTION_BLOCK_OR_EXPR_EXPR = {
         },
 };
 
-// Pravidlo 21 (Pouziti bloku) (ptr): <blockOrExpr> => <block>
+// Pravidlo L21 (Pouziti bloku) (ptr): <blockOrExpr> => <block>
 const StaticProduction PRODUCTION_BLOCK_OR_EXPR_BLOCK = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_BLOCK)},
 };
 
-// Pravidlo 23 (Dalsi prikaz) (ptr): <commandList> => <command> <commandList>
+// Pravidlo L23 (Dalsi prikaz) (ptr): <commandList> => <command> <commandList>
 // Pozn.: Prikazy konci bud koncem logickeho radku, nebo strednikem.
 const StaticProduction PRODUCTION_COMMAND_LIST_NEXT = {
     .length = 2,
@@ -247,10 +250,10 @@ const StaticProduction PRODUCTION_COMMAND_LIST_NEXT = {
         },
 };
 
-// Pravidlo 24 (Konec seznamu prikazu): <commandList> => epsilon
+// Pravidlo L24 (Konec seznamu prikazu): <commandList> => epsilon
 const StaticProduction PRODUCTION_COMMAND_LIST_END = {.length = 0};
 
-// Pravidlo 25 (Konec prikazu - strednik): <commandEnd> => ;
+// Pravidlo L25 (Konec prikazu - strednik): <commandEnd> => ;
 // Pozn.: Prikaz se strednikem na konci bloku je zakazan, protoze by pri
 // spotrebovani DEDENT ze zasobniku nastala chyba.
 const StaticProduction PRODUCTION_COMMAND_END_SEMICOLON = {
@@ -258,26 +261,26 @@ const StaticProduction PRODUCTION_COMMAND_END_SEMICOLON = {
     .production = {GRAMMAR_TERMINAL(TOKEN_SEMICOLON)},
 };
 
-// Pravidlo 26 (Konec prikazu - EOL): <commandEnd> => EOL
+// Pravidlo L26 (Konec prikazu - EOL): <commandEnd> => EOL
 const StaticProduction PRODUCTION_COMMAND_END_EOL = {
     .length = 1,
     .production = {GRAMMAR_TERMINAL(TOKEN_EOL)},
 };
 
-// Pravidlo 29 (Deklarace modifikovatelne promenne): <valVar> => var
+// Pravidlo L29 (Deklarace modifikovatelne promenne): <valVar> => var
 const StaticProduction PRODUCTION_VAR = {
     .length = 1,
     .production = {GRAMMAR_TERMINAL(TOKEN_KW_VAR)},
 };
 
-// Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
-// Pozn.: <exprNoID> je v implementaci nahrazen <expr>, viz pravidlo 30 vyse.
+// Pravidlo L30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
+// Pozn.: <exprNoID> je v implementaci nahrazen <expr>, viz pravidlo L30 vyse.
 const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
 };
 
-// Pravidlo 45 (Jednoduchy prikaz) (ptr): <command> => <commandSimple> <commandEnd>
+// Pravidlo L45 (Jednoduchy prikaz) (ptr): <command> => <commandSimple> <commandEnd>
 const StaticProduction PRODUCTION_COMMAND_SIMPLE = {
     .length = 2,
     .production =
@@ -287,13 +290,13 @@ const StaticProduction PRODUCTION_COMMAND_SIMPLE = {
         },
 };
 
-// Pravidlo 46 (Ridici prikaz) (ptr): <command> => <commandControl>
+// Pravidlo L46 (Ridici prikaz) (ptr): <command> => <commandControl>
 const StaticProduction PRODUCTION_COMMAND_CONTROL = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_CONTROL)},
 };
 
-// Pravidlo 55 (Then vetev s blokem) (ptr): <thenBranch> => <block> <optionalElse>
+// Pravidlo L55 (Then vetev s blokem) (ptr): <thenBranch> => <block> <optionalElse>
 const StaticProduction PRODUCTION_THEN_BRANCH_BLOCK = {
     .length = 2,
     .production =
@@ -303,7 +306,7 @@ const StaticProduction PRODUCTION_THEN_BRANCH_BLOCK = {
         },
 };
 
-// Pravidlo 56 (Then vetev s prikazem) (ptr): <thenBranch> => <commandSimple> <elseOrCommandEnd>
+// Pravidlo L56 (Then vetev s prikazem) (ptr): <thenBranch> => <commandSimple> <elseOrCommandEnd>
 // Pozn.: else musi nasledovat na stejnem radku jako inline then.
 const StaticProduction PRODUCTION_THEN_BRANCH_SIMPLE = {
     .length = 2,
@@ -314,47 +317,47 @@ const StaticProduction PRODUCTION_THEN_BRANCH_SIMPLE = {
         },
 };
 
-// Pravidlo 57 (Then vetev s ridicim prikazem) (ptr): <thenBranch> => <commandControl>
+// Pravidlo L57 (Then vetev s ridicim prikazem) (ptr): <thenBranch> => <commandControl>
 // Pozn.: Bez vetve else, else tak vzdy patri k nejblizsimu if.
 const StaticProduction PRODUCTION_THEN_BRANCH_CONTROL = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_CONTROL)},
 };
 
-// Pravidlo 58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
+// Pravidlo L58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
 const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND_END)},
 };
 
-// Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
+// Pravidlo L35 (Return vyrazu) (ptr): <returnValue> => <expr>
 const StaticProduction PRODUCTION_RETURN_VALUE_EXPR = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
 };
 
-// Pravidlo 36 (Prazdny return): <returnValue> => epsilon
+// Pravidlo L36 (Prazdny return): <returnValue> => epsilon
 const StaticProduction PRODUCTION_RETURN_VALUE_EMPTY = {.length = 0};
 
-// Pravidlo 42 (Konec strazi): <guardList> => epsilon
+// Pravidlo L42 (Konec strazi): <guardList> => epsilon
 const StaticProduction PRODUCTION_GUARD_LIST_END = {.length = 0};
 
-// Pravidlo 43 (Nasleduje blok) (ptr): <blockOrCommand> => <block>
+// Pravidlo L43 (Nasleduje blok) (ptr): <blockOrCommand> => <block>
 const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_BLOCK = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_BLOCK)},
 };
 
-// Pravidlo 44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command>
+// Pravidlo L44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command>
 const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_COMMAND = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_COMMAND)},
 };
 
-// Pravidlo 49 (Vynechana vetev else): <optionalElse> => epsilon
+// Pravidlo L49 (Vynechana vetev else): <optionalElse> => epsilon
 const StaticProduction PRODUCTION_OPTIONAL_ELSE_ABSENT = {.length = 0};
 
-// Pravidlo 51 (Odsazeni vyrazu v ternarni podmince) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
+// Pravidlo L51 (Odsazeni vyrazu v ternarni podmince) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
 // Pozn.: Pravidla 51 a 53 maji shodnou pravou stranu, ale lisi se chovanim.
 const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED = {
     .length = 5,
@@ -368,23 +371,14 @@ const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED = {
         },
 };
 
-// Pravidlo 52 (Neodsazeny vyraz v ternarni podmince) (ptr): <exprOrIndentExpr> => <expr>
+// Pravidlo L52 (Neodsazeny vyraz v ternarni podmince) (ptr): <exprOrIndentExpr> => <expr>
 const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN = {
     .length = 1,
     .production = {GRAMMAR_NONTERMINAL(NONTERM_EXPR)},
 };
 
-// Pravidlo 54 (Nedokoncena vetev else): <elseTernaryIf> => epsilon
+// Pravidlo L54 (Nedokoncena vetev else): <elseTernaryIf> => epsilon
 // Pozn.: Do vyrazovky se vrati neterminal TIF, ktery bude redukovan a pripoji
 // vetev else. Uvnitr zavorek odsazeni nehraje roli, vetev else se pripoji na
 // zaklade redukce ohranicene zavorkami.
 const StaticProduction PRODUCTION_ELSE_TERNARY_IF_ABSENT = {.length = 0};
-
-// Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
-// do vyrazoveho parseru
-
-// Testovaci pravidlo mimo gramatiku: <expr> => *
-const StaticProduction PRODUCTION_TEST_EXPR_STAR = {
-    .length = 1,
-    .production = {GRAMMAR_TERMINAL(TOKEN_STAR)},
-};

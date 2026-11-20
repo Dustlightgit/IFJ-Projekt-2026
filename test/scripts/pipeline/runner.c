@@ -5,7 +5,7 @@
 #include "nonterminal.h"
 #include "parser_common.h"
 #include "predictive_parser.h"
-#include "semantic.h"
+#include "semantic_analyzer.h"
 #include "symtable.h"
 
 int main() {

@@ -10,7 +10,7 @@
     Seznam zmen:
         - xbalaka00 - IDContextType zobecnen a prejmenovan na ContextAnnotation
           (hodnoty CONTEXT_*), SemanticCallback prijima kontextovou anotaci.
-        - xbalaka00 - SemanticCallback prijima cislo radku.
+        - xbalaka00 - PredictiveSemanticAction prijima cislo radku.
         - xbalaka00 - pridana anotace CONTEXT_ID_COMMAND a polozka id_expr
           v SemanticContext.
         - xnovacm00 - pridany nove hodnoty ContextAnnotation za ucelem stavby AST
@@ -35,7 +35,7 @@
 
 /*
     Prompty pro vytvoreni tohoto souboru a presun typu do nej. Stejne prompty
-    zpusobily zmeny take v parser_common.h, semantic_actions.h a LL_table.h,
+    zpusobily zmeny take v parser_common.h, predictive_semantic_actions.h a LL_table.h,
     jejich zneni je pouze zde.
 
     Prompt pro Claude:
@@ -80,7 +80,7 @@
     Prompt pro zobecneni IDContextType na ContextAnnotation, predavani
     anotace callbackum a kopirovani anotace ve statickych produkcich. Stejny
     prompt zpusobil zmeny take v parser_common.h, parser_common.c,
-    semantic_actions.h, semantic_actions.c, production.h, production.c,
+    predictive_semantic_actions.h, predictive_semantic_actions.c, production.h, production.c,
     predictive_parser.h a predictive_parser.c, jeho zneni je pouze zde.
 
     Prompt pro Claude:
@@ -169,8 +169,8 @@ typedef enum {
 } ContextAnnotation;
 
 /*
-    Prompt pro vychozi kostru SemanticContext a SemanticCallback (puvodne
-    v semantic_actions.h).
+    Prompt pro vychozi kostru SemanticContext a PredictiveSemanticAction (puvodne
+    v predictive_semantic_actions.h).
 
     Prompt pro Claude:
         Nevím jestli jsem to již nezmínil, ale budou dva parsery - prediktivní
@@ -219,7 +219,7 @@ typedef enum {
                 - ve vyrazovem parseru to bude obvykle ukazatel na prislusny
                         dokonceny vyrazovy podstrom.
 
-    Prompt pro upravu SemanticCallback (parser context se callbacku nepredava).
+    Prompt pro upravu PredictiveSemanticAction (parser context se callbacku nepredava).
 
     Prompt pro Claude:
         Myslím, že nakonec parser context nakonec nebude potřeba předávat
@@ -227,7 +227,7 @@ typedef enum {
         všechny instance parseru.
 
     Prompt pro predani cisla radku semantickym callbackum. Stejny prompt
-    zpusobil zmeny take v semantic_actions.h, semantic_actions.c
+    zpusobil zmeny take v predictive_semantic_actions.h, predictive_semantic_actions.c
     a predictive_parser.c, jeho zneni je pouze zde.
 
     Prompt pro Claude:
@@ -281,7 +281,7 @@ typedef struct {
  * @param stack Zasobnik parseru, akce na nej muze pridat produkci
  *        a k ni rovnou atributy (ukazatele, kontextove anotace apod.).
  */
-typedef void (*SemanticCallback)(SemanticContext *ctx, void *semantic_pointer,
+typedef void (*PredictiveSemanticAction)(SemanticContext *ctx, void *semantic_pointer,
                                  ContextAnnotation annotation, int line,
                                  Stack *stack);
 
@@ -292,8 +292,8 @@ typedef void (*SemanticCallback)(SemanticContext *ctx, void *semantic_pointer,
     v reduction_table.* a funkci parser_stack_peek. Stejny prompt zpusobil
     zmeny take v reduction_table.h, reduction_table.c, parser_common.h
     a parser_common.c, jeho zneni je pouze zde. V promptu je uvedeno
-    PredictiveSemanticAction a predictive_semantic_actions.*, myslen je tim
-    PrecedenceSemanticAction a precedence_semantic_actions.*.
+    PredictiveSemanticAction a predictive_predictive_semantic_actions.*, myslen je tim
+    PrecedenceSemanticAction a precedence_predictive_semantic_actions.*.
 
     Prompt pro Claude:
         Dobrá, teď bych navrhnul ten callback. Rovnou řeknu, že jim tu budu
