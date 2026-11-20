@@ -28,6 +28,9 @@
         - xbalaka00 - pridany tokeny TOKEN_PLUS_UNARY a TOKEN_MINUS_UNARY mezi
           unarni operatory, TOKEN_PLUS a TOKEN_MINUS presunuty mezi binarni
           terminaly vyrazove analyzy (prompt je v token.h).
+        - xbalaka00 - TOKEN_STAR presunut z indexatoru LL tabulky mezi ostatni
+          terminaly vyrazove analyzy (pred TOKEN_SLASH), pridan terminal
+          TOKEN_TIF (ternarni if ve vyrazu) za TOKEN_DOLLAR (prompt je zde).
 
     Definice typu tokenu, struktury tokenu a prototypu funkci pro lexer.
     Pouzivano i jako terminal parseru.
@@ -60,6 +63,32 @@
         * Uprav také indexační funkci a konstanty velikostí v precedenční tabulce tak, aby tyto nové tokeny podporovaly. Tabulku zatím nevyplňuj.
 */
 
+/*
+    Prompt pro presun TOKEN_STAR z indexatoru LL tabulky mezi indexatory
+    precedencni tabulky, odstraneni zastupce sloupce *dalsi z LL tabulky,
+    zmenu TIF z neterminalu na terminal TOKEN_TIF a zmenu formatu cisel pravidel
+    v LL tabulce na L<n>. Stejny prompt zpusobil zmeny take v token.c,
+    nonterminal.h, nonterminal.c, LL_table.h, LL_table.c, precedence_table.h
+    a precedence_table.c, jeho zneni je pouze zde.
+
+    Prompt pro Claude:
+        Dělám parser založený na hybridu prediktivní a precedenční analýzy. Přikládám relevantní soubory. Pokud by ti některý soubor chyběl, vyžádej si jej, než začneš pracovat. Kontext návrhu a význam kódu si přečti v komentářích a deklarovaných promptech. Dodržuj jmenné konvence (včetně komentářů v češtině bez diakritiky - používej české názvy všech věcí i přesto, že v promptech někdy věci pojmenuji anglicky; prompty ale cituj doslovně po vzoru souborů), formát hlaviček souborů s popisem souboru, dle vzoru přiložených souborů také deklaruj prompty a aktualizuj změnové seznamy. Kód můžeš zkompilovat, ale podle mě není nutné ho testovat na vlastní implementaci.
+
+        Potřebuji, aby jsi z části poklidil po testovacích pravidlech (v LL tabulce jsou záznamy pro hvězdičku jakožto zástupce za sloupec *další, který už jsou v jádře udělány finálním způsobem takže je bezpečné aby se smazaly. Přebytečná pravidla odstraním potom.
+
+        A z části je potřeba změna ovlivňující návrh parseru, protože původně jsem ternární if ještě neměl plně domyšlený, ale teď už vím, že TIF musí být terminál a ne neterminál.
+
+        Potřebuji tedy, aby jsi
+
+        * hvězdičku přesunul z indexátorů LL tabulky mezi běžné indexátory precedenční tabulky
+        * změnil TIF z neterminálu na terminál a zavedl jej jako nový indexátor precedenční tabulky. Zatím jeho sloupec a řádek vyplň errorovými záznamy. Měl by přijít na okraj tabulky, tedy jeho nové záznamy jsou za $ v řádku i v sloupci.
+        * provedl změny, které s tímto souvisí, tedy upravil funkce pro výpis (ne)terminálů, upravil LL tabulku, zohlednil to v indexačních převodech precedenční tabulky apod.
+
+        Teoreticky tyto změny znamenají, že je potřeba i upravit záznamy v redukční tabulce a v sémantickém callbacku na tom jednom místě kde se TIF vyskytuje, avšak to provedu ručně, takže tyto soubory ti nepřikládám (jsou velké a nejsou podle mě nutně potřeba).
+
+        Jo vlastně když už budeš měnit LL tabulku, mohl bys také aktualizovat komentáře, aby čísla pravidel prediktivního parseru uváděly v novém formátu např. L8 s písmenem L aby to zrcadlilo E8 z precedenčních pravidel.
+*/
+
 /**
  * @brief Typ tokenu.
  *
@@ -67,9 +96,6 @@
  * - Hodnoty mensi nez TOKEN_LL_TERM_COUNT indexuji LL tabulku. Jsou mezi nimi
  *   i terminaly vyrazove analyzy, ktere se vyskytuji take v LL gramatice
  *   (ID, (, ), carka a List), ty tedy indexuji i precedencni tabulku.
- *   Docasne je mezi nimi i TOKEN_STAR (testovaci pravidla), ktery v budoucnu
- *   LL tabulku indexovat prestane a bude mezi ostatnimi terminaly vyrazove
- *   analyzy.
  * - Hodnoty mezi TOKEN_LL_TERM_COUNT a TOKEN_EXPRESSION_BEGINNING_DELIMITER
  *   jsou dalsi terminaly vyrazove analyzy, kterymi smi zacinat vyraz.
  * - Hodnoty mezi TOKEN_EXPRESSION_BEGINNING_DELIMITER a
@@ -79,7 +105,7 @@
  *
  * Vyraz nesmi zacinat tokenem, ktery je v enumu za
  * TOKEN_EXPRESSION_BEGINNING_DELIMITER. Hodnoty TOKEN_ID_OPERATOR,
- * TOKEN_PLUS_UNARY, TOKEN_MINUS_UNARY a TOKEN_DOLLAR scanner nevraci,
+ * TOKEN_PLUS_UNARY, TOKEN_MINUS_UNARY, TOKEN_DOLLAR a TOKEN_TIF scanner nevraci,
  * vznikaji az ve vyrazovem scanneru (scanner vraci TOKEN_PLUS a TOKEN_MINUS,
  * ktere se na miste operandu prebarvi na unarni varianty).
  * Hodnoty TOKEN_LL_TERM_COUNT, TOKEN_EXPRESSION_BEGINNING_DELIMITER,
@@ -127,11 +153,6 @@ typedef enum {
   // Main anotace
   TOKEN_ANNOT_MAIN, ///< Cele "@main"
 
-  // DOCASNE: TOKEN_STAR je zde jen kvuli testovacim pravidlum v LL tabulce
-  // (zastupce sloupce *dalsi). V budoucnu se presune mezi ostatni terminaly
-  // vyrazove analyzy (pred TOKEN_SLASH) a z LL tabulky se odstrani.
-  TOKEN_STAR, ///< * (take v "import ifj26.*", mimo vyraz neni operator)
-
   // Zde konci indexatory LL tabulky.
 
   TOKEN_LL_TERM_COUNT, ///< Pocet indexatoru LL tabulky (neni skutecny token)
@@ -162,6 +183,7 @@ typedef enum {
   TOKEN_EXPRESSION_BEGINNING_DELIMITER,
 
   // Ostatni terminaly vyrazove analyzy, indexuji precedencni tabulku
+  TOKEN_STAR,     ///< * (take v "import ifj26.*", mimo vyraz neni operator)
   TOKEN_SLASH,    ///< /
   TOKEN_DOT,      ///< . (VALMEM, LISTS, import)
   TOKEN_PLUSPLUS, ///< ++ (LISTS: spojeni seznamu)
@@ -177,6 +199,7 @@ typedef enum {
   // Specialni terminaly vyrazove analyzy, scanner je nevraci
   TOKEN_ID_OPERATOR, ///< ID prebarvene na operator (nese text jako ID)
   TOKEN_DOLLAR,      ///< $ (konec vyrazu)
+  TOKEN_TIF,         ///< Ternarni if ve vyrazu (TIF)
 
   // Zde konci indexatory precedencni tabulky.
 

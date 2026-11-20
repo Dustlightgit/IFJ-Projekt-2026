@@ -12,6 +12,7 @@
         - xbalaka00 - odstranen nazev pro NONTERM_EXPR_NO_ID.
         - xbalaka00 - pridany nazvy pro NONTERM_TIF a NONTERM_ARGS, pridana
           funkce nonterm_type_validate (prompt je v nonterminal.h).
+        - xbalaka00 - odstranen nazev pro NONTERM_TIF (prompt je v souboru token.h).
 
     Tento soubor obsahuje pomocne funkce pro praci s neterminaly.
 
@@ -22,6 +23,8 @@
 #include "error.h"
 
 /*
+    Prompt pro odstraneni nazvu NONTERM_TIF je v souboru token.h.
+
     Prompt pro odstraneni NONTERM_EXPR_NO_ID je v souboru nonterminal.h.
 
     Prompt pro Claude:
@@ -113,8 +116,6 @@ const char *nonterm_type_name(NonterminalType type) {
     return "vyraz";
 
   // Neterminaly mimo LL tabulku
-  case NONTERM_TIF:
-    return "ternarni if ve vyrazu";
   case NONTERM_ARGS:
     return "seznam argumentu";
 

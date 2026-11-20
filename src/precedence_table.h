@@ -12,6 +12,9 @@
           precedence_parser.h).
         - xbalaka00 - PRECEDENCE_TABLE_SIZE zvetsena z 27 na 29 kvuli novym
           tokenum TOKEN_PLUS_UNARY a TOKEN_MINUS_UNARY (prompt je v token.h).
+        - xbalaka00 - PRECEDENCE_TABLE_SIZE zvetsena z 29 na 30 kvuli novemu
+          tokenu TOKEN_TIF, TOKEN_STAR je nyni v souvislem rozsahu enumu
+          (prompt je v token.h).
 
     Tento soubor obsahuje deklarace pro precedencni tabulku, kterou bude
     vyuzivat precedencni parser vyrazu, a funkce pro prevod terminalu na
@@ -82,13 +85,17 @@
           přikáže precedenčnímu parseru, co má udělat za akci.
 */
 
+/*
+    Prompt pro zvetseni tabulky na 30 (TOKEN_TIF) je v souboru token.h.
+*/
+
 /**
  * @brief Pocet radku i sloupcu precedencni tabulky.
  *
  * Odpovida poctu terminalu vyrazove analyzy, ktere indexuji precedencni
  * tabulku (viz TokenType v token.h).
  */
-#define PRECEDENCE_TABLE_SIZE 29
+#define PRECEDENCE_TABLE_SIZE 30
 
 /**
  * @brief Direktiva precedencni tabulky.

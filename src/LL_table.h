@@ -13,6 +13,7 @@
         - xbalaka00 - velikost tabulky je NONTERM_LL_TABLE_COUNT radku,
           upravena dokumentace ll_table_lookup (prompt je v nonterminal.h).
           TOKEN_STAR zatim docasne zustava indexem tabulky.
+        - xbalaka00 - TOKEN_STAR a NONTERM_EXPR uz LL tabulku neindexuje (prompt je v token.h).
 
     Tento soubor obsahuje deklarace pro LL tabulku, kterou bude vyuzivat
     prediktivni parser, a funkci pro vyhledani pravidla v ni.

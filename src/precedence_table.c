@@ -17,6 +17,10 @@
         - xbalaka00 - vyplnena precedencni tabulka podle rucne navrzene
           tabulky, vypocet indexu je sdileny makry PRECEDENCE_RANGE_INDEX
           a PIDX_* (prompt je zde).
+        - xbalaka00 - TOKEN_STAR je nyni v souvislem rozsahu enumu, odstranen
+          ze switch v precedence_table_try_index, PRECEDENCE_SWITCH_COUNT
+          snizen na 5. Pridan radek a sloupec pro TOKEN_TIF (zatim same
+          prazdne polozky), tabulka ma 30 radku a sloupcu (prompt je v token.h).
 
     Tento soubor obsahuje precedencni tabulku precedencniho parseru vyrazu
     a funkce a makra pro prevod terminalu na jeji index a funkce pro vyhledani direktivy.
@@ -61,13 +65,11 @@
 
 // Pocet terminalu precedencni tabulky, ktere jsou v enumu TokenType mezi
 // indexatory LL tabulky a v precedence_table_try_index je resi switch
-// (KW_LIST, (, ), carka, ID a docasne take TOKEN_STAR).
-#define PRECEDENCE_SWITCH_COUNT 6
+// (KW_LIST, (, ), carka a ID).
+#define PRECEDENCE_SWITCH_COUNT 5
 
-// Pokud se TOKEN_STAR presune z indexatoru LL tabulky mezi ostatni terminaly
-// vyrazove analyzy, tato kontrola selze. Je pak treba odstranit TOKEN_STAR ze
-// switch v precedence_table_try_index, snizit PRECEDENCE_SWITCH_COUNT
-// a zmenit definici PIDX_STAR na PRECEDENCE_RANGE_INDEX(TOKEN_STAR).
+// Kontrola, ze pocet indexatoru v souvislem rozsahu a ve switch odpovida
+// velikosti tabulky.
 _Static_assert(PRECEDENCE_RANGE_COUNT + PRECEDENCE_SWITCH_COUNT ==
                    PRECEDENCE_TABLE_SIZE,
                "Pocet indexatoru precedencni tabulky nesedi s "
@@ -81,7 +83,6 @@ _Static_assert(PRECEDENCE_RANGE_COUNT + PRECEDENCE_SWITCH_COUNT ==
 #define PIDX_SWITCH_RPAREN (PRECEDENCE_RANGE_COUNT + 2)
 #define PIDX_SWITCH_COMMA (PRECEDENCE_RANGE_COUNT + 3)
 #define PIDX_SWITCH_ID (PRECEDENCE_RANGE_COUNT + 4)
-#define PIDX_SWITCH_STAR (PRECEDENCE_RANGE_COUNT + 5)
 
 // Indexy terminalu pro zapis tabulky (pojmenovani odpovida radkum a sloupcum
 // tabulky navrzene rucne).
@@ -99,7 +100,7 @@ _Static_assert(PRECEDENCE_RANGE_COUNT + PRECEDENCE_SWITCH_COUNT ==
 #define PIDX_PPLUS PRECEDENCE_RANGE_INDEX(TOKEN_PLUS_UNARY)
 #define PIDX_PMINUS PRECEDENCE_RANGE_INDEX(TOKEN_MINUS_UNARY)
 #define PIDX_NOT PRECEDENCE_RANGE_INDEX(TOKEN_NOT)
-#define PIDX_STAR PIDX_SWITCH_STAR // Docasne, viz _Static_assert vyse
+#define PIDX_STAR PRECEDENCE_RANGE_INDEX(TOKEN_STAR)
 #define PIDX_SLASH PRECEDENCE_RANGE_INDEX(TOKEN_SLASH)
 #define PIDX_PLUS PRECEDENCE_RANGE_INDEX(TOKEN_PLUS)
 #define PIDX_MINUS PRECEDENCE_RANGE_INDEX(TOKEN_MINUS)
@@ -114,6 +115,7 @@ _Static_assert(PRECEDENCE_RANGE_COUNT + PRECEDENCE_SWITCH_COUNT ==
 #define PIDX_OR PRECEDENCE_RANGE_INDEX(TOKEN_OR)
 #define PIDX_IDOP PRECEDENCE_RANGE_INDEX(TOKEN_ID_OPERATOR)
 #define PIDX_DOLLAR PRECEDENCE_RANGE_INDEX(TOKEN_DOLLAR)
+#define PIDX_TIF PRECEDENCE_RANGE_INDEX(TOKEN_TIF)
 
 // Zkratky polozek tabulky.
 #define NO DIRECTIVE_ERROR             // - (prazdne pole)
@@ -124,10 +126,10 @@ _Static_assert(PRECEDENCE_RANGE_COUNT + PRECEDENCE_SWITCH_COUNT ==
 // Jeden radek tabulky. Polozky se zapisuji v poradi sloupcu z rucne navrzene
 // tabulky, makro je rozmisti na spravne indexy (sloupce):
 // List ( ) , . ID INT DBL STR true false +u -u ! * / + - ++ < <= > >= == !=
-// && || ID_OPERATOR $
+// && || ID_OPERATOR $ TIF
 #define PRECEDENCE_ROW(c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11,  \
                        c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22,  \
-                       c23, c24, c25, c26, c27, c28, c29)                      \
+                       c23, c24, c25, c26, c27, c28, c29, c30)                 \
   {                                                                            \
     [PIDX_LIST] = c01, [PIDX_LPAREN] = c02, [PIDX_RPAREN] = c03,               \
     [PIDX_COMMA] = c04, [PIDX_DOT] = c05, [PIDX_ID] = c06, [PIDX_INT] = c07,   \
@@ -136,102 +138,106 @@ _Static_assert(PRECEDENCE_RANGE_COUNT + PRECEDENCE_SWITCH_COUNT ==
     [PIDX_STAR] = c15, [PIDX_SLASH] = c16, [PIDX_PLUS] = c17,                  \
     [PIDX_MINUS] = c18, [PIDX_CONCAT] = c19, [PIDX_LT] = c20, [PIDX_LE] = c21, \
     [PIDX_GT] = c22, [PIDX_GE] = c23, [PIDX_EQ] = c24, [PIDX_NE] = c25,        \
-    [PIDX_AND] = c26, [PIDX_OR] = c27, [PIDX_IDOP] = c28, [PIDX_DOLLAR] = c29  \
+    [PIDX_AND] = c26, [PIDX_OR] = c27, [PIDX_IDOP] = c28, [PIDX_DOLLAR] = c29, \
+    [PIDX_TIF] = c30                                                           \
   }
 
 // Precedencni tabulka, radky jsou terminal na zasobniku, sloupce terminal na
 // vstupu. Radky jsou zapsany v poradi rucne navrzene tabulky, na spravny index
-// je umistuje makro PIDX_*. Kazdy radek ma 29 polozek ve dvou radcich (prvnich
-// 15 sloupcu: List az *, dalsich 14 sloupcu: / az $).
+// je umistuje makro PIDX_*. Kazdy radek ma 30 polozek (sloupce: List az *,
+// / az $, TIF). Radek a sloupec TIF jsou zatim same prazdne polozky.
 const PrecedenceDirective
     PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE][PRECEDENCE_TABLE_SIZE] = {
         [PIDX_LIST] = PRECEDENCE_ROW(NO, SH, NO, NO, SH, NO, NO, NO, NO, NO, NO,
                                      NO, NO, NO, NO, NO, NO, NO, NO, NO, NO, NO,
-                                     NO, NO, NO, NO, NO, NO, NO),
+                                     NO, NO, NO, NO, NO, NO, NO, NO),
         [PIDX_LPAREN] = PRECEDENCE_ROW(MK, MK, SH, MK, MK, MK, MK, MK, MK, MK,
                                        MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                       MK, MK, MK, MK, MK, MK, MK, MK, NO),
+                                       MK, MK, MK, MK, MK, MK, MK, MK, NO, NO),
         [PIDX_RPAREN] = PRECEDENCE_ROW(NO, NO, EX, EX, EX, NO, NO, NO, NO, NO,
                                        NO, NO, NO, NO, EX, EX, EX, EX, EX, EX,
-                                       EX, EX, EX, EX, EX, EX, EX, EX, EX),
+                                       EX, EX, EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_COMMA] = PRECEDENCE_ROW(MK, MK, EX, EX, EX, MK, MK, MK, MK, MK,
                                       MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                      MK, MK, MK, MK, MK, MK, MK, MK, NO),
+                                      MK, MK, MK, MK, MK, MK, MK, MK, NO, NO),
         [PIDX_DOT] = PRECEDENCE_ROW(NO, NO, NO, NO, EX, SH, NO, NO, NO, NO, NO,
                                     NO, NO, NO, NO, NO, NO, NO, NO, NO, NO, NO,
-                                    NO, NO, NO, NO, NO, NO, NO),
+                                    NO, NO, NO, NO, NO, NO, NO, NO),
         [PIDX_ID] = PRECEDENCE_ROW(NO, SH, EX, EX, EX, NO, NO, NO, NO, NO, NO,
                                    NO, NO, NO, EX, EX, EX, EX, EX, EX, EX, EX,
-                                   EX, EX, EX, EX, EX, EX, EX),
+                                   EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_INT] = PRECEDENCE_ROW(NO, NO, EX, EX, EX, NO, NO, NO, NO, NO, NO,
                                     NO, NO, NO, EX, EX, EX, EX, EX, EX, EX, EX,
-                                    EX, EX, EX, EX, EX, EX, EX),
+                                    EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_DBL] = PRECEDENCE_ROW(NO, NO, EX, EX, EX, NO, NO, NO, NO, NO, NO,
                                     NO, NO, NO, EX, EX, EX, EX, EX, EX, EX, EX,
-                                    EX, EX, EX, EX, EX, EX, EX),
+                                    EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_STR] = PRECEDENCE_ROW(NO, NO, EX, EX, EX, NO, NO, NO, NO, NO, NO,
                                     NO, NO, NO, EX, EX, EX, EX, EX, EX, EX, EX,
-                                    EX, EX, EX, EX, EX, EX, EX),
+                                    EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_TRUE] = PRECEDENCE_ROW(NO, NO, EX, EX, EX, NO, NO, NO, NO, NO, NO,
                                      NO, NO, NO, EX, EX, EX, EX, EX, EX, EX, EX,
-                                     EX, EX, EX, EX, EX, EX, EX),
+                                     EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_FALSE] = PRECEDENCE_ROW(NO, NO, EX, EX, EX, NO, NO, NO, NO, NO,
                                       NO, NO, NO, NO, EX, EX, EX, EX, EX, EX,
-                                      EX, EX, EX, EX, EX, EX, EX, EX, EX),
+                                      EX, EX, EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_PPLUS] = PRECEDENCE_ROW(NO, MK, EX, EX, MK, MK, MK, MK, MK, MK,
                                       MK, MK, MK, MK, EX, EX, EX, EX, EX, EX,
-                                      EX, EX, EX, EX, EX, EX, EX, EX, EX),
+                                      EX, EX, EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_PMINUS] = PRECEDENCE_ROW(NO, MK, EX, EX, MK, MK, MK, MK, MK, MK,
                                        MK, MK, MK, MK, EX, EX, EX, EX, EX, EX,
-                                       EX, EX, EX, EX, EX, EX, EX, EX, EX),
+                                       EX, EX, EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_NOT] = PRECEDENCE_ROW(NO, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                     MK, MK, MK, EX, EX, EX, EX, EX, EX, EX, EX,
-                                    EX, EX, EX, EX, EX, EX, EX),
+                                    EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_STAR] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                      MK, MK, MK, EX, EX, EX, EX, EX, EX, EX, EX,
-                                     EX, EX, EX, EX, EX, EX, EX),
+                                     EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_SLASH] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK,
                                       MK, MK, MK, MK, EX, EX, EX, EX, EX, EX,
-                                      EX, EX, EX, EX, EX, EX, EX, EX, EX),
+                                      EX, EX, EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_PLUS] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                      MK, MK, MK, MK, MK, EX, EX, EX, EX, EX, EX,
-                                     EX, EX, EX, EX, EX, EX, EX),
+                                     EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_MINUS] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK,
                                       MK, MK, MK, MK, MK, MK, EX, EX, EX, EX,
-                                      EX, EX, EX, EX, EX, EX, EX, EX, EX),
+                                      EX, EX, EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_CONCAT] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK,
                                        MK, MK, MK, MK, MK, MK, EX, EX, EX, EX,
-                                       EX, EX, EX, EX, EX, EX, EX, EX, EX),
+                                       EX, EX, EX, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_LT] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                    MK, MK, MK, MK, MK, MK, MK, MK, NO, NO, NO,
-                                   NO, EX, EX, EX, EX, EX, EX),
+                                   NO, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_LE] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                    MK, MK, MK, MK, MK, MK, MK, MK, NO, NO, NO,
-                                   NO, EX, EX, EX, EX, EX, EX),
+                                   NO, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_GT] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                    MK, MK, MK, MK, MK, MK, MK, MK, NO, NO, NO,
-                                   NO, EX, EX, EX, EX, EX, EX),
+                                   NO, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_GE] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                    MK, MK, MK, MK, MK, MK, MK, MK, NO, NO, NO,
-                                   NO, EX, EX, EX, EX, EX, EX),
+                                   NO, EX, EX, EX, EX, EX, EX, NO),
         [PIDX_EQ] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                    MK, MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                   MK, NO, NO, EX, EX, EX, EX),
+                                   MK, NO, NO, EX, EX, EX, EX, NO),
         [PIDX_NE] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                    MK, MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                   MK, NO, NO, EX, EX, EX, EX),
+                                   MK, NO, NO, EX, EX, EX, EX, NO),
         [PIDX_AND] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                     MK, MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                    MK, MK, MK, EX, EX, EX, EX),
+                                    MK, MK, MK, EX, EX, EX, EX, NO),
         [PIDX_OR] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                    MK, MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                   MK, MK, MK, MK, EX, EX, EX),
+                                   MK, MK, MK, MK, EX, EX, EX, NO),
         [PIDX_IDOP] = PRECEDENCE_ROW(MK, MK, EX, EX, MK, MK, MK, MK, MK, MK, MK,
                                      MK, MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                     MK, MK, MK, MK, MK, EX, EX),
+                                     MK, MK, MK, MK, MK, EX, EX, NO),
         [PIDX_DOLLAR] = PRECEDENCE_ROW(MK, MK, NO, NO, MK, MK, MK, MK, MK, MK,
                                        MK, MK, MK, MK, MK, MK, MK, MK, MK, MK,
-                                       MK, MK, MK, MK, MK, MK, MK, MK, NO),
+                                       MK, MK, MK, MK, MK, MK, MK, MK, NO, NO),
+        [PIDX_TIF] = PRECEDENCE_ROW(NO, NO, NO, NO, NO, NO, NO, NO, NO, NO, NO,
+                                    NO, NO, NO, NO, NO, NO, NO, NO, NO, NO, NO,
+                                    NO, NO, NO, NO, NO, NO, NO, NO),
 };
 
 #undef NO
@@ -269,9 +275,6 @@ static bool precedence_table_try_index(TokenType terminal, size_t *index) {
     return true;
   case TOKEN_ID:
     *index = PIDX_SWITCH_ID;
-    return true;
-  case TOKEN_STAR: // Docasne, TOKEN_STAR se v budoucnu presune do rozsahu
-    *index = PIDX_SWITCH_STAR;
     return true;
   default:
     return false;

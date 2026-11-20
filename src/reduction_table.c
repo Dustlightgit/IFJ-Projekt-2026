@@ -107,7 +107,7 @@ const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE] = {
     REDUCTION_RULE(precedence_action_args_trailing_comma_args,
                    SYM_NONTERM(NONTERM_ARGS), SYM_TERM(TOKEN_COMMA)),
     // E41: E <= TIF E
-    REDUCTION_RULE(precedence_action_ternary_else, SYM_NONTERM(NONTERM_TIF),
+    REDUCTION_RULE(precedence_action_ternary_else, SYM_TERM(TOKEN_TIF),
                    SYM_NONTERM(NONTERM_EXPR)),
 
     // Handle delky 3
