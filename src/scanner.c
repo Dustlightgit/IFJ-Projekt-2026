@@ -1049,8 +1049,10 @@ void get_token(Token *token) {
     }
     // Zkontroluje zda odsazeni je vetsi nez u zacatku logickeho radku
     if (indent_count <= logical_indent) {
+
+      // Jedna se o chybu syntaxe
       free_token_text(token);
-      error_exit(ERR_LEXICAL, token->line,
+      error_exit(ERR_SYNTAX, token->line,
                  "Pokracovaci radek v zavorkach musi byt odsazen vic");
     }
   }
