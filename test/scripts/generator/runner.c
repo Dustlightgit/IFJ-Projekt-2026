@@ -4,6 +4,8 @@
 
 #include "ast.h"
 #include "generator.h"
+#include "semantic.h"
+#include "symtable.h"
 
 #define SO_PATH "/tmp/ifj_ast.so"
 
@@ -28,8 +30,13 @@ int main(void) {
         return 1;
     }
 
+    int *run_semantic = dlsym(handle, "run_semantic");
+
     Program *program = build_ast();
+    SymTable *symtable = (run_semantic && *run_semantic) ? semantic_analyze(program) : NULL;
     generate_program(program, stdout);
+
+    symtable_free(symtable);
     program_free(program);
 
     dlclose(handle);
