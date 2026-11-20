@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="grammar__symbol_8h" kind="file" language="C++">
+    <compoundname>grammar_symbol.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <includedby refid="parser__common_8h" local="yes">src/parser_common.h</includedby>
+    <includedby refid="precedence__semantic__actions_8c" local="yes">src/precedence_semantic_actions.c</includedby>
+    <includedby refid="predictive__parser_8c" local="yes">src/predictive_parser.c</includedby>
+    <includedby refid="production_8c" local="yes">src/production.c</includedby>
+    <includedby refid="production_8h" local="yes">src/production.h</includedby>
+    <includedby refid="reduction__table_8c" local="yes">src/reduction_table.c</includedby>
+    <includedby refid="reduction__table_8h" local="yes">src/reduction_table.h</includedby>
+    <includedby refid="semantic__actions_8c" local="yes">src/semantic_actions.c</includedby>
+    <includedby refid="semantic__types_8h" local="yes">src/semantic_types.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="4">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="17">
+        <label>src/LL_table.c</label>
+        <link refid="LL__table_8c"/>
+      </node>
+      <node id="18">
+        <label>src/LL_table.h</label>
+        <link refid="LL__table_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="4">
+        <label>src/parser_common.c</label>
+        <link refid="parser__common_8c"/>
+      </node>
+      <node id="2">
+        <label>src/parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/precedence_helpers.c</label>
+        <link refid="precedence__helpers_8c"/>
+      </node>
+      <node id="5">
+        <label>src/precedence_helpers.h</label>
+        <link refid="precedence__helpers_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="8">
+        <label>src/precedence_parser.h</label>
+        <link refid="precedence__parser_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/precedence_semantic_actions.c</label>
+        <link refid="precedence__semantic__actions_8c"/>
+      </node>
+      <node id="22">
+        <label>src/precedence_semantic_actions.h</label>
+        <link refid="precedence__semantic__actions_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+      <node id="11">
+        <label>src/predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>src/production.c</label>
+        <link refid="production_8c"/>
+      </node>
+      <node id="16">
+        <label>src/production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+      </node>
+      <node id="20">
+        <label>src/reduction_table.h</label>
+        <link refid="reduction__table_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>src/semantic_actions.c</label>
+        <link refid="semantic__actions_8c"/>
+      </node>
+      <node id="23">
+        <label>src/semantic_actions.h</label>
+        <link refid="semantic__actions_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>src/semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+      </node>
+      <node id="14">
+        <label>src/special_actions.h</label>
+        <link refid="special__actions_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structGrammarSymbol" prot="public">GrammarSymbol</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" prot="public" static="no">
+        <name>GRAMMAR_TERMINAL</name>
+        <param><defname>t</defname></param>
+        <initializer>  { .is_terminal = true, .terminal = (t) }</initializer>
+        <briefdescription>
+<para>Inicializator <ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref> pro terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pouziva se pri inicializaci promenne nebo pole, napr. <ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref> symbol = <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL(TOKEN_ID)</ref>; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/grammar_symbol.h" line="49" column="9" bodyfile="src/grammar_symbol.h" bodystart="49" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="define" id="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" prot="public" static="no">
+        <name>GRAMMAR_NONTERMINAL</name>
+        <param><defname>n</defname></param>
+        <initializer>  { .is_terminal = false, .nonterminal = (n) }</initializer>
+        <briefdescription>
+<para>Inicializator <ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref> pro neterminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pouziva se pri inicializaci promenne nebo pole, napr. <ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref> symbol = <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL(NONTERM_TYPE)</ref>; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/grammar_symbol.h" line="58" column="9" bodyfile="src/grammar_symbol.h" bodystart="58" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/grammar_symbol.h"/>
+  </compounddef>
+</doxygen>

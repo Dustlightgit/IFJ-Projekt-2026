@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structReductionTableEntry" kind="struct" language="C++" prot="public">
+    <compoundname>ReductionTableEntry</compoundname>
+    <includes refid="reduction__table_8h" local="no">reduction_table.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structReductionTableEntry_1a77830cefc1e7907c6bc29cc67bc4fc9b" prot="public" static="no" mutable="no">
+        <type><ref refid="semantic__types_8h_1a6ea4594c8b87bee8d9d968786952c01c" kindref="member">PrecedenceSemanticAction</ref></type>
+        <definition>PrecedenceSemanticAction ReductionTableEntry::action</definition>
+        <argsstring></argsstring>
+        <name>action</name>
+        <qualifiedname>ReductionTableEntry::action</qualifiedname>
+        <briefdescription>
+<para>Semanticka akce pravidla, provede se pri redukci handle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="110" column="28" bodyfile="src/reduction_table.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structReductionTableEntry_1af329a4d89adb867bd02e0ee24c00a7c3" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref></type>
+        <definition>const SearchHandle ReductionTableEntry::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <qualifiedname>ReductionTableEntry::handle</qualifiedname>
+        <briefdescription>
+<para>Handle pravidla, tedy symboly jeho prave strany. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="112" column="22" bodyfile="src/reduction_table.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Polozka redukcni tabulky, jedno pravidlo vyrazove gramatiky. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>GrammarSymbol</label>
+        <link refid="structGrammarSymbol"/>
+      </node>
+      <node id="1">
+        <label>ReductionTableEntry</label>
+        <link refid="structReductionTableEntry"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>action</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>handle</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SearchHandle</label>
+        <link refid="structSearchHandle"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbols</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Stack</label>
+        <link refid="structStack"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/reduction_table.h" line="108" column="1" bodyfile="src/reduction_table.h" bodystart="108" bodyend="113"/>
+    <listofallmembers>
+      <member refid="structReductionTableEntry_1a77830cefc1e7907c6bc29cc67bc4fc9b" prot="public" virt="non-virtual"><scope>ReductionTableEntry</scope><name>action</name></member>
+      <member refid="structReductionTableEntry_1af329a4d89adb867bd02e0ee24c00a7c3" prot="public" virt="non-virtual"><scope>ReductionTableEntry</scope><name>handle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

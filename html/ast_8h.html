@@ -1,0 +1,2651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/ast.h file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>ast.h <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structLiteral.html" class="m-doc">Literal</a>
+            </dt>
+            <dd><a href="structLiteral.html" class="m-doc">Literal</a>: druh a hodnota.</dd>
+            <dt>
+              struct <a href="structType.html" class="m-doc">Type</a>
+            </dt>
+            <dd>Typ: druh a u seznamu ukazatel na typ prvku.</dd>
+            <dt>
+              struct <a href="structExpr.html" class="m-doc">Expr</a>
+            </dt>
+            <dd>Vyraz: spolecna struktura pro vsechny druhy vyrazu.</dd>
+            <dt>
+              struct <a href="structBlock.html" class="m-doc">Block</a>
+            </dt>
+            <dd>Blok: posloupnost prikazu.</dd>
+            <dt>
+              struct <a href="structStmt.html" class="m-doc">Stmt</a>
+            </dt>
+            <dd>Prikaz: spolecna obalka pro vsechny druhy prikazu.</dd>
+            <dt>
+              struct <a href="structParam.html" class="m-doc">Param</a>
+            </dt>
+            <dd>Parametr funkce, napr. n: Int.</dd>
+            <dt>
+              struct <a href="structFuncDef.html" class="m-doc">FuncDef</a>
+            </dt>
+            <dd>Definice funkce.</dd>
+            <dt>
+              struct <a href="structProgram.html" class="m-doc">Program</a>
+            </dt>
+            <dd>Cely program: seznam definic funkci.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6" class="m-doc">LiteralKind</a> { </span><span class="m-doc-wrap"><a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a5d2e6469fa6afd9edebb63730eed96fa" class="m-doc">LIT_INT</a>,
+              <a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6afc522f6ffffe4403bdcf299ec4a02222" class="m-doc">LIT_DOUBLE</a>,
+              <a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a7ec80420bbfd80364a27f1548f96896b" class="m-doc">LIT_STRING</a>,
+              <a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a1d7f42f6523dfd0d2e859c85bd8d46e4" class="m-doc">LIT_UNIT</a>,
+              <a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a89a9ee41e7b586ea32bc46360e98a3d2" class="m-doc">LIT_BOOL</a> }</span>
+            </dt>
+            <dd>Druh literalu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#ab4dd8308e08805aedfe646096be0e4e7" class="m-doc">TypeKind</a> { </span><span class="m-doc-wrap"><a href="#ab4dd8308e08805aedfe646096be0e4e7a4fcd4421533bb21c827865bdbac4fef9" class="m-doc">TYPE_INT</a>,
+              <a href="#ab4dd8308e08805aedfe646096be0e4e7a019d94f7c571e36215cc1a41e825de0c" class="m-doc">TYPE_DOUBLE</a>,
+              <a href="#ab4dd8308e08805aedfe646096be0e4e7addb4be6b1cc25112defabef75f73427a" class="m-doc">TYPE_STRING</a>,
+              <a href="#ab4dd8308e08805aedfe646096be0e4e7a9f05f9f42cf83343a26b9e1039767679" class="m-doc">TYPE_UNIT</a>,
+              <a href="#ab4dd8308e08805aedfe646096be0e4e7a61df052a75508047ab6c53699222718a" class="m-doc">TYPE_BOOLEAN</a>,
+              <a href="#ab4dd8308e08805aedfe646096be0e4e7a301826474cc79357b4df50f06df2f6d6" class="m-doc">TYPE_LIST</a> }</span>
+            </dt>
+            <dd>Druh typu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#ac0e6f7f17047750fd114b6634912dca4" class="m-doc">UnaryOp</a> { </span><span class="m-doc-wrap"><a href="#ac0e6f7f17047750fd114b6634912dca4ad4ea546a981360dab20f73f7b85f3cdd" class="m-doc">UNOP_PLUS</a>,
+              <a href="#ac0e6f7f17047750fd114b6634912dca4a6fc70f09d0c0778966667e96c2cf0f40" class="m-doc">UNOP_NEG</a>,
+              <a href="#ac0e6f7f17047750fd114b6634912dca4a9abfd22c94f8ae83b6a65889672e4c29" class="m-doc">UNOP_NOT</a> }</span>
+            </dt>
+            <dd>Unarni operatory.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a751965739ae765593a89b5fd608d480c" class="m-doc">BinaryOp</a> { </span><span class="m-doc-wrap"><a href="#a751965739ae765593a89b5fd608d480caf55b01cb6b891192b538dd8335f574d3" class="m-doc">BINOP_ADD</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca7575825b160e4f1f435caa42e7f9c23e" class="m-doc">BINOP_SUB</a>,
+              <a href="#a751965739ae765593a89b5fd608d480cac5498d828d1b357edb1bb5deea7b3aff" class="m-doc">BINOP_MUL</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca7fdd390514501380898cedb6ef337221" class="m-doc">BINOP_DIV</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca3fd9d4ba3bda516ee64d8ebf75030c27" class="m-doc">BINOP_LT</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca4aee629e9d3991e9b33e0debd0befabf" class="m-doc">BINOP_LE</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca96d250a98bc0e0f49a8520c948ed97f6" class="m-doc">BINOP_GT</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca1f270a564e8885ebcd6b1e3097bb054c" class="m-doc">BINOP_GE</a>,
+              <a href="#a751965739ae765593a89b5fd608d480caadc9e9f1be60200d7e56d228d8b23a9b" class="m-doc">BINOP_EQ</a>,
+              <a href="#a751965739ae765593a89b5fd608d480caf1bc5e8fbef0fe321277476706a79ecb" class="m-doc">BINOP_NE</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca00ab4791d5caaf7e9cf660109c4cc81c" class="m-doc">BINOP_AND</a>,
+              <a href="#a751965739ae765593a89b5fd608d480caebbc7e76e48e6ab8c5f2add4b74773c4" class="m-doc">BINOP_OR</a>,
+              <a href="#a751965739ae765593a89b5fd608d480ca854ba5597dee454c64bf356a3da51975" class="m-doc">BINOP_CONCAT_LIST</a> }</span>
+            </dt>
+            <dd>Binarni operatory.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a6bec3a2f37359f29ba8881edc58f44d2" class="m-doc">ExprKind</a> { </span><span class="m-doc-wrap"><a href="#a6bec3a2f37359f29ba8881edc58f44d2a263c3ecfc853f1364586b6933eeb28dd" class="m-doc">EXPR_LITERAL</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a8dd7ad0d0fd5ccd44c44de2e64ae099d" class="m-doc">EXPR_VARIABLE</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a4af521fe644e85869c47e76f8314be7e" class="m-doc">EXPR_UNARY</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a9d329753218aeba3208d74ab5e31743c" class="m-doc">EXPR_BINARY</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a7ee394df7db7aae7dc1bfeff2a756f56" class="m-doc">EXPR_CALL</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a81dcc5c2102a27fbdcc4da5496fa497e" class="m-doc">EXPR_IF</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a068853890bc0ce9169f1cf45a3efa347" class="m-doc">EXPR_RANGE</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a00309efe1119f22ac1fff7fe539338c4" class="m-doc">EXPR_MEMBER</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2a400a7e3d77f5455b35522b73e14490a2" class="m-doc">EXPR_LIST_LITERAL</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2ace24595e04cbc90895218e7a8b1bd347" class="m-doc">EXPR_LIST_RANGE</a>,
+              <a href="#a6bec3a2f37359f29ba8881edc58f44d2ab3fe6c3c913393720861bdab1d16f782" class="m-doc">EXPR_INDEX</a> }</span>
+            </dt>
+            <dd>Druh vyrazu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a1b09b1c2cca879d79a9b57ae03eb9ffe" class="m-doc">StmtKind</a> { </span><span class="m-doc-wrap"><a href="#a1b09b1c2cca879d79a9b57ae03eb9ffeae9cd3ca06e39de216bc3c7cac779597d" class="m-doc">STMT_VARDEF</a>,
+              <a href="#a1b09b1c2cca879d79a9b57ae03eb9ffeaba80b7ec9d1db4df9cd80d4520bdf5a1" class="m-doc">STMT_ASSIGN</a>,
+              <a href="#a1b09b1c2cca879d79a9b57ae03eb9ffea0da4793b8ad4b9347fa6d543e35aaaa4" class="m-doc">STMT_RETURN</a>,
+              <a href="#a1b09b1c2cca879d79a9b57ae03eb9ffea606ac5221fbec3a6abd016cb560c17b3" class="m-doc">STMT_EXPR</a>,
+              <a href="#a1b09b1c2cca879d79a9b57ae03eb9ffeaa12f4736601ce53e400a78c717fed2d7" class="m-doc">STMT_WHILE</a>,
+              <a href="#a1b09b1c2cca879d79a9b57ae03eb9ffea70c22da87fff216087fcf4d67bec0f1e" class="m-doc">STMT_FOR</a> }</span>
+            </dt>
+            <dd>Druh prikazu.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt id="a8d06b072dd455e686bfe1d436dce286c">
+              using <a href="#a8d06b072dd455e686bfe1d436dce286c" class="m-doc-self">Stmt</a> = struct <a href="structStmt.html" class="m-doc">Stmt</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2af45dc93858b3ab0965646789821f60">
+              using <a href="#a2af45dc93858b3ab0965646789821f60" class="m-doc-self">Block</a> = struct <a href="structBlock.html" class="m-doc">Block</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1ac75f8fee198af783521627f1fecfbc">
+              using <a href="#a1ac75f8fee198af783521627f1fecfbc" class="m-doc-self">Type</a> = struct <a href="structType.html" class="m-doc">Type</a>
+            </dt>
+            <dd>Typ: druh a u seznamu ukazatel na typ prvku.</dd>
+            <dt id="a7c22bc52926e22205adb835292a38c9b">
+              using <a href="#a7c22bc52926e22205adb835292a38c9b" class="m-doc-self">Expr</a> = struct <a href="structExpr.html" class="m-doc">Expr</a>
+            </dt>
+            <dd>Vyraz: spolecna struktura pro vsechny druhy vyrazu.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b11669c3659d51ddc503e1495b2f404" class="m-doc">type_new</a>(</span><span class="m-doc-wrap"><a href="#ab4dd8308e08805aedfe646096be0e4e7" class="m-doc">TypeKind</a> kind) -&gt; <a href="structType.html" class="m-doc">Type</a>*</span>
+            </dt>
+            <dd>Vytvori typ daneho druhu (pro TYPE_LIST pouzij type_new_list).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae182e02ccce3c3facbebf4bb193c6fcb" class="m-doc">type_new_list</a>(</span><span class="m-doc-wrap"><a href="structType.html" class="m-doc">Type</a>* element) -&gt; <a href="structType.html" class="m-doc">Type</a>*</span>
+            </dt>
+            <dd>Vytvori typ List[element], prebere vlastnictvi elementu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5a1c5fdf09b106f81213e71c7f8af8f9" class="m-doc">type_clone</a>(</span><span class="m-doc-wrap">const <a href="structType.html" class="m-doc">Type</a>* type) -&gt; <a href="structType.html" class="m-doc">Type</a>*</span>
+            </dt>
+            <dd>Vytvori hlubokou kopii typu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aaa3a1ca9e0fa34fb49a6fd5421af2d07" class="m-doc">type_free</a>(</span><span class="m-doc-wrap"><a href="structType.html" class="m-doc">Type</a>* type)</span>
+            </dt>
+            <dd>Uvolni typ vcetne typu prvku.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a208a8ad414f2a120d0f822f2cd6eeb09" class="m-doc">expr_new_int</a>(</span><span class="m-doc-wrap">int value,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori celociselny literal.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae3a48191949e163006f537ef4d84a95d" class="m-doc">expr_new_double</a>(</span><span class="m-doc-wrap">double value,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori desetinny literal.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab08abcb4d13d05e5b3124723c3d8d272" class="m-doc">expr_new_string</a>(</span><span class="m-doc-wrap">const char* value,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori retezcovy literal, retezec se zkopiruje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab885e6f2123d3d23e2726c61f1a7b8cc" class="m-doc">expr_new_unit</a>(</span><span class="m-doc-wrap">int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori literal Unit, tedy hodnotu ().</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae091768e1ddd319a34ce275b44e20301" class="m-doc">expr_new_bool</a>(</span><span class="m-doc-wrap">bool value,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori pravdivostni literal.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2914c5e8c2ccc3cfb197c1a60e2147c1" class="m-doc">expr_new_variable</a>(</span><span class="m-doc-wrap">const char* name,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori pouziti promenne, jmeno se zkopiruje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a87102fdd22db4df35c2f7049e9186e0d" class="m-doc">expr_new_unary</a>(</span><span class="m-doc-wrap"><a href="#ac0e6f7f17047750fd114b6634912dca4" class="m-doc">UnaryOp</a> op,
+              <a href="structExpr.html" class="m-doc">Expr</a>* operand,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori unarni vyraz, prebere vlastnictvi operandu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6cb42b1558c6db38955c6eccfaa01e67" class="m-doc">expr_new_binary</a>(</span><span class="m-doc-wrap"><a href="#a751965739ae765593a89b5fd608d480c" class="m-doc">BinaryOp</a> op,
+              <a href="structExpr.html" class="m-doc">Expr</a>* left,
+              <a href="structExpr.html" class="m-doc">Expr</a>* right,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori binarni vyraz, prebere vlastnictvi obou operandu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab671783318cfaf0b3de78d8a7148a460" class="m-doc">expr_new_call</a>(</span><span class="m-doc-wrap">const char* name,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori volani funkce bez argumentu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af2bc36cd51b0cb07b0963f264044ceac" class="m-doc">expr_call_add_arg</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* call,
+              <a href="structExpr.html" class="m-doc">Expr</a>* arg)</span>
+            </dt>
+            <dd>Prida argument na konec volani funkce, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa19e7a6f4b4c997efdb954fa153ecc64" class="m-doc">expr_new_if</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* cond,
+              <a href="structBlock.html" class="m-doc">Block</a>* then_block,
+              <a href="structBlock.html" class="m-doc">Block</a>* else_block,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori podminku if, prebere vlastnictvi vsech casti.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af5fb4ffe0809285b68d5e5eaf79fe3af" class="m-doc">expr_new_range</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* from,
+              <a href="structExpr.html" class="m-doc">Expr</a>* to,
+              bool is_inclusive,
+              <a href="structExpr.html" class="m-doc">Expr</a>* step,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori rozsah, prebere vlastnictvi vsech casti.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2a5267467216795b00606f1559a131bd" class="m-doc">expr_new_member</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* object,
+              const char* name,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori clen hodnoty bez argumentu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac3f159210e77f00674d61020554ed389" class="m-doc">expr_member_add_arg</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* member,
+              <a href="structExpr.html" class="m-doc">Expr</a>* arg)</span>
+            </dt>
+            <dd>Prida argument na konec clenu, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7e0f6bb25bd26c4ac9ae6ef5fc1fe4fe" class="m-doc">expr_new_list_literal</a>(</span><span class="m-doc-wrap">int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori prazdny seznam.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a408fa5ca364381bb598b86e60387adfd" class="m-doc">expr_list_add_item</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* list,
+              <a href="structExpr.html" class="m-doc">Expr</a>* item)</span>
+            </dt>
+            <dd>Prida prvek na konec seznamu, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8bc4ed1fb2812229d69a145d09ab7d0a" class="m-doc">expr_new_list_range</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* start,
+              <a href="structExpr.html" class="m-doc">Expr</a>* end,
+              <a href="structExpr.html" class="m-doc">Expr</a>* step,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori List.range, prebere vlastnictvi vsech casti.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad321e798439bb4dc2d25f04a3e26bfde" class="m-doc">expr_new_index</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* list,
+              <a href="structExpr.html" class="m-doc">Expr</a>* index,
+              int line) -&gt; <a href="structExpr.html" class="m-doc">Expr</a>*</span>
+            </dt>
+            <dd>Vytvori pristup k prvku seznamu, prebere vlastnictvi obou casti.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8b8e8c97f0ead1338a0bef406daa36aa" class="m-doc">expr_free</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd>Uvolni vyraz a cely jeho podstrom.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5aeb6e50ec5ca78edc2df716fc47b830" class="m-doc">block_new</a>(</span><span class="m-doc-wrap">void) -&gt; <a href="structBlock.html" class="m-doc">Block</a>*</span>
+            </dt>
+            <dd>Vytvori prazdny blok.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9ebbadd9744854b397afd7318f1bfe65" class="m-doc">block_add</a>(</span><span class="m-doc-wrap"><a href="structBlock.html" class="m-doc">Block</a>* block,
+              <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd>Prida prikaz na konec bloku, prebere vlastnictvi prikazu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7ee22d856fc49858787e8f2290cf1dfc" class="m-doc">block_free</a>(</span><span class="m-doc-wrap"><a href="structBlock.html" class="m-doc">Block</a>* block)</span>
+            </dt>
+            <dd>Uvolni blok a vsechny jeho prikazy.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a924819c094545eeb287963d06546fe6d" class="m-doc">stmt_new_vardef</a>(</span><span class="m-doc-wrap">bool is_mutable,
+              const char* name,
+              <a href="structType.html" class="m-doc">Type</a>* declared_type,
+              <a href="structExpr.html" class="m-doc">Expr</a>* init,
+              int line) -&gt; <a href="structStmt.html" class="m-doc">Stmt</a>*</span>
+            </dt>
+            <dd>Vytvori definici promenne, prebere vlastnictvi typu a inicializace.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab2a93a223aa2ba3cdfd3a954903441a1" class="m-doc">stmt_new_assign</a>(</span><span class="m-doc-wrap">const char* name,
+              <a href="structExpr.html" class="m-doc">Expr</a>* value,
+              int line) -&gt; <a href="structStmt.html" class="m-doc">Stmt</a>*</span>
+            </dt>
+            <dd>Vytvori prirazeni, prebere vlastnictvi hodnoty.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5eff34c542999ea324aec49c71bc2bf5" class="m-doc">stmt_new_return</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* value,
+              int line) -&gt; <a href="structStmt.html" class="m-doc">Stmt</a>*</span>
+            </dt>
+            <dd>Vytvori prikaz return, prebere vlastnictvi hodnoty.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3ac0e20220b2b1b9e02a9128f7b16b3a" class="m-doc">stmt_new_expr</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              int line) -&gt; <a href="structStmt.html" class="m-doc">Stmt</a>*</span>
+            </dt>
+            <dd>Vytvori prikaz ze samostatneho vyrazu, prebere vlastnictvi vyrazu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa8befb48ce6af924cad68b9f58184622" class="m-doc">stmt_new_while</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* cond,
+              <a href="structBlock.html" class="m-doc">Block</a>* body,
+              int line) -&gt; <a href="structStmt.html" class="m-doc">Stmt</a>*</span>
+            </dt>
+            <dd>Vytvori cyklus while, prebere vlastnictvi podminky a tela.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a26ca3ef3f3c3919c15007309a6d0cbc4" class="m-doc">stmt_new_for</a>(</span><span class="m-doc-wrap">const char* var_name,
+              <a href="structExpr.html" class="m-doc">Expr</a>* source,
+              int line) -&gt; <a href="structStmt.html" class="m-doc">Stmt</a>*</span>
+            </dt>
+            <dd>Vytvori cyklus for bez strazi a bez tela.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5aee929e987feb7671cfac7a855ffd06" class="m-doc">stmt_for_add_guard</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* for_stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* guard)</span>
+            </dt>
+            <dd>Prida straz cyklu for, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#afd5b8eed3c1e941ab502e72f5c5899c1" class="m-doc">stmt_for_set_body</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* for_stmt,
+              <a href="structBlock.html" class="m-doc">Block</a>* body)</span>
+            </dt>
+            <dd>Nastavi telo cyklu for, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad05f034e300fb966e8d676e85f5caa45" class="m-doc">stmt_free</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd>Uvolni prikaz a cely jeho podstrom.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa2f4d6c830e301676b3052a5b99aea2f" class="m-doc">funcdef_new</a>(</span><span class="m-doc-wrap">const char* name,
+              bool is_main,
+              int line) -&gt; <a href="structFuncDef.html" class="m-doc">FuncDef</a>*</span>
+            </dt>
+            <dd>Vytvori funkci bez parametru, bez navratoveho typu a bez tela.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac9ff015f7653549978283259bddb3a84" class="m-doc">funcdef_add_param</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              const char* name,
+              <a href="structType.html" class="m-doc">Type</a>* type)</span>
+            </dt>
+            <dd>Prida parametr na konec seznamu parametru, prebere vlastnictvi typu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9ca6c124af25fd8f5b8b96f6a05229e8" class="m-doc">funcdef_set_return_type</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              <a href="structType.html" class="m-doc">Type</a>* return_type)</span>
+            </dt>
+            <dd>Nastavi navratovy typ funkce, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aeb96f3789705d45af935cda1c37954a6" class="m-doc">funcdef_set_body</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              <a href="structBlock.html" class="m-doc">Block</a>* body)</span>
+            </dt>
+            <dd>Nastavi telo funkce, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a17b1ca0bef54f4c146056e2a4435575d" class="m-doc">funcdef_free</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func)</span>
+            </dt>
+            <dd>Uvolni definici funkce vcetne parametru a tela.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae27b7ada7b8ac3321623b14aa32076da" class="m-doc">program_new</a>(</span><span class="m-doc-wrap">void) -&gt; <a href="structProgram.html" class="m-doc">Program</a>*</span>
+            </dt>
+            <dd>Vytvori prazdny program.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a05cf7cfa5a5e8962bff5898682e6940c" class="m-doc">program_add_func</a>(</span><span class="m-doc-wrap"><a href="structProgram.html" class="m-doc">Program</a>* program,
+              <a href="structFuncDef.html" class="m-doc">FuncDef</a>* func)</span>
+            </dt>
+            <dd>Prida funkci do programu, prebere vlastnictvi funkce.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab2525b646e271371469f9a2153e23c1f" class="m-doc">program_free</a>(</span><span class="m-doc-wrap"><a href="structProgram.html" class="m-doc">Program</a>* program)</span>
+            </dt>
+            <dd>Uvolni program a vsechny jeho funkce.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a451666a7c5ba892808e27e6adc8dc151" class="m-doc">type_list_set_element</a>(</span><span class="m-doc-wrap"><a href="structType.html" class="m-doc">Type</a>* list,
+              <a href="structType.html" class="m-doc">Type</a>* element)</span>
+            </dt>
+            <dd>Nastavi typ prvku u typu List[T].</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8176d94491c7dd52d6a0c4c96bad1729" class="m-doc">block_from_stmt</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt) -&gt; <a href="structBlock.html" class="m-doc">Block</a>*</span>
+            </dt>
+            <dd>Vytvori blok s jednim prikazem (jednoradkove telo).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3c50a05561ddcc275f4cad076e57e7a6" class="m-doc">block_from_expr</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              int line) -&gt; <a href="structBlock.html" class="m-doc">Block</a>*</span>
+            </dt>
+            <dd>Vytvori blok s jednim prikazem, ktery je vyraz.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac94095542003faf384ce5cb4cd88a5f3" class="m-doc">stmt_vardef_set_mutable</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              bool is_mutable)</span>
+            </dt>
+            <dd>Nastavi, zda je promenna modifikovatelna.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aac52edf976420cc4adec922d3f7afd12" class="m-doc">stmt_vardef_set_name</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              const char* name)</span>
+            </dt>
+            <dd>Nastavi jmeno definovane promenne, jmeno se zkopiruje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af5741b8bf474610f94c70f0af4e073bc" class="m-doc">stmt_vardef_set_type</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structType.html" class="m-doc">Type</a>* declared_type)</span>
+            </dt>
+            <dd>Nastavi uvedeny typ promenne, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8e4ccc8ea38c17dd2fad5ea789bd37df" class="m-doc">stmt_vardef_set_init</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* init)</span>
+            </dt>
+            <dd>Nastavi pocatecni hodnotu promenne, prebere jeji vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8fab939547306584db6423c91e5a9fce" class="m-doc">stmt_assign_set_name</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              const char* name)</span>
+            </dt>
+            <dd>Nastavi jmeno promenne v prirazeni, jmeno se zkopiruje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2a1a66bf01c07429798280a0b14e5b30" class="m-doc">stmt_assign_set_value</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* value)</span>
+            </dt>
+            <dd>Nastavi novou hodnotu v prirazeni, prebere jeji vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae0d1e119e43db5832c1296af59462054" class="m-doc">stmt_return_set_value</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* value)</span>
+            </dt>
+            <dd>Nastavi vracenou hodnotu prikazu return, prebere jeji vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a35d9e238b26cbd92e8db08fc77d54eff" class="m-doc">stmt_expr_set_expr</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd>Nastavi vyraz samostatneho prikazu, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae0e3c9f01c9f5ea87a939b5a4f9bc6e3" class="m-doc">stmt_while_set_cond</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* cond)</span>
+            </dt>
+            <dd>Nastavi podminku cyklu while, prebere jeji vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac408d600e211be4b07d67ad0d0b4b917" class="m-doc">stmt_while_set_body</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structBlock.html" class="m-doc">Block</a>* body)</span>
+            </dt>
+            <dd>Nastavi telo cyklu while, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#acfcfd346c90a0fb5705a8e11d64b4577" class="m-doc">stmt_for_set_var_name</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              const char* var_name)</span>
+            </dt>
+            <dd>Nastavi jmeno ridici promenne cyklu for, jmeno se zkopiruje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae11613f6d8138985caf77c7a2bab7fa3" class="m-doc">stmt_for_set_source</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* source)</span>
+            </dt>
+            <dd>Nastavi zdroj cyklu for, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a002459b67f5c803962a49523aa9d8e9c" class="m-doc">expr_if_set_cond</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              <a href="structExpr.html" class="m-doc">Expr</a>* cond)</span>
+            </dt>
+            <dd>Nastavi podminku vyrazu if, prebere jeji vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a10a903743607f1126dedd5d1fd56686c" class="m-doc">expr_if_set_then</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              <a href="structBlock.html" class="m-doc">Block</a>* then_block)</span>
+            </dt>
+            <dd>Nastavi vetev then vyrazu if, prebere jeji vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8d8d70ae2e66a7dbd45efd991a495f3e" class="m-doc">expr_if_set_else</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              <a href="structBlock.html" class="m-doc">Block</a>* else_block)</span>
+            </dt>
+            <dd>Nastavi vetev else vyrazu if, prebere jeji vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a41b8dd826e4b8f8efa46acce9af81e24" class="m-doc">funcdef_set_name</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              const char* name)</span>
+            </dt>
+            <dd>Nastavi jmeno funkce, jmeno se zkopiruje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1dff5ed47bee0cc6794116547b3b5d9e" class="m-doc">funcdef_set_main</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              bool is_main)</span>
+            </dt>
+            <dd>Nastavi, zda ma funkce anotaci @main.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a462cd531c89c50d766487d2928aec32a" class="m-doc">funcdef_param_set_name</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              int index,
+              const char* name)</span>
+            </dt>
+            <dd>Nastavi jmeno parametru na danem indexu, jmeno se zkopiruje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7d0ad40467b17e2e3fe0b6a2c9f647d8" class="m-doc">funcdef_param_set_type</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              int index,
+              <a href="structType.html" class="m-doc">Type</a>* type)</span>
+            </dt>
+            <dd>Nastavi typ parametru na danem indexu, prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a763eb8f3116e32e761c947d80c130fa7" class="m-doc">expr_range_set_step</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* range,
+              <a href="structExpr.html" class="m-doc">Expr</a>* step)</span>
+            </dt>
+            <dd>Nastavi krok rozsahu a prebere jeho vlastnictvi.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a80f96dcfe4087a2294de2d6da97d7e88" class="m-doc">expr_call_take_args</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* call,
+              <a href="structExpr.html" class="m-doc">Expr</a>* args)</span>
+            </dt>
+            <dd>Presune prvky list literalu na konec argumentu volani funkce.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0805bcb6bed113b4b0741cb469f4af6c" class="m-doc">expr_member_take_args</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* member,
+              <a href="structExpr.html" class="m-doc">Expr</a>* args)</span>
+            </dt>
+            <dd>Presune prvky list literalu na konec argumentu clenu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7e17c629d5a00fa3605be8954c3a269d" class="m-doc">expr_list_take_items</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* list,
+              <a href="structExpr.html" class="m-doc">Expr</a>*** items,
+              int* count)</span>
+            </dt>
+            <dd>Vyjme prvky z list literalu.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a8cb9fbb7d80c9134ae81ee008d7b33d6"><div>
+            <h3>
+              enum <a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6" class="m-doc-self">LiteralKind</a>
+            </h3>
+            <p>Druh literalu.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a5d2e6469fa6afd9edebb63730eed96fa" class="m-doc-self" id="a8cb9fbb7d80c9134ae81ee008d7b33d6a5d2e6469fa6afd9edebb63730eed96fa">LIT_INT</a></td>
+                  <td>
+                  <p>Cele cislo, napr. 5.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6afc522f6ffffe4403bdcf299ec4a02222" class="m-doc-self" id="a8cb9fbb7d80c9134ae81ee008d7b33d6afc522f6ffffe4403bdcf299ec4a02222">LIT_DOUBLE</a></td>
+                  <td>
+                  <p>Desetinne cislo, napr. 3.14.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a7ec80420bbfd80364a27f1548f96896b" class="m-doc-self" id="a8cb9fbb7d80c9134ae81ee008d7b33d6a7ec80420bbfd80364a27f1548f96896b">LIT_STRING</a></td>
+                  <td>
+                  <p>Retezec, napr. &quot;ahoj&quot;.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a1d7f42f6523dfd0d2e859c85bd8d46e4" class="m-doc-self" id="a8cb9fbb7d80c9134ae81ee008d7b33d6a1d7f42f6523dfd0d2e859c85bd8d46e4">LIT_UNIT</a></td>
+                  <td>
+                  <p>Hodnota (), nema zadna data.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a8cb9fbb7d80c9134ae81ee008d7b33d6a89a9ee41e7b586ea32bc46360e98a3d2" class="m-doc-self" id="a8cb9fbb7d80c9134ae81ee008d7b33d6a89a9ee41e7b586ea32bc46360e98a3d2">LIT_BOOL</a></td>
+                  <td>
+                  <p>Pravdivostni hodnota true/false (rozsireni BOOLTHEN).</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab4dd8308e08805aedfe646096be0e4e7"><div>
+            <h3>
+              enum <a href="#ab4dd8308e08805aedfe646096be0e4e7" class="m-doc-self">TypeKind</a>
+            </h3>
+            <p>Druh typu.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#ab4dd8308e08805aedfe646096be0e4e7a4fcd4421533bb21c827865bdbac4fef9" class="m-doc-self" id="ab4dd8308e08805aedfe646096be0e4e7a4fcd4421533bb21c827865bdbac4fef9">TYPE_INT</a></td>
+                  <td>
+                  <p>Int.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab4dd8308e08805aedfe646096be0e4e7a019d94f7c571e36215cc1a41e825de0c" class="m-doc-self" id="ab4dd8308e08805aedfe646096be0e4e7a019d94f7c571e36215cc1a41e825de0c">TYPE_DOUBLE</a></td>
+                  <td>
+                  <p>Double.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab4dd8308e08805aedfe646096be0e4e7addb4be6b1cc25112defabef75f73427a" class="m-doc-self" id="ab4dd8308e08805aedfe646096be0e4e7addb4be6b1cc25112defabef75f73427a">TYPE_STRING</a></td>
+                  <td>
+                  <p>String.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab4dd8308e08805aedfe646096be0e4e7a9f05f9f42cf83343a26b9e1039767679" class="m-doc-self" id="ab4dd8308e08805aedfe646096be0e4e7a9f05f9f42cf83343a26b9e1039767679">TYPE_UNIT</a></td>
+                  <td>
+                  <p>Unit.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab4dd8308e08805aedfe646096be0e4e7a61df052a75508047ab6c53699222718a" class="m-doc-self" id="ab4dd8308e08805aedfe646096be0e4e7a61df052a75508047ab6c53699222718a">TYPE_BOOLEAN</a></td>
+                  <td>
+                  <p>Boolean (rozsireni BOOLTHEN).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ab4dd8308e08805aedfe646096be0e4e7a301826474cc79357b4df50f06df2f6d6" class="m-doc-self" id="ab4dd8308e08805aedfe646096be0e4e7a301826474cc79357b4df50f06df2f6d6">TYPE_LIST</a></td>
+                  <td>
+                  <p>List[T] (rozsireni LISTS).</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac0e6f7f17047750fd114b6634912dca4"><div>
+            <h3>
+              enum <a href="#ac0e6f7f17047750fd114b6634912dca4" class="m-doc-self">UnaryOp</a>
+            </h3>
+            <p>Unarni operatory.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#ac0e6f7f17047750fd114b6634912dca4ad4ea546a981360dab20f73f7b85f3cdd" class="m-doc-self" id="ac0e6f7f17047750fd114b6634912dca4ad4ea546a981360dab20f73f7b85f3cdd">UNOP_PLUS</a></td>
+                  <td>
+                  <p>Unarni plus, napr. +x.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ac0e6f7f17047750fd114b6634912dca4a6fc70f09d0c0778966667e96c2cf0f40" class="m-doc-self" id="ac0e6f7f17047750fd114b6634912dca4a6fc70f09d0c0778966667e96c2cf0f40">UNOP_NEG</a></td>
+                  <td>
+                  <p>Unarni minus, napr. -x.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ac0e6f7f17047750fd114b6634912dca4a9abfd22c94f8ae83b6a65889672e4c29" class="m-doc-self" id="ac0e6f7f17047750fd114b6634912dca4a9abfd22c94f8ae83b6a65889672e4c29">UNOP_NOT</a></td>
+                  <td>
+                  <p>Negace, napr. !x (rozsireni BOOLTHEN).</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a751965739ae765593a89b5fd608d480c"><div>
+            <h3>
+              enum <a href="#a751965739ae765593a89b5fd608d480c" class="m-doc-self">BinaryOp</a>
+            </h3>
+            <p>Binarni operatory.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480caf55b01cb6b891192b538dd8335f574d3" class="m-doc-self" id="a751965739ae765593a89b5fd608d480caf55b01cb6b891192b538dd8335f574d3">BINOP_ADD</a></td>
+                  <td>
+                  <p>Scitani a konkatenace retezcu, +.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca7575825b160e4f1f435caa42e7f9c23e" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca7575825b160e4f1f435caa42e7f9c23e">BINOP_SUB</a></td>
+                  <td>
+                  <p>Odecitani, -.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480cac5498d828d1b357edb1bb5deea7b3aff" class="m-doc-self" id="a751965739ae765593a89b5fd608d480cac5498d828d1b357edb1bb5deea7b3aff">BINOP_MUL</a></td>
+                  <td>
+                  <p>Nasobeni, *.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca7fdd390514501380898cedb6ef337221" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca7fdd390514501380898cedb6ef337221">BINOP_DIV</a></td>
+                  <td>
+                  <p>Deleni, /.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca3fd9d4ba3bda516ee64d8ebf75030c27" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca3fd9d4ba3bda516ee64d8ebf75030c27">BINOP_LT</a></td>
+                  <td>
+                  <p>Mensi, &lt;.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca4aee629e9d3991e9b33e0debd0befabf" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca4aee629e9d3991e9b33e0debd0befabf">BINOP_LE</a></td>
+                  <td>
+                  <p>Mensi nebo rovno, &lt;=.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca96d250a98bc0e0f49a8520c948ed97f6" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca96d250a98bc0e0f49a8520c948ed97f6">BINOP_GT</a></td>
+                  <td>
+                  <p>Vetsi, &gt;.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca1f270a564e8885ebcd6b1e3097bb054c" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca1f270a564e8885ebcd6b1e3097bb054c">BINOP_GE</a></td>
+                  <td>
+                  <p>Vetsi nebo rovno, &gt;=.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480caadc9e9f1be60200d7e56d228d8b23a9b" class="m-doc-self" id="a751965739ae765593a89b5fd608d480caadc9e9f1be60200d7e56d228d8b23a9b">BINOP_EQ</a></td>
+                  <td>
+                  <p>Rovno, ==.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480caf1bc5e8fbef0fe321277476706a79ecb" class="m-doc-self" id="a751965739ae765593a89b5fd608d480caf1bc5e8fbef0fe321277476706a79ecb">BINOP_NE</a></td>
+                  <td>
+                  <p>Nerovno, !=.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca00ab4791d5caaf7e9cf660109c4cc81c" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca00ab4791d5caaf7e9cf660109c4cc81c">BINOP_AND</a></td>
+                  <td>
+                  <p>Logicky soucin, &amp;&amp; (rozsireni BOOLTHEN).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480caebbc7e76e48e6ab8c5f2add4b74773c4" class="m-doc-self" id="a751965739ae765593a89b5fd608d480caebbc7e76e48e6ab8c5f2add4b74773c4">BINOP_OR</a></td>
+                  <td>
+                  <p>Logicky soucet, || (rozsireni BOOLTHEN).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a751965739ae765593a89b5fd608d480ca854ba5597dee454c64bf356a3da51975" class="m-doc-self" id="a751965739ae765593a89b5fd608d480ca854ba5597dee454c64bf356a3da51975">BINOP_CONCAT_LIST</a></td>
+                  <td>
+                  <p>Spojeni seznamu, ++ (rozsireni LISTS).</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6bec3a2f37359f29ba8881edc58f44d2"><div>
+            <h3>
+              enum <a href="#a6bec3a2f37359f29ba8881edc58f44d2" class="m-doc-self">ExprKind</a>
+            </h3>
+            <p>Druh vyrazu.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a263c3ecfc853f1364586b6933eeb28dd" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a263c3ecfc853f1364586b6933eeb28dd">EXPR_LITERAL</a></td>
+                  <td>
+                  <p><a href="structLiteral.html" class="m-doc">Literal</a>, napr. 5.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a8dd7ad0d0fd5ccd44c44de2e64ae099d" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a8dd7ad0d0fd5ccd44c44de2e64ae099d">EXPR_VARIABLE</a></td>
+                  <td>
+                  <p>Pouziti promenne, napr. x.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a4af521fe644e85869c47e76f8314be7e" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a4af521fe644e85869c47e76f8314be7e">EXPR_UNARY</a></td>
+                  <td>
+                  <p>Unarni operator, napr. -x.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a9d329753218aeba3208d74ab5e31743c" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a9d329753218aeba3208d74ab5e31743c">EXPR_BINARY</a></td>
+                  <td>
+                  <p>Binarni operator, napr. 2 + 3.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a7ee394df7db7aae7dc1bfeff2a756f56" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a7ee394df7db7aae7dc1bfeff2a756f56">EXPR_CALL</a></td>
+                  <td>
+                  <p>Volani funkce, napr. print(x).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a81dcc5c2102a27fbdcc4da5496fa497e" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a81dcc5c2102a27fbdcc4da5496fa497e">EXPR_IF</a></td>
+                  <td>
+                  <p>Podminka if, napr. if x &lt; 0 then 0 - x else x.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a068853890bc0ce9169f1cf45a3efa347" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a068853890bc0ce9169f1cf45a3efa347">EXPR_RANGE</a></td>
+                  <td>
+                  <p>Rozsah, napr. 1 to 10, 0 until n, 1 to 9 by 2.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a00309efe1119f22ac1fff7fe539338c4" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a00309efe1119f22ac1fff7fe539338c4">EXPR_MEMBER</a></td>
+                  <td>
+                  <p>Clen hodnoty, napr. x.toInt nebo lst.drop(2).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2a400a7e3d77f5455b35522b73e14490a2" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2a400a7e3d77f5455b35522b73e14490a2">EXPR_LIST_LITERAL</a></td>
+                  <td>
+                  <p>Seznam, napr. List(1, 2, 3).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2ace24595e04cbc90895218e7a8b1bd347" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2ace24595e04cbc90895218e7a8b1bd347">EXPR_LIST_RANGE</a></td>
+                  <td>
+                  <p>Cisla v seznamu, napr. List.range(1, 10).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a6bec3a2f37359f29ba8881edc58f44d2ab3fe6c3c913393720861bdab1d16f782" class="m-doc-self" id="a6bec3a2f37359f29ba8881edc58f44d2ab3fe6c3c913393720861bdab1d16f782">EXPR_INDEX</a></td>
+                  <td>
+                  <p>Pristup k prvku seznamu, napr. lst(2).</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1b09b1c2cca879d79a9b57ae03eb9ffe"><div>
+            <h3>
+              enum <a href="#a1b09b1c2cca879d79a9b57ae03eb9ffe" class="m-doc-self">StmtKind</a>
+            </h3>
+            <p>Druh prikazu.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a1b09b1c2cca879d79a9b57ae03eb9ffeae9cd3ca06e39de216bc3c7cac779597d" class="m-doc-self" id="a1b09b1c2cca879d79a9b57ae03eb9ffeae9cd3ca06e39de216bc3c7cac779597d">STMT_VARDEF</a></td>
+                  <td>
+                  <p>Definice promenne, napr. val x = 5.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1b09b1c2cca879d79a9b57ae03eb9ffeaba80b7ec9d1db4df9cd80d4520bdf5a1" class="m-doc-self" id="a1b09b1c2cca879d79a9b57ae03eb9ffeaba80b7ec9d1db4df9cd80d4520bdf5a1">STMT_ASSIGN</a></td>
+                  <td>
+                  <p>Prirazeni, napr. x = 7.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1b09b1c2cca879d79a9b57ae03eb9ffea0da4793b8ad4b9347fa6d543e35aaaa4" class="m-doc-self" id="a1b09b1c2cca879d79a9b57ae03eb9ffea0da4793b8ad4b9347fa6d543e35aaaa4">STMT_RETURN</a></td>
+                  <td>
+                  <p>Navrat z funkce, napr. return x.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1b09b1c2cca879d79a9b57ae03eb9ffea606ac5221fbec3a6abd016cb560c17b3" class="m-doc-self" id="a1b09b1c2cca879d79a9b57ae03eb9ffea606ac5221fbec3a6abd016cb560c17b3">STMT_EXPR</a></td>
+                  <td>
+                  <p>Samostatny vyraz, napr. print(x).</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1b09b1c2cca879d79a9b57ae03eb9ffeaa12f4736601ce53e400a78c717fed2d7" class="m-doc-self" id="a1b09b1c2cca879d79a9b57ae03eb9ffeaa12f4736601ce53e400a78c717fed2d7">STMT_WHILE</a></td>
+                  <td>
+                  <p>Cyklus while, napr. while i &gt; 1 do ...</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a1b09b1c2cca879d79a9b57ae03eb9ffea70c22da87fff216087fcf4d67bec0f1e" class="m-doc-self" id="a1b09b1c2cca879d79a9b57ae03eb9ffea70c22da87fff216087fcf4d67bec0f1e">STMT_FOR</a></td>
+                  <td>
+                  <p>Cyklus for, napr. for i &lt;- 1 to 10 do ...</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1b11669c3659d51ddc503e1495b2f404"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structType.html" class="m-doc">Type</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b11669c3659d51ddc503e1495b2f404" class="m-doc-self">type_new</a>(</span><span class="m-doc-wrap"><a href="#ab4dd8308e08805aedfe646096be0e4e7" class="m-doc">TypeKind</a> kind)</span></span>
+            </h3>
+            <p>Vytvori typ daneho druhu (pro TYPE_LIST pouzij type_new_list).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">kind</td>
+                  <td>Druh typu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy typ.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae182e02ccce3c3facbebf4bb193c6fcb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structType.html" class="m-doc">Type</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae182e02ccce3c3facbebf4bb193c6fcb" class="m-doc-self">type_new_list</a>(</span><span class="m-doc-wrap"><a href="structType.html" class="m-doc">Type</a>* element)</span></span>
+            </h3>
+            <p>Vytvori typ List[element], prebere vlastnictvi elementu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">element</td>
+                  <td>Typ prvku seznamu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy typ seznamu.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5a1c5fdf09b106f81213e71c7f8af8f9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structType.html" class="m-doc">Type</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a1c5fdf09b106f81213e71c7f8af8f9" class="m-doc-self">type_clone</a>(</span><span class="m-doc-wrap">const <a href="structType.html" class="m-doc">Type</a>* type)</span></span>
+            </h3>
+            <p>Vytvori hlubokou kopii typu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Typ ke zkopirovani.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Nova kopie typu.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Pouziva se v semantice, aby kazdy vyraz mel vlastni typ. Resi problem s dvojitym uvolnenim (kazdy vyraz uvolnuje svuj typ). Napr. <a href="structExpr.html" class="m-doc">Expr</a> &quot;a&quot; =&gt; TYPE_INT (1), <a href="structExpr.html" class="m-doc">Expr</a> &quot;a + b&quot; =&gt; TYPE_INT (2). Neukazuji na stejny TYPE_INT, ale kazdy ma svuj.</p>
+          </div></section>
+          <section class="m-doc-details" id="aaa3a1ca9e0fa34fb49a6fd5421af2d07"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa3a1ca9e0fa34fb49a6fd5421af2d07" class="m-doc-self">type_free</a>(</span><span class="m-doc-wrap"><a href="structType.html" class="m-doc">Type</a>* type)</span></span>
+            </h3>
+            <p>Uvolni typ vcetne typu prvku.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Typ k uvolneni (muze byt NULL).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a208a8ad414f2a120d0f822f2cd6eeb09"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a208a8ad414f2a120d0f822f2cd6eeb09" class="m-doc-self">expr_new_int</a>(</span><span class="m-doc-wrap">int value,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori celociselny literal.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Hodnota.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae3a48191949e163006f537ef4d84a95d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae3a48191949e163006f537ef4d84a95d" class="m-doc-self">expr_new_double</a>(</span><span class="m-doc-wrap">double value,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori desetinny literal.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Hodnota.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab08abcb4d13d05e5b3124723c3d8d272"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab08abcb4d13d05e5b3124723c3d8d272" class="m-doc-self">expr_new_string</a>(</span><span class="m-doc-wrap">const char* value,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori retezcovy literal, retezec se zkopiruje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Hodnota.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab885e6f2123d3d23e2726c61f1a7b8cc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab885e6f2123d3d23e2726c61f1a7b8cc" class="m-doc-self">expr_new_unit</a>(</span><span class="m-doc-wrap">int line)</span></span>
+            </h3>
+            <p>Vytvori literal Unit, tedy hodnotu ().</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae091768e1ddd319a34ce275b44e20301"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae091768e1ddd319a34ce275b44e20301" class="m-doc-self">expr_new_bool</a>(</span><span class="m-doc-wrap">bool value,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori pravdivostni literal.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Hodnota.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2914c5e8c2ccc3cfb197c1a60e2147c1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2914c5e8c2ccc3cfb197c1a60e2147c1" class="m-doc-self">expr_new_variable</a>(</span><span class="m-doc-wrap">const char* name,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori pouziti promenne, jmeno se zkopiruje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Jmeno promenne.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a87102fdd22db4df35c2f7049e9186e0d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a87102fdd22db4df35c2f7049e9186e0d" class="m-doc-self">expr_new_unary</a>(</span><span class="m-doc-wrap"><a href="#ac0e6f7f17047750fd114b6634912dca4" class="m-doc">UnaryOp</a> op,
+              <a href="structExpr.html" class="m-doc">Expr</a>* operand,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori unarni vyraz, prebere vlastnictvi operandu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">op</td>
+                  <td>Operator.</td>
+                </tr>
+                <tr>
+                  <td>operand</td>
+                  <td>Operand.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6cb42b1558c6db38955c6eccfaa01e67"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6cb42b1558c6db38955c6eccfaa01e67" class="m-doc-self">expr_new_binary</a>(</span><span class="m-doc-wrap"><a href="#a751965739ae765593a89b5fd608d480c" class="m-doc">BinaryOp</a> op,
+              <a href="structExpr.html" class="m-doc">Expr</a>* left,
+              <a href="structExpr.html" class="m-doc">Expr</a>* right,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori binarni vyraz, prebere vlastnictvi obou operandu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">op</td>
+                  <td>Operator.</td>
+                </tr>
+                <tr>
+                  <td>left</td>
+                  <td>Levy operand.</td>
+                </tr>
+                <tr>
+                  <td>right</td>
+                  <td>Pravy operand.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab671783318cfaf0b3de78d8a7148a460"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab671783318cfaf0b3de78d8a7148a460" class="m-doc-self">expr_new_call</a>(</span><span class="m-doc-wrap">const char* name,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori volani funkce bez argumentu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Jmeno volane funkce.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Argumenty se pridavaji funkci expr_call_add_arg.</p>
+          </div></section>
+          <section class="m-doc-details" id="af2bc36cd51b0cb07b0963f264044ceac"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af2bc36cd51b0cb07b0963f264044ceac" class="m-doc-self">expr_call_add_arg</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* call,
+              <a href="structExpr.html" class="m-doc">Expr</a>* arg)</span></span>
+            </h3>
+            <p>Prida argument na konec volani funkce, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">call</td>
+                  <td>Volani funkce.</td>
+                </tr>
+                <tr>
+                  <td>arg</td>
+                  <td>Pridavany argument.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa19e7a6f4b4c997efdb954fa153ecc64"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa19e7a6f4b4c997efdb954fa153ecc64" class="m-doc-self">expr_new_if</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* cond,
+              <a href="structBlock.html" class="m-doc">Block</a>* then_block,
+              <a href="structBlock.html" class="m-doc">Block</a>* else_block,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori podminku if, prebere vlastnictvi vsech casti.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cond</td>
+                  <td>Podminka.</td>
+                </tr>
+                <tr>
+                  <td>then_block</td>
+                  <td>Vetev then.</td>
+                </tr>
+                <tr>
+                  <td>else_block</td>
+                  <td>Vetev else, NULL kdyz chybi.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af5fb4ffe0809285b68d5e5eaf79fe3af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af5fb4ffe0809285b68d5e5eaf79fe3af" class="m-doc-self">expr_new_range</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* from,
+              <a href="structExpr.html" class="m-doc">Expr</a>* to,
+              bool is_inclusive,
+              <a href="structExpr.html" class="m-doc">Expr</a>* step,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori rozsah, prebere vlastnictvi vsech casti.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">from</td>
+                  <td>Zacatek rozsahu.</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>Konec rozsahu.</td>
+                </tr>
+                <tr>
+                  <td>is_inclusive</td>
+                  <td>True pro to, false pro until.</td>
+                </tr>
+                <tr>
+                  <td>step</td>
+                  <td>Krok, NULL kdyz chybi.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2a5267467216795b00606f1559a131bd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a5267467216795b00606f1559a131bd" class="m-doc-self">expr_new_member</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* object,
+              const char* name,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori clen hodnoty bez argumentu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">object</td>
+                  <td>Hodnota, na ktere se clen vola.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno clenu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Argumenty se pridavaji funkci expr_member_add_arg.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac3f159210e77f00674d61020554ed389"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac3f159210e77f00674d61020554ed389" class="m-doc-self">expr_member_add_arg</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* member,
+              <a href="structExpr.html" class="m-doc">Expr</a>* arg)</span></span>
+            </h3>
+            <p>Prida argument na konec clenu, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">member</td>
+                  <td>Vyraz clenu.</td>
+                </tr>
+                <tr>
+                  <td>arg</td>
+                  <td>Pridavany argument.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7e0f6bb25bd26c4ac9ae6ef5fc1fe4fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e0f6bb25bd26c4ac9ae6ef5fc1fe4fe" class="m-doc-self">expr_new_list_literal</a>(</span><span class="m-doc-wrap">int line)</span></span>
+            </h3>
+            <p>Vytvori prazdny seznam.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Prvky se pridavaji funkci expr_list_add_item.</p>
+          </div></section>
+          <section class="m-doc-details" id="a408fa5ca364381bb598b86e60387adfd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a408fa5ca364381bb598b86e60387adfd" class="m-doc-self">expr_list_add_item</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* list,
+              <a href="structExpr.html" class="m-doc">Expr</a>* item)</span></span>
+            </h3>
+            <p>Prida prvek na konec seznamu, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">list</td>
+                  <td>Seznam.</td>
+                </tr>
+                <tr>
+                  <td>item</td>
+                  <td>Pridavany prvek.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8bc4ed1fb2812229d69a145d09ab7d0a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bc4ed1fb2812229d69a145d09ab7d0a" class="m-doc-self">expr_new_list_range</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* start,
+              <a href="structExpr.html" class="m-doc">Expr</a>* end,
+              <a href="structExpr.html" class="m-doc">Expr</a>* step,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori List.range, prebere vlastnictvi vsech casti.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">start</td>
+                  <td>Prvni cislo.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Konec, bez nej.</td>
+                </tr>
+                <tr>
+                  <td>step</td>
+                  <td>Krok, NULL kdyz chybi.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad321e798439bb4dc2d25f04a3e26bfde"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structExpr.html" class="m-doc">Expr</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad321e798439bb4dc2d25f04a3e26bfde" class="m-doc-self">expr_new_index</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* list,
+              <a href="structExpr.html" class="m-doc">Expr</a>* index,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori pristup k prvku seznamu, prebere vlastnictvi obou casti.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">list</td>
+                  <td>Seznam, ze ktereho se cte.</td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Index prvku.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy vyraz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8b8e8c97f0ead1338a0bef406daa36aa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b8e8c97f0ead1338a0bef406daa36aa" class="m-doc-self">expr_free</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr)</span></span>
+            </h3>
+            <p>Uvolni vyraz a cely jeho podstrom.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">expr</td>
+                  <td>Vyraz k uvolneni (muze byt NULL).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5aeb6e50ec5ca78edc2df716fc47b830"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structBlock.html" class="m-doc">Block</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5aeb6e50ec5ca78edc2df716fc47b830" class="m-doc-self">block_new</a>(</span><span class="m-doc-wrap">void)</span></span>
+            </h3>
+            <p>Vytvori prazdny blok.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Novy blok.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9ebbadd9744854b397afd7318f1bfe65"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ebbadd9744854b397afd7318f1bfe65" class="m-doc-self">block_add</a>(</span><span class="m-doc-wrap"><a href="structBlock.html" class="m-doc">Block</a>* block,
+              <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span></span>
+            </h3>
+            <p>Prida prikaz na konec bloku, prebere vlastnictvi prikazu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">block</td>
+                  <td>Blok.</td>
+                </tr>
+                <tr>
+                  <td>stmt</td>
+                  <td>Pridavany prikaz.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7ee22d856fc49858787e8f2290cf1dfc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ee22d856fc49858787e8f2290cf1dfc" class="m-doc-self">block_free</a>(</span><span class="m-doc-wrap"><a href="structBlock.html" class="m-doc">Block</a>* block)</span></span>
+            </h3>
+            <p>Uvolni blok a vsechny jeho prikazy.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">block</td>
+                  <td>Blok k uvolneni (muze byt NULL).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a924819c094545eeb287963d06546fe6d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structStmt.html" class="m-doc">Stmt</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a924819c094545eeb287963d06546fe6d" class="m-doc-self">stmt_new_vardef</a>(</span><span class="m-doc-wrap">bool is_mutable,
+              const char* name,
+              <a href="structType.html" class="m-doc">Type</a>* declared_type,
+              <a href="structExpr.html" class="m-doc">Expr</a>* init,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori definici promenne, prebere vlastnictvi typu a inicializace.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">is_mutable</td>
+                  <td>True pro var, false pro val.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno promenne.</td>
+                </tr>
+                <tr>
+                  <td>declared_type</td>
+                  <td>Uvedeny typ, NULL kdyz chybi.</td>
+                </tr>
+                <tr>
+                  <td>init</td>
+                  <td>Pocatecni hodnota.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy prikaz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab2a93a223aa2ba3cdfd3a954903441a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structStmt.html" class="m-doc">Stmt</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab2a93a223aa2ba3cdfd3a954903441a1" class="m-doc-self">stmt_new_assign</a>(</span><span class="m-doc-wrap">const char* name,
+              <a href="structExpr.html" class="m-doc">Expr</a>* value,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori prirazeni, prebere vlastnictvi hodnoty.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Jmeno promenne.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Nova hodnota.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy prikaz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5eff34c542999ea324aec49c71bc2bf5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structStmt.html" class="m-doc">Stmt</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5eff34c542999ea324aec49c71bc2bf5" class="m-doc-self">stmt_new_return</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* value,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori prikaz return, prebere vlastnictvi hodnoty.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Vracena hodnota, NULL pro prazdny return.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy prikaz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3ac0e20220b2b1b9e02a9128f7b16b3a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structStmt.html" class="m-doc">Stmt</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3ac0e20220b2b1b9e02a9128f7b16b3a" class="m-doc-self">stmt_new_expr</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori prikaz ze samostatneho vyrazu, prebere vlastnictvi vyrazu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">expr</td>
+                  <td>Vyraz.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy prikaz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa8befb48ce6af924cad68b9f58184622"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structStmt.html" class="m-doc">Stmt</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa8befb48ce6af924cad68b9f58184622" class="m-doc-self">stmt_new_while</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* cond,
+              <a href="structBlock.html" class="m-doc">Block</a>* body,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori cyklus while, prebere vlastnictvi podminky a tela.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">cond</td>
+                  <td>Podminka.</td>
+                </tr>
+                <tr>
+                  <td>body</td>
+                  <td>Telo cyklu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy prikaz.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a26ca3ef3f3c3919c15007309a6d0cbc4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structStmt.html" class="m-doc">Stmt</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26ca3ef3f3c3919c15007309a6d0cbc4" class="m-doc-self">stmt_new_for</a>(</span><span class="m-doc-wrap">const char* var_name,
+              <a href="structExpr.html" class="m-doc">Expr</a>* source,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori cyklus for bez strazi a bez tela.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">var_name</td>
+                  <td>Jmeno ridici promenne.</td>
+                </tr>
+                <tr>
+                  <td>source</td>
+                  <td>Zdroj: rozsah nebo seznam.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy prikaz.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Straze a telo se doplni funkcemi stmt_for_add_guard a stmt_for_set_body.</p>
+          </div></section>
+          <section class="m-doc-details" id="a5aee929e987feb7671cfac7a855ffd06"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5aee929e987feb7671cfac7a855ffd06" class="m-doc-self">stmt_for_add_guard</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* for_stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* guard)</span></span>
+            </h3>
+            <p>Prida straz cyklu for, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">for_stmt</td>
+                  <td>Cyklus for.</td>
+                </tr>
+                <tr>
+                  <td>guard</td>
+                  <td>Straz (vyraz typu Boolean).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afd5b8eed3c1e941ab502e72f5c5899c1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afd5b8eed3c1e941ab502e72f5c5899c1" class="m-doc-self">stmt_for_set_body</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* for_stmt,
+              <a href="structBlock.html" class="m-doc">Block</a>* body)</span></span>
+            </h3>
+            <p>Nastavi telo cyklu for, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">for_stmt</td>
+                  <td>Cyklus for.</td>
+                </tr>
+                <tr>
+                  <td>body</td>
+                  <td>Telo cyklu.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad05f034e300fb966e8d676e85f5caa45"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad05f034e300fb966e8d676e85f5caa45" class="m-doc-self">stmt_free</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span></span>
+            </h3>
+            <p>Uvolni prikaz a cely jeho podstrom.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz k uvolneni (muze byt NULL).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa2f4d6c830e301676b3052a5b99aea2f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa2f4d6c830e301676b3052a5b99aea2f" class="m-doc-self">funcdef_new</a>(</span><span class="m-doc-wrap">const char* name,
+              bool is_main,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori funkci bez parametru, bez navratoveho typu a bez tela.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Jmeno funkce.</td>
+                </tr>
+                <tr>
+                  <td>is_main</td>
+                  <td>True pro funkci s anotaci @main.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Nova definice funkce.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac9ff015f7653549978283259bddb3a84"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac9ff015f7653549978283259bddb3a84" class="m-doc-self">funcdef_add_param</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              const char* name,
+              <a href="structType.html" class="m-doc">Type</a>* type)</span></span>
+            </h3>
+            <p>Prida parametr na konec seznamu parametru, prebere vlastnictvi typu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno parametru.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Typ parametru.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9ca6c124af25fd8f5b8b96f6a05229e8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ca6c124af25fd8f5b8b96f6a05229e8" class="m-doc-self">funcdef_set_return_type</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              <a href="structType.html" class="m-doc">Type</a>* return_type)</span></span>
+            </h3>
+            <p>Nastavi navratovy typ funkce, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce.</td>
+                </tr>
+                <tr>
+                  <td>return_type</td>
+                  <td>Navratovy typ.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aeb96f3789705d45af935cda1c37954a6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeb96f3789705d45af935cda1c37954a6" class="m-doc-self">funcdef_set_body</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              <a href="structBlock.html" class="m-doc">Block</a>* body)</span></span>
+            </h3>
+            <p>Nastavi telo funkce, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce.</td>
+                </tr>
+                <tr>
+                  <td>body</td>
+                  <td>Telo funkce.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a17b1ca0bef54f4c146056e2a4435575d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17b1ca0bef54f4c146056e2a4435575d" class="m-doc-self">funcdef_free</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func)</span></span>
+            </h3>
+            <p>Uvolni definici funkce vcetne parametru a tela.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce k uvolneni (muze byt NULL).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae27b7ada7b8ac3321623b14aa32076da"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structProgram.html" class="m-doc">Program</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae27b7ada7b8ac3321623b14aa32076da" class="m-doc-self">program_new</a>(</span><span class="m-doc-wrap">void)</span></span>
+            </h3>
+            <p>Vytvori prazdny program.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Novy program.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a05cf7cfa5a5e8962bff5898682e6940c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05cf7cfa5a5e8962bff5898682e6940c" class="m-doc-self">program_add_func</a>(</span><span class="m-doc-wrap"><a href="structProgram.html" class="m-doc">Program</a>* program,
+              <a href="structFuncDef.html" class="m-doc">FuncDef</a>* func)</span></span>
+            </h3>
+            <p>Prida funkci do programu, prebere vlastnictvi funkce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">program</td>
+                  <td><a href="structProgram.html" class="m-doc">Program</a>.</td>
+                </tr>
+                <tr>
+                  <td>func</td>
+                  <td>Pridavana funkce.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab2525b646e271371469f9a2153e23c1f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab2525b646e271371469f9a2153e23c1f" class="m-doc-self">program_free</a>(</span><span class="m-doc-wrap"><a href="structProgram.html" class="m-doc">Program</a>* program)</span></span>
+            </h3>
+            <p>Uvolni program a vsechny jeho funkce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">program</td>
+                  <td><a href="structProgram.html" class="m-doc">Program</a> k uvolneni (muze byt NULL).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a451666a7c5ba892808e27e6adc8dc151"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a451666a7c5ba892808e27e6adc8dc151" class="m-doc-self">type_list_set_element</a>(</span><span class="m-doc-wrap"><a href="structType.html" class="m-doc">Type</a>* list,
+              <a href="structType.html" class="m-doc">Type</a>* element)</span></span>
+            </h3>
+            <p>Nastavi typ prvku u typu List[T].</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">list</td>
+                  <td>Typ seznamu.</td>
+                </tr>
+                <tr>
+                  <td>element</td>
+                  <td>Typ prvku, prebere se jeho vlastnictvi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8176d94491c7dd52d6a0c4c96bad1729"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structBlock.html" class="m-doc">Block</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8176d94491c7dd52d6a0c4c96bad1729" class="m-doc-self">block_from_stmt</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span></span>
+            </h3>
+            <p>Vytvori blok s jednim prikazem (jednoradkove telo).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz, prebere se jeho vlastnictvi.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy blok.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3c50a05561ddcc275f4cad076e57e7a6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structBlock.html" class="m-doc">Block</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3c50a05561ddcc275f4cad076e57e7a6" class="m-doc-self">block_from_expr</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              int line)</span></span>
+            </h3>
+            <p>Vytvori blok s jednim prikazem, ktery je vyraz.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">expr</td>
+                  <td>Vyraz, prebere se jeho vlastnictvi.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Radek ve zdrojovem kodu.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy blok.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Pouziva se pro vetev ternarniho if a telo funkce.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac94095542003faf384ce5cb4cd88a5f3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac94095542003faf384ce5cb4cd88a5f3" class="m-doc-self">stmt_vardef_set_mutable</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              bool is_mutable)</span></span>
+            </h3>
+            <p>Nastavi, zda je promenna modifikovatelna.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_VARDEF.</td>
+                </tr>
+                <tr>
+                  <td>is_mutable</td>
+                  <td>True pro var, false pro val.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aac52edf976420cc4adec922d3f7afd12"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aac52edf976420cc4adec922d3f7afd12" class="m-doc-self">stmt_vardef_set_name</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              const char* name)</span></span>
+            </h3>
+            <p>Nastavi jmeno definovane promenne, jmeno se zkopiruje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_VARDEF.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno promenne.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af5741b8bf474610f94c70f0af4e073bc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af5741b8bf474610f94c70f0af4e073bc" class="m-doc-self">stmt_vardef_set_type</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structType.html" class="m-doc">Type</a>* declared_type)</span></span>
+            </h3>
+            <p>Nastavi uvedeny typ promenne, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_VARDEF.</td>
+                </tr>
+                <tr>
+                  <td>declared_type</td>
+                  <td>Uvedeny typ.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8e4ccc8ea38c17dd2fad5ea789bd37df"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e4ccc8ea38c17dd2fad5ea789bd37df" class="m-doc-self">stmt_vardef_set_init</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* init)</span></span>
+            </h3>
+            <p>Nastavi pocatecni hodnotu promenne, prebere jeji vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_VARDEF.</td>
+                </tr>
+                <tr>
+                  <td>init</td>
+                  <td>Pocatecni hodnota.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8fab939547306584db6423c91e5a9fce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8fab939547306584db6423c91e5a9fce" class="m-doc-self">stmt_assign_set_name</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              const char* name)</span></span>
+            </h3>
+            <p>Nastavi jmeno promenne v prirazeni, jmeno se zkopiruje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_ASSIGN.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno promenne.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2a1a66bf01c07429798280a0b14e5b30"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a1a66bf01c07429798280a0b14e5b30" class="m-doc-self">stmt_assign_set_value</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* value)</span></span>
+            </h3>
+            <p>Nastavi novou hodnotu v prirazeni, prebere jeji vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_ASSIGN.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Nova hodnota.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae0d1e119e43db5832c1296af59462054"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0d1e119e43db5832c1296af59462054" class="m-doc-self">stmt_return_set_value</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* value)</span></span>
+            </h3>
+            <p>Nastavi vracenou hodnotu prikazu return, prebere jeji vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_RETURN.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Vracena hodnota.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a35d9e238b26cbd92e8db08fc77d54eff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a35d9e238b26cbd92e8db08fc77d54eff" class="m-doc-self">stmt_expr_set_expr</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span></span>
+            </h3>
+            <p>Nastavi vyraz samostatneho prikazu, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_EXPR.</td>
+                </tr>
+                <tr>
+                  <td>expr</td>
+                  <td>Vyraz.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae0e3c9f01c9f5ea87a939b5a4f9bc6e3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0e3c9f01c9f5ea87a939b5a4f9bc6e3" class="m-doc-self">stmt_while_set_cond</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* cond)</span></span>
+            </h3>
+            <p>Nastavi podminku cyklu while, prebere jeji vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_WHILE.</td>
+                </tr>
+                <tr>
+                  <td>cond</td>
+                  <td>Podminka.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac408d600e211be4b07d67ad0d0b4b917"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac408d600e211be4b07d67ad0d0b4b917" class="m-doc-self">stmt_while_set_body</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structBlock.html" class="m-doc">Block</a>* body)</span></span>
+            </h3>
+            <p>Nastavi telo cyklu while, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_WHILE.</td>
+                </tr>
+                <tr>
+                  <td>body</td>
+                  <td>Telo cyklu.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acfcfd346c90a0fb5705a8e11d64b4577"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acfcfd346c90a0fb5705a8e11d64b4577" class="m-doc-self">stmt_for_set_var_name</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              const char* var_name)</span></span>
+            </h3>
+            <p>Nastavi jmeno ridici promenne cyklu for, jmeno se zkopiruje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_FOR.</td>
+                </tr>
+                <tr>
+                  <td>var_name</td>
+                  <td>Jmeno ridici promenne.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae11613f6d8138985caf77c7a2bab7fa3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae11613f6d8138985caf77c7a2bab7fa3" class="m-doc-self">stmt_for_set_source</a>(</span><span class="m-doc-wrap"><a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              <a href="structExpr.html" class="m-doc">Expr</a>* source)</span></span>
+            </h3>
+            <p>Nastavi zdroj cyklu for, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stmt</td>
+                  <td>Prikaz STMT_FOR.</td>
+                </tr>
+                <tr>
+                  <td>source</td>
+                  <td>Zdroj: rozsah nebo seznam.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a002459b67f5c803962a49523aa9d8e9c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a002459b67f5c803962a49523aa9d8e9c" class="m-doc-self">expr_if_set_cond</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              <a href="structExpr.html" class="m-doc">Expr</a>* cond)</span></span>
+            </h3>
+            <p>Nastavi podminku vyrazu if, prebere jeji vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">expr</td>
+                  <td>Vyraz EXPR_IF.</td>
+                </tr>
+                <tr>
+                  <td>cond</td>
+                  <td>Podminka.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a10a903743607f1126dedd5d1fd56686c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a10a903743607f1126dedd5d1fd56686c" class="m-doc-self">expr_if_set_then</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              <a href="structBlock.html" class="m-doc">Block</a>* then_block)</span></span>
+            </h3>
+            <p>Nastavi vetev then vyrazu if, prebere jeji vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">expr</td>
+                  <td>Vyraz EXPR_IF.</td>
+                </tr>
+                <tr>
+                  <td>then_block</td>
+                  <td>Vetev then.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8d8d70ae2e66a7dbd45efd991a495f3e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d8d70ae2e66a7dbd45efd991a495f3e" class="m-doc-self">expr_if_set_else</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              <a href="structBlock.html" class="m-doc">Block</a>* else_block)</span></span>
+            </h3>
+            <p>Nastavi vetev else vyrazu if, prebere jeji vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">expr</td>
+                  <td>Vyraz EXPR_IF.</td>
+                </tr>
+                <tr>
+                  <td>else_block</td>
+                  <td>Vetev else.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a41b8dd826e4b8f8efa46acce9af81e24"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a41b8dd826e4b8f8efa46acce9af81e24" class="m-doc-self">funcdef_set_name</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              const char* name)</span></span>
+            </h3>
+            <p>Nastavi jmeno funkce, jmeno se zkopiruje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno funkce.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1dff5ed47bee0cc6794116547b3b5d9e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1dff5ed47bee0cc6794116547b3b5d9e" class="m-doc-self">funcdef_set_main</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              bool is_main)</span></span>
+            </h3>
+            <p>Nastavi, zda ma funkce anotaci @main.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce.</td>
+                </tr>
+                <tr>
+                  <td>is_main</td>
+                  <td>True pro funkci s anotaci @main.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a462cd531c89c50d766487d2928aec32a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a462cd531c89c50d766487d2928aec32a" class="m-doc-self">funcdef_param_set_name</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              int index,
+              const char* name)</span></span>
+            </h3>
+            <p>Nastavi jmeno parametru na danem indexu, jmeno se zkopiruje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce.</td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Index parametru.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno parametru.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7d0ad40467b17e2e3fe0b6a2c9f647d8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d0ad40467b17e2e3fe0b6a2c9f647d8" class="m-doc-self">funcdef_param_set_type</a>(</span><span class="m-doc-wrap"><a href="structFuncDef.html" class="m-doc">FuncDef</a>* func,
+              int index,
+              <a href="structType.html" class="m-doc">Type</a>* type)</span></span>
+            </h3>
+            <p>Nastavi typ parametru na danem indexu, prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">func</td>
+                  <td>Funkce.</td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Index parametru.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Typ parametru.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a763eb8f3116e32e761c947d80c130fa7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a763eb8f3116e32e761c947d80c130fa7" class="m-doc-self">expr_range_set_step</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* range,
+              <a href="structExpr.html" class="m-doc">Expr</a>* step)</span></span>
+            </h3>
+            <p>Nastavi krok rozsahu a prebere jeho vlastnictvi.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">range</td>
+                  <td>Vyraz EXPR_RANGE.</td>
+                </tr>
+                <tr>
+                  <td>step</td>
+                  <td>Novy krok.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Puvodni krok se uvolni.</p>
+          </div></section>
+          <section class="m-doc-details" id="a80f96dcfe4087a2294de2d6da97d7e88"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80f96dcfe4087a2294de2d6da97d7e88" class="m-doc-self">expr_call_take_args</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* call,
+              <a href="structExpr.html" class="m-doc">Expr</a>* args)</span></span>
+            </h3>
+            <p>Presune prvky list literalu na konec argumentu volani funkce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">call</td>
+                  <td>Volani funkce.</td>
+                </tr>
+                <tr>
+                  <td>args</td>
+                  <td>Pomocny uzel EXPR_LIST_LITERAL s argumenty.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Prebere vlastnictvi prvku. List literal (pomocny uzel) uvolni.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0805bcb6bed113b4b0741cb469f4af6c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0805bcb6bed113b4b0741cb469f4af6c" class="m-doc-self">expr_member_take_args</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* member,
+              <a href="structExpr.html" class="m-doc">Expr</a>* args)</span></span>
+            </h3>
+            <p>Presune prvky list literalu na konec argumentu clenu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">member</td>
+                  <td>Vyraz clenu.</td>
+                </tr>
+                <tr>
+                  <td>args</td>
+                  <td>Pomocny uzel EXPR_LIST_LITERAL s argumenty.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Prebere vlastnictvi prvku. List literal (pomocny uzel) uvolni.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7e17c629d5a00fa3605be8954c3a269d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e17c629d5a00fa3605be8954c3a269d" class="m-doc-self">expr_list_take_items</a>(</span><span class="m-doc-wrap"><a href="structExpr.html" class="m-doc">Expr</a>* list,
+              <a href="structExpr.html" class="m-doc">Expr</a>*** items,
+              int* count)</span></span>
+            </h3>
+            <p>Vyjme prvky z list literalu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">list</td>
+                  <td>List literal.</td>
+                </tr>
+                <tr>
+                  <td>items</td>
+                  <td>Vystup: pole ukazatelu na prvky.</td>
+                </tr>
+                <tr>
+                  <td>count</td>
+                  <td>Vystup: pocet prvku.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Do *items da pole ukazatelu (volajici ho uvolni funkci free, jeho prvky prebira) a do *count jejich pocet. List literal zustane prazdny a uvolni ho volajici pomoci expr_free.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

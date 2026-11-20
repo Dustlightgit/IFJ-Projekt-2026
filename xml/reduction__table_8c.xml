@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="reduction__table_8c" kind="file" language="C++">
+    <compoundname>reduction_table.c</compoundname>
+    <includes refid="reduction__table_8h" local="yes">reduction_table.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes refid="grammar__symbol_8h" local="yes">grammar_symbol.h</includes>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="precedence__semantic__actions_8h" local="yes">precedence_semantic_actions.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <incdepgraph>
+      <node id="9">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="4">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="13">
+        <label>precedence_semantic_actions.h</label>
+        <link refid="precedence__semantic__actions_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>reduction_table.h</label>
+        <link refid="reduction__table_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+      <node id="11">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="reduction__table_8c_1a5d250020706f742039476fff1b6710bf" prot="public" static="no">
+        <name>SYM_TERM</name>
+        <param><defname>t</defname></param>
+        <initializer><ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(t)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="56" column="9" bodyfile="src/reduction_table.c" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="reduction__table_8c_1a3a82ab685465acbb66d1695173630cbd" prot="public" static="no">
+        <name>SYM_NONTERM</name>
+        <param><defname>n</defname></param>
+        <initializer><ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(n)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="57" column="9" bodyfile="src/reduction_table.c" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="reduction__table_8c_1a7c19d1dca38099a2984bd57ea7566645" prot="public" static="no">
+        <name>REDUCTION_RULE</name>
+        <param><defname>action_function</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>  {                                                                            \
+    .action = (action_function), .handle = {                                   \
+      .length =                                                                \
+          sizeof((<ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref>[]){__VA_ARGS__}) / sizeof(<ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref>),      \
+      .symbols = {__VA_ARGS__}                                                 \
+    }                                                                          \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="62" column="9" bodyfile="src/reduction_table.c" bodystart="62" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="reduction__table_8c_1a5b334d6c49308d981589063f4c1f8b62" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structReductionTableEntry" kindref="compound">ReductionTableEntry</ref></type>
+        <definition>const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE]</definition>
+        <argsstring>[REDUCTION_TABLE_SIZE]</argsstring>
+        <name>REDUCTION_TABLE</name>
+        <briefdescription>
+<para>Tabulka redukcnich pravidel vyrazove gramatiky. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Mapuje handle pravidla na jeho semantickou akci. Polozky jsou serazeny vzestupne podle delky handle (poradi neodpovida cislum pravidel), na jejich poradi se spoleha funkce reduction_table_lookup. Pripadne nevyuzite polozky s action NULL jsou az na konci tabulky. Tabulka obsahuje vsech 43 pravidel vyrazove gramatiky (E0 az E42), nevyuzite polozky tedy zatim zadne nejsou. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="75" column="27" bodyfile="src/reduction_table.c" bodystart="75" bodyend="225"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="reduction__table_8c_1af6905059747b010160f85dcce5f87316" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool grammar_symbols_equal</definition>
+        <argsstring>(const GrammarSymbol *a, const GrammarSymbol *b)</argsstring>
+        <name>grammar_symbols_equal</name>
+        <param>
+          <type>const <ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref> *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="232" column="13" bodyfile="src/reduction_table.c" bodystart="232" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="reduction__table_8c_1aa63c6c0ebbcb38b81daaf2e88428c319" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool handles_equal</definition>
+        <argsstring>(const SearchHandle *a, const SearchHandle *b)</argsstring>
+        <name>handles_equal</name>
+        <param>
+          <type>const <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref> *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="244" column="13" bodyfile="src/reduction_table.c" bodystart="244" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="reduction__table_8c_1a4379817672c7dd7def7a1fdb802e0f08" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void print_handle</definition>
+        <argsstring>(const SearchHandle *handle)</argsstring>
+        <name>print_handle</name>
+        <param>
+          <type>const <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref> *</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="256" column="13" bodyfile="src/reduction_table.c" bodystart="256" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="reduction__table_8c_1a0288903fa1ed8f1b1d838e26e748d15b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="semantic__types_8h_1a6ea4594c8b87bee8d9d968786952c01c" kindref="member">PrecedenceSemanticAction</ref></type>
+        <definition>PrecedenceSemanticAction reduction_table_lookup</definition>
+        <argsstring>(const SearchHandle *handle, int line)</argsstring>
+        <name>reduction_table_lookup</name>
+        <param>
+          <type>const <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref> *</type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vyhleda v redukcni tabulce pravidlo podle handle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Tabulka je serazena podle delky handle, funkce proto preskoci kratsi handle, porovna cely vyhledavany handle (delku i vsechny symboly) postupne se vsemi handle stejne delky a pri prvnim delsim handle vyhledavani konci. Delka vyhledavaneho handle musi byt v rozsahu 1 az HANDLE_MAX_LENGTH, jinak jde o internich chybu (ERR_INTERNAL). Pokud pravidlo neexistuje, program skonci syntaktickou chybou (ERR_SYNTAX) a na stderr vypise hledany handle.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyhledavany handle, sestaveny jadrem ze symbolu zasobniku v prirozenem poradi (viz <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref>), nesmi byt NULL. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku vstupniho tokenu pro chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Semanticka akce nalezeneho pravidla, nikdy NULL. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.c" line="267" column="26" bodyfile="src/reduction_table.c" bodystart="267" bodyend="298"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/reduction_table.c"/>
+  </compounddef>
+</doxygen>

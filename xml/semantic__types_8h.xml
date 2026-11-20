@@ -1,0 +1,578 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="semantic__types_8h" kind="file" language="C++">
+    <compoundname>semantic_types.h</compoundname>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="grammar__symbol_8h" local="yes">grammar_symbol.h</includes>
+    <includes refid="stack_8h" local="yes">stack.h</includes>
+    <includedby refid="LL__table_8h" local="yes">src/LL_table.h</includedby>
+    <includedby refid="parser__common_8h" local="yes">src/parser_common.h</includedby>
+    <includedby refid="precedence__parser_8c" local="yes">src/precedence_parser.c</includedby>
+    <includedby refid="precedence__parser_8h" local="yes">src/precedence_parser.h</includedby>
+    <includedby refid="precedence__semantic__actions_8h" local="yes">src/precedence_semantic_actions.h</includedby>
+    <includedby refid="reduction__table_8h" local="yes">src/reduction_table.h</includedby>
+    <includedby refid="semantic__actions_8h" local="yes">src/semantic_actions.h</includedby>
+    <includedby refid="special__actions_8h" local="yes">src/special_actions.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="1">
+        <label>src/semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="8">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>src/LL_table.c</label>
+        <link refid="LL__table_8c"/>
+      </node>
+      <node id="2">
+        <label>src/LL_table.h</label>
+        <link refid="LL__table_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="7">
+        <label>src/parser_common.c</label>
+        <link refid="parser__common_8c"/>
+      </node>
+      <node id="5">
+        <label>src/parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/precedence_helpers.c</label>
+        <link refid="precedence__helpers_8c"/>
+      </node>
+      <node id="8">
+        <label>src/precedence_helpers.h</label>
+        <link refid="precedence__helpers_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="11">
+        <label>src/precedence_parser.h</label>
+        <link refid="precedence__parser_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>src/precedence_semantic_actions.c</label>
+        <link refid="precedence__semantic__actions_8c"/>
+      </node>
+      <node id="17">
+        <label>src/precedence_semantic_actions.h</label>
+        <link refid="precedence__semantic__actions_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+      <node id="13">
+        <label>src/predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+      </node>
+      <node id="19">
+        <label>src/reduction_table.h</label>
+        <link refid="reduction__table_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>src/semantic_actions.c</label>
+        <link refid="semantic__actions_8c"/>
+      </node>
+      <node id="20">
+        <label>src/semantic_actions.h</label>
+        <link refid="semantic__actions_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+      </node>
+      <node id="16">
+        <label>src/special_actions.h</label>
+        <link refid="special__actions_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structSemanticContext" prot="public">SemanticContext</innerclass>
+    <innerclass refid="structAnnotatedSymbol" prot="public">AnnotatedSymbol</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" prot="public" static="no" strong="no">
+        <type></type>
+        <name>ContextAnnotation</name>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfac24319930c0604b6fd7e77d4966a4c38" prot="public">
+          <name>CONTEXT_NONE</name>
+          <briefdescription>
+<para>Vychozi hodnota, symbol bez anotace. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfae928da37a67aafc3797a43ca7531f6f6" prot="public">
+          <name>CONTEXT_FUNCTION_DECLARATION_NAME</name>
+          <briefdescription>
+<para>Jmeno deklarovane funkce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa67e769bd12f63c10e51dac176ed26562" prot="public">
+          <name>CONTEXT_DECLARATION_NAME</name>
+          <briefdescription>
+<para>Jmeno deklarovane promenne. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfaabbfb968fcac10a94a08472a7094da98" prot="public">
+          <name>CONTEXT_ASSIGNMENT_TARGET</name>
+          <briefdescription>
+<para>Cil prirazeni. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa1d8b9f3a87025a555b4e98ecc37e7004" prot="public">
+          <name>CONTEXT_EXPRESSION_REFERENCE</name>
+          <briefdescription>
+<para>Reference na ID ve vyrazu. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfac887d3850591effcbfce0877fd9249da" prot="public">
+          <name>CONTEXT_ID_COMMAND</name>
+          <briefdescription>
+<para>ID na zacatku prikazu, special_action_id vytvori uzel. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa23cd5ecfba33e9974f490d0a395ae966" prot="public">
+          <name>CONTEXT_PROLOGUE_CHECK</name>
+          <briefdescription>
+<para>ID v prologu, kontrola ifj26. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfaf7c4e38f1b079364a2c4c82ac6cd6261" prot="public">
+          <name>CONTEXT_FUNCTION_DEF</name>
+          <briefdescription>
+<para>ID je jmeno definovane funkce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfadfc49a39ab78aa2fc24803f8b0b4f7ec" prot="public">
+          <name>CONTEXT_FUNCTION_RETURN_TYPE</name>
+          <briefdescription>
+<para>Typ je navratovy typ funkce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfaa53eb634b0e7c8afd557fe7a9a0fb342" prot="public">
+          <name>CONTEXT_PARAM_NAME</name>
+          <briefdescription>
+<para>ID je jmeno parametru funkce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfaf880762eb7c9288f2fe5d01456c839c9" prot="public">
+          <name>CONTEXT_PARAM_TYPE</name>
+          <briefdescription>
+<para>Typ je typ naposledy pridaneho parametru. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa86140e54797854e0c038555d4da83726" prot="public">
+          <name>CONTEXT_LIST_ELEMENT</name>
+          <briefdescription>
+<para>Typ je typ prvku seznamu (pointer je <ref refid="structType" kindref="compound">Type</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfaf525d2ee1c7a4a42a75f6aab5be9a32a" prot="public">
+          <name>CONTEXT_BLOCK_STMT</name>
+          <briefdescription>
+<para>Pointer je <ref refid="structBlock" kindref="compound">Block</ref> *, prikaz se prida do nej. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa1b584b55e212536ded6668217e63b195" prot="public">
+          <name>CONTEXT_FUNCTION_BODY</name>
+          <briefdescription>
+<para>Pointer je <ref refid="structFuncDef" kindref="compound">FuncDef</ref> *, blok je telo funkce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfad89c1b12621001098d583c5c67e64669" prot="public">
+          <name>CONTEXT_WHILE_BODY</name>
+          <briefdescription>
+<para>Pointer je <ref refid="structStmt" kindref="compound">Stmt</ref> * (while), blok je telo. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa383e94414f446299b2758bccfcc54ce4" prot="public">
+          <name>CONTEXT_FOR_BODY</name>
+          <briefdescription>
+<para>Pointer je <ref refid="structStmt" kindref="compound">Stmt</ref> * (for), blok je telo. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa3e0064a391e85bc806339363ced42e91" prot="public">
+          <name>CONTEXT_VARDEF_TYPE</name>
+          <briefdescription>
+<para>Typ je deklarovany typ promenne (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa7e5cfd5feb074848134e8a3879c22df8" prot="public">
+          <name>CONTEXT_VARDEF_INIT</name>
+          <briefdescription>
+<para>Vyraz je inicializace promenne (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfabd3fca73a716618f6413d1a8c06dbc48" prot="public">
+          <name>CONTEXT_ASSIGN_VALUE</name>
+          <briefdescription>
+<para>Vyraz je hodnota prirazeni (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa89c767e57757e497aac18f1403d030c8" prot="public">
+          <name>CONTEXT_RETURN_VALUE</name>
+          <briefdescription>
+<para>Vyraz je hodnota returnu (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfaa8221a9f56dd7ee5d0e5a0da84102cba" prot="public">
+          <name>CONTEXT_WHILE_COND</name>
+          <briefdescription>
+<para>Vyraz je podminka while (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa437bfc3d759441ec859872cf6d2c7889" prot="public">
+          <name>CONTEXT_FOR_VAR</name>
+          <briefdescription>
+<para>ID je ridici promenna for (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa6f6ded5e652fade05895ef1435c155f7" prot="public">
+          <name>CONTEXT_FOR_SOURCE</name>
+          <briefdescription>
+<para>Vyraz je zdroj for (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa9fdd3804b78a97f7676d064054bae5d3" prot="public">
+          <name>CONTEXT_FOR_GUARD</name>
+          <briefdescription>
+<para>Vyraz je straz for (<ref refid="structStmt" kindref="compound">Stmt</ref> *) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfac73b48985118dac598df8cdc42a376db" prot="public">
+          <name>CONTEXT_IF_THEN</name>
+          <briefdescription>
+<para>Blok je vetev then (<ref refid="structExpr" kindref="compound">Expr</ref> * if) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfae8d165bd7b0afaa3b07b27e94d5d20e5" prot="public">
+          <name>CONTEXT_IF_ELSE</name>
+          <briefdescription>
+<para>Blok je vetev else (<ref refid="structExpr" kindref="compound">Expr</ref> * if) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa7656fe8f7be3356a80e379fd6a47354e" prot="public">
+          <name>CONTEXT_IF_COND</name>
+          <briefdescription>
+<para>Vyraz je podminka if (<ref refid="structExpr" kindref="compound">Expr</ref> * if) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebfa578ded8b382a053cdb130e90f3ca9c15" prot="public">
+          <name>CONTEXT_RANGE_WITHOUT_STEP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Neterminal E je rozsah bez kroku (<ref refid="structExpr" kindref="compound">Expr</ref> * EXPR_RANGE vytvoreny pravidlem &quot;to&quot; nebo &quot;until&quot;), pripustny levy operand infixoveho &quot;by&quot; </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Kontextova anotace pripojena k symbolu na zasobniku parseru. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Anotaci lze pripojit k libovolnemu terminalu i neterminalu. Callback rozvadeneho neterminalu podle ni pozna, co ma provest a kam vysledek ulozit, a stejnou cestou anotuje symboly vkladane na zasobnik. Hodnoty budou doplneny dle potreb stavby AST, prozatim jsou ilustrativni. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="132" column="1" bodyfile="src/semantic_types.h" bodystart="132" bodyend="169"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="semantic__types_8h_1acbe2ed0b0877f90cab9d7f87ff6d89bd" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* SemanticCallback) (SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</definition>
+        <argsstring>)(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, int line, Stack *stack)</argsstring>
+        <name>SemanticCallback</name>
+        <briefdescription>
+<para>Semanticka akce pravidla. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Akce se provede pri rozvoji neterminalu timto pravidlem. Callback dostane ukazatel a kontextovou anotaci rozvadeneho neterminalu, aby vedel, co ma provest a kam vysledek ulozit. Symboly sve prave strany vklada na zasobnik spolu s ukazateli a anotacemi, ktere jim sdeluji totez. Staticke produkce kopiruji ukazatel a anotaci neterminalu na leve strane vzdy do vsech symbolu produkce, aniz by musely byt callbacky.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext sdileny mezi akcemi. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny na zasobniku u neterminalu, ktery je timto pravidlem rozvadeny. Vyznam zavisi na parseru:<itemizedlist>
+<listitem><para>V LL parseru je to ukazatel na misto, kam ma byt vlozen uzel AST, pripadne na atribut, ktery ma byt zmenen. Zmenu provede semanticka akce nahrazujici dany neterminal.</para>
+</listitem><listitem><para>Ve vyrazovem parseru je to obvykle ukazatel na prislusny dokonceny vyrazovy podstrom. </para>
+</listitem></itemizedlist>
+</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena na zasobniku u neterminalu, ktery je timto pravidlem rozvadeny. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu, ktery je nejblize skutecnemu umisteni konstrukce ve vstupu. Slouzi napr. pro cislo radku v uzlech AST a pro chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce na nej muze pridat produkci a k ni rovnou atributy (ukazatele, kontextove anotace apod.). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="284" column="9" bodyfile="src/semantic_types.h" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="semantic__types_8h_1a6ea4594c8b87bee8d9d968786952c01c" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* PrecedenceSemanticAction) (const Stack *stack, int line, AnnotatedSymbol *result)</definition>
+        <argsstring>)(const Stack *stack, int line, AnnotatedSymbol *result)</argsstring>
+        <name>PrecedenceSemanticAction</name>
+        <briefdescription>
+<para>Semanticka akce precedencniho parseru, reprezentuje redukcni pravidlo. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Akce se zavola, kdyz byl handle pravidla vyhledan v redukcni tabulce. Handle se sklada primo z prvku zasobniku, akce tedy ma zaruceno, ze prvnich length symbolu na zasobniku (od vrcholu) jsou presne symboly prave strany pravidla, kde length je delka handle pravidla. Data techto symbolu si akce prohlizi pomoci parser_stack_peek (hloubka 0 je vrchol, tedy posledni symbol handle). Vezme podstromy z jednotlivych symbolu, slozi je do noveho uzlu a ten preda jadru pres result jako semanticky ukazatel redukovaneho neterminalu.</para>
+<para>Akce zasobnik nemeni. Vyklizeni handle a vlozeni redukovaneho neterminalu je odpovednosti jadra, protoze handle musi byt v dobe volani akce stale na zasobniku a musi byt vyklizen drive, nez se vlozi redukovany neterminal.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru, akce z nej cte, ale nemeni ho. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku, obvykle radek aktualniho vstupniho terminalu, ktery je nejblize skutecnemu umisteni konstrukce ve vstupu. Slouzi napr. pro cislo radku v uzlech AST a pro chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup, symbol, semanticky ukazatel a anotace, ktere jadro vlozi do noveho zaznamu na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="428" column="9" bodyfile="src/semantic_types.h" bodystart="428" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/semantic_types.h"/>
+  </compounddef>
+</doxygen>

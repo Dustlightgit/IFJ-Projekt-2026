@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>IFJ-Projekt-2026</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="index_1md_README"/></para>
+<sect1 id="index_1autotoc_md0">
+<title>Implementace překladače imperativního jazyka IFJ26</title>
+<para><itemizedlist>
+<listitem><para>Termín odevzdávání: 27. 11. v 11:59:59</para>
+</listitem><listitem><para>Pokusné odevzdání: do konce čtvrtka 19. 11.</para>
+</listitem><listitem><para>Mezi čtvrtkem 26. 11. a úterým 1. 12. v 8:00 zaneste vytištěnou dokumentaci na fakultu</para>
+</listitem></itemizedlist>
+</para>
+<sect2 id="index_1autotoc_md1">
+<title>Varianta</title>
+<para><itemizedlist>
+<listitem><para>vv-BVS – Výškově vyvážený binární vyhledávací strom</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md2">
+<title>Formát</title>
+<para><itemizedlist>
+<listitem><para>Clang-format – LLVM</para>
+</listitem><listitem><para>Proměnné a funkce - snake_case</para>
+</listitem><listitem><para>Konstanty a položky enum - SCREAMING_SNAKE_CASE</para>
+</listitem><listitem><para>Datové typy - PascalCase</para>
+</listitem><listitem><para>Komentáře česky bez diakritiky</para>
+</listitem><listitem><para>Kód, git messages anglicky</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md3">
+<title>Překlad a testování</title>
+<para><itemizedlist>
+<listitem><para><bold>výchozí</bold> chování příkazu **<computeroutput>make</computeroutput> je <computeroutput>build</computeroutput>**</para>
+</listitem><listitem><para>kompilace do <computeroutput>build/</computeroutput> – <computeroutput>make build</computeroutput><itemizedlist>
+<listitem><para><bold>rekompilace</bold> - <computeroutput>make rebuild</computeroutput> (spustí <computeroutput>clean</computeroutput> a pak <computeroutput>build</computeroutput>)</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para><bold>spouštění překladače</bold> v <computeroutput>build/main</computeroutput> - <computeroutput>make run</computeroutput></para>
+</listitem><listitem><para><bold>testování</bold> – <computeroutput>make test</computeroutput> - otestuje překladač pomocí **_valgrind_** a zároveň spustí všechny <bold>unit testy</bold> ve složce <computeroutput>/test/scripts</computeroutput> jednotlivých částí překladače<itemizedlist>
+<listitem><para>vždy spustí <computeroutput>rebuild</computeroutput></para>
+</listitem><listitem><para>více informací o testování v <computeroutput>/test/tests.md</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para><bold>formátování</bold> všech souborů v <computeroutput>src/</computeroutput> – <computeroutput>make format</computeroutput></para>
+</listitem><listitem><para>výsledné <bold>zabalení</bold> do <computeroutput>output/</computeroutput> – <computeroutput>make package</computeroutput></para>
+</listitem><listitem><para><bold>čištění</bold> složek <computeroutput>build/</computeroutput>, <computeroutput>output/</computeroutput> a zbytků po testech - <computeroutput>make clean</computeroutput></para>
+</listitem><listitem><para><computeroutput>make show-docs</computeroutput> otevře na portu 8000 dokumentaci od doxy<itemizedlist>
+<listitem><para><computeroutput>make stop-docs</computeroutput> proces ukončí </para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+    </detaileddescription>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

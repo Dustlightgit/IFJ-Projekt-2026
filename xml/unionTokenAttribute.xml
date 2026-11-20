@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="unionTokenAttribute" kind="union" language="C++" prot="public">
+    <compoundname>TokenAttribute</compoundname>
+    <includes refid="token_8h" local="no">token.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionTokenAttribute_1a924ad3fe81f1f102f0ee7342e4757a19" prot="public" static="no" mutable="no">
+        <type>long long</type>
+        <definition>long long TokenAttribute::int_val</definition>
+        <argsstring></argsstring>
+        <name>int_val</name>
+        <qualifiedname>TokenAttribute::int_val</qualifiedname>
+        <briefdescription>
+<para>TOKEN_INT_LIT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="223" column="13" bodyfile="src/token.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionTokenAttribute_1a81f2640e8190a95371ad43e2065ecb67" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double TokenAttribute::double_val</definition>
+        <argsstring></argsstring>
+        <name>double_val</name>
+        <qualifiedname>TokenAttribute::double_val</qualifiedname>
+        <briefdescription>
+<para>TOKEN_DOUBLE_LIT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="224" column="10" bodyfile="src/token.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionTokenAttribute_1a70bf501278085fae2600d04ec198b45f" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* TokenAttribute::text</definition>
+        <argsstring></argsstring>
+        <name>text</name>
+        <qualifiedname>TokenAttribute::text</qualifiedname>
+        <briefdescription>
+<para>TOKEN_ID, TOKEN_ID_OPERATOR, TOKEN_STRING_LIT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="225" column="8" bodyfile="src/token.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Hodnota tokenu, platny clen urcuje typ tokenu. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/token.h" line="222" column="1" bodyfile="src/token.h" bodystart="222" bodyend="226"/>
+    <listofallmembers>
+      <member refid="unionTokenAttribute_1a81f2640e8190a95371ad43e2065ecb67" prot="public" virt="non-virtual"><scope>TokenAttribute</scope><name>double_val</name></member>
+      <member refid="unionTokenAttribute_1a924ad3fe81f1f102f0ee7342e4757a19" prot="public" virt="non-virtual"><scope>TokenAttribute</scope><name>int_val</name></member>
+      <member refid="unionTokenAttribute_1a70bf501278085fae2600d04ec198b45f" prot="public" virt="non-virtual"><scope>TokenAttribute</scope><name>text</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

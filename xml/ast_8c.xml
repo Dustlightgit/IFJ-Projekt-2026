@@ -1,0 +1,3159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="ast_8c" kind="file" language="C++">
+    <compoundname>ast.c</compoundname>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes refid="memory_8h" local="yes">memory.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/ast.c</label>
+        <link refid="ast_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="5">
+        <label>memory.h</label>
+        <link refid="memory_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="6">
+        <label>stddef.h</label>
+      </node>
+      <node id="7">
+        <label>stdlib.h</label>
+      </node>
+      <node id="8">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="ast_8c_1a0ef97abf9bef046fda5f511a67f1868d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void require_stmt</definition>
+        <argsstring>(const Stmt *stmt, StmtKind kind)</argsstring>
+        <name>require_stmt</name>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="ast_8h_1a1b09b1c2cca879d79a9b57ae03eb9ffe" kindref="member">StmtKind</ref></type>
+          <declname>kind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="29" column="13" bodyfile="src/ast.c" bodystart="29" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a84db18794d415dc16e504d86aea09cea" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void require_expr</definition>
+        <argsstring>(const Expr *expr, ExprKind kind)</argsstring>
+        <name>require_expr</name>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="ast_8h_1a6bec3a2f37359f29ba8881edc58f44d2" kindref="member">ExprKind</ref></type>
+          <declname>kind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="37" column="13" bodyfile="src/ast.c" bodystart="37" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1af279040fab2935beab56f4b2df7fbb0f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void require_func</definition>
+        <argsstring>(const FuncDef *func)</argsstring>
+        <name>require_func</name>
+        <param>
+          <type>const <ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="45" column="13" bodyfile="src/ast.c" bodystart="45" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a1b11669c3659d51ddc503e1495b2f404" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type * type_new</definition>
+        <argsstring>(TypeKind kind)</argsstring>
+        <name>type_new</name>
+        <param>
+          <type><ref refid="ast_8h_1ab4dd8308e08805aedfe646096be0e4e7" kindref="member">TypeKind</ref></type>
+          <declname>kind</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori typ daneho druhu (pro TYPE_LIST pouzij type_new_list). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>kind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Druh typu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy typ. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="58" column="6" bodyfile="src/ast.c" bodystart="58" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ae182e02ccce3c3facbebf4bb193c6fcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type * type_new_list</definition>
+        <argsstring>(Type *element)</argsstring>
+        <name>type_new_list</name>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori typ List[element], prebere vlastnictvi elementu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ prvku seznamu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy typ seznamu. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="66" column="6" bodyfile="src/ast.c" bodystart="66" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a5a1c5fdf09b106f81213e71c7f8af8f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type * type_clone</definition>
+        <argsstring>(const Type *type)</argsstring>
+        <name>type_clone</name>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori hlubokou kopii typu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pouziva se v semantice, aby kazdy vyraz mel vlastni typ. Resi problem s dvojitym uvolnenim (kazdy vyraz uvolnuje svuj typ). Napr. <ref refid="structExpr" kindref="compound">Expr</ref> &quot;a&quot; =&gt; TYPE_INT (1), <ref refid="structExpr" kindref="compound">Expr</ref> &quot;a + b&quot; =&gt; TYPE_INT (2). Neukazuji na stejny TYPE_INT, ale kazdy ma svuj.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ ke zkopirovani. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nova kopie typu. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="73" column="6" bodyfile="src/ast.c" bodystart="73" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1aaa3a1ca9e0fa34fb49a6fd5421af2d07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void type_free</definition>
+        <argsstring>(Type *type)</argsstring>
+        <name>type_free</name>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni typ vcetne typu prvku. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ k uvolneni (muze byt NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="83" column="6" bodyfile="src/ast.c" bodystart="83" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a2f43f6a9c30d0148b2a30a7cc35612ee" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>static Expr * expr_alloc</definition>
+        <argsstring>(ExprKind kind, int line)</argsstring>
+        <name>expr_alloc</name>
+        <param>
+          <type><ref refid="ast_8h_1a6bec3a2f37359f29ba8881edc58f44d2" kindref="member">ExprKind</ref></type>
+          <declname>kind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="96" column="13" bodyfile="src/ast.c" bodystart="96" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a208a8ad414f2a120d0f822f2cd6eeb09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_int</definition>
+        <argsstring>(int value, int line)</argsstring>
+        <name>expr_new_int</name>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori celociselny literal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hodnota. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="105" column="6" bodyfile="src/ast.c" bodystart="105" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ae3a48191949e163006f537ef4d84a95d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_double</definition>
+        <argsstring>(double value, int line)</argsstring>
+        <name>expr_new_double</name>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori desetinny literal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hodnota. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="113" column="6" bodyfile="src/ast.c" bodystart="113" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ab08abcb4d13d05e5b3124723c3d8d272" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_string</definition>
+        <argsstring>(const char *value, int line)</argsstring>
+        <name>expr_new_string</name>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori retezcovy literal, retezec se zkopiruje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hodnota. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="121" column="6" bodyfile="src/ast.c" bodystart="121" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ab885e6f2123d3d23e2726c61f1a7b8cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_unit</definition>
+        <argsstring>(int line)</argsstring>
+        <name>expr_new_unit</name>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori literal Unit, tedy hodnotu (). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="129" column="6" bodyfile="src/ast.c" bodystart="129" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ae091768e1ddd319a34ce275b44e20301" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_bool</definition>
+        <argsstring>(bool value, int line)</argsstring>
+        <name>expr_new_bool</name>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori pravdivostni literal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hodnota. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="136" column="6" bodyfile="src/ast.c" bodystart="136" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a2914c5e8c2ccc3cfb197c1a60e2147c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_variable</definition>
+        <argsstring>(const char *name, int line)</argsstring>
+        <name>expr_new_variable</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori pouziti promenne, jmeno se zkopiruje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno promenne. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="144" column="6" bodyfile="src/ast.c" bodystart="144" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a87102fdd22db4df35c2f7049e9186e0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_unary</definition>
+        <argsstring>(UnaryOp op, Expr *operand, int line)</argsstring>
+        <name>expr_new_unary</name>
+        <param>
+          <type><ref refid="ast_8h_1ac0e6f7f17047750fd114b6634912dca4" kindref="member">UnaryOp</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori unarni vyraz, prebere vlastnictvi operandu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operand. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="151" column="6" bodyfile="src/ast.c" bodystart="151" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a6cb42b1558c6db38955c6eccfaa01e67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_binary</definition>
+        <argsstring>(BinaryOp op, Expr *left, Expr *right, int line)</argsstring>
+        <name>expr_new_binary</name>
+        <param>
+          <type><ref refid="ast_8h_1a751965739ae765593a89b5fd608d480c" kindref="member">BinaryOp</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori binarni vyraz, prebere vlastnictvi obou operandu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Levy operand. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pravy operand. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="162" column="6" bodyfile="src/ast.c" bodystart="162" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ab671783318cfaf0b3de78d8a7148a460" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_call</definition>
+        <argsstring>(const char *name, int line)</argsstring>
+        <name>expr_new_call</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori volani funkce bez argumentu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Argumenty se pridavaji funkci expr_call_add_arg.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno volane funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="171" column="6" bodyfile="src/ast.c" bodystart="171" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1af2bc36cd51b0cb07b0963f264044ceac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_call_add_arg</definition>
+        <argsstring>(Expr *call, Expr *arg)</argsstring>
+        <name>expr_call_add_arg</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>call</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+<para>Prida argument na konec volani funkce, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>call</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Volani funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pridavany argument. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="178" column="6" bodyfile="src/ast.c" bodystart="178" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1aa19e7a6f4b4c997efdb954fa153ecc64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_if</definition>
+        <argsstring>(Expr *cond, Block *then_block, Block *else_block, int line)</argsstring>
+        <name>expr_new_if</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>cond</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>then_block</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>else_block</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori podminku if, prebere vlastnictvi vsech casti. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Podminka. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>then_block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vetev then. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>else_block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vetev else, NULL kdyz chybi. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="187" column="6" bodyfile="src/ast.c" bodystart="187" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1af5fb4ffe0809285b68d5e5eaf79fe3af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_range</definition>
+        <argsstring>(Expr *from, Expr *to, bool is_inclusive, Expr *step, int line)</argsstring>
+        <name>expr_new_range</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_inclusive</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori rozsah, prebere vlastnictvi vsech casti. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zacatek rozsahu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Konec rozsahu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>is_inclusive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True pro to, false pro until. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Krok, NULL kdyz chybi. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="196" column="6" bodyfile="src/ast.c" bodystart="196" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a2a5267467216795b00606f1559a131bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_member</definition>
+        <argsstring>(Expr *object, const char *name, int line)</argsstring>
+        <name>expr_new_member</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>object</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori clen hodnoty bez argumentu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Argumenty se pridavaji funkci expr_member_add_arg.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>object</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hodnota, na ktere se clen vola. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno clenu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="207" column="6" bodyfile="src/ast.c" bodystart="207" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ac3f159210e77f00674d61020554ed389" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_member_add_arg</definition>
+        <argsstring>(Expr *member, Expr *arg)</argsstring>
+        <name>expr_member_add_arg</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>member</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+<para>Prida argument na konec clenu, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>member</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz clenu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pridavany argument. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="215" column="6" bodyfile="src/ast.c" bodystart="215" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a7e0f6bb25bd26c4ac9ae6ef5fc1fe4fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_list_literal</definition>
+        <argsstring>(int line)</argsstring>
+        <name>expr_new_list_literal</name>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori prazdny seznam. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Prvky se pridavaji funkci expr_list_add_item.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="224" column="6" bodyfile="src/ast.c" bodystart="224" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a408fa5ca364381bb598b86e60387adfd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_list_add_item</definition>
+        <argsstring>(Expr *list, Expr *item)</argsstring>
+        <name>expr_list_add_item</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+<para>Prida prvek na konec seznamu, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Seznam. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>item</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pridavany prvek. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="229" column="6" bodyfile="src/ast.c" bodystart="229" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a8bc4ed1fb2812229d69a145d09ab7d0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_list_range</definition>
+        <argsstring>(Expr *start, Expr *end, Expr *step, int line)</argsstring>
+        <name>expr_new_list_range</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori List.range, prebere vlastnictvi vsech casti. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prvni cislo. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Konec, bez nej. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Krok, NULL kdyz chybi. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="238" column="6" bodyfile="src/ast.c" bodystart="238" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ad321e798439bb4dc2d25f04a3e26bfde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * expr_new_index</definition>
+        <argsstring>(Expr *list, Expr *index, int line)</argsstring>
+        <name>expr_new_index</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori pristup k prvku seznamu, prebere vlastnictvi obou casti. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Seznam, ze ktereho se cte. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index prvku. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy vyraz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="247" column="6" bodyfile="src/ast.c" bodystart="247" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a5aeb6e50ec5ca78edc2df716fc47b830" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+        <definition>Block * block_new</definition>
+        <argsstring>(void)</argsstring>
+        <name>block_new</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Vytvori prazdny blok. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Novy blok. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="259" column="7" bodyfile="src/ast.c" bodystart="259" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a9ebbadd9744854b397afd7318f1bfe65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void block_add</definition>
+        <argsstring>(Block *block, Stmt *stmt)</argsstring>
+        <name>block_add</name>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+<para>Prida prikaz na konec bloku, prebere vlastnictvi prikazu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Blok. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pridavany prikaz. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="267" column="6" bodyfile="src/ast.c" bodystart="267" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a0ee9c4a2c2857de61c38e6a943367c67" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+        <definition>static Stmt * stmt_alloc</definition>
+        <argsstring>(StmtKind kind, int line)</argsstring>
+        <name>stmt_alloc</name>
+        <param>
+          <type><ref refid="ast_8h_1a1b09b1c2cca879d79a9b57ae03eb9ffe" kindref="member">StmtKind</ref></type>
+          <declname>kind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="274" column="13" bodyfile="src/ast.c" bodystart="274" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a924819c094545eeb287963d06546fe6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+        <definition>Stmt * stmt_new_vardef</definition>
+        <argsstring>(bool is_mutable, const char *name, Type *declared_type, Expr *init, int line)</argsstring>
+        <name>stmt_new_vardef</name>
+        <param>
+          <type>bool</type>
+          <declname>is_mutable</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>declared_type</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>init</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori definici promenne, prebere vlastnictvi typu a inicializace. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is_mutable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True pro var, false pro val. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno promenne. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>declared_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Uvedeny typ, NULL kdyz chybi. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>init</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pocatecni hodnota. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy prikaz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="284" column="6" bodyfile="src/ast.c" bodystart="284" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ab2a93a223aa2ba3cdfd3a954903441a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+        <definition>Stmt * stmt_new_assign</definition>
+        <argsstring>(const char *name, Expr *value, int line)</argsstring>
+        <name>stmt_new_assign</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori prirazeni, prebere vlastnictvi hodnoty. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno promenne. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nova hodnota. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy prikaz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="295" column="6" bodyfile="src/ast.c" bodystart="295" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a5eff34c542999ea324aec49c71bc2bf5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+        <definition>Stmt * stmt_new_return</definition>
+        <argsstring>(Expr *value, int line)</argsstring>
+        <name>stmt_new_return</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori prikaz return, prebere vlastnictvi hodnoty. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vracena hodnota, NULL pro prazdny return. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy prikaz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="303" column="6" bodyfile="src/ast.c" bodystart="303" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a3ac0e20220b2b1b9e02a9128f7b16b3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+        <definition>Stmt * stmt_new_expr</definition>
+        <argsstring>(Expr *expr, int line)</argsstring>
+        <name>stmt_new_expr</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori prikaz ze samostatneho vyrazu, prebere vlastnictvi vyrazu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy prikaz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="310" column="6" bodyfile="src/ast.c" bodystart="310" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1aa8befb48ce6af924cad68b9f58184622" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+        <definition>Stmt * stmt_new_while</definition>
+        <argsstring>(Expr *cond, Block *body, int line)</argsstring>
+        <name>stmt_new_while</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>cond</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>body</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori cyklus while, prebere vlastnictvi podminky a tela. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Podminka. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Telo cyklu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy prikaz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="317" column="6" bodyfile="src/ast.c" bodystart="317" bodyend="322"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a26ca3ef3f3c3919c15007309a6d0cbc4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+        <definition>Stmt * stmt_new_for</definition>
+        <argsstring>(const char *var_name, Expr *source, int line)</argsstring>
+        <name>stmt_new_for</name>
+        <param>
+          <type>const char *</type>
+          <declname>var_name</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori cyklus for bez strazi a bez tela. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Straze a telo se doplni funkcemi stmt_for_add_guard a stmt_for_set_body.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>var_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno ridici promenne. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zdroj: rozsah nebo seznam. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy prikaz. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="325" column="6" bodyfile="src/ast.c" bodystart="325" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a5aee929e987feb7671cfac7a855ffd06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_for_add_guard</definition>
+        <argsstring>(Stmt *for_stmt, Expr *guard)</argsstring>
+        <name>stmt_for_add_guard</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>for_stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>guard</declname>
+        </param>
+        <briefdescription>
+<para>Prida straz cyklu for, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>for_stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cyklus for. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>guard</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Straz (vyraz typu Boolean). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="333" column="6" bodyfile="src/ast.c" bodystart="333" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1afd5b8eed3c1e941ab502e72f5c5899c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_for_set_body</definition>
+        <argsstring>(Stmt *for_stmt, Block *body)</argsstring>
+        <name>stmt_for_set_body</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>for_stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi telo cyklu for, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>for_stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cyklus for. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Telo cyklu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="343" column="6" bodyfile="src/ast.c" bodystart="343" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1aa2f4d6c830e301676b3052a5b99aea2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+        <definition>FuncDef * funcdef_new</definition>
+        <argsstring>(const char *name, bool is_main, int line)</argsstring>
+        <name>funcdef_new</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_main</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori funkci bez parametru, bez navratoveho typu a bez tela. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>is_main</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True pro funkci s anotaci @main. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nova definice funkce. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="354" column="9" bodyfile="src/ast.c" bodystart="354" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ac9ff015f7653549978283259bddb3a84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_add_param</definition>
+        <argsstring>(FuncDef *func, const char *name, Type *type)</argsstring>
+        <name>funcdef_add_param</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Prida parametr na konec seznamu parametru, prebere vlastnictvi typu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno parametru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ parametru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="368" column="6" bodyfile="src/ast.c" bodystart="368" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a9ca6c124af25fd8f5b8b96f6a05229e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_set_return_type</definition>
+        <argsstring>(FuncDef *func, Type *return_type)</argsstring>
+        <name>funcdef_set_return_type</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>return_type</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi navratovy typ funkce, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>return_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Navratovy typ. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="378" column="6" bodyfile="src/ast.c" bodystart="378" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1aeb96f3789705d45af935cda1c37954a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_set_body</definition>
+        <argsstring>(FuncDef *func, Block *body)</argsstring>
+        <name>funcdef_set_body</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi telo funkce, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Telo funkce. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="385" column="6" bodyfile="src/ast.c" bodystart="385" bodyend="389"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ae27b7ada7b8ac3321623b14aa32076da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structProgram" kindref="compound">Program</ref> *</type>
+        <definition>Program * program_new</definition>
+        <argsstring>(void)</argsstring>
+        <name>program_new</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Vytvori prazdny program. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Novy program. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="392" column="9" bodyfile="src/ast.c" bodystart="392" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a05cf7cfa5a5e8962bff5898682e6940c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void program_add_func</definition>
+        <argsstring>(Program *program, FuncDef *func)</argsstring>
+        <name>program_add_func</name>
+        <param>
+          <type><ref refid="structProgram" kindref="compound">Program</ref> *</type>
+          <declname>program</declname>
+        </param>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Prida funkci do programu, prebere vlastnictvi funkce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>program</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structProgram" kindref="compound">Program</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pridavana funkce. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="400" column="6" bodyfile="src/ast.c" bodystart="400" bodyend="405"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a6fbbad0f287dc68aa5bc65ad7fa93785" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void free_expr_array</definition>
+        <argsstring>(Expr **items, int count)</argsstring>
+        <name>free_expr_array</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> **</type>
+          <declname>items</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="422" column="13" bodyfile="src/ast.c" bodystart="422" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a8b8e8c97f0ead1338a0bef406daa36aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_free</definition>
+        <argsstring>(Expr *expr)</argsstring>
+        <name>expr_free</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni vyraz a cely jeho podstrom. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz k uvolneni (muze byt NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="431" column="6" bodyfile="src/ast.c" bodystart="431" bodyend="487"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a7ee22d856fc49858787e8f2290cf1dfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void block_free</definition>
+        <argsstring>(Block *block)</argsstring>
+        <name>block_free</name>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni blok a vsechny jeho prikazy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Blok k uvolneni (muze byt NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="490" column="6" bodyfile="src/ast.c" bodystart="490" bodyend="499"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ad05f034e300fb966e8d676e85f5caa45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_free</definition>
+        <argsstring>(Stmt *stmt)</argsstring>
+        <name>stmt_free</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni prikaz a cely jeho podstrom. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz k uvolneni (muze byt NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="503" column="6" bodyfile="src/ast.c" bodystart="503" bodyend="535"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a17b1ca0bef54f4c146056e2a4435575d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_free</definition>
+        <argsstring>(FuncDef *func)</argsstring>
+        <name>funcdef_free</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni definici funkce vcetne parametru a tela. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce k uvolneni (muze byt NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="539" column="6" bodyfile="src/ast.c" bodystart="539" bodyend="552"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ab2525b646e271371469f9a2153e23c1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void program_free</definition>
+        <argsstring>(Program *program)</argsstring>
+        <name>program_free</name>
+        <param>
+          <type><ref refid="structProgram" kindref="compound">Program</ref> *</type>
+          <declname>program</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni program a vsechny jeho funkce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>program</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structProgram" kindref="compound">Program</ref> k uvolneni (muze byt NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="556" column="6" bodyfile="src/ast.c" bodystart="556" bodyend="565"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a29337f5d9de3ccfe35a4769221fb6963" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void replace_string</definition>
+        <argsstring>(char **target, const char *value)</argsstring>
+        <name>replace_string</name>
+        <param>
+          <type>char **</type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="584" column="13" bodyfile="src/ast.c" bodystart="584" bodyend="588"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a9d5a477567d3fe3e0b2be4e8e412705c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structParam" kindref="compound">Param</ref> *</type>
+        <definition>static Param * get_param</definition>
+        <argsstring>(FuncDef *func, int index)</argsstring>
+        <name>get_param</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="591" column="14" bodyfile="src/ast.c" bodystart="591" bodyend="597"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a451666a7c5ba892808e27e6adc8dc151" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void type_list_set_element</definition>
+        <argsstring>(Type *list, Type *element)</argsstring>
+        <name>type_list_set_element</name>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi typ prvku u typu List[T]. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ seznamu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ prvku, prebere se jeho vlastnictvi. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="624" column="6" bodyfile="src/ast.c" bodystart="624" bodyend="630"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a8176d94491c7dd52d6a0c4c96bad1729" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+        <definition>Block * block_from_stmt</definition>
+        <argsstring>(Stmt *stmt)</argsstring>
+        <name>block_from_stmt</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori blok s jednim prikazem (jednoradkove telo). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz, prebere se jeho vlastnictvi. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy blok. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="635" column="7" bodyfile="src/ast.c" bodystart="635" bodyend="639"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a3c50a05561ddcc275f4cad076e57e7a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+        <definition>Block * block_from_expr</definition>
+        <argsstring>(Expr *expr, int line)</argsstring>
+        <name>block_from_expr</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori blok s jednim prikazem, ktery je vyraz. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pouziva se pro vetev ternarniho if a telo funkce.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz, prebere se jeho vlastnictvi. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Radek ve zdrojovem kodu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy blok. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="642" column="7" bodyfile="src/ast.c" bodystart="642" bodyend="644"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ac94095542003faf384ce5cb4cd88a5f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_vardef_set_mutable</definition>
+        <argsstring>(Stmt *stmt, bool is_mutable)</argsstring>
+        <name>stmt_vardef_set_mutable</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_mutable</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi, zda je promenna modifikovatelna. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_VARDEF. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>is_mutable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True pro var, false pro val. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="649" column="6" bodyfile="src/ast.c" bodystart="649" bodyend="652"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1aac52edf976420cc4adec922d3f7afd12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_vardef_set_name</definition>
+        <argsstring>(Stmt *stmt, const char *name)</argsstring>
+        <name>stmt_vardef_set_name</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi jmeno definovane promenne, jmeno se zkopiruje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_VARDEF. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno promenne. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="655" column="6" bodyfile="src/ast.c" bodystart="655" bodyend="658"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1af5741b8bf474610f94c70f0af4e073bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_vardef_set_type</definition>
+        <argsstring>(Stmt *stmt, Type *declared_type)</argsstring>
+        <name>stmt_vardef_set_type</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>declared_type</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi uvedeny typ promenne, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_VARDEF. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>declared_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Uvedeny typ. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="661" column="6" bodyfile="src/ast.c" bodystart="661" bodyend="665"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a8e4ccc8ea38c17dd2fad5ea789bd37df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_vardef_set_init</definition>
+        <argsstring>(Stmt *stmt, Expr *init)</argsstring>
+        <name>stmt_vardef_set_init</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>init</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi pocatecni hodnotu promenne, prebere jeji vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_VARDEF. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>init</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pocatecni hodnota. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="668" column="6" bodyfile="src/ast.c" bodystart="668" bodyend="672"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a8fab939547306584db6423c91e5a9fce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_assign_set_name</definition>
+        <argsstring>(Stmt *stmt, const char *name)</argsstring>
+        <name>stmt_assign_set_name</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi jmeno promenne v prirazeni, jmeno se zkopiruje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_ASSIGN. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno promenne. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="677" column="6" bodyfile="src/ast.c" bodystart="677" bodyend="680"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a2a1a66bf01c07429798280a0b14e5b30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_assign_set_value</definition>
+        <argsstring>(Stmt *stmt, Expr *value)</argsstring>
+        <name>stmt_assign_set_value</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi novou hodnotu v prirazeni, prebere jeji vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_ASSIGN. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nova hodnota. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="683" column="6" bodyfile="src/ast.c" bodystart="683" bodyend="687"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ae0d1e119e43db5832c1296af59462054" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_return_set_value</definition>
+        <argsstring>(Stmt *stmt, Expr *value)</argsstring>
+        <name>stmt_return_set_value</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi vracenou hodnotu prikazu return, prebere jeji vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_RETURN. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vracena hodnota. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="690" column="6" bodyfile="src/ast.c" bodystart="690" bodyend="694"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a35d9e238b26cbd92e8db08fc77d54eff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_expr_set_expr</definition>
+        <argsstring>(Stmt *stmt, Expr *expr)</argsstring>
+        <name>stmt_expr_set_expr</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi vyraz samostatneho prikazu, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_EXPR. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="697" column="6" bodyfile="src/ast.c" bodystart="697" bodyend="701"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ae0e3c9f01c9f5ea87a939b5a4f9bc6e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_while_set_cond</definition>
+        <argsstring>(Stmt *stmt, Expr *cond)</argsstring>
+        <name>stmt_while_set_cond</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>cond</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi podminku cyklu while, prebere jeji vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_WHILE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Podminka. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="706" column="6" bodyfile="src/ast.c" bodystart="706" bodyend="710"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ac408d600e211be4b07d67ad0d0b4b917" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_while_set_body</definition>
+        <argsstring>(Stmt *stmt, Block *body)</argsstring>
+        <name>stmt_while_set_body</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi telo cyklu while, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_WHILE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Telo cyklu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="713" column="6" bodyfile="src/ast.c" bodystart="713" bodyend="717"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1acfcfd346c90a0fb5705a8e11d64b4577" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_for_set_var_name</definition>
+        <argsstring>(Stmt *stmt, const char *var_name)</argsstring>
+        <name>stmt_for_set_var_name</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>var_name</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi jmeno ridici promenne cyklu for, jmeno se zkopiruje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_FOR. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>var_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno ridici promenne. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="720" column="6" bodyfile="src/ast.c" bodystart="720" bodyend="723"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1ae11613f6d8138985caf77c7a2bab7fa3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stmt_for_set_source</definition>
+        <argsstring>(Stmt *stmt, Expr *source)</argsstring>
+        <name>stmt_for_set_source</name>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>source</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi zdroj cyklu for, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prikaz STMT_FOR. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zdroj: rozsah nebo seznam. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="726" column="6" bodyfile="src/ast.c" bodystart="726" bodyend="730"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a002459b67f5c803962a49523aa9d8e9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_if_set_cond</definition>
+        <argsstring>(Expr *expr, Expr *cond)</argsstring>
+        <name>expr_if_set_cond</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>cond</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi podminku vyrazu if, prebere jeji vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz EXPR_IF. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Podminka. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="735" column="6" bodyfile="src/ast.c" bodystart="735" bodyend="739"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a10a903743607f1126dedd5d1fd56686c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_if_set_then</definition>
+        <argsstring>(Expr *expr, Block *then_block)</argsstring>
+        <name>expr_if_set_then</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>then_block</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi vetev then vyrazu if, prebere jeji vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz EXPR_IF. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>then_block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vetev then. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="742" column="6" bodyfile="src/ast.c" bodystart="742" bodyend="746"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a8d8d70ae2e66a7dbd45efd991a495f3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_if_set_else</definition>
+        <argsstring>(Expr *expr, Block *else_block)</argsstring>
+        <name>expr_if_set_else</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>else_block</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi vetev else vyrazu if, prebere jeji vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz EXPR_IF. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>else_block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vetev else. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="749" column="6" bodyfile="src/ast.c" bodystart="749" bodyend="753"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a41b8dd826e4b8f8efa46acce9af81e24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_set_name</definition>
+        <argsstring>(FuncDef *func, const char *name)</argsstring>
+        <name>funcdef_set_name</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi jmeno funkce, jmeno se zkopiruje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno funkce. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="758" column="6" bodyfile="src/ast.c" bodystart="758" bodyend="761"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a1dff5ed47bee0cc6794116547b3b5d9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_set_main</definition>
+        <argsstring>(FuncDef *func, bool is_main)</argsstring>
+        <name>funcdef_set_main</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_main</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi, zda ma funkce anotaci @main. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>is_main</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True pro funkci s anotaci @main. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="764" column="6" bodyfile="src/ast.c" bodystart="764" bodyend="767"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a462cd531c89c50d766487d2928aec32a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_param_set_name</definition>
+        <argsstring>(FuncDef *func, int index, const char *name)</argsstring>
+        <name>funcdef_param_set_name</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi jmeno parametru na danem indexu, jmeno se zkopiruje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index parametru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno parametru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="770" column="6" bodyfile="src/ast.c" bodystart="770" bodyend="772"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a7d0ad40467b17e2e3fe0b6a2c9f647d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void funcdef_param_set_type</definition>
+        <argsstring>(FuncDef *func, int index, Type *type)</argsstring>
+        <name>funcdef_param_set_type</name>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi typ parametru na danem indexu, prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index parametru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ parametru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="775" column="6" bodyfile="src/ast.c" bodystart="775" bodyend="779"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a763eb8f3116e32e761c947d80c130fa7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_range_set_step</definition>
+        <argsstring>(Expr *range, Expr *step)</argsstring>
+        <name>expr_range_set_step</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>step</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi krok rozsahu a prebere jeho vlastnictvi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Puvodni krok se uvolni.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz EXPR_RANGE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Novy krok. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="800" column="6" bodyfile="src/ast.c" bodystart="800" bodyend="804"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1acfd4fe105d4db951a78d8dff33f5bf20" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void list_free_shell</definition>
+        <argsstring>(Expr *list)</argsstring>
+        <name>list_free_shell</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="807" column="13" bodyfile="src/ast.c" bodystart="807" bodyend="812"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a80f96dcfe4087a2294de2d6da97d7e88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_call_take_args</definition>
+        <argsstring>(Expr *call, Expr *args)</argsstring>
+        <name>expr_call_take_args</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>call</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Presune prvky list literalu na konec argumentu volani funkce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Prebere vlastnictvi prvku. List literal (pomocny uzel) uvolni.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>call</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Volani funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pomocny uzel EXPR_LIST_LITERAL s argumenty. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="815" column="6" bodyfile="src/ast.c" bodystart="815" bodyend="822"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a0805bcb6bed113b4b0741cb469f4af6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_member_take_args</definition>
+        <argsstring>(Expr *member, Expr *args)</argsstring>
+        <name>expr_member_take_args</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>member</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Presune prvky list literalu na konec argumentu clenu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Prebere vlastnictvi prvku. List literal (pomocny uzel) uvolni.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>member</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyraz clenu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pomocny uzel EXPR_LIST_LITERAL s argumenty. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="825" column="6" bodyfile="src/ast.c" bodystart="825" bodyend="832"/>
+      </memberdef>
+      <memberdef kind="function" id="ast_8c_1a7e17c629d5a00fa3605be8954c3a269d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void expr_list_take_items</definition>
+        <argsstring>(Expr *list, Expr ***items, int *count)</argsstring>
+        <name>expr_list_take_items</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> ***</type>
+          <declname>items</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Vyjme prvky z list literalu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Do *items da pole ukazatelu (volajici ho uvolni funkci free, jeho prvky prebira) a do *count jejich pocet. List literal zustane prazdny a uvolni ho volajici pomoci expr_free.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>List literal. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup: pole ukazatelu na prvky. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vystup: pocet prvku. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.c" line="835" column="6" bodyfile="src/ast.c" bodystart="835" bodyend="841"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/ast.c"/>
+  </compounddef>
+</doxygen>

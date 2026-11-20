@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSearchHandle" kind="struct" language="C++" prot="public">
+    <compoundname>SearchHandle</compoundname>
+    <includes refid="reduction__table_8h" local="no">reduction_table.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSearchHandle_1a4200e038a6b13570b033bac069383138" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SearchHandle::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>SearchHandle::length</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pocet symbolu </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="89" column="10" bodyfile="src/reduction_table.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSearchHandle_1aadc17a0271bf5d7f72fe4f893278b906" prot="public" static="no" mutable="no">
+        <type><ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref></type>
+        <definition>GrammarSymbol SearchHandle::symbols[HANDLE_MAX_LENGTH]</definition>
+        <argsstring>[HANDLE_MAX_LENGTH]</argsstring>
+        <name>symbols</name>
+        <qualifiedname>SearchHandle::symbols</qualifiedname>
+        <briefdescription>
+<para>Symboly, vyuzito je prvnich length. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="91" column="17" bodyfile="src/reduction_table.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Handle, vyhledavaci prvek tabulky redukcnich pravidel. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Prakticky protejsek <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref>, ktery ale predstavuje jinou vec: handle neni prava strana pravidla ulozena jako konstanta, nybrz se za behu sestavuje v jadre precedencniho parseru z prvku zasobniku (viz reduction_marker v <ref refid="structParserStackEntry" kindref="compound">ParserStackEntry</ref>) a podle nej se vyhledava pravidlo v tabulce redukci. Symboly jsou v prirozenem poradi (zleva doprava), tedy od nejhloubeji ulozeneho symbolu k vrcholu zasobniku. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>GrammarSymbol</label>
+        <link refid="structGrammarSymbol"/>
+      </node>
+      <node id="1">
+        <label>SearchHandle</label>
+        <link refid="structSearchHandle"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbols</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/reduction_table.h" line="88" column="1" bodyfile="src/reduction_table.h" bodystart="88" bodyend="92"/>
+    <listofallmembers>
+      <member refid="structSearchHandle_1a4200e038a6b13570b033bac069383138" prot="public" virt="non-virtual"><scope>SearchHandle</scope><name>length</name></member>
+      <member refid="structSearchHandle_1aadc17a0271bf5d7f72fe4f893278b906" prot="public" virt="non-virtual"><scope>SearchHandle</scope><name>symbols</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

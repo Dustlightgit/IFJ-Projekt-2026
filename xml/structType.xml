@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structType" kind="struct" language="C++" prot="public">
+    <compoundname>Type</compoundname>
+    <includes refid="ast_8h" local="no">ast.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structType_1a8baf74e9cd420707d722f60a36a7af4e" prot="public" static="no" mutable="no">
+        <type><ref refid="ast_8h_1ab4dd8308e08805aedfe646096be0e4e7" kindref="member">TypeKind</ref></type>
+        <definition>TypeKind Type::kind</definition>
+        <argsstring></argsstring>
+        <name>kind</name>
+        <qualifiedname>Type::kind</qualifiedname>
+        <briefdescription>
+<para>Druh typu. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="68" column="12" bodyfile="src/ast.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structType_1af19fd6b967ae3da637c610c8acf09d91" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>struct Type* Type::element</definition>
+        <argsstring></argsstring>
+        <name>element</name>
+        <qualifiedname>Type::element</qualifiedname>
+        <briefdescription>
+<para>Typ prvku, pouze pro TYPE_LIST, jinak NULL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="69" column="13" bodyfile="src/ast.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Typ: druh a u seznamu ukazatel na typ prvku. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/ast.h" line="67" column="1" bodyfile="src/ast.h" bodystart="67" bodyend="70"/>
+    <listofallmembers>
+      <member refid="structType_1af19fd6b967ae3da637c610c8acf09d91" prot="public" virt="non-virtual"><scope>Type</scope><name>element</name></member>
+      <member refid="structType_1a8baf74e9cd420707d722f60a36a7af4e" prot="public" virt="non-virtual"><scope>Type</scope><name>kind</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

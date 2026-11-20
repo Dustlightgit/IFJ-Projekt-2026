@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSymTable" kind="struct" language="C++" prot="public">
+    <compoundname>SymTable</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSymTable_1a32b09fe407ace19b1ecf2c8e29aec58b" prot="public" static="no" mutable="no">
+        <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>AvlNode* SymTable::root</definition>
+        <argsstring></argsstring>
+        <name>root</name>
+        <qualifiedname>SymTable::root</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="204" column="11" bodyfile="src/symtable.c" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymTable_1a4a7101779dc77126a548631a10478ebe" prot="public" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* SymTable::scope_stack</definition>
+        <argsstring></argsstring>
+        <name>scope_stack</name>
+        <qualifiedname>SymTable::scope_stack</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="205" column="7" bodyfile="src/symtable.c" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymTable_1afadbd080913de2b3ab3bd70b5e1089cf" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int SymTable::scope_depth</definition>
+        <argsstring></argsstring>
+        <name>scope_depth</name>
+        <qualifiedname>SymTable::scope_depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="206" column="7" bodyfile="src/symtable.c" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymTable_1a465d6aeb8c9f0a88fc9fde26ee421ec2" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int SymTable::scope_capacity</definition>
+        <argsstring></argsstring>
+        <name>scope_capacity</name>
+        <qualifiedname>SymTable::scope_capacity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="207" column="7" bodyfile="src/symtable.c" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymTable_1a4693f6ff43adfa30a4d01e34aab39b70" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int SymTable::next_scope_id</definition>
+        <argsstring></argsstring>
+        <name>next_scope_id</name>
+        <qualifiedname>SymTable::next_scope_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="208" column="7" bodyfile="src/symtable.c" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSymTable_1a47135d64cb207a79a2dcfdcac65a7482" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int SymTable::next_var_id</definition>
+        <argsstring></argsstring>
+        <name>next_var_id</name>
+        <qualifiedname>SymTable::next_var_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="209" column="7" bodyfile="src/symtable.c" bodystart="209" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>AvlNode</label>
+        <link refid="structAvlNode"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>left</edgelabel>
+          <edgelabel>right</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="6">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SymTable</label>
+        <link refid="structSymTable"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>root</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/symtable.c" line="203" column="1" bodyfile="src/symtable.c" bodystart="203" bodyend="210"/>
+    <listofallmembers>
+      <member refid="structSymTable_1a4693f6ff43adfa30a4d01e34aab39b70" prot="public" virt="non-virtual"><scope>SymTable</scope><name>next_scope_id</name></member>
+      <member refid="structSymTable_1a47135d64cb207a79a2dcfdcac65a7482" prot="public" virt="non-virtual"><scope>SymTable</scope><name>next_var_id</name></member>
+      <member refid="structSymTable_1a32b09fe407ace19b1ecf2c8e29aec58b" prot="public" virt="non-virtual"><scope>SymTable</scope><name>root</name></member>
+      <member refid="structSymTable_1a465d6aeb8c9f0a88fc9fde26ee421ec2" prot="public" virt="non-virtual"><scope>SymTable</scope><name>scope_capacity</name></member>
+      <member refid="structSymTable_1afadbd080913de2b3ab3bd70b5e1089cf" prot="public" virt="non-virtual"><scope>SymTable</scope><name>scope_depth</name></member>
+      <member refid="structSymTable_1a4a7101779dc77126a548631a10478ebe" prot="public" virt="non-virtual"><scope>SymTable</scope><name>scope_stack</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

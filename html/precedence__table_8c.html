@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/precedence_table.c file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>precedence_table.c <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
+                <li><a href="#define-members">Defines</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a016d26ce4e123366f5333e58e5817a3a">
+              <span class="m-doc-wrap-bumper">static auto <a href="#a016d26ce4e123366f5333e58e5817a3a" class="m-doc-self">precedence_table_try_index</a>(</span><span class="m-doc-wrap"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> terminal,
+              size_t* index) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8a73a844271122d98ae7d995ce8d3e16" class="m-doc">precedence_table_index</a>(</span><span class="m-doc-wrap"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> terminal,
+              int line) -&gt; size_t</span>
+            </dt>
+            <dd>Vrati index terminalu do precedencni tabulky.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abb2b191e7dc60a6b806014ce7fbd97fe" class="m-doc">precedence_table_lookup</a>(</span><span class="m-doc-wrap"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> stack_terminal,
+              <a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> input_terminal,
+              int line) -&gt; <a href="precedence__table_8h.html#ad29641fd0f43eb518a1f9cbfeb6f16df" class="m-doc">PrecedenceDirective</a></span>
+            </dt>
+            <dd>Vyhleda direktivu v precedencni tabulce.</dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              const <a href="precedence__table_8h.html#ad29641fd0f43eb518a1f9cbfeb6f16df" class="m-doc">PrecedenceDirective</a> <a href="#a4486ad15f66a22290397699afa05ac00" class="m-doc">PRECEDENCE_TABLE</a>
+            </dt>
+            <dd>Precedencni tabulka indexovana terminalem na zasobniku (radek) a terminalem na vstupu (sloupec).</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt id="a4fa5c6a5c0f277c0e53434cef639eb17">
+              <span class="m-doc-wrap-bumper">#define <a href="#a4fa5c6a5c0f277c0e53434cef639eb17" class="m-doc-self">PRECEDENCE_RANGE_INDEX</a>(</span><span class="m-doc-wrap">t)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac985e67c4d1f7b6af3c86721a6c12870">
+              <span class="m-doc-wrap-bumper">#define <a href="#ac985e67c4d1f7b6af3c86721a6c12870" class="m-doc-self">PRECEDENCE_RANGE_COUNT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad9f6c53d754f378ce88dad668eb5e88e">
+              <span class="m-doc-wrap-bumper">#define <a href="#ad9f6c53d754f378ce88dad668eb5e88e" class="m-doc-self">PRECEDENCE_SWITCH_COUNT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a535c6739f3a1334e8b974d5a78b3e524">
+              <span class="m-doc-wrap-bumper">#define <a href="#a535c6739f3a1334e8b974d5a78b3e524" class="m-doc-self">PIDX_SWITCH_KW_LIST</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6e7eb156d0888af605eb86e8e4f3ee24">
+              <span class="m-doc-wrap-bumper">#define <a href="#a6e7eb156d0888af605eb86e8e4f3ee24" class="m-doc-self">PIDX_SWITCH_LPAREN</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa182f7d799e82ef7fd98cbf3168c2296">
+              <span class="m-doc-wrap-bumper">#define <a href="#aa182f7d799e82ef7fd98cbf3168c2296" class="m-doc-self">PIDX_SWITCH_RPAREN</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab62b8460aad8025fc08a7713ce5ce3b7">
+              <span class="m-doc-wrap-bumper">#define <a href="#ab62b8460aad8025fc08a7713ce5ce3b7" class="m-doc-self">PIDX_SWITCH_COMMA</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a94f57368e155506516448147be341f3e">
+              <span class="m-doc-wrap-bumper">#define <a href="#a94f57368e155506516448147be341f3e" class="m-doc-self">PIDX_SWITCH_ID</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a07bcc8d975ff3d2eedb4ce1f787e5d54">
+              <span class="m-doc-wrap-bumper">#define <a href="#a07bcc8d975ff3d2eedb4ce1f787e5d54" class="m-doc-self">PIDX_LIST</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4614e47f5b284a086bda7a74d1a89db2">
+              <span class="m-doc-wrap-bumper">#define <a href="#a4614e47f5b284a086bda7a74d1a89db2" class="m-doc-self">PIDX_LPAREN</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae124f2129b8f2e6d3ddab20874212440">
+              <span class="m-doc-wrap-bumper">#define <a href="#ae124f2129b8f2e6d3ddab20874212440" class="m-doc-self">PIDX_RPAREN</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1a28729c5f6653f41eec81a1abbe19af">
+              <span class="m-doc-wrap-bumper">#define <a href="#a1a28729c5f6653f41eec81a1abbe19af" class="m-doc-self">PIDX_COMMA</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9e195d220844d0af94d8964d3a407761">
+              <span class="m-doc-wrap-bumper">#define <a href="#a9e195d220844d0af94d8964d3a407761" class="m-doc-self">PIDX_DOT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a766c22cc0399a526ea88f8178db81895">
+              <span class="m-doc-wrap-bumper">#define <a href="#a766c22cc0399a526ea88f8178db81895" class="m-doc-self">PIDX_ID</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7b7b42448dc67ffb0e3c78be3345d5b7">
+              <span class="m-doc-wrap-bumper">#define <a href="#a7b7b42448dc67ffb0e3c78be3345d5b7" class="m-doc-self">PIDX_INT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad3e34f4182c0856b6b659caf6bda95ea">
+              <span class="m-doc-wrap-bumper">#define <a href="#ad3e34f4182c0856b6b659caf6bda95ea" class="m-doc-self">PIDX_DBL</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a12b979c5d983e32cc4283e2b3dc0db53">
+              <span class="m-doc-wrap-bumper">#define <a href="#a12b979c5d983e32cc4283e2b3dc0db53" class="m-doc-self">PIDX_STR</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad4ac80f59e1659e2d1b080f190755838">
+              <span class="m-doc-wrap-bumper">#define <a href="#ad4ac80f59e1659e2d1b080f190755838" class="m-doc-self">PIDX_TRUE</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa48324505febd7f3b3e824162d39c905">
+              <span class="m-doc-wrap-bumper">#define <a href="#aa48324505febd7f3b3e824162d39c905" class="m-doc-self">PIDX_FALSE</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0726a15f5a29574cdab0be5c880dda7d">
+              <span class="m-doc-wrap-bumper">#define <a href="#a0726a15f5a29574cdab0be5c880dda7d" class="m-doc-self">PIDX_PPLUS</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a13963e48508537aaf72c4123558500fe">
+              <span class="m-doc-wrap-bumper">#define <a href="#a13963e48508537aaf72c4123558500fe" class="m-doc-self">PIDX_PMINUS</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6843528e299c1dad3055b89184034257">
+              <span class="m-doc-wrap-bumper">#define <a href="#a6843528e299c1dad3055b89184034257" class="m-doc-self">PIDX_NOT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ada7377e720d48ac90b39c0ddf7bbd979">
+              <span class="m-doc-wrap-bumper">#define <a href="#ada7377e720d48ac90b39c0ddf7bbd979" class="m-doc-self">PIDX_STAR</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abbdf3b97e9759f3dd2875e8ca63ab707">
+              <span class="m-doc-wrap-bumper">#define <a href="#abbdf3b97e9759f3dd2875e8ca63ab707" class="m-doc-self">PIDX_SLASH</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8c5d2c1fbd3fb3d4dc0369d6eab54df9">
+              <span class="m-doc-wrap-bumper">#define <a href="#a8c5d2c1fbd3fb3d4dc0369d6eab54df9" class="m-doc-self">PIDX_PLUS</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8a6da0912487d610b540614d2c56340f">
+              <span class="m-doc-wrap-bumper">#define <a href="#a8a6da0912487d610b540614d2c56340f" class="m-doc-self">PIDX_MINUS</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a01e20460740b58d5a024de29d13f0e17">
+              <span class="m-doc-wrap-bumper">#define <a href="#a01e20460740b58d5a024de29d13f0e17" class="m-doc-self">PIDX_CONCAT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acf73358a93aa9cdd02efa586cdb3bd9b">
+              <span class="m-doc-wrap-bumper">#define <a href="#acf73358a93aa9cdd02efa586cdb3bd9b" class="m-doc-self">PIDX_LT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2da6741d5005840e407470c8a3c75aaf">
+              <span class="m-doc-wrap-bumper">#define <a href="#a2da6741d5005840e407470c8a3c75aaf" class="m-doc-self">PIDX_LE</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5d2ef9d52d5ad847e43031d712c4e69c">
+              <span class="m-doc-wrap-bumper">#define <a href="#a5d2ef9d52d5ad847e43031d712c4e69c" class="m-doc-self">PIDX_GT</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a72491dd651150421f6aa4835c3a0e2c8">
+              <span class="m-doc-wrap-bumper">#define <a href="#a72491dd651150421f6aa4835c3a0e2c8" class="m-doc-self">PIDX_GE</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab5937d56c4b3d9258d391edf16eda803">
+              <span class="m-doc-wrap-bumper">#define <a href="#ab5937d56c4b3d9258d391edf16eda803" class="m-doc-self">PIDX_EQ</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4fa83ac843aed28d6a8b133391b9127a">
+              <span class="m-doc-wrap-bumper">#define <a href="#a4fa83ac843aed28d6a8b133391b9127a" class="m-doc-self">PIDX_NE</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0cf7af639cfb20f829ca8ac0d60ea06e">
+              <span class="m-doc-wrap-bumper">#define <a href="#a0cf7af639cfb20f829ca8ac0d60ea06e" class="m-doc-self">PIDX_AND</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a69d97daf11b1d46f1c062592215ae276">
+              <span class="m-doc-wrap-bumper">#define <a href="#a69d97daf11b1d46f1c062592215ae276" class="m-doc-self">PIDX_OR</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acdad67a202ff553933ada2cd4f4445e5">
+              <span class="m-doc-wrap-bumper">#define <a href="#acdad67a202ff553933ada2cd4f4445e5" class="m-doc-self">PIDX_IDOP</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af0a25f6e36fdd49337294f2ea2018823">
+              <span class="m-doc-wrap-bumper">#define <a href="#af0a25f6e36fdd49337294f2ea2018823" class="m-doc-self">PIDX_DOLLAR</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6b85df28d8895dc29ddea6958dbbe7dd">
+              <span class="m-doc-wrap-bumper">#define <a href="#a6b85df28d8895dc29ddea6958dbbe7dd" class="m-doc-self">PIDX_TIF</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a996bde01ecac342918f0a2c4e7ce7bd5">
+              <span class="m-doc-wrap-bumper">#define <a href="#a996bde01ecac342918f0a2c4e7ce7bd5" class="m-doc-self">NO</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4f7ad8e1644e9a80d5946b6dd827a122">
+              <span class="m-doc-wrap-bumper">#define <a href="#a4f7ad8e1644e9a80d5946b6dd827a122" class="m-doc-self">MK</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6c2e35fdcd9091ccada629895fa1d034">
+              <span class="m-doc-wrap-bumper">#define <a href="#a6c2e35fdcd9091ccada629895fa1d034" class="m-doc-self">EX</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4453478cd8b3bf96df84fe861cb78600">
+              <span class="m-doc-wrap-bumper">#define <a href="#a4453478cd8b3bf96df84fe861cb78600" class="m-doc-self">SH</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad25de65a09349772c6d6b1ab59b8d8ec">
+              <span class="m-doc-wrap-bumper">#define <a href="#ad25de65a09349772c6d6b1ab59b8d8ec" class="m-doc-self">PRECEDENCE_ROW</a>(</span><span class="m-doc-wrap">c01,
+              c02,
+              c03,
+              c04,
+              c05,
+              c06,
+              c07,
+              c08,
+              c09,
+              c10,
+              c11,
+              c12,
+              c13,
+              c14,
+              c15,
+              c16,
+              c17,
+              c18,
+              c19,
+              c20,
+              c21,
+              c22,
+              c23,
+              c24,
+              c25,
+              c26,
+              c27,
+              c28,
+              c29,
+              c30)</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a8a73a844271122d98ae7d995ce8d3e16"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">size_t </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8a73a844271122d98ae7d995ce8d3e16" class="m-doc-self">precedence_table_index</a>(</span><span class="m-doc-wrap"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> terminal,
+              int line)</span></span>
+            </h3>
+            <p>Vrati index terminalu do precedencni tabulky.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">terminal</td>
+                  <td>Typ terminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku pro chybova hlaseni, &lt;= 0 pokud neni znam.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Index v rozsahu 0 az PRECEDENCE_TABLE_SIZE - 1.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Nejprve overi token funkci token_type_validate (neplatny typ je interni chyba). Terminaly mezi TOKEN_LL_TERM_COUNT a TOKEN_EXPR_TERM_DELIMITER dostanou index vypoctem z jejich hodnoty v enumu a zabiraji souvisly rozsah od 0. Ostatni terminaly precedencni tabulky, ktere jsou v enumu TokenType mezi indexatory LL tabulky (napr. zavorky), dostanou index za timto rozsahem. <a href="structToken.html" class="m-doc">Token</a>, ktery precedencni tabulku neindexuje, zpusobi interni chybu (ERR_INTERNAL).</p>
+          </div></section>
+          <section class="m-doc-details" id="abb2b191e7dc60a6b806014ce7fbd97fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="precedence__table_8h.html#ad29641fd0f43eb518a1f9cbfeb6f16df" class="m-doc">PrecedenceDirective</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abb2b191e7dc60a6b806014ce7fbd97fe" class="m-doc-self">precedence_table_lookup</a>(</span><span class="m-doc-wrap"><a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> stack_terminal,
+              <a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> input_terminal,
+              int line)</span></span>
+            </h3>
+            <p>Vyhleda direktivu v precedencni tabulce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stack_terminal</td>
+                  <td>Terminal na zasobniku (radek tabulky).</td>
+                </tr>
+                <tr>
+                  <td>input_terminal</td>
+                  <td>Terminal na vstupu (sloupec tabulky).</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku vstupniho tokenu pro chybova hlaseni.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Direktiva, ktera neni DIRECTIVE_ERROR.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Zaindexuje tabulku terminalem na zasobniku (ten je vzdy indexem tabulky, jinak jde o internich chybu) a terminalem na vstupu. Vstupni terminal, ktery precedencni tabulku neindexuje, je chyba ve vstupnim programu a program skonci syntaktickou chybou (ERR_SYNTAX). Pokud je pole tabulky prazdne (DIRECTIVE_ERROR), kombinace terminalu neni platna a program skonci take syntaktickou chybou (ERR_SYNTAX) s vypisem pouzitych indexu.</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a4486ad15f66a22290397699afa05ac00"><div>
+            <h3>
+              const <a href="precedence__table_8h.html#ad29641fd0f43eb518a1f9cbfeb6f16df" class="m-doc">PrecedenceDirective</a> <a href="#a4486ad15f66a22290397699afa05ac00" class="m-doc-self">PRECEDENCE_TABLE</a>
+            </h3>
+            <p>Precedencni tabulka indexovana terminalem na zasobniku (radek) a terminalem na vstupu (sloupec).</p>
+<p>Indexy terminalu urcuje funkce precedence_table_index. Polozky bez zaznamu jsou DIRECTIVE_ERROR (hodnota 0).</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

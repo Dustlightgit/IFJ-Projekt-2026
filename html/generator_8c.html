@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/generator.c file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>generator.c <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
+                <li><a href="#define-members">Defines</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structRuntime.html" class="m-doc">Runtime</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              struct <a href="structGen.html" class="m-doc">Gen</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              struct <a href="structSimpleMember.html" class="m-doc">SimpleMember</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a859f0e8de24b03fae077551e661303c2">
+              <span class="m-doc-wrap-bumper">void <a href="#a859f0e8de24b03fae077551e661303c2" class="m-doc-self">gen_emit</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* fmt,
+              ...)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a88d7edf4a7aae87ef7ba60bcf33ac56d">
+              <span class="m-doc-wrap-bumper">void <a href="#a88d7edf4a7aae87ef7ba60bcf33ac56d" class="m-doc-self">gen_push</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* symb)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a631624232ba0b1ac0f88c595d6d854a0">
+              <span class="m-doc-wrap-bumper">void <a href="#a631624232ba0b1ac0f88c595d6d854a0" class="m-doc-self">gen_pop</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* var)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a43cc1014cb13de897d9b1357db94429f">
+              <span class="m-doc-wrap-bumper">void <a href="#a43cc1014cb13de897d9b1357db94429f" class="m-doc-self">gen_discard</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4406d428648e00407fb9d7dbcb31598b">
+              <span class="m-doc-wrap-bumper">void <a href="#a4406d428648e00407fb9d7dbcb31598b" class="m-doc-self">gen_stack_op</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* op,
+              int consumed,
+              int produced)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1db9603f6fb9ed6b9053c93c48802eb0">
+              <span class="m-doc-wrap-bumper">void <a href="#a1db9603f6fb9ed6b9053c93c48802eb0" class="m-doc-self">gen_check_depth</a>(</span><span class="m-doc-wrap">const <a href="structGen.html" class="m-doc">Gen</a>* g,
+              int expected,
+              int line)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acfea0628c2fc2e3ff2c39a6c3500a050">
+              <span class="m-doc-wrap-bumper">static void <a href="#acfea0628c2fc2e3ff2c39a6c3500a050" class="m-doc-self">emit_jumpifeqs</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* label)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a72e13d30596e82be78796e1746641a1e">
+              <span class="m-doc-wrap-bumper">void <a href="#a72e13d30596e82be78796e1746641a1e" class="m-doc-self">gen_make_label</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              char* buf,
+              size_t size,
+              const char* prefix)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a18a76b6a0635e1d006f46671240c5f41">
+              <span class="m-doc-wrap-bumper">void <a href="#a18a76b6a0635e1d006f46671240c5f41" class="m-doc-self">gen_function_label</a>(</span><span class="m-doc-wrap">char* buf,
+              size_t size,
+              const char* name)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4edde93c8186cd0a9580934b7c718788">
+              <span class="m-doc-wrap-bumper">void <a href="#a4edde93c8186cd0a9580934b7c718788" class="m-doc-self">gen_var_name</a>(</span><span class="m-doc-wrap">char* buf,
+              size_t size,
+              const <a href="structSymbol.html" class="m-doc">Symbol</a>* symbol)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a13081969f67145dbf0da041fde39624b">
+              <span class="m-doc-wrap-bumper">void <a href="#a13081969f67145dbf0da041fde39624b" class="m-doc-self">gen_declare_var</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* var)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad624ed893b48a25a2e2eae4653c2e2ee">
+              <span class="m-doc-wrap-bumper">void <a href="#ad624ed893b48a25a2e2eae4653c2e2ee" class="m-doc-self">gen_new_temp</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              char* buf,
+              size_t size)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3f2597ab3b97f503ae8c7b76aa8568d0">
+              <span class="m-doc-wrap-bumper">static void <a href="#a3f2597ab3b97f503ae8c7b76aa8568d0" class="m-doc-self">dstr_append_str</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s,
+              const char* text)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a198c2689a68580eb2ea0dcbd8af2066e">
+              <span class="m-doc-wrap-bumper">static void <a href="#a198c2689a68580eb2ea0dcbd8af2066e" class="m-doc-self">push_string_literal</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* text)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a973112064a16ac10e869559fe2bc4745">
+              <span class="m-doc-wrap-bumper">void <a href="#a973112064a16ac10e869559fe2bc4745" class="m-doc-self">gen_push_literal</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structLiteral.html" class="m-doc">Literal</a>* literal)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a03a697828bdba760c1e82f71fdf5ce61">
+              <span class="m-doc-wrap-bumper">void <a href="#a03a697828bdba760c1e82f71fdf5ce61" class="m-doc-self">gen_convert</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structType.html" class="m-doc">Type</a>* from,
+              const <a href="structType.html" class="m-doc">Type</a>* to)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="addc338f5fe3d0bfe9a1200b545f6a2c1">
+              <span class="m-doc-wrap-bumper">void <a href="#addc338f5fe3d0bfe9a1200b545f6a2c1" class="m-doc-self">gen_entry</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structFuncDef.html" class="m-doc">FuncDef</a>* main_func)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="adfc328bd4f547410bf37e643f7c73785">
+              <span class="m-doc-wrap-bumper">void <a href="#adfc328bd4f547410bf37e643f7c73785" class="m-doc-self">gen_return_sequence</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad83b586638734265fdecef3ff31f8057">
+              <span class="m-doc-wrap-bumper">static void <a href="#ad83b586638734265fdecef3ff31f8057" class="m-doc-self">flush_declarations</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acea7231ebb19be3a2883a5dba781a51b">
+              <span class="m-doc-wrap-bumper">void <a href="#acea7231ebb19be3a2883a5dba781a51b" class="m-doc-self">gen_function</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structFuncDef.html" class="m-doc">FuncDef</a>* func)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4c7e26c6873a362477416c033e22cda8">
+              <span class="m-doc-wrap-bumper">static auto <a href="#a4c7e26c6873a362477416c033e22cda8" class="m-doc-self">find_runtime</a>(</span><span class="m-doc-wrap">const char* name) -&gt; size_t</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aace2038b82ae0e1d655bb2cb7e2c2cd2">
+              <span class="m-doc-wrap-bumper">void <a href="#aace2038b82ae0e1d655bb2cb7e2c2cd2" class="m-doc-self">gen_use_runtime</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* name)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a55d6c9f81f6c49271cc3af54dd729d47">
+              <span class="m-doc-wrap-bumper">void <a href="#a55d6c9f81f6c49271cc3af54dd729d47" class="m-doc-self">gen_call</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* label,
+              int argc)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2acfa3da5955d3827959cfe4ab310205">
+              <span class="m-doc-wrap-bumper">void <a href="#a2acfa3da5955d3827959cfe4ab310205" class="m-doc-self">gen_call_runtime</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* name,
+              int argc)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aff5dc181cbdbde1c6c4b95b953f6452b">
+              <span class="m-doc-wrap-bumper">void <a href="#aff5dc181cbdbde1c6c4b95b953f6452b" class="m-doc-self">gen_emit_used_runtime</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6ce53a931e610176d2551a1c552396ff">
+              <span class="m-doc-wrap-bumper">void <a href="#a6ce53a931e610176d2551a1c552396ff" class="m-doc-self">gen_block</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structBlock.html" class="m-doc">Block</a>* block,
+              const <a href="structType.html" class="m-doc">Type</a>* want)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4158677e94c93859a655b6703193ec92">
+              <span class="m-doc-wrap-bumper">void <a href="#a4158677e94c93859a655b6703193ec92" class="m-doc-self">gen_stmt</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6d6b62d32da12b8f3e2f3e9fe95ee697">
+              <span class="m-doc-wrap-bumper">void <a href="#a6d6b62d32da12b8f3e2f3e9fe95ee697" class="m-doc-self">gen_stmt_vardef</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3cc132453fdc7eb28e5e9243552ea159">
+              <span class="m-doc-wrap-bumper">void <a href="#a3cc132453fdc7eb28e5e9243552ea159" class="m-doc-self">gen_stmt_assign</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af7b16564443fd9e8bebcc1f59d6fabc8">
+              <span class="m-doc-wrap-bumper">void <a href="#af7b16564443fd9e8bebcc1f59d6fabc8" class="m-doc-self">gen_stmt_return</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abaa94677f72c9ebd6352afcdd7a49b48">
+              <span class="m-doc-wrap-bumper">void <a href="#abaa94677f72c9ebd6352afcdd7a49b48" class="m-doc-self">gen_stmt_while</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af2508882fb5db3f0d80df293cab1f63a">
+              <span class="m-doc-wrap-bumper">void <a href="#af2508882fb5db3f0d80df293cab1f63a" class="m-doc-self">gen_stmt_for</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a26453cec7c8a6886237a8ef6cb91b507">
+              <span class="m-doc-wrap-bumper">void <a href="#a26453cec7c8a6886237a8ef6cb91b507" class="m-doc-self">gen_for_guards</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt,
+              const char* skip_label)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9124c9c991b7e8127f46f8f373ca64ab">
+              <span class="m-doc-wrap-bumper">static void <a href="#a9124c9c991b7e8127f46f8f373ca64ab" class="m-doc-self">emit_range_exit</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const char* op,
+              bool expect,
+              const char* var,
+              const char* end,
+              const char* cond,
+              const char* done)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abe9447a85576a42485c022718aa37221">
+              <span class="m-doc-wrap-bumper">void <a href="#abe9447a85576a42485c022718aa37221" class="m-doc-self">gen_for_range</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af6178bcd13f0e5815e1bfcda50153a09">
+              <span class="m-doc-wrap-bumper">void <a href="#af6178bcd13f0e5815e1bfcda50153a09" class="m-doc-self">gen_for_list</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structStmt.html" class="m-doc">Stmt</a>* stmt)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a400d24ff6ba6f2f68f56073ee45dea0a">
+              <span class="m-doc-wrap-bumper">void <a href="#a400d24ff6ba6f2f68f56073ee45dea0a" class="m-doc-self">gen_expr</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abd6faba9d130a78e54ac8f89d31c814e">
+              <span class="m-doc-wrap-bumper">void <a href="#abd6faba9d130a78e54ac8f89d31c814e" class="m-doc-self">gen_expr_as</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              const <a href="structType.html" class="m-doc">Type</a>* target)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a65109691714edd12e5871fbd64ae903d">
+              <span class="m-doc-wrap-bumper">void <a href="#a65109691714edd12e5871fbd64ae903d" class="m-doc-self">gen_jump_if_false</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* cond,
+              const char* label)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af18f103af452fd8300db0864f7a1679f">
+              <span class="m-doc-wrap-bumper">void <a href="#af18f103af452fd8300db0864f7a1679f" class="m-doc-self">gen_expr_unary</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afcc2ca814ec37fcb756f8a8c712eefd6">
+              <span class="m-doc-wrap-bumper">static auto <a href="#afcc2ca814ec37fcb756f8a8c712eefd6" class="m-doc-self">operand_target</a>(</span><span class="m-doc-wrap">const <a href="structExpr.html" class="m-doc">Expr</a>* left,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* right) -&gt; const <a href="structType.html" class="m-doc">Type</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3cc110f5cb69f4e613dd018790537536">
+              <span class="m-doc-wrap-bumper">void <a href="#a3cc110f5cb69f4e613dd018790537536" class="m-doc-self">gen_expr_binary</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa746f2cc15e3c14e0dc793c2f83f1ea1">
+              <span class="m-doc-wrap-bumper">void <a href="#aa746f2cc15e3c14e0dc793c2f83f1ea1" class="m-doc-self">gen_arithmetic</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9ed0f337147b8e2af2f15b956b2623a9">
+              <span class="m-doc-wrap-bumper">void <a href="#a9ed0f337147b8e2af2f15b956b2623a9" class="m-doc-self">gen_comparison</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3928e1dbe10b8262c6f6c91f59da4023">
+              <span class="m-doc-wrap-bumper">void <a href="#a3928e1dbe10b8262c6f6c91f59da4023" class="m-doc-self">gen_logical</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1a8e085c0f342bdef181c51fafe29190">
+              <span class="m-doc-wrap-bumper">void <a href="#a1a8e085c0f342bdef181c51fafe29190" class="m-doc-self">gen_expr_call</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa47ecda812aa1cf6717d813bf91d3032">
+              <span class="m-doc-wrap-bumper">static void <a href="#aa47ecda812aa1cf6717d813bf91d3032" class="m-doc-self">gen_branch</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structBlock.html" class="m-doc">Block</a>* block,
+              const <a href="structType.html" class="m-doc">Type</a>* want)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af3ebdc6f28e426dfea9771bcd880f950">
+              <span class="m-doc-wrap-bumper">void <a href="#af3ebdc6f28e426dfea9771bcd880f950" class="m-doc-self">gen_expr_if</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3793c4e3d2530f0fea279dbd3c84c6e2">
+              <span class="m-doc-wrap-bumper">void <a href="#a3793c4e3d2530f0fea279dbd3c84c6e2" class="m-doc-self">gen_expr_member</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7b228962ef21538f305f0a12bf1adf3f">
+              <span class="m-doc-wrap-bumper">void <a href="#a7b228962ef21538f305f0a12bf1adf3f" class="m-doc-self">gen_expr_list_literal</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a30164b6a1a0e24bbce5c929d1afbce05">
+              <span class="m-doc-wrap-bumper">static void <a href="#a30164b6a1a0e24bbce5c929d1afbce05" class="m-doc-self">gen_range_call</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* from,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* to,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* step,
+              bool inclusive)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a33a549e81849673bd570a28bd4ddf239">
+              <span class="m-doc-wrap-bumper">void <a href="#a33a549e81849673bd570a28bd4ddf239" class="m-doc-self">gen_expr_list_range</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a52cbf8914a3a71d49c7092aacd849102">
+              <span class="m-doc-wrap-bumper">void <a href="#a52cbf8914a3a71d49c7092aacd849102" class="m-doc-self">gen_expr_range</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af37373e679f3acbd2e831db162dd786a">
+              <span class="m-doc-wrap-bumper">void <a href="#af37373e679f3acbd2e831db162dd786a" class="m-doc-self">gen_expr_index</a>(</span><span class="m-doc-wrap"><a href="structGen.html" class="m-doc">Gen</a>* g,
+              const <a href="structExpr.html" class="m-doc">Expr</a>* expr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac2186d12f07712ed7d95b8c69e2f0772">
+              <span class="m-doc-wrap-bumper">void <a href="#ac2186d12f07712ed7d95b8c69e2f0772" class="m-doc-self">generate_program</a>(</span><span class="m-doc-wrap"><a href="structProgram.html" class="m-doc">Program</a>* program,
+              FILE* out)</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a1bb2e2743fd983e03ec3c27f869396bb">
+              static const char <a href="#a1bb2e2743fd983e03ec3c27f869396bb" class="m-doc-self">BODY_PRINT</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa9e7e4b2f25fa72d898a0595cc320f5d">
+              static const char <a href="#aa9e7e4b2f25fa72d898a0595cc320f5d" class="m-doc-self">BODY_TO_STR</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a129d897a25a95b7910ea8f5252e9f17d">
+              static const char <a href="#a129d897a25a95b7910ea8f5252e9f17d" class="m-doc-self">BODY_READ_LINE</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a41b2444cfa7f01b837a4edf81f13acc1">
+              static const char <a href="#a41b2444cfa7f01b837a4edf81f13acc1" class="m-doc-self">BODY_READ_INT</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1710e60c04c4dc3489103b38e4a02bab">
+              static const char <a href="#a1710e60c04c4dc3489103b38e4a02bab" class="m-doc-self">BODY_READ_DOUBLE</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2e648d33b267bb1244dc73c6fb74c761">
+              static const char <a href="#a2e648d33b267bb1244dc73c6fb74c761" class="m-doc-self">BODY_READ_BOOLEAN</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7b0e7795e2f4ddfab7863fc75131a444">
+              static const char <a href="#a7b0e7795e2f4ddfab7863fc75131a444" class="m-doc-self">BODY_TO_INT</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0b27f98a66bbc1a831f99f4d84130edb">
+              static const char <a href="#a0b27f98a66bbc1a831f99f4d84130edb" class="m-doc-self">BODY_STR_LENGTH</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab9efd218f48d683c815b9e47cc64c3ce">
+              static const char <a href="#ab9efd218f48d683c815b9e47cc64c3ce" class="m-doc-self">BODY_CHR</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aae3aab2eb70a16936ffe68274d7c8afc">
+              static const char <a href="#aae3aab2eb70a16936ffe68274d7c8afc" class="m-doc-self">BODY_SUB_STR</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1a7c1b194487f3afa66e0bb308d9ddca">
+              static const char <a href="#a1a7c1b194487f3afa66e0bb308d9ddca" class="m-doc-self">BODY_ORD</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5fef48da798d239e0626be999e87351b">
+              static const char <a href="#a5fef48da798d239e0626be999e87351b" class="m-doc-self">BODY_FLOOR</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aeb11bc5064e7742709ac6f78ea611cd6">
+              static const char <a href="#aeb11bc5064e7742709ac6f78ea611cd6" class="m-doc-self">BODY_LIST_GET</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2c7fd00ea045171f99e404627a479d8f">
+              static const char <a href="#a2c7fd00ea045171f99e404627a479d8f" class="m-doc-self">BODY_LIST_RANGE</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a14a1dc3d7ec39c85296737a9431d95bd">
+              static const char <a href="#a14a1dc3d7ec39c85296737a9431d95bd" class="m-doc-self">BODY_LIST_SLICE</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aca9592bafa707a2eabeb84f093796239">
+              static const char <a href="#aca9592bafa707a2eabeb84f093796239" class="m-doc-self">BODY_LIST_TAIL</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1a4830b20b7a92fb53ce8744e5d15435">
+              static const char <a href="#a1a4830b20b7a92fb53ce8744e5d15435" class="m-doc-self">BODY_LIST_CONCAT</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1160440f45b0a94c5f021bfc325056d6">
+              static const <a href="structRuntime.html" class="m-doc">Runtime</a> <a href="#a1160440f45b0a94c5f021bfc325056d6" class="m-doc-self">RUNTIME</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a17dec8678c9beeb33f09b6a072690967">
+              static const <a href="structType.html" class="m-doc">Type</a> <a href="#a17dec8678c9beeb33f09b6a072690967" class="m-doc-self">DOUBLE_TYPE</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a33d62fd96806555c8e6066710f75133a">
+              static const <a href="structSimpleMember.html" class="m-doc">SimpleMember</a> <a href="#a33d62fd96806555c8e6066710f75133a" class="m-doc-self">SIMPLE_MEMBERS</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt id="a3024ccd4a9af5109d24e6c57565d74a1">
+              <span class="m-doc-wrap-bumper">#define <a href="#a3024ccd4a9af5109d24e6c57565d74a1" class="m-doc-self">_POSIX_C_SOURCE</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1d4d94cc7563f70e87bbdcee5a48fb91">
+              <span class="m-doc-wrap-bumper">#define <a href="#a1d4d94cc7563f70e87bbdcee5a48fb91" class="m-doc-self">NAME_BUF</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4354afde8b0de5d9430f62c76fe15034">
+              <span class="m-doc-wrap-bumper">#define <a href="#a4354afde8b0de5d9430f62c76fe15034" class="m-doc-self">LABEL_BUF</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a04056d59a80457c5fc780d33c2176ea2">
+              <span class="m-doc-wrap-bumper">#define <a href="#a04056d59a80457c5fc780d33c2176ea2" class="m-doc-self">DISCARD_VAR</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3f849cac9b3f375bc3b585bc860e058d">
+              <span class="m-doc-wrap-bumper">#define <a href="#a3f849cac9b3f375bc3b585bc860e058d" class="m-doc-self">ERROR_LABEL</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1531077f4f1bcc6d6d557a58b9927e0b">
+              <span class="m-doc-wrap-bumper">#define <a href="#a1531077f4f1bcc6d6d557a58b9927e0b" class="m-doc-self">INT_MAX_LITERAL</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae7d8bc1e39ebeeea7428a7e75443e716">
+              <span class="m-doc-wrap-bumper">#define <a href="#ae7d8bc1e39ebeeea7428a7e75443e716" class="m-doc-self">FN_BEGIN</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8127c91379979976064b8b4bb648b6aa">
+              <span class="m-doc-wrap-bumper">#define <a href="#a8127c91379979976064b8b4bb648b6aa" class="m-doc-self">FN_END</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a33df3386ba8677862f46e5f2c000f5f5">
+              <span class="m-doc-wrap-bumper">#define <a href="#a33df3386ba8677862f46e5f2c000f5f5" class="m-doc-self">DEF_VAR</a>(</span><span class="m-doc-wrap">v)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a22b313616adc7e988d44dbcce796bab9">
+              <span class="m-doc-wrap-bumper">#define <a href="#a22b313616adc7e988d44dbcce796bab9" class="m-doc-self">POP_VAR</a>(</span><span class="m-doc-wrap">v)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a33978cb0cfd5fa405da75c959b95672c">
+              <span class="m-doc-wrap-bumper">#define <a href="#a33978cb0cfd5fa405da75c959b95672c" class="m-doc-self">UNARY_BODY</a>(</span><span class="m-doc-wrap">instr)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a00055697760c5511bc3d95ae76c52997">
+              <span class="m-doc-wrap-bumper">#define <a href="#a00055697760c5511bc3d95ae76c52997" class="m-doc-self">READ_BODY</a>(</span><span class="m-doc-wrap">name,
+              type,
+              default_value)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5908e3676847063a19a32ebc4e4f5535">
+              <span class="m-doc-wrap-bumper">#define <a href="#a5908e3676847063a19a32ebc4e4f5535" class="m-doc-self">RUNTIME_COUNT</a></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

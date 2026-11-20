@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAvlNode" kind="struct" language="C++" prot="public">
+    <compoundname>AvlNode</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAvlNode_1ac08d1104d08a4b6f6e19ca24b8099355" prot="public" static="no" mutable="no">
+        <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>Symbol* AvlNode::symbol</definition>
+        <argsstring></argsstring>
+        <name>symbol</name>
+        <qualifiedname>AvlNode::symbol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="23" column="10" bodyfile="src/symtable.c" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAvlNode_1a7ba2f9e45009430196cf6407cd2b0a7c" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AvlNode::scope_id</definition>
+        <argsstring></argsstring>
+        <name>scope_id</name>
+        <qualifiedname>AvlNode::scope_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="24" column="7" bodyfile="src/symtable.c" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAvlNode_1a6b0559169f04d686bb4403f54abceef9" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>struct AvlNode* AvlNode::left</definition>
+        <argsstring></argsstring>
+        <name>left</name>
+        <qualifiedname>AvlNode::left</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="25" column="16" bodyfile="src/symtable.c" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAvlNode_1a94cfc32ceb2561755640822c251b24b3" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>struct AvlNode* AvlNode::right</definition>
+        <argsstring></argsstring>
+        <name>right</name>
+        <qualifiedname>AvlNode::right</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="26" column="16" bodyfile="src/symtable.c" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAvlNode_1a9c10125f4fbd4f26b8546cb54240e9df" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int AvlNode::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>AvlNode::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="27" column="7" bodyfile="src/symtable.c" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>AvlNode</label>
+        <link refid="structAvlNode"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>left</edgelabel>
+          <edgelabel>right</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="5">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/symtable.c" line="22" column="1" bodyfile="src/symtable.c" bodystart="22" bodyend="28"/>
+    <listofallmembers>
+      <member refid="structAvlNode_1a9c10125f4fbd4f26b8546cb54240e9df" prot="public" virt="non-virtual"><scope>AvlNode</scope><name>height</name></member>
+      <member refid="structAvlNode_1a6b0559169f04d686bb4403f54abceef9" prot="public" virt="non-virtual"><scope>AvlNode</scope><name>left</name></member>
+      <member refid="structAvlNode_1a94cfc32ceb2561755640822c251b24b3" prot="public" virt="non-virtual"><scope>AvlNode</scope><name>right</name></member>
+      <member refid="structAvlNode_1a7ba2f9e45009430196cf6407cd2b0a7c" prot="public" virt="non-virtual"><scope>AvlNode</scope><name>scope_id</name></member>
+      <member refid="structAvlNode_1ac08d1104d08a4b6f6e19ca24b8099355" prot="public" virt="non-virtual"><scope>AvlNode</scope><name>symbol</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

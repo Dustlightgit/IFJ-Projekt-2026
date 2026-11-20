@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/special_actions.c file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>special_actions.c <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5ceaf592faf752fc621a8a5730e7ccbe" class="m-doc">special_action_id</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              const <a href="structToken.html" class="m-doc">Token</a>* token)</span>
+            </dt>
+            <dd>Specialni akce pro token ID.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4410a880d05afa97bcde194aab40de4b" class="m-doc">special_action_precedence_preprocessing</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* input_token) -&gt; void*</span>
+            </dt>
+            <dd>Specialni akce predzpracovani vstupniho terminalu precedencniho parseru.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac34969b0a22907e07261fa43f342b6f4" class="m-doc">special_action_expr</a>(</span><span class="m-doc-wrap">void* ptr,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              <a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              int line)</span>
+            </dt>
+            <dd>Ulozi hotovy vyraz podle kontextove anotace.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac00d2206245e474f44f05ea896ac3e55" class="m-doc">special_action_execute_expr_rule</a>(</span><span class="m-doc-wrap"><a href="structParserContext.html" class="m-doc">ParserContext</a>* ctx,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack,
+              const <a href="structAnnotatedSymbol.html" class="m-doc">AnnotatedSymbol</a>* top)</span>
+            </dt>
+            <dd>Specialni akce provedeni pravidla pro vstupni terminal, kterym smi zacinat vyraz.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a5ceaf592faf752fc621a8a5730e7ccbe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ceaf592faf752fc621a8a5730e7ccbe" class="m-doc-self">special_action_id</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              const <a href="structToken.html" class="m-doc">Token</a>* token)</span></span>
+            </h3>
+            <p>Specialni akce pro token ID.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext, do nej se uklada vytvoreny AST uzel.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u symbolu ID na zasobniku.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u symbolu ID na zasobniku.</td>
+                </tr>
+                <tr>
+                  <td>token</td>
+                  <td>Vstupni token ID ze scanneru. <a href="structToken.html" class="m-doc">Token</a> po skonceni akce uvolni parser_match, akce proto musi text, ktery chce uchovat, zkopirovat.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Jadro ji vola, kdyz je na vrcholu zasobniku terminal ID a na vstupu je take ID, a to pred porovnanim a uvolnenim tokenu funkci parser_match. Zpracuje tedy kazdy token ID vcetne jeho atributu. Obvykla akce bude podle anotace pripojit nazev ID k uzlu urcenemu ukazatelem (napr. nazev funkce nebo citace cyklu for), pripadne vytvorit uzel AST pro ID.</p><p>Vzdy vypise informaci o potkanem ID na stderr. Podle anotace pak:</p><ul><li>CONTEXT_ID_COMMAND: vytvori AST uzel pro ID (<a href="structExpr.html" class="m-doc">Expr</a> typu EXPR_VARIABLE) a ulozi ukazatel na nej do ctx-&gt;id_expr, odkud ho vezme jadro parseru.</li><li>ostatni anotace: zatim nic dalsiho (pozdeji nejspis interni chyba).</li></ul>
+          </div></section>
+          <section class="m-doc-details" id="a4410a880d05afa97bcde194aab40de4b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4410a880d05afa97bcde194aab40de4b" class="m-doc-self">special_action_precedence_preprocessing</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* input_token)</span></span>
+            </h3>
+            <p>Specialni akce predzpracovani vstupniho terminalu precedencniho parseru.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">input_token</td>
+                  <td>Vstupni token, nesmi byt NULL. <a href="structToken.html" class="m-doc">Token</a> se nemeni, akce si text atributu predava funkci expr_new_*, token ho uvolni pozdeji parser_advance.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Ukazatel na vytvoreny uzel AST (<a href="structExpr.html" class="m-doc">Expr</a> *), nebo NULL pro token bez atributu.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Jadro precedencniho parseru ji vola jednou pro kazdy vstupni token, a to po vyhodnoceni prediktoru (token je tedy pripadne uz prebarveny z TOKEN_ID na TOKEN_ID_OPERATOR) a pred jeho zpracovanim a uvolnenim. Atribut tokenu je tak zpracovan driv, nez ho parser_advance uvolni.</p><p>Pro tokeny s atributem vytvori uzel AST a vrati ukazatel na nej:</p><ul><li>TOKEN_ID a TOKEN_ID_OPERATOR: expr_new_variable (jmeno z atributu),</li><li>TOKEN_INT_LIT: expr_new_int,</li><li>TOKEN_DOUBLE_LIT: expr_new_double,</li><li>TOKEN_STRING_LIT: expr_new_string. Pro ostatni tokeny vrati NULL.</li></ul><p>Vraceny ukazatel jadro ulozi jako semanticky ukazatel terminalu na zasobniku precedencniho parseru, terminaly s atributem tedy na zasobniku jsou uz uzlem AST a semanticka akce redukce literalu nebo ID na E ukazatel pouze preda. Pokud se ID nebo ID_OPERATOR nakonec nepouzije jako listova promenna (napr. nazev volane funkce nebo ID pouzite jako infixovy operator), vezme se z uzlu jmeno, vytvori se skutecne potrebny uzel a pomocny uzel se uvolni. Tento zpusob umoznuje, aby atribut tokenu zustal uchovan v uzlu AST a nebylo ho treba nikam jinam kopirovat.</p><p>Akce se neprovadi na pocatecnim terminalu, ktery prediktivni parser predava precedencnimu parseru (jadrova pravidla 32 a 33); u nej prediktivni parser predava uzel AST rovnou jako semanticky ukazatel.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac34969b0a22907e07261fa43f342b6f4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac34969b0a22907e07261fa43f342b6f4" class="m-doc-self">special_action_expr</a>(</span><span class="m-doc-wrap">void* ptr,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              <a href="structExpr.html" class="m-doc">Expr</a>* expr,
+              int line)</span></span>
+            </h3>
+            <p>Ulozi hotovy vyraz podle kontextove anotace.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ptr</td>
+                  <td>Semanticky ukazatel ulozeny u neterminalu, jehoz vyraz se uklada.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u tohoto neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>expr</td>
+                  <td>Hotovy vyraz, funkce prebira jeho vlastnictvi.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku pro uzly AST a chybova hlaseni.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vola ji vyrazovy parser po dokonceni vyrazu. Podle anotace vyraz ulozi na misto urcene ukazatelem (hodnota returnu, inicializace promenne, hodnota prirazeni, podminka cyklu while nebo if, zdroj nebo straz cyklu for). Pri ostatnich anotacich se vyraz prida jako samostatny prikaz do bloku ziskaneho funkci target_block. Drive ast_attach_expr v semantic_actions.*.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac00d2206245e474f44f05ea896ac3e55"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac00d2206245e474f44f05ea896ac3e55" class="m-doc-self">special_action_execute_expr_rule</a>(</span><span class="m-doc-wrap"><a href="structParserContext.html" class="m-doc">ParserContext</a>* ctx,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack,
+              const <a href="structAnnotatedSymbol.html" class="m-doc">AnnotatedSymbol</a>* top)</span></span>
+            </h3>
+            <p>Specialni akce provedeni pravidla pro vstupni terminal, kterym smi zacinat vyraz.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Spolecny kontext parseru, z nej se bere cislo radku pro chybu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik prediktivniho parseru, na nej se vklada produkce.</td>
+                </tr>
+                <tr>
+                  <td>top</td>
+                  <td>Neterminal odebrany z vrcholu zasobniku spolu s jeho semantickym ukazatelem a kontextovou anotaci.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Jadro ji vola, kdyz je na vstupu terminal, ktery neindexuje LL tabulku, ale muze jim zacinat vyraz. Tato situace je pri volani jiz overena, funkce vstupni terminal nijak nekontroluje. Podle neterminalu z vrcholu zasobniku vybere pravidlo, ktere se pro vyraz na vstupu pouzije, a provede ho vlozenim prave strany staticke produkce na zasobnik (zadne z vybranych pravidel nema semantickou akci). Neterminal musi byt v dobe volani uz odebrany ze zasobniku, jeho semanticky ukazatel a anotaci predava jadro v top a funkce je podle pravidla pro staticke produkce zkopiruje do vsech vlozenych symbolu.</p><p>Mapovani neterminalu na pravidla gramatiky:</p><ul><li>NONTERM_BLOCK_OR_EXPR: pravidlo 20,</li><li>NONTERM_COMMAND: pravidlo 45,</li><li>NONTERM_COMMAND_LIST: pravidlo 23,</li><li>NONTERM_COMMAND_SIMPLE: pravidlo 30,</li><li>NONTERM_RETURN_VALUE: pravidlo 35,</li><li>NONTERM_BLOCK_OR_COMMAND: pravidlo 44,</li><li>NONTERM_THEN_BRANCH: pravidlo 56,</li><li>NONTERM_OPTIONAL_ELSE: pravidlo 49,</li><li>NONTERM_EXPR_OR_INDENT_EXPR: pravidlo 52,</li><li>NONTERM_ELSE_TERNARY_IF: pravidlo 54.</li></ul><p>Pro jiny neterminal skonci program chybou ERR_SYNTAX s hlasenim &quot;LL Parser:
+Neni mozne zvolit pravidlo.&quot;.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

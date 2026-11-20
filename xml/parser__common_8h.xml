@@ -1,0 +1,567 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="parser__common_8h" kind="file" language="C++">
+    <compoundname>parser_common.h</compoundname>
+    <includes refid="grammar__symbol_8h" local="yes">grammar_symbol.h</includes>
+    <includes refid="production_8h" local="yes">production.h</includes>
+    <includes refid="semantic__types_8h" local="yes">semantic_types.h</includes>
+    <includes refid="stack_8h" local="yes">stack.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <includedby refid="main_8c" local="yes">src/main.c</includedby>
+    <includedby refid="parser__common_8c" local="yes">src/parser_common.c</includedby>
+    <includedby refid="precedence__helpers_8h" local="yes">src/precedence_helpers.h</includedby>
+    <includedby refid="precedence__parser_8h" local="yes">src/precedence_parser.h</includedby>
+    <includedby refid="precedence__semantic__actions_8c" local="yes">src/precedence_semantic_actions.c</includedby>
+    <includedby refid="predictive__parser_8h" local="yes">src/predictive_parser.h</includedby>
+    <includedby refid="semantic__actions_8c" local="yes">src/semantic_actions.c</includedby>
+    <includedby refid="special__actions_8h" local="yes">src/special_actions.h</includedby>
+    <incdepgraph>
+      <node id="9">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="1">
+        <label>src/parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="7">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="3">
+        <label>src/parser_common.c</label>
+        <link refid="parser__common_8c"/>
+      </node>
+      <node id="1">
+        <label>src/parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/precedence_helpers.c</label>
+        <link refid="precedence__helpers_8c"/>
+      </node>
+      <node id="4">
+        <label>src/precedence_helpers.h</label>
+        <link refid="precedence__helpers_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="7">
+        <label>src/precedence_parser.h</label>
+        <link refid="precedence__parser_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/precedence_semantic_actions.c</label>
+        <link refid="precedence__semantic__actions_8c"/>
+      </node>
+      <node id="8">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+      <node id="10">
+        <label>src/predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>src/semantic_actions.c</label>
+        <link refid="semantic__actions_8c"/>
+      </node>
+      <node id="11">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+      </node>
+      <node id="13">
+        <label>src/special_actions.h</label>
+        <link refid="special__actions_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structParserStackEntry" prot="public">ParserStackEntry</innerclass>
+    <innerclass refid="structParserContext" prot="public">ParserContext</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="parser__common_8h_1ac0fdefefac8f44af11b042255e012d0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool parser_check_token</definition>
+        <argsstring>(const ParserContext *ctx, TokenType expected)</argsstring>
+        <name>parser_check_token</name>
+        <param>
+          <type>const <ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>expected</declname>
+        </param>
+        <briefdescription>
+<para>Umoznuje zjistit, zda je na vstupu konkretni token. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Funkce je ciste zjistovaci, nemeni stav kontextu parseru.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spolecny context parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Porovnavany typ token. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="149" column="6" bodyfile="src/parser_common.c" bodystart="33" bodyend="35" declfile="src/parser_common.h" declline="149" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1ab3a8b38fe60a4cf79e3c5dfcf57c398d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void parser_advance</definition>
+        <argsstring>(ParserContext *ctx)</argsstring>
+        <name>parser_advance</name>
+        <param>
+          <type><ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>Posun ve vstupnim proudu dale. Kontroluje take koncovou carku. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uvolni soucasny token a zavola pritele scannera, aby dodal dalsi. Veskere zpracovani tokenu tedy musi probehnout jeste pred zavolanim teto funkce. Typ noveho tokenu overi funkci token_type_validate (neplatny typ je interni chyba).</para>
+<para>Funkce take kontroluje zakaz dvou po sobe jdoucich carek a koncovou carku v seznamu. Kontrola je tedy spolecna pro oba parsery.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spolecny context parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="163" column="6" bodyfile="src/parser_common.c" bodystart="37" bodyend="68" declfile="src/parser_common.h" declline="163" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1a0721f0c129e74d42756212f9290ca4bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void parser_stack_init</definition>
+        <argsstring>(Stack *stack)</argsstring>
+        <name>parser_stack_init</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Inicializuje zasobnik parseru. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Velikost prvku je sizeof(ParserStackEntry).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik k inicializaci. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="176" column="6" bodyfile="src/parser_common.c" bodystart="137" bodyend="139" declfile="src/parser_common.h" declline="176" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1a632c7941ebed1308aca223eed39d5f56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void parser_stack_push</definition>
+        <argsstring>(Stack *stack, GrammarSymbol symbol, void *semantic_pointer, ContextAnnotation annotation, bool reduction_marker)</argsstring>
+        <name>parser_stack_push</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type><ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref></type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>reduction_marker</declname>
+        </param>
+        <briefdescription>
+<para>Vlozi na zasobnik parseru novy zaznam. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Zaznam se sestavi z predanych hodnot, zasobnik si ho zkopiruje.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>symbol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> gramatiky. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel pro stavbu stromu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace symbolu, bez anotace CONTEXT_NONE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reduction_marker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Priznak znacky redukce, bezne false (viz <ref refid="structParserStackEntry" kindref="compound">ParserStackEntry</ref>). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="190" column="6" bodyfile="src/parser_common.c" bodystart="141" bodyend="153" declfile="src/parser_common.h" declline="190" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1adbe484c76ddbb86b26a05f16a339e21b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool parser_stack_pop</definition>
+        <argsstring>(Stack *stack, ParserStackEntry *out)</argsstring>
+        <name>parser_stack_pop</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type><ref refid="structParserStackEntry" kindref="compound">ParserStackEntry</ref> *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>Odebere zaznam z vrcholu zasobniku parseru. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kam se odebrany zaznam zkopiruje, pokud neni NULL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>False, pokud je zasobnik prazdny, jinak true. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="201" column="6" bodyfile="src/parser_common.c" bodystart="155" bodyend="157" declfile="src/parser_common.h" declline="201" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1a44bd6301ce6970e9ebeec505f105cd70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structParserStackEntry" kindref="compound">ParserStackEntry</ref> *</type>
+        <definition>ParserStackEntry * parser_stack_top</definition>
+        <argsstring>(const Stack *stack)</argsstring>
+        <name>parser_stack_top</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Vrati zaznam na vrcholu zasobniku parseru. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na zaznam na vrcholu, nebo NULL, je-li zasobnik prazdny. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="209" column="18" bodyfile="src/parser_common.c" bodystart="159" bodyend="161" declfile="src/parser_common.h" declline="209" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1af36dd001ac94c114baa48a85c69d9373" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structParserStackEntry" kindref="compound">ParserStackEntry</ref> *</type>
+        <definition>ParserStackEntry * parser_stack_peek</definition>
+        <argsstring>(const Stack *stack, size_t depth)</argsstring>
+        <name>parser_stack_peek</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+<para>Vrati zaznam na zasobniku parseru v dane hloubce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>depth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hloubka, 0 je vrchol, 1 je zaznam tesne pod nim. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na zaznam, nebo NULL, pokud takovy zaznam neni. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="218" column="18" bodyfile="src/parser_common.c" bodystart="163" bodyend="165" declfile="src/parser_common.h" declline="218" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1a5a5d355e3fd495102bf5dd599eb55f29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void parser_context_init</definition>
+        <argsstring>(ParserContext *ctx)</argsstring>
+        <name>parser_context_init</name>
+        <param>
+          <type><ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>Inicializuje kontext parseru a nacte prvni token ze vstupu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vsechny hodnoty nastavi na nulove, potom zavola parser_advance, ktery ziska prvni vstupni token. Scanner musi byt pripraveny pred volanim.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontext parseru k inicializaci. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="233" column="6" bodyfile="src/parser_common.c" bodystart="172" bodyend="179" declfile="src/parser_common.h" declline="233" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="parser__common_8h_1ac68f9fe3b8a0184f3af28ae13285a9cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void trace_rule</definition>
+        <argsstring>(bool is_predictive_parser, int rule_number, int line)</argsstring>
+        <name>trace_rule</name>
+        <param>
+          <type>bool</type>
+          <declname>is_predictive_parser</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rule_number</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vypise pouzite pravidlo a cislo radku na stderr (ladici vystup). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Format vystupu urcuje parametr is_predictive_parser. Pravidla prediktivniho (LL) parseru se vypisuji jako &quot;LL Parser: Pravidlo L&lt;cislo&gt; (radek &lt;radek&gt;)&quot;, pravidla precedencniho parseru jako &quot;Precedencni parser: Pravidlo E&lt;cislo&gt; (radek &lt;radek&gt;)&quot;.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is_predictive_parser</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True pro pravidlo prediktivniho (LL) parseru, false pro pravidlo precedencniho parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rule_number</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo pravidla. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku vstupu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="252" column="6" bodyfile="src/parser_common.c" bodystart="198" bodyend="204" declfile="src/parser_common.h" declline="252" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/parser_common.h"/>
+  </compounddef>
+</doxygen>

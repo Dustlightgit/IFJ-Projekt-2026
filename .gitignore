@@ -13,3 +13,4 @@ test/IFJ26_examples/.bsp
 test/IFJ26_examples/.scala-build
 *.log
 .bsp
+.docs-server.pid

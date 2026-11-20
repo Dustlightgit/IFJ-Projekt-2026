@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="nonterminal_8c" kind="file" language="C++">
+    <compoundname>nonterminal.c</compoundname>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="1">
+        <label>src/nonterminal.c</label>
+        <link refid="nonterminal_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="nonterminal_8c_1a2d2a841983eb39614e8aeea6bd70d58f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * nonterm_type_name</definition>
+        <argsstring>(NonterminalType type)</argsstring>
+        <name>nonterm_type_name</name>
+        <param>
+          <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Vrati citelny nazev neterminalu pro chybove vypisy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Retezec s nazvem neterminalu, pro neplatnou hodnotu &quot;?&quot;. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nonterminal.c" line="54" column="12" bodyfile="src/nonterminal.c" bodystart="54" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="nonterminal_8c_1a794f1dfd5949934851b9e9c820445903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nonterm_type_validate</definition>
+        <argsstring>(NonterminalType type, int line)</argsstring>
+        <name>nonterm_type_validate</name>
+        <param>
+          <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Overi, ze typ neterminalu je skutecny neterminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri neplatne hodnote ukonci program s kodem ERR_INTERNAL. Neplatne jsou specialni hodnoty (NONTERM_LL_TABLE_COUNT, NONTERM_COUNT) a hodnoty mimo enum. Funkce neterminaly dale neklasifikuje, tedy nezjistuje, zda indexuji LL tabulku.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Overovany typ neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku pro chybove hlaseni, &lt;= 0 pokud neni znam. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nonterminal.c" line="139" column="6" bodyfile="src/nonterminal.c" bodystart="139" bodyend="144"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/nonterminal.c"/>
+  </compounddef>
+</doxygen>

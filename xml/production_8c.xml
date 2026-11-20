@@ -1,0 +1,683 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="production_8c" kind="file" language="C++">
+    <compoundname>production.c</compoundname>
+    <includes refid="production_8h" local="yes">production.h</includes>
+    <includes refid="grammar__symbol_8h" local="yes">grammar_symbol.h</includes>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="1">
+        <label>src/production.c</label>
+        <link refid="production_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="production_8c_1abf8589ae83e46c088749974c88360ee0" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_DEF_LIST_NEXT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_DEF_LIST_NEXT</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda23c9124625178f6e23eb071fd51d0fce" kindref="member">NONTERM_DEF</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda27b99ef35c270bdd7cd0ce57602848e8" kindref="member">NONTERM_DEF_LIST</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 1 (Seznam deklaraci) (ptr): &lt;defList&gt; =&gt; &lt;def&gt; &lt;defList&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="168" column="24" bodyfile="src/production.c" bodystart="168" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a4dd2edd3aaeaa2714a4188a18b7e1ba1" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_DEF_LIST_END</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_DEF_LIST_END</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 2 (Konec deklaraci): &lt;defList&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="178" column="24" bodyfile="src/production.c" bodystart="178" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a117a9e3d123f54204176edc1a895221e" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_MAIN_ABSENT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_MAIN_ABSENT</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 5 (Anotace neni): &lt;main&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="181" column="24" bodyfile="src/production.c" bodystart="181" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1aa7b505463aa5ec584a4fc84a718d0d1c" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_OPTIONAL_EOL_PRESENT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_OPTIONAL_EOL_PRESENT</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" kindref="member">TOKEN_EOL</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 6 (EOL je): &lt;optionalEOL&gt; =&gt; EOL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="184" column="24" bodyfile="src/production.c" bodystart="184" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1ad5610a00fc592bf5fc8f9a4b6f23fffa" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_OPTIONAL_EOL_ABSENT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_OPTIONAL_EOL_ABSENT</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 7 (EOL neni): &lt;optionalEOL&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="190" column="24" bodyfile="src/production.c" bodystart="190" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1ad4b91d23e58b0321cb625f95c6397b79" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_PARAM_LIST_TAIL_NEXT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_PARAM_LIST_TAIL_NEXT</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a8d265e17914bc733c8b9a880dd097a9e" kindref="member">TOKEN_COMMA</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda42cd8d571ee5b038c6b34117764d7b9c" kindref="member">NONTERM_PARAM_LIST</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 9 (Pridani carky) (ptr): &lt;paramComma&gt; =&gt; , &lt;paramAdd&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="194" column="24" bodyfile="src/production.c" bodystart="194" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a5b3954af4c09ccfdf7394c3cc7f59a66" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_PARAM_LIST_END</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_PARAM_LIST_END</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 10 (Konec parametru A): &lt;paramAdd&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="204" column="24" bodyfile="src/production.c" bodystart="204" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1aeffb2196939f818f8db405dda4c39c08" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_PARAM_LIST_TAIL_END</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_PARAM_LIST_TAIL_END</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 11 (Konec parametru B): &lt;paramComma&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="207" column="24" bodyfile="src/production.c" bodystart="207" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1aa0ef438a80c1fed74a5ed59aebd30ede" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_OPTIONAL_TYPE_PRESENT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_OPTIONAL_TYPE_PRESENT</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a92a35ac6329421e77882bf3739a75e47" kindref="member">TOKEN_COLON</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda7e3bfd20d0f891f2e78dd55de77f754e" kindref="member">NONTERM_TYPE</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 12 (Navratovy typ je) (ptr): &lt;optionalType&gt; =&gt; : &lt;type&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="210" column="24" bodyfile="src/production.c" bodystart="210" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a717a0943ca21974dea9a341ef02ebdf6" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_OPTIONAL_TYPE_ABSENT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_OPTIONAL_TYPE_ABSENT</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 13 (Navratovy typ neni): &lt;optionalType&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="220" column="24" bodyfile="src/production.c" bodystart="220" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a383b434a57b7339c735d38f920701b3c" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_BLOCK_OR_EXPR_EXPR</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_BLOCK_OR_EXPR_EXPR</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" kindref="member">NONTERM_EXPR</ref>),
+            <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" kindref="member">TOKEN_EOL</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 20 (Jednoradkovy vyraz misto bloku) (ptr): &lt;blockOrExpr&gt; =&gt; &lt;expr&gt; EOL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="224" column="24" bodyfile="src/production.c" bodystart="224" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1ae19f99e5fe0dfd046051342049cf58e8" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_BLOCK_OR_EXPR_BLOCK</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_BLOCK_OR_EXPR_BLOCK</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda17798dcee94f1a20a30115d86792d901" kindref="member">NONTERM_BLOCK</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 21 (Pouziti bloku) (ptr): &lt;blockOrExpr&gt; =&gt; &lt;block&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="234" column="24" bodyfile="src/production.c" bodystart="234" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1add0267d7f9b7cdf765a53a632c2b20ff" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_COMMAND_LIST_NEXT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_COMMAND_LIST_NEXT</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddaacbec80867dea79582134ab408527532" kindref="member">NONTERM_COMMAND</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae4dcca4e64eff019189f8d80138b4db4" kindref="member">NONTERM_COMMAND_LIST</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 23 (Dalsi prikaz) (ptr): &lt;commandList&gt; =&gt; &lt;command&gt; &lt;commandList&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="241" column="24" bodyfile="src/production.c" bodystart="241" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1afad67b26043b61a2a40d3777492ed161" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_COMMAND_LIST_END</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_COMMAND_LIST_END</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 24 (Konec seznamu prikazu): &lt;commandList&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="251" column="24" bodyfile="src/production.c" bodystart="251" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a5489dbe7d414253f4a2fc8c65a7501bc" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_COMMAND_END_SEMICOLON</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_COMMAND_END_SEMICOLON</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921ac8c74b281e178c87923363a90f6ff371" kindref="member">TOKEN_SEMICOLON</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 25 (Konec prikazu - strednik): &lt;commandEnd&gt; =&gt; ;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="256" column="24" bodyfile="src/production.c" bodystart="256" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a5446f346934e11139e0888e1fe0d70e5" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_COMMAND_END_EOL</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_COMMAND_END_EOL</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" kindref="member">TOKEN_EOL</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 26 (Konec prikazu - EOL): &lt;commandEnd&gt; =&gt; EOL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="262" column="24" bodyfile="src/production.c" bodystart="262" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1aff986aea8332b32b403b34796bcca0e2" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_VAR</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_VAR</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a6ffacab6b61365785f103c5ca66cba9c" kindref="member">TOKEN_KW_VAR</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 29 (Deklarace modifikovatelne promenne): &lt;valVar&gt; =&gt; var. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="268" column="24" bodyfile="src/production.c" bodystart="268" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1ac9ca375208424396b2cb2e87ebfdfa84" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_COMMAND_SIMPLE_EXPR</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" kindref="member">NONTERM_EXPR</ref>)},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pravidlo 30 (Prikaz vyrazu) (ptr): &lt;commandSimple&gt; =&gt; &lt;exprNoID&gt; Pozn.: nahradi PRODUCTION_COMMAND_EXPR, ktere se odstrani v LL tabulce. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="275" column="24" bodyfile="src/production.c" bodystart="275" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a80c0f05039eff69e668f8f21b4d1eef5" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_COMMAND_SIMPLE</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_COMMAND_SIMPLE</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda0be5df54c703b0c14c1327199ddf4afa" kindref="member">NONTERM_COMMAND_SIMPLE</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda43f6165f745d0553608324ee46ff0460" kindref="member">NONTERM_COMMAND_END</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 45 (Jednoduchy prikaz) (ptr): &lt;command&gt; =&gt; &lt;commandSimple&gt; &lt;commandEnd&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="281" column="24" bodyfile="src/production.c" bodystart="281" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a5fa90b9106f54c670bb50ffd43dfa07f" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_COMMAND_CONTROL</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_COMMAND_CONTROL</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda4ca79d92d9782cc380a98cbb40f9f116" kindref="member">NONTERM_COMMAND_CONTROL</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 46 (Ridici prikaz) (ptr): &lt;command&gt; =&gt; &lt;commandControl&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="291" column="24" bodyfile="src/production.c" bodystart="291" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1abcda87ed99c2efae13a6563bd8d230c6" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_THEN_BRANCH_BLOCK</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_THEN_BRANCH_BLOCK</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda17798dcee94f1a20a30115d86792d901" kindref="member">NONTERM_BLOCK</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddad5bdeb3cb0ff9817d7aa75b5eb376af0" kindref="member">NONTERM_OPTIONAL_ELSE</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 55 (Then vetev s blokem) (ptr): &lt;thenBranch&gt; =&gt; &lt;block&gt; &lt;optionalElse&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="297" column="24" bodyfile="src/production.c" bodystart="297" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a2a848d2109ad8723d60d588fbd3b8053" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_THEN_BRANCH_SIMPLE</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_THEN_BRANCH_SIMPLE</name>
+        <initializer>= {
+    .length = 2,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda0be5df54c703b0c14c1327199ddf4afa" kindref="member">NONTERM_COMMAND_SIMPLE</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda81816cdbe4fe045c7557136a8c578079" kindref="member">NONTERM_ELSE_OR_COMMAND_END</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 56 (Then vetev s prikazem) (ptr): &lt;thenBranch&gt; =&gt; &lt;commandSimple&gt; &lt;elseOrCommandEnd&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="308" column="24" bodyfile="src/production.c" bodystart="308" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a9144c950bed073e0f117b476af1e6da3" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_THEN_BRANCH_CONTROL</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_THEN_BRANCH_CONTROL</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda4ca79d92d9782cc380a98cbb40f9f116" kindref="member">NONTERM_COMMAND_CONTROL</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 57 (Then vetev s ridicim prikazem, bez else) (ptr): &lt;thenBranch&gt; =&gt; &lt;commandControl&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="319" column="24" bodyfile="src/production.c" bodystart="319" bodyend="322"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1ab777926960a8fa8c77f6734085a39492" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda43f6165f745d0553608324ee46ff0460" kindref="member">NONTERM_COMMAND_END</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 58 (Konec prikazu v then vetvi) (ptr): &lt;elseOrCommandEnd&gt; =&gt; &lt;commandEnd&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="325" column="24" bodyfile="src/production.c" bodystart="325" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1ad3b0b7a9ef6fff0db7943c8518a76253" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_RETURN_VALUE_EXPR</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_RETURN_VALUE_EXPR</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" kindref="member">NONTERM_EXPR</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 35 (Return vyrazu) (ptr): &lt;returnValue&gt; =&gt; &lt;expr&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="331" column="24" bodyfile="src/production.c" bodystart="331" bodyend="334"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a3526e871d180bda63626cd8f07ea9656" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_RETURN_VALUE_EMPTY</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_RETURN_VALUE_EMPTY</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 36 (Prazdny return): &lt;returnValue&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="337" column="24" bodyfile="src/production.c" bodystart="337" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a2ffd2dde705c583199b315257ff5af8c" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_GUARD_LIST_END</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_GUARD_LIST_END</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 42 (Konec strazi): &lt;guardList&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="340" column="24" bodyfile="src/production.c" bodystart="340" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a117c03d59f093c23590390d2a3b59956" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_BLOCK</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_BLOCK_OR_COMMAND_BLOCK</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dda17798dcee94f1a20a30115d86792d901" kindref="member">NONTERM_BLOCK</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 43 (Nasleduje blok) (ptr): &lt;blockOrCommand&gt; =&gt; &lt;block&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="343" column="24" bodyfile="src/production.c" bodystart="343" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a56b755281c55319c5dad39fe41fc8983" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_COMMAND</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_BLOCK_OR_COMMAND_COMMAND</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddaacbec80867dea79582134ab408527532" kindref="member">NONTERM_COMMAND</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 44 (Nasleduje prikaz) (ptr): &lt;blockOrCommand&gt; =&gt; &lt;command&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="349" column="24" bodyfile="src/production.c" bodystart="349" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1aab32edd9baebbc80588a1112129f78b5" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_OPTIONAL_ELSE_ABSENT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_OPTIONAL_ELSE_ABSENT</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 49 (Vynechana vetev else): &lt;optionalElse&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="355" column="24" bodyfile="src/production.c" bodystart="355" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a46e4a444d3f9c3ac35f6a6c9e801b084" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED</name>
+        <initializer>= {
+    .length = 5,
+    .production =
+        {
+            <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" kindref="member">TOKEN_EOL</ref>),
+            <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aa6daeeb50a89fd2ff9a9a273cba429c9" kindref="member">TOKEN_INDENT</ref>),
+            <ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" kindref="member">NONTERM_EXPR</ref>),
+            <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a6b0ab7cf8c0d1203475022b3d5600f85" kindref="member">TOKEN_EOL</ref>),
+            <ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921abe35698de6c054dd0906f4869678e5e5" kindref="member">TOKEN_DEDENT</ref>),
+        },
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 51 (Odsazeni vyrazu v ternarni podmince) (ptr): &lt;exprOrIndentExpr&gt; =&gt; EOL INDENT &lt;expr&gt; EOL DEDENT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="359" column="24" bodyfile="src/production.c" bodystart="359" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a1c33bd81975579744b87ed9d7f80cb15" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afbfe5e89e7c1c7bdbac169626c3c0847" kindref="member">GRAMMAR_NONTERMINAL</ref>(<ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381ddae36f5e3f17f0b172dfb6b562547992f6" kindref="member">NONTERM_EXPR</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Pravidlo 52 (Neodsazeny vyraz v ternarni podmince) (ptr): &lt;exprOrIndentExpr&gt; =&gt; &lt;expr&gt; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="372" column="24" bodyfile="src/production.c" bodystart="372" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a24d5784d91101cec5105e7f28603fd50" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_ELSE_TERNARY_IF_ABSENT</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_ELSE_TERNARY_IF_ABSENT</name>
+        <initializer>= {.length = 0}</initializer>
+        <briefdescription>
+<para>Pravidlo 54 (Nedokoncena vetev else): &lt;elseTernaryIf&gt; =&gt; epsilon. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="381" column="24" bodyfile="src/production.c" bodystart="381" bodyend="381"/>
+      </memberdef>
+      <memberdef kind="variable" id="production_8c_1a6fd2d5a90748180d8f2ecfb4229856b5" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref></type>
+        <definition>const StaticProduction PRODUCTION_TEST_EXPR_STAR</definition>
+        <argsstring></argsstring>
+        <name>PRODUCTION_TEST_EXPR_STAR</name>
+        <initializer>= {
+    .length = 1,
+    .production = {<ref refid="grammar__symbol_8h_1afc496bd86b0d9980f0284b7a37c3c62b" kindref="member">GRAMMAR_TERMINAL</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a1109083cbeff0c33b619eb9b3177940a" kindref="member">TOKEN_STAR</ref>)},
+}</initializer>
+        <briefdescription>
+<para>Testovaci pravidlo mimo gramatiku: &lt;expr&gt; =&gt; *. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.c" line="387" column="24" bodyfile="src/production.c" bodystart="387" bodyend="390"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/production.c"/>
+  </compounddef>
+</doxygen>

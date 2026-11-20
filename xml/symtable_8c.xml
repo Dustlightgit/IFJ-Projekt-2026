@@ -1,0 +1,818 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="symtable_8c" kind="file" language="C++">
+    <compoundname>symtable.c</compoundname>
+    <includes refid="symtable_8h" local="yes">symtable.h</includes>
+    <includes refid="memory_8h" local="yes">memory.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>memory.h</label>
+        <link refid="memory_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/symtable.c</label>
+        <link refid="symtable_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>symtable.h</label>
+        <link refid="symtable_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="6">
+        <label>stddef.h</label>
+      </node>
+      <node id="7">
+        <label>stdlib.h</label>
+      </node>
+      <node id="8">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structAvlNode" prot="public">AvlNode</innerclass>
+    <innerclass refid="structSymTable" prot="public">SymTable</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="symtable_8c_1ad6654c7efc6584763bd74388facce314" prot="public" static="no">
+        <name>GLOBAL_SCOPE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="16" column="9" bodyfile="src/symtable.c" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="symtable_8c_1ae5b9d74e685c1e07675aa1563ad01230" prot="public" static="no">
+        <name>INITIAL_SCOPE_CAPACITY</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="201" column="9" bodyfile="src/symtable.c" bodystart="201" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="symtable_8c_1a698597f7f079e134d83133b7f72f8967" prot="public" static="no">
+        <type>struct <ref refid="structAvlNode" kindref="compound">AvlNode</ref></type>
+        <definition>typedef struct AvlNode AvlNode</definition>
+        <argsstring></argsstring>
+        <name>AvlNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="28" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="symtable_8c_1a68a58e147f45ee938c7c5fbb9344e9b2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int key_cmp</definition>
+        <argsstring>(const char *name, int scope, const AvlNode *node)</argsstring>
+        <name>key_cmp</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scope</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="32" column="12" bodyfile="src/symtable.c" bodystart="32" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a0c5a55af282bbe4ed73e6c59bc9b8a51" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int height</definition>
+        <argsstring>(const AvlNode *node)</argsstring>
+        <name>height</name>
+        <param>
+          <type>const <ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="41" column="12" bodyfile="src/symtable.c" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a94f155fcce337a2b9d4719ed8042cbbe" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int max_int</definition>
+        <argsstring>(int a, int b)</argsstring>
+        <name>max_int</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="43" column="12" bodyfile="src/symtable.c" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1aabe4e411b307b118f6dffa170a18fbd5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void update_height</definition>
+        <argsstring>(AvlNode *node)</argsstring>
+        <name>update_height</name>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="46" column="13" bodyfile="src/symtable.c" bodystart="46" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a3b1955f95c2dad358eaf736dd09449fb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int balance_factor</definition>
+        <argsstring>(const AvlNode *node)</argsstring>
+        <name>balance_factor</name>
+        <param>
+          <type>const <ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="52" column="12" bodyfile="src/symtable.c" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a2051a8eb00490b2173763c3573c4045f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>static AvlNode * rotate_right</definition>
+        <argsstring>(AvlNode *root)</argsstring>
+        <name>rotate_right</name>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="62" column="16" bodyfile="src/symtable.c" bodystart="62" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a6945640e71284bc11a895fbeafd4cd57" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>static AvlNode * rotate_left</definition>
+        <argsstring>(AvlNode *root)</argsstring>
+        <name>rotate_left</name>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="79" column="16" bodyfile="src/symtable.c" bodystart="79" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a99904fdee4345529a0c57bc63e6dd58b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>static AvlNode * rebalance</definition>
+        <argsstring>(AvlNode *node)</argsstring>
+        <name>rebalance</name>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="95" column="16" bodyfile="src/symtable.c" bodystart="95" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a53153d3e49e0adc63bb6261863aa1af5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>static AvlNode * avl_insert</definition>
+        <argsstring>(AvlNode *root, AvlNode *new_node)</argsstring>
+        <name>avl_insert</name>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>new_node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="126" column="16" bodyfile="src/symtable.c" bodystart="126" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1ad32ece9e87fe9b32f31ecd1cfd8587c9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+        <definition>static AvlNode * avl_find</definition>
+        <argsstring>(AvlNode *root, const char *name, int scope)</argsstring>
+        <name>avl_find</name>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="144" column="16" bodyfile="src/symtable.c" bodystart="144" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a53c391b8d2794efbfde6d279234b95e9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void free_symbol</definition>
+        <argsstring>(Symbol *symbol)</argsstring>
+        <name>free_symbol</name>
+        <param>
+          <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+          <declname>symbol</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="164" column="13" bodyfile="src/symtable.c" bodystart="164" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1ac2174e8b3c6e4f64427d2e1fa746d535" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void avl_free</definition>
+        <argsstring>(AvlNode *node)</argsstring>
+        <name>avl_free</name>
+        <param>
+          <type><ref refid="structAvlNode" kindref="compound">AvlNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="186" column="13" bodyfile="src/symtable.c" bodystart="186" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a5a55dea77fc4d74c0e0b000b26b52b28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+        <definition>SymTable * symtable_new</definition>
+        <argsstring>(void)</argsstring>
+        <name>symtable_new</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Vytvori tabulku s jednim (globalnim) rozsahem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Ukazatel na novou tabulku. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="213" column="10" bodyfile="src/symtable.c" bodystart="213" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a985c441aea80ad28c5c6076e996907b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void symtable_free</definition>
+        <argsstring>(SymTable *table)</argsstring>
+        <name>symtable_free</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni tabulku a vsechny symboly, ktere obsahuje. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Akceptuje NULL.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka k uvolneni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="230" column="6" bodyfile="src/symtable.c" bodystart="230" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1ad1b39bb9d5eab3a56bc66957549cb9e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void symtable_enter_scope</definition>
+        <argsstring>(SymTable *table)</argsstring>
+        <name>symtable_enter_scope</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Otevre novy rozsah (vstup do bloku, funkce nebo tela cyklu). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="241" column="6" bodyfile="src/symtable.c" bodystart="241" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a1fb88c3a3dcafe5983e1f3bce2afa979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void symtable_exit_scope</definition>
+        <argsstring>(SymTable *table)</argsstring>
+        <name>symtable_exit_scope</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Zavre nejvnitrnejsi rozsah, jeho jmena prestanou byt videt. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Symboly se neuvolnuji, ukazatele na ne zustavaji platne.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="257" column="6" bodyfile="src/symtable.c" bodystart="257" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a23bda57eee04f1e4a581d88d0bb87722" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>Symbol * symtable_lookup_in_current_scope</definition>
+        <argsstring>(const SymTable *table, const char *name)</argsstring>
+        <name>symtable_lookup_in_current_scope</name>
+        <param>
+          <type>const <ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Najde symbol jen v aktualnim rozsahu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hledane jmeno. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nalezeny symbol, nebo NULL, kdyz tam neexistuje. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="270" column="8" bodyfile="src/symtable.c" bodystart="270" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a2ff105cd332eb0af6292d0f64c3438e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>Symbol * symtable_lookup</definition>
+        <argsstring>(const SymTable *table, const char *name)</argsstring>
+        <name>symtable_lookup</name>
+        <param>
+          <type>const <ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Najde symbol podle jmena od nejvnitrnejsiho rozsahu ven. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hledane jmeno. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nalezeny symbol, nebo NULL, kdyz neexistuje (chyba 3). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="279" column="8" bodyfile="src/symtable.c" bodystart="279" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a6249d3be73c6b86ecfd01cdb4bfd79e9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>static Symbol * insert_symbol</definition>
+        <argsstring>(SymTable *table, Symbol *symbol, int scope)</argsstring>
+        <name>insert_symbol</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="297" column="15" bodyfile="src/symtable.c" bodystart="297" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a031a3d6222aad4c0dd3aa356ca5b9cf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>Symbol * symtable_define_var</definition>
+        <argsstring>(SymTable *table, const char *name, const Type *type, bool is_mutable)</argsstring>
+        <name>symtable_define_var</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_mutable</declname>
+        </param>
+        <briefdescription>
+<para>Definuje promennou v aktualnim rozsahu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Promenne patri jen do lokalnich rozsahu, nikdy do globalniho. Jmeno i typ se zkopiruji.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno promenne. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ promenne (zkopiruje se). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>is_mutable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True pro var, false pro val a parametry. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy symbol, nebo NULL, kdyz jmeno v aktualnim rozsahu uz existuje (chyba 4). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="310" column="8" bodyfile="src/symtable.c" bodystart="310" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a8baee86c854a65f27ad5679527808940" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>Symbol * symtable_define_func</definition>
+        <argsstring>(SymTable *table, const char *name, FuncDef *def)</argsstring>
+        <name>symtable_define_func</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+<para>Definuje uzivatelskou funkci v globalnim rozsahu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Funkce se definuje do globalniho rozsahu bez ohledu na aktualni rozsah. Parametry a navratovy typ se opisou z definice, NULL return_type znamena neznamy. Volat pro vsechny funkce driv, nez se zacnou analyzovat jejich tela.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>def</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Definice funkce v AST (nevlastni). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy symbol, nebo NULL, kdyz funkce stejneho jmena uz existuje (chyba 4). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="332" column="8" bodyfile="src/symtable.c" bodystart="332" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a88e7df0b48295f4b46770506c727d721" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>Symbol * symtable_define_builtin</definition>
+        <argsstring>(SymTable *table, const char *name, int param_count, const Type *const *param_types, const Type *return_type)</argsstring>
+        <name>symtable_define_builtin</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>param_count</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *const *</type>
+          <declname>param_types</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>return_type</declname>
+        </param>
+        <briefdescription>
+<para>Definuje vestavenou funkci v globalnim rozsahu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Typy se zkopiruji. NULL prvek v param_types znamena parametr typu Any.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Jmeno funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>param_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pocet parametru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>param_types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pole typu parametru (zkopiruje se). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>return_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Navratovy typ (zkopiruje se). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Novy symbol, nebo NULL, kdyz funkce stejneho jmena uz existuje. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="367" column="8" bodyfile="src/symtable.c" bodystart="367" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a593400e4131bef575a9ba06ed8dfa3d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void symbol_set_return_type</definition>
+        <argsstring>(Symbol *symbol, const Type *type)</argsstring>
+        <name>symbol_set_return_type</name>
+        <param>
+          <type><ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Nastavi navratovy typ funkce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Novy typ se zkopiruje, puvodni typ se uvolni.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>symbol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> funkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Novy navratovy typ. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="407" column="6" bodyfile="src/symtable.c" bodystart="407" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="symtable_8c_1a7026497152b62b1ddcf3ecd01aebac7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void symtable_register_builtins</definition>
+        <argsstring>(SymTable *table)</argsstring>
+        <name>symtable_register_builtins</name>
+        <param>
+          <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Zaregistruje vsechny vestavene funkce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Registruje: print, readLine, readInt, readDouble, readBoolean, toStr, toInt, strLength, subStr, ord, chr.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tabulka symbolu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/symtable.c" line="422" column="6" bodyfile="src/symtable.c" bodystart="422" bodyend="468"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/symtable.c"/>
+  </compounddef>
+</doxygen>

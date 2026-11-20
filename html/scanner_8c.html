@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/scanner.c file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>scanner.c <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
+                <li><a href="#define-members">Defines</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structKeyword.html" class="m-doc">Keyword</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt id="a5d74787dedbc4e11c1ab15bf487e61f8">
+              <span class="m-doc-wrap-bumper">enum <a href="#a5d74787dedbc4e11c1ab15bf487e61f8" class="m-doc-self">State</a> { </span><span class="m-doc-wrap"><a href="#a5d74787dedbc4e11c1ab15bf487e61f8a1844f314039d713261df43a309145446" class="m-doc">STATE_START</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a4ee43fa807d5cf21c9c7c09dca543a31" class="m-doc">STATE_ASSIGN</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a006e0d031efafc9a4090885bb0a4f41c" class="m-doc">STATE_NOT</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8aadeb10440fb26d8f31d9de08fbed7846" class="m-doc">STATE_GREATER</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a1b0fb017716e122fc6025e81c34d104c" class="m-doc">STATE_PLUS</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a212e63d95e4f2e190ebdc2f061d87884" class="m-doc">STATE_AMPERSAND</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a5fb7e79aded19518bef06477f923f2e7" class="m-doc">STATE_PIPE</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8ab81b1aa81da3be3cb1a232f34241bc8b" class="m-doc">STATE_LESS</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a0d15cc14df5481149a1cb18245e81f84" class="m-doc">STATE_SLASH</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a792a3b49035cf7bd25659aeb87241190" class="m-doc">STATE_LINE_COMMENT</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8af945292230bd3cfe3c72961cf271c7db" class="m-doc">STATE_BLOCK_COMMENT</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a8c43b02ad4f995b1b47932494369a640" class="m-doc">STATE_BLOCK_SLASH</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a2d366667dd3d06c9c2cbbc82ee0fd265" class="m-doc">STATE_BLOCK_STAR</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8afc8df9b178ba8b45d7090e3a083363fa" class="m-doc">STATE_ID</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a0303a773c5ac4ecf942519d6e2f1a160" class="m-doc">STATE_INT</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8ae0614c921832f0200e1cd670db018d93" class="m-doc">STATE_INT_UNDERSCORE</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a237a1eca2b0d8a897edcc492456887a1" class="m-doc">STATE_DOT</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a827f0c56a09e5ab9b124b0e84556f4b1" class="m-doc">STATE_INT_DOT</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8adb8cf83503a0a137426a7bdaf6ee1f86" class="m-doc">STATE_FRAC</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a09b7cf9eb221e61f21a66b6405e16f80" class="m-doc">STATE_FRAC_UNDERSCORE</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a2359ae7432717bf6b90ec68410e1127f" class="m-doc">STATE_EXP_START</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a339ade39235e45a427f1bc69221efd59" class="m-doc">STATE_EXP_SIGN</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8ae99dc282a9a66b5ae4884fa6e214e0d0" class="m-doc">STATE_EXP</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a0d7fa6368e0eececf1c4c0c1bf971a12" class="m-doc">STATE_EXP_UNDERSCORE</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8afd4949461895b03bbb1200e0c349d818" class="m-doc">STATE_STRING</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a5067b1d743db85c137c946a67aa6e1a9" class="m-doc">STATE_STRING_ESCAPE</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a4264c868cb35e93f76ab4851c98b7484" class="m-doc">STATE_QUOTE</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8ab43eb682d9353ebadba83202e31a8e9c" class="m-doc">STATE_QUOTE2</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8a4d4783f4584458f1b5985ddbcec94398" class="m-doc">STATE_MULTI</a>,
+              <a href="#a5d74787dedbc4e11c1ab15bf487e61f8acfa1c6b40ba771d0c6d9a98793f28472" class="m-doc">STATE_AT</a> }</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a60c30b726bc8db486fe0a2832625356f">
+              <span class="m-doc-wrap-bumper">static void <a href="#a60c30b726bc8db486fe0a2832625356f" class="m-doc-self">buf_start</a>(</span><span class="m-doc-wrap">void)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1950520fff85f7078ba49448da7c683f">
+              <span class="m-doc-wrap-bumper">static void <a href="#a1950520fff85f7078ba49448da7c683f" class="m-doc-self">buf_release</a>(</span><span class="m-doc-wrap">void)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a34661f8436cfe1239ce0a61e643d2a3a">
+              <span class="m-doc-wrap-bumper">static void <a href="#a34661f8436cfe1239ce0a61e643d2a3a" class="m-doc-self">free_token_text</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* token)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae307f99bc34167a9d83a1f8e99e1c8a4">
+              <span class="m-doc-wrap-bumper">void <a href="#ae307f99bc34167a9d83a1f8e99e1c8a4" class="m-doc-self">scanner_cleanup</a>(</span><span class="m-doc-wrap">void)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab6a4c441ff65fe3a889d04a8ea940c0c">
+              <span class="m-doc-wrap-bumper">static auto <a href="#ab6a4c441ff65fe3a889d04a8ea940c0c" class="m-doc-self">is_alpha</a>(</span><span class="m-doc-wrap">int character) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a599076e297a6f10d92496cf4e8b12352">
+              <span class="m-doc-wrap-bumper">static auto <a href="#a599076e297a6f10d92496cf4e8b12352" class="m-doc-self">is_digit</a>(</span><span class="m-doc-wrap">int character) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4ae53a063476d1fbc729d99519c65efb">
+              <span class="m-doc-wrap-bumper">static auto <a href="#a4ae53a063476d1fbc729d99519c65efb" class="m-doc-self">next_char</a>(</span><span class="m-doc-wrap">void) -&gt; int</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad06e316696ef55794e223b9e0753061d">
+              <span class="m-doc-wrap-bumper">static void <a href="#ad06e316696ef55794e223b9e0753061d" class="m-doc-self">put_back</a>(</span><span class="m-doc-wrap">int character)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a54e98a8e4d3b0808badf4a6a087dd09d">
+              <span class="m-doc-wrap-bumper">static auto <a href="#a54e98a8e4d3b0808badf4a6a087dd09d" class="m-doc-self">single_char_type</a>(</span><span class="m-doc-wrap">int character,
+              <a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a>* type) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae6120006e4406a8670568f6d9ac39fb3">
+              <span class="m-doc-wrap-bumper">static auto <a href="#ae6120006e4406a8670568f6d9ac39fb3" class="m-doc-self">lookup_keyword</a>(</span><span class="m-doc-wrap">const char* word) -&gt; <a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a772af955db1c96434f04deb3ebc4780f">
+              <span class="m-doc-wrap-bumper">static void <a href="#a772af955db1c96434f04deb3ebc4780f" class="m-doc-self">finish_int</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* token,
+              <a href="structDString.html" class="m-doc">DString</a>* buffer)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a026e3fdf25c33a235b21ecdc7aa633d5">
+              <span class="m-doc-wrap-bumper">static void <a href="#a026e3fdf25c33a235b21ecdc7aa633d5" class="m-doc-self">finish_double</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* token,
+              <a href="structDString.html" class="m-doc">DString</a>* buffer)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae0deabf8648062a17d205a30e7baca68">
+              <span class="m-doc-wrap-bumper">static void <a href="#ae0deabf8648062a17d205a30e7baca68" class="m-doc-self">read_token</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* token)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4dc286585ce81c39765228eb7c7ed1cc">
+              <span class="m-doc-wrap-bumper">static void <a href="#a4dc286585ce81c39765228eb7c7ed1cc" class="m-doc-self">make_token</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* token,
+              <a href="token_8h.html#aa520fbf142ba1e7e659590c07da31921" class="m-doc">TokenType</a> type,
+              int token_line)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6f7d7d4c0be3459e7f17d77928ca63a2">
+              <span class="m-doc-wrap-bumper">static void <a href="#a6f7d7d4c0be3459e7f17d77928ca63a2" class="m-doc-self">apply_indent</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* token)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5d9e137df40bf99ef084fe4848d3d5f9">
+              <span class="m-doc-wrap-bumper">static void <a href="#a5d9e137df40bf99ef084fe4848d3d5f9" class="m-doc-self">flush_indent</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* token)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9f25c94c4af354e3996b5f0691005053" class="m-doc">get_token</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* t)</span>
+            </dt>
+            <dd>Precte dalsi token ze standardniho vstupu.</dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a147d0cecc85d0cf77386195384c07e31">
+              static int <a href="#a147d0cecc85d0cf77386195384c07e31" class="m-doc-self">pushback</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aeb73a6e94497a0021447ebad5eee352c">
+              static int <a href="#aeb73a6e94497a0021447ebad5eee352c" class="m-doc-self">pushback_count</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a41ebd28ef1d7c6ade45642cb6acc1039">
+              static int <a href="#a41ebd28ef1d7c6ade45642cb6acc1039" class="m-doc-self">line</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af2b180be70437a168b4d9ad7872cccd3">
+              static bool <a href="#af2b180be70437a168b4d9ad7872cccd3" class="m-doc-self">line_has_token</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a931a02e52cc8d96b0e353f0659c6ef7b">
+              static int <a href="#a931a02e52cc8d96b0e353f0659c6ef7b" class="m-doc-self">paren_depth</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af297cce2a6c1ef1967bffaf9503ff681">
+              static bool <a href="#af297cce2a6c1ef1967bffaf9503ff681" class="m-doc-self">pending_nl</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5d32854a401a57bde7ef810563735e9e">
+              static bool <a href="#a5d32854a401a57bde7ef810563735e9e" class="m-doc-self">after_newline_comment</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aeaf76160841175eb81ddd71c1ce5f2ce">
+              static bool <a href="#aeaf76160841175eb81ddd71c1ce5f2ce" class="m-doc-self">at_line_start</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="adc35f6ca17ff034e455e57f4b4534738">
+              static int <a href="#adc35f6ca17ff034e455e57f4b4534738" class="m-doc-self">indent_count</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a788fac370810bcf26af170a04785d67f">
+              static bool <a href="#a788fac370810bcf26af170a04785d67f" class="m-doc-self">indent_has_tab</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2c40f5594c5226ff61412c82ca521c83">
+              static <a href="structStack.html" class="m-doc">Stack</a> <a href="#a2c40f5594c5226ff61412c82ca521c83" class="m-doc-self">indent_stack</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa18a430754f2be3fbd46f9750e6e1ee0">
+              static bool <a href="#aa18a430754f2be3fbd46f9750e6e1ee0" class="m-doc-self">indent_ready</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab2f61239a02d5a1bcefc1bcc24b3b4c9">
+              static <a href="structToken.html" class="m-doc">Token</a> <a href="#ab2f61239a02d5a1bcefc1bcc24b3b4c9" class="m-doc-self">held_token</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8a031a5db56bea828aab6a13c7aaa06d">
+              static bool <a href="#a8a031a5db56bea828aab6a13c7aaa06d" class="m-doc-self">has_held</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a26949d8b40212ab769eb0aa42476411c">
+              static int <a href="#a26949d8b40212ab769eb0aa42476411c" class="m-doc-self">pending_dedents</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a717cf38349e4d18d8302b6410db5e800">
+              static int <a href="#a717cf38349e4d18d8302b6410db5e800" class="m-doc-self">logical_indent</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1c92fdfe12195912db8c8863adcc7e6d">
+              static bool <a href="#a1c92fdfe12195912db8c8863adcc7e6d" class="m-doc-self">pending_check</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a81c04cf87844963b7351fe163fa14607">
+              static <a href="structDString.html" class="m-doc">DString</a> <a href="#a81c04cf87844963b7351fe163fa14607" class="m-doc-self">buffer</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a13b12497d15bbfcd427d3da3a202e495">
+              static bool <a href="#a13b12497d15bbfcd427d3da3a202e495" class="m-doc-self">buffer_active</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a162a0e6c52794f353e28cf3cd8d2bc80">
+              static const <a href="structKeyword.html" class="m-doc">Keyword</a> <a href="#a162a0e6c52794f353e28cf3cd8d2bc80" class="m-doc-self">keywords</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt id="a2582c4e6850358df29c0f91a5379e0f4">
+              <span class="m-doc-wrap-bumper">#define <a href="#a2582c4e6850358df29c0f91a5379e0f4" class="m-doc-self">PUSHBACK_MAX</a></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9f25c94c4af354e3996b5f0691005053"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9f25c94c4af354e3996b5f0691005053" class="m-doc-self">get_token</a>(</span><span class="m-doc-wrap"><a href="structToken.html" class="m-doc">Token</a>* t)</span></span>
+            </h3>
+            <p>Precte dalsi token ze standardniho vstupu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">t</td>
+                  <td>Vystup, do ktereho se ulozi nacteny token.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

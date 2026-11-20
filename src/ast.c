@@ -11,59 +11,9 @@
 
 #include "ast.h"
 #include "error.h"
-
+#include "memory.h"
 #include <stdlib.h>
 #include <string.h>
-
-/* ----- Zacatek casti generovane AI (Claude) -----
- * Prompt: "Do ast.c potrebuju pomocne funkce pro praci s pameti, aby se
- * kontrola vysledku alokace nemusela opakovat v kazdem konstruktoru.
- * Napis xmalloc a xrealloc, ktere pri neuspechu ukonci program pres
- * error_exit s kodem ERR_INTERNAL. Dale xstrdup pro kopii retezce
- * a xstrdup_opt, ktera ponecha NULL jako NULL. Nakonec grow_array, ktera
- * zvetsi dynamicke pole o jedno misto a pro pole s ukazatelem NULL ho
- * vytvori."
- */
-
-// Alokuje pamet, pri neuspechu ukonci program s kodem interni chyby
-static void *xmalloc(size_t size) {
-  void *ptr = malloc(size);
-  if (ptr == NULL) {
-    error_exit(ERR_INTERNAL, 0, "Nedostatek pameti");
-  }
-  return ptr;
-}
-
-// Vytvori kopii retezce
-static char *xstrdup(const char *str) {
-  size_t len = strlen(str) + 1; // Delka retezce + nullovy znak
-  char *copy = xmalloc(len);
-
-  // Zkopiruju obsah retezce do nove pameti (vytvori se nezavisla kopie retezce)
-  memcpy(copy, str, len);
-  return copy;
-}
-
-// Vytvori kopii retezce, NULL zustane NULL (pro casti uzlu, ktere zatim nejsou znamy)
-static char *xstrdup_opt(const char *str) {
-  return str == NULL ? NULL : xstrdup(str);
-}
-
-// Zmeni velikost pameti, pri neuspechu ukonci program s kodem interni chyby
-static void *xrealloc(void *old, size_t size) {
-  void *ptr = realloc(old, size);
-  if (ptr == NULL) {
-    error_exit(ERR_INTERNAL, 0, "Nedostatek pameti");
-  }
-  return ptr;
-}
-
-// Zvetsi pole o jedno misto (pro prazdne pole s ukazatelem NULL ho vytvori)
-static void *grow_array(void *array, int count, size_t elem_size) {
-  return xrealloc(array, (size_t)(count + 1) * elem_size);
-}
-
-/* ----- Konec casti generovane AI ----- */
 
 //--------------------------------------------------------------------------------//
 

@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="reduction__table_8h" kind="file" language="C++">
+    <compoundname>reduction_table.h</compoundname>
+    <includes local="no">stddef.h</includes>
+    <includes refid="grammar__symbol_8h" local="yes">grammar_symbol.h</includes>
+    <includes refid="semantic__types_8h" local="yes">semantic_types.h</includes>
+    <includedby refid="precedence__helpers_8h" local="yes">src/precedence_helpers.h</includedby>
+    <includedby refid="precedence__parser_8c" local="yes">src/precedence_parser.c</includedby>
+    <includedby refid="reduction__table_8c" local="yes">src/reduction_table.c</includedby>
+    <incdepgraph>
+      <node id="8">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="1">
+        <label>src/reduction_table.h</label>
+        <link refid="reduction__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="2">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>src/precedence_helpers.c</label>
+        <link refid="precedence__helpers_8c"/>
+      </node>
+      <node id="2">
+        <label>src/precedence_helpers.h</label>
+        <link refid="precedence__helpers_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="5">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+      </node>
+      <node id="1">
+        <label>src/reduction_table.h</label>
+        <link refid="reduction__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structSearchHandle" prot="public">SearchHandle</innerclass>
+    <innerclass refid="structReductionTableEntry" prot="public">ReductionTableEntry</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="reduction__table_8h_1ace1908027768987d83798d3988af8965" prot="public" static="no">
+        <name>HANDLE_MAX_LENGTH</name>
+        <initializer>6</initializer>
+        <briefdescription>
+<para>Maximalni pocet symbolu v jednom handle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Nejdelsi handle vyrazove gramatiky ma 6 symbolu. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="76" column="9" bodyfile="src/reduction_table.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="reduction__table_8h_1ae2e43dbda92e5a0ec68d2ca644ccab40" prot="public" static="no">
+        <name>REDUCTION_TABLE_SIZE</name>
+        <initializer>43</initializer>
+        <briefdescription>
+<para>Pocet radku (pravidel) redukcni tabulky. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="103" column="9" bodyfile="src/reduction_table.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="reduction__table_8h_1a5b334d6c49308d981589063f4c1f8b62" prot="public" static="no" extern="yes" mutable="no">
+        <type>const <ref refid="structReductionTableEntry" kindref="compound">ReductionTableEntry</ref></type>
+        <definition>const ReductionTableEntry REDUCTION_TABLE[REDUCTION_TABLE_SIZE]</definition>
+        <argsstring>[REDUCTION_TABLE_SIZE]</argsstring>
+        <name>REDUCTION_TABLE</name>
+        <briefdescription>
+<para>Tabulka redukcnich pravidel vyrazove gramatiky. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Mapuje handle pravidla na jeho semantickou akci. Polozky jsou serazeny vzestupne podle delky handle (poradi neodpovida cislum pravidel), na jejich poradi se spoleha funkce reduction_table_lookup. Pripadne nevyuzite polozky s action NULL jsou az na konci tabulky. Tabulka obsahuje vsech 43 pravidel vyrazove gramatiky (E0 az E42), nevyuzite polozky tedy zatim zadne nejsou. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="124" column="34" bodyfile="src/reduction_table.c" bodystart="75" bodyend="225" declfile="src/reduction_table.h" declline="124" declcolumn="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="reduction__table_8h_1a0288903fa1ed8f1b1d838e26e748d15b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="semantic__types_8h_1a6ea4594c8b87bee8d9d968786952c01c" kindref="member">PrecedenceSemanticAction</ref></type>
+        <definition>PrecedenceSemanticAction reduction_table_lookup</definition>
+        <argsstring>(const SearchHandle *handle, int line)</argsstring>
+        <name>reduction_table_lookup</name>
+        <param>
+          <type>const <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref> *</type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vyhleda v redukcni tabulce pravidlo podle handle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Tabulka je serazena podle delky handle, funkce proto preskoci kratsi handle, porovna cely vyhledavany handle (delku i vsechny symboly) postupne se vsemi handle stejne delky a pri prvnim delsim handle vyhledavani konci. Delka vyhledavaneho handle musi byt v rozsahu 1 az HANDLE_MAX_LENGTH, jinak jde o internich chybu (ERR_INTERNAL). Pokud pravidlo neexistuje, program skonci syntaktickou chybou (ERR_SYNTAX) a na stderr vypise hledany handle.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vyhledavany handle, sestaveny jadrem ze symbolu zasobniku v prirozenem poradi (viz <ref refid="structSearchHandle" kindref="compound">SearchHandle</ref>), nesmi byt NULL. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku vstupniho tokenu pro chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Semanticka akce nalezeneho pravidla, nikdy NULL. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/reduction_table.h" line="178" column="26" bodyfile="src/reduction_table.c" bodystart="267" bodyend="298" declfile="src/reduction_table.h" declline="178" declcolumn="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/reduction_table.h"/>
+  </compounddef>
+</doxygen>

@@ -23,13 +23,11 @@
       </div>
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
         <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-12 m-col-m-none">
             <li><a href="annotated.html" id="m-navbar-current">Classes</a></li>
             <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
               <use href="#m-doc-search-icon-path" />
             </svg></a></li>
@@ -45,6 +43,35 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>Classes</h1>
         <ul class="m-doc">
+          <li>struct <a href="structAnnotatedSymbol.html" class="m-doc">AnnotatedSymbol</a> <span class="m-doc"><a href="structSymbol.html" class="m-doc">Symbol</a> gramatiky doplneny o semanticky ukazatel a kontextovou anotaci.</span></li>
+          <li>struct <a href="structAvlNode.html" class="m-doc">AvlNode</a> <span class="m-doc"><span></span></span></li>
+          <li>struct <a href="structBlock.html" class="m-doc">Block</a> <span class="m-doc">Blok: posloupnost prikazu.</span></li>
+          <li>struct <a href="structCtx.html" class="m-doc">Ctx</a> <span class="m-doc"><span></span></span></li>
+          <li>struct <a href="structDString.html" class="m-doc">DString</a> <span class="m-doc">Dynamicky retezec.</span></li>
+          <li>struct <a href="structExpr.html" class="m-doc">Expr</a> <span class="m-doc">Vyraz: spolecna struktura pro vsechny druhy vyrazu.</span></li>
+          <li>struct <a href="structFuncDef.html" class="m-doc">FuncDef</a> <span class="m-doc">Definice funkce.</span></li>
+          <li>struct <a href="structGen.html" class="m-doc">Gen</a> <span class="m-doc"><span></span></span></li>
+          <li>struct <a href="structGrammarSymbol.html" class="m-doc">GrammarSymbol</a> <span class="m-doc"><a href="structSymbol.html" class="m-doc">Symbol</a> gramatiky, terminal nebo neterminal.</span></li>
+          <li>struct <a href="structKeyword.html" class="m-doc">Keyword</a> <span class="m-doc"><span></span></span></li>
+          <li>struct <a href="structLiteral.html" class="m-doc">Literal</a> <span class="m-doc"><a href="structLiteral.html" class="m-doc">Literal</a>: druh a hodnota.</span></li>
+          <li>struct <a href="structLLTableEntry.html" class="m-doc">LLTableEntry</a> <span class="m-doc">Polozka LL tabulky.</span></li>
+          <li>struct <a href="structParam.html" class="m-doc">Param</a> <span class="m-doc">Parametr funkce, napr. n: Int.</span></li>
+          <li>struct <a href="structParserContext.html" class="m-doc">ParserContext</a> <span class="m-doc">Kontext sdileny mezi vsemi parsery.</span></li>
+          <li>struct <a href="structParserStackEntry.html" class="m-doc">ParserStackEntry</a> <span class="m-doc">Zaznam ulozeny na zasobniku parseru.</span></li>
+          <li>struct <a href="structProgram.html" class="m-doc">Program</a> <span class="m-doc">Cely program: seznam definic funkci.</span></li>
+          <li>struct <a href="structReductionTableEntry.html" class="m-doc">ReductionTableEntry</a> <span class="m-doc">Polozka redukcni tabulky, jedno pravidlo vyrazove gramatiky.</span></li>
+          <li>struct <a href="structRuntime.html" class="m-doc">Runtime</a> <span class="m-doc"><span></span></span></li>
+          <li>struct <a href="structSearchHandle.html" class="m-doc">SearchHandle</a> <span class="m-doc">Handle, vyhledavaci prvek tabulky redukcnich pravidel.</span></li>
+          <li>struct <a href="structSemanticContext.html" class="m-doc">SemanticContext</a> <span class="m-doc">Semanticky kontext sdileny mezi semantickymi akcemi.</span></li>
+          <li>struct <a href="structSimpleMember.html" class="m-doc">SimpleMember</a> <span class="m-doc"><span></span></span></li>
+          <li>struct <a href="structStack.html" class="m-doc">Stack</a> <span class="m-doc">Obecny zasobnik prvku pevne velikosti.</span></li>
+          <li>struct <a href="structStaticProduction.html" class="m-doc">StaticProduction</a> <span class="m-doc">Staticka produkce, prava strana pravidla ulozena primo ve strukture.</span></li>
+          <li>struct <a href="structStmt.html" class="m-doc">Stmt</a> <span class="m-doc">Prikaz: spolecna obalka pro vsechny druhy prikazu.</span></li>
+          <li>struct <a href="structSymbol.html" class="m-doc">Symbol</a> <span class="m-doc">Definice struktury <a href="structSymbol.html" class="m-doc">Symbol</a>.</span></li>
+          <li>struct <a href="structSymTable.html" class="m-doc">SymTable</a> <span class="m-doc"><span></span></span></li>
+          <li>struct <a href="structToken.html" class="m-doc">Token</a> <span class="m-doc"><a href="structToken.html" class="m-doc">Token</a> lexikalni analyzy.</span></li>
+          <li>union <a href="unionTokenAttribute.html" class="m-doc">TokenAttribute</a> <span class="m-doc">Hodnota tokenu, platny clen urcuje typ tokenu.</span></li>
+          <li>struct <a href="structType.html" class="m-doc">Type</a> <span class="m-doc">Typ: druh a u seznamu ukazatel na typ prvku.</span></li>
         </ul>
         <script>
         function toggle(e) {
@@ -81,17 +108,7 @@
           </form>
           <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
           <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+            <p>Search for files, structs, functions, or macros.</p>
           </div>
           <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
           <ul id="search-results"></ul>
@@ -106,7 +123,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.18.0 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

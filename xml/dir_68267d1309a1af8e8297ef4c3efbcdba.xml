@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>src</compoundname>
+    <innerfile refid="ast_8c">ast.c</innerfile>
+    <innerfile refid="ast_8h">ast.h</innerfile>
+    <innerfile refid="dstring_8c">dstring.c</innerfile>
+    <innerfile refid="dstring_8h">dstring.h</innerfile>
+    <innerfile refid="error_8c">error.c</innerfile>
+    <innerfile refid="error_8h">error.h</innerfile>
+    <innerfile refid="generator_8c">generator.c</innerfile>
+    <innerfile refid="generator_8h">generator.h</innerfile>
+    <innerfile refid="grammar__symbol_8h">grammar_symbol.h</innerfile>
+    <innerfile refid="LL__table_8c">LL_table.c</innerfile>
+    <innerfile refid="LL__table_8h">LL_table.h</innerfile>
+    <innerfile refid="main_8c">main.c</innerfile>
+    <innerfile refid="memory_8c">memory.c</innerfile>
+    <innerfile refid="memory_8h">memory.h</innerfile>
+    <innerfile refid="nonterminal_8c">nonterminal.c</innerfile>
+    <innerfile refid="nonterminal_8h">nonterminal.h</innerfile>
+    <innerfile refid="parser__common_8c">parser_common.c</innerfile>
+    <innerfile refid="parser__common_8h">parser_common.h</innerfile>
+    <innerfile refid="precedence__helpers_8c">precedence_helpers.c</innerfile>
+    <innerfile refid="precedence__helpers_8h">precedence_helpers.h</innerfile>
+    <innerfile refid="precedence__parser_8c">precedence_parser.c</innerfile>
+    <innerfile refid="precedence__parser_8h">precedence_parser.h</innerfile>
+    <innerfile refid="precedence__semantic__actions_8c">precedence_semantic_actions.c</innerfile>
+    <innerfile refid="precedence__semantic__actions_8h">precedence_semantic_actions.h</innerfile>
+    <innerfile refid="precedence__table_8c">precedence_table.c</innerfile>
+    <innerfile refid="precedence__table_8h">precedence_table.h</innerfile>
+    <innerfile refid="predictive__parser_8c">predictive_parser.c</innerfile>
+    <innerfile refid="predictive__parser_8h">predictive_parser.h</innerfile>
+    <innerfile refid="production_8c">production.c</innerfile>
+    <innerfile refid="production_8h">production.h</innerfile>
+    <innerfile refid="reduction__table_8c">reduction_table.c</innerfile>
+    <innerfile refid="reduction__table_8h">reduction_table.h</innerfile>
+    <innerfile refid="scanner_8c">scanner.c</innerfile>
+    <innerfile refid="scanner_8h">scanner.h</innerfile>
+    <innerfile refid="semantic_8c">semantic.c</innerfile>
+    <innerfile refid="semantic_8h">semantic.h</innerfile>
+    <innerfile refid="semantic__actions_8c">semantic_actions.c</innerfile>
+    <innerfile refid="semantic__actions_8h">semantic_actions.h</innerfile>
+    <innerfile refid="semantic__types_8h">semantic_types.h</innerfile>
+    <innerfile refid="special__actions_8c">special_actions.c</innerfile>
+    <innerfile refid="special__actions_8h">special_actions.h</innerfile>
+    <innerfile refid="stack_8c">stack.c</innerfile>
+    <innerfile refid="stack_8h">stack.h</innerfile>
+    <innerfile refid="symtable_8c">symtable.c</innerfile>
+    <innerfile refid="symtable_8h">symtable.h</innerfile>
+    <innerfile refid="token_8c">token.c</innerfile>
+    <innerfile refid="token_8h">token.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/"/>
+  </compounddef>
+</doxygen>

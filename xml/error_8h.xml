@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="error_8h" kind="file" language="C++">
+    <compoundname>error.h</compoundname>
+    <includedby refid="LL__table_8c" local="yes">src/LL_table.c</includedby>
+    <includedby refid="ast_8c" local="yes">src/ast.c</includedby>
+    <includedby refid="dstring_8c" local="yes">src/dstring.c</includedby>
+    <includedby refid="error_8c" local="yes">src/error.c</includedby>
+    <includedby refid="generator_8c" local="yes">src/generator.c</includedby>
+    <includedby refid="memory_8c" local="yes">src/memory.c</includedby>
+    <includedby refid="nonterminal_8c" local="yes">src/nonterminal.c</includedby>
+    <includedby refid="parser__common_8c" local="yes">src/parser_common.c</includedby>
+    <includedby refid="precedence__helpers_8c" local="yes">src/precedence_helpers.c</includedby>
+    <includedby refid="precedence__parser_8c" local="yes">src/precedence_parser.c</includedby>
+    <includedby refid="precedence__semantic__actions_8c" local="yes">src/precedence_semantic_actions.c</includedby>
+    <includedby refid="precedence__table_8c" local="yes">src/precedence_table.c</includedby>
+    <includedby refid="predictive__parser_8c" local="yes">src/predictive_parser.c</includedby>
+    <includedby refid="reduction__table_8c" local="yes">src/reduction_table.c</includedby>
+    <includedby refid="scanner_8c" local="yes">src/scanner.c</includedby>
+    <includedby refid="semantic_8c" local="yes">src/semantic.c</includedby>
+    <includedby refid="semantic__actions_8c" local="yes">src/semantic_actions.c</includedby>
+    <includedby refid="special__actions_8c" local="yes">src/special_actions.c</includedby>
+    <includedby refid="token_8c" local="yes">src/token.c</includedby>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/LL_table.c</label>
+        <link refid="LL__table_8c"/>
+      </node>
+      <node id="3">
+        <label>src/ast.c</label>
+        <link refid="ast_8c"/>
+      </node>
+      <node id="4">
+        <label>src/dstring.c</label>
+        <link refid="dstring_8c"/>
+      </node>
+      <node id="5">
+        <label>src/error.c</label>
+        <link refid="error_8c"/>
+      </node>
+      <node id="1">
+        <label>src/error.h</label>
+        <link refid="error_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/generator.c</label>
+        <link refid="generator_8c"/>
+      </node>
+      <node id="7">
+        <label>src/memory.c</label>
+        <link refid="memory_8c"/>
+      </node>
+      <node id="8">
+        <label>src/nonterminal.c</label>
+        <link refid="nonterminal_8c"/>
+      </node>
+      <node id="9">
+        <label>src/parser_common.c</label>
+        <link refid="parser__common_8c"/>
+      </node>
+      <node id="10">
+        <label>src/precedence_helpers.c</label>
+        <link refid="precedence__helpers_8c"/>
+      </node>
+      <node id="11">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="12">
+        <label>src/precedence_semantic_actions.c</label>
+        <link refid="precedence__semantic__actions_8c"/>
+      </node>
+      <node id="13">
+        <label>src/precedence_table.c</label>
+        <link refid="precedence__table_8c"/>
+      </node>
+      <node id="14">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+      <node id="15">
+        <label>src/reduction_table.c</label>
+        <link refid="reduction__table_8c"/>
+      </node>
+      <node id="16">
+        <label>src/scanner.c</label>
+        <link refid="scanner_8c"/>
+      </node>
+      <node id="17">
+        <label>src/semantic.c</label>
+        <link refid="semantic_8c"/>
+      </node>
+      <node id="18">
+        <label>src/semantic_actions.c</label>
+        <link refid="semantic__actions_8c"/>
+      </node>
+      <node id="19">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+      </node>
+      <node id="20">
+        <label>src/token.c</label>
+        <link refid="token_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="error_8h_1ac656b991da05ef1436a03449a22740ec" prot="public" static="no">
+        <name>ERR_LEXICAL</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="17" column="9" bodyfile="src/error.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1a8cefbf9955ed0faf4a10cd8ea4947451" prot="public" static="no">
+        <name>ERR_SYNTAX</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="18" column="9" bodyfile="src/error.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1a08a5c15f3c73ae5cc10a92f3b2ac3eef" prot="public" static="no">
+        <name>ERR_UNDEFINED</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="19" column="9" bodyfile="src/error.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1aa22325dafe2f2231dddc9e324ce24e02" prot="public" static="no">
+        <name>ERR_REDEFINED</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="20" column="9" bodyfile="src/error.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1a9aa009ef3b96c995c41a07a6f254d9c0" prot="public" static="no">
+        <name>ERR_ARGS</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="21" column="9" bodyfile="src/error.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1a9d7fd488d95e6c91df3e0e4b02516925" prot="public" static="no">
+        <name>ERR_TYPE</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="22" column="9" bodyfile="src/error.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1a614df24fd47df17f7f445c2b839484df" prot="public" static="no">
+        <name>ERR_IMMUTABLE</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="23" column="9" bodyfile="src/error.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1ab1ada44beec7674063cab7ed81cf5d36" prot="public" static="no">
+        <name>ERR_OTHER</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="24" column="9" bodyfile="src/error.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="error_8h_1a6084679069ce82f37778a3ed56860557" prot="public" static="no">
+        <name>ERR_INTERNAL</name>
+        <initializer>99</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="25" column="9" bodyfile="src/error.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="error_8h_1ada7db2c6ec96bfb0f21fd44478980d87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void error_exit</definition>
+        <argsstring>(int code, int line, const char *message)</argsstring>
+        <name>error_exit</name>
+        <param>
+          <type>int</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/error.h" line="29" column="6" bodyfile="src/error.c" bodystart="17" bodyend="23" declfile="src/error.h" declline="29" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/error.h"/>
+  </compounddef>
+</doxygen>

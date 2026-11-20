@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="special__actions_8c" kind="file" language="C++">
+    <compoundname>special_actions.c</compoundname>
+    <includes refid="special__actions_8h" local="yes">special_actions.h</includes>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="predictive__parser_8h" local="yes">predictive_parser.h</includes>
+    <includes refid="production_8h" local="yes">production.h</includes>
+    <includes refid="semantic__actions_8h" local="yes">semantic_actions.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <incdepgraph>
+      <node id="11">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="4">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="3">
+        <label>parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>semantic_actions.h</label>
+        <link refid="semantic__actions_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>special_actions.h</label>
+        <link refid="special__actions_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdbool.h</label>
+      </node>
+      <node id="9">
+        <label>stddef.h</label>
+      </node>
+      <node id="16">
+        <label>stdio.h</label>
+      </node>
+      <node id="17">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="special__actions_8c_1a5ceaf592faf752fc621a8a5730e7ccbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void special_action_id</definition>
+        <argsstring>(SemanticContext *ctx, void *semantic_pointer, ContextAnnotation annotation, const Token *token)</argsstring>
+        <name>special_action_id</name>
+        <param>
+          <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>Specialni akce pro token ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Jadro ji vola, kdyz je na vrcholu zasobniku terminal ID a na vstupu je take ID, a to pred porovnanim a uvolnenim tokenu funkci parser_match. Zpracuje tedy kazdy token ID vcetne jeho atributu. Obvykla akce bude podle anotace pripojit nazev ID k uzlu urcenemu ukazatelem (napr. nazev funkce nebo citace cyklu for), pripadne vytvorit uzel AST pro ID.</para>
+<para>Vzdy vypise informaci o potkanem ID na stderr. Podle anotace pak:<itemizedlist>
+<listitem><para>CONTEXT_ID_COMMAND: vytvori AST uzel pro ID (<ref refid="structExpr" kindref="compound">Expr</ref> typu EXPR_VARIABLE) a ulozi ukazatel na nej do ctx-&gt;id_expr, odkud ho vezme jadro parseru.</para>
+</listitem><listitem><para>ostatni anotace: zatim nic dalsiho (pozdeji nejspis interni chyba).</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky kontext, do nej se uklada vytvoreny AST uzel. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel ulozeny u symbolu ID na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u symbolu ID na zasobniku. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vstupni token ID ze scanneru. <ref refid="structToken" kindref="compound">Token</ref> po skonceni akce uvolni parser_match, akce proto musi text, ktery chce uchovat, zkopirovat. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/special_actions.c" line="45" column="6" bodyfile="src/special_actions.c" bodystart="45" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="special__actions_8c_1a4410a880d05afa97bcde194aab40de4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * special_action_precedence_preprocessing</definition>
+        <argsstring>(Token *input_token)</argsstring>
+        <name>special_action_precedence_preprocessing</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>input_token</declname>
+        </param>
+        <briefdescription>
+<para>Specialni akce predzpracovani vstupniho terminalu precedencniho parseru. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Jadro precedencniho parseru ji vola jednou pro kazdy vstupni token, a to po vyhodnoceni prediktoru (token je tedy pripadne uz prebarveny z TOKEN_ID na TOKEN_ID_OPERATOR) a pred jeho zpracovanim a uvolnenim. Atribut tokenu je tak zpracovan driv, nez ho parser_advance uvolni.</para>
+<para>Pro tokeny s atributem vytvori uzel AST a vrati ukazatel na nej:<itemizedlist>
+<listitem><para>TOKEN_ID a TOKEN_ID_OPERATOR: expr_new_variable (jmeno z atributu),</para>
+</listitem><listitem><para>TOKEN_INT_LIT: expr_new_int,</para>
+</listitem><listitem><para>TOKEN_DOUBLE_LIT: expr_new_double,</para>
+</listitem><listitem><para>TOKEN_STRING_LIT: expr_new_string. Pro ostatni tokeny vrati NULL.</para>
+</listitem></itemizedlist>
+</para>
+<para>Vraceny ukazatel jadro ulozi jako semanticky ukazatel terminalu na zasobniku precedencniho parseru, terminaly s atributem tedy na zasobniku jsou uz uzlem AST a semanticka akce redukce literalu nebo ID na E ukazatel pouze preda. Pokud se ID nebo ID_OPERATOR nakonec nepouzije jako listova promenna (napr. nazev volane funkce nebo ID pouzite jako infixovy operator), vezme se z uzlu jmeno, vytvori se skutecne potrebny uzel a pomocny uzel se uvolni. Tento zpusob umoznuje, aby atribut tokenu zustal uchovan v uzlu AST a nebylo ho treba nikam jinam kopirovat.</para>
+<para>Akce se neprovadi na pocatecnim terminalu, ktery prediktivni parser predava precedencnimu parseru (jadrova pravidla 32 a 33); u nej prediktivni parser predava uzel AST rovnou jako semanticky ukazatel.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input_token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vstupni token, nesmi byt NULL. <ref refid="structToken" kindref="compound">Token</ref> se nemeni, akce si text atributu predava funkci expr_new_*, token ho uvolni pozdeji parser_advance. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na vytvoreny uzel AST (<ref refid="structExpr" kindref="compound">Expr</ref> *), nebo NULL pro token bez atributu. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/special_actions.c" line="86" column="6" bodyfile="src/special_actions.c" bodystart="86" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="special__actions_8c_1ac34969b0a22907e07261fa43f342b6f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void special_action_expr</definition>
+        <argsstring>(void *ptr, ContextAnnotation annotation, Expr *expr, int line)</argsstring>
+        <name>special_action_expr</name>
+        <param>
+          <type>void *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Ulozi hotovy vyraz podle kontextove anotace. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vola ji vyrazovy parser po dokonceni vyrazu. Podle anotace vyraz ulozi na misto urcene ukazatelem (hodnota returnu, inicializace promenne, hodnota prirazeni, podminka cyklu while nebo if, zdroj nebo straz cyklu for). Pri ostatnich anotacich se vyraz prida jako samostatny prikaz do bloku ziskaneho funkci target_block. Drive ast_attach_expr v semantic_actions.*.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky ukazatel ulozeny u neterminalu, jehoz vyraz se uklada. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace ulozena u tohoto neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hotovy vyraz, funkce prebira jeho vlastnictvi. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku pro uzly AST a chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/special_actions.c" line="111" column="6" bodyfile="src/special_actions.c" bodystart="111" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="special__actions_8c_1ac00d2206245e474f44f05ea896ac3e55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void special_action_execute_expr_rule</definition>
+        <argsstring>(ParserContext *ctx, Stack *stack, const AnnotatedSymbol *top)</argsstring>
+        <name>special_action_execute_expr_rule</name>
+        <param>
+          <type><ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <briefdescription>
+<para>Specialni akce provedeni pravidla pro vstupni terminal, kterym smi zacinat vyraz. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Jadro ji vola, kdyz je na vstupu terminal, ktery neindexuje LL tabulku, ale muze jim zacinat vyraz. Tato situace je pri volani jiz overena, funkce vstupni terminal nijak nekontroluje. Podle neterminalu z vrcholu zasobniku vybere pravidlo, ktere se pro vyraz na vstupu pouzije, a provede ho vlozenim prave strany staticke produkce na zasobnik (zadne z vybranych pravidel nema semantickou akci). Neterminal musi byt v dobe volani uz odebrany ze zasobniku, jeho semanticky ukazatel a anotaci predava jadro v top a funkce je podle pravidla pro staticke produkce zkopiruje do vsech vlozenych symbolu.</para>
+<para>Mapovani neterminalu na pravidla gramatiky:<itemizedlist>
+<listitem><para>NONTERM_BLOCK_OR_EXPR: pravidlo 20,</para>
+</listitem><listitem><para>NONTERM_COMMAND: pravidlo 45,</para>
+</listitem><listitem><para>NONTERM_COMMAND_LIST: pravidlo 23,</para>
+</listitem><listitem><para>NONTERM_COMMAND_SIMPLE: pravidlo 30,</para>
+</listitem><listitem><para>NONTERM_RETURN_VALUE: pravidlo 35,</para>
+</listitem><listitem><para>NONTERM_BLOCK_OR_COMMAND: pravidlo 44,</para>
+</listitem><listitem><para>NONTERM_THEN_BRANCH: pravidlo 56,</para>
+</listitem><listitem><para>NONTERM_OPTIONAL_ELSE: pravidlo 49,</para>
+</listitem><listitem><para>NONTERM_EXPR_OR_INDENT_EXPR: pravidlo 52,</para>
+</listitem><listitem><para>NONTERM_ELSE_TERNARY_IF: pravidlo 54.</para>
+</listitem></itemizedlist>
+</para>
+<para>Pro jiny neterminal skonci program chybou ERR_SYNTAX s hlasenim &quot;LL Parser:
+Neni mozne zvolit pravidlo.&quot;.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spolecny kontext parseru, z nej se bere cislo radku pro chybu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik prediktivniho parseru, na nej se vklada produkce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Neterminal odebrany z vrcholu zasobniku spolu s jeho semantickym ukazatelem a kontextovou anotaci. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/special_actions.c" line="146" column="6" bodyfile="src/special_actions.c" bodystart="146" bodyend="208"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/special_actions.c"/>
+  </compounddef>
+</doxygen>

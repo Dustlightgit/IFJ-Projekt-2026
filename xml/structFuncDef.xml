@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structFuncDef" kind="struct" language="C++" prot="public">
+    <compoundname>FuncDef</compoundname>
+    <includes refid="ast_8h" local="no">ast.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structFuncDef_1a22bb8da44388e6cc85b94db69a2f4c30" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* FuncDef::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>FuncDef::name</qualifiedname>
+        <briefdescription>
+<para>Jmeno funkce, vlastni kopie. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="265" column="8" bodyfile="src/ast.h" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFuncDef_1a26e6bba5d1e440f5dd6f414eb5189a3d" prot="public" static="no" mutable="no">
+        <type><ref refid="structParam" kindref="compound">Param</ref> *</type>
+        <definition>Param* FuncDef::params</definition>
+        <argsstring></argsstring>
+        <name>params</name>
+        <qualifiedname>FuncDef::params</qualifiedname>
+        <briefdescription>
+<para>Pole parametru. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="266" column="9" bodyfile="src/ast.h" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFuncDef_1ae443d1595a8127a1997a06f5d8db9a25" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int FuncDef::param_count</definition>
+        <argsstring></argsstring>
+        <name>param_count</name>
+        <qualifiedname>FuncDef::param_count</qualifiedname>
+        <briefdescription>
+<para>Pocet parametru, muze byt 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="267" column="7" bodyfile="src/ast.h" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFuncDef_1a8102a2f9df3d25a9103cf109d2a7edfd" prot="public" static="no" mutable="no">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type* FuncDef::return_type</definition>
+        <argsstring></argsstring>
+        <name>return_type</name>
+        <qualifiedname>FuncDef::return_type</qualifiedname>
+        <briefdescription>
+<para>Navratovy typ, NULL kdyz ho programator nenapsal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="268" column="8" bodyfile="src/ast.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFuncDef_1a908121ba3edbe2620e93208021f90692" prot="public" static="no" mutable="no">
+        <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+        <definition>Block* FuncDef::body</definition>
+        <argsstring></argsstring>
+        <name>body</name>
+        <qualifiedname>FuncDef::body</qualifiedname>
+        <briefdescription>
+<para>Telo funkce. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="269" column="9" bodyfile="src/ast.h" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFuncDef_1a5842f3deccaf3f1d0e0abd6fce215dbf" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool FuncDef::is_main</definition>
+        <argsstring></argsstring>
+        <name>is_main</name>
+        <qualifiedname>FuncDef::is_main</qualifiedname>
+        <briefdescription>
+<para>True pro funkci s anotaci @main. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="270" column="8" bodyfile="src/ast.h" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFuncDef_1a3077b91f9f39a402226041d8e369bec5" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int FuncDef::line</definition>
+        <argsstring></argsstring>
+        <name>line</name>
+        <qualifiedname>FuncDef::line</qualifiedname>
+        <briefdescription>
+<para>Radek ve zdrojovem kodu pro chybova hlaseni. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="271" column="7" bodyfile="src/ast.h" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFuncDef_1ab9872b9252da0e3edefdf685e1490377" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>struct Symbol* FuncDef::symbol</definition>
+        <argsstring></argsstring>
+        <name>symbol</name>
+        <qualifiedname>FuncDef::symbol</qualifiedname>
+        <briefdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> z tabulky symbolu (nevlastni), vyplni semantika. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="273" column="1" bodyfile="src/ast.h" bodystart="272" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Definice funkce. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="2">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/ast.h" line="264" column="1" bodyfile="src/ast.h" bodystart="264" bodyend="274"/>
+    <listofallmembers>
+      <member refid="structFuncDef_1a908121ba3edbe2620e93208021f90692" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>body</name></member>
+      <member refid="structFuncDef_1a5842f3deccaf3f1d0e0abd6fce215dbf" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>is_main</name></member>
+      <member refid="structFuncDef_1a3077b91f9f39a402226041d8e369bec5" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>line</name></member>
+      <member refid="structFuncDef_1a22bb8da44388e6cc85b94db69a2f4c30" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>name</name></member>
+      <member refid="structFuncDef_1ae443d1595a8127a1997a06f5d8db9a25" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>param_count</name></member>
+      <member refid="structFuncDef_1a26e6bba5d1e440f5dd6f414eb5189a3d" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>params</name></member>
+      <member refid="structFuncDef_1a8102a2f9df3d25a9103cf109d2a7edfd" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>return_type</name></member>
+      <member refid="structFuncDef_1ab9872b9252da0e3edefdf685e1490377" prot="public" virt="non-virtual"><scope>FuncDef</scope><name>symbol</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

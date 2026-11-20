@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSemanticContext" kind="struct" language="C++" prot="public">
+    <compoundname>SemanticContext</compoundname>
+    <includes refid="semantic__types_8h" local="no">semantic_types.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSemanticContext_1a6ad6703fe0671cb68716043edd333493" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int SemanticContext::temp</definition>
+        <argsstring></argsstring>
+        <name>temp</name>
+        <qualifiedname>SemanticContext::temp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Prozatim bez vyznamu </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="251" column="7" bodyfile="src/semantic_types.h" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSemanticContext_1a2b5ef83b8a06d0f576f9d6d8cea9a39d" prot="public" static="no" mutable="no">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr* SemanticContext::id_expr</definition>
+        <argsstring></argsstring>
+        <name>id_expr</name>
+        <qualifiedname>SemanticContext::id_expr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>AST uzel ID na zacatku prikazu (vytvari ho special_action_id pri anotaci CONTEXT_ID_COMMAND, zpracuje a uvolni jadro parseru). NULL, pokud zadny takovy uzel prave neexistuje. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="255" column="8" bodyfile="src/semantic_types.h" bodystart="255" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Semanticky kontext sdileny mezi semantickymi akcemi. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Obsahuje vse, co si jednotlive akce potrebuji udrzovat mezi sebou, pokud nejake takove informace budou. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="8">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="7">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SemanticContext</label>
+        <link refid="structSemanticContext"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>id_expr</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/semantic_types.h" line="250" column="1" bodyfile="src/semantic_types.h" bodystart="250" bodyend="256"/>
+    <listofallmembers>
+      <member refid="structSemanticContext_1a2b5ef83b8a06d0f576f9d6d8cea9a39d" prot="public" virt="non-virtual"><scope>SemanticContext</scope><name>id_expr</name></member>
+      <member refid="structSemanticContext_1a6ad6703fe0671cb68716043edd333493" prot="public" virt="non-virtual"><scope>SemanticContext</scope><name>temp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

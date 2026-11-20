@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="predictive__parser_8h" kind="file" language="C++">
+    <compoundname>predictive_parser.h</compoundname>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="parser__common_8h" local="yes">parser_common.h</includes>
+    <includedby refid="main_8c" local="yes">src/main.c</includedby>
+    <includedby refid="predictive__parser_8c" local="yes">src/predictive_parser.c</includedby>
+    <includedby refid="special__actions_8c" local="yes">src/special_actions.c</includedby>
+    <incdepgraph>
+      <node id="10">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="3">
+        <label>parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdbool.h</label>
+      </node>
+      <node id="8">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+      <node id="3">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+      <node id="1">
+        <label>src/predictive_parser.h</label>
+        <link refid="predictive__parser_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/special_actions.c</label>
+        <link refid="special__actions_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="predictive__parser_8h_1acb8d7dfad93b2cfeeaa1d721ff92131f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void parser_match</definition>
+        <argsstring>(ParserContext *ctx, Stack *stack)</argsstring>
+        <name>parser_match</name>
+        <param>
+          <type><ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Porovnani vstupniho tokenu s vrcholem zasobniku. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri shode jsou vstupni token i vrchol spotrebovany. Pri odlisnosti je vyvolana chyba 2.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spolecny context parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/predictive_parser.h" line="34" column="6" bodyfile="src/predictive_parser.c" bodystart="51" bodyend="96" declfile="src/predictive_parser.h" declline="34" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="predictive__parser_8h_1a5243753d069c3bc708dccdfc6f3dee84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void parser_push_static_production</definition>
+        <argsstring>(Stack *stack, const StaticProduction *production, void *semantic_pointer, ContextAnnotation annotation)</argsstring>
+        <name>parser_push_static_production</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStaticProduction" kindref="compound">StaticProduction</ref> *</type>
+          <declname>production</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <param>
+          <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+          <declname>annotation</declname>
+        </param>
+        <briefdescription>
+<para>Vlozi symboly staticke produkce na zasobnik parseru. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Symboly se vkladaji od posledniho, aby byl na vrcholu prvni symbol produkce. Semanticky ukazatel i kontextova anotace se zkopiruji do vsech vlozenych symbolu, vzdy, bez vyjimky. Pro produkci delky 0 se nic nevlozi.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>production</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Staticka produkce, nesmi byt NULL. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky ukazatel rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>annotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontextova anotace rozvadeneho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/predictive_parser.h" line="54" column="6" bodyfile="src/predictive_parser.c" bodystart="416" bodyend="427" declfile="src/predictive_parser.h" declline="54" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="predictive__parser_8h_1a3f0e62c4439b2b3c9911d346bef2378e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void predictive_parser</definition>
+        <argsstring>(ParserContext *ctx, NonterminalType starting_nonterm, void *semantic_pointer)</argsstring>
+        <name>predictive_parser</name>
+        <param>
+          <type><ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+          <declname>starting_nonterm</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <briefdescription>
+<para>Jadro prediktivniho parseru rizeneho LL tabulkou. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Funkce si vytvori vlastni zasobnik, takze se muze rekurzivne volat. Vstupni proud je sdileny pres ctx a ctx musi mit nacteny prvni token (viz parser_context_init). Pri chybe ukonci program pres error_exit.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spolecny kontext parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>starting_nonterm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pocatecni neterminal, ktery se bude rozvadet. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky ukazatel pocatecniho neterminalu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/predictive_parser.h" line="70" column="6" bodyfile="src/predictive_parser.c" bodystart="429" bodyend="593" declfile="src/predictive_parser.h" declline="70" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/predictive_parser.h"/>
+  </compounddef>
+</doxygen>

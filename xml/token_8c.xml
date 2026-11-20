@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="token_8c" kind="file" language="C++">
+    <compoundname>token.c</compoundname>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="1">
+        <label>src/token.c</label>
+        <link refid="token_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="5">
+        <label>stdlib.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="token_8c_1a4ad4786141f0747550700e5d174c302f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * token_type_name</definition>
+        <argsstring>(TokenType type)</argsstring>
+        <name>token_type_name</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Vrati citelny nazev typu tokenu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pouziva se pro ladici vypisy a chybova hlaseni.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ tokenu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Retezec s nazvem typu, pro tokeny bez nazvu &quot;?&quot;. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.c" line="34" column="12" bodyfile="src/token.c" bodystart="34" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="token_8c_1a2e80c4219a24cd05c46e8d079ca7ccd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void token_free</definition>
+        <argsstring>(Token *t)</argsstring>
+        <name>token_free</name>
+        <param>
+          <type><ref refid="structToken" kindref="compound">Token</ref> *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni pamet, kterou token vlastni, a token zneplatni. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uvolnuje se jen text u TOKEN_ID, TOKEN_ID_OPERATOR a TOKEN_STRING_LIT.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structToken" kindref="compound">Token</ref>, jehoz pamet se uvolni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.c" line="156" column="6" bodyfile="src/token.c" bodystart="156" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="token_8c_1a8cb811e15754a2e13f86b7b4fa87d7d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void token_type_validate</definition>
+        <argsstring>(TokenType type, int line)</argsstring>
+        <name>token_type_validate</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Overi, ze typ tokenu je skutecny token. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri neplatne hodnote ukonci program s kodem ERR_INTERNAL. Neplatne jsou specialni hodnoty (TOKEN_LL_TERM_COUNT, TOKEN_EXPRESSION_BEGINNING_DELIMITER, TOKEN_EXPR_TERM_DELIMITER, TOKEN_COUNT) a hodnoty mimo enum. Funkce tokeny dale neklasifikuje, tedy nezjistuje, ktere tabulce slouzi jako indexator.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Overovany typ tokenu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku pro chybove hlaseni, &lt;= 0 pokud neni znam. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.c" line="163" column="6" bodyfile="src/token.c" bodystart="163" bodyend="169"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/token.c"/>
+  </compounddef>
+</doxygen>

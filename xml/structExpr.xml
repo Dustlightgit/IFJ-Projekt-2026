@@ -1,0 +1,739 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structExpr" kind="struct" language="C++" prot="public">
+    <compoundname>Expr</compoundname>
+    <includes refid="ast_8h" local="no">ast.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structExpr_1a4dae4106d7415b5ceb0c14d6409ace20" prot="public" static="no" mutable="no">
+        <type><ref refid="ast_8h_1a6bec3a2f37359f29ba8881edc58f44d2" kindref="member">ExprKind</ref></type>
+        <definition>ExprKind Expr::kind</definition>
+        <argsstring></argsstring>
+        <name>kind</name>
+        <qualifiedname>Expr::kind</qualifiedname>
+        <briefdescription>
+<para>Urcuje, kterou polozku z as cist. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="125" column="12" bodyfile="src/ast.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1aeefdd8f3b7582a4aa29f257da8d96358" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Expr::line</definition>
+        <argsstring></argsstring>
+        <name>line</name>
+        <qualifiedname>Expr::line</qualifiedname>
+        <briefdescription>
+<para>Radek ve zdrojovem kodu pro chybova hlaseni. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="126" column="7" bodyfile="src/ast.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a27426e8e949667eff11d1ec0515670f4" prot="public" static="no" mutable="no">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type* Expr::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>Expr::type</qualifiedname>
+        <briefdescription>
+<para>Typ vyrazu, vyplni semanticka analyza (parser nastavi NULL). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="127" column="8" bodyfile="src/ast.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a900e553c2d2ac4d106924505b05c952e" prot="public" static="no" mutable="no">
+        <type><ref refid="structLiteral" kindref="compound">Literal</ref></type>
+        <definition>Literal Expr::literal</definition>
+        <argsstring></argsstring>
+        <name>literal</name>
+        <qualifiedname>Expr::literal</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_LITERAL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="129" column="13" bodyfile="src/ast.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a0532a8a226b03ea0197c044a2cd0fbed" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Expr::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>Expr::name</qualifiedname>
+        <briefdescription>
+<para>Jmeno promenne, vlastni kopie. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Jmeno clenu, napr. toInt, vlastni kopie.</para>
+<para>Jmeno volane funkce, vlastni kopie. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="131" column="12" bodyfile="src/ast.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a370958c31edfca15393eca0ce2727f14" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>struct Symbol* Expr::symbol</definition>
+        <argsstring></argsstring>
+        <name>symbol</name>
+        <qualifiedname>Expr::symbol</qualifiedname>
+        <briefdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> z tabulky symbolu (nevlastni), vyplni semanticka analyza. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> z tabulky symbolu (nevlastni), vyplni semantika. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="133" column="11" bodyfile="src/ast.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a32541526c1c80929a71e2dba67bae7e6" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::variable</definition>
+        <argsstring></argsstring>
+        <name>variable</name>
+        <qualifiedname>Expr::variable</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_VARIABLE. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="134" column="20"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1af4b50699bc4d7dcca8a8b7968c4d4c2b" prot="public" static="no" mutable="no">
+        <type><ref refid="ast_8h_1ac0e6f7f17047750fd114b6634912dca4" kindref="member">UnaryOp</ref></type>
+        <definition>UnaryOp Expr::op</definition>
+        <argsstring></argsstring>
+        <name>op</name>
+        <qualifiedname>Expr::op</qualifiedname>
+        <briefdescription>
+<para>Ktery operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="136" column="15" bodyfile="src/ast.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a5ccafcde07083c71ffb2bce4e45ea855" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::operand</definition>
+        <argsstring></argsstring>
+        <name>operand</name>
+        <qualifiedname>Expr::operand</qualifiedname>
+        <briefdescription>
+<para>Vyraz, na ktery se operator pouzije. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="137" column="17" bodyfile="src/ast.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1ad70404dd6290e117984cbfd08e9a4c90" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::unary</definition>
+        <argsstring></argsstring>
+        <name>unary</name>
+        <qualifiedname>Expr::unary</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_UNARY. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="138" column="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a4dd98e3b6b7ec0c2f3fbfdf39961e521" prot="public" static="no" mutable="no">
+        <type><ref refid="ast_8h_1a751965739ae765593a89b5fd608d480c" kindref="member">BinaryOp</ref></type>
+        <definition>BinaryOp Expr::op</definition>
+        <argsstring></argsstring>
+        <name>op</name>
+        <qualifiedname>Expr::op</qualifiedname>
+        <briefdescription>
+<para>Ktery operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="140" column="16" bodyfile="src/ast.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a145a9627f267a999016d90f1a6b20161" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::left</definition>
+        <argsstring></argsstring>
+        <name>left</name>
+        <qualifiedname>Expr::left</qualifiedname>
+        <briefdescription>
+<para>Levy operand. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="141" column="17" bodyfile="src/ast.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1acb9b8d1998794dd570227ddb53a53f86" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::right</definition>
+        <argsstring></argsstring>
+        <name>right</name>
+        <qualifiedname>Expr::right</qualifiedname>
+        <briefdescription>
+<para>Pravy operand. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="142" column="17" bodyfile="src/ast.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a63b228d0789911924392c1dfb9b10b9e" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::binary</definition>
+        <argsstring></argsstring>
+        <name>binary</name>
+        <qualifiedname>Expr::binary</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_BINARY. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="143" column="30"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a9c10872209b8d0c9d039a13f38acf72b" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> **</type>
+        <definition>struct Expr** Expr::args</definition>
+        <argsstring></argsstring>
+        <name>args</name>
+        <qualifiedname>Expr::args</qualifiedname>
+        <briefdescription>
+<para>Pole ukazatelu na argumenty. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Argumenty, NULL kdyz zadne nejsou. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="146" column="17" bodyfile="src/ast.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1ac861d262c11173fccc1d27cc73a53a48" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Expr::arg_count</definition>
+        <argsstring></argsstring>
+        <name>arg_count</name>
+        <qualifiedname>Expr::arg_count</qualifiedname>
+        <briefdescription>
+<para>Pocet argumentu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pocet argumentu, muze byt 0. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="147" column="11" bodyfile="src/ast.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a57f98fe659de5e30b596ade66904dad3" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::call</definition>
+        <argsstring></argsstring>
+        <name>call</name>
+        <qualifiedname>Expr::call</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_CALL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="150" column="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1adced7b83d425e0e10a232a452e18769f" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::cond</definition>
+        <argsstring></argsstring>
+        <name>cond</name>
+        <qualifiedname>Expr::cond</qualifiedname>
+        <briefdescription>
+<para>Podminka. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="152" column="17" bodyfile="src/ast.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1afae8ef180ed5f475db164429a332d0f6" prot="public" static="no" mutable="no">
+        <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+        <definition>Block* Expr::then_block</definition>
+        <argsstring></argsstring>
+        <name>then_block</name>
+        <qualifiedname>Expr::then_block</qualifiedname>
+        <briefdescription>
+<para>Vetev then. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="153" column="13" bodyfile="src/ast.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1ae4cce9c54c2d1eb1fc5f8a7ed143ea7a" prot="public" static="no" mutable="no">
+        <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+        <definition>Block* Expr::else_block</definition>
+        <argsstring></argsstring>
+        <name>else_block</name>
+        <qualifiedname>Expr::else_block</qualifiedname>
+        <briefdescription>
+<para>Vetev else, NULL kdyz chybi. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="154" column="13" bodyfile="src/ast.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1aa84c33e2b5f83efdc1f293975425d457" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::if_expr</definition>
+        <argsstring></argsstring>
+        <name>if_expr</name>
+        <qualifiedname>Expr::if_expr</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_IF. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="155" column="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a54ba8619e0677179f2388b557a2a805c" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::from</definition>
+        <argsstring></argsstring>
+        <name>from</name>
+        <qualifiedname>Expr::from</qualifiedname>
+        <briefdescription>
+<para>Zacatek rozsahu. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="157" column="17" bodyfile="src/ast.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a78a18272db09954a47bd2829a11deacb" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::to</definition>
+        <argsstring></argsstring>
+        <name>to</name>
+        <qualifiedname>Expr::to</qualifiedname>
+        <briefdescription>
+<para>Konec rozsahu. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="158" column="17" bodyfile="src/ast.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a2a0bd06ab7d847f3b211280f84b93378" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Expr::is_inclusive</definition>
+        <argsstring></argsstring>
+        <name>is_inclusive</name>
+        <qualifiedname>Expr::is_inclusive</qualifiedname>
+        <briefdescription>
+<para>True pro to, false pro until. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="159" column="12" bodyfile="src/ast.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a221a354b3868b4e7c100f1a991a0535b" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::step</definition>
+        <argsstring></argsstring>
+        <name>step</name>
+        <qualifiedname>Expr::step</qualifiedname>
+        <briefdescription>
+<para>Krok (by), NULL kdyz chybi. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Krok, NULL kdyz chybi. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="160" column="17" bodyfile="src/ast.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1adb24cf835a07a99a7c725c0c9bddda7a" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::range</definition>
+        <argsstring></argsstring>
+        <name>range</name>
+        <qualifiedname>Expr::range</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_RANGE. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="161" column="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1af1a3ba32e2659fd818efaacd9d90ff8b" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::object</definition>
+        <argsstring></argsstring>
+        <name>object</name>
+        <qualifiedname>Expr::object</qualifiedname>
+        <briefdescription>
+<para>Hodnota, na ktere se clen vola. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="163" column="17" bodyfile="src/ast.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a3e2e1aeb6a33d3044f6e7fdb0763210f" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::member</definition>
+        <argsstring></argsstring>
+        <name>member</name>
+        <qualifiedname>Expr::member</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_MEMBER. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="167" column="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a0df953191f5ce7b3fef99ba725301913" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> **</type>
+        <definition>struct Expr** Expr::items</definition>
+        <argsstring></argsstring>
+        <name>items</name>
+        <qualifiedname>Expr::items</qualifiedname>
+        <briefdescription>
+<para>Prvky seznamu, NULL pro prazdny seznam. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="169" column="17" bodyfile="src/ast.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a5586737a3dccd32d54a62e5a85d9b0e0" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Expr::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>Expr::count</qualifiedname>
+        <briefdescription>
+<para>Pocet prvku, muze byt 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="170" column="11" bodyfile="src/ast.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1aa3d898bc7a37cf2d74c1325a14c501c3" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::list_literal</definition>
+        <argsstring></argsstring>
+        <name>list_literal</name>
+        <qualifiedname>Expr::list_literal</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_LIST_LITERAL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="171" column="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1aee6ceb2d5f830a7a1538e32203af1b7f" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::start</definition>
+        <argsstring></argsstring>
+        <name>start</name>
+        <qualifiedname>Expr::start</qualifiedname>
+        <briefdescription>
+<para>Prvni cislo. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="173" column="17" bodyfile="src/ast.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1ae521ba5df1a83b256623a927674c66bc" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::end</definition>
+        <argsstring></argsstring>
+        <name>end</name>
+        <qualifiedname>Expr::end</qualifiedname>
+        <briefdescription>
+<para>Konec, bez nej. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="174" column="17" bodyfile="src/ast.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a0e456b24dfb79eeb800dad9ddc9476ce" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::list_range</definition>
+        <argsstring></argsstring>
+        <name>list_range</name>
+        <qualifiedname>Expr::list_range</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_LIST_RANGE. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="176" column="30"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a6d3b50fa6d1e6ac1a40a2d02b609c653" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::list</definition>
+        <argsstring></argsstring>
+        <name>list</name>
+        <qualifiedname>Expr::list</qualifiedname>
+        <briefdescription>
+<para>Seznam, ze ktereho se cte. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="178" column="17" bodyfile="src/ast.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a805579b48ab85e52a0421c5506fd7ea9" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>struct Expr* Expr::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>Expr::index</qualifiedname>
+        <briefdescription>
+<para>Index prvku. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="179" column="17" bodyfile="src/ast.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1a2e54b65f6aeed880edc1fbe6b62349ac" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>struct Expr Expr::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>Expr::index</qualifiedname>
+        <briefdescription>
+<para>Pro EXPR_INDEX. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="180" column="30"/>
+      </memberdef>
+      <memberdef kind="variable" id="structExpr_1acbb1a83f7300f5e37d673af3d943d68f" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structExpr" kindref="compound">Expr</ref></type>
+        <definition>union Expr Expr::as</definition>
+        <argsstring></argsstring>
+        <name>as</name>
+        <qualifiedname>Expr::as</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="181" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Vyraz: spolecna struktura pro vsechny druhy vyrazu. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="7">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="6">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/ast.h" line="124" column="1" bodyfile="src/ast.h" bodystart="124" bodyend="182"/>
+    <listofallmembers>
+      <member refid="structExpr_1ac861d262c11173fccc1d27cc73a53a48" prot="public" virt="non-virtual"><scope>Expr</scope><name>arg_count</name></member>
+      <member refid="structExpr_1a9c10872209b8d0c9d039a13f38acf72b" prot="public" virt="non-virtual"><scope>Expr</scope><name>args</name></member>
+      <member refid="structExpr_1acbb1a83f7300f5e37d673af3d943d68f" prot="public" virt="non-virtual"><scope>Expr</scope><name>as</name></member>
+      <member refid="structExpr_1a63b228d0789911924392c1dfb9b10b9e" prot="public" virt="non-virtual"><scope>Expr</scope><name>binary</name></member>
+      <member refid="structExpr_1a57f98fe659de5e30b596ade66904dad3" prot="public" virt="non-virtual"><scope>Expr</scope><name>call</name></member>
+      <member refid="structExpr_1adced7b83d425e0e10a232a452e18769f" prot="public" virt="non-virtual"><scope>Expr</scope><name>cond</name></member>
+      <member refid="structExpr_1a5586737a3dccd32d54a62e5a85d9b0e0" prot="public" virt="non-virtual"><scope>Expr</scope><name>count</name></member>
+      <member refid="structExpr_1ae4cce9c54c2d1eb1fc5f8a7ed143ea7a" prot="public" virt="non-virtual"><scope>Expr</scope><name>else_block</name></member>
+      <member refid="structExpr_1ae521ba5df1a83b256623a927674c66bc" prot="public" virt="non-virtual"><scope>Expr</scope><name>end</name></member>
+      <member refid="structExpr_1a54ba8619e0677179f2388b557a2a805c" prot="public" virt="non-virtual"><scope>Expr</scope><name>from</name></member>
+      <member refid="structExpr_1aa84c33e2b5f83efdc1f293975425d457" prot="public" virt="non-virtual"><scope>Expr</scope><name>if_expr</name></member>
+      <member refid="structExpr_1a805579b48ab85e52a0421c5506fd7ea9" prot="public" virt="non-virtual"><scope>Expr</scope><name>index</name></member>
+      <member refid="structExpr_1a2e54b65f6aeed880edc1fbe6b62349ac" prot="public" virt="non-virtual"><scope>Expr</scope><name>index</name></member>
+      <member refid="structExpr_1a2a0bd06ab7d847f3b211280f84b93378" prot="public" virt="non-virtual"><scope>Expr</scope><name>is_inclusive</name></member>
+      <member refid="structExpr_1a0df953191f5ce7b3fef99ba725301913" prot="public" virt="non-virtual"><scope>Expr</scope><name>items</name></member>
+      <member refid="structExpr_1a4dae4106d7415b5ceb0c14d6409ace20" prot="public" virt="non-virtual"><scope>Expr</scope><name>kind</name></member>
+      <member refid="structExpr_1a145a9627f267a999016d90f1a6b20161" prot="public" virt="non-virtual"><scope>Expr</scope><name>left</name></member>
+      <member refid="structExpr_1aeefdd8f3b7582a4aa29f257da8d96358" prot="public" virt="non-virtual"><scope>Expr</scope><name>line</name></member>
+      <member refid="structExpr_1a6d3b50fa6d1e6ac1a40a2d02b609c653" prot="public" virt="non-virtual"><scope>Expr</scope><name>list</name></member>
+      <member refid="structExpr_1aa3d898bc7a37cf2d74c1325a14c501c3" prot="public" virt="non-virtual"><scope>Expr</scope><name>list_literal</name></member>
+      <member refid="structExpr_1a0e456b24dfb79eeb800dad9ddc9476ce" prot="public" virt="non-virtual"><scope>Expr</scope><name>list_range</name></member>
+      <member refid="structExpr_1a900e553c2d2ac4d106924505b05c952e" prot="public" virt="non-virtual"><scope>Expr</scope><name>literal</name></member>
+      <member refid="structExpr_1a3e2e1aeb6a33d3044f6e7fdb0763210f" prot="public" virt="non-virtual"><scope>Expr</scope><name>member</name></member>
+      <member refid="structExpr_1a0532a8a226b03ea0197c044a2cd0fbed" prot="public" virt="non-virtual"><scope>Expr</scope><name>name</name></member>
+      <member refid="structExpr_1af1a3ba32e2659fd818efaacd9d90ff8b" prot="public" virt="non-virtual"><scope>Expr</scope><name>object</name></member>
+      <member refid="structExpr_1af4b50699bc4d7dcca8a8b7968c4d4c2b" prot="public" virt="non-virtual"><scope>Expr</scope><name>op</name></member>
+      <member refid="structExpr_1a4dd98e3b6b7ec0c2f3fbfdf39961e521" prot="public" virt="non-virtual"><scope>Expr</scope><name>op</name></member>
+      <member refid="structExpr_1a5ccafcde07083c71ffb2bce4e45ea855" prot="public" virt="non-virtual"><scope>Expr</scope><name>operand</name></member>
+      <member refid="structExpr_1adb24cf835a07a99a7c725c0c9bddda7a" prot="public" virt="non-virtual"><scope>Expr</scope><name>range</name></member>
+      <member refid="structExpr_1acb9b8d1998794dd570227ddb53a53f86" prot="public" virt="non-virtual"><scope>Expr</scope><name>right</name></member>
+      <member refid="structExpr_1aee6ceb2d5f830a7a1538e32203af1b7f" prot="public" virt="non-virtual"><scope>Expr</scope><name>start</name></member>
+      <member refid="structExpr_1a221a354b3868b4e7c100f1a991a0535b" prot="public" virt="non-virtual"><scope>Expr</scope><name>step</name></member>
+      <member refid="structExpr_1a370958c31edfca15393eca0ce2727f14" prot="public" virt="non-virtual"><scope>Expr</scope><name>symbol</name></member>
+      <member refid="structExpr_1afae8ef180ed5f475db164429a332d0f6" prot="public" virt="non-virtual"><scope>Expr</scope><name>then_block</name></member>
+      <member refid="structExpr_1a78a18272db09954a47bd2829a11deacb" prot="public" virt="non-virtual"><scope>Expr</scope><name>to</name></member>
+      <member refid="structExpr_1a27426e8e949667eff11d1ec0515670f4" prot="public" virt="non-virtual"><scope>Expr</scope><name>type</name></member>
+      <member refid="structExpr_1ad70404dd6290e117984cbfd08e9a4c90" prot="public" virt="non-virtual"><scope>Expr</scope><name>unary</name></member>
+      <member refid="structExpr_1a32541526c1c80929a71e2dba67bae7e6" prot="public" virt="non-virtual"><scope>Expr</scope><name>variable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

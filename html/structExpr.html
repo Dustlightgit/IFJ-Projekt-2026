@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Expr struct | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Expr <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ast_8h.html">&lt;src/ast.h&gt;</a></div>
+        </h1>
+        <p>Vyraz: spolecna struktura pro vsechny druhy vyrazu.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a4dae4106d7415b5ceb0c14d6409ace20">
+              <a href="ast_8h.html#a6bec3a2f37359f29ba8881edc58f44d2" class="m-doc">ExprKind</a> <a href="#a4dae4106d7415b5ceb0c14d6409ace20" class="m-doc-self">kind</a>
+            </dt>
+            <dd>Urcuje, kterou polozku z as cist.</dd>
+            <dt id="aeefdd8f3b7582a4aa29f257da8d96358">
+              int <a href="#aeefdd8f3b7582a4aa29f257da8d96358" class="m-doc-self">line</a>
+            </dt>
+            <dd>Radek ve zdrojovem kodu pro chybova hlaseni.</dd>
+            <dt id="a27426e8e949667eff11d1ec0515670f4">
+              <a href="structType.html" class="m-doc">Type</a>* <a href="#a27426e8e949667eff11d1ec0515670f4" class="m-doc-self">type</a>
+            </dt>
+            <dd>Typ vyrazu, vyplni semanticka analyza (parser nastavi NULL).</dd>
+            <dt id="a900e553c2d2ac4d106924505b05c952e">
+              <a href="structLiteral.html" class="m-doc">Literal</a> <a href="#a900e553c2d2ac4d106924505b05c952e" class="m-doc-self">literal</a>
+            </dt>
+            <dd>Pro EXPR_LITERAL.</dd>
+            <dt>
+              char* <a href="#a0532a8a226b03ea0197c044a2cd0fbed" class="m-doc">name</a>
+            </dt>
+            <dd>Jmeno promenne, vlastni kopie.</dd>
+            <dt>
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a>* <a href="#a370958c31edfca15393eca0ce2727f14" class="m-doc">symbol</a>
+            </dt>
+            <dd><a href="structSymbol.html" class="m-doc">Symbol</a> z tabulky symbolu (nevlastni), vyplni semanticka analyza.</dd>
+            <dt id="a32541526c1c80929a71e2dba67bae7e6">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#a32541526c1c80929a71e2dba67bae7e6" class="m-doc-self">variable</a>
+            </dt>
+            <dd>Pro EXPR_VARIABLE.</dd>
+            <dt id="af4b50699bc4d7dcca8a8b7968c4d4c2b">
+              <a href="ast_8h.html#ac0e6f7f17047750fd114b6634912dca4" class="m-doc">UnaryOp</a> <a href="#af4b50699bc4d7dcca8a8b7968c4d4c2b" class="m-doc-self">op</a>
+            </dt>
+            <dd>Ktery operator.</dd>
+            <dt id="a5ccafcde07083c71ffb2bce4e45ea855">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a5ccafcde07083c71ffb2bce4e45ea855" class="m-doc-self">operand</a>
+            </dt>
+            <dd>Vyraz, na ktery se operator pouzije.</dd>
+            <dt id="ad70404dd6290e117984cbfd08e9a4c90">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#ad70404dd6290e117984cbfd08e9a4c90" class="m-doc-self">unary</a>
+            </dt>
+            <dd>Pro EXPR_UNARY.</dd>
+            <dt id="a4dd98e3b6b7ec0c2f3fbfdf39961e521">
+              <a href="ast_8h.html#a751965739ae765593a89b5fd608d480c" class="m-doc">BinaryOp</a> <a href="#a4dd98e3b6b7ec0c2f3fbfdf39961e521" class="m-doc-self">op</a>
+            </dt>
+            <dd>Ktery operator.</dd>
+            <dt id="a145a9627f267a999016d90f1a6b20161">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a145a9627f267a999016d90f1a6b20161" class="m-doc-self">left</a>
+            </dt>
+            <dd>Levy operand.</dd>
+            <dt id="acb9b8d1998794dd570227ddb53a53f86">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#acb9b8d1998794dd570227ddb53a53f86" class="m-doc-self">right</a>
+            </dt>
+            <dd>Pravy operand.</dd>
+            <dt id="a63b228d0789911924392c1dfb9b10b9e">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#a63b228d0789911924392c1dfb9b10b9e" class="m-doc-self">binary</a>
+            </dt>
+            <dd>Pro EXPR_BINARY.</dd>
+            <dt>
+              struct <a href="structExpr.html" class="m-doc">Expr</a>** <a href="#a9c10872209b8d0c9d039a13f38acf72b" class="m-doc">args</a>
+            </dt>
+            <dd>Pole ukazatelu na argumenty.</dd>
+            <dt>
+              int <a href="#ac861d262c11173fccc1d27cc73a53a48" class="m-doc">arg_count</a>
+            </dt>
+            <dd>Pocet argumentu.</dd>
+            <dt id="a57f98fe659de5e30b596ade66904dad3">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#a57f98fe659de5e30b596ade66904dad3" class="m-doc-self">call</a>
+            </dt>
+            <dd>Pro EXPR_CALL.</dd>
+            <dt id="adced7b83d425e0e10a232a452e18769f">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#adced7b83d425e0e10a232a452e18769f" class="m-doc-self">cond</a>
+            </dt>
+            <dd>Podminka.</dd>
+            <dt id="afae8ef180ed5f475db164429a332d0f6">
+              <a href="structBlock.html" class="m-doc">Block</a>* <a href="#afae8ef180ed5f475db164429a332d0f6" class="m-doc-self">then_block</a>
+            </dt>
+            <dd>Vetev then.</dd>
+            <dt id="ae4cce9c54c2d1eb1fc5f8a7ed143ea7a">
+              <a href="structBlock.html" class="m-doc">Block</a>* <a href="#ae4cce9c54c2d1eb1fc5f8a7ed143ea7a" class="m-doc-self">else_block</a>
+            </dt>
+            <dd>Vetev else, NULL kdyz chybi.</dd>
+            <dt id="aa84c33e2b5f83efdc1f293975425d457">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#aa84c33e2b5f83efdc1f293975425d457" class="m-doc-self">if_expr</a>
+            </dt>
+            <dd>Pro EXPR_IF.</dd>
+            <dt id="a54ba8619e0677179f2388b557a2a805c">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a54ba8619e0677179f2388b557a2a805c" class="m-doc-self">from</a>
+            </dt>
+            <dd>Zacatek rozsahu.</dd>
+            <dt id="a78a18272db09954a47bd2829a11deacb">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a78a18272db09954a47bd2829a11deacb" class="m-doc-self">to</a>
+            </dt>
+            <dd>Konec rozsahu.</dd>
+            <dt id="a2a0bd06ab7d847f3b211280f84b93378">
+              bool <a href="#a2a0bd06ab7d847f3b211280f84b93378" class="m-doc-self">is_inclusive</a>
+            </dt>
+            <dd>True pro to, false pro until.</dd>
+            <dt>
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a221a354b3868b4e7c100f1a991a0535b" class="m-doc">step</a>
+            </dt>
+            <dd>Krok (by), NULL kdyz chybi.</dd>
+            <dt id="adb24cf835a07a99a7c725c0c9bddda7a">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#adb24cf835a07a99a7c725c0c9bddda7a" class="m-doc-self">range</a>
+            </dt>
+            <dd>Pro EXPR_RANGE.</dd>
+            <dt id="af1a3ba32e2659fd818efaacd9d90ff8b">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#af1a3ba32e2659fd818efaacd9d90ff8b" class="m-doc-self">object</a>
+            </dt>
+            <dd>Hodnota, na ktere se clen vola.</dd>
+            <dt id="a3e2e1aeb6a33d3044f6e7fdb0763210f">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#a3e2e1aeb6a33d3044f6e7fdb0763210f" class="m-doc-self">member</a>
+            </dt>
+            <dd>Pro EXPR_MEMBER.</dd>
+            <dt id="a0df953191f5ce7b3fef99ba725301913">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>** <a href="#a0df953191f5ce7b3fef99ba725301913" class="m-doc-self">items</a>
+            </dt>
+            <dd>Prvky seznamu, NULL pro prazdny seznam.</dd>
+            <dt id="a5586737a3dccd32d54a62e5a85d9b0e0">
+              int <a href="#a5586737a3dccd32d54a62e5a85d9b0e0" class="m-doc-self">count</a>
+            </dt>
+            <dd>Pocet prvku, muze byt 0.</dd>
+            <dt id="aa3d898bc7a37cf2d74c1325a14c501c3">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#aa3d898bc7a37cf2d74c1325a14c501c3" class="m-doc-self">list_literal</a>
+            </dt>
+            <dd>Pro EXPR_LIST_LITERAL.</dd>
+            <dt id="aee6ceb2d5f830a7a1538e32203af1b7f">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#aee6ceb2d5f830a7a1538e32203af1b7f" class="m-doc-self">start</a>
+            </dt>
+            <dd>Prvni cislo.</dd>
+            <dt id="ae521ba5df1a83b256623a927674c66bc">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#ae521ba5df1a83b256623a927674c66bc" class="m-doc-self">end</a>
+            </dt>
+            <dd>Konec, bez nej.</dd>
+            <dt id="a0e456b24dfb79eeb800dad9ddc9476ce">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#a0e456b24dfb79eeb800dad9ddc9476ce" class="m-doc-self">list_range</a>
+            </dt>
+            <dd>Pro EXPR_LIST_RANGE.</dd>
+            <dt id="a6d3b50fa6d1e6ac1a40a2d02b609c653">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a6d3b50fa6d1e6ac1a40a2d02b609c653" class="m-doc-self">list</a>
+            </dt>
+            <dd>Seznam, ze ktereho se cte.</dd>
+            <dt id="a805579b48ab85e52a0421c5506fd7ea9">
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a805579b48ab85e52a0421c5506fd7ea9" class="m-doc-self">index</a>
+            </dt>
+            <dd>Index prvku.</dd>
+            <dt id="a2e54b65f6aeed880edc1fbe6b62349ac">
+              struct <a href="structExpr.html" class="m-doc">Expr</a> <a href="#a2e54b65f6aeed880edc1fbe6b62349ac" class="m-doc-self">index</a>
+            </dt>
+            <dd>Pro EXPR_INDEX.</dd>
+            <dt id="acbb1a83f7300f5e37d673af3d943d68f">
+              union <a href="structExpr.html" class="m-doc">Expr</a> <a href="#acbb1a83f7300f5e37d673af3d943d68f" class="m-doc-self">as</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a0532a8a226b03ea0197c044a2cd0fbed"><div>
+            <h3>
+              char* Expr::<wbr /><a href="#a0532a8a226b03ea0197c044a2cd0fbed" class="m-doc-self">name</a>
+            </h3>
+            <p>Jmeno promenne, vlastni kopie.</p>
+<p>Jmeno clenu, napr. toInt, vlastni kopie.</p><p>Jmeno volane funkce, vlastni kopie.</p>
+          </div></section>
+          <section class="m-doc-details" id="a370958c31edfca15393eca0ce2727f14"><div>
+            <h3>
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a>* Expr::<wbr /><a href="#a370958c31edfca15393eca0ce2727f14" class="m-doc-self">symbol</a>
+            </h3>
+            <p><a href="structSymbol.html" class="m-doc">Symbol</a> z tabulky symbolu (nevlastni), vyplni semanticka analyza.</p>
+<p><a href="structSymbol.html" class="m-doc">Symbol</a> z tabulky symbolu (nevlastni), vyplni semantika.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9c10872209b8d0c9d039a13f38acf72b"><div>
+            <h3>
+              struct <a href="structExpr.html" class="m-doc">Expr</a>** Expr::<wbr /><a href="#a9c10872209b8d0c9d039a13f38acf72b" class="m-doc-self">args</a>
+            </h3>
+            <p>Pole ukazatelu na argumenty.</p>
+<p>Argumenty, NULL kdyz zadne nejsou.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac861d262c11173fccc1d27cc73a53a48"><div>
+            <h3>
+              int Expr::<wbr /><a href="#ac861d262c11173fccc1d27cc73a53a48" class="m-doc-self">arg_count</a>
+            </h3>
+            <p>Pocet argumentu.</p>
+<p>Pocet argumentu, muze byt 0.</p>
+          </div></section>
+          <section class="m-doc-details" id="a221a354b3868b4e7c100f1a991a0535b"><div>
+            <h3>
+              struct <a href="structExpr.html" class="m-doc">Expr</a>* Expr::<wbr /><a href="#a221a354b3868b4e7c100f1a991a0535b" class="m-doc-self">step</a>
+            </h3>
+            <p>Krok (by), NULL kdyz chybi.</p>
+<p>Krok, NULL kdyz chybi.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structBlock" kind="struct" language="C++" prot="public">
+    <compoundname>Block</compoundname>
+    <includes refid="ast_8h" local="no">ast.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structBlock_1aea5b7b4791d24ba63cb9dc5bc6b5a777" prot="public" static="no" mutable="no">
+        <type><ref refid="structStmt" kindref="compound">Stmt</ref> **</type>
+        <definition>Stmt** Block::items</definition>
+        <argsstring></argsstring>
+        <name>items</name>
+        <qualifiedname>Block::items</qualifiedname>
+        <briefdescription>
+<para>Pole ukazatelu na prikazy. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="190" column="8" bodyfile="src/ast.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structBlock_1a0ff964160890b77194a8e178a0f1ee4f" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Block::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>Block::count</qualifiedname>
+        <briefdescription>
+<para>Pocet prikazu v bloku. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="191" column="7" bodyfile="src/ast.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Blok: posloupnost prikazu. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="8">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/ast.h" line="189" column="1" bodyfile="src/ast.h" bodystart="189" bodyend="192"/>
+    <listofallmembers>
+      <member refid="structBlock_1a0ff964160890b77194a8e178a0f1ee4f" prot="public" virt="non-virtual"><scope>Block</scope><name>count</name></member>
+      <member refid="structBlock_1aea5b7b4791d24ba63cb9dc5bc6b5a777" prot="public" virt="non-virtual"><scope>Block</scope><name>items</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

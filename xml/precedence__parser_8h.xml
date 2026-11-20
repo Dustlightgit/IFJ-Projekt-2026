@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="precedence__parser_8h" kind="file" language="C++">
+    <compoundname>precedence_parser.h</compoundname>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="parser__common_8h" local="yes">parser_common.h</includes>
+    <includes refid="semantic__types_8h" local="yes">semantic_types.h</includes>
+    <includes refid="stack_8h" local="yes">stack.h</includes>
+    <includedby refid="precedence__parser_8c" local="yes">src/precedence_parser.c</includedby>
+    <includedby refid="predictive__parser_8c" local="yes">src/predictive_parser.c</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="4">
+        <label>parser_common.h</label>
+        <link refid="parser__common_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/precedence_parser.h</label>
+        <link refid="precedence__parser_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="9">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="1">
+        <label>src/precedence_parser.h</label>
+        <link refid="precedence__parser_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="precedence__parser_8h_1aee046f420b634553ee092daba2c4f334" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void parser_execute_reduction</definition>
+        <argsstring>(const ParserContext *ctx, Stack *stack)</argsstring>
+        <name>parser_execute_reduction</name>
+        <param>
+          <type>const <ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <briefdescription>
+<para>Provede redukci na zasobniku precedencniho parseru. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Vola se, kdyz precedencni tabulka prikazala provest redukci. Funkce:<orderedlist>
+<listitem><para>Sestavi handle ze zasobniku (parser_build_handle).</para>
+</listitem><listitem><para>Vyhleda v redukcni tabulce semantickou akci (reduction_table_lookup).</para>
+</listitem><listitem><para>Zavola akci, handle je v tu chvili jeste na zasobniku. Akce vrati pres <ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> symbol, semanticky ukazatel a anotaci noveho zaznamu.</para>
+</listitem><listitem><para>Vyklidi handle ze zasobniku (tolikrat parser_stack_pop, kolik je delka handle).</para>
+</listitem><listitem><para>Smaze znacku redukce ze zaznamu na vrcholu, protoze redukce, kterou ohranicovala, byla provedena.</para>
+</listitem><listitem><para>Vlozi na zasobnik zaznam s redukovanym neterminalem a informacemi od akce, bez znacky redukce.</para>
+</listitem></orderedlist>
+</para>
+<para>Chyby handle a vyhledani resi volane funkce (ERR_SYNTAX pri prilis dlouhem handle nebo neexistujicim pravidle). Pokud akce nevrati neterminal, jde o internich chybu (ERR_INTERNAL).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kontext parseru, pouziva se z nej cislo radku vstupniho tokenu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik precedencniho parseru. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_parser.h" line="91" column="6" bodyfile="src/precedence_parser.c" bodystart="52" bodyend="84" declfile="src/precedence_parser.h" declline="91" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__parser_8h_1a282745102431f859867f4185c663f3fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool parser_execute_directive</definition>
+        <argsstring>(ParserContext *ctx, Stack *stack, bool use_specified_terminal, TokenType terminal, void *semantic_pointer)</argsstring>
+        <name>parser_execute_directive</name>
+        <param>
+          <type><ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_specified_terminal</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>semantic_pointer</declname>
+        </param>
+        <briefdescription>
+<para>Provede direktivu precedencni tabulky. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Najde terminal nejblize vrcholu zasobniku (parser_top_terminal) a vyhleda direktivu v precedencni tabulce pro dvojici tento terminal a vstupni terminal. Podle direktivy:<itemizedlist>
+<listitem><para>DIRECTIVE_REDUCTION_EXECUTE: provede redukci (parser_execute_reduction), vstup se nemeni.</para>
+</listitem><listitem><para>DIRECTIVE_REDUCTION_MARKER: nastavi znacku redukce u terminalu nejblize vrcholu a pak postupuje jako u DIRECTIVE_SHIFT_SYMBOL.</para>
+</listitem><listitem><para>DIRECTIVE_SHIFT_SYMBOL: vlozi vstupni terminal na zasobnik se semantickym ukazatelem a anotaci CONTEXT_NONE. Pokud neni pouzit specifikovany terminal, posune se take vstup (parser_advance).</para>
+</listitem></itemizedlist>
+</para>
+<para>Neplatna kombinace terminalu (DIRECTIVE_ERROR) skonci chybou uz pri vyhledani v precedencni tabulce.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spolecny kontext parseru, vstupni token je uz nacteny. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stack</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik precedencniho parseru. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>use_specified_terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Je-li true, pouzije se misto vstupniho tokenu terminal v argumentu terminal a vstup se nemeni. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Terminal pouzity misto vstupniho tokenu, ignoruje se, je-li use_specified_terminal false. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>semantic_pointer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Semanticky ukazatel noveho zaznamu, pokud se nejaky vklada na zasobnik. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True, pokud byl spotrebovan vstupni token (vstup byl posunut), jinak false (redukce nebo pouzit specifikovany terminal). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_parser.h" line="171" column="6" bodyfile="src/precedence_parser.c" bodystart="86" bodyend="140" declfile="src/precedence_parser.h" declline="171" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__parser_8h_1ab1437a8ab0047486822de3cdeb3aab52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+        <definition>Expr * precedence_parser</definition>
+        <argsstring>(ParserContext *ctx, AnnotatedSymbol *starting_terminal)</argsstring>
+        <name>precedence_parser</name>
+        <param>
+          <type><ref refid="structParserContext" kindref="compound">ParserContext</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structAnnotatedSymbol" kindref="compound">AnnotatedSymbol</ref> *</type>
+          <declname>starting_terminal</declname>
+        </param>
+        <briefdescription>
+<para>Jadro precedencniho parseru vyrazu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Zpracuje vyraz ze vstupniho proudu sdileneho pres ctx a vrati ukazatel na vytvoreny podstrom. Pri chybe ukonci program pres error_exit. Funkce si vytvori vlastni zasobnik, takze se muze rekurzivne volat (napr. pro ternarni if).</para>
+<para>Volitelny pocatecni zaznam se pouziva jen ve specialnim pripade jadrovych pravidel 32 a 33 LL gramatiky, tedy pri rozliseni prirazeni od vyrazu zacinajiciho ID, kdy je ID uz zpracovano LL parserem. Ve vetsine pripadu je NULL.</para>
+<para>Stavba stromu zatim neprobiha, funkce prozatim vraci NULL, protoze NULL vraci i callbacky.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spolecny kontext parseru, vstupni token je uz nacteny. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>starting_terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Volitelny pocatecni zaznam zasobniku (symbol, semanticky ukazatel a anotace), nebo NULL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na vytvoreny podstrom vyrazu, prozatim NULL. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_parser.h" line="227" column="6" bodyfile="src/precedence_parser.c" bodystart="142" bodyend="280" declfile="src/precedence_parser.h" declline="227" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/precedence_parser.h"/>
+  </compounddef>
+</doxygen>
