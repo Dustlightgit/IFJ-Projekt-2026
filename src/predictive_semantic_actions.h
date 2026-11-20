@@ -30,6 +30,7 @@
           a prejmenovany na special_action_expr a special_action_store_type,
           sjednocen format cisel pravidel a prejmenovany akce na predictive_action_*
           Soubor byl prejmenovan na predictive_semantic_actions.h
+        - xbalaka00 - odstranen SemanticContext z akci, protoze akce jej nevyuzivaly.
 
     Tento soubor obsahuje deklarace semantickych akci pravidel LL parseru.
     Akce stavi AST, semanticke kontroly (napr. kompatibilita typu) probihaji
@@ -62,13 +63,12 @@
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_prolog(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_prolog(void *semantic_pointer,
                             ContextAnnotation annotation, int line,
                             Stack *stack);
 
@@ -78,14 +78,12 @@ void predictive_action_prolog(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_function_definition(SemanticContext *ctx,
-                                         void *semantic_pointer,
+void predictive_action_function_definition(void *semantic_pointer,
                                          ContextAnnotation annotation, int line,
                                          Stack *stack);
 
@@ -95,14 +93,12 @@ void predictive_action_function_definition(SemanticContext *ctx,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_main_annotation(SemanticContext *ctx,
-                                     void *semantic_pointer,
+void predictive_action_main_annotation(void *semantic_pointer,
                                      ContextAnnotation annotation, int line,
                                      Stack *stack);
 
@@ -112,13 +108,12 @@ void predictive_action_main_annotation(SemanticContext *ctx,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_param_add(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_param_add(void *semantic_pointer,
                                ContextAnnotation annotation, int line,
                                Stack *stack);
 
@@ -128,13 +123,12 @@ void predictive_action_param_add(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_type_int(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_type_int(void *semantic_pointer,
                               ContextAnnotation annotation, int line,
                               Stack *stack);
 
@@ -144,13 +138,12 @@ void predictive_action_type_int(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_type_double(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_type_double(void *semantic_pointer,
                                  ContextAnnotation annotation, int line,
                                  Stack *stack);
 
@@ -160,13 +153,12 @@ void predictive_action_type_double(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_type_string(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_type_string(void *semantic_pointer,
                                  ContextAnnotation annotation, int line,
                                  Stack *stack);
 
@@ -176,13 +168,12 @@ void predictive_action_type_string(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_type_unit(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_type_unit(void *semantic_pointer,
                                ContextAnnotation annotation, int line,
                                Stack *stack);
 
@@ -192,13 +183,12 @@ void predictive_action_type_unit(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_type_boolean(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_type_boolean(void *semantic_pointer,
                                   ContextAnnotation annotation, int line,
                                   Stack *stack);
 
@@ -208,13 +198,12 @@ void predictive_action_type_boolean(SemanticContext *ctx, void *semantic_pointer
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_type_list(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_type_list(void *semantic_pointer,
                                ContextAnnotation annotation, int line,
                                Stack *stack);
 
@@ -224,13 +213,12 @@ void predictive_action_type_list(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_block(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_block(void *semantic_pointer,
                            ContextAnnotation annotation, int line,
                            Stack *stack);
 
@@ -240,14 +228,12 @@ void predictive_action_block(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_declaration_command(SemanticContext *ctx,
-                                         void *semantic_pointer,
+void predictive_action_declaration_command(void *semantic_pointer,
                                          ContextAnnotation annotation, int line,
                                          Stack *stack);
 
@@ -257,13 +243,12 @@ void predictive_action_declaration_command(SemanticContext *ctx,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_val(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_val(void *semantic_pointer,
                          ContextAnnotation annotation, int line, Stack *stack);
 
 /**
@@ -274,13 +259,12 @@ void predictive_action_val(SemanticContext *ctx, void *semantic_pointer,
  * special_action_id, a neterminalu <IDcommand> preda svuj semanticky ukazatel
  * (kam ulozit prirazeni nebo vyraz). Dalsi atributy stavba stromu nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_id_command(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_id_command(void *semantic_pointer,
                                 ContextAnnotation annotation, int line,
                                 Stack *stack);
 
@@ -290,14 +274,12 @@ void predictive_action_id_command(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_return_command(SemanticContext *ctx,
-                                    void *semantic_pointer,
+void predictive_action_return_command(void *semantic_pointer,
                                     ContextAnnotation annotation, int line,
                                     Stack *stack);
 
@@ -307,13 +289,12 @@ void predictive_action_return_command(SemanticContext *ctx,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_while_command(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_while_command(void *semantic_pointer,
                                    ContextAnnotation annotation, int line,
                                    Stack *stack);
 
@@ -323,13 +304,12 @@ void predictive_action_while_command(SemanticContext *ctx, void *semantic_pointe
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_for_command(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_for_command(void *semantic_pointer,
                                  ContextAnnotation annotation, int line,
                                  Stack *stack);
 
@@ -339,14 +319,12 @@ void predictive_action_for_command(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_for_header_inline(SemanticContext *ctx,
-                                       void *semantic_pointer,
+void predictive_action_for_header_inline(void *semantic_pointer,
                                        ContextAnnotation annotation, int line,
                                        Stack *stack);
 
@@ -356,14 +334,12 @@ void predictive_action_for_header_inline(SemanticContext *ctx,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_for_header_block(SemanticContext *ctx,
-                                      void *semantic_pointer,
+void predictive_action_for_header_block(void *semantic_pointer,
                                       ContextAnnotation annotation, int line,
                                       Stack *stack);
 
@@ -373,13 +349,12 @@ void predictive_action_for_header_block(SemanticContext *ctx,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_guard_next(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_guard_next(void *semantic_pointer,
                                 ContextAnnotation annotation, int line,
                                 Stack *stack);
 
@@ -389,13 +364,12 @@ void predictive_action_guard_next(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_if_command(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_if_command(void *semantic_pointer,
                                 ContextAnnotation annotation, int line,
                                 Stack *stack);
 
@@ -405,14 +379,12 @@ void predictive_action_if_command(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_optional_else_present(SemanticContext *ctx,
-                                           void *semantic_pointer,
+void predictive_action_optional_else_present(void *semantic_pointer,
                                            ContextAnnotation annotation,
                                            int line, Stack *stack);
 
@@ -422,13 +394,12 @@ void predictive_action_optional_else_present(SemanticContext *ctx,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_ternary_if(SemanticContext *ctx, void *semantic_pointer,
+void predictive_action_ternary_if(void *semantic_pointer,
                                 ContextAnnotation annotation, int line,
                                 Stack *stack);
 
@@ -438,20 +409,17 @@ void predictive_action_ternary_if(SemanticContext *ctx, void *semantic_pointer,
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
  * Atributy pro stavbu stromu zatim nepridava.
  *
- * @param ctx Semanticky kontext.
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
  * @param line Cislo radku aktualniho vstupniho terminalu.
  * @param stack Zasobnik parseru.
  */
-void predictive_action_else_ternary_if_indented(SemanticContext *ctx,
-                                              void *semantic_pointer,
+void predictive_action_else_ternary_if_indented(void *semantic_pointer,
                                               ContextAnnotation annotation,
                                               int line, Stack *stack);
 
 // Semanticka akce pravidla L59
-void predictive_action_else_or_command_end_else(SemanticContext *ctx,
-                                              void *semantic_pointer,
+void predictive_action_else_or_command_end_else(void *semantic_pointer,
                                               ContextAnnotation annotation,
                                               int line, Stack *stack);
 

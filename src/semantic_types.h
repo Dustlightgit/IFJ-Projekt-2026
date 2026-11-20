@@ -21,6 +21,8 @@
           ukazatelem a anotaci (prompt je zde).
         - xbalaka00 - pridana anotace CONTEXT_RANGE_WITHOUT_STEP (prompt je
           v precedence_semantic_actions.c).
+        - xbalaka00 - odstranen SemanticContext, protoze nebyl vyuzivan. Misto
+          pro schovani uzlu ID pro pravidla L32 a L33 presunut do ParserContext.
 
     Tento soubor obsahuje spolecne datove typy pro semanticke akce: kontextovou
     anotaci prvku na zasobniku parseru, semanticky kontext a typy semantickych akci.
@@ -241,19 +243,7 @@ typedef enum {
         není, protože ten má přístup k celému tokenu, kde je i číslo řádku.
 */
 
-/**
- * @brief Semanticky kontext sdileny mezi semantickymi akcemi.
- *
- * Obsahuje vse, co si jednotlive akce potrebuji udrzovat mezi sebou,
- * pokud nejake takove informace budou.
- */
-typedef struct {
-  int temp; ///< Prozatim bez vyznamu
-  /// AST uzel ID na zacatku prikazu (vytvari ho special_action_id pri
-  /// anotaci CONTEXT_ID_COMMAND, zpracuje a uvolni jadro parseru). NULL, pokud
-  /// zadny takovy uzel prave neexistuje.
-  Expr *id_expr;
-} SemanticContext;
+/* SemanticContext byl odstranen, protoze nebyl potrebny */
 
 /**
  * @brief Semanticka akce pravidla.
@@ -265,7 +255,6 @@ typedef struct {
  * kopiruji ukazatel a anotaci neterminalu na leve strane vzdy do vsech symbolu
  * produkce, aniz by musely byt callbacky.
  *
- * @param ctx Semanticky kontext sdileny mezi akcemi.
  * @param semantic_pointer Ukazatel ulozeny na zasobniku u neterminalu,
  *        ktery je timto pravidlem rozvadeny. Vyznam zavisi na parseru:
  *        - V LL parseru je to ukazatel na misto, kam ma byt vlozen uzel AST,
@@ -281,7 +270,7 @@ typedef struct {
  * @param stack Zasobnik parseru, akce na nej muze pridat produkci
  *        a k ni rovnou atributy (ukazatele, kontextove anotace apod.).
  */
-typedef void (*PredictiveSemanticAction)(SemanticContext *ctx, void *semantic_pointer,
+typedef void (*PredictiveSemanticAction)(void *semantic_pointer,
                                  ContextAnnotation annotation, int line,
                                  Stack *stack);
 

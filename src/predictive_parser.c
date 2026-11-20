@@ -31,6 +31,9 @@
           a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
           prompt je v reduction_table.h).
         - xbalaka00 - jadro propojeno s precedencnim parserem
+        - xbalaka00 - odstranen SemanticContext z argumentu akci, protoze akce
+          jej nevyuzivaly. Misto pro schovani uzlu ID pro pravidla L32 a L33
+          presunut do ParserContext.
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -475,7 +478,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
         // LL tabulka ani zadna dalsi akce se v teto iteraci neprovadi.
         // Uzel ID vytvorila special_action_id pri zpracovani ID na zacatku
         // prikazu, ID je uz porovnano a spotrebovano.
-        Expr *id_expr = ctx->semantic_context.id_expr;
+        Expr *id_expr = ctx->id_expr;
 
         if (id_expr == NULL)
           error_exit(ERR_INTERNAL, ctx->current_token.line,
@@ -497,7 +500,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
 
           // AST uzel ID uz neni potreba, jmeno si prirazeni zkopirovalo
           expr_free(id_expr);
-          ctx->semantic_context.id_expr = NULL;
+          ctx->id_expr = NULL;
 
           // Terminal = se nahradi dalsim vstupnim terminalem
           parser_advance(ctx);
@@ -545,8 +548,8 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
           // Pravidlo je semanticke (ll_table_lookup zaruci, ze je zaznam
           // staticky nebo semanticky), callback si produkci vlozi na zasobnik
           // sam
-          entry->callback(&(ctx->semantic_context), semantic_pointer,
-                          annotation, ctx->current_token.line, &stack);
+          entry->callback(semantic_pointer, annotation, ctx->current_token.line,
+                          &stack);
         }
       }
 
@@ -580,8 +583,8 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
       // vcetne atributu. Musi probehnout pred parser_match, ktery token
       // uvolni. Pri odlisnosti tokenu by parser_match vyvolal chybu.
       if (top->symbol.terminal == TOKEN_ID && parser_check_token(ctx, TOKEN_ID))
-        special_action_id(&(ctx->semantic_context), top->semantic_pointer,
-                          top->annotation, &(ctx->current_token));
+        special_action_id(ctx, top->semantic_pointer, top->annotation,
+                          &(ctx->current_token));
 
       // Porovna terminaly a oba odstrani
       parser_match(ctx, &stack);

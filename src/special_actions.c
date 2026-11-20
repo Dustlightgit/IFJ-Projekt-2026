@@ -19,7 +19,9 @@
           special_action_expr (prompt je v special_actions.h).
         - xbalaka00 - funkce target_block a store_type sem byly presunuty z predictive_semantic_actions.*
           a prejmenovany na special_action_expr a special_action_store_type,
-          sjednocen format cisel pravidel u special_action_execute_expr_rule
+          sjednocen format cisel pravidel u special_action_execute_expr_rule.
+        - xbalaka00 - zmenen argument funkce special_action_execute_expr_rule, protoze misto pro schovani
+          uzlu ID pro pravidla L32 a L33 bylo presunuto do ParserContext.
 
     Tento soubor obsahuje specialni akce parseru, napriklad akce pro stavbu AST,
     ktere ale nejsou samy pravidlem.
@@ -45,7 +47,7 @@
     special_actions.h.
 */
 
-void special_action_id(SemanticContext *ctx, void *semantic_pointer,
+void special_action_id(ParserContext *ctx, void *semantic_pointer,
                        ContextAnnotation annotation, const Token *token) {
 
   // Potkani ID se vypise vzdy

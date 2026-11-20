@@ -17,6 +17,8 @@
           special_action_expr (prompt je zde), include parser_common.h.
         - xbalaka00 - funkce target_block a store_type sem byly presunuty z predictive_semantic_actions.*
           a prejmenovany na special_action_expr a special_action_store_type
+        - xbalaka00 - zmenen argument funkce special_action_execute_expr_rule, protoze misto pro schovani
+          uzlu ID pro pravidla L32 a L33 bylo presunuto do ParserContext.
 
     Tento soubor obsahuje deklarace specialnich akci parseru, tedy akci,
     ktere nejsou vazane na precedencni nebo prediktivni pravidlo a maji
@@ -79,13 +81,14 @@
  *   a ulozi ukazatel na nej do ctx->id_expr, odkud ho vezme jadro parseru.
  * - ostatni anotace: zatim nic dalsiho (pozdeji nejspis interni chyba).
  *
- * @param ctx Semanticky kontext, do nej se uklada vytvoreny AST uzel.
+ * @param ctx Kontext parseru, do nej se uklada vytvoreny AST uzel
+ *        uchovavany pro pravidla L32 a L33.
  * @param semantic_pointer Ukazatel ulozeny u symbolu ID na zasobniku.
  * @param annotation Kontextova anotace ulozena u symbolu ID na zasobniku.
  * @param token Vstupni token ID ze scanneru. Token po skonceni akce uvolni
  *        parser_match, akce proto musi text, ktery chce uchovat, zkopirovat.
  */
-void special_action_id(SemanticContext *ctx, void *semantic_pointer,
+void special_action_id(ParserContext *ctx, void *semantic_pointer,
                        ContextAnnotation annotation, const Token *token);
 
 /**
