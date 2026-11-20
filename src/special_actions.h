@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     special_actions.h
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -14,10 +16,9 @@
           funkce ast_attach_expr ze semantic_actions.h, prejmenovana na
           special_action_expr (prompt je zde), include parser_common.h.
 
-    Tento soubor obsahuje deklarace specialnich akci parseru, tedy callbacku,
-    ktere nejsou vazane na pravidlo LL tabulky a maji vlastni rozhrani
-    (napr. akce pro token ID, ktera dostava cely vstupni token). Zatim jsou
-    to jen kostry, funkcionalita se doplni pri propojeni s AST.
+    Tento soubor obsahuje deklarace specialnich akci parseru, tedy akci,
+    ktere nejsou vazane na precedencni nebo prediktivni pravidlo a maji
+    vlastni rozhrani (napr. akce pro token ID, ktera dostava cely vstupni token).
 */
 
 #ifndef SPECIAL_ACTIONS_H

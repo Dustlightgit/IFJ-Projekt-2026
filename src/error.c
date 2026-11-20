@@ -1,3 +1,13 @@
+/*
+    IFJ projekt 2026
+
+    xnovacm00 Michal Novacek
+
+    error.c
+
+    Tento soubor obsahuje implementaci funkce pro vypis chyb a ukonceni programu.
+*/
+
 #include "error.h"
 
 #include <stdio.h>

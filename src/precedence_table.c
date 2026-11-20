@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     precedence_table.c
 
     Puvodni autor: xbalaka00 za asistence Claude
@@ -17,7 +19,7 @@
           a PIDX_* (prompt je zde).
 
     Tento soubor obsahuje precedencni tabulku precedencniho parseru vyrazu
-    a funkce pro prevod terminalu na jeji index a vyhledani direktivy.
+    a funkce a makra pro prevod terminalu na jeji index a funkce pro vyhledani direktivy.
     Prompt pro vznik souboru je v souboru precedence_table.h.
 */
 

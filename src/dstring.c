@@ -1,5 +1,12 @@
-// xnovacm00
-// dstring.c - dynamicky retezec implementace
+/*
+    IFJ projekt 2026
+
+    xnovacm00 Michal Novacek
+
+    dstring.c
+
+    Tento soubor obsahuje implementaci dynamickeho retezce.
+*/
 
 #include "dstring.h"
 

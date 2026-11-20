@@ -1,6 +1,9 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+    xnovacm00 Michal Novacek
+
     predictive_parser.c
 
     Puvodni autor: xbalaka00 za konzultace s ChatGPT
@@ -18,6 +21,7 @@
         - xbalaka00 - callbackum se predava cislo radku vstupniho terminalu.
         - xbalaka00 - jadro obsahuje chovani pro neterminal <IDcommand>
           (pravidla 32 a 33, zatim bez stavby stromu a vyrazoveho parseru).
+        - xnovacm00 - doplnena stavba uzlu AST ke specialnimu chovani pravidla 32
         - xbalaka00 - jadro overuje funkcemi nonterm_type_validate
           a token_type_validate neterminal vyjmuty ze zasobniku a terminal
           na jeho vrcholu (prompt je v nonterminal.h).

@@ -1,6 +1,8 @@
 /*
     IFJ projekt 2026
 
+    xbalaka00 Artur Balak
+
     LL_table.c
 
     Puvodni autor: xbalaka00 za asistence Claude a konzultace s ChatGPT
