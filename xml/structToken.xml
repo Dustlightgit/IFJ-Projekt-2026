@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structToken" kind="struct" language="C++" prot="public">
+    <compoundname>Token</compoundname>
+    <includes refid="token_8h" local="no">token.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structToken_1a67919af9f3a80dc0b28a0ab1e6d5bf8a" prot="public" static="no" mutable="no">
+        <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+        <definition>TokenType Token::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>Token::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="232" column="13" bodyfile="src/token.h" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structToken_1a4b96c2a31d7c374fd2bd1986794f80dd" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Token::line</definition>
+        <argsstring></argsstring>
+        <name>line</name>
+        <qualifiedname>Token::line</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Cislo radku, kde token zacina </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="233" column="7" bodyfile="src/token.h" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structToken_1a71107203fc457dc54c23fde77a718bd1" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Token::nl_before</definition>
+        <argsstring></argsstring>
+        <name>nl_before</name>
+        <qualifiedname>Token::nl_before</qualifiedname>
+        <briefdescription>
+<para>Pred tokenem byl LF uvnitr zavorek (kontrola koncove carky) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="235" column="8" bodyfile="src/token.h" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structToken_1aadd69563f786f7ee8e2525e15cb08852" prot="public" static="no" mutable="no">
+        <type><ref refid="unionTokenAttribute" kindref="compound">TokenAttribute</ref></type>
+        <definition>TokenAttribute Token::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>Token::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/token.h" line="236" column="18" bodyfile="src/token.h" bodystart="236" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="structToken" kindref="compound">Token</ref> lexikalni analyzy. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Token</label>
+        <link refid="structToken"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TokenAttribute</label>
+        <link refid="unionTokenAttribute"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/token.h" line="231" column="1" bodyfile="src/token.h" bodystart="231" bodyend="237"/>
+    <listofallmembers>
+      <member refid="structToken_1a4b96c2a31d7c374fd2bd1986794f80dd" prot="public" virt="non-virtual"><scope>Token</scope><name>line</name></member>
+      <member refid="structToken_1a71107203fc457dc54c23fde77a718bd1" prot="public" virt="non-virtual"><scope>Token</scope><name>nl_before</name></member>
+      <member refid="structToken_1a67919af9f3a80dc0b28a0ab1e6d5bf8a" prot="public" virt="non-virtual"><scope>Token</scope><name>type</name></member>
+      <member refid="structToken_1aadd69563f786f7ee8e2525e15cb08852" prot="public" virt="non-virtual"><scope>Token</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

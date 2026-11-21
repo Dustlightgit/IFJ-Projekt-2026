@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structParserContext" kind="struct" language="C++" prot="public">
+    <compoundname>ParserContext</compoundname>
+    <includes refid="parser__common_8h" local="no">parser_common.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structParserContext_1abe1f86a84f961bc802960c63359d8d61" prot="public" static="no" mutable="no">
+        <type><ref refid="structToken" kindref="compound">Token</ref></type>
+        <definition>Token ParserContext::current_token</definition>
+        <argsstring></argsstring>
+        <name>current_token</name>
+        <qualifiedname>ParserContext::current_token</qualifiedname>
+        <briefdescription>
+<para>Aktualni token na vstupu programu. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="133" column="9" bodyfile="src/parser_common.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParserContext_1a09ace6e60a72dff6717c23471566e063" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ParserContext::has_current_token</definition>
+        <argsstring></argsstring>
+        <name>has_current_token</name>
+        <qualifiedname>ParserContext::has_current_token</qualifiedname>
+        <briefdescription>
+<para>Priznak validity vstupniho tokenu. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="134" column="8" bodyfile="src/parser_common.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParserContext_1af4162ca50b2cfb98c07de798ba4bb252" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ParserContext::previous_token_was_comma</definition>
+        <argsstring></argsstring>
+        <name>previous_token_was_comma</name>
+        <qualifiedname>ParserContext::previous_token_was_comma</qualifiedname>
+        <briefdescription>
+<para>Priznak pro kontrolu koncove carky. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="135" column="8" bodyfile="src/parser_common.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParserContext_1a9f032b39663f2206aab96b96ea3e3df5" prot="public" static="no" mutable="no">
+        <type><ref refid="structSemanticContext" kindref="compound">SemanticContext</ref></type>
+        <definition>SemanticContext ParserContext::semantic_context</definition>
+        <argsstring></argsstring>
+        <name>semantic_context</name>
+        <qualifiedname>ParserContext::semantic_context</qualifiedname>
+        <briefdescription>
+<para>Struktura s daty pro interni potrebu semantickych akci. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/parser_common.h" line="137" column="7" bodyfile="src/parser_common.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Kontext sdileny mezi vsemi parsery. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Obsahuje aktualni terminal ze vstupu. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="11">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="10">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ParserContext</label>
+        <link refid="structParserContext"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>current_token</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>semantic_context</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SemanticContext</label>
+        <link refid="structSemanticContext"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>id_expr</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Token</label>
+        <link refid="structToken"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TokenAttribute</label>
+        <link refid="unionTokenAttribute"/>
+      </node>
+      <node id="6">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/parser_common.h" line="132" column="1" bodyfile="src/parser_common.h" bodystart="132" bodyend="139"/>
+    <listofallmembers>
+      <member refid="structParserContext_1abe1f86a84f961bc802960c63359d8d61" prot="public" virt="non-virtual"><scope>ParserContext</scope><name>current_token</name></member>
+      <member refid="structParserContext_1a09ace6e60a72dff6717c23471566e063" prot="public" virt="non-virtual"><scope>ParserContext</scope><name>has_current_token</name></member>
+      <member refid="structParserContext_1af4162ca50b2cfb98c07de798ba4bb252" prot="public" virt="non-virtual"><scope>ParserContext</scope><name>previous_token_was_comma</name></member>
+      <member refid="structParserContext_1a9f032b39663f2206aab96b96ea3e3df5" prot="public" virt="non-virtual"><scope>ParserContext</scope><name>semantic_context</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

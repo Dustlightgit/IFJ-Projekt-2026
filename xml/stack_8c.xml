@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="stack_8c" kind="file" language="C++">
+    <compoundname>stack.c</compoundname>
+    <includes refid="stack_8h" local="yes">stack.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/stack.c</label>
+        <link refid="stack_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+      <node id="5">
+        <label>stdint.h</label>
+      </node>
+      <node id="6">
+        <label>stdio.h</label>
+      </node>
+      <node id="7">
+        <label>stdlib.h</label>
+      </node>
+      <node id="8">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="stack_8c_1a43da2d1a88c80cc4f5507c9eae1dc9a9" prot="public" static="no">
+        <name>STACK_INITIAL_CAP</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="18" column="9" bodyfile="src/stack.c" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="stack_8c_1a9806abc2cad4d09a41ed3b55c5496914" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void stack_fatal</definition>
+        <argsstring>(void)</argsstring>
+        <name>stack_fatal</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="21" column="13" bodyfile="src/stack.c" bodystart="21" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1acafe5a2cbabc6d4af5820d2a2fa92595" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void stack_grow</definition>
+        <argsstring>(Stack *s)</argsstring>
+        <name>stack_grow</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="27" column="13" bodyfile="src/stack.c" bodystart="27" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1ac83c9003bd88e6b049a10fb64695d7db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stack_init</definition>
+        <argsstring>(Stack *s, size_t elem_size)</argsstring>
+        <name>stack_init</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>elem_size</declname>
+        </param>
+        <briefdescription>
+<para>Inicializuje prazdny zasobnik. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik k inicializaci. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Velikost jednoho prvku v bajtech, musi byt &gt; 0. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="39" column="6" bodyfile="src/stack.c" bodystart="39" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1ab01732b3df311c448d3688c7e0bac382" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stack_push</definition>
+        <argsstring>(Stack *s, const void *elem)</argsstring>
+        <name>stack_push</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Vlozi kopii prvku na vrchol zasobniku. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri nedostatku pameti ukonci program s kodem 99.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel na prvek, ktery se zkopiruje. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="46" column="6" bodyfile="src/stack.c" bodystart="46" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1a87f76c09e82061f1a150f38b09a6cc9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool stack_pop</definition>
+        <argsstring>(Stack *s, void *out)</argsstring>
+        <name>stack_pop</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>Odebere prvek z vrcholu zasobniku. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Kam se odebrany prvek zkopiruje, pokud neni NULL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>False, pokud je zasobnik prazdny, jinak true. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="57" column="6" bodyfile="src/stack.c" bodystart="57" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1a848c4121a98bf891d2bdabe5c06795da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * stack_top</definition>
+        <argsstring>(const Stack *s)</argsstring>
+        <name>stack_top</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Vrati ukazatel na prvek na vrcholu zasobniku. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na prvek na vrcholu, nebo NULL, je-li zasobnik prazdny. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="67" column="6" bodyfile="src/stack.c" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1ad09f2ccfececd646a4f6b0b7ff911b0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * stack_peek</definition>
+        <argsstring>(const Stack *s, size_t depth)</argsstring>
+        <name>stack_peek</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+<para>Vrati ukazatel na prvek v dane hloubce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zasobnik. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>depth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hloubka, 0 je vrchol, 1 je prvek tesne pod nim. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na prvek, nebo NULL, pokud takovy prvek neni. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="70" column="6" bodyfile="src/stack.c" bodystart="70" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1ab29a7fe1b9d9611703a79c10a17619d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t stack_size</definition>
+        <argsstring>(const Stack *s)</argsstring>
+        <name>stack_size</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Vrati pocet prvku na zasobniku. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="77" column="8" bodyfile="src/stack.c" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1aee6df790096930ce6de180e3e5506c32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool stack_is_empty</definition>
+        <argsstring>(const Stack *s)</argsstring>
+        <name>stack_is_empty</name>
+        <param>
+          <type>const <ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Vrati true, je-li zasobnik prazdny. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="80" column="6" bodyfile="src/stack.c" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1a6f9e7d863275849618000ec5cd7040c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stack_clear</definition>
+        <argsstring>(Stack *s)</argsstring>
+        <name>stack_clear</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Vyprazdni zasobnik, alokovanou pamet ponecha pro dalsi pouziti. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="83" column="6" bodyfile="src/stack.c" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="stack_8c_1aee3cc8432cd8515bded9248453539111" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stack_free</definition>
+        <argsstring>(Stack *s)</argsstring>
+        <name>stack_free</name>
+        <param>
+          <type><ref refid="structStack" kindref="compound">Stack</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Uvolni pamet zasobniku. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.c" line="86" column="6" bodyfile="src/stack.c" bodystart="86" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/stack.c"/>
+  </compounddef>
+</doxygen>

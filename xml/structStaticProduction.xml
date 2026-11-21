@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structStaticProduction" kind="struct" language="C++" prot="public">
+    <compoundname>StaticProduction</compoundname>
+    <includes refid="production_8h" local="no">production.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structStaticProduction_1aa2d5abc9f0c3476dd01caebe1d037a25" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t StaticProduction::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>StaticProduction::length</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pocet symbolu </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.h" line="113" column="10" bodyfile="src/production.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structStaticProduction_1a6e68717d37eebc498f86eeb4e4eaf96e" prot="public" static="no" mutable="no">
+        <type><ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref></type>
+        <definition>GrammarSymbol StaticProduction::production[STATIC_PRODUCTION_MAX_LENGTH]</definition>
+        <argsstring>[STATIC_PRODUCTION_MAX_LENGTH]</argsstring>
+        <name>production</name>
+        <qualifiedname>StaticProduction::production</qualifiedname>
+        <briefdescription>
+<para>Symboly, vyuzito je prvnich length. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/production.h" line="115" column="17" bodyfile="src/production.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Staticka produkce, prava strana pravidla ulozena primo ve strukture. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Pri vlozeni staticke produkce na zasobnik parser vzdy zkopiruje semanticky ukazatel a kontextovou anotaci neterminalu na leve strane pravidla do vsech symbolu produkce. Staticka pravidla tak sirí tyto informace dal, aniz by musela byt callbacky. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>GrammarSymbol</label>
+        <link refid="structGrammarSymbol"/>
+      </node>
+      <node id="1">
+        <label>StaticProduction</label>
+        <link refid="structStaticProduction"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>production</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/production.h" line="112" column="1" bodyfile="src/production.h" bodystart="112" bodyend="116"/>
+    <listofallmembers>
+      <member refid="structStaticProduction_1aa2d5abc9f0c3476dd01caebe1d037a25" prot="public" virt="non-virtual"><scope>StaticProduction</scope><name>length</name></member>
+      <member refid="structStaticProduction_1a6e68717d37eebc498f86eeb4e4eaf96e" prot="public" virt="non-virtual"><scope>StaticProduction</scope><name>production</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

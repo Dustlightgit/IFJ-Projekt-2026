@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="LL__table_8h" kind="file" language="C++">
+    <compoundname>LL_table.h</compoundname>
+    <includes refid="nonterminal_8h" local="yes">nonterminal.h</includes>
+    <includes refid="production_8h" local="yes">production.h</includes>
+    <includes refid="semantic__types_8h" local="yes">semantic_types.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <includedby refid="LL__table_8c" local="yes">src/LL_table.c</includedby>
+    <includedby refid="predictive__parser_8c" local="yes">src/predictive_parser.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/LL_table.h</label>
+        <link refid="LL__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>grammar_symbol.h</label>
+        <link refid="grammar__symbol_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>nonterminal.h</label>
+        <link refid="nonterminal_8h"/>
+      </node>
+      <node id="3">
+        <label>production.h</label>
+        <link refid="production_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>semantic_types.h</label>
+        <link refid="semantic__types_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>stack.h</label>
+        <link refid="stack_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>stdbool.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/LL_table.c</label>
+        <link refid="LL__table_8c"/>
+      </node>
+      <node id="1">
+        <label>src/LL_table.h</label>
+        <link refid="LL__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/predictive_parser.c</label>
+        <link refid="predictive__parser_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structLLTableEntry" prot="public">LLTableEntry</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="LL__table_8h_1afbeab96fe38bbd25326643845660fd17" prot="public" static="no" strong="no">
+        <type></type>
+        <name>LLRuleType</name>
+        <enumvalue id="LL__table_8h_1afbeab96fe38bbd25326643845660fd17a30292f18ff9f2203298c01981a135b04" prot="public">
+          <name>LL_RULE_ERROR</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Pro dvojici neterminal a terminal neexistuje pravidlo. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="LL__table_8h_1afbeab96fe38bbd25326643845660fd17a6e3029c235d6c0a5b653949c407a232f" prot="public">
+          <name>LL_RULE_STATIC</name>
+          <briefdescription>
+<para>Staticka produkce, parser ji na zasobnik vlozi sam. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="LL__table_8h_1afbeab96fe38bbd25326643845660fd17aaefcfc0731552f1ad7ca175dd969af50" prot="public">
+          <name>LL_RULE_SEMANTIC</name>
+          <briefdescription>
+<para>Callback, ktery produkci na zasobnik vlozi sam. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Typ polozky LL tabulky. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LL_table.h" line="66" column="1" bodyfile="src/LL_table.h" bodystart="66" bodyend="70"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="LL__table_8h_1a615171f45a492f9d770d2351698eff56" prot="public" static="no" extern="yes" mutable="no">
+        <type>const <ref refid="structLLTableEntry" kindref="compound">LLTableEntry</ref></type>
+        <definition>const LLTableEntry LL_TABLE[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT]</definition>
+        <argsstring>[NONTERM_LL_TABLE_COUNT][TOKEN_LL_TERM_COUNT]</argsstring>
+        <name>LL_TABLE</name>
+        <briefdescription>
+<para>LL tabulka indexovana neterminalem (radek) a terminalem (sloupec). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LL_table.h" line="110" column="27" bodyfile="src/LL_table.c" bodystart="208" bodyend="467" declfile="src/LL_table.h" declline="110" declcolumn="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="LL__table_8h_1aa80a09989199a6a40c140c08b12f5ec9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="structLLTableEntry" kindref="compound">LLTableEntry</ref> *</type>
+        <definition>const LLTableEntry * ll_table_lookup</definition>
+        <argsstring>(NonterminalType nonterm, TokenType terminal, int line)</argsstring>
+        <name>ll_table_lookup</name>
+        <param>
+          <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+          <declname>nonterm</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vyhleda pravidlo v LL tabulce pro dvojici neterminal a terminal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Funkce overi rozsah indexu, vyhleda zaznam a zkontroluje jeho platnost (znamy typ pravidla, u statickeho pravidla platnou produkci, u semantickeho nenulovy callback). Vracena pravidla jsou tedy vzdy staticka nebo semanticka. Volajici musi zajistit, ze neterminal je mensi nez NONTERM_LL_TABLE_COUNT a terminal mensi nez TOKEN_LL_TERM_COUNT, jinak jde o interni chybu (ERR_INTERNAL). Pokud pro dvojici neexistuje pravidlo, ukonci program syntaktickou chybou (ERR_SYNTAX).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nonterm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Neterminal (radek tabulky). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ vstupniho terminalu (sloupec tabulky). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku vstupniho tokenu pro chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na zaznam, ktery neni prazdnym pravidlem a je platny. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LL_table.h" line="128" column="20" bodyfile="src/LL_table.c" bodystart="470" bodyend="518" declfile="src/LL_table.h" declline="128" declcolumn="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/LL_table.h"/>
+  </compounddef>
+</doxygen>

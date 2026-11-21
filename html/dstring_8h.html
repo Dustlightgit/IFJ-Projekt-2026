@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/dstring.h file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>dstring.h <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structDString.html" class="m-doc">DString</a>
+            </dt>
+            <dd>Dynamicky retezec.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a45d6b9260a2148043647e3025eaf8dd2" class="m-doc">dstr_init</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s)</span>
+            </dt>
+            <dd>Pripravi prazdny retezec.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af632405d46492cee2ca898d3a9c16f97" class="m-doc">dstr_append_char</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s,
+              char c)</span>
+            </dt>
+            <dd>Prida znak na konec retezce.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae33030315ea93d98162d7d279be9ebdc" class="m-doc">dstr_clear</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s)</span>
+            </dt>
+            <dd>Vyprazdni retezec, pamet ponecha.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1a4695b50ea08263f32dbc927ccf6842" class="m-doc">dstr_copy</a>(</span><span class="m-doc-wrap">const <a href="structDString.html" class="m-doc">DString</a>* s) -&gt; char*</span>
+            </dt>
+            <dd>Vytvori novou kopii retezce.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5d4d7be41d0707eac04194f20faa0049" class="m-doc">dstr_free</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s)</span>
+            </dt>
+            <dd>Uvolni pamet retezce.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a45d6b9260a2148043647e3025eaf8dd2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45d6b9260a2148043647e3025eaf8dd2" class="m-doc-self">dstr_init</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s)</span></span>
+            </h3>
+            <p>Pripravi prazdny retezec.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">s</td>
+                  <td>Retezec k inicializaci.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af632405d46492cee2ca898d3a9c16f97"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af632405d46492cee2ca898d3a9c16f97" class="m-doc-self">dstr_append_char</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s,
+              char c)</span></span>
+            </h3>
+            <p>Prida znak na konec retezce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">s</td>
+                  <td>Retezec, do ktereho se pridava.</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>Pridavany znak.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae33030315ea93d98162d7d279be9ebdc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae33030315ea93d98162d7d279be9ebdc" class="m-doc-self">dstr_clear</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s)</span></span>
+            </h3>
+            <p>Vyprazdni retezec, pamet ponecha.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">s</td>
+                  <td>Retezec k vyprazdneni.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1a4695b50ea08263f32dbc927ccf6842"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">char* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a4695b50ea08263f32dbc927ccf6842" class="m-doc-self">dstr_copy</a>(</span><span class="m-doc-wrap">const <a href="structDString.html" class="m-doc">DString</a>* s)</span></span>
+            </h3>
+            <p>Vytvori novou kopii retezce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">s</td>
+                  <td>Retezec ke zkopirovani.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Nova kopie, kterou musi volajici uvolnit pres free.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5d4d7be41d0707eac04194f20faa0049"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5d4d7be41d0707eac04194f20faa0049" class="m-doc-self">dstr_free</a>(</span><span class="m-doc-wrap"><a href="structDString.html" class="m-doc">DString</a>* s)</span></span>
+            </h3>
+            <p>Uvolni pamet retezce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">s</td>
+                  <td>Retezec k uvolneni.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

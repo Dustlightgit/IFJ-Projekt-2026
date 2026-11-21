@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structGen" kind="struct" language="C++" prot="public">
+    <compoundname>Gen</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structGen_1aa7c1e4607b1596e4b402fbb0c8dc3c70" prot="public" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* Gen::out</definition>
+        <argsstring></argsstring>
+        <name>out</name>
+        <qualifiedname>Gen::out</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="394" column="8" bodyfile="src/generator.c" bodystart="394" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGen_1a4ea4c446203395a9bfa3bc38be6c40e5" prot="public" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* Gen::cur</definition>
+        <argsstring></argsstring>
+        <name>cur</name>
+        <qualifiedname>Gen::cur</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="395" column="8" bodyfile="src/generator.c" bodystart="395" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGen_1a145f7e2606186eea56afffaf14687976" prot="public" static="no" mutable="no">
+        <type><ref refid="structStack" kindref="compound">Stack</ref></type>
+        <definition>Stack Gen::vars</definition>
+        <argsstring></argsstring>
+        <name>vars</name>
+        <qualifiedname>Gen::vars</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="396" column="9" bodyfile="src/generator.c" bodystart="396" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGen_1a4ec920c5dfd12227db280481311a8589" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Gen::depth</definition>
+        <argsstring></argsstring>
+        <name>depth</name>
+        <qualifiedname>Gen::depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="397" column="7" bodyfile="src/generator.c" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGen_1abafe687c6a94b81896bc1c1e28833e1e" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Gen::label_counter</definition>
+        <argsstring></argsstring>
+        <name>label_counter</name>
+        <qualifiedname>Gen::label_counter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="398" column="7" bodyfile="src/generator.c" bodystart="398" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGen_1a120e30097d05d11f8e44db4e6356ebf4" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Gen::temp_counter</definition>
+        <argsstring></argsstring>
+        <name>temp_counter</name>
+        <qualifiedname>Gen::temp_counter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="399" column="7" bodyfile="src/generator.c" bodystart="399" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGen_1aee207dc87a2ab82677119454c5d9a3d8" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+        <definition>const FuncDef* Gen::func</definition>
+        <argsstring></argsstring>
+        <name>func</name>
+        <qualifiedname>Gen::func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="400" column="17" bodyfile="src/generator.c" bodystart="400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGen_1adac891983df129cf00aee8359058990e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Gen::used[RUNTIME_COUNT]</definition>
+        <argsstring>[RUNTIME_COUNT]</argsstring>
+        <name>used</name>
+        <qualifiedname>Gen::used</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.c" line="401" column="8" bodyfile="src/generator.c" bodystart="401" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="7">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Gen</label>
+        <link refid="structGen"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>vars</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>func</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="4">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Stack</label>
+        <link refid="structStack"/>
+      </node>
+      <node id="8">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/generator.c" line="393" column="1" bodyfile="src/generator.c" bodystart="393" bodyend="402"/>
+    <listofallmembers>
+      <member refid="structGen_1a4ea4c446203395a9bfa3bc38be6c40e5" prot="public" virt="non-virtual"><scope>Gen</scope><name>cur</name></member>
+      <member refid="structGen_1a4ec920c5dfd12227db280481311a8589" prot="public" virt="non-virtual"><scope>Gen</scope><name>depth</name></member>
+      <member refid="structGen_1aee207dc87a2ab82677119454c5d9a3d8" prot="public" virt="non-virtual"><scope>Gen</scope><name>func</name></member>
+      <member refid="structGen_1abafe687c6a94b81896bc1c1e28833e1e" prot="public" virt="non-virtual"><scope>Gen</scope><name>label_counter</name></member>
+      <member refid="structGen_1aa7c1e4607b1596e4b402fbb0c8dc3c70" prot="public" virt="non-virtual"><scope>Gen</scope><name>out</name></member>
+      <member refid="structGen_1a120e30097d05d11f8e44db4e6356ebf4" prot="public" virt="non-virtual"><scope>Gen</scope><name>temp_counter</name></member>
+      <member refid="structGen_1adac891983df129cf00aee8359058990e" prot="public" virt="non-virtual"><scope>Gen</scope><name>used</name></member>
+      <member refid="structGen_1a145f7e2606186eea56afffaf14687976" prot="public" virt="non-virtual"><scope>Gen</scope><name>vars</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

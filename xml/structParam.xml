@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structParam" kind="struct" language="C++" prot="public">
+    <compoundname>Param</compoundname>
+    <includes refid="ast_8h" local="no">ast.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structParam_1afa11cf3ca1922dbd21d22664343c2d28" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Param::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>Param::name</qualifiedname>
+        <briefdescription>
+<para>Jmeno parametru, vlastni kopie. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="255" column="8" bodyfile="src/ast.h" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParam_1ad07b00f82769cfe3009d292088134d35" prot="public" static="no" mutable="no">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>Type* Param::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>Param::type</qualifiedname>
+        <briefdescription>
+<para>Typ parametru, vzdy zadany. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="256" column="8" bodyfile="src/ast.h" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structParam_1a4f37fd05315552b912948e675f23099e" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+        <definition>struct Symbol* Param::symbol</definition>
+        <argsstring></argsstring>
+        <name>symbol</name>
+        <qualifiedname>Param::symbol</qualifiedname>
+        <briefdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> z tabulky symbolu (nevlastni), vyplni semantika. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="258" column="1" bodyfile="src/ast.h" bodystart="257" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Parametr funkce, napr. n: Int. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="1">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/ast.h" line="254" column="1" bodyfile="src/ast.h" bodystart="254" bodyend="259"/>
+    <listofallmembers>
+      <member refid="structParam_1afa11cf3ca1922dbd21d22664343c2d28" prot="public" virt="non-virtual"><scope>Param</scope><name>name</name></member>
+      <member refid="structParam_1a4f37fd05315552b912948e675f23099e" prot="public" virt="non-virtual"><scope>Param</scope><name>symbol</name></member>
+      <member refid="structParam_1ad07b00f82769cfe3009d292088134d35" prot="public" virt="non-virtual"><scope>Param</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

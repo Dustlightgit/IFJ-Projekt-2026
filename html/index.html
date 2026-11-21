@@ -23,13 +23,11 @@
       </div>
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
         <div class="m-row">
-          <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
-          </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-12 m-col-m-none">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
               <use href="#m-doc-search-icon-path" />
             </svg></a></li>
@@ -46,6 +44,7 @@
         <h1>
           IFJ-Projekt-2026
         </h1>
+<p><a name="md_README"></a></p><section id="autotoc_md0"><h2><a href="#autotoc_md0">Implementace překladače imperativního jazyka IFJ26</a></h2><ul><li>Termín odevzdávání: 27. 11. v 11:59:59</li><li>Pokusné odevzdání: do konce čtvrtka 19. 11.</li><li>Mezi čtvrtkem 26. 11. a úterým 1. 12. v 8:00 zaneste vytištěnou dokumentaci na fakultu</li></ul><section id="autotoc_md1"><h3><a href="#autotoc_md1">Varianta</a></h3><ul><li>vv-BVS – Výškově vyvážený binární vyhledávací strom</li></ul></section><section id="autotoc_md2"><h3><a href="#autotoc_md2">Formát</a></h3><ul><li>Clang-format – LLVM</li><li>Proměnné a funkce - snake_case</li><li>Konstanty a položky enum - SCREAMING_SNAKE_CASE</li><li>Datové typy - PascalCase</li><li>Komentáře česky bez diakritiky</li><li>Kód, git messages anglicky</li></ul></section><section id="autotoc_md3"><h3><a href="#autotoc_md3">Překlad a testování</a></h3><ul><li><strong>výchozí</strong> chování příkazu **<code>make</code> je <code>build</code>**</li><li>kompilace do <code>build/</code> – <code>make build</code><ul><li><strong>rekompilace</strong> - <code>make rebuild</code> (spustí <code>clean</code> a pak <code>build</code>)</li></ul></li><li><strong>spouštění překladače</strong> v <code>build/main</code> - <code>make run</code></li><li><strong>testování</strong> – <code>make test</code> - otestuje překladač pomocí **_valgrind_** a zároveň spustí všechny <strong>unit testy</strong> ve složce <code>/test/scripts</code> jednotlivých částí překladače<ul><li>vždy spustí <code>rebuild</code></li><li>více informací o testování v <code>/test/tests.md</code></li></ul></li><li><strong>formátování</strong> všech souborů v <code>src/</code> – <code>make format</code></li><li>výsledné <strong>zabalení</strong> do <code>output/</code> – <code>make package</code></li><li><strong>čištění</strong> složek <code>build/</code>, <code>output/</code> a zbytků po testech - <code>make clean</code></li><li><code>make show-docs</code> otevře na portu 8000 dokumentaci od doxy<ul><li><code>make stop-docs</code> proces ukončí</li></ul></li></ul></section></section>
       </div>
     </div>
   </div>
@@ -65,17 +64,7 @@
           </form>
           <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
           <div id="search-help" class="m-text m-dim m-text-center">
-            <p class="m-noindent">Search for symbols, directories, files, pages or
-            modules. You can omit any prefix from the symbol or file path; adding a
-            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
-            directory.</p>
-            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
-            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
-            <span class="m-label m-dim">Enter</span> to go.
-            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
-            copy a link to the result using <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
-            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+            <p>Search for files, structs, functions, or macros.</p>
           </div>
           <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
           <ul id="search-results"></ul>
@@ -90,7 +79,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>IFJ-Projekt-2026. Created with <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

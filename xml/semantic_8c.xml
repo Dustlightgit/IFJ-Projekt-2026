@@ -1,0 +1,450 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="semantic_8c" kind="file" language="C++">
+    <compoundname>semantic.c</compoundname>
+    <includes refid="semantic_8h" local="yes">semantic.h</includes>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes refid="symtable_8h" local="yes">symtable.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">string.h</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="1">
+        <label>src/semantic.c</label>
+        <link refid="semantic_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>semantic.h</label>
+        <link refid="semantic_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>symtable.h</label>
+        <link refid="symtable_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="7">
+        <label>stddef.h</label>
+      </node>
+      <node id="8">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structCtx" prot="public">Ctx</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="semantic_8c_1a51927b210ba789537b0b59afa8eb73d0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool type_equals</definition>
+        <argsstring>(const Type *a, const Type *b)</argsstring>
+        <name>type_equals</name>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="21" column="13" bodyfile="src/semantic.c" bodystart="21" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a1b08413d7cd7806283f0a5e30435bea7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool type_is_numeric</definition>
+        <argsstring>(const Type *type)</argsstring>
+        <name>type_is_numeric</name>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="35" column="13" bodyfile="src/semantic.c" bodystart="35" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1ad403a4e5c65c6d1817920f9e5f9a9e73" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool type_assignable</definition>
+        <argsstring>(const Type *target, const Type *src)</argsstring>
+        <name>type_assignable</name>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="41" column="13" bodyfile="src/semantic.c" bodystart="41" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1abfc6b3a41434a6bff416b6a46282a42f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>static Type * analyze_expr</definition>
+        <argsstring>(Ctx *ctx, Expr *e, const Type *expected)</argsstring>
+        <name>analyze_expr</name>
+        <param>
+          <type><ref refid="structCtx" kindref="compound">Ctx</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>expected</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="173" column="13" bodyfile="src/semantic.c" bodystart="173" bodyend="517" declfile="src/semantic.c" declline="56" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a5f5518d7eb9878b6fbc89bccb997e31a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>static Type * analyze_block</definition>
+        <argsstring>(Ctx *ctx, Block *b, const Type *expected)</argsstring>
+        <name>analyze_block</name>
+        <param>
+          <type><ref refid="structCtx" kindref="compound">Ctx</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>expected</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="521" column="13" bodyfile="src/semantic.c" bodystart="521" bodyend="541" declfile="src/semantic.c" declline="57" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1ac309e1fe6663888271e44df8565ffba8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void analyze_stmt</definition>
+        <argsstring>(Ctx *ctx, Stmt *s)</argsstring>
+        <name>analyze_stmt</name>
+        <param>
+          <type><ref refid="structCtx" kindref="compound">Ctx</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="544" column="13" bodyfile="src/semantic.c" bodystart="544" bodyend="664" declfile="src/semantic.c" declline="58" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a0e8c7690b48562b23f6cf07f6835ca49" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void analyze_func</definition>
+        <argsstring>(Ctx *ctx, FuncDef *func)</argsstring>
+        <name>analyze_func</name>
+        <param>
+          <type><ref refid="structCtx" kindref="compound">Ctx</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="700" column="13" bodyfile="src/semantic.c" bodystart="700" bodyend="741" declfile="src/semantic.c" declline="59" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1abd11463250507f7c64fab733b98c330f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>static Type * unit_type</definition>
+        <argsstring>(void)</argsstring>
+        <name>unit_type</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="62" column="13" bodyfile="src/semantic.c" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a8caff282e94b0e31076af9aaf499430d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void register_functions</definition>
+        <argsstring>(Ctx *ctx, Program *program)</argsstring>
+        <name>register_functions</name>
+        <param>
+          <type><ref refid="structCtx" kindref="compound">Ctx</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structProgram" kindref="compound">Program</ref> *</type>
+          <declname>program</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="72" column="13" bodyfile="src/semantic.c" bodystart="72" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a86817fed9edadff573b27be21ffb6575" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>static Type * set_expr_type</definition>
+        <argsstring>(Expr *e, TypeKind kind)</argsstring>
+        <name>set_expr_type</name>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type><ref refid="ast_8h_1ab4dd8308e08805aedfe646096be0e4e7" kindref="member">TypeKind</ref></type>
+          <declname>kind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="109" column="13" bodyfile="src/semantic.c" bodystart="109" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1ae699d7b3613547e13e9d4c5d2bc6b46f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="ast_8h_1ab4dd8308e08805aedfe646096be0e4e7" kindref="member">TypeKind</ref></type>
+        <definition>static TypeKind arithmetic_result</definition>
+        <argsstring>(const Type *l, const Type *r, int line)</argsstring>
+        <name>arithmetic_result</name>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="116" column="17" bodyfile="src/semantic.c" bodystart="116" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a8b9bd9e64234720321bf434672e8e8ae" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void expect_int</definition>
+        <argsstring>(Ctx *ctx, Expr *e, const char *message)</argsstring>
+        <name>expect_int</name>
+        <param>
+          <type><ref refid="structCtx" kindref="compound">Ctx</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="128" column="13" bodyfile="src/semantic.c" bodystart="128" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a9cc415f5908b55868c0941c4f26ff748" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structType" kindref="compound">Type</ref> *</type>
+        <definition>static Type * common_type</definition>
+        <argsstring>(const Type *a, const Type *b)</argsstring>
+        <name>common_type</name>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="144" column="13" bodyfile="src/semantic.c" bodystart="144" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a399a6809ec941776df73c9237a72bb26" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void member_expect_count</definition>
+        <argsstring>(const Expr *e, int count)</argsstring>
+        <name>member_expect_count</name>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="157" column="13" bodyfile="src/semantic.c" bodystart="157" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1ac5c5232158a01501d7dc890108f07e2f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void member_int_arg</definition>
+        <argsstring>(Ctx *ctx, Expr *e, int index)</argsstring>
+        <name>member_int_arg</name>
+        <param>
+          <type><ref refid="structCtx" kindref="compound">Ctx</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="164" column="13" bodyfile="src/semantic.c" bodystart="164" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a1a7f9c4840356644c2b41461cde81a13" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool block_returns</definition>
+        <argsstring>(const Block *b)</argsstring>
+        <name>block_returns</name>
+        <param>
+          <type>const <ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="675" column="13" bodyfile="src/semantic.c" bodystart="675" bodyend="695"/>
+      </memberdef>
+      <memberdef kind="function" id="semantic_8c_1a52ee22faa1144c0fd938405761ef91d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSymTable" kindref="compound">SymTable</ref> *</type>
+        <definition>SymTable * semantic_analyze</definition>
+        <argsstring>(Program *program)</argsstring>
+        <name>semantic_analyze</name>
+        <param>
+          <type><ref refid="structProgram" kindref="compound">Program</ref> *</type>
+          <declname>program</declname>
+        </param>
+        <briefdescription>
+<para>Provede semantickou analyzu celeho programu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Projde cely program, zkontroluje ho a doplni typy a symboly do AST.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>program</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structProgram" kindref="compound">Program</ref> (AST) k analyze. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Tabulka symbolu vytvorena behem analyzy. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic.c" line="750" column="10" bodyfile="src/semantic.c" bodystart="750" bodyend="777"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/semantic.c"/>
+  </compounddef>
+</doxygen>

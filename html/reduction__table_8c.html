@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/reduction_table.c file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>reduction_table.c <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
+                <li><a href="#define-members">Defines</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt id="af6905059747b010160f85dcce5f87316">
+              <span class="m-doc-wrap-bumper">static auto <a href="#af6905059747b010160f85dcce5f87316" class="m-doc-self">grammar_symbols_equal</a>(</span><span class="m-doc-wrap">const <a href="structGrammarSymbol.html" class="m-doc">GrammarSymbol</a>* a,
+              const <a href="structGrammarSymbol.html" class="m-doc">GrammarSymbol</a>* b) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa63c6c0ebbcb38b81daaf2e88428c319">
+              <span class="m-doc-wrap-bumper">static auto <a href="#aa63c6c0ebbcb38b81daaf2e88428c319" class="m-doc-self">handles_equal</a>(</span><span class="m-doc-wrap">const <a href="structSearchHandle.html" class="m-doc">SearchHandle</a>* a,
+              const <a href="structSearchHandle.html" class="m-doc">SearchHandle</a>* b) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4379817672c7dd7def7a1fdb802e0f08">
+              <span class="m-doc-wrap-bumper">static void <a href="#a4379817672c7dd7def7a1fdb802e0f08" class="m-doc-self">print_handle</a>(</span><span class="m-doc-wrap">const <a href="structSearchHandle.html" class="m-doc">SearchHandle</a>* handle)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0288903fa1ed8f1b1d838e26e748d15b" class="m-doc">reduction_table_lookup</a>(</span><span class="m-doc-wrap">const <a href="structSearchHandle.html" class="m-doc">SearchHandle</a>* handle,
+              int line) -&gt; <a href="semantic__types_8h.html#a6ea4594c8b87bee8d9d968786952c01c" class="m-doc">PrecedenceSemanticAction</a></span>
+            </dt>
+            <dd>Vyhleda v redukcni tabulce pravidlo podle handle.</dd>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              const <a href="structReductionTableEntry.html" class="m-doc">ReductionTableEntry</a> <a href="#a5b334d6c49308d981589063f4c1f8b62" class="m-doc">REDUCTION_TABLE</a>
+            </dt>
+            <dd>Tabulka redukcnich pravidel vyrazove gramatiky.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt id="a5d250020706f742039476fff1b6710bf">
+              <span class="m-doc-wrap-bumper">#define <a href="#a5d250020706f742039476fff1b6710bf" class="m-doc-self">SYM_TERM</a>(</span><span class="m-doc-wrap">t)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3a82ab685465acbb66d1695173630cbd">
+              <span class="m-doc-wrap-bumper">#define <a href="#a3a82ab685465acbb66d1695173630cbd" class="m-doc-self">SYM_NONTERM</a>(</span><span class="m-doc-wrap">n)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7c19d1dca38099a2984bd57ea7566645">
+              <span class="m-doc-wrap-bumper">#define <a href="#a7c19d1dca38099a2984bd57ea7566645" class="m-doc-self">REDUCTION_RULE</a>(</span><span class="m-doc-wrap">action_function,
+              ...)</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a0288903fa1ed8f1b1d838e26e748d15b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="semantic__types_8h.html#a6ea4594c8b87bee8d9d968786952c01c" class="m-doc">PrecedenceSemanticAction</a> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0288903fa1ed8f1b1d838e26e748d15b" class="m-doc-self">reduction_table_lookup</a>(</span><span class="m-doc-wrap">const <a href="structSearchHandle.html" class="m-doc">SearchHandle</a>* handle,
+              int line)</span></span>
+            </h3>
+            <p>Vyhleda v redukcni tabulce pravidlo podle handle.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Vyhledavany handle, sestaveny jadrem ze symbolu zasobniku v prirozenem poradi (viz <a href="structSearchHandle.html" class="m-doc">SearchHandle</a>), nesmi byt NULL.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku vstupniho tokenu pro chybova hlaseni.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Semanticka akce nalezeneho pravidla, nikdy NULL.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Tabulka je serazena podle delky handle, funkce proto preskoci kratsi handle, porovna cely vyhledavany handle (delku i vsechny symboly) postupne se vsemi handle stejne delky a pri prvnim delsim handle vyhledavani konci. Delka vyhledavaneho handle musi byt v rozsahu 1 az HANDLE_MAX_LENGTH, jinak jde o internich chybu (ERR_INTERNAL). Pokud pravidlo neexistuje, program skonci syntaktickou chybou (ERR_SYNTAX) a na stderr vypise hledany handle.</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a5b334d6c49308d981589063f4c1f8b62"><div>
+            <h3>
+              const <a href="structReductionTableEntry.html" class="m-doc">ReductionTableEntry</a> <a href="#a5b334d6c49308d981589063f4c1f8b62" class="m-doc-self">REDUCTION_TABLE</a>
+            </h3>
+            <p>Tabulka redukcnich pravidel vyrazove gramatiky.</p>
+<p>Mapuje handle pravidla na jeho semantickou akci. Polozky jsou serazeny vzestupne podle delky handle (poradi neodpovida cislum pravidel), na jejich poradi se spoleha funkce reduction_table_lookup. Pripadne nevyuzite polozky s action NULL jsou az na konci tabulky. Tabulka obsahuje vsech 43 pravidel vyrazove gramatiky (E0 az E42), nevyuzite polozky tedy zatim zadne nejsou.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

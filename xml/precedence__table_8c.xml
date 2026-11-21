@@ -1,0 +1,711 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="precedence__table_8c" kind="file" language="C++">
+    <compoundname>precedence_table.c</compoundname>
+    <includes refid="precedence__table_8h" local="yes">precedence_table.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <incdepgraph>
+      <node id="7">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="1">
+        <label>src/precedence_table.c</label>
+        <link refid="precedence__table_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>precedence_table.h</label>
+        <link refid="precedence__table_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+      <node id="6">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" prot="public" static="no">
+        <name>PRECEDENCE_RANGE_INDEX</name>
+        <param><defname>t</defname></param>
+        <initializer>  ((size_t)(t) - (size_t)<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a3851183212d24b397e6474745f1e12a0" kindref="member">TOKEN_LL_TERM_COUNT</ref> - 1 -                             \
+   ((t) &gt; <ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921ae4d8eb0f4f6e613bf75801bfb9aad51c" kindref="member">TOKEN_EXPRESSION_BEGINNING_DELIMITER</ref> ? 1 : 0))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="56" column="9" bodyfile="src/precedence_table.c" bodystart="56" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ac985e67c4d1f7b6af3c86721a6c12870" prot="public" static="no">
+        <name>PRECEDENCE_RANGE_COUNT</name>
+        <initializer>  ((size_t)<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aa4f86cbc44e1acf7d32cdd85380d7538" kindref="member">TOKEN_EXPR_TERM_DELIMITER</ref> - (size_t)<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a3851183212d24b397e6474745f1e12a0" kindref="member">TOKEN_LL_TERM_COUNT</ref> - 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="63" column="9" bodyfile="src/precedence_table.c" bodystart="63" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ad9f6c53d754f378ce88dad668eb5e88e" prot="public" static="no">
+        <name>PRECEDENCE_SWITCH_COUNT</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="69" column="9" bodyfile="src/precedence_table.c" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a535c6739f3a1334e8b974d5a78b3e524" prot="public" static="no">
+        <name>PIDX_SWITCH_KW_LIST</name>
+        <initializer>(<ref refid="precedence__table_8c_1ac985e67c4d1f7b6af3c86721a6c12870" kindref="member">PRECEDENCE_RANGE_COUNT</ref> + 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="81" column="9" bodyfile="src/precedence_table.c" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a6e7eb156d0888af605eb86e8e4f3ee24" prot="public" static="no">
+        <name>PIDX_SWITCH_LPAREN</name>
+        <initializer>(<ref refid="precedence__table_8c_1ac985e67c4d1f7b6af3c86721a6c12870" kindref="member">PRECEDENCE_RANGE_COUNT</ref> + 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="82" column="9" bodyfile="src/precedence_table.c" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1aa182f7d799e82ef7fd98cbf3168c2296" prot="public" static="no">
+        <name>PIDX_SWITCH_RPAREN</name>
+        <initializer>(<ref refid="precedence__table_8c_1ac985e67c4d1f7b6af3c86721a6c12870" kindref="member">PRECEDENCE_RANGE_COUNT</ref> + 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="83" column="9" bodyfile="src/precedence_table.c" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ab62b8460aad8025fc08a7713ce5ce3b7" prot="public" static="no">
+        <name>PIDX_SWITCH_COMMA</name>
+        <initializer>(<ref refid="precedence__table_8c_1ac985e67c4d1f7b6af3c86721a6c12870" kindref="member">PRECEDENCE_RANGE_COUNT</ref> + 3)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="84" column="9" bodyfile="src/precedence_table.c" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a94f57368e155506516448147be341f3e" prot="public" static="no">
+        <name>PIDX_SWITCH_ID</name>
+        <initializer>(<ref refid="precedence__table_8c_1ac985e67c4d1f7b6af3c86721a6c12870" kindref="member">PRECEDENCE_RANGE_COUNT</ref> + 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="85" column="9" bodyfile="src/precedence_table.c" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a07bcc8d975ff3d2eedb4ce1f787e5d54" prot="public" static="no">
+        <name>PIDX_LIST</name>
+        <initializer><ref refid="precedence__table_8c_1a535c6739f3a1334e8b974d5a78b3e524" kindref="member">PIDX_SWITCH_KW_LIST</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="89" column="9" bodyfile="src/precedence_table.c" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a4614e47f5b284a086bda7a74d1a89db2" prot="public" static="no">
+        <name>PIDX_LPAREN</name>
+        <initializer><ref refid="precedence__table_8c_1a6e7eb156d0888af605eb86e8e4f3ee24" kindref="member">PIDX_SWITCH_LPAREN</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="90" column="9" bodyfile="src/precedence_table.c" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ae124f2129b8f2e6d3ddab20874212440" prot="public" static="no">
+        <name>PIDX_RPAREN</name>
+        <initializer><ref refid="precedence__table_8c_1aa182f7d799e82ef7fd98cbf3168c2296" kindref="member">PIDX_SWITCH_RPAREN</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="91" column="9" bodyfile="src/precedence_table.c" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a1a28729c5f6653f41eec81a1abbe19af" prot="public" static="no">
+        <name>PIDX_COMMA</name>
+        <initializer><ref refid="precedence__table_8c_1ab62b8460aad8025fc08a7713ce5ce3b7" kindref="member">PIDX_SWITCH_COMMA</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="92" column="9" bodyfile="src/precedence_table.c" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a9e195d220844d0af94d8964d3a407761" prot="public" static="no">
+        <name>PIDX_DOT</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921ab565ebfaaa53dcee6ddda201e270733e" kindref="member">TOKEN_DOT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="93" column="9" bodyfile="src/precedence_table.c" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a766c22cc0399a526ea88f8178db81895" prot="public" static="no">
+        <name>PIDX_ID</name>
+        <initializer><ref refid="precedence__table_8c_1a94f57368e155506516448147be341f3e" kindref="member">PIDX_SWITCH_ID</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="94" column="9" bodyfile="src/precedence_table.c" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a7b7b42448dc67ffb0e3c78be3345d5b7" prot="public" static="no">
+        <name>PIDX_INT</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921afc93f7c09207edf6cd136968f217b457" kindref="member">TOKEN_INT_LIT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="95" column="9" bodyfile="src/precedence_table.c" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ad3e34f4182c0856b6b659caf6bda95ea" prot="public" static="no">
+        <name>PIDX_DBL</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a711b1e30d1130737ff93a38b59814e37" kindref="member">TOKEN_DOUBLE_LIT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="96" column="9" bodyfile="src/precedence_table.c" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a12b979c5d983e32cc4283e2b3dc0db53" prot="public" static="no">
+        <name>PIDX_STR</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a0d74a532ff9d28be0add8021681809da" kindref="member">TOKEN_STRING_LIT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="97" column="9" bodyfile="src/precedence_table.c" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ad4ac80f59e1659e2d1b080f190755838" prot="public" static="no">
+        <name>PIDX_TRUE</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a0bfe75e32e6efc883f386554e8c173dd" kindref="member">TOKEN_KW_TRUE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="98" column="9" bodyfile="src/precedence_table.c" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1aa48324505febd7f3b3e824162d39c905" prot="public" static="no">
+        <name>PIDX_FALSE</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a86f1c50587c517e1cbe1589e13228866" kindref="member">TOKEN_KW_FALSE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="99" column="9" bodyfile="src/precedence_table.c" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a0726a15f5a29574cdab0be5c880dda7d" prot="public" static="no">
+        <name>PIDX_PPLUS</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a091b054f5996a03d51ee21badb118238" kindref="member">TOKEN_PLUS_UNARY</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="100" column="9" bodyfile="src/precedence_table.c" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a13963e48508537aaf72c4123558500fe" prot="public" static="no">
+        <name>PIDX_PMINUS</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a391686aaef9dc565814b57d5ef52adfa" kindref="member">TOKEN_MINUS_UNARY</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="101" column="9" bodyfile="src/precedence_table.c" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a6843528e299c1dad3055b89184034257" prot="public" static="no">
+        <name>PIDX_NOT</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a103f608e741c11627e4d4a984f8ab8d6" kindref="member">TOKEN_NOT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="102" column="9" bodyfile="src/precedence_table.c" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ada7377e720d48ac90b39c0ddf7bbd979" prot="public" static="no">
+        <name>PIDX_STAR</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a1109083cbeff0c33b619eb9b3177940a" kindref="member">TOKEN_STAR</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="103" column="9" bodyfile="src/precedence_table.c" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1abbdf3b97e9759f3dd2875e8ca63ab707" prot="public" static="no">
+        <name>PIDX_SLASH</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a7bb488da02f984b2c055687da13856e2" kindref="member">TOKEN_SLASH</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="104" column="9" bodyfile="src/precedence_table.c" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a8c5d2c1fbd3fb3d4dc0369d6eab54df9" prot="public" static="no">
+        <name>PIDX_PLUS</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a7f0601b40fea37f0d4598b0a61f828f2" kindref="member">TOKEN_PLUS</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="105" column="9" bodyfile="src/precedence_table.c" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a8a6da0912487d610b540614d2c56340f" prot="public" static="no">
+        <name>PIDX_MINUS</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a160171b541dcf45a3bd712598963ea39" kindref="member">TOKEN_MINUS</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="106" column="9" bodyfile="src/precedence_table.c" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a01e20460740b58d5a024de29d13f0e17" prot="public" static="no">
+        <name>PIDX_CONCAT</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aba68ee0a391d5807711846ba9e11170e" kindref="member">TOKEN_PLUSPLUS</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="107" column="9" bodyfile="src/precedence_table.c" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1acf73358a93aa9cdd02efa586cdb3bd9b" prot="public" static="no">
+        <name>PIDX_LT</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aa3aef76940413ed1a121e71fa1b82519" kindref="member">TOKEN_LT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="108" column="9" bodyfile="src/precedence_table.c" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a2da6741d5005840e407470c8a3c75aaf" prot="public" static="no">
+        <name>PIDX_LE</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a2eccbcdff9c4795abee454d7558e8dab" kindref="member">TOKEN_LE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="109" column="9" bodyfile="src/precedence_table.c" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a5d2ef9d52d5ad847e43031d712c4e69c" prot="public" static="no">
+        <name>PIDX_GT</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aa5d81c076968a75a50ec61593495d894" kindref="member">TOKEN_GT</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="110" column="9" bodyfile="src/precedence_table.c" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a72491dd651150421f6aa4835c3a0e2c8" prot="public" static="no">
+        <name>PIDX_GE</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a0e30112e555feb2996120db9cafbe28d" kindref="member">TOKEN_GE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="111" column="9" bodyfile="src/precedence_table.c" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ab5937d56c4b3d9258d391edf16eda803" prot="public" static="no">
+        <name>PIDX_EQ</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aeba19c29eb600289d1e973bf335139fe" kindref="member">TOKEN_EQ</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="112" column="9" bodyfile="src/precedence_table.c" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a4fa83ac843aed28d6a8b133391b9127a" prot="public" static="no">
+        <name>PIDX_NE</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aa134765c8c52d90da35d8bd922bc532c" kindref="member">TOKEN_NE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="113" column="9" bodyfile="src/precedence_table.c" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a0cf7af639cfb20f829ca8ac0d60ea06e" prot="public" static="no">
+        <name>PIDX_AND</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a7203710f75ffd67d36a92024eca9b4ab" kindref="member">TOKEN_AND</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="114" column="9" bodyfile="src/precedence_table.c" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a69d97daf11b1d46f1c062592215ae276" prot="public" static="no">
+        <name>PIDX_OR</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921af82eae34ce15da4d9e334b9a2e3b5675" kindref="member">TOKEN_OR</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="115" column="9" bodyfile="src/precedence_table.c" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1acdad67a202ff553933ada2cd4f4445e5" prot="public" static="no">
+        <name>PIDX_IDOP</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921adb83473d4d59f69cf2a47de35ec719fd" kindref="member">TOKEN_ID_OPERATOR</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="116" column="9" bodyfile="src/precedence_table.c" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1af0a25f6e36fdd49337294f2ea2018823" prot="public" static="no">
+        <name>PIDX_DOLLAR</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921aea65f3c75f7858f5a8d2de53d0e5d3ed" kindref="member">TOKEN_DOLLAR</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="117" column="9" bodyfile="src/precedence_table.c" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a6b85df28d8895dc29ddea6958dbbe7dd" prot="public" static="no">
+        <name>PIDX_TIF</name>
+        <initializer><ref refid="precedence__table_8c_1a4fa5c6a5c0f277c0e53434cef639eb17" kindref="member">PRECEDENCE_RANGE_INDEX</ref>(<ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921a1b5625928930e6edf6b2d33746afa76f" kindref="member">TOKEN_TIF</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="118" column="9" bodyfile="src/precedence_table.c" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a996bde01ecac342918f0a2c4e7ce7bd5" prot="public" static="no">
+        <name>NO</name>
+        <initializer><ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfafe1cd9821f8efc492dbcda974313137e" kindref="member">DIRECTIVE_ERROR</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="121" column="9" bodyfile="src/precedence_table.c" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a4f7ad8e1644e9a80d5946b6dd827a122" prot="public" static="no">
+        <name>MK</name>
+        <initializer><ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfa188d91988f86e8235e8e0269b452b727" kindref="member">DIRECTIVE_REDUCTION_MARKER</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="122" column="9" bodyfile="src/precedence_table.c" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a6c2e35fdcd9091ccada629895fa1d034" prot="public" static="no">
+        <name>EX</name>
+        <initializer><ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfa82b3472d08e054b35ea93602f17068e0" kindref="member">DIRECTIVE_REDUCTION_EXECUTE</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="123" column="9" bodyfile="src/precedence_table.c" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1a4453478cd8b3bf96df84fe861cb78600" prot="public" static="no">
+        <name>SH</name>
+        <initializer><ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfab766a8c041cdff84251fdacc2f6880a0" kindref="member">DIRECTIVE_SHIFT_SYMBOL</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="124" column="9" bodyfile="src/precedence_table.c" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="precedence__table_8c_1ad25de65a09349772c6d6b1ab59b8d8ec" prot="public" static="no">
+        <name>PRECEDENCE_ROW</name>
+        <param><defname>c01</defname></param>
+        <param><defname>c02</defname></param>
+        <param><defname>c03</defname></param>
+        <param><defname>c04</defname></param>
+        <param><defname>c05</defname></param>
+        <param><defname>c06</defname></param>
+        <param><defname>c07</defname></param>
+        <param><defname>c08</defname></param>
+        <param><defname>c09</defname></param>
+        <param><defname>c10</defname></param>
+        <param><defname>c11</defname></param>
+        <param><defname>c12</defname></param>
+        <param><defname>c13</defname></param>
+        <param><defname>c14</defname></param>
+        <param><defname>c15</defname></param>
+        <param><defname>c16</defname></param>
+        <param><defname>c17</defname></param>
+        <param><defname>c18</defname></param>
+        <param><defname>c19</defname></param>
+        <param><defname>c20</defname></param>
+        <param><defname>c21</defname></param>
+        <param><defname>c22</defname></param>
+        <param><defname>c23</defname></param>
+        <param><defname>c24</defname></param>
+        <param><defname>c25</defname></param>
+        <param><defname>c26</defname></param>
+        <param><defname>c27</defname></param>
+        <param><defname>c28</defname></param>
+        <param><defname>c29</defname></param>
+        <param><defname>c30</defname></param>
+        <initializer>  {                                                                            \
+    [<ref refid="precedence__table_8c_1a07bcc8d975ff3d2eedb4ce1f787e5d54" kindref="member">PIDX_LIST</ref>] = c01, [<ref refid="precedence__table_8c_1a4614e47f5b284a086bda7a74d1a89db2" kindref="member">PIDX_LPAREN</ref>] = c02, [<ref refid="precedence__table_8c_1ae124f2129b8f2e6d3ddab20874212440" kindref="member">PIDX_RPAREN</ref>] = c03,               \
+    [<ref refid="precedence__table_8c_1a1a28729c5f6653f41eec81a1abbe19af" kindref="member">PIDX_COMMA</ref>] = c04, [<ref refid="precedence__table_8c_1a9e195d220844d0af94d8964d3a407761" kindref="member">PIDX_DOT</ref>] = c05, [<ref refid="precedence__table_8c_1a766c22cc0399a526ea88f8178db81895" kindref="member">PIDX_ID</ref>] = c06, [<ref refid="precedence__table_8c_1a7b7b42448dc67ffb0e3c78be3345d5b7" kindref="member">PIDX_INT</ref>] = c07,   \
+    [<ref refid="precedence__table_8c_1ad3e34f4182c0856b6b659caf6bda95ea" kindref="member">PIDX_DBL</ref>] = c08, [<ref refid="precedence__table_8c_1a12b979c5d983e32cc4283e2b3dc0db53" kindref="member">PIDX_STR</ref>] = c09, [<ref refid="precedence__table_8c_1ad4ac80f59e1659e2d1b080f190755838" kindref="member">PIDX_TRUE</ref>] = c10, [<ref refid="precedence__table_8c_1aa48324505febd7f3b3e824162d39c905" kindref="member">PIDX_FALSE</ref>] = c11, \
+    [<ref refid="precedence__table_8c_1a0726a15f5a29574cdab0be5c880dda7d" kindref="member">PIDX_PPLUS</ref>] = c12, [<ref refid="precedence__table_8c_1a13963e48508537aaf72c4123558500fe" kindref="member">PIDX_PMINUS</ref>] = c13, [<ref refid="precedence__table_8c_1a6843528e299c1dad3055b89184034257" kindref="member">PIDX_NOT</ref>] = c14,                 \
+    [<ref refid="precedence__table_8c_1ada7377e720d48ac90b39c0ddf7bbd979" kindref="member">PIDX_STAR</ref>] = c15, [<ref refid="precedence__table_8c_1abbdf3b97e9759f3dd2875e8ca63ab707" kindref="member">PIDX_SLASH</ref>] = c16, [<ref refid="precedence__table_8c_1a8c5d2c1fbd3fb3d4dc0369d6eab54df9" kindref="member">PIDX_PLUS</ref>] = c17,                  \
+    [<ref refid="precedence__table_8c_1a8a6da0912487d610b540614d2c56340f" kindref="member">PIDX_MINUS</ref>] = c18, [<ref refid="precedence__table_8c_1a01e20460740b58d5a024de29d13f0e17" kindref="member">PIDX_CONCAT</ref>] = c19, [<ref refid="precedence__table_8c_1acf73358a93aa9cdd02efa586cdb3bd9b" kindref="member">PIDX_LT</ref>] = c20, [<ref refid="precedence__table_8c_1a2da6741d5005840e407470c8a3c75aaf" kindref="member">PIDX_LE</ref>] = c21, \
+    [<ref refid="precedence__table_8c_1a5d2ef9d52d5ad847e43031d712c4e69c" kindref="member">PIDX_GT</ref>] = c22, [<ref refid="precedence__table_8c_1a72491dd651150421f6aa4835c3a0e2c8" kindref="member">PIDX_GE</ref>] = c23, [<ref refid="precedence__table_8c_1ab5937d56c4b3d9258d391edf16eda803" kindref="member">PIDX_EQ</ref>] = c24, [<ref refid="precedence__table_8c_1a4fa83ac843aed28d6a8b133391b9127a" kindref="member">PIDX_NE</ref>] = c25,        \
+    [<ref refid="precedence__table_8c_1a0cf7af639cfb20f829ca8ac0d60ea06e" kindref="member">PIDX_AND</ref>] = c26, [<ref refid="precedence__table_8c_1a69d97daf11b1d46f1c062592215ae276" kindref="member">PIDX_OR</ref>] = c27, [<ref refid="precedence__table_8c_1acdad67a202ff553933ada2cd4f4445e5" kindref="member">PIDX_IDOP</ref>] = c28, [<ref refid="precedence__table_8c_1af0a25f6e36fdd49337294f2ea2018823" kindref="member">PIDX_DOLLAR</ref>] = c29, \
+    [<ref refid="precedence__table_8c_1a6b85df28d8895dc29ddea6958dbbe7dd" kindref="member">PIDX_TIF</ref>] = c30                                                           \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="132" column="9" bodyfile="src/precedence_table.c" bodystart="130" bodyend="143"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="precedence__table_8c_1a4486ad15f66a22290397699afa05ac00" prot="public" static="no" mutable="no">
+        <type>const <ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16df" kindref="member">PrecedenceDirective</ref></type>
+        <definition>const PrecedenceDirective PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE][PRECEDENCE_TABLE_SIZE]</definition>
+        <argsstring>[PRECEDENCE_TABLE_SIZE][PRECEDENCE_TABLE_SIZE]</argsstring>
+        <name>PRECEDENCE_TABLE</name>
+        <briefdescription>
+<para>Precedencni tabulka indexovana terminalem na zasobniku (radek) a terminalem na vstupu (sloupec). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Indexy terminalu urcuje funkce precedence_table_index. Polozky bez zaznamu jsou DIRECTIVE_ERROR (hodnota 0). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="150" column="5" bodyfile="src/precedence_table.c" bodystart="150" bodyend="241"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="precedence__table_8c_1a016d26ce4e123366f5333e58e5817a3a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool precedence_table_try_index</definition>
+        <argsstring>(TokenType terminal, size_t *index)</argsstring>
+        <name>precedence_table_try_index</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>size_t *</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="250" column="13" bodyfile="src/precedence_table.c" bodystart="250" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__table_8c_1a8a73a844271122d98ae7d995ce8d3e16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t precedence_table_index</definition>
+        <argsstring>(TokenType terminal, int line)</argsstring>
+        <name>precedence_table_index</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vrati index terminalu do precedencni tabulky. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Nejprve overi token funkci token_type_validate (neplatny typ je interni chyba). Terminaly mezi TOKEN_LL_TERM_COUNT a TOKEN_EXPR_TERM_DELIMITER dostanou index vypoctem z jejich hodnoty v enumu a zabiraji souvisly rozsah od 0. Ostatni terminaly precedencni tabulky, ktere jsou v enumu TokenType mezi indexatory LL tabulky (napr. zavorky), dostanou index za timto rozsahem. <ref refid="structToken" kindref="compound">Token</ref>, ktery precedencni tabulku neindexuje, zpusobi interni chybu (ERR_INTERNAL).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku pro chybova hlaseni, &lt;= 0 pokud neni znam. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Index v rozsahu 0 az PRECEDENCE_TABLE_SIZE - 1. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="284" column="8" bodyfile="src/precedence_table.c" bodystart="284" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__table_8c_1abb2b191e7dc60a6b806014ce7fbd97fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16df" kindref="member">PrecedenceDirective</ref></type>
+        <definition>PrecedenceDirective precedence_table_lookup</definition>
+        <argsstring>(TokenType stack_terminal, TokenType input_terminal, int line)</argsstring>
+        <name>precedence_table_lookup</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>stack_terminal</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>input_terminal</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vyhleda direktivu v precedencni tabulce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Zaindexuje tabulku terminalem na zasobniku (ten je vzdy indexem tabulky, jinak jde o internich chybu) a terminalem na vstupu. Vstupni terminal, ktery precedencni tabulku neindexuje, je chyba ve vstupnim programu a program skonci syntaktickou chybou (ERR_SYNTAX). Pokud je pole tabulky prazdne (DIRECTIVE_ERROR), kombinace terminalu neni platna a program skonci take syntaktickou chybou (ERR_SYNTAX) s vypisem pouzitych indexu.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack_terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Terminal na zasobniku (radek tabulky). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input_terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Terminal na vstupu (sloupec tabulky). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku vstupniho tokenu pro chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Direktiva, ktera neni DIRECTIVE_ERROR. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.c" line="298" column="21" bodyfile="src/precedence_table.c" bodystart="298" bodyend="340"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/precedence_table.c"/>
+  </compounddef>
+</doxygen>

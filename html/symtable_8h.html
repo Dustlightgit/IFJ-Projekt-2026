@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/symtable.h file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>symtable.h <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+                <li><a href="#typedef-members">Typedefs</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a>
+            </dt>
+            <dd>Definice struktury <a href="structSymbol.html" class="m-doc">Symbol</a>.</dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a05812818de02fb4b202d7513ce50745d" class="m-doc">SymbolKind</a> { </span><span class="m-doc-wrap"><a href="#a05812818de02fb4b202d7513ce50745da4aeab8753276f7c7a40125cbb216ec57" class="m-doc">SYM_VAR</a>,
+              <a href="#a05812818de02fb4b202d7513ce50745da9f25a8fc3891950523fd8b502e87bcb7" class="m-doc">SYM_FUNC</a> }</span>
+            </dt>
+            <dd>Druh symbolu.</dd>
+          </dl>
+        </section>
+        <section id="typedef-members">
+          <h2><a href="#typedef-members">Typedefs</a></h2>
+          <dl class="m-doc">
+            <dt id="ac1b95cde05bdecd202e6f33298f78a17">
+              using <a href="#ac1b95cde05bdecd202e6f33298f78a17" class="m-doc-self">Symbol</a> = struct <a href="structSymbol.html" class="m-doc">Symbol</a>
+            </dt>
+            <dd><a href="structSymbol.html" class="m-doc">Symbol</a>: vse, co prekladac vi o jednom jmene v programu.</dd>
+            <dt id="af46af5c56ebde205d8264308f0a07f47">
+              using <a href="#af46af5c56ebde205d8264308f0a07f47" class="m-doc-self">SymTable</a> = struct <a href="structSymTable.html" class="m-doc">SymTable</a>
+            </dt>
+            <dd>Tabulka symbolu.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5a55dea77fc4d74c0e0b000b26b52b28" class="m-doc">symtable_new</a>(</span><span class="m-doc-wrap">void) -&gt; <a href="structSymTable.html" class="m-doc">SymTable</a>*</span>
+            </dt>
+            <dd>Vytvori tabulku s jednim (globalnim) rozsahem.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a985c441aea80ad28c5c6076e996907b7" class="m-doc">symtable_free</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span>
+            </dt>
+            <dd>Uvolni tabulku a vsechny symboly, ktere obsahuje.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad1b39bb9d5eab3a56bc66957549cb9e5" class="m-doc">symtable_enter_scope</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span>
+            </dt>
+            <dd>Otevre novy rozsah (vstup do bloku, funkce nebo tela cyklu).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1fb88c3a3dcafe5983e1f3bce2afa979" class="m-doc">symtable_exit_scope</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span>
+            </dt>
+            <dd>Zavre nejvnitrnejsi rozsah, jeho jmena prestanou byt videt.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a031a3d6222aad4c0dd3aa356ca5b9cf6" class="m-doc">symtable_define_var</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name,
+              const <a href="structType.html" class="m-doc">Type</a>* type,
+              bool is_mutable) -&gt; <a href="structSymbol.html" class="m-doc">Symbol</a>*</span>
+            </dt>
+            <dd>Definuje promennou v aktualnim rozsahu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8baee86c854a65f27ad5679527808940" class="m-doc">symtable_define_func</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name,
+              <a href="structFuncDef.html" class="m-doc">FuncDef</a>* def) -&gt; <a href="structSymbol.html" class="m-doc">Symbol</a>*</span>
+            </dt>
+            <dd>Definuje uzivatelskou funkci v globalnim rozsahu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a88e7df0b48295f4b46770506c727d721" class="m-doc">symtable_define_builtin</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name,
+              int param_count,
+              const <a href="structType.html" class="m-doc">Type</a>*const* param_types,
+              const <a href="structType.html" class="m-doc">Type</a>* return_type) -&gt; <a href="structSymbol.html" class="m-doc">Symbol</a>*</span>
+            </dt>
+            <dd>Definuje vestavenou funkci v globalnim rozsahu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7026497152b62b1ddcf3ecd01aebac7e" class="m-doc">symtable_register_builtins</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span>
+            </dt>
+            <dd>Zaregistruje vsechny vestavene funkce.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2ff105cd332eb0af6292d0f64c3438e4" class="m-doc">symtable_lookup</a>(</span><span class="m-doc-wrap">const <a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name) -&gt; <a href="structSymbol.html" class="m-doc">Symbol</a>*</span>
+            </dt>
+            <dd>Najde symbol podle jmena od nejvnitrnejsiho rozsahu ven.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a23bda57eee04f1e4a581d88d0bb87722" class="m-doc">symtable_lookup_in_current_scope</a>(</span><span class="m-doc-wrap">const <a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name) -&gt; <a href="structSymbol.html" class="m-doc">Symbol</a>*</span>
+            </dt>
+            <dd>Najde symbol jen v aktualnim rozsahu.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a593400e4131bef575a9ba06ed8dfa3d3" class="m-doc">symbol_set_return_type</a>(</span><span class="m-doc-wrap"><a href="structSymbol.html" class="m-doc">Symbol</a>* symbol,
+              const <a href="structType.html" class="m-doc">Type</a>* type)</span>
+            </dt>
+            <dd>Nastavi navratovy typ funkce.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a05812818de02fb4b202d7513ce50745d"><div>
+            <h3>
+              enum <a href="#a05812818de02fb4b202d7513ce50745d" class="m-doc-self">SymbolKind</a>
+            </h3>
+            <p>Druh symbolu.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a05812818de02fb4b202d7513ce50745da4aeab8753276f7c7a40125cbb216ec57" class="m-doc-self" id="a05812818de02fb4b202d7513ce50745da4aeab8753276f7c7a40125cbb216ec57">SYM_VAR</a></td>
+                  <td>
+                  <p>Promenna (val, var) nebo parametr funkce.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a05812818de02fb4b202d7513ce50745da9f25a8fc3891950523fd8b502e87bcb7" class="m-doc-self" id="a05812818de02fb4b202d7513ce50745da9f25a8fc3891950523fd8b502e87bcb7">SYM_FUNC</a></td>
+                  <td>
+                  <p>Funkce uzivatelska nebo vestavena.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a5a55dea77fc4d74c0e0b000b26b52b28"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structSymTable.html" class="m-doc">SymTable</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a55dea77fc4d74c0e0b000b26b52b28" class="m-doc-self">symtable_new</a>(</span><span class="m-doc-wrap">void)</span></span>
+            </h3>
+            <p>Vytvori tabulku s jednim (globalnim) rozsahem.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Ukazatel na novou tabulku.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a985c441aea80ad28c5c6076e996907b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a985c441aea80ad28c5c6076e996907b7" class="m-doc-self">symtable_free</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span></span>
+            </h3>
+            <p>Uvolni tabulku a vsechny symboly, ktere obsahuje.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka k uvolneni.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Akceptuje NULL.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad1b39bb9d5eab3a56bc66957549cb9e5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad1b39bb9d5eab3a56bc66957549cb9e5" class="m-doc-self">symtable_enter_scope</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span></span>
+            </h3>
+            <p>Otevre novy rozsah (vstup do bloku, funkce nebo tela cyklu).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1fb88c3a3dcafe5983e1f3bce2afa979"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1fb88c3a3dcafe5983e1f3bce2afa979" class="m-doc-self">symtable_exit_scope</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span></span>
+            </h3>
+            <p>Zavre nejvnitrnejsi rozsah, jeho jmena prestanou byt videt.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Symboly se neuvolnuji, ukazatele na ne zustavaji platne.</p>
+          </div></section>
+          <section class="m-doc-details" id="a031a3d6222aad4c0dd3aa356ca5b9cf6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structSymbol.html" class="m-doc">Symbol</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a031a3d6222aad4c0dd3aa356ca5b9cf6" class="m-doc-self">symtable_define_var</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name,
+              const <a href="structType.html" class="m-doc">Type</a>* type,
+              bool is_mutable)</span></span>
+            </h3>
+            <p>Definuje promennou v aktualnim rozsahu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno promenne.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Typ promenne (zkopiruje se).</td>
+                </tr>
+                <tr>
+                  <td>is_mutable</td>
+                  <td>True pro var, false pro val a parametry.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy symbol, nebo NULL, kdyz jmeno v aktualnim rozsahu uz existuje (chyba 4).</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Promenne patri jen do lokalnich rozsahu, nikdy do globalniho. Jmeno i typ se zkopiruji.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8baee86c854a65f27ad5679527808940"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structSymbol.html" class="m-doc">Symbol</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8baee86c854a65f27ad5679527808940" class="m-doc-self">symtable_define_func</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name,
+              <a href="structFuncDef.html" class="m-doc">FuncDef</a>* def)</span></span>
+            </h3>
+            <p>Definuje uzivatelskou funkci v globalnim rozsahu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno funkce.</td>
+                </tr>
+                <tr>
+                  <td>def</td>
+                  <td>Definice funkce v AST (nevlastni).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy symbol, nebo NULL, kdyz funkce stejneho jmena uz existuje (chyba 4).</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Funkce se definuje do globalniho rozsahu bez ohledu na aktualni rozsah. Parametry a navratovy typ se opisou z definice, NULL return_type znamena neznamy. Volat pro vsechny funkce driv, nez se zacnou analyzovat jejich tela.</p>
+          </div></section>
+          <section class="m-doc-details" id="a88e7df0b48295f4b46770506c727d721"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structSymbol.html" class="m-doc">Symbol</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88e7df0b48295f4b46770506c727d721" class="m-doc-self">symtable_define_builtin</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name,
+              int param_count,
+              const <a href="structType.html" class="m-doc">Type</a>*const* param_types,
+              const <a href="structType.html" class="m-doc">Type</a>* return_type)</span></span>
+            </h3>
+            <p>Definuje vestavenou funkci v globalnim rozsahu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Jmeno funkce.</td>
+                </tr>
+                <tr>
+                  <td>param_count</td>
+                  <td>Pocet parametru.</td>
+                </tr>
+                <tr>
+                  <td>param_types</td>
+                  <td>Pole typu parametru (zkopiruje se).</td>
+                </tr>
+                <tr>
+                  <td>return_type</td>
+                  <td>Navratovy typ (zkopiruje se).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Novy symbol, nebo NULL, kdyz funkce stejneho jmena uz existuje.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Typy se zkopiruji. NULL prvek v param_types znamena parametr typu Any.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7026497152b62b1ddcf3ecd01aebac7e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7026497152b62b1ddcf3ecd01aebac7e" class="m-doc-self">symtable_register_builtins</a>(</span><span class="m-doc-wrap"><a href="structSymTable.html" class="m-doc">SymTable</a>* table)</span></span>
+            </h3>
+            <p>Zaregistruje vsechny vestavene funkce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Registruje: print, readLine, readInt, readDouble, readBoolean, toStr, toInt, strLength, subStr, ord, chr.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2ff105cd332eb0af6292d0f64c3438e4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structSymbol.html" class="m-doc">Symbol</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2ff105cd332eb0af6292d0f64c3438e4" class="m-doc-self">symtable_lookup</a>(</span><span class="m-doc-wrap">const <a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name)</span></span>
+            </h3>
+            <p>Najde symbol podle jmena od nejvnitrnejsiho rozsahu ven.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Hledane jmeno.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Nalezeny symbol, nebo NULL, kdyz neexistuje (chyba 3).</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a23bda57eee04f1e4a581d88d0bb87722"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="structSymbol.html" class="m-doc">Symbol</a>* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23bda57eee04f1e4a581d88d0bb87722" class="m-doc-self">symtable_lookup_in_current_scope</a>(</span><span class="m-doc-wrap">const <a href="structSymTable.html" class="m-doc">SymTable</a>* table,
+              const char* name)</span></span>
+            </h3>
+            <p>Najde symbol jen v aktualnim rozsahu.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">table</td>
+                  <td>Tabulka symbolu.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Hledane jmeno.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Nalezeny symbol, nebo NULL, kdyz tam neexistuje.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a593400e4131bef575a9ba06ed8dfa3d3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a593400e4131bef575a9ba06ed8dfa3d3" class="m-doc-self">symbol_set_return_type</a>(</span><span class="m-doc-wrap"><a href="structSymbol.html" class="m-doc">Symbol</a>* symbol,
+              const <a href="structType.html" class="m-doc">Type</a>* type)</span></span>
+            </h3>
+            <p>Nastavi navratovy typ funkce.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">symbol</td>
+                  <td><a href="structSymbol.html" class="m-doc">Symbol</a> funkce.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Novy navratovy typ.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Novy typ se zkopiruje, puvodni typ se uvolni.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structProgram" kind="struct" language="C++" prot="public">
+    <compoundname>Program</compoundname>
+    <includes refid="ast_8h" local="no">ast.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structProgram_1a017c2804979fd0082a925a1abd05f4ac" prot="public" static="no" mutable="no">
+        <type><ref refid="structFuncDef" kindref="compound">FuncDef</ref> **</type>
+        <definition>FuncDef** Program::funcs</definition>
+        <argsstring></argsstring>
+        <name>funcs</name>
+        <qualifiedname>Program::funcs</qualifiedname>
+        <briefdescription>
+<para>Pole ukazatelu na funkce. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="280" column="11" bodyfile="src/ast.h" bodystart="280" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structProgram_1af9b0790ac231df69afcbf3a79f1f8148" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Program::func_count</definition>
+        <argsstring></argsstring>
+        <name>func_count</name>
+        <qualifiedname>Program::func_count</qualifiedname>
+        <briefdescription>
+<para>Pocet funkci. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/ast.h" line="281" column="7" bodyfile="src/ast.h" bodystart="281" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Cely program: seznam definic funkci. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="6">
+        <label>Block</label>
+        <link refid="structBlock"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>items</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Expr</label>
+        <link refid="structExpr"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>literal</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>args</edgelabel>
+          <edgelabel>cond</edgelabel>
+          <edgelabel>end</edgelabel>
+          <edgelabel>from</edgelabel>
+          <edgelabel>index</edgelabel>
+          <edgelabel>items</edgelabel>
+          <edgelabel>left</edgelabel>
+          <edgelabel>list</edgelabel>
+          <edgelabel>object</edgelabel>
+          <edgelabel>operand</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>else_block</edgelabel>
+          <edgelabel>then_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>FuncDef</label>
+        <link refid="structFuncDef"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>return_type</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Literal</label>
+        <link refid="structLiteral"/>
+      </node>
+      <node id="3">
+        <label>Param</label>
+        <link refid="structParam"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Program</label>
+        <link refid="structProgram"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>funcs</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Stmt</label>
+        <link refid="structStmt"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>declared_type</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>cond</edgelabel>
+          <edgelabel>expr</edgelabel>
+          <edgelabel>guards</edgelabel>
+          <edgelabel>init</edgelabel>
+          <edgelabel>source</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>body</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Symbol</label>
+        <link refid="structSymbol"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>param_types</edgelabel>
+          <edgelabel>return_type</edgelabel>
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>def</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Type</label>
+        <link refid="structType"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>element</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/ast.h" line="279" column="1" bodyfile="src/ast.h" bodystart="279" bodyend="282"/>
+    <listofallmembers>
+      <member refid="structProgram_1af9b0790ac231df69afcbf3a79f1f8148" prot="public" virt="non-virtual"><scope>Program</scope><name>func_count</name></member>
+      <member refid="structProgram_1a017c2804979fd0082a925a1abd05f4ac" prot="public" virt="non-virtual"><scope>Program</scope><name>funcs</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

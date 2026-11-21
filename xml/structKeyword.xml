@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structKeyword" kind="struct" language="C++" prot="public">
+    <compoundname>Keyword</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structKeyword_1af319339fc4bded005db93c0cf6f3d04b" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Keyword::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>Keyword::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="223" column="14" bodyfile="src/scanner.c" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structKeyword_1ad436356b8655a1d3fe930d5e9731007d" prot="public" static="no" mutable="no">
+        <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+        <definition>TokenType Keyword::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>Keyword::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/scanner.c" line="224" column="13" bodyfile="src/scanner.c" bodystart="224" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/scanner.c" line="222" column="1" bodyfile="src/scanner.c" bodystart="222" bodyend="225"/>
+    <listofallmembers>
+      <member refid="structKeyword_1af319339fc4bded005db93c0cf6f3d04b" prot="public" virt="non-virtual"><scope>Keyword</scope><name>name</name></member>
+      <member refid="structKeyword_1ad436356b8655a1d3fe930d5e9731007d" prot="public" virt="non-virtual"><scope>Keyword</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

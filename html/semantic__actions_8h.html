@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>src/semantic_actions.h file | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a>/</span>semantic_actions.h <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a84abb0a6f1e7b9aa0e2f0f7fe2687a3e" class="m-doc">semantic_action_prolog</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 0 (prolog).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a33b94b90eb74066840d05665e1460475" class="m-doc">semantic_action_function_definition</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 3 (deklarace funkce).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a63d05ed2eab809319d0d0575e1def80c" class="m-doc">semantic_action_main_annotation</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 4 (anotace main).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7d20a204ab5eeddf4466a2eed28fecfb" class="m-doc">semantic_action_param_add</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 8 (pridani parametru).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#abca363c0dee931d76ba5deba7b3aefa5" class="m-doc">semantic_action_type_int</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 14 (typ integer).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ada5b64f35fb8e632b8dd49a93a88b936" class="m-doc">semantic_action_type_double</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 15 (typ double).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5e1307e241174849b065f0a00e53c466" class="m-doc">semantic_action_type_string</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 16 (typ string).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a11043671538a2b24905adad30713b634" class="m-doc">semantic_action_type_unit</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 17 (typ unit).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a03780a50e16ae80bb0869402be6de9bf" class="m-doc">semantic_action_type_boolean</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 18 (typ boolean).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a519aac962bbf81f7089e933500fc6ab8" class="m-doc">semantic_action_type_list</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 19 (typ list).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab5065dae1188259ce0f2c07b29e0ec4b" class="m-doc">semantic_action_block</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 22 (blok a prvni prikaz).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a78bfba35fcd216fc0dd1f60a9ab52967" class="m-doc">semantic_action_declaration_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 27 (prikaz deklarace).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2ff985fbcc59c5d5c27b7c0484b3b288" class="m-doc">semantic_action_val</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 28 (deklarace nemodifikovatelne promenne).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a35538b7b126a0b29f0dd63a56f9b3fc1" class="m-doc">semantic_action_id_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 31 (prikaz zacinajici id).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#afbf29aa30bc0b12434562b6315ed9949" class="m-doc">semantic_action_return_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 34 (prikaz return).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7552de2e31348adf3c8fab9d2cc08a31" class="m-doc">semantic_action_while_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 37 (cyklus while).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9030d25e09d551ad7adc3b264c26396c" class="m-doc">semantic_action_for_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 38 (cyklus for).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a68c579d3eccf8644f7c76bce093dc7b6" class="m-doc">semantic_action_for_header_inline</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 39 (jednoradkova hlavicka for).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4456d2a4d1992d452ac2da8f8e624144" class="m-doc">semantic_action_for_header_block</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 40 (viceradkova hlavicka for).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a17fb616a64d7391261ba85b1c46f0e0c" class="m-doc">semantic_action_guard_next</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 41 (dalsi straz).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae0a28382292f3df2797d3339340f0021" class="m-doc">semantic_action_if_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 47 (podminka).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a70f1c8f6b4f9d75af28ca6ad6193f97e" class="m-doc">semantic_action_optional_else_present</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 48 (nepovinna cast else).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#abedda2a868f03a7916873277c120be37" class="m-doc">semantic_action_ternary_if</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 50 (ternarni podminka).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a10595bab05838d48245a086b709f1160" class="m-doc">semantic_action_else_ternary_if_indented</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd>Semanticka akce pravidla 53 (odsazena vetev else).</dd>
+            <dt id="a810f56afde10fd6933439ac56bb8be4f">
+              <span class="m-doc-wrap-bumper">void <a href="#a810f56afde10fd6933439ac56bb8be4f" class="m-doc-self">semantic_action_else_or_command_end_else</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a76fbb74b0f481accbd6e3f747281b740">
+              <span class="m-doc-wrap-bumper">void <a href="#a76fbb74b0f481accbd6e3f747281b740" class="m-doc-self">semantic_action_test_expr</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2d17b0353c9c8ee648d4e2781d9b4193">
+              <span class="m-doc-wrap-bumper">auto <a href="#a2d17b0353c9c8ee648d4e2781d9b4193" class="m-doc-self">target_block</a>(</span><span class="m-doc-wrap">void* ptr,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line) -&gt; <a href="structBlock.html" class="m-doc">Block</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a84abb0a6f1e7b9aa0e2f0f7fe2687a3e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84abb0a6f1e7b9aa0e2f0f7fe2687a3e" class="m-doc-self">semantic_action_prolog</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 0 (prolog).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a33b94b90eb74066840d05665e1460475"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a33b94b90eb74066840d05665e1460475" class="m-doc-self">semantic_action_function_definition</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 3 (deklarace funkce).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a63d05ed2eab809319d0d0575e1def80c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63d05ed2eab809319d0d0575e1def80c" class="m-doc-self">semantic_action_main_annotation</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 4 (anotace main).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7d20a204ab5eeddf4466a2eed28fecfb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d20a204ab5eeddf4466a2eed28fecfb" class="m-doc-self">semantic_action_param_add</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 8 (pridani parametru).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="abca363c0dee931d76ba5deba7b3aefa5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abca363c0dee931d76ba5deba7b3aefa5" class="m-doc-self">semantic_action_type_int</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 14 (typ integer).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="ada5b64f35fb8e632b8dd49a93a88b936"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ada5b64f35fb8e632b8dd49a93a88b936" class="m-doc-self">semantic_action_type_double</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 15 (typ double).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a5e1307e241174849b065f0a00e53c466"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5e1307e241174849b065f0a00e53c466" class="m-doc-self">semantic_action_type_string</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 16 (typ string).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a11043671538a2b24905adad30713b634"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a11043671538a2b24905adad30713b634" class="m-doc-self">semantic_action_type_unit</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 17 (typ unit).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a03780a50e16ae80bb0869402be6de9bf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a03780a50e16ae80bb0869402be6de9bf" class="m-doc-self">semantic_action_type_boolean</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 18 (typ boolean).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a519aac962bbf81f7089e933500fc6ab8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a519aac962bbf81f7089e933500fc6ab8" class="m-doc-self">semantic_action_type_list</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 19 (typ list).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab5065dae1188259ce0f2c07b29e0ec4b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab5065dae1188259ce0f2c07b29e0ec4b" class="m-doc-self">semantic_action_block</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 22 (blok a prvni prikaz).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a78bfba35fcd216fc0dd1f60a9ab52967"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a78bfba35fcd216fc0dd1f60a9ab52967" class="m-doc-self">semantic_action_declaration_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 27 (prikaz deklarace).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2ff985fbcc59c5d5c27b7c0484b3b288"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2ff985fbcc59c5d5c27b7c0484b3b288" class="m-doc-self">semantic_action_val</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 28 (deklarace nemodifikovatelne promenne).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a35538b7b126a0b29f0dd63a56f9b3fc1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a35538b7b126a0b29f0dd63a56f9b3fc1" class="m-doc-self">semantic_action_id_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 31 (prikaz zacinajici id).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Terminalu ID priradi anotaci CONTEXT_ID_COMMAND, aby ho zpracovala special_action_id, a neterminalu &lt;IDcommand&gt; preda svuj semanticky ukazatel (kam ulozit prirazeni nebo vyraz). Dalsi atributy stavba stromu nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="afbf29aa30bc0b12434562b6315ed9949"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afbf29aa30bc0b12434562b6315ed9949" class="m-doc-self">semantic_action_return_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 34 (prikaz return).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7552de2e31348adf3c8fab9d2cc08a31"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7552de2e31348adf3c8fab9d2cc08a31" class="m-doc-self">semantic_action_while_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 37 (cyklus while).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9030d25e09d551ad7adc3b264c26396c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9030d25e09d551ad7adc3b264c26396c" class="m-doc-self">semantic_action_for_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 38 (cyklus for).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a68c579d3eccf8644f7c76bce093dc7b6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68c579d3eccf8644f7c76bce093dc7b6" class="m-doc-self">semantic_action_for_header_inline</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 39 (jednoradkova hlavicka for).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a4456d2a4d1992d452ac2da8f8e624144"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4456d2a4d1992d452ac2da8f8e624144" class="m-doc-self">semantic_action_for_header_block</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 40 (viceradkova hlavicka for).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a17fb616a64d7391261ba85b1c46f0e0c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17fb616a64d7391261ba85b1c46f0e0c" class="m-doc-self">semantic_action_guard_next</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 41 (dalsi straz).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="ae0a28382292f3df2797d3339340f0021"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0a28382292f3df2797d3339340f0021" class="m-doc-self">semantic_action_if_command</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 47 (podminka).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a70f1c8f6b4f9d75af28ca6ad6193f97e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a70f1c8f6b4f9d75af28ca6ad6193f97e" class="m-doc-self">semantic_action_optional_else_present</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 48 (nepovinna cast else).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="abedda2a868f03a7916873277c120be37"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abedda2a868f03a7916873277c120be37" class="m-doc-self">semantic_action_ternary_if</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 50 (ternarni podminka).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+          <section class="m-doc-details" id="a10595bab05838d48245a086b709f1160"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a10595bab05838d48245a086b709f1160" class="m-doc-self">semantic_action_else_ternary_if_indented</a>(</span><span class="m-doc-wrap"><a href="structSemanticContext.html" class="m-doc">SemanticContext</a>* ctx,
+              void* semantic_pointer,
+              <a href="semantic__types_8h.html#a1982e4c9bda350aa5385b920694c7ebf" class="m-doc">ContextAnnotation</a> annotation,
+              int line,
+              <a href="structStack.html" class="m-doc">Stack</a>* stack)</span></span>
+            </h3>
+            <p>Semanticka akce pravidla 53 (odsazena vetev else).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ctx</td>
+                  <td>Semanticky kontext.</td>
+                </tr>
+                <tr>
+                  <td>semantic_pointer</td>
+                  <td>Ukazatel ulozeny u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>annotation</td>
+                  <td>Kontextova anotace ulozena u rozvadeneho neterminalu.</td>
+                </tr>
+                <tr>
+                  <td>line</td>
+                  <td>Cislo radku aktualniho vstupniho terminalu.</td>
+                </tr>
+                <tr>
+                  <td>stack</td>
+                  <td>Zasobnik parseru.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik. Atributy pro stavbu stromu zatim nepridava.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Symbol struct | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Symbol <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="symtable_8h.html">&lt;src/symtable.h&gt;</a></div>
+        </h1>
+        <p>Definice struktury <a href="structSymbol.html" class="m-doc">Symbol</a>.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>Polozka kind urcuje, ktera varianta unie as je platna.</p>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a15ea2d09721ddb027b2502717d27de0a">
+              <a href="symtable_8h.html#a05812818de02fb4b202d7513ce50745d" class="m-doc">SymbolKind</a> <a href="#a15ea2d09721ddb027b2502717d27de0a" class="m-doc-self">kind</a>
+            </dt>
+            <dd>Urcuje, kterou polozku z as cist.</dd>
+            <dt id="aa9ba617cd9de17ed73148893a6c14606">
+              char* <a href="#aa9ba617cd9de17ed73148893a6c14606" class="m-doc-self">name</a>
+            </dt>
+            <dd>Jmeno, vlastni kopie.</dd>
+            <dt id="aef1817df07977c196cea6c46261b4049">
+              <a href="structType.html" class="m-doc">Type</a>* <a href="#aef1817df07977c196cea6c46261b4049" class="m-doc-self">type</a>
+            </dt>
+            <dd>Typ promenne, vlastni kopie.</dd>
+            <dt id="a5334dae4aa73c33e0ccf675da67d22c9">
+              bool <a href="#a5334dae4aa73c33e0ccf675da67d22c9" class="m-doc-self">is_mutable</a>
+            </dt>
+            <dd>True pro var, false pro val a parametry.</dd>
+            <dt id="a9021011055137bfd999eebb115fe6902">
+              int <a href="#a9021011055137bfd999eebb115fe6902" class="m-doc-self">unique_id</a>
+            </dt>
+            <dd>Jedinecne cislo, aby se zastinene promenne nepletly.</dd>
+            <dt>
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a> <a href="#ac9e1135ec38b3478e4719cbb4681bfce" class="m-doc">var</a>
+            </dt>
+            <dd></dd>
+            <dt id="a803ae4e24e071a47cc4d9e67f3835f28">
+              <a href="structFuncDef.html" class="m-doc">FuncDef</a>* <a href="#a803ae4e24e071a47cc4d9e67f3835f28" class="m-doc-self">def</a>
+            </dt>
+            <dd>Definice v AST (nevlastni), NULL pro vestavenou funkci.</dd>
+            <dt id="a0a65692aed768a077b41eb6783de9086">
+              int <a href="#a0a65692aed768a077b41eb6783de9086" class="m-doc-self">param_count</a>
+            </dt>
+            <dd>Pocet parametru.</dd>
+            <dt id="aafca63282d7b626fbfb43c7c3d1ac47d">
+              <a href="structType.html" class="m-doc">Type</a>** <a href="#aafca63282d7b626fbfb43c7c3d1ac47d" class="m-doc-self">param_types</a>
+            </dt>
+            <dd>Typy parametru (vlastni kopie), NULL prvek znamena Any.</dd>
+            <dt id="a7ea6f6f8ee238ba1a89e59d0e7567567">
+              <a href="structType.html" class="m-doc">Type</a>* <a href="#a7ea6f6f8ee238ba1a89e59d0e7567567" class="m-doc-self">return_type</a>
+            </dt>
+            <dd>Navratovy typ (vlastni kopie), NULL dokud neni znamy.</dd>
+            <dt id="abba1d8d80b49d618fd22e506fa8172ae">
+              bool <a href="#abba1d8d80b49d618fd22e506fa8172ae" class="m-doc-self">is_builtin</a>
+            </dt>
+            <dd>True pro vestavene funkce (print, readInt...).</dd>
+            <dt id="a439c41e14e29507c123da30c4fecbcaf">
+              bool <a href="#a439c41e14e29507c123da30c4fecbcaf" class="m-doc-self">being_inferred</a>
+            </dt>
+            <dd>True, kdyz se navratovy typ prave odvozuje (detekce rekurze).</dd>
+            <dt>
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a> <a href="#a7a5143077a31c13ccf65948a260048e8" class="m-doc">func</a>
+            </dt>
+            <dd></dd>
+            <dt id="af08cf922cfee0e3996639446a68f244c">
+              union <a href="structSymbol.html" class="m-doc">Symbol</a> <a href="#af08cf922cfee0e3996639446a68f244c" class="m-doc-self">as</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="ac9e1135ec38b3478e4719cbb4681bfce"><div>
+            <h3>
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a> Symbol::<wbr /><a href="#ac9e1135ec38b3478e4719cbb4681bfce" class="m-doc-self">var</a>
+            </h3>
+<p>Pro SYM_VAR.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7a5143077a31c13ccf65948a260048e8"><div>
+            <h3>
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a> Symbol::<wbr /><a href="#a7a5143077a31c13ccf65948a260048e8" class="m-doc-self">func</a>
+            </h3>
+<p>Pro SYM_FUNC.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

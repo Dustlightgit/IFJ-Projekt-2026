@@ -8,45 +8,12 @@
     Tento soubor obsahuje implementaci tabulky symbolu pomoci AVL stromu.
 */
 
+#include "symtable.h"
+#include "memory.h"
 #include <stdlib.h>
 #include <string.h>
 
-#include "error.h"
-#include "symtable.h"
-
 #define GLOBAL_SCOPE 0
-
-//--------------------------------------------------------------------------------//
-// Pomocne funkce pro praci s pameti (pri chybe konci pres error_exit)
-//--------------------------------------------------------------------------------//
-
-static void *xmalloc(size_t size) {
-  void *p = malloc(size);
-  if (!p)
-    error_exit(ERR_INTERNAL, 0, "Nedostatek pameti");
-  return p;
-}
-
-static void *xcalloc(size_t n, size_t size) {
-  void *p = calloc(n, size);
-  if (!p)
-    error_exit(ERR_INTERNAL, 0, "Nedostatek pameti");
-  return p;
-}
-
-static void *xrealloc(void *ptr, size_t size) {
-  void *p = realloc(ptr, size);
-  if (!p)
-    error_exit(ERR_INTERNAL, 0, "Nedostatek pameti");
-  return p;
-}
-
-static char *xstrdup(const char *s) {
-  size_t len = strlen(s) + 1;
-  char *copy = xmalloc(len);
-  memcpy(copy, s, len);
-  return copy;
-}
 
 //--------------------------------------------------------------------------------//
 // AVL strom s dvojitym klicem (jmeno, scope_id)

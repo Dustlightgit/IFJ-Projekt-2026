@@ -1,0 +1,1109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="generator_8h" kind="file" language="C++">
+    <compoundname>generator.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="ast_8h" local="yes">ast.h</includes>
+    <includes refid="symtable_8h" local="yes">symtable.h</includes>
+    <includedby refid="generator_8c" local="yes">src/generator.c</includedby>
+    <includedby refid="main_8c" local="yes">src/main.c</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>ast.h</label>
+        <link refid="ast_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/generator.h</label>
+        <link refid="generator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>symtable.h</label>
+        <link refid="symtable_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/generator.c</label>
+        <link refid="generator_8c"/>
+      </node>
+      <node id="1">
+        <label>src/generator.h</label>
+        <link refid="generator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="generator_8h_1a255af051a94f02cc444f2daa6e378792" prot="public" static="no">
+        <type>struct <ref refid="structGen" kindref="compound">Gen</ref></type>
+        <definition>typedef struct Gen Gen</definition>
+        <argsstring></argsstring>
+        <name>Gen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="97" column="18" bodyfile="src/generator.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="generator_8h_1ac2186d12f07712ed7d95b8c69e2f0772" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void generate_program</definition>
+        <argsstring>(Program *program, FILE *out)</argsstring>
+        <name>generate_program</name>
+        <param>
+          <type><ref refid="structProgram" kindref="compound">Program</ref> *</type>
+          <declname>program</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="83" column="6" bodyfile="src/generator.c" bodystart="1253" bodyend="1278" declfile="src/generator.h" declline="83" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a859f0e8de24b03fae077551e661303c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_emit</definition>
+        <argsstring>(Gen *g, const char *fmt,...)</argsstring>
+        <name>gen_emit</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="107" column="6" bodyfile="src/generator.c" bodystart="407" bodyend="413" declfile="src/generator.h" declline="107" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a88d7edf4a7aae87ef7ba60bcf33ac56d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_push</definition>
+        <argsstring>(Gen *g, const char *symb)</argsstring>
+        <name>gen_push</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>symb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="110" column="6" bodyfile="src/generator.c" bodystart="415" bodyend="418" declfile="src/generator.h" declline="110" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a631624232ba0b1ac0f88c595d6d854a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_pop</definition>
+        <argsstring>(Gen *g, const char *var)</argsstring>
+        <name>gen_pop</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="113" column="6" bodyfile="src/generator.c" bodystart="420" bodyend="423" declfile="src/generator.h" declline="113" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a43cc1014cb13de897d9b1357db94429f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_discard</definition>
+        <argsstring>(Gen *g)</argsstring>
+        <name>gen_discard</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="116" column="6" bodyfile="src/generator.c" bodystart="425" bodyend="425" declfile="src/generator.h" declline="116" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a4406d428648e00407fb9d7dbcb31598b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_stack_op</definition>
+        <argsstring>(Gen *g, const char *op, int consumed, int produced)</argsstring>
+        <name>gen_stack_op</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>consumed</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>produced</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="122" column="6" bodyfile="src/generator.c" bodystart="427" bodyend="430" declfile="src/generator.h" declline="122" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a1db9603f6fb9ed6b9053c93c48802eb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_check_depth</definition>
+        <argsstring>(const Gen *g, int expected, int line)</argsstring>
+        <name>gen_check_depth</name>
+        <param>
+          <type>const <ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="129" column="6" bodyfile="src/generator.c" bodystart="432" bodyend="437" declfile="src/generator.h" declline="129" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a72e13d30596e82be78796e1746641a1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_make_label</definition>
+        <argsstring>(Gen *g, char *buf, size_t size, const char *prefix)</argsstring>
+        <name>gen_make_label</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>prefix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="136" column="6" bodyfile="src/generator.c" bodystart="450" bodyend="453" declfile="src/generator.h" declline="136" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a18a76b6a0635e1d006f46671240c5f41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_function_label</definition>
+        <argsstring>(char *buf, size_t size, const char *name)</argsstring>
+        <name>gen_function_label</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="142" column="6" bodyfile="src/generator.c" bodystart="455" bodyend="457" declfile="src/generator.h" declline="142" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a4edde93c8186cd0a9580934b7c718788" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_var_name</definition>
+        <argsstring>(char *buf, size_t size, const Symbol *symbol)</argsstring>
+        <name>gen_var_name</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSymbol" kindref="compound">Symbol</ref> *</type>
+          <declname>symbol</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="148" column="6" bodyfile="src/generator.c" bodystart="459" bodyend="461" declfile="src/generator.h" declline="148" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a13081969f67145dbf0da041fde39624b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_declare_var</definition>
+        <argsstring>(Gen *g, const char *var)</argsstring>
+        <name>gen_declare_var</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="154" column="6" bodyfile="src/generator.c" bodystart="463" bodyend="469" declfile="src/generator.h" declline="154" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1ad624ed893b48a25a2e2eae4653c2e2ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_new_temp</definition>
+        <argsstring>(Gen *g, char *buf, size_t size)</argsstring>
+        <name>gen_new_temp</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="157" column="6" bodyfile="src/generator.c" bodystart="471" bodyend="475" declfile="src/generator.h" declline="157" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a973112064a16ac10e869559fe2bc4745" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_push_literal</definition>
+        <argsstring>(Gen *g, const Literal *literal)</argsstring>
+        <name>gen_push_literal</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structLiteral" kindref="compound">Literal</ref> *</type>
+          <declname>literal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="169" column="6" bodyfile="src/generator.c" bodystart="504" bodyend="526" declfile="src/generator.h" declline="169" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a03a697828bdba760c1e82f71fdf5ce61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_convert</definition>
+        <argsstring>(Gen *g, const Type *from, const Type *to)</argsstring>
+        <name>gen_convert</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>to</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="176" column="6" bodyfile="src/generator.c" bodystart="528" bodyend="533" declfile="src/generator.h" declline="176" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1addc338f5fe3d0bfe9a1200b545f6a2c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_entry</definition>
+        <argsstring>(Gen *g, const FuncDef *main_func)</argsstring>
+        <name>gen_entry</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>main_func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="187" column="6" bodyfile="src/generator.c" bodystart="539" bodyend="553" declfile="src/generator.h" declline="187" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1acea7231ebb19be3a2883a5dba781a51b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_function</definition>
+        <argsstring>(Gen *g, const FuncDef *func)</argsstring>
+        <name>gen_function</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structFuncDef" kindref="compound">FuncDef</ref> *</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="196" column="6" bodyfile="src/generator.c" bodystart="583" bodyend="623" declfile="src/generator.h" declline="196" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1adfc328bd4f547410bf37e643f7c73785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_return_sequence</definition>
+        <argsstring>(Gen *g)</argsstring>
+        <name>gen_return_sequence</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="205" column="6" bodyfile="src/generator.c" bodystart="555" bodyend="570" declfile="src/generator.h" declline="205" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1aace2038b82ae0e1d655bb2cb7e2c2cd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_use_runtime</definition>
+        <argsstring>(Gen *g, const char *name)</argsstring>
+        <name>gen_use_runtime</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="217" column="6" bodyfile="src/generator.c" bodystart="640" bodyend="650" declfile="src/generator.h" declline="217" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a55d6c9f81f6c49271cc3af54dd729d47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_call</definition>
+        <argsstring>(Gen *g, const char *label, int argc)</argsstring>
+        <name>gen_call</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="223" column="6" bodyfile="src/generator.c" bodystart="652" bodyend="655" declfile="src/generator.h" declline="223" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a2acfa3da5955d3827959cfe4ab310205" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_call_runtime</definition>
+        <argsstring>(Gen *g, const char *name, int argc)</argsstring>
+        <name>gen_call_runtime</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="226" column="6" bodyfile="src/generator.c" bodystart="657" bodyend="663" declfile="src/generator.h" declline="226" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1aff5dc181cbdbde1c6c4b95b953f6452b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_emit_used_runtime</definition>
+        <argsstring>(Gen *g)</argsstring>
+        <name>gen_emit_used_runtime</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="232" column="6" bodyfile="src/generator.c" bodystart="665" bodyend="674" declfile="src/generator.h" declline="232" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a6ce53a931e610176d2551a1c552396ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_block</definition>
+        <argsstring>(Gen *g, const Block *block, const Type *want)</argsstring>
+        <name>gen_block</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structBlock" kindref="compound">Block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>want</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="244" column="6" bodyfile="src/generator.c" bodystart="680" bodyend="695" declfile="src/generator.h" declline="244" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a4158677e94c93859a655b6703193ec92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_stmt</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_stmt</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="250" column="6" bodyfile="src/generator.c" bodystart="697" bodyend="725" declfile="src/generator.h" declline="250" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a6d6b62d32da12b8f3e2f3e9fe95ee697" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_stmt_vardef</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_stmt_vardef</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="256" column="6" bodyfile="src/generator.c" bodystart="727" bodyend="735" declfile="src/generator.h" declline="256" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a3cc132453fdc7eb28e5e9243552ea159" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_stmt_assign</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_stmt_assign</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="259" column="6" bodyfile="src/generator.c" bodystart="737" bodyend="744" declfile="src/generator.h" declline="259" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1af7b16564443fd9e8bebcc1f59d6fabc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_stmt_return</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_stmt_return</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="265" column="6" bodyfile="src/generator.c" bodystart="746" bodyend="764" declfile="src/generator.h" declline="265" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1abaa94677f72c9ebd6352afcdd7a49b48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_stmt_while</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_stmt_while</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="268" column="6" bodyfile="src/generator.c" bodystart="766" bodyend="777" declfile="src/generator.h" declline="268" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1af2508882fb5db3f0d80df293cab1f63a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_stmt_for</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_stmt_for</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="271" column="6" bodyfile="src/generator.c" bodystart="779" bodyend="785" declfile="src/generator.h" declline="271" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1abe9447a85576a42485c022718aa37221" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_for_range</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_for_range</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="278" column="6" bodyfile="src/generator.c" bodystart="804" bodyend="851" declfile="src/generator.h" declline="278" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1af6178bcd13f0e5815e1bfcda50153a09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_for_list</definition>
+        <argsstring>(Gen *g, const Stmt *stmt)</argsstring>
+        <name>gen_for_list</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="281" column="6" bodyfile="src/generator.c" bodystart="853" bodyend="883" declfile="src/generator.h" declline="281" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a26453cec7c8a6886237a8ef6cb91b507" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_for_guards</definition>
+        <argsstring>(Gen *g, const Stmt *stmt, const char *skip_label)</argsstring>
+        <name>gen_for_guards</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structStmt" kindref="compound">Stmt</ref> *</type>
+          <declname>stmt</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>skip_label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="287" column="6" bodyfile="src/generator.c" bodystart="787" bodyend="791" declfile="src/generator.h" declline="287" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a400d24ff6ba6f2f68f56073ee45dea0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="294" column="6" bodyfile="src/generator.c" bodystart="889" bodyend="934" declfile="src/generator.h" declline="294" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1abd6faba9d130a78e54ac8f89d31c814e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_as</definition>
+        <argsstring>(Gen *g, const Expr *expr, const Type *target)</argsstring>
+        <name>gen_expr_as</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structType" kindref="compound">Type</ref> *</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="301" column="6" bodyfile="src/generator.c" bodystart="936" bodyend="939" declfile="src/generator.h" declline="301" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a65109691714edd12e5871fbd64ae903d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_jump_if_false</definition>
+        <argsstring>(Gen *g, const Expr *cond, const char *label)</argsstring>
+        <name>gen_jump_if_false</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>cond</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>label</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="307" column="6" bodyfile="src/generator.c" bodystart="941" bodyend="945" declfile="src/generator.h" declline="307" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1af18f103af452fd8300db0864f7a1679f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_unary</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_unary</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="310" column="6" bodyfile="src/generator.c" bodystart="947" bodyend="961" declfile="src/generator.h" declline="310" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a3cc110f5cb69f4e613dd018790537536" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_binary</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_binary</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="313" column="6" bodyfile="src/generator.c" bodystart="971" bodyend="993" declfile="src/generator.h" declline="313" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1aa746f2cc15e3c14e0dc793c2f83f1ea1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_arithmetic</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_arithmetic</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="320" column="6" bodyfile="src/generator.c" bodystart="995" bodyend="1033" declfile="src/generator.h" declline="320" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a9ed0f337147b8e2af2f15b956b2623a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_comparison</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_comparison</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="326" column="6" bodyfile="src/generator.c" bodystart="1035" bodyend="1070" declfile="src/generator.h" declline="326" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a3928e1dbe10b8262c6f6c91f59da4023" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_logical</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_logical</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="329" column="6" bodyfile="src/generator.c" bodystart="1072" bodyend="1092" declfile="src/generator.h" declline="329" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a1a8e085c0f342bdef181c51fafe29190" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_call</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_call</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="340" column="6" bodyfile="src/generator.c" bodystart="1094" bodyend="1119" declfile="src/generator.h" declline="340" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1af3ebdc6f28e426dfea9771bcd880f950" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_if</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_if</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="347" column="6" bodyfile="src/generator.c" bodystart="1133" bodyend="1149" declfile="src/generator.h" declline="347" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a3793c4e3d2530f0fea279dbd3c84c6e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_member</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_member</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="354" column="6" bodyfile="src/generator.c" bodystart="1162" bodyend="1199" declfile="src/generator.h" declline="354" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a7b228962ef21538f305f0a12bf1adf3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_list_literal</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_list_literal</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="357" column="6" bodyfile="src/generator.c" bodystart="1201" bodyend="1217" declfile="src/generator.h" declline="357" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a33a549e81849673bd570a28bd4ddf239" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_list_range</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_list_range</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="363" column="6" bodyfile="src/generator.c" bodystart="1233" bodyend="1236" declfile="src/generator.h" declline="363" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1a52cbf8914a3a71d49c7092aacd849102" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_range</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_range</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="369" column="6" bodyfile="src/generator.c" bodystart="1238" bodyend="1241" declfile="src/generator.h" declline="369" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="generator_8h_1af37373e679f3acbd2e831db162dd786a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gen_expr_index</definition>
+        <argsstring>(Gen *g, const Expr *expr)</argsstring>
+        <name>gen_expr_index</name>
+        <param>
+          <type><ref refid="structGen" kindref="compound">Gen</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structExpr" kindref="compound">Expr</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/generator.h" line="375" column="6" bodyfile="src/generator.c" bodystart="1243" bodyend="1247" declfile="src/generator.h" declline="375" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/generator.h"/>
+  </compounddef>
+</doxygen>

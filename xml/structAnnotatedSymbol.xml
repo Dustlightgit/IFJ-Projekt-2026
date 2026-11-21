@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structAnnotatedSymbol" kind="struct" language="C++" prot="public">
+    <compoundname>AnnotatedSymbol</compoundname>
+    <includes refid="semantic__types_8h" local="no">semantic_types.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structAnnotatedSymbol_1a195abf428dedb51a1286750ac553983e" prot="public" static="no" mutable="no">
+        <type><ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref></type>
+        <definition>GrammarSymbol AnnotatedSymbol::symbol</definition>
+        <argsstring></argsstring>
+        <name>symbol</name>
+        <qualifiedname>AnnotatedSymbol::symbol</qualifiedname>
+        <briefdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref>, u vysledku redukce neterminal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="399" column="17" bodyfile="src/semantic_types.h" bodystart="399" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAnnotatedSymbol_1af08e4fc18e0a47a2390475e450618c0e" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* AnnotatedSymbol::semantic_pointer</definition>
+        <argsstring></argsstring>
+        <name>semantic_pointer</name>
+        <qualifiedname>AnnotatedSymbol::semantic_pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Semanticky ukazatel noveho zaznamu, obvykle hotovy podstrom </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="400" column="8" bodyfile="src/semantic_types.h" bodystart="400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structAnnotatedSymbol_1a0a07d5a54e9fcecb429965fb5f0b71cd" prot="public" static="no" mutable="no">
+        <type><ref refid="semantic__types_8h_1a1982e4c9bda350aa5385b920694c7ebf" kindref="member">ContextAnnotation</ref></type>
+        <definition>ContextAnnotation AnnotatedSymbol::annotation</definition>
+        <argsstring></argsstring>
+        <name>annotation</name>
+        <qualifiedname>AnnotatedSymbol::annotation</qualifiedname>
+        <briefdescription>
+<para>Kontextova anotace noveho zaznamu. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/semantic_types.h" line="402" column="21" bodyfile="src/semantic_types.h" bodystart="402" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> gramatiky doplneny o semanticky ukazatel a kontextovou anotaci. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Slouzi ke snizeni poctu parametru funkci pri predavani dat budouciho zaznamu zasobniku. Pouziva se na dvou mistech: jako vystup semanticke akce precedencniho parseru (neterminal, na ktery se pravidlo redukuje) a jako volitelny pocatecni terminal vstupu precedencniho parseru. Z techto hodnot jadro sestavi novy <ref refid="structParserStackEntry" kindref="compound">ParserStackEntry</ref>. Priznak reduction_marker nastavuje jadro samo. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>AnnotatedSymbol</label>
+        <link refid="structAnnotatedSymbol"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>symbol</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>GrammarSymbol</label>
+        <link refid="structGrammarSymbol"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/semantic_types.h" line="398" column="1" bodyfile="src/semantic_types.h" bodystart="398" bodyend="403"/>
+    <listofallmembers>
+      <member refid="structAnnotatedSymbol_1a0a07d5a54e9fcecb429965fb5f0b71cd" prot="public" virt="non-virtual"><scope>AnnotatedSymbol</scope><name>annotation</name></member>
+      <member refid="structAnnotatedSymbol_1af08e4fc18e0a47a2390475e450618c0e" prot="public" virt="non-virtual"><scope>AnnotatedSymbol</scope><name>semantic_pointer</name></member>
+      <member refid="structAnnotatedSymbol_1a195abf428dedb51a1286750ac553983e" prot="public" virt="non-virtual"><scope>AnnotatedSymbol</scope><name>symbol</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

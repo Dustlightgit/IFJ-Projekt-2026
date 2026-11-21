@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stmt struct | IFJ-Projekt-2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">IFJ-Projekt-2026</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Stmt <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ast_8h.html">&lt;src/ast.h&gt;</a></div>
+        </h1>
+        <p>Prikaz: spolecna obalka pro vsechny druhy prikazu.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a7f6862510f3ec7ba0b0469c5a94def16">
+              <a href="ast_8h.html#a1b09b1c2cca879d79a9b57ae03eb9ffe" class="m-doc">StmtKind</a> <a href="#a7f6862510f3ec7ba0b0469c5a94def16" class="m-doc-self">kind</a>
+            </dt>
+            <dd>Urcuje, kterou polozku z as cist.</dd>
+            <dt id="a7c445438e82a35c1be1e48da926025dd">
+              int <a href="#a7c445438e82a35c1be1e48da926025dd" class="m-doc-self">line</a>
+            </dt>
+            <dd>Radek ve zdrojovem kodu pro chybova hlaseni.</dd>
+            <dt id="a8de60b980ec4f024c94b5f5f9f063d8c">
+              bool <a href="#a8de60b980ec4f024c94b5f5f9f063d8c" class="m-doc-self">is_mutable</a>
+            </dt>
+            <dd>True pro var, false pro val.</dd>
+            <dt id="a7fc662d2d40bd164108c209a5d3cda54">
+              char* <a href="#a7fc662d2d40bd164108c209a5d3cda54" class="m-doc-self">name</a>
+            </dt>
+            <dd>Jmeno promenne, vlastni kopie.</dd>
+            <dt id="a746f77a7caf34e8cbca4b4bb2958b96c">
+              <a href="structType.html" class="m-doc">Type</a>* <a href="#a746f77a7caf34e8cbca4b4bb2958b96c" class="m-doc-self">declared_type</a>
+            </dt>
+            <dd>Typ napsany programatorem, NULL kdyz chybi.</dd>
+            <dt id="a0e6ce523932c42b94953aeca25b24b3c">
+              <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a0e6ce523932c42b94953aeca25b24b3c" class="m-doc-self">init</a>
+            </dt>
+            <dd>Pocatecni hodnota.</dd>
+            <dt id="ac4b1b2f195cd93da6a6ed3868f0de223">
+              struct <a href="structSymbol.html" class="m-doc">Symbol</a>* <a href="#ac4b1b2f195cd93da6a6ed3868f0de223" class="m-doc-self">symbol</a>
+            </dt>
+            <dd><a href="structSymbol.html" class="m-doc">Symbol</a> z tabulky symbolu (nevlastni), vyplni semantika.</dd>
+            <dt id="acf6358e5ad08b78a131639fdc882f490">
+              struct <a href="structStmt.html" class="m-doc">Stmt</a> <a href="#acf6358e5ad08b78a131639fdc882f490" class="m-doc-self">vardef</a>
+            </dt>
+            <dd>Pro STMT_VARDEF.</dd>
+            <dt>
+              <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a465a974d8828dcb0416b7ecec0e81258" class="m-doc">value</a>
+            </dt>
+            <dd>Nova hodnota.</dd>
+            <dt id="af719c2fe1e23fc9b4da4ea5928f619d3">
+              struct <a href="structStmt.html" class="m-doc">Stmt</a> <a href="#af719c2fe1e23fc9b4da4ea5928f619d3" class="m-doc-self">assign</a>
+            </dt>
+            <dd>Pro STMT_ASSIGN.</dd>
+            <dt id="ab476cd798ece97e0b4935b68a709f759">
+              struct <a href="structStmt.html" class="m-doc">Stmt</a> <a href="#ab476cd798ece97e0b4935b68a709f759" class="m-doc-self">ret</a>
+            </dt>
+            <dd>Pro STMT_RETURN.</dd>
+            <dt id="a6843bc6006fccf3084b1cec825592d9a">
+              <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#a6843bc6006fccf3084b1cec825592d9a" class="m-doc-self">expr</a>
+            </dt>
+            <dd>Vyraz, ktery se vyhodnoti a zahodi.</dd>
+            <dt id="a280d44899f714486de4d18909dd4c478">
+              struct <a href="structStmt.html" class="m-doc">Stmt</a> <a href="#a280d44899f714486de4d18909dd4c478" class="m-doc-self">expr_stmt</a>
+            </dt>
+            <dd>Pro STMT_EXPR.</dd>
+            <dt id="abe9aabb4b724e8d37e83958364ff365a">
+              <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#abe9aabb4b724e8d37e83958364ff365a" class="m-doc-self">cond</a>
+            </dt>
+            <dd>Podminka cyklu.</dd>
+            <dt id="ab56161015a9cea022ce42dceca715b4d">
+              <a href="structBlock.html" class="m-doc">Block</a>* <a href="#ab56161015a9cea022ce42dceca715b4d" class="m-doc-self">body</a>
+            </dt>
+            <dd>Telo cyklu.</dd>
+            <dt id="ace40c14ec1a742f176a960b5be71cb03">
+              struct <a href="structStmt.html" class="m-doc">Stmt</a> <a href="#ace40c14ec1a742f176a960b5be71cb03" class="m-doc-self">while_loop</a>
+            </dt>
+            <dd>Pro STMT_WHILE.</dd>
+            <dt id="a9c286a8a57a94a8b9aa1ab3d9cbbad68">
+              char* <a href="#a9c286a8a57a94a8b9aa1ab3d9cbbad68" class="m-doc-self">var_name</a>
+            </dt>
+            <dd>Jmeno ridici promenne, vlastni kopie.</dd>
+            <dt id="aee6cccc71e77bc163d39336227a3ee38">
+              <a href="structExpr.html" class="m-doc">Expr</a>* <a href="#aee6cccc71e77bc163d39336227a3ee38" class="m-doc-self">source</a>
+            </dt>
+            <dd>Zdroj: rozsah nebo seznam.</dd>
+            <dt id="a14c2e6cf36f21e61f006b5ba4eed0db5">
+              <a href="structExpr.html" class="m-doc">Expr</a>** <a href="#a14c2e6cf36f21e61f006b5ba4eed0db5" class="m-doc-self">guards</a>
+            </dt>
+            <dd>Pole strazi (vyrazy typu Boolean).</dd>
+            <dt id="a89e1383e4ec72c4ee4fbd89f806701c2">
+              int <a href="#a89e1383e4ec72c4ee4fbd89f806701c2" class="m-doc-self">guard_count</a>
+            </dt>
+            <dd>Pocet strazi, muze byt 0.</dd>
+            <dt id="a25b50a24cc12bb72cb7bb7620bee13ce">
+              struct <a href="structStmt.html" class="m-doc">Stmt</a> <a href="#a25b50a24cc12bb72cb7bb7620bee13ce" class="m-doc-self">for_loop</a>
+            </dt>
+            <dd>Pro STMT_FOR.</dd>
+            <dt id="aea451cf5f801baddf36982963adaac87">
+              union <a href="structStmt.html" class="m-doc">Stmt</a> <a href="#aea451cf5f801baddf36982963adaac87" class="m-doc-self">as</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a465a974d8828dcb0416b7ecec0e81258"><div>
+            <h3>
+              <a href="structExpr.html" class="m-doc">Expr</a>* Stmt::<wbr /><a href="#a465a974d8828dcb0416b7ecec0e81258" class="m-doc-self">value</a>
+            </h3>
+            <p>Nova hodnota.</p>
+<p>Vracena hodnota, NULL pro prazdny return.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p>Search for files, structs, functions, or macros.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>IFJ-Projekt-2026. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.8 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

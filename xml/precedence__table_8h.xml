@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="precedence__table_8h" kind="file" language="C++">
+    <compoundname>precedence_table.h</compoundname>
+    <includes local="no">stddef.h</includes>
+    <includes refid="token_8h" local="yes">token.h</includes>
+    <includedby refid="precedence__parser_8c" local="yes">src/precedence_parser.c</includedby>
+    <includedby refid="precedence__table_8c" local="yes">src/precedence_table.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/precedence_table.h</label>
+        <link refid="precedence__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>token.h</label>
+        <link refid="token_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="2">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/precedence_parser.c</label>
+        <link refid="precedence__parser_8c"/>
+      </node>
+      <node id="3">
+        <label>src/precedence_table.c</label>
+        <link refid="precedence__table_8c"/>
+      </node>
+      <node id="1">
+        <label>src/precedence_table.h</label>
+        <link refid="precedence__table_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="precedence__table_8h_1ade0b7e0b8f7168b2833e2f38cc396596" prot="public" static="no">
+        <name>PRECEDENCE_TABLE_SIZE</name>
+        <initializer>30</initializer>
+        <briefdescription>
+<para>Pocet radku i sloupcu precedencni tabulky. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Odpovida poctu terminalu vyrazove analyzy, ktere indexuji precedencni tabulku (viz TokenType v <ref refid="token_8h" kindref="compound">token.h</ref>). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.h" line="98" column="9" bodyfile="src/precedence_table.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16df" prot="public" static="no" strong="no">
+        <type></type>
+        <name>PrecedenceDirective</name>
+        <enumvalue id="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfafe1cd9821f8efc492dbcda974313137e" prot="public">
+          <name>DIRECTIVE_ERROR</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Prazdne pole tabulky, kombinace neni platna. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfa188d91988f86e8235e8e0269b452b727" prot="public">
+          <name>DIRECTIVE_REDUCTION_MARKER</name>
+          <briefdescription>
+<para>Polozka &lt;, vlozeni znacky redukce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfa82b3472d08e054b35ea93602f17068e0" prot="public">
+          <name>DIRECTIVE_REDUCTION_EXECUTE</name>
+          <briefdescription>
+<para>Polozka &gt;, provedeni redukce. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16dfab766a8c041cdff84251fdacc2f6880a0" prot="public">
+          <name>DIRECTIVE_SHIFT_SYMBOL</name>
+          <briefdescription>
+<para>Polozka =, presun vstupniho symbolu. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Direktiva precedencni tabulky. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Prikazuje precedencnimu parseru, jakou akci ma provest. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.h" line="105" column="1" bodyfile="src/precedence_table.h" bodystart="105" bodyend="110"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="precedence__table_8h_1a4486ad15f66a22290397699afa05ac00" prot="public" static="no" extern="yes" mutable="no">
+        <type>const <ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16df" kindref="member">PrecedenceDirective</ref></type>
+        <definition>const PrecedenceDirective PRECEDENCE_TABLE[PRECEDENCE_TABLE_SIZE][PRECEDENCE_TABLE_SIZE]</definition>
+        <argsstring>[PRECEDENCE_TABLE_SIZE][PRECEDENCE_TABLE_SIZE]</argsstring>
+        <name>PRECEDENCE_TABLE</name>
+        <briefdescription>
+<para>Precedencni tabulka indexovana terminalem na zasobniku (radek) a terminalem na vstupu (sloupec). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Indexy terminalu urcuje funkce precedence_table_index. Polozky bez zaznamu jsou DIRECTIVE_ERROR (hodnota 0). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.h" line="119" column="34" bodyfile="src/precedence_table.c" bodystart="150" bodyend="241" declfile="src/precedence_table.h" declline="119" declcolumn="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="precedence__table_8h_1a8a73a844271122d98ae7d995ce8d3e16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t precedence_table_index</definition>
+        <argsstring>(TokenType terminal, int line)</argsstring>
+        <name>precedence_table_index</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>terminal</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vrati index terminalu do precedencni tabulky. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Nejprve overi token funkci token_type_validate (neplatny typ je interni chyba). Terminaly mezi TOKEN_LL_TERM_COUNT a TOKEN_EXPR_TERM_DELIMITER dostanou index vypoctem z jejich hodnoty v enumu a zabiraji souvisly rozsah od 0. Ostatni terminaly precedencni tabulky, ktere jsou v enumu TokenType mezi indexatory LL tabulky (napr. zavorky), dostanou index za timto rozsahem. <ref refid="structToken" kindref="compound">Token</ref>, ktery precedencni tabulku neindexuje, zpusobi interni chybu (ERR_INTERNAL).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Typ terminalu. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku pro chybova hlaseni, &lt;= 0 pokud neni znam. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Index v rozsahu 0 az PRECEDENCE_TABLE_SIZE - 1. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.h" line="137" column="8" bodyfile="src/precedence_table.c" bodystart="284" bodyend="296" declfile="src/precedence_table.h" declline="137" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="precedence__table_8h_1abb2b191e7dc60a6b806014ce7fbd97fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="precedence__table_8h_1ad29641fd0f43eb518a1f9cbfeb6f16df" kindref="member">PrecedenceDirective</ref></type>
+        <definition>PrecedenceDirective precedence_table_lookup</definition>
+        <argsstring>(TokenType stack_terminal, TokenType input_terminal, int line)</argsstring>
+        <name>precedence_table_lookup</name>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>stack_terminal</declname>
+        </param>
+        <param>
+          <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+          <declname>input_terminal</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Vyhleda direktivu v precedencni tabulce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Zaindexuje tabulku terminalem na zasobniku (ten je vzdy indexem tabulky, jinak jde o internich chybu) a terminalem na vstupu. Vstupni terminal, ktery precedencni tabulku neindexuje, je chyba ve vstupnim programu a program skonci syntaktickou chybou (ERR_SYNTAX). Pokud je pole tabulky prazdne (DIRECTIVE_ERROR), kombinace terminalu neni platna a program skonci take syntaktickou chybou (ERR_SYNTAX) s vypisem pouzitych indexu.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stack_terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Terminal na zasobniku (radek tabulky). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input_terminal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Terminal na vstupu (sloupec tabulky). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cislo radku vstupniho tokenu pro chybova hlaseni. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Direktiva, ktera neni DIRECTIVE_ERROR. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/precedence_table.h" line="154" column="21" bodyfile="src/precedence_table.c" bodystart="298" bodyend="340" declfile="src/precedence_table.h" declline="154" declcolumn="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/precedence_table.h"/>
+  </compounddef>
+</doxygen>

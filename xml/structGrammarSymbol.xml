@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structGrammarSymbol" kind="struct" language="C++" prot="public">
+    <compoundname>GrammarSymbol</compoundname>
+    <includes refid="grammar__symbol_8h" local="no">grammar_symbol.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structGrammarSymbol_1a608193e2ce0dcb0e79e074bde81d7fb0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool GrammarSymbol::is_terminal</definition>
+        <argsstring></argsstring>
+        <name>is_terminal</name>
+        <qualifiedname>GrammarSymbol::is_terminal</qualifiedname>
+        <briefdescription>
+<para>Odliseni terminalu od neterminalu. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/grammar_symbol.h" line="36" column="8" bodyfile="src/grammar_symbol.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGrammarSymbol_1ae557add136bbbe26cf2c96c7ce89783a" prot="public" static="no" mutable="no">
+        <type><ref refid="token_8h_1aa520fbf142ba1e7e659590c07da31921" kindref="member">TokenType</ref></type>
+        <definition>TokenType GrammarSymbol::terminal</definition>
+        <argsstring></argsstring>
+        <name>terminal</name>
+        <qualifiedname>GrammarSymbol::terminal</qualifiedname>
+        <briefdescription>
+<para>Platne, pokud je is_terminal true. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/grammar_symbol.h" line="38" column="15" bodyfile="src/grammar_symbol.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGrammarSymbol_1a1153d735e4f359a518f9b6f0d32d16c9" prot="public" static="no" mutable="no">
+        <type><ref refid="nonterminal_8h_1a85d4bc22c0246920638f94d69fe381dd" kindref="member">NonterminalType</ref></type>
+        <definition>NonterminalType GrammarSymbol::nonterminal</definition>
+        <argsstring></argsstring>
+        <name>nonterminal</name>
+        <qualifiedname>GrammarSymbol::nonterminal</qualifiedname>
+        <briefdescription>
+<para>Platne, pokud je is_terminal false. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/grammar_symbol.h" line="39" column="21" bodyfile="src/grammar_symbol.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structGrammarSymbol_1a6bc8e4a33da0790b6f0230ba03fef0b3" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structGrammarSymbol" kindref="compound">GrammarSymbol</ref></type>
+        <definition>union GrammarSymbol GrammarSymbol</definition>
+        <argsstring></argsstring>
+        <name></name>
+        <qualifiedname>GrammarSymbol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/grammar_symbol.h" line="40" column="3"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="structSymbol" kindref="compound">Symbol</ref> gramatiky, terminal nebo neterminal. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/grammar_symbol.h" line="35" column="1" bodyfile="src/grammar_symbol.h" bodystart="35" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structGrammarSymbol_1a608193e2ce0dcb0e79e074bde81d7fb0" prot="public" virt="non-virtual"><scope>GrammarSymbol</scope><name>is_terminal</name></member>
+      <member refid="structGrammarSymbol_1a1153d735e4f359a518f9b6f0d32d16c9" prot="public" virt="non-virtual"><scope>GrammarSymbol</scope><name>nonterminal</name></member>
+      <member refid="structGrammarSymbol_1ae557add136bbbe26cf2c96c7ce89783a" prot="public" virt="non-virtual"><scope>GrammarSymbol</scope><name>terminal</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

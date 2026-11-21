@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structStack" kind="struct" language="C++" prot="public">
+    <compoundname>Stack</compoundname>
+    <includes refid="stack_8h" local="no">stack.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structStack_1ac6da0059516e42463ddacb5f859ec06c" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* Stack::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>Stack::data</qualifiedname>
+        <briefdescription>
+<para>Souvisle pole prvku. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.h" line="25" column="8" bodyfile="src/stack.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structStack_1a834d89c03be722b042059a1720ccb586" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Stack::elem_size</definition>
+        <argsstring></argsstring>
+        <name>elem_size</name>
+        <qualifiedname>Stack::elem_size</qualifiedname>
+        <briefdescription>
+<para>Velikost jednoho prvku v bajtech (&gt; 0) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.h" line="26" column="10" bodyfile="src/stack.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structStack_1a300c8d23651ae1a01c4c324d30ad65a5" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Stack::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>Stack::count</qualifiedname>
+        <briefdescription>
+<para>Pocet ulozenych prvku. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.h" line="27" column="10" bodyfile="src/stack.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structStack_1a577a173bb501461575d4d371763731eb" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Stack::cap</definition>
+        <argsstring></argsstring>
+        <name>cap</name>
+        <qualifiedname>Stack::cap</qualifiedname>
+        <briefdescription>
+<para>Kapacita v prvcich. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/stack.h" line="28" column="10" bodyfile="src/stack.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Obecny zasobnik prvku pevne velikosti. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/stack.h" line="24" column="1" bodyfile="src/stack.h" bodystart="24" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structStack_1a577a173bb501461575d4d371763731eb" prot="public" virt="non-virtual"><scope>Stack</scope><name>cap</name></member>
+      <member refid="structStack_1a300c8d23651ae1a01c4c324d30ad65a5" prot="public" virt="non-virtual"><scope>Stack</scope><name>count</name></member>
+      <member refid="structStack_1ac6da0059516e42463ddacb5f859ec06c" prot="public" virt="non-virtual"><scope>Stack</scope><name>data</name></member>
+      <member refid="structStack_1a834d89c03be722b042059a1720ccb586" prot="public" virt="non-virtual"><scope>Stack</scope><name>elem_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

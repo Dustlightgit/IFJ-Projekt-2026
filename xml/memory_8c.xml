@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="memory_8c" kind="file" language="C++">
+    <compoundname>memory.c</compoundname>
+    <includes refid="memory_8h" local="yes">memory.h</includes>
+    <includes refid="error_8h" local="yes">error.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="1">
+        <label>src/memory.c</label>
+        <link refid="memory_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory.h</label>
+        <link refid="memory_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+      <node id="5">
+        <label>stdlib.h</label>
+      </node>
+      <node id="6">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="memory_8c_1af7b6b8fd37a3c4b944c71b783d50fc96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * xmalloc</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>xmalloc</name>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Alokuje blok pameti o zadane velikosti. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri selhani alokace ukonci program volanim error_exit s kodem ERR_INTERNAL.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Velikost alokovane pameti v bajtech. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na alokovanou pamet. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/memory.c" line="27" column="6" bodyfile="src/memory.c" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="memory_8c_1a9753e8ae6b7748944ccc04388c7fd857" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * xcalloc</definition>
+        <argsstring>(size_t n, size_t size)</argsstring>
+        <name>xcalloc</name>
+        <param>
+          <type>size_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Alokuje pole prvku a inicializuje vsechny bajty na nulu. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri selhani alokace ukonci program volanim error_exit s kodem ERR_INTERNAL.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pocet prvku k alokaci. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Velikost jednoho prvku v bajtech. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na vynulovanou alokovanou pamet. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/memory.c" line="34" column="6" bodyfile="src/memory.c" bodystart="34" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="memory_8c_1af1634ff7d575d04a5ad3bd26343b4e51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * xrealloc</definition>
+        <argsstring>(void *ptr, size_t size)</argsstring>
+        <name>xrealloc</name>
+        <param>
+          <type>void *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Zmeni velikost drive alokovaneho bloku pameti. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri selhani realokace ukonci program volanim error_exit s kodem ERR_INTERNAL.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel na puvodni blok pameti (nebo NULL pro novou alokaci). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nova pozadovana velikost v bajtech. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na realokovany blok pameti. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/memory.c" line="41" column="6" bodyfile="src/memory.c" bodystart="41" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="memory_8c_1a417e1e9b1022a2f475a8a6005726bf53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char * xstrdup</definition>
+        <argsstring>(const char *s)</argsstring>
+        <name>xstrdup</name>
+        <param>
+          <type>const char *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori dynamicky alokovanou kopii retezce zakoncenou nulovym znakem. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pri selhani alokace ukonci program volanim error_exit s kodem ERR_INTERNAL.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zdrojovy retezec (nesmi byt NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na nove alokovanou kopii retezce. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/memory.c" line="48" column="6" bodyfile="src/memory.c" bodystart="48" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="memory_8c_1a3d09adb9399321b53ee2ab5463f1f348" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char * xstrdup_opt</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>xstrdup_opt</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Vytvori dynamicky alokovanou kopii volitelneho retezce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pokud je vstupni ukazatel NULL, funkce nealokuje pamet a vrati NULL.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zdrojovy retezec nebo NULL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na kopii retezce, nebo NULL pokud byl vstup NULL. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/memory.c" line="55" column="6" bodyfile="src/memory.c" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="memory_8c_1add7261d18debaea99ff5b0735bc67c07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * grow_array</definition>
+        <argsstring>(void *array, int count, size_t elem_size)</argsstring>
+        <name>grow_array</name>
+        <param>
+          <type>void *</type>
+          <declname>array</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>elem_size</declname>
+        </param>
+        <briefdescription>
+<para>Zvetsi dynamicke pole o jeden prvek. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pokud je ukazatel na pole NULL (prazdne pole), alokuje pole pro jeden prvek. Pri selhani alokace ukonci program volanim error_exit s kodem ERR_INTERNAL.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>array</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ukazatel na stavajici pole nebo NULL. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Aktualni pocet prvku v poli pred zvetsenim. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Velikost jednoho prvku pole v bajtech. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ukazatel na zvetsene pole. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/memory.c" line="57" column="6" bodyfile="src/memory.c" bodystart="57" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/memory.c"/>
+  </compounddef>
+</doxygen>

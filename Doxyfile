@@ -1,6 +1,9 @@
 PROJECT_NAME           = "IFJ-Projekt-2026"
-INPUT                  = include/
+INPUT                  = src/ README.md
+USE_MDFILE_AS_MAINPAGE = README.md
 RECURSIVE              = YES
+EXTRACT_ALL            = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
 
 # Disable default Doxygen HTML output
 GENERATE_HTML          = NO
@@ -9,3 +12,4 @@ GENERATE_LATEX         = NO
 # Enable XML output for m.css to consume
 GENERATE_XML           = YES
 XML_OUTPUT             = xml
+XML_PROGRAMLISTING     = NO
