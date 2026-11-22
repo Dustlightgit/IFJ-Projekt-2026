@@ -3,12 +3,12 @@
 
     xnovacm00 Michal Novacek
 
-    semantic.c
+    semantic_analyzer.c
 
     Tento soubor obsahuje implementaci semanticke analyzy.
 */
 
-#include "semantic.h"
+#include "semantic_analyzer.h"
 #include "ast.h"
 #include "error.h"
 #include "symtable.h"

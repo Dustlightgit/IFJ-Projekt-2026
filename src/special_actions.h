@@ -13,8 +13,12 @@
         - xbalaka00 - doplnena dokumentace a funkcionalita akce
           special_action_precedence_preprocessing (prompt je zde).
         - xbalaka00 - pridana special_action_execute_expr_rule a presunuta
-          funkce ast_attach_expr ze semantic_actions.h, prejmenovana na
+          funkce ast_attach_expr ze predictive_semantic_actions.h, prejmenovana na
           special_action_expr (prompt je zde), include parser_common.h.
+        - xbalaka00 - funkce target_block a store_type sem byly presunuty z predictive_semantic_actions.*
+          a prejmenovany na special_action_expr a special_action_store_type
+        - xbalaka00 - zmenen argument funkce special_action_execute_expr_rule, protoze misto pro schovani
+          uzlu ID pro pravidla L32 a L33 bylo presunuto do ParserContext.
 
     Tento soubor obsahuje deklarace specialnich akci parseru, tedy akci,
     ktere nejsou vazane na precedencni nebo prediktivni pravidlo a maji
@@ -77,14 +81,39 @@
  *   a ulozi ukazatel na nej do ctx->id_expr, odkud ho vezme jadro parseru.
  * - ostatni anotace: zatim nic dalsiho (pozdeji nejspis interni chyba).
  *
- * @param ctx Semanticky kontext, do nej se uklada vytvoreny AST uzel.
+ * @param ctx Kontext parseru, do nej se uklada vytvoreny AST uzel
+ *        uchovavany pro pravidla L32 a L33.
  * @param semantic_pointer Ukazatel ulozeny u symbolu ID na zasobniku.
  * @param annotation Kontextova anotace ulozena u symbolu ID na zasobniku.
  * @param token Vstupni token ID ze scanneru. Token po skonceni akce uvolni
  *        parser_match, akce proto musi text, ktery chce uchovat, zkopirovat.
  */
-void special_action_id(SemanticContext *ctx, void *semantic_pointer,
+void special_action_id(ParserContext *ctx, void *semantic_pointer,
                        ContextAnnotation annotation, const Token *token);
+
+/**
+ * @brief Vrati blok, do ktereho se ma pridat prikaz nebo pripoji prikaz k vlastnikovi bloku.
+ * 
+ * Pokud pointer ukazuje na vlastnika tela (funkce, cyklus), blok se vytvori a pripoji.
+ * Pouziva se uvnitr semantickych akci prediktivniho parseru.
+ * 
+ * @param semantic_pointer Ukazatel ulozeny u neterminalu pravidla na zasobniku.
+ * @param annotation Kontextova anotace ulozena u neterminalu pravidla na zasobniku.
+ * @param line Cislo radku pro chybove vystupy.
+ */
+Block *special_action_block(void *ptr, ContextAnnotation annotation, int line);
+
+
+/**
+ * @brief Ulozi hotovy typ na misto urcene ukazatelem a anotaci (prebira vlastnictvi typu).
+ * 
+ * @param semantic_pointer Ukazatel urcujici, kam se ma typ vlozit.
+ * @param annotation Kontextova anotace urcujici, jaka funkce se ma pouzit pro vlozeni.
+ * @param type Typ, ktery se ma ulozit na dane misto.
+ * @param line Cislo radku pro chybove vystupy.
+ */
+void special_action_store_type(void *semantic_pointer, ContextAnnotation annotation,
+                       Type *type, int line);
 
 /*
     Prompt pro specialni akci predzpracovani terminalu precedencniho parseru.
@@ -167,9 +196,9 @@ void *special_action_precedence_preprocessing(Token *input_token);
 
 /*
     Prompt pro specialni akci provedeni pravidla vyrazu a pro presun funkce
-    ast_attach_expr z semantic_actions.* a jeji prejmenovani na
+    ast_attach_expr z predictive_semantic_actions.* a jeji prejmenovani na
     special_action_expr. Stejny prompt zpusobil zmeny take v special_actions.c,
-    semantic_actions.h a semantic_actions.c, jeho zneni je pouze zde.
+    predictive_semantic_actions.h a predictive_semantic_actions.c, jeho zneni je pouze zde.
 
     Prompt pro Claude:
         Dělám parser založený na hybridu prediktivní a precedenční analýzy.
@@ -267,7 +296,7 @@ void special_action_execute_expr_rule(ParserContext *ctx, Stack *stack,
  * misto urcene ukazatelem (hodnota returnu, inicializace promenne, hodnota
  * prirazeni, podminka cyklu while nebo if, zdroj nebo straz cyklu for).
  * Pri ostatnich anotacich se vyraz prida jako samostatny prikaz do bloku
- * ziskaneho funkci target_block. Drive ast_attach_expr v semantic_actions.*.
+ * ziskaneho funkci special_action_block. Drive ast_attach_expr v predictive_semantic_actions.*.
  *
  * @param ptr Semanticky ukazatel ulozeny u neterminalu, jehoz vyraz se uklada.
  * @param annotation Kontextova anotace ulozena u tohoto neterminalu.

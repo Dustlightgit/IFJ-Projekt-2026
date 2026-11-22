@@ -25,6 +25,8 @@
           prompt je v reduction_table.h).
         - xbalaka00 - pridana funkce trace_rule (prompt je v parser_common.c).
         - xbalaka00 - upraven popis funkce parser_advance
+        - xbalaka00 - misto pro schovani ID pro specialni pravidla L32 a L33
+          bylo presunuto z SemanticContext do ParserContext
 
     Tento soubor definuje veci spolecne pro oba parsery: zaznam ukladany
     na zasobniku parseru, kontext sdileny mezi parsery, funkce pro praci
@@ -133,9 +135,11 @@ typedef struct {
   Token current_token;           ///< Aktualni token na vstupu programu
   bool has_current_token;        ///< Priznak validity vstupniho tokenu
   bool previous_token_was_comma; ///< Priznak pro kontrolu koncove carky
-  SemanticContext
-      semantic_context; ///< Struktura s daty pro interni potrebu semantickych akci
-  // Pokud nebude vyuzita, bude odstranena.
+
+  /// AST uzel ID na zacatku prikazu (vytvari ho special_action_id pri
+  /// anotaci CONTEXT_ID_COMMAND, zpracuje a uvolni jadro parseru). NULL, pokud
+  /// zadny takovy uzel prave neexistuje.
+  Expr *id_expr;
 } ParserContext;
 
 /**

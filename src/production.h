@@ -25,6 +25,9 @@
           a GRAMMAR_NONTERMINAL presunuty do grammar_symbol.h,
           STATIC_PRODUCTION_MAX_LENGTH snizena na 5 (prompt je v
           reduction_table.h).
+        - xbalaka00 - odstraneny pozustatky testovaciho pravidla <expr> -> *
+        - xbalaka00 - cislovani pravidel bylo prevedeno na novy format L<n>, aby ladilo s E<n>
+          u precedencniho parseru
 
     Tento soubor obsahuje datove struktury a pomocne funkce pro reprezentaci produkci bez semanticke akce.
     Produkce je prakticky prava strana daneho pravidla. Obsahuje take
@@ -91,7 +94,7 @@
 /**
  * @brief Maximalni pocet symbolu v jedne staticke produkci.
  *
- * Hodnota odpovida nejdelsi staticke produkci (pravidlo 51).
+ * Hodnota odpovida nejdelsi staticke produkci (pravidlo L51).
  */
 #define STATIC_PRODUCTION_MAX_LENGTH 5
 
@@ -131,110 +134,104 @@ typedef struct {
 // ktere predava semanticky ukazatel (parser ukazatel i kontextovou anotaci
 // kopiruje u vsech statickych produkci, znacka je jen informativni).
 
-/// Pravidlo 1 (Seznam deklaraci) (ptr): <defList> => <def> <defList>
+/// Pravidlo L1 (Seznam deklaraci) (ptr): <defList> => <def> <defList>
 extern const StaticProduction PRODUCTION_DEF_LIST_NEXT;
 
-/// Pravidlo 2 (Konec deklaraci): <defList> => epsilon
+/// Pravidlo L2 (Konec deklaraci): <defList> => epsilon
 extern const StaticProduction PRODUCTION_DEF_LIST_END;
 
-/// Pravidlo 5 (Anotace neni): <main> => epsilon
+/// Pravidlo L5 (Anotace neni): <main> => epsilon
 extern const StaticProduction PRODUCTION_MAIN_ABSENT;
 
-/// Pravidlo 6 (EOL je): <optionalEOL> => EOL
+/// Pravidlo L6 (EOL je): <optionalEOL> => EOL
 extern const StaticProduction PRODUCTION_OPTIONAL_EOL_PRESENT;
 
-/// Pravidlo 7 (EOL neni): <optionalEOL> => epsilon
+/// Pravidlo L7 (EOL neni): <optionalEOL> => epsilon
 extern const StaticProduction PRODUCTION_OPTIONAL_EOL_ABSENT;
 
-/// Pravidlo 9 (Pridani carky) (ptr): <paramComma> => , <paramAdd>
+/// Pravidlo L9 (Pridani carky) (ptr): <paramComma> => , <paramAdd>
 extern const StaticProduction PRODUCTION_PARAM_LIST_TAIL_NEXT;
 
-/// Pravidlo 10 (Konec parametru A): <paramAdd> => epsilon
+/// Pravidlo L10 (Konec parametru A): <paramAdd> => epsilon
 extern const StaticProduction PRODUCTION_PARAM_LIST_END;
 
-/// Pravidlo 11 (Konec parametru B): <paramComma> => epsilon
+/// Pravidlo L11 (Konec parametru B): <paramComma> => epsilon
 extern const StaticProduction PRODUCTION_PARAM_LIST_TAIL_END;
 
-/// Pravidlo 12 (Navratovy typ je) (ptr): <optionalType> => : <type>
+/// Pravidlo L12 (Navratovy typ je) (ptr): <optionalType> => : <type>
 extern const StaticProduction PRODUCTION_OPTIONAL_TYPE_PRESENT;
 
-/// Pravidlo 13 (Navratovy typ neni): <optionalType> => epsilon
+/// Pravidlo L13 (Navratovy typ neni): <optionalType> => epsilon
 extern const StaticProduction PRODUCTION_OPTIONAL_TYPE_ABSENT;
 
-/// Pravidlo 20 (Jednoradkovy vyraz misto bloku) (ptr): <blockOrExpr> => <expr> EOL
+/// Pravidlo L20 (Jednoradkovy vyraz misto bloku) (ptr): <blockOrExpr> => <expr> EOL
 extern const StaticProduction PRODUCTION_BLOCK_OR_EXPR_EXPR;
 
-/// Pravidlo 21 (Pouziti bloku) (ptr): <blockOrExpr> => <block>
+/// Pravidlo L21 (Pouziti bloku) (ptr): <blockOrExpr> => <block>
 extern const StaticProduction PRODUCTION_BLOCK_OR_EXPR_BLOCK;
 
-/// Pravidlo 23 (Dalsi prikaz) (ptr): <commandList> => <command> <commandList>
+/// Pravidlo L23 (Dalsi prikaz) (ptr): <commandList> => <command> <commandList>
 extern const StaticProduction PRODUCTION_COMMAND_LIST_NEXT;
 
-/// Pravidlo 24 (Konec seznamu prikazu): <commandList> => epsilon
+/// Pravidlo L24 (Konec seznamu prikazu): <commandList> => epsilon
 extern const StaticProduction PRODUCTION_COMMAND_LIST_END;
 
-/// Pravidlo 25 (Konec prikazu - strednik): <commandEnd> => ;
+/// Pravidlo L25 (Konec prikazu - strednik): <commandEnd> => ;
 extern const StaticProduction PRODUCTION_COMMAND_END_SEMICOLON;
 
-/// Pravidlo 26 (Konec prikazu - EOL): <commandEnd> => EOL
+/// Pravidlo L26 (Konec prikazu - EOL): <commandEnd> => EOL
 extern const StaticProduction PRODUCTION_COMMAND_END_EOL;
 
-/// Pravidlo 29 (Deklarace modifikovatelne promenne): <valVar> => var
+/// Pravidlo L29 (Deklarace modifikovatelne promenne): <valVar> => var
 extern const StaticProduction PRODUCTION_VAR;
 
-/// Pravidlo 30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
+/// Pravidlo L30 (Prikaz vyrazu) (ptr): <commandSimple> => <exprNoID>
 /// Pozn.: nahradi PRODUCTION_COMMAND_EXPR, ktere se odstrani v LL tabulce.
 extern const StaticProduction PRODUCTION_COMMAND_SIMPLE_EXPR;
 
-/// Pravidlo 45 (Jednoduchy prikaz) (ptr): <command> => <commandSimple> <commandEnd>
+/// Pravidlo L45 (Jednoduchy prikaz) (ptr): <command> => <commandSimple> <commandEnd>
 extern const StaticProduction PRODUCTION_COMMAND_SIMPLE;
 
-/// Pravidlo 46 (Ridici prikaz) (ptr): <command> => <commandControl>
+/// Pravidlo L46 (Ridici prikaz) (ptr): <command> => <commandControl>
 extern const StaticProduction PRODUCTION_COMMAND_CONTROL;
 
-/// Pravidlo 55 (Then vetev s blokem) (ptr): <thenBranch> => <block> <optionalElse>
+/// Pravidlo L55 (Then vetev s blokem) (ptr): <thenBranch> => <block> <optionalElse>
 extern const StaticProduction PRODUCTION_THEN_BRANCH_BLOCK;
 
-/// Pravidlo 56 (Then vetev s prikazem) (ptr): <thenBranch> => <commandSimple> <elseOrCommandEnd>
+/// Pravidlo L56 (Then vetev s prikazem) (ptr): <thenBranch> => <commandSimple> <elseOrCommandEnd>
 extern const StaticProduction PRODUCTION_THEN_BRANCH_SIMPLE;
 
-/// Pravidlo 57 (Then vetev s ridicim prikazem, bez else) (ptr): <thenBranch> => <commandControl>
+/// Pravidlo L57 (Then vetev s ridicim prikazem, bez else) (ptr): <thenBranch> => <commandControl>
 extern const StaticProduction PRODUCTION_THEN_BRANCH_CONTROL;
 
-/// Pravidlo 58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
+/// Pravidlo L58 (Konec prikazu v then vetvi) (ptr): <elseOrCommandEnd> => <commandEnd>
 extern const StaticProduction PRODUCTION_ELSE_OR_COMMAND_END_COMMAND_END;
 
-/// Pravidlo 35 (Return vyrazu) (ptr): <returnValue> => <expr>
+/// Pravidlo L35 (Return vyrazu) (ptr): <returnValue> => <expr>
 extern const StaticProduction PRODUCTION_RETURN_VALUE_EXPR;
 
-/// Pravidlo 36 (Prazdny return): <returnValue> => epsilon
+/// Pravidlo L36 (Prazdny return): <returnValue> => epsilon
 extern const StaticProduction PRODUCTION_RETURN_VALUE_EMPTY;
 
-/// Pravidlo 42 (Konec strazi): <guardList> => epsilon
+/// Pravidlo L42 (Konec strazi): <guardList> => epsilon
 extern const StaticProduction PRODUCTION_GUARD_LIST_END;
 
-/// Pravidlo 43 (Nasleduje blok) (ptr): <blockOrCommand> => <block>
+/// Pravidlo L43 (Nasleduje blok) (ptr): <blockOrCommand> => <block>
 extern const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_BLOCK;
 
-/// Pravidlo 44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command>
+/// Pravidlo L44 (Nasleduje prikaz) (ptr): <blockOrCommand> => <command>
 extern const StaticProduction PRODUCTION_BLOCK_OR_COMMAND_COMMAND;
 
-/// Pravidlo 49 (Vynechana vetev else): <optionalElse> => epsilon
+/// Pravidlo L49 (Vynechana vetev else): <optionalElse> => epsilon
 extern const StaticProduction PRODUCTION_OPTIONAL_ELSE_ABSENT;
 
-/// Pravidlo 51 (Odsazeni vyrazu v ternarni podmince) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
+/// Pravidlo L51 (Odsazeni vyrazu v ternarni podmince) (ptr): <exprOrIndentExpr> => EOL INDENT <expr> EOL DEDENT
 extern const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_INDENTED;
 
-/// Pravidlo 52 (Neodsazeny vyraz v ternarni podmince) (ptr): <exprOrIndentExpr> => <expr>
+/// Pravidlo L52 (Neodsazeny vyraz v ternarni podmince) (ptr): <exprOrIndentExpr> => <expr>
 extern const StaticProduction PRODUCTION_EXPR_OR_INDENT_EXPR_PLAIN;
 
-/// Pravidlo 54 (Nedokoncena vetev else): <elseTernaryIf> => epsilon
+/// Pravidlo L54 (Nedokoncena vetev else): <elseTernaryIf> => epsilon
 extern const StaticProduction PRODUCTION_ELSE_TERNARY_IF_ABSENT;
-
-// Testovaci pravidlo mimo gramatiku, v hotovem parseru je <expr> prechod
-// do vyrazoveho parseru
-
-/// Testovaci pravidlo mimo gramatiku: <expr> => *
-extern const StaticProduction PRODUCTION_TEST_EXPR_STAR;
 
 #endif // PRODUCTION_H

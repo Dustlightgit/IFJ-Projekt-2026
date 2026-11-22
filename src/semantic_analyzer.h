@@ -3,13 +3,13 @@
 
     xnovacm00 Michal Novacek
 
-    semantic.h
+    semantic_analyzer.h
 
     Tento soubor obsahuje deklaraci funkce pro semantickou analyzu.
 */
 
-#ifndef SEMANTIC_H
-#define SEMANTIC_H
+#ifndef SEMANTIC_ANALYZER_H
+#define SEMANTIC_ANALYZER_H
 
 #include "ast.h"
 #include "symtable.h"

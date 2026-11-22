@@ -31,6 +31,9 @@
           a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
           prompt je v reduction_table.h).
         - xbalaka00 - jadro propojeno s precedencnim parserem
+        - xbalaka00 - odstranen SemanticContext z argumentu akci, protoze akce
+          jej nevyuzivaly. Misto pro schovani uzlu ID pro pravidla L32 a L33
+          presunut do ParserContext.
 
     Implementace prediktivniho parseru zalozeneho na LL tabulce a nekterych jeho
     pomocnych funkci.
@@ -45,7 +48,7 @@
 #include "error.h"
 #include "grammar_symbol.h"
 #include "precedence_parser.h"
-#include "semantic_actions.h"
+#include "predictive_semantic_actions.h"
 #include "special_actions.h"
 
 void parser_match(ParserContext *ctx, Stack *stack) {
@@ -304,8 +307,8 @@ void parser_match(ParserContext *ctx, Stack *stack) {
     Prompt pro doplneni chovani jadra pro neterminal <IDcommand> (pravidla
     32 a 33), anotaci CONTEXT_ID_COMMAND, polozku id_expr v SemanticContext,
     upravu callbacku pravidla 31 a specialni akce pro ID. Stejny prompt
-    zpusobil zmeny take v semantic_types.h, semantic_actions.h,
-    semantic_actions.c, special_actions.h a special_actions.c, jeho zneni je
+    zpusobil zmeny take v semantic_types.h, predictive_semantic_actions.h,
+    predictive_semantic_actions.c, special_actions.h a special_actions.c, jeho zneni je
     pouze zde.
 
     Prompt pro Claude:
@@ -475,7 +478,7 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
         // LL tabulka ani zadna dalsi akce se v teto iteraci neprovadi.
         // Uzel ID vytvorila special_action_id pri zpracovani ID na zacatku
         // prikazu, ID je uz porovnano a spotrebovano.
-        Expr *id_expr = ctx->semantic_context.id_expr;
+        Expr *id_expr = ctx->id_expr;
 
         if (id_expr == NULL)
           error_exit(ERR_INTERNAL, ctx->current_token.line,
@@ -489,15 +492,15 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
                   id_expr->as.variable.name);
 
           // Prirazeni se prida do bloku (nebo do tela cyklu ci vetve if)
-          Block *block = target_block(semantic_pointer, annotation,
-                                      ctx->current_token.line);
+          Block *block = special_action_block(semantic_pointer, annotation,
+                                              ctx->current_token.line);
           Stmt *assign =
               stmt_new_assign(id_expr->as.variable.name, NULL, id_expr->line);
           block_add(block, assign);
 
           // AST uzel ID uz neni potreba, jmeno si prirazeni zkopirovalo
           expr_free(id_expr);
-          ctx->semantic_context.id_expr = NULL;
+          ctx->id_expr = NULL;
 
           // Terminal = se nahradi dalsim vstupnim terminalem
           parser_advance(ctx);
@@ -545,8 +548,8 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
           // Pravidlo je semanticke (ll_table_lookup zaruci, ze je zaznam
           // staticky nebo semanticky), callback si produkci vlozi na zasobnik
           // sam
-          entry->callback(&(ctx->semantic_context), semantic_pointer,
-                          annotation, ctx->current_token.line, &stack);
+          entry->callback(semantic_pointer, annotation, ctx->current_token.line,
+                          &stack);
         }
       }
 
@@ -580,8 +583,8 @@ void predictive_parser(ParserContext *ctx, NonterminalType starting_nonterm,
       // vcetne atributu. Musi probehnout pred parser_match, ktery token
       // uvolni. Pri odlisnosti tokenu by parser_match vyvolal chybu.
       if (top->symbol.terminal == TOKEN_ID && parser_check_token(ctx, TOKEN_ID))
-        special_action_id(&(ctx->semantic_context), top->semantic_pointer,
-                          top->annotation, &(ctx->current_token));
+        special_action_id(ctx, top->semantic_pointer, top->annotation,
+                          &(ctx->current_token));
 
       // Porovna terminaly a oba odstrani
       parser_match(ctx, &stack);

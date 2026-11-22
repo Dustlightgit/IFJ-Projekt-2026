@@ -4,7 +4,7 @@
     xbalaka00 Artur Balak
     xnovacm00 Michal Novacek
 
-    semantic_actions.c
+    predictive_semantic_actions.c
 
     Puvodni autor: xbalaka00 za asistence Claude
     Seznam zmen:
@@ -24,24 +24,30 @@
         - xnovacm00 - doplnena stavba AST do semantickych akci, pridany pomocne funkce pro tento ucel
         - xbalaka00 - push_terminal a push_nonterminal vkladaji zaznamy bez
           znacky redukce (prompt je v parser_common.c).
-        - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL (GrammarSymbol presunut do grammar_symbol.h,
-          prompt je v reduction_table.h).
+        - xbalaka00 - include grammar_symbol.h pro makra GRAMMAR_TERMINAL a GRAMMAR_NONTERMINAL
+        (GrammarSymbol presunut do grammar_symbol.h, prompt je v reduction_table.h).
         - xbalaka00 - funkce trace_rule presunuta do parser_common.c
           a zobecnena (prompt je tam), volani doplnena o argument true
           (pravidla LL parseru).
         - xbalaka00 - funkce ast_attach_expr presunuta do special_actions.c
           a prejmenovana na special_action_expr (prompt je v
           special_actions.h), include special_actions.h.
+        - xbalaka00 - funkce target_block a store_type presunuty do special_actions.c
+          a prejmenovany na special_action_expr a special_action_store_type,
+          sjednocen format cisel pravidel a prejmenovany akce na predictive_action_*.
+          Soubor byl prejmenovan na predictive_semantic_actions.c
+        - xbalaka00 - odstranen SemanticContext z akci, protoze akce jej nevyuzivaly.
+        - xbalaka00 - vyplneny semanticke akce pro ternarni if
 
     Tento soubor obsahuje semanticke akce pravidel LL parseru, ktere vypisuji cislo pravidla
     na stderr a stavi AST.
+    Semanticke kontroly jsou prevazne zajistovany analyzatorem v souboru semantic_analyzer.*
 
 */
 
-#include "semantic_actions.h"
+#include "predictive_semantic_actions.h"
 
 #include "ast.h"
-#include "error.h"
 
 #include "grammar_symbol.h"
 #include "nonterminal.h"
@@ -56,7 +62,7 @@
     Prompt pro doplneni callbacku vsech pravidel se semantickou akci a pro
     odstraneni funkci push_terminal a push_nonterminal (viz nasledujici prompt
     o jejich vraceni). Stejny prompt zpusobil
-    zmeny take v semantic_actions.h, nonterminal.h a nonterminal.c, jeho zneni
+    zmeny take v predictive_semantic_actions.h, nonterminal.h a nonterminal.c, jeho zneni
     je pouze zde.
 
     Prompt pro Claude:
@@ -130,12 +136,11 @@ static void push_nonterminal(Stack *stack, NonterminalType type,
 // nahradi hodnotami podle potreby stavby AST. Ukazatel a anotace rozvadeneho
 // neterminalu (parametry callbacku) se zatim nevyuzivaji.
 
-// Pravidlo 0 (Prolog): <program> => import ID . * EOL <defList> EOF
+// Pravidlo L0 (Prolog): <program> => import ID . * EOL <defList> EOF
 // Pozn.: Semanticky pointer je koren AST (Program *), preda se seznamu funkci.
-void semantic_action_prolog(SemanticContext *ctx, void *semantic_pointer,
-                            ContextAnnotation annotation, int line,
-                            Stack *stack) {
-  (void)ctx;
+void predictive_action_prolog(void *semantic_pointer,
+                              ContextAnnotation annotation, int line,
+                              Stack *stack) {
   (void)annotation;
   trace_rule(true, 0, line);
 
@@ -148,14 +153,12 @@ void semantic_action_prolog(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_IMPORT, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 3 (Deklarace funkce): <def> => <main> def ID ( <paramAdd> ) <optionalType> = <blockOrExpr>
+// Pravidlo L3 (Deklarace funkce): <def> => <main> def ID ( <paramAdd> ) <optionalType> = <blockOrExpr>
 // Pozn.: Semanticky pointer je Program *. Vytvori se FuncDef, pripoji se
 // k programu a jeho ukazatel dostanou deti, ktere funkci doplnuji.
-void semantic_action_function_definition(SemanticContext *ctx,
-                                         void *semantic_pointer,
-                                         ContextAnnotation annotation, int line,
-                                         Stack *stack) {
-  (void)ctx;
+void predictive_action_function_definition(void *semantic_pointer,
+                                           ContextAnnotation annotation,
+                                           int line, Stack *stack) {
   (void)annotation;
   trace_rule(true, 3, line);
 
@@ -176,13 +179,11 @@ void semantic_action_function_definition(SemanticContext *ctx,
   push_nonterminal(stack, NONTERM_MAIN_ANNOTATION, func, CONTEXT_NONE);
 }
 
-// Pravidlo 4 (Anotace main): <main> => @main <optionalEOL>
+// Pravidlo L4 (Anotace main): <main> => @main <optionalEOL>
 // Pozn.: Semanticky pointer je FuncDef *, oznaci se jako vstupni funkce.
-void semantic_action_main_annotation(SemanticContext *ctx,
-                                     void *semantic_pointer,
-                                     ContextAnnotation annotation, int line,
-                                     Stack *stack) {
-  (void)ctx;
+void predictive_action_main_annotation(void *semantic_pointer,
+                                       ContextAnnotation annotation, int line,
+                                       Stack *stack) {
   (void)annotation;
   trace_rule(true, 4, line);
 
@@ -192,71 +193,10 @@ void semantic_action_main_annotation(SemanticContext *ctx,
   push_terminal(stack, TOKEN_ANNOT_MAIN, NULL, CONTEXT_NONE);
 }
 
-// Vrati blok, do ktereho se ma pridat prikaz. Pokud pointer ukazuje na
-// vlastnika tela (funkce, cyklus), blok se vytvori a pripoji.
-Block *target_block(void *ptr, ContextAnnotation annotation, int line) {
-  Block *block;
-  switch (annotation) {
-  case CONTEXT_BLOCK_STMT:
-    return (Block *)ptr;
-  case CONTEXT_FUNCTION_BODY:
-    block = block_new();
-    funcdef_set_body((FuncDef *)ptr, block);
-    return block;
-  case CONTEXT_WHILE_BODY:
-    block = block_new();
-    stmt_while_set_body((Stmt *)ptr, block);
-    return block;
-  case CONTEXT_FOR_BODY:
-    block = block_new();
-    stmt_for_set_body((Stmt *)ptr, block);
-    return block;
-  case CONTEXT_IF_THEN:
-    block = block_new();
-    expr_if_set_then((Expr *)ptr, block);
-    return block;
-  case CONTEXT_IF_ELSE:
-    block = block_new();
-    expr_if_set_else((Expr *)ptr, block);
-    return block;
-  default:
-    error_exit(ERR_INTERNAL, line, "Prikaz nema urceno, kam se ma pridat");
-  }
-  return NULL;
-}
-
-// Ulozi hotovy typ na misto urcene ukazatelem a anotaci (prebira vlastnictvi typu)
-static void store_type(void *semantic_pointer, ContextAnnotation annotation,
-                       Type *type, int line) {
-  switch (annotation) {
-  case CONTEXT_FUNCTION_RETURN_TYPE:
-    funcdef_set_return_type((FuncDef *)semantic_pointer, type);
-    break;
-  case CONTEXT_PARAM_TYPE: {
-    // Typ patri parametru, ktery byl pridan jako posledni
-    FuncDef *func = (FuncDef *)semantic_pointer;
-    funcdef_param_set_type(func, func->param_count - 1, type);
-    break;
-  }
-  case CONTEXT_LIST_ELEMENT:
-    type_list_set_element((Type *)semantic_pointer, type);
-    break;
-
-  case CONTEXT_VARDEF_TYPE:
-    stmt_vardef_set_type((Stmt *)semantic_pointer, type);
-    break;
-
-  default:
-    type_free(type);
-    error_exit(ERR_INTERNAL, line, "Typ nema urceno, kam se ma ulozit");
-  }
-}
-
-// Pravidlo 8 (Pridani parametru): <paramAdd> => ID : <type> <paramComma>
-void semantic_action_param_add(SemanticContext *ctx, void *semantic_pointer,
-                               ContextAnnotation annotation, int line,
-                               Stack *stack) {
-  (void)ctx;
+// Pravidlo L8 (Pridani parametru): <paramAdd> => ID : <type> <paramComma>
+void predictive_action_param_add(void *semantic_pointer,
+                                 ContextAnnotation annotation, int line,
+                                 Stack *stack) {
   (void)annotation;
   trace_rule(true, 8, line);
 
@@ -267,67 +207,66 @@ void semantic_action_param_add(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_ID, semantic_pointer, CONTEXT_PARAM_NAME);
 }
 
-// Pravidlo 14 (Typ Integer): <type> => Int
-void semantic_action_type_int(SemanticContext *ctx, void *semantic_pointer,
-                              ContextAnnotation annotation, int line,
-                              Stack *stack) {
-  (void)ctx;
+// Pravidlo L14 (Typ Integer): <type> => Int
+void predictive_action_type_int(void *semantic_pointer,
+                                ContextAnnotation annotation, int line,
+                                Stack *stack) {
   trace_rule(true, 14, line);
-  store_type(semantic_pointer, annotation, type_new(TYPE_INT), line);
+  special_action_store_type(semantic_pointer, annotation, type_new(TYPE_INT),
+                            line);
   push_terminal(stack, TOKEN_KW_INT, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 15 (Typ Double): <type> => Double
-void semantic_action_type_double(SemanticContext *ctx, void *semantic_pointer,
-                                 ContextAnnotation annotation, int line,
-                                 Stack *stack) {
-  (void)ctx;
+// Pravidlo L15 (Typ Double): <type> => Double
+void predictive_action_type_double(void *semantic_pointer,
+                                   ContextAnnotation annotation, int line,
+                                   Stack *stack) {
   trace_rule(true, 15, line);
-  store_type(semantic_pointer, annotation, type_new(TYPE_DOUBLE), line);
+  special_action_store_type(semantic_pointer, annotation, type_new(TYPE_DOUBLE),
+                            line);
   push_terminal(stack, TOKEN_KW_DOUBLE, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 16 (Typ String): <type> => String
-void semantic_action_type_string(SemanticContext *ctx, void *semantic_pointer,
-                                 ContextAnnotation annotation, int line,
-                                 Stack *stack) {
-  (void)ctx;
+// Pravidlo L16 (Typ String): <type> => String
+void predictive_action_type_string(void *semantic_pointer,
+                                   ContextAnnotation annotation, int line,
+                                   Stack *stack) {
   trace_rule(true, 16, line);
-  store_type(semantic_pointer, annotation, type_new(TYPE_STRING), line);
+  special_action_store_type(semantic_pointer, annotation, type_new(TYPE_STRING),
+                            line);
   push_terminal(stack, TOKEN_KW_STRING, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 17 (Typ Unit): <type> => Unit
-void semantic_action_type_unit(SemanticContext *ctx, void *semantic_pointer,
-                               ContextAnnotation annotation, int line,
-                               Stack *stack) {
-  (void)ctx;
+// Pravidlo L17 (Typ Unit): <type> => Unit
+void predictive_action_type_unit(void *semantic_pointer,
+                                 ContextAnnotation annotation, int line,
+                                 Stack *stack) {
   trace_rule(true, 17, line);
-  store_type(semantic_pointer, annotation, type_new(TYPE_UNIT), line);
+  special_action_store_type(semantic_pointer, annotation, type_new(TYPE_UNIT),
+                            line);
   push_terminal(stack, TOKEN_KW_UNIT, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 18 (Typ Boolean): <type> => Boolean
-void semantic_action_type_boolean(SemanticContext *ctx, void *semantic_pointer,
-                                  ContextAnnotation annotation, int line,
-                                  Stack *stack) {
-  (void)ctx;
+// Pravidlo L18 (Typ Boolean): <type> => Boolean
+void predictive_action_type_boolean(void *semantic_pointer,
+                                    ContextAnnotation annotation, int line,
+                                    Stack *stack) {
 
   trace_rule(true, 18, line);
-  store_type(semantic_pointer, annotation, type_new(TYPE_BOOLEAN), line);
+  special_action_store_type(semantic_pointer, annotation,
+                            type_new(TYPE_BOOLEAN), line);
   push_terminal(stack, TOKEN_KW_BOOLEAN, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 19 (Typ List): <type> => List [ <type> ]
+// Pravidlo L19 (Typ List): <type> => List [ <type> ]
 // Pozn.: Seznamy seznamu jsou povoleny.
-void semantic_action_type_list(SemanticContext *ctx, void *semantic_pointer,
-                               ContextAnnotation annotation, int line,
-                               Stack *stack) {
-  (void)ctx;
+void predictive_action_type_list(void *semantic_pointer,
+                                 ContextAnnotation annotation, int line,
+                                 Stack *stack) {
   trace_rule(true, 19, line);
 
   Type *list = type_new_list(NULL); // Typ prvku se doplni pozdeji
-  store_type(semantic_pointer, annotation, list, line);
+  special_action_store_type(semantic_pointer, annotation, list, line);
 
   push_terminal(stack, TOKEN_RBRACKET, NULL, CONTEXT_NONE);
   push_nonterminal(stack, NONTERM_TYPE, list, CONTEXT_LIST_ELEMENT);
@@ -335,14 +274,13 @@ void semantic_action_type_list(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_LIST, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 22 (Blok a prvni prikaz): <block> => EOL INDENT <command> <commandList> DEDENT
+// Pravidlo L22 (Blok a prvni prikaz): <block> => EOL INDENT <command> <commandList> DEDENT
 // Pozn.: Musi byt pritomen alespon jeden prikaz.
-void semantic_action_block(SemanticContext *ctx, void *semantic_pointer,
-                           ContextAnnotation annotation, int line,
-                           Stack *stack) {
-  (void)ctx;
+void predictive_action_block(void *semantic_pointer,
+                             ContextAnnotation annotation, int line,
+                             Stack *stack) {
   trace_rule(true, 22, line);
-  Block *block = target_block(semantic_pointer, annotation, line);
+  Block *block = special_action_block(semantic_pointer, annotation, line);
 
   push_terminal(stack, TOKEN_DEDENT, NULL, CONTEXT_NONE);
   push_nonterminal(stack, NONTERM_COMMAND_LIST, block, CONTEXT_BLOCK_STMT);
@@ -351,15 +289,13 @@ void semantic_action_block(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 27 (Prikaz deklarace): <command> => <valVar> ID <optionalType> = <expr> <commandEnd>
-// Pozn.: U deklarace se predpoklada var, pravidlo 28 to pripadne prepise.
-void semantic_action_declaration_command(SemanticContext *ctx,
-                                         void *semantic_pointer,
-                                         ContextAnnotation annotation, int line,
-                                         Stack *stack) {
-  (void)ctx;
+// Pravidlo L27 (Prikaz deklarace): <command> => <valVar> ID <optionalType> = <expr> <commandEnd>
+// Pozn.: U deklarace se predpoklada var, pravidlo L28 to pripadne prepise.
+void predictive_action_declaration_command(void *semantic_pointer,
+                                           ContextAnnotation annotation,
+                                           int line, Stack *stack) {
   trace_rule(true, 27, line);
-  Block *block = target_block(semantic_pointer, annotation, line);
+  Block *block = special_action_block(semantic_pointer, annotation, line);
   Stmt *stmt = stmt_new_vardef(true, NULL, NULL, NULL, line); // val to prepise
   block_add(block, stmt);
 
@@ -370,10 +306,9 @@ void semantic_action_declaration_command(SemanticContext *ctx,
   push_nonterminal(stack, NONTERM_VAL_VAR, stmt, CONTEXT_NONE);
 }
 
-// Pravidlo 28 (Deklarace nemodifikovatelne promenne): <valVar> => val
-void semantic_action_val(SemanticContext *ctx, void *semantic_pointer,
-                         ContextAnnotation annotation, int line, Stack *stack) {
-  (void)ctx;
+// Pravidlo L28 (Deklarace nemodifikovatelne promenne): <valVar> => val
+void predictive_action_val(void *semantic_pointer, ContextAnnotation annotation,
+                           int line, Stack *stack) {
   (void)annotation;
   trace_rule(true, 28, line);
 
@@ -381,14 +316,13 @@ void semantic_action_val(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_VAL, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 31 (Prikaz zacinajici ID): <command> => ID <IDcommand> <commandEnd>
+// Pravidlo L31 (Prikaz zacinajici ID): <command> => ID <IDcommand> <commandEnd>
 // Pozn.: Neterminal <IDcommand> (pravidla 32 a 33) je reseny v jadre parseru,
 // ne v LL tabulce: pri vstupnim = se provede prirazeni, jinak se do vyrazove
 // analyzy preda ID.
-void semantic_action_id_command(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, int line,
-                                Stack *stack) {
-  (void)ctx;
+void predictive_action_id_command(void *semantic_pointer,
+                                  ContextAnnotation annotation, int line,
+                                  Stack *stack) {
   trace_rule(true, 31, line);
 
   // Pointer a anotace se predaji jadru, ktere z nich pri prirazeni urci blok
@@ -396,15 +330,13 @@ void semantic_action_id_command(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_ID, NULL, CONTEXT_ID_COMMAND);
 }
 
-// Pravidlo 34 (Prikaz return): <command> => return <returnValue> <commandEnd>
-void semantic_action_return_command(SemanticContext *ctx,
-                                    void *semantic_pointer,
-                                    ContextAnnotation annotation, int line,
-                                    Stack *stack) {
-  (void)ctx;
+// Pravidlo L34 (Prikaz return): <command> => return <returnValue> <commandEnd>
+void predictive_action_return_command(void *semantic_pointer,
+                                      ContextAnnotation annotation, int line,
+                                      Stack *stack) {
 
   trace_rule(true, 34, line);
-  Block *block = target_block(semantic_pointer, annotation, line);
+  Block *block = special_action_block(semantic_pointer, annotation, line);
   Stmt *stmt = stmt_new_return(NULL, line);
   block_add(block, stmt);
 
@@ -412,13 +344,12 @@ void semantic_action_return_command(SemanticContext *ctx,
   push_terminal(stack, TOKEN_KW_RETURN, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 37 (Cyklus while): <command> => while <expr> do <blockOrCommand>
-void semantic_action_while_command(SemanticContext *ctx, void *semantic_pointer,
-                                   ContextAnnotation annotation, int line,
-                                   Stack *stack) {
-  (void)ctx;
+// Pravidlo L37 (Cyklus while): <command> => while <expr> do <blockOrCommand>
+void predictive_action_while_command(void *semantic_pointer,
+                                     ContextAnnotation annotation, int line,
+                                     Stack *stack) {
   trace_rule(true, 37, line);
-  Block *block = target_block(semantic_pointer, annotation, line);
+  Block *block = special_action_block(semantic_pointer, annotation, line);
   Stmt *stmt = stmt_new_while(NULL, NULL, line);
   block_add(block, stmt);
 
@@ -428,15 +359,14 @@ void semantic_action_while_command(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_WHILE, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 38 (Cyklus for): <command> => for <forHeader> do <blockOrCommand>
-void semantic_action_for_command(SemanticContext *ctx, void *semantic_pointer,
-                                 ContextAnnotation annotation, int line,
-                                 Stack *stack) {
-  (void)ctx;
+// Pravidlo L38 (Cyklus for): <command> => for <forHeader> do <blockOrCommand>
+void predictive_action_for_command(void *semantic_pointer,
+                                   ContextAnnotation annotation, int line,
+                                   Stack *stack) {
   (void)semantic_pointer;
   (void)annotation;
   trace_rule(true, 38, line);
-  Block *block = target_block(semantic_pointer, annotation, line);
+  Block *block = special_action_block(semantic_pointer, annotation, line);
   Stmt *stmt = stmt_new_for(NULL, NULL, line);
   block_add(block, stmt);
 
@@ -446,12 +376,10 @@ void semantic_action_for_command(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_FOR, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 39 (Jednoradkova hlavicka for): <forHeader> => ID <- <expr>
-void semantic_action_for_header_inline(SemanticContext *ctx,
-                                       void *semantic_pointer,
-                                       ContextAnnotation annotation, int line,
-                                       Stack *stack) {
-  (void)ctx;
+// Pravidlo L39 (Jednoradkova hlavicka for): <forHeader> => ID <- <expr>
+void predictive_action_for_header_inline(void *semantic_pointer,
+                                         ContextAnnotation annotation, int line,
+                                         Stack *stack) {
   (void)annotation;
   trace_rule(true, 39, line);
 
@@ -460,13 +388,11 @@ void semantic_action_for_header_inline(SemanticContext *ctx,
   push_terminal(stack, TOKEN_ID, semantic_pointer, CONTEXT_FOR_VAR);
 }
 
-// Pravidlo 40 (Viceradkova hlavicka for): <forHeader> => EOL INDENT ID <- <expr> EOL <guardList> DEDENT
+// Pravidlo L40 (Viceradkova hlavicka for): <forHeader> => EOL INDENT ID <- <expr> EOL <guardList> DEDENT
 // Pozn.: Je treba rozlisit jednoradkovy a viceradkovy zapis hlavicky for.
-void semantic_action_for_header_block(SemanticContext *ctx,
-                                      void *semantic_pointer,
-                                      ContextAnnotation annotation, int line,
-                                      Stack *stack) {
-  (void)ctx;
+void predictive_action_for_header_block(void *semantic_pointer,
+                                        ContextAnnotation annotation, int line,
+                                        Stack *stack) {
   (void)annotation;
   trace_rule(true, 40, line);
 
@@ -480,12 +406,11 @@ void semantic_action_for_header_block(SemanticContext *ctx,
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 41 (Dalsi straz): <guardList> => if <expr> EOL <guardList>
+// Pravidlo L41 (Dalsi straz): <guardList> => if <expr> EOL <guardList>
 // Pozn.: Jednoradkova hlavicka neumoznuje straze.
-void semantic_action_guard_next(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, int line,
-                                Stack *stack) {
-  (void)ctx;
+void predictive_action_guard_next(void *semantic_pointer,
+                                  ContextAnnotation annotation, int line,
+                                  Stack *stack) {
   (void)annotation;
   trace_rule(true, 41, line);
 
@@ -495,14 +420,13 @@ void semantic_action_guard_next(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_IF, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 47 (Podminka): <command> => if <expr> then <blockOrCommand> <optionalElse>
+// Pravidlo L47 (Podminka): <command> => if <expr> then <blockOrCommand> <optionalElse>
 // Pozn.: Konstrukce if else je pokryta jednoradkovym blokem s prikazem if.
-void semantic_action_if_command(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, int line,
-                                Stack *stack) {
-  (void)ctx;
+void predictive_action_if_command(void *semantic_pointer,
+                                  ContextAnnotation annotation, int line,
+                                  Stack *stack) {
   trace_rule(true, 47, line);
-  Block *block = target_block(semantic_pointer, annotation, line);
+  Block *block = special_action_block(semantic_pointer, annotation, line);
   Expr *ifx = expr_new_if(NULL, NULL, NULL, line);
   block_add(block, stmt_new_expr(ifx, line));
 
@@ -512,14 +436,12 @@ void semantic_action_if_command(SemanticContext *ctx, void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_IF, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 48 (Nepovinna cast else): <optionalElse> => else <blockOrCommand>
+// Pravidlo L48 (Nepovinna cast else): <optionalElse> => else <blockOrCommand>
 // Pozn.: Visici else patri k nejblizsimu if, konflikt v LL tabulce je vyresen
 // rucne.
-void semantic_action_optional_else_present(SemanticContext *ctx,
-                                           void *semantic_pointer,
-                                           ContextAnnotation annotation,
-                                           int line, Stack *stack) {
-  (void)ctx;
+void predictive_action_optional_else_present(void *semantic_pointer,
+                                             ContextAnnotation annotation,
+                                             int line, Stack *stack) {
   (void)annotation;
   trace_rule(true, 48, line);
 
@@ -528,68 +450,70 @@ void semantic_action_optional_else_present(SemanticContext *ctx,
   push_terminal(stack, TOKEN_KW_ELSE, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 50 (Ternarni podminka): <ternaryIf> => if <expr> then <exprOrIndentExpr> else <elseTernaryIf>
+// Pravidlo L50 (Ternarni podminka): <ternaryIf> => if <expr> then <exprOrIndentExpr> else <elseTernaryIf>
 // Pozn.: Pravidlo se zacne zpracovavat, kdyz vyrazovy parser zavola LL parser s
 // pocatecnim neterminalem <ternaryIf> a ukazatelem na zaznam, ktery chce
 // vyrazovka umistit na svuj zasobnik.
-void semantic_action_ternary_if(SemanticContext *ctx, void *semantic_pointer,
-                                ContextAnnotation annotation, int line,
-                                Stack *stack) {
-  (void)ctx;
-  (void)semantic_pointer;
+void predictive_action_ternary_if(void *semantic_pointer,
+                                  ContextAnnotation annotation, int line,
+                                  Stack *stack) {
   (void)annotation;
   trace_rule(true, 50, line);
 
-  push_nonterminal(stack, NONTERM_ELSE_TERNARY_IF, NULL, CONTEXT_NONE);
+  // Ziskani mista pro ulozeni vysledku
+  AnnotatedSymbol *result = (AnnotatedSymbol *)semantic_pointer;
+
+  // Tvorba uzlu
+  Expr *if_node = expr_new_if(NULL, NULL, NULL, line);
+
+  // Vraceni do prediktivniho parseru
+  // Predpoklad, ze bude vracen jako TIF
+  result->symbol = (GrammarSymbol)GRAMMAR_TERMINAL(TOKEN_TIF);
+  result->semantic_pointer = if_node;
+
+  push_nonterminal(stack, NONTERM_ELSE_TERNARY_IF, result, CONTEXT_NONE);
   push_terminal(stack, TOKEN_KW_ELSE, NULL, CONTEXT_NONE);
-  push_nonterminal(stack, NONTERM_EXPR_OR_INDENT_EXPR, NULL, CONTEXT_NONE);
+  push_nonterminal(stack, NONTERM_EXPR_OR_INDENT_EXPR, if_node,
+                   CONTEXT_IF_THEN);
   push_terminal(stack, TOKEN_KW_THEN, NULL, CONTEXT_NONE);
-  push_nonterminal(stack, NONTERM_EXPR, NULL, CONTEXT_NONE);
+  push_nonterminal(stack, NONTERM_EXPR, if_node, CONTEXT_IF_COND);
   push_terminal(stack, TOKEN_KW_IF, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 53 (Odsazena vetev else): <elseTernaryIf> => EOL INDENT <expr> EOL DEDENT
+// Pravidlo L53 (Odsazena vetev else): <elseTernaryIf> => EOL INDENT <expr> EOL DEDENT
 // Pozn.: Mimo zavorky je nutne podporovat odsazeny vyraz. Provedenim pravidla
 // se vrati vyraz s hotovou ternarni podminkou a volajici vyrazovka se rovnou
 // ukonci. Pravidla 51 a 53 maji shodnou pravou stranu, ale lisi se chovanim.
-void semantic_action_else_ternary_if_indented(SemanticContext *ctx,
-                                              void *semantic_pointer,
-                                              ContextAnnotation annotation,
-                                              int line, Stack *stack) {
-  (void)ctx;
-  (void)semantic_pointer;
+void predictive_action_else_ternary_if_indented(void *semantic_pointer,
+                                                ContextAnnotation annotation,
+                                                int line, Stack *stack) {
   (void)annotation;
   trace_rule(true, 53, line);
 
+  // Ziskani mista pro ulozeni vysledku
+  AnnotatedSymbol *result = (AnnotatedSymbol *)semantic_pointer;
+
+  // Toto pravidlo prepisuje predpoklad, ze ternarni if bude navracen
+  // nedokonceny jako TIF
+  result->symbol = (GrammarSymbol)GRAMMAR_NONTERMINAL(NONTERM_EXPR);
+
   push_terminal(stack, TOKEN_DEDENT, NULL, CONTEXT_NONE);
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
-  push_nonterminal(stack, NONTERM_EXPR, NULL, CONTEXT_NONE);
+  push_nonterminal(stack, NONTERM_EXPR, result->semantic_pointer,
+                   CONTEXT_IF_ELSE);
   push_terminal(stack, TOKEN_INDENT, NULL, CONTEXT_NONE);
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo 59 (Else za inline then): <elseOrCommandEnd> => else <blockOrCommand>
-// Pozn.: Chova se stejne jako pravidlo 48, jen patri k jinemu neterminalu.
-void semantic_action_else_or_command_end_else(SemanticContext *ctx,
-                                              void *semantic_pointer,
-                                              ContextAnnotation annotation,
-                                              int line, Stack *stack) {
-  (void)ctx;
+// Pravidlo L59 (Else za inline then): <elseOrCommandEnd> => else <blockOrCommand>
+// Pozn.: Chova se stejne jako pravidlo L48, jen patri k jinemu neterminalu.
+void predictive_action_else_or_command_end_else(void *semantic_pointer,
+                                                ContextAnnotation annotation,
+                                                int line, Stack *stack) {
   (void)annotation;
   trace_rule(true, 59, line);
 
   push_nonterminal(stack, NONTERM_BLOCK_OR_COMMAND, semantic_pointer,
                    CONTEXT_IF_ELSE);
   push_terminal(stack, TOKEN_KW_ELSE, NULL, CONTEXT_NONE);
-}
-
-// Docasne pravidlo mimo gramatiku: <expr> => *, vytvori literal 0
-void semantic_action_test_expr(SemanticContext *ctx, void *semantic_pointer,
-                               ContextAnnotation annotation, int line,
-                               Stack *stack) {
-  (void)ctx;
-  trace_rule(true, 999, line);
-  special_action_expr(semantic_pointer, annotation, expr_new_int(0, line),
-                      line);
-  push_terminal(stack, TOKEN_STAR, NULL, CONTEXT_NONE);
 }

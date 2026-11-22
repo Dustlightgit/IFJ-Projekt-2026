@@ -23,6 +23,7 @@
     Tento soubor obsahuje semanticke akce pravidel precedencniho parseru. Akce
     vypisuji cislo pravidla na stderr, stavi uzly AST z podstromu ulozenych na zasobniku
     a nastavuji neterminal, na ktery se handle redukuje.
+    Semanticke kontroly jsou prevazne zajistovany analyzatorem v souboru semantic_analyzer.*
 
 */
 
