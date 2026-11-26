@@ -38,6 +38,7 @@
           Soubor byl prejmenovan na predictive_semantic_actions.c
         - xbalaka00 - odstranen SemanticContext z akci, protoze akce jej nevyuzivaly.
         - xbalaka00 - vyplneny semanticke akce pro ternarni if
+        - xbalaka00 - upraveny komentare
 
     Tento soubor obsahuje semanticke akce pravidel LL parseru, ktere vypisuji cislo pravidla
     na stderr a stavi AST.
@@ -289,7 +290,7 @@ void predictive_action_block(void *semantic_pointer,
   push_terminal(stack, TOKEN_EOL, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo L27 (Prikaz deklarace): <command> => <valVar> ID <optionalType> = <expr> <commandEnd>
+// Pravidlo L27 (Prikaz deklarace): <command> => <valVar> ID <optionalType> = <expr>
 // Pozn.: U deklarace se predpoklada var, pravidlo L28 to pripadne prepise.
 void predictive_action_declaration_command(void *semantic_pointer,
                                            ContextAnnotation annotation,
@@ -316,7 +317,7 @@ void predictive_action_val(void *semantic_pointer, ContextAnnotation annotation,
   push_terminal(stack, TOKEN_KW_VAL, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo L31 (Prikaz zacinajici ID): <command> => ID <IDcommand> <commandEnd>
+// Pravidlo L31 (Prikaz zacinajici ID): <command> => ID <IDcommand>
 // Pozn.: Neterminal <IDcommand> (pravidla 32 a 33) je reseny v jadre parseru,
 // ne v LL tabulce: pri vstupnim = se provede prirazeni, jinak se do vyrazove
 // analyzy preda ID.
@@ -330,7 +331,7 @@ void predictive_action_id_command(void *semantic_pointer,
   push_terminal(stack, TOKEN_ID, NULL, CONTEXT_ID_COMMAND);
 }
 
-// Pravidlo L34 (Prikaz return): <command> => return <returnValue> <commandEnd>
+// Pravidlo L34 (Prikaz return): <command> => return <returnValue>
 void predictive_action_return_command(void *semantic_pointer,
                                       ContextAnnotation annotation, int line,
                                       Stack *stack) {
@@ -420,7 +421,7 @@ void predictive_action_guard_next(void *semantic_pointer,
   push_terminal(stack, TOKEN_KW_IF, NULL, CONTEXT_NONE);
 }
 
-// Pravidlo L47 (Podminka): <command> => if <expr> then <blockOrCommand> <optionalElse>
+// Pravidlo L47 (Podminka): <command> => if <expr> then <thenBranch>
 // Pozn.: Konstrukce if else je pokryta jednoradkovym blokem s prikazem if.
 void predictive_action_if_command(void *semantic_pointer,
                                   ContextAnnotation annotation, int line,

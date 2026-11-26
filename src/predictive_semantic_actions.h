@@ -31,11 +31,11 @@
           sjednocen format cisel pravidel a prejmenovany akce na predictive_action_*
           Soubor byl prejmenovan na predictive_semantic_actions.h
         - xbalaka00 - odstranen SemanticContext z akci, protoze akce jej nevyuzivaly.
+        - xbalaka00 - upraveny komentare
 
     Tento soubor obsahuje deklarace semantickych akci pravidel LL parseru.
-    Akce stavi AST, semanticke kontroly (napr. kompatibilita typu) probihaji
-    az nad kompletnim AST. Datove typy akci a prompty, ze kterych vznikly,
-    jsou v semantic_types.h.
+    Akce stavi AST, vypisuji cislo pravidla a vkladaji svoji pravou stranu na zasobnik.
+    Datove typy akci a prompty, ze kterych vznikly, jsou v semantic_types.h.
     Semanticke kontroly jsou prevazne zajistovany analyzatorem v souboru semantic_analyzer.*
 */
 
@@ -61,7 +61,7 @@
  * @brief Semanticka akce pravidla L0 (prolog).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -76,7 +76,7 @@ void predictive_action_prolog(void *semantic_pointer,
  * @brief Semanticka akce pravidla L3 (deklarace funkce).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -91,7 +91,7 @@ void predictive_action_function_definition(void *semantic_pointer,
  * @brief Semanticka akce pravidla L4 (anotace main).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -106,7 +106,7 @@ void predictive_action_main_annotation(void *semantic_pointer,
  * @brief Semanticka akce pravidla L8 (pridani parametru).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -121,7 +121,7 @@ void predictive_action_param_add(void *semantic_pointer,
  * @brief Semanticka akce pravidla L14 (typ integer).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -136,7 +136,7 @@ void predictive_action_type_int(void *semantic_pointer,
  * @brief Semanticka akce pravidla L15 (typ double).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -151,7 +151,7 @@ void predictive_action_type_double(void *semantic_pointer,
  * @brief Semanticka akce pravidla L16 (typ string).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -166,7 +166,7 @@ void predictive_action_type_string(void *semantic_pointer,
  * @brief Semanticka akce pravidla L17 (typ unit).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -181,7 +181,7 @@ void predictive_action_type_unit(void *semantic_pointer,
  * @brief Semanticka akce pravidla L18 (typ boolean).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -196,7 +196,7 @@ void predictive_action_type_boolean(void *semantic_pointer,
  * @brief Semanticka akce pravidla L19 (typ list).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -211,7 +211,7 @@ void predictive_action_type_list(void *semantic_pointer,
  * @brief Semanticka akce pravidla L22 (blok a prvni prikaz).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -226,7 +226,7 @@ void predictive_action_block(void *semantic_pointer,
  * @brief Semanticka akce pravidla L27 (prikaz deklarace).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -241,7 +241,7 @@ void predictive_action_declaration_command(void *semantic_pointer,
  * @brief Semanticka akce pravidla L28 (deklarace nemodifikovatelne promenne).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -272,7 +272,7 @@ void predictive_action_id_command(void *semantic_pointer,
  * @brief Semanticka akce pravidla L34 (prikaz return).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -287,7 +287,7 @@ void predictive_action_return_command(void *semantic_pointer,
  * @brief Semanticka akce pravidla L37 (cyklus while).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -302,7 +302,7 @@ void predictive_action_while_command(void *semantic_pointer,
  * @brief Semanticka akce pravidla L38 (cyklus for).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -317,7 +317,7 @@ void predictive_action_for_command(void *semantic_pointer,
  * @brief Semanticka akce pravidla L39 (jednoradkova hlavicka for).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -332,7 +332,7 @@ void predictive_action_for_header_inline(void *semantic_pointer,
  * @brief Semanticka akce pravidla L40 (viceradkova hlavicka for).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -347,7 +347,7 @@ void predictive_action_for_header_block(void *semantic_pointer,
  * @brief Semanticka akce pravidla L41 (dalsi straz).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -362,7 +362,7 @@ void predictive_action_guard_next(void *semantic_pointer,
  * @brief Semanticka akce pravidla L47 (podminka).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -377,7 +377,7 @@ void predictive_action_if_command(void *semantic_pointer,
  * @brief Semanticka akce pravidla L48 (nepovinna cast else).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -392,7 +392,7 @@ void predictive_action_optional_else_present(void *semantic_pointer,
  * @brief Semanticka akce pravidla L50 (ternarni podminka).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -407,7 +407,7 @@ void predictive_action_ternary_if(void *semantic_pointer,
  * @brief Semanticka akce pravidla L53 (odsazena vetev else).
  *
  * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
- * Atributy pro stavbu stromu zatim nepridava.
+ * Provede stavbu kousku AST.
  *
  * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
  * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
@@ -418,7 +418,18 @@ void predictive_action_else_ternary_if_indented(void *semantic_pointer,
                                               ContextAnnotation annotation,
                                               int line, Stack *stack);
 
-// Semanticka akce pravidla L59
+
+/**
+ * @brief Semanticka akce pravidla L59 (vetev else).
+ *
+ * Vypise cislo pravidla na stderr a vlozi pravou stranu pravidla na zasobnik.
+ * Provede stavbu kousku AST.
+ *
+ * @param semantic_pointer Ukazatel ulozeny u rozvadeneho neterminalu.
+ * @param annotation Kontextova anotace ulozena u rozvadeneho neterminalu.
+ * @param line Cislo radku aktualniho vstupniho terminalu.
+ * @param stack Zasobnik parseru.
+ */
 void predictive_action_else_or_command_end_else(void *semantic_pointer,
                                               ContextAnnotation annotation,
                                               int line, Stack *stack);
