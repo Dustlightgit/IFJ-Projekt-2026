@@ -1,0 +1,405 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[czech]{babel}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{caption}
+\usepackage{tocloft}
+\usepackage[hidelinks]{hyperref}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    columns=fullflexible
+}
+
+\begin{document}
+
+\begin{center}
+    \includegraphics[width=0.65\textwidth]{logo_cz.png}
+
+    \vspace{1.2cm}
+    {\LARGE \textbf{Dokumentace k projektu do předmětu IFJ 2026}}
+    \vspace{1cm}
+
+    \begin{tabular}{ll}
+        \textbf{Jméno, příjmení a xlogin:} & \textbf{Os. Číslo:} \\
+        \midrule
+        \textbf{Artur Balák xbalaka00} & \textbf{282413} \\
+        Michal Nováček xnovacm00 & 279697 \\
+        Radovan Šantavý xsantar00 & 281778 \\
+        Anna Navrátilová xnavraa00 & 281956 \\
+    \end{tabular}
+
+    \vspace{0.8cm}
+    Varianta: vv-BVS \\
+    Rozdeleni: xbalaka00: 37\,\% $|$ xnovacm00: 39\,\% $|$ xsantar00: 24\,\% $|$ xnavraa00: 0\,\% \\
+    Rozsireni: \texttt{FUNEXP}, \texttt{BOOLTHEN}, \texttt{CONTROL}, \texttt{LISTS}, \texttt{VALMEM} \\
+    Odkaz na repositář: \textbf{\href{https://github.com/Dustlightgit/IFJ-Projekt-2026}{IFJ-Projekt-2026}}
+\end{center}
+
+\vspace{0.5cm}
+{
+    \setlength{\parskip}{0pt}
+    \setlength{\cftbeforetoctitleskip}{0pt}
+    \setlength{\cftaftertoctitleskip}{3pt}
+    \setlength{\cftbeforesecskip}{1pt}
+    \setlength{\cftbeforesubsecskip}{0pt}
+    \setlength{\cftbeforesubsubsecskip}{0pt}
+
+    \renewcommand{\cftsecfont}{\footnotesize\bfseries}
+    \renewcommand{\cftsubsecfont}{\footnotesize}
+    \renewcommand{\cftsubsubsecfont}{\footnotesize}
+    \renewcommand{\cftsecpagefont}{\footnotesize\bfseries}
+    \renewcommand{\cftsubsecpagefont}{\footnotesize}
+    \renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+
+    \tableofcontents
+}
+\newpage
+
+\section{Rozdělení práce}
+
+\begin{itemize}
+    \item Artur Balák
+    \begin{itemize}
+        \item Návrh a implementace prediktivního a precedenčního parseru, rozhraní pro stavbu AST a doplnění stavby AST k precedenčnímu parseru.
+    \end{itemize}
+    \item Michal Nováček
+    \begin{itemize}
+        \item Návrh a implementace scanneru, AST, tabulky symbolů, sémantického analyzátoru a stavba AST u prediktivního parseru.
+    \end{itemize}
+    \item Radovan Šantavý
+    \begin{itemize}
+        \item Návrh a implementace generátoru kódu, technické zázemí (github, discord...), testovací prostředí, dokumentace a prezentace k obhajobě.
+    \end{itemize}
+\end{itemize}
+
+\section{Odchylky od rovnoměrného rozdělení bodů}
+
+\begin{itemize}
+    \item Anna Navrátilová dostala 0 bodů, protože se rozhodla projekt opustit.
+    \item Radovan Šantavý po domluvě obdržel menší podíl než ostatní, protože na projektu vykonal relativně k ostatním méně práce.
+\end{itemize}
+
+\section{Způsob spolupráce}
+
+\begin{itemize}
+    \item Každý člen týmu pracoval na své části samostatně, avšak součinnost jednotlivých komponent byla v reálném čase diskutována a domlouvána na discordu.
+    \item Dělba práce byla domlouvána ve vyhrazeném kanálu.
+    \item Aby mohl být PR sloučen s main, musí získat alespoň 2x kladné stanovisko; vyjímkou jsou PR s drobnými úpravami, kde postačuje jedno kladné stanovisko.
+    \item PR neovlivňujíci větev \texttt{main} nemusí být nutně někým kontrolován.
+    \item Bylo dohodnuto, že hloubkový code review se při schvalování PR nevyžaduje. Schvalující osoba by se však měla alespoň přehledově seznámit s kódem a případné odhalené problémy uvést ideálně do komentáře na github, avšak postačuje i oznámení nedostatku na discordu.
+\end{itemize}
+
+\section{Využití AI}
+
+Při vývoji projektu byly použity nástroje umělé inteligence \emph{ChatGPT}, \emph{Claude} a \emph{Gemini}.
+
+Gemini byl využit k dovysvětlení některých pasáží z teorie.
+
+ChatGPT byl využit jako konzultant návrhu parseru. Svým způsobem se jednalo o zveličený zápisník, do kterého byly vypsány nápady na řešení jednotlivých problémů souvisejících se zadáním. ChatGPT obvykle odpovídal analýzou proveditelnosti nebo podněty na uhlazení návrhu. Občas doporučil vlastní řešení, které bylo v některých případech přijato, v některých upraveno a v jiných sloužilo jako dobrý podnět, aby byl návrh lépe vysvětlen. Například návrh na implementaci prediktoru operandu a operátoru jakožto řešení pro infixový alfanumerický operátor pochází od ChatGPT, avšak jeho původní návrh by prakticky znamenal implementovat kompletní třístavový konečný automat, který na základě přechodů i vyvolává chyby, přitom bohatě dostačuje jednoduchý jednobitový "omylný" prediktor obarvující terminály, jaký je ve výsledné implementaci.
+
+Většina kódu parseru byla vygenerována přes Claude na základě promptů, které jsou uvedeny ve zdrojových souborech. Vývoj z větší části probíhal tak, že v každém promptu byla specifikována přesná změna v projektu odpovídající přibližně jednomu commitu. Claude podle promptu upravil soubory, ty byly zkontrolovány přes funkcionalitu diff ve visual studio code, pokusně zkompilovány, případně i otestovány (pokud to bylo možné) a nakonec commitnuty. Kód vygenerovaný Claude za celou dobu vývoje ani jednou neselhal při kompilaci či testování, což však nejspíše bude z části důsledek i přesné specifikace změn. V některých otázkách byla Claude ponechána větší volnost, například při generování koster sémantických akcí na základě návrhového excel souboru, avšak vždy byly vymezeny meze, v jakých se tak dělo.
+
+Gramatika obou parserů i všechny tabulky byly vytvořeny ručně. Claude však zkontroloval ručně navrženou precedenční tabulku a gramatiku a odhalil v ní pár chyb, které ve svém výčtu odůvodnil. Všechny odhalené chyby se zdály být formálně i matematicky opodstatněné, a proto byly aplikovány opravy návrhu.
+
+Claude byl rovněž využit pro generování menších úseků kódu i v jiných částech projektu.
+
+
+\section{Využité formy testování}
+
+\subsection{Architektura a princip testování}
+
+\begin{itemize}
+    \item Testování řídí skript \texttt{test.py}, který postupně spouští jednotlivé testovací moduly (\texttt{runner.c}).
+    \item \texttt{runner.c} slouží jako náhradní vstupní bod programu (fake \texttt{main}) a informační most mezi testovanou částí překladače a testovacím prostředím.
+    \item Vstupy jsou v souborech input.txt a výstupy testovaných modulů se zapisují do souboru \texttt{output.txt}, který se následně porovnává s očekávaným výstupem \texttt{expected.txt}.
+    \item U testů \emph{generátoru} a celého \emph{překladače} (obecně testů vyžadujících interpret) se mezivýstup v cílovém jazyce \emph{ifjcode26} nejprve uloží do souboru \texttt{ifjcode.txt}, vykoná pomocí interpretu a teprve výsledný běh se porovná s očekávaným výstupem.
+\end{itemize}
+
+\subsection{Struktura komponent a konfigurace}
+
+\begin{itemize}
+    \item Testy jsou rozděleny do izolovaných komponent s vlastním sestavením: \texttt{lexer}, \texttt{parser}, \texttt{generator} a \texttt{pipeline}.
+    \begin{itemize}
+        \item Všechny zdrojové soubory jsou také překládány pro každou komponentu zvlášť.
+        \item Každý jednotlivý test nebo celou komponentu lze z testování manuálně vynechat (aktuálně jsou vynechány vybrané testy, pro které nebudeme implementovat rozšíření).
+    \end{itemize}
+    \item Seznamy ignorovaných testů (\texttt{EXCEPTIONS}) a testů vyžadujících běh v interpretu (\texttt{INTERPRET\_TESTS}) se definují přímo v \texttt{test.py}.
+    \item Podrobnosti k použití testovacího prostředí jsou popsány v \texttt{/test/tests.md}
+\end{itemize}
+\newpage
+
+\section{Konvence projektu}
+
+\begin{itemize}
+    \item \textbf{Formátovací}
+    \begin{itemize}
+        \item Formátování kódu zajišťuje ručně nastavený clang-format založený na stylu \texttt{LLVM}
+    \end{itemize}
+    \item \textbf{Jazykové}
+    \begin{itemize}
+        \item Kód, commit zprávy, názvy souborů (až na výjímky dané zadáním) jsou psány anglicky
+        \item Komentáře jsou česky bez diakritiky s vyjímkou promptů, které mohou být doslovně i s diakritikou
+    \end{itemize}
+    \item \textbf{Jmenné}
+    \begin{itemize}
+        \item Běžné identifikátory, názvy souborů - \texttt{snake\_case}
+        \item Konstanty - \texttt{SCREAMING\_SNAKE\_CASE}
+        \item Názvy datových typů - \texttt{PascalCase}
+    \end{itemize}
+    \item \textbf{Jiné}
+    \begin{itemize}
+        \item Každý soubor začíná hlavičkou s názvem souboru, se jmény osob, které se na souboru podílely, a stručným popisem souboru.
+        \item Nepovinně (dle uvážení původního autora souboru) lze v hlavičce také udržovat seznam změn.
+    \end{itemize}
+\end{itemize}
+
+\newpage
+
+\section{Diagram automatu, který specifikuje lexikální analyzátor}
+
+\noindent
+\begin{minipage}[t][0pt][t]{\textwidth}
+    \centering
+    \includegraphics[width=1.1\textwidth]{fsm_scanner.pdf}
+    \captionof{figure}{Diagram automatu lexikálního analyzátoru}
+\end{minipage}
+
+\newpage
+
+\section{Blokové schéma}
+
+\noindent
+\begin{minipage}[t][0pt][t]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, height=0.95\textheight, keepaspectratio]{BlockScheme.pdf}
+    \captionof{figure}{Blokové schéma překladače}
+\end{minipage}
+
+\newpage
+
+\section{LL Gramatika}
+
+\noindent
+\begin{minipage}[t][0pt][t]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{grammar_whole.png}
+    \captionof{figure}{LL Gramatika}\label{fig:ll_gramatika}
+\end{minipage}
+
+\vspace{2cm}
+\subsection{LL tabulka}
+
+\noindent
+\begin{minipage}[t][0pt][t]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{LL_table.png}
+    \captionof{figure}{LL tabulka}
+\end{minipage}
+\clearpage
+
+\section{Precedenční tabulka}
+
+\noindent
+\begin{minipage}[t][0pt][t]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{precedence_table.png}
+    \captionof{figure}{Precedenční tabulka}
+\end{minipage}
+
+\vspace*{2cm}
+
+\section{Stručný popis každého modulu}
+
+\subsection{Lexikální analýza}
+
+\texttt{scanner.c}, \texttt{scanner.h}: Lexikální analyzátor. Zvenku je vidět jen funkce \texttt{get\_token}, která ze vstupu přečte další token. Kromě běžných tokenů vrací i \texttt{EOL}, \texttt{INDENT} a \texttt{DEDENT}, podle kterých parser pozná konce řádků a bloky.
+
+Scanner je konečný automat v jedné funkci \texttt{read\_token}, kde \texttt{switch} podle aktuálního stavu rozhoduje, co se znakem udělá. Znaky se skládají do bufferu a když přijde znak, který už k tokenu nepatří, vrátí se zpátky na vstup. Vrátit umíme i víc znaků najednou, protože u \texttt{5.toString} musíme vrátit tečku i písmeno, aby z \texttt{5} zůstal celočíselný literál.
+
+Víceznakové operátory (\texttt{==}, \texttt{<-}, \texttt{++}, \texttt{\&\&}, ...) mají vlastní stavy, které po prvním znaku čekají na druhý. Identifikátory a klíčová slova se čtou stejným stavem a až po přečtení celého slova se v tabulce zjistí, jestli je to klíčové slovo. Čísla se nejdřív načtou jako text a na hodnotu se převedou až na konci, kde se také hlídá nepovolená úvodní nula. U řetězců automat zpracovává escape sekvence a umí i víceřádkový zápis \texttt{"""}.
+
+Na čtyři věci čistý konečný automat nestačí, proto jsme ho rozšířili:
+
+\textbf{Vnořené blokové komentáře:} hloubku vnoření počítá proměnná \texttt{comment\_depth}, komentář končí až u poslední dvojice \texttt{*/}.
+
+\textbf{Víceřádkové řetězce:} počítáme uvozovky za sebou. Poslední tři ukončí řetězec, ostatní patří do jeho obsahu.
+
+\textbf{Konce řádků:} token \texttt{EOL} vznikne, jen když na řádku byl nějaký token, prázdné řádky a komentáře se ignorují. Blokový komentář s koncem řádku se chová jako \texttt{EOL}. Uvnitř závorek je konec řádku jen mezera, ale scanner ho poznačí do příznaku \texttt{nl\_before} u dalšího tokenu a hlídá, aby pokračovací řádek byl odsazený víc než začátek příkazu.
+
+\textbf{Odsazení:} bloky se určují odsazením, proto scanner drží zásobník úrovní. U prvního tokenu na řádku porovná počet mezer s vrcholem zásobníku. Při větším odsazení vrátí \texttt{INDENT}, při menším jeden \texttt{DEDENT} za každý uzavřený blok a na konci vstupu uzavře všechny otevřené bloky. Skutečný token si mezitím podrží a vrátí až za nimi.
+
+Neplatný vstup (neznámý znak, neukončený řetězec nebo komentář, tabulátor v odsazení, odsazení neodpovídající žádné předchozí úrovni) skončí chybou \texttt{ERR\_LEXICAL} s číslem řádku.
+
+\subsection{Abstraktní syntaktický strom}
+
+\texttt{ast.c}, \texttt{ast.h}: Datové struktury abstraktního syntaktického stromu (program, funkce, bloky, příkazy, výrazy a typy) a funkce pro jeho vytváření, postupné sestavování a uvolňování. Strom je výstupem parseru a vstupem sémantické analýzy a generátoru kódu.
+
+Program drží pole funkcí, funkce má tělo (\texttt{Block}), tělo obsahuje příkazy (\texttt{Stmt}) a ty výrazy (\texttt{Expr}). Příkazy i výrazy jsou jedna struktura s polem \texttt{kind} a unií \texttt{as}, kde \texttt{kind} říká, kterou variantu můžeme číst. Všechny uzly se tak procházejí jedním \texttt{switch}.
+
+Rodič vlastní své potomky, takže \texttt{program\_free} uvolní celý strom. Konstruktory a settery přebírají vlastnictví uzlů, řetězce si kopírují. Ukazatele \texttt{symbol} strom nevlastní, patří tabulce symbolů.
+
+Parser při provádění pravidel uzel často vytváří neúplný (konstruktory berou \texttt{NULL}) a zbytek doplňuje settery. Typy výrazů (\texttt{Expr.type}) a ukazatele \texttt{symbol} nechává na \texttt{NULL}, doplňuje je sémantická analýza. Každý výraz dostane vlastní kopii typu (\texttt{type\_clone}), aby se nic neuvolňovalo dvakrát.
+
+\subsection{Tabulka symbolů}
+
+\texttt{symtable.c}, \texttt{symtable.h}: Tabulka symbolů pro sémantickou analýzu. Uchovává proměnné a funkce (i vestavěné) s jejich typy a hlídá, která jména jsou v daném místě programu vidět. Je postavená na AVL stromu.
+
+Všechny symboly ze všech rozsahů jsou v jednom AVL stromu. Klíčem je dvojice (jméno, číslo rozsahu), takže vedle sebe můžou bez problému existovat dvě proměnné stejného jména v různých blocích. Aktuálně otevřené rozsahy si tabulka drží na zásobníku jejich čísel. Při vstupu do bloku (\texttt{symtable\_enter\_scope}) dostane rozsah nové číslo, které se nikdy nepoužije znovu, a při výstupu se jen sníží hloubka zásobníku. Symboly se tím neuvolňují, jen přestanou být vidět, takže ukazatele na ně v AST zůstávají platné až do \texttt{symtable\_free}.
+
+Hledání (\texttt{symtable\_lookup}) prochází rozsahy od nejvnitřnějšího ven a vrací první nalezený symbol, díky čemuž funguje zastínění proměnných. Pro kontrolu redefinice se hledá jen v aktuálním rozsahu. Každá proměnná má navíc \texttt{unique\_id}, podle kterého se zastíněné proměnné se stejným jménem rozliší.
+
+Funkce jsou vždy v globálním rozsahu. Před analýzou těl se musí zaregistrovat všechny, aby se šlo volat funkce definované později. Návratový typ funkce může být zpočátku neznámý (\texttt{NULL}) a odvodí se až při analýze těla. Příznak \texttt{being\_inferred} slouží k detekci rekurze při odvozování návratového typu. Vestavěné funkce se registrují při startu (\texttt{symtable\_register\_builtins}) a \texttt{NULL} v typech parametrů u nich znamená \texttt{Any}.
+
+Tabulka vlastní všechny symboly, jména i typy si kopíruje a uvolní je jedním \texttt{symtable\_free}. Odkaz na definici funkce v AST tabulka nevlastní, uvolňuje se spolu se stromem.
+
+\subsection{Sémantická analýza}
+
+\texttt{Semantic\_analyzer.c}, \texttt{semantic\_analyzer.h}: Sémantická analýza. Projde AST, zkontroluje typy a pravidla jazyka (definice, počty argumentů, \texttt{@main}, ...) a doplní do stromu typy výrazů a odkazy na symboly. Vrací tabulku symbolů, kterou dál používá generátor kódu.
+
+Vstupem je AST od parseru, hlavní funkce \texttt{semantic\_analyze} nejdřív vytvoří tabulku symbolů a zaregistruje do ní vestavěné funkce. Potom zapíše všechny uživatelské funkce, aby šlo volat i funkce definované později v souboru. Tady se také kontroluje \texttt{@main}: musí být právě jedna, bez parametrů a s typem \texttt{Unit}. Teprve potom se analyzují těla funkcí.
+
+Analýza je rekurzivní průchod stromem. \texttt{analyze\_expr} zjistí typ výrazu, uloží ho do \texttt{Expr.type} (každý výraz má vlastní kopii) a vrátí ho. Zároveň doplní ukazatele \texttt{symbol} u proměnných, volání, přiřazení a cyklů, které parser nechal prázdné. Bloky a těla funkcí a cyklů se analyzují v novém rozsahu tabulky symbolů. Při definici proměnné se nejdřív analyzuje inicializace a teprve potom se proměnná zapíše do tabulky. Funkci \texttt{analyze\_expr} jde předat i očekávaný typ (z deklarace, z přiřazení, z návratového typu), který potřebujeme třeba pro \texttt{List()} bez prvků, jinak by se typ prázdného seznamu nedal odvodit.
+
+Pravidla typů jsou jednoduchá. Jediná implicitní konverze je \texttt{Int} na \texttt{Double} (\texttt{type\_assignable}). Aritmetika dvou \texttt{Int} dává \texttt{Int}, jinak \texttt{Double}. Prvky seznamu se sjednocují do společného typu (\texttt{Int} a \texttt{Double} dají \texttt{Double}). Zápis \texttt{lst(i)} parser nepozná od volání funkce, takže semantická analýza podle symbolu rozhodne, jestli jde o indexování seznamu. Členy hodnot (\texttt{toString}, \texttt{length}, \texttt{drop}, ...) se kontrolují podle typu objektu a počtu a typu argumentů.
+
+Když funkce nemá uvedený návratový typ, odvodí se z typu těla. Pokud se taková funkce zavolá dřív, než na ni dojde řada, analyzuje se na požádání (\texttt{analyze\_func} se zavolá přímo z volání). Příznak \texttt{being\_inferred} přitom pozná rekurzi, která musí mít typ uvedený. Funkce, které už byly odvozeny, se v hlavním průchodu přeskočí. U funkcí s explicitním typem se kontroluje, že tělo vrací správný typ, nebo že vždy skončí \texttt{return} (\texttt{block\_returns}).
+
+\subsection{Parser a rozhraní pro stavbu AST}
+
+\texttt{nonterminal.*}: Výčtový typ \texttt{NonterminalType} reprezentující neterminály obou parserů a obslužné metody pro práci s nimi. \\
+\texttt{grammar\_symbol.h}: Struktura \texttt{GrammarSymbol} reprezentující buď terminál, nebo neterminál, a makra pro zápis jejích hodnot.
+
+\texttt{semantic\_types.h}: Datové typy pro sémantické akce a deklarace datových typů ukazatelů na sémantické akce. \\
+\texttt{parser\_common.*}: Struktura \texttt{ParserStackEntry} reprezentující položku zásobníku parseru a metody obalující zásobník ze \texttt{stack.*}, struktura \texttt{ParserContext} obsahující především stav sdíleného vstupního proudu terminálů a metody pro práci s ním.
+
+\texttt{production.*}: Datový typ \texttt{StaticProduction} reprezentující statické pravidlo a definice samotných statických pravidel. \\
+\texttt{predictive\_semantic\_actions.*}: Deklarace a definice sémantických akcí prediktivního parseru. \\
+\texttt{LL\_table.*}: LL tabulka obsahující statická a callbacková pravidla prediktivního parseru a metoda pro získání její položky. \\
+\texttt{predictive\_parser.*}: Implementace jádra prediktivního parseru.
+
+\texttt{precedence\_table.*}: Precedenční tabulka obsahující direktivy, indexační převod z terminálu na index a metoda pro získání direktivy z tabulky. \\
+\texttt{precedence\_semantic\_actions.*}: Deklarace a definice sémantických akcí precedenčního parseru. \\
+\texttt{reduction\_table.*}: Struktura \texttt{SearchHandle} sloužící jako klíč do tabulky, redukční tabulka a metoda pro vyhledání položky v tabulce. \\
+\texttt{precedence\_helpers.*}: Pomocné metody využívané jádrem precedenčního parseru. \\
+\texttt{precedence\_parser.*}: Implementace jádra precedenčního parseru.
+
+\texttt{special\_actions.*}: Speciální sémantické akce obou parserů, které nejsou vázány na pravidlo. Použají je interně sémantické akce jednotlivých parserů nebo jádra parserů přímo.
+
+Parser je složený z \textbf{prediktivního} a \textbf{precedenčního} parseru. Oba mají společný vstupní proud \emph{tokenů} (ve struktuře \texttt{ParserContext}). Oba parsery se rozhodují na základě svých tabulek a oba na základě provedených pravidel provádějí \emph{sémantické akce}, které především staví AST. Část funkcionality stavby AST je vyčleněna do \emph{speciálních akcí}, které nejsou svázané s konkrétním pravidlem. Oba parsery se vzájemně rekurzivně volají, aby mohl být zpracován ternární if - každá instance zavolání parseru má tedy svůj vlastní zásobník.
+
+Parser nad rámec zadání podporuje infixový zápis členských metod, tedy například
+\begin{lstlisting}
+List(2, 3, 5, 7, 11) drop 2
+\end{lstlisting}
+se vyhodnotí ekvivalentně se zápisem
+\begin{lstlisting}
+List(2, 3, 5, 7, 11).drop(2)
+\end{lstlisting}
+Tato funkcionalita byla implementována především jako způsob syntaktického zpracování zápisu generátoru. Parser naopak nepodporuje zápis běžného řídícího if s přítomnou větví else, jehož větev else by byla jednořádkový řídící příkaz, tedy například situaci
+\begin{lstlisting}
+if w then while x do y else z
+\end{lstlisting}
+
+Plný detail návrhu parseru je v souboru \texttt{./formalisms/parser\_formalisms.xlsx} na githubu.
+
+\subsubsection{Prediktivní parser}
+
+Jádro prediktivního parseru je implementováno algoritmem z přednášek - jedinou odlišností je, že končí jednoduchým vyprázdněním zásobníku. Parseru je možné specifikovat počáteční neterminál. Obě tyto vlastnosti má kvůli ternárnímu ifu - viz dále.
+
+\textbf{LL tabulka} je prostým dvojrozměrným polem a obsahuje (mimo chybové záznamy) pravidla dvojího druhu - \emph{statické} a \emph{callbackové}.
+
+\textbf{Statické pravidlo} je konstanta typu \texttt{StaticProduction}, která přímo obsahuje pravou stranu pravidla pro vložení na zásobník. Takto jsou reprezentována jednoduchá, obvykle čistě syntaktická pravidla nepotřebující vykonávat zvláštní činnost.
+
+\textbf{Callbackové pravidlo} je ukazatel na funkci, tzv. sémantickou akci. Sémantická akce obvykle provádí stavbu AST, případně je potřeba pro fungování některého z implementačních triků či slouží jako rozcestník pro sémantické informace. Odpovědností sémantické akce je vložit na zásobník pravou stranu pravidla, které reprezentuje; k jednotlivým položkám smí přiložit sémantické informace dle svého uvážení.
+
+\textbf{Sémantické informace} se ukládají ke každé položce zásobníku. Jedná se o \emph{sémantický ukazatel} - libovolný ukazatel typu \texttt{(void *)} na cokoliv dle uvážení \emph{sémantické akce}, obvykle na uzel AST, ke kterému se má připojit další uzel AST či doplnit informace. Dále se jedná o \emph{sémantickou anotaci}, kterou je možné specifikovat očekávané chování další akce v pořadí.
+
+Pro šíření sémantických informací skrz pomyslný derivační strom platí jednoduché pravidlo - statické pravidlo vždy zkopíruje \emph{ukazatel} i \emph{anotaci} ze svého \emph{neterminálu} do všech symbolů na pravé straně pravidla. Podrobnější řízení toku informací pak vyžaduje \emph{sémantickou akci}.
+
+Pokud je na vrcholu zásobníku i na vstupu terminál ID, je nad ním zavolána příslušná speciální akce.
+
+\subsubsection{Precedenční parser}
+
+Jádro precedenčního parseru je implementováno algoritmem z přednášek, tentokrát bez odlišností, avšak koná jisté věci navíc. Precedenčnímu parseru je možné specifikovat počáteční \emph{terminál}, který je využit místo aktuálního terminálu vstupního proudu.
+
+\textbf{Redukční značka} \texttt{<} je reprezentována příznakem u položky zásobníku s významem, že znak \texttt{<} následuje bezprostředně po této položce.
+
+V parseru je využit \textbf{jednobitový prediktor}, který za základě terminálu na vstupu předpoví, jestli příští terminál bude operand, nebo operátor. \emph{Prediktor} je využit pro "přebarvení" vstupních terminálů na jejich varianty v některých situacích, aby byly především pro účely \emph{precedenční tabulky} odlišeny od původních terminálů. Terminály \emph{+} a \emph{-} jsou v příslušných situacích přebarveny na své unární varianty, a terminál \emph{ID} je přebarven na operátorovou verzi.
+
+\textbf{Precedenční tabulka} je dvojrozměrné pole obsahující čtyři direktivy z algoritmu z přednášek (včetně chybové direktivy); pro indexaci je využit indexační převod. Jádro na základě direktiv ohraničuje pravé strany pravidel, tzv. \emph{handle} pravidla. Při redukci vyhledá \emph{handle} pravidla v \emph{redukční tabulce} a provede příslušnou \emph{sémantickou akci} (pokud je nalezena).
+
+\textbf{Redukční tabulka} je statická vyhledávací tabulka s klíčem typu \texttt{SearchHandle} (symbolová reprezentace \emph{handle}); jeho užitečnou položkou je \emph{ukazatel na sémantickou akci}. Vzhledem k malému a neměnnému počtu položek je hledání implementováno se složitostí $O(n)$ lineárním vyhledáním s předčasným ukončením při překročení velikosti \texttt{SearchHandle}. Symboly v \emph{handle} jsou porovnávány kompletně, aby bylo zajištěno, že se nikdy neprovede nesprávná redukce. Neúspěšné vyhledání je syntaktická chyba.
+
+Na rozdíl od prediktivního parseru je každé pravidlo precedenčního parseru reprezentováno \emph{sémantickou akcí}. Akce opět především staví AST. \emph{Sémantické akce} mají díky mechanismu vyhledání v \emph{redukční tabulce} zaručeno, že na zásobníku se při jejich zavolání nachází jejich \emph{handle}. \emph{Sémantická akce} má právo nahlížet na položky zásobníku, aby si z nich získala potřebné \emph{sémantické informace}. Akce vrátí symbol anotovaný sémantickými informacemi, na který by měl být zredukován \emph{handle}. Precedenční akce zásobník nijak nemění.
+
+\subsubsection{Řádný přechod mezi parsery}
+
+V gramatice prediktivního parseru je zaveden speciální neterminál $\langle\text{expr}\rangle$. Pokud se tento neterminál objeví na vrcholu zásobníku, je zahájen přechod do výrazové analýzy. Zavolá se precedenční parser, který vrátí výsledný výrazový podstrom; ten je připojen ke zbytku stromu příslušnou speciální akcí.
+
+Pro účely výpočtů množin pro LL tabulku byly ručně definovány následující množiny:
+\begin{itemize}
+    \item $\text{empty}(\langle\text{expr}\rangle) = \emptyset$
+    \item $\text{first}(\langle\text{expr}\rangle) = \{ (, \text{List}, \text{if}, \text{ID}, \text{*další} \}$
+\end{itemize}
+přičemž *další zastupuje symboly, které neindexují LL tabulku, ale smí jimi začínat výraz. Jedná se o literály a unární operátory. Pro tyto symboly je v návrhu LL tabulky vyhrazen zvláštní sloupec. V případě, že je na vstupu jeden z těchto terminálů, je příslušné pravidlo provedeno jádrem prediktivního parseru mimo rámec LL tabulky.
+
+Výsledek výpočtu množiny $\text{follow}(\langle\text{expr}\rangle)$ byl využit jako množina ukončovačů výrazové analýzy. Přijde-li na vstup jeden z těchto terminálů, \emph{precedenční parser} až do svého ukončení místo vstupního terminálu využívá ukončovač $\$$ v souladu s matematickým modelem.
+
+\subsubsection{Implementační triky}
+
+Mezi hlavní implementační triky patří rozlišení situace příkazu přiřazení a příkazu tvořeného výrazem, který začíná ID; a dále také ternární if, vyžadující spolupráci obou parserů.
+
+Na začátku příkazu je nutné od sebe odlišit následující situace:
+\begin{lstlisting}
+5 * 2 + example
+example = 5 * 2
+example + 5 * 2
+\end{lstlisting}
+
+Tyto situace jsou řešeny v pravidlech L30-L33 (viz \hyperref[fig:ll_gramatika]{obrázek~\ref*{fig:ll_gramatika}}). Byl zaveden neterminál $\langle\text{exprNoID}\rangle$, který má stejný význam jako $\langle\text{expr}\rangle$ s tím rozdílem, že jeho množina first neobsahuje ID a if, jednak pro odlišení výše uvedené situace, ale také jako vyřešení otázky, zda je samostatně položený if výrazový, či běžný řídící. $\langle\text{exprNoID}\rangle$ je skutečným neterminálem formální gramatiky, v implementaci však není odlišen od $\langle\text{expr}\rangle$, protože by jeho chování bylo stejné.
+
+Ze situací přiřazení vs. výraz začínající ID je terminál ID vytknut (pravidlo L31), přičemž sémantická akce tohoto pravidla uschová ID v podobě uzlu AST. Pravidla L32 a L33 provádí jádro mimo rámec běžného běhu. Pokud je na vstupu =, běžně provede tvorbu uzlu přiřazení. Pokud je na vstupu cokoliv jiného, je spuštěn precedenční parser s uchovaným počátečním terminálem ID.
+
+Dostane-li prediktivní parser na vstup terminál if, zavolá prediktivní parser s počátečním neterminálem $\langle\text{ternaryIf}\rangle$. Prediktivní parser zpracuje ternární if, přičemž jeho sémantické akce rozhodnou o tom, v jaké podobě se ternární if vrátí.
+
+Prediktivní parser narozdíl od matematického modelu končí prostým vyprázdněním zásobníku bez kontroly EOF, aby zpracování ternárního ifu skončilo korektně. Ověření, že byl přečten celý vstupní soubor, je zajištěno tím, že terminál EOF je součástí pravidla L0. Bez korektního porovnání EOF není v nejvyšším běhu parseru možné vyprázdnit zásobník.
+
+Pokud ternární if končí odsazeným výrazem, je do výrazové analýzy vrácen jako neterminál E s hotovým uzlem AST. V této situaci precedenční parser zahájí ukončení svého běhu.
+
+Jestliže ternární if nekončí odsazeným výrazem, je prediktivním parserem zpracován bez větve else a navrácen je jako terminál TIF s nedokončeným uzlem AST. Ten je na zásobník zařazen standardním způsobem přes precedenční tabulku a větev else připojí příslušná redukce (pravidlo E41).
+
+Tento přístup vyžadoval zavedení "virtuálních pravidel" ilustrujících umístění ternárního ifu v programu IFJ26 pro účely výpočtu množiny $\text{follow}(\langle\text{ternaryIf}\rangle)$ a množin, které na tomto výpočtu zavisí.
+
+\subsection{Generování kódu}
+
+\texttt{generator.c}, \texttt{generator.h}: Generátor cílového kódu. Překládá otypovaný AST do instrukcí \texttt{IFJcode26}. \emph{Tabulku symbolů} už nepotřebuje, protože všechny symboly a typy jsou uložené přímo v uzlech stromu.
+
+Výrazy se generují zásobníkově, takže každý \emph{výraz} zanechá na vrcholu datového zásobníku přesně jednu hodnotu, zatímco \emph{příkazy} zásobník nechávají beze změny. Generátor průběžně sleduje hloubku zásobníku relativně k začátku funkce a po každém příkazu i výrazu ji kontroluje (\texttt{gen\_check\_depth}). Tělo funkce se nejprve zapíše do paměťového bufferu přes \texttt{open\_memstream}, aby se všechny proměnné zaevidované během průchodu mohly vypsat jako \texttt{DEFVAR} na začátek rámce ještě před samotné instrukce těla. Proměnné mají tvar \texttt{LF@<jmeno>\_<unique\_id>} (díky čemuž nekolidují zastíněné proměnné), dočasné proměnné mají tvar \texttt{LF@\$tN}.
+
+Při volání se argumenty uloží na zásobník a volaná funkce je odebere v opačném pořadí (obdoba konvence volání \emph{pascal}). Každá funkce vrací právě jednu hodnotu (typ \texttt{Unit} vrací \texttt{nil@nil}, který volající zahodí do \texttt{GF@\$discard}). Pokud při předčasném \texttt{return} zůstávají pod návratovou hodnotou rozpracované mezivýsledky, uloží se výsledek do dočasné proměnné, přebytek se odstraní (popne se do \texttt{GF@\$discard}) a hodnota se vrátí zpět na vrchol před \texttt{POPFRAME} a \texttt{RETURN}. Jediná implicitní konverze \texttt{Int} na \texttt{Double} se řeší instrukcí \texttt{INT2FLOATS}. Reálné literály se vypisují ve formátu \texttt{\%a} a speciální znaky v řetězcích se escapují jako \texttt{\textbackslash xyz}.
+
+Podporujeme \texttt{if} jako výraz, zkrácené vyhodnocování \texttt{\&\&} a \texttt{||} i cykly \texttt{while} a \texttt{for} (přes rozsahy i seznamy, včetně stráží). Seznam je reprezentován jako pole \texttt{IFJcode26}, kde prvek na indexu 0 drží délku a data jsou uložena od indexu 1. Vestavěné funkce (\texttt{print}, \texttt{toStr}, \texttt{readInt}, \texttt{subStr}, ...) a pomocné rutiny (\texttt{list\$get}, \texttt{list\$range}, \texttt{list\$slice}, \texttt{list\$tail}, \texttt{list\$concat}, \texttt{double\$floor}) jsou definovány jako funkce v cílovém kódu a na konec výstupu se vypíšou jen když je program včetně závislostí skutečně využil. Návěští funkcí a rutin začínají znakem \texttt{\$}, takže nekolidují s uživatelskými identifikátory. Běhové chyby (index mimo meze, nulový krok rozsahu, prázdný seznam u \texttt{tail} či neplatné meze u \texttt{subStr}) skáčou na sdílené návěští \texttt{\$error\$40} s ukončením \texttt{EXIT int@40}.
+
+\subsection{Pomocné funkce}
+
+\texttt{dstring.c}, \texttt{dstring.h}: Dynamický řetězec, který si sám zvětšuje paměť podle potřeby. \emph{Scanner} ho používá na skládání identifikátorů, čísel a řetězců po jednom znaku.
+
+\texttt{DString} si pamatuje text, jeho délku a kolik má alokované paměti. Když se při přidání znaku paměť zaplní, zdvojnásobí se, takže se nemusí zvětšovat po každém znaku. Text je pořád ukončený \texttt{'\textbackslash 0'}, takže ho jde normálně předat funkcím z \texttt{<string.h>}. Až je řetězec hotový, zkopíruje se přes \texttt{dstr\_copy} a tu kopii pak musí \emph{volající} uvolnit sám.
+
+\texttt{stack.c}, \texttt{stack.h}: Obecný zásobník prvků pevné velikosti, který si sám zvětšuje paměť. Používá se na uložení úrovní odsazení ve \emph{scanneru} a v \emph{syntaktické analýze}. Funkce \texttt{stack\_top} a \texttt{stack\_peek} vrací ukazatel přímo na prvek, takže ho \emph{volající} musí přetypovat na správný typ.
+
+\texttt{error.c}, \texttt{error.h}: Chybové návratové kódy podle zadání a funkce \texttt{error\_exit}, která vypíše chybu na \texttt{stderr} a ukončí program s odpovídajícím kódem.
+
+\texttt{memory.c}, \texttt{memory.h}: Pomocné funkce pro správu paměti (\texttt{xmalloc}, \texttt{xcalloc}, \texttt{xrealloc}, \texttt{xstrdup}, \texttt{xstrdup\_opt} a \texttt{grow\_array}). Obalují standardní alokační funkce a při selhání alokace okamžitě ukončí program voláním \texttt{error\_exit} s kódem \texttt{ERR\_INTERNAL}, aby se kontrola ukazatele \texttt{NULL} nemusela opakovat v celém \emph{překladači}. Funkce \texttt{xstrdup\_opt} navíc bezpečně propouští \texttt{NULL} jako \texttt{NULL} a \texttt{grow\_array} slouží ke zvětšování dynamických polí o jeden prvek (případně k jejich vytvoření z ukazatele \texttt{NULL}).
+
+\end{document}
