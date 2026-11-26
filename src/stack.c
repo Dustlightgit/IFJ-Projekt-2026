@@ -21,7 +21,9 @@
 static void stack_grow(Stack *s) {
   size_t new_cap = s->cap ? s->cap * 2 : STACK_INITIAL_CAP;
   if (new_cap < s->cap || new_cap > SIZE_MAX / s->elem_size)
-    error_exit(ERR_INTERNAL, 0, "Preteceni pri vypoctu velikosti: Nedostatek pameti (stack)"); // Preteceni pri vypoctu velikosti
+    error_exit(
+        ERR_INTERNAL, 0,
+        "Preteceni pri vypoctu velikosti: Nedostatek pameti (stack)"); // Preteceni pri vypoctu velikosti
   void *p = realloc(s->data, new_cap * s->elem_size);
   if (!p)
     error_exit(ERR_INTERNAL, 0, "Nedostatek pameti (stack)");
