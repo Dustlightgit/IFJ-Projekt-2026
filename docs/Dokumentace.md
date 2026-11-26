@@ -44,7 +44,7 @@ Například návrh na implementaci prediktoru operandu a operátoru jakožto ře
 
 Většina kódu parseru byla vygenerována přes Claude na základě promptů, které jsou uvedeny ve zdrojových souborech. Vývoj z větší části probíhal tak, že v každém promptu byla specifikována přesná změna v projektu odpovídající přibližně jednomu commitu. Claude podle promptu upravil soubory, ty byly zkontrolovány přes funkcionalitu diff ve visual studio code, pokusně zkompilovány, případně i otestovány (pokud to bylo možné) a nakonec commitnuty. Kód vygenerovaný Claude za celou dobu vývoje ani jednou neselhal při kompilaci či testování, což však nejspíše bude z části důsledek i přesné specifikace změn. V některých otázkách byla Claude ponechána větší volnost, například při generování koster sémentických akcí na základě excel souboru, avšak vždy byly vymezeny meze, v jakých se tak dělo.
 
-Gramatika obou parserů i všechny tabulky byly vytvořeny ručně. Jedinou výjímku tvoří nejnovější verze LL tabulky a jejích množin. Původní verze LL gramatiky musela během vývoje být dvakrát přepracována kvůli chybám, které odhalilo testování. V původní verzi i v první revizi byly výpočty množin provedeny ručně. Při odhalení nutnosti druhé revize byla úprava gramatiky provedena ručně, z časových důvodů však byly výpočty množin a vyplnění LL tabulky přenechány Claude, jehož práce byla poté zkontrolována a testována. Claude také zkontroloval ručně navrženou precedenční tabulku a gramatiku a odhalil v ní několik chyb, které ve svém výčtu odůvodnil. Všechny odhalené chyby se zdály být formálně i matematicky opodstatněné, a proto byly aplikovány opravy návrhu.
+Gramatika obou parserů i všechny tabulky byly vytvořeny ručně. Claude také zkontroloval ručně navrženou precedenční tabulku a gramatiku a odhalil v ní několik chyb, které ve svém výčtu odůvodnil. Všechny odhalené chyby se zdály být formálně i matematicky opodstatněné, a proto byly aplikovány opravy návrhu.
 
 Claude byl rovněž využit pro generování menších úseků kódu i v jiných částech projektu.
 
@@ -83,6 +83,22 @@ Claude byl rovněž využit pro generování menších úseků kódu i v jiných
 # Diagram automatu, který specifikuje lexikální analyzátor
 ![[fsm_scanner.pdf]]
 
+---
+
+![[BlockScheme.pdf]]
+
+---
+
+# LL Gramatika
+
+![[grammar_whole.png]]
+## LL tabulka
+
+![[LL_table.png]]
+# Precedenční tabulka
+![[precedence_table.png]]
+
+---
 # Stručný popis každého modulu
 
 ## Lexikální analýza
@@ -127,7 +143,7 @@ Funkce jsou vždy v globálním rozsahu. Před analýzou těl se musí zaregistr
 Tabulka vlastní všechny symboly, jména i typy si kopíruje a uvolní je jedním `symtable_free`. Odkaz na definici funkce v AST tabulka nevlastní, uvolňuje se spolu se stromem.
 ## Sémantická analýza
 
-`Semantic_analyzator.c`, `semantic_analyzator.h`: Sémantická analýza. Projde AST, zkontroluje typy a pravidla jazyka (definice, počty argumentů, `@main`, ...) a doplní do stromu typy výrazů a odkazy na symboly. Vrací tabulku symbolů, kterou dál používá generátor kódu.
+`Semantic_analyzer.c`, `semantic_analyzer.h`: Sémantická analýza. Projde AST, zkontroluje typy a pravidla jazyka (definice, počty argumentů, `@main`, ...) a doplní do stromu typy výrazů a odkazy na symboly. Vrací tabulku symbolů, kterou dál používá generátor kódu.
 
 Vstupem je AST od parseru, hlavní funkce `semantic_analyze` nejdřív vytvoří tabulku symbolů a zaregistruje do ní vestavěné funkce. Potom zapíše všechny uživatelské funkce, aby šlo volat i funkce definované později v souboru. Tady se také kontroluje `@main`: musí být právě jedna, bez parametrů a s typem `Unit`. Teprve potom se analyzují těla funkcí.
 
