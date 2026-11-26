@@ -248,7 +248,7 @@ Program drží pole funkcí, funkce má tělo (\texttt{Block}), tělo obsahuje p
 
 Rodič vlastní své potomky, takže \texttt{program\_free} uvolní celý strom. Konstruktory a settery přebírají vlastnictví uzlů, řetězce si kopírují. Ukazatele \texttt{symbol} strom nevlastní, patří tabulce symbolů.
 
-Parser skládá strom až při redukci pravidel, takže uzel často vytváří neúplný (konstruktory berou \texttt{NULL}) a zbytek doplňuje settery. Typy výrazů (\texttt{Expr.type}) a ukazatele \texttt{symbol} nechává na \texttt{NULL}, doplňuje je sémantická analýza. Každý výraz dostane vlastní kopii typu (\texttt{type\_clone}), aby se nic neuvolňovalo dvakrát.
+Parser při provádění pravidel uzel často vytváří neúplný (konstruktory berou \texttt{NULL}) a zbytek doplňuje settery. Typy výrazů (\texttt{Expr.type}) a ukazatele \texttt{symbol} nechává na \texttt{NULL}, doplňuje je sémantická analýza. Každý výraz dostane vlastní kopii typu (\texttt{type\_clone}), aby se nic neuvolňovalo dvakrát.
 
 \subsection{Tabulka symbolů}
 
