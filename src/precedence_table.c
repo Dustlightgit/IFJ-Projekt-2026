@@ -21,6 +21,7 @@
           ze switch v precedence_table_try_index, PRECEDENCE_SWITCH_COUNT
           snizen na 5. Pridan radek a sloupec pro TOKEN_TIF (zatim same
           prazdne polozky), tabulka ma 30 radku a sloupcu (prompt je v token.h).
+        - xbalaka00 - vyplnena precedencni tabulka
 
     Tento soubor obsahuje precedencni tabulku precedencniho parseru vyrazu
     a funkce a makra pro prevod terminalu na jeji index a funkce pro vyhledani direktivy.
@@ -28,7 +29,7 @@
 */
 
 /*
-    Prompt pro vyplneni precedencni tabulky.
+    Prompt pro prvotni vyplneni precedencni tabulky.
 
     Prompt pro Claude:
         Dělám parser založený na hybridu prediktivní a precedenční analýzy. Přikládám relevantní soubory. Pokud by ti některý soubor chyběl, vyžádej si jej, než začneš pracovat. Kontext návrhu a význam kódu si přečti v komentářích a deklarovaných promptech. Dodržuj jmenné konvence (včetně komentářů v češtině bez diakritiky - používej české názvy všech věcí i přesto, že v promptech někdy věci pojmenuji anglicky; prompty ale cituj doslovně po vzoru souborů), formát hlaviček souborů s popisem souboru, dle vzoru přiložených souborů také deklaruj prompty a aktualizuj změnové seznamy. Kód můžeš zkompilovat, ale podle mě není nutné ho testovat na vlastní implementaci.
